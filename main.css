@@ -1,0 +1,23 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  background-color: brown;
+  font-size: 20px;
+}
+
+.main-game {
+  background-color: blue;
+  height: 50%;
+  width: 50%;
+}
+
+.main-menu {
+  background-color: green;
+  height: 50%;
+  width: 50%;
+}
