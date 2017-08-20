@@ -7,28 +7,38 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: 'MENU'
+      mode: 'MENU',
+      items: [
+        'torch',
+        'key1',
+        'pot roast'
+      ]
     }
   }
 
-  toggleMenu() {
-    const { mode } = this.state;
-    this.setState({ mode: (mode === 'MENU') ? 'GAME' : 'MENU' });
+  setMode(mode) {
+    this.setState({ mode });
   }
 
   renderGameContent() {
     const { mode } = this.state;
     if (mode === 'MENU') {
-      return <MainMenu name={this.props.name} />
+      return <MainMenu
+        name={this.props.name}
+        goToGame={this.setMode.bind(this, 'GAME')}
+      />
     } else {
-      return <MainGame name={this.props.name} />
+      return <MainGame
+        name={this.props.name}
+        goToMenu={this.setMode.bind(this, 'MENU')}
+        items={this.state.items}
+      />
     }
   }
 
   render() {
     return (
       <div>
-        <p onClick={this.toggleMenu.bind(this)}>Game mode: {this.state.mode}!</p>
         {this.renderGameContent()}
       </div>
     )
