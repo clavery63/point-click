@@ -9,12 +9,7 @@ const mode = (state = 'MENU', action) => {
   }
 }
 
-const items = (state = [
-    'torch',
-    'key1',
-    'pot roast',
-    'key2'
-], action) => {
+const items = (state = [], action) => {
   switch (action.type) {
     case 'ADD_ITEM':
       return [
@@ -26,6 +21,13 @@ const items = (state = [
   }
 }
 
-const reducers = combineReducers({ items, mode });
+const room = (state = {}, action) => {
+  switch (action.type) {
+    default:
+      return state
+  }
+}
+
+const reducers = combineReducers({ items, mode, room });
 
 export default reducers;

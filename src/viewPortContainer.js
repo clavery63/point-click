@@ -1,12 +1,16 @@
 import { connect } from 'react-redux'
-import ItemList from './ItemList.jsx'
+import ViewPort from './ViewPort.jsx'
 
 const addItem = name => ({
   type: 'ADD_ITEM',
   name
 });
 
-const mapStateToProps = ({ items }) => ({ items });
+const mapStateToProps = ({ room }) => {
+  return {
+    items: room.items
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -16,9 +20,9 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-const ItemListContainer = connect(
+const ViewPortContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ItemList)
+)(ViewPort)
 
-export default ItemListContainer;
+export default ViewPortContainer;
