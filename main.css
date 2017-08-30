@@ -4,7 +4,7 @@ html, body {
   background-color: brown;
 }
 
-#app {
+#root {
   width: 800px;
   height: 600px;
   font-size: 20px;

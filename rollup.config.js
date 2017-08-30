@@ -4,7 +4,7 @@ import replace from 'rollup-plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
 
 export default {
-  entry: 'src/app.jsx',
+  entry: 'src/index.jsx',
   format: 'iife',
   plugins: [
     resolve(),
