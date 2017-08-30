@@ -1,12 +1,12 @@
 import React from 'react';
 import Item from './item.jsx';
 
-export default function ItemList(props) {
+export default function ItemList({ items, onItemClick }) {
   return (
-    <div className='item-list'>
-      {props.items.map(item => {
-        return <Item name={item} />
+    <ul className='item-list'>
+      {items.map(item => {
+        return <Item onClick={() => onItemClick(item)} name={item} />
       })}
-    </div>
+    </ul>
   )
 }

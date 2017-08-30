@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Item(props) {
+export default function Item({ name, onClick }) {
   return (
-    <div className='item'>
-      <p>{props.name}</p>
-    </div>
+    <li className='item' onClick={onClick}>
+      {name}
+    </li>
   )
 }

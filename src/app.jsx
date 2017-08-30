@@ -1,18 +1,12 @@
 import React from 'react';
-import {render} from 'react-dom';
 import MainGame from './mainGame.jsx';
 import MainMenu from './mainMenu.jsx';
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: 'MENU',
-      items: [
-        'torch',
-        'key1',
-        'pot roast'
-      ]
+      mode: 'MENU'
     }
   }
 
@@ -24,14 +18,11 @@ class App extends React.Component {
     const { mode } = this.state;
     if (mode === 'MENU') {
       return <MainMenu
-        name={this.props.name}
         goToGame={this.setMode.bind(this, 'GAME')}
       />
     } else {
       return <MainGame
-        name={this.props.name}
         goToMenu={this.setMode.bind(this, 'MENU')}
-        items={this.state.items}
       />
     }
   }
@@ -44,5 +35,3 @@ class App extends React.Component {
     )
   }
 }
-
-render(<App name='Brendan' />, document.getElementById('app'));
