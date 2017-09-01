@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import ViewPort from './ViewPort.jsx'
+import ViewPort from './viewPort.jsx'
 
 const addItem = name => ({
   type: 'ADD_ITEM',
