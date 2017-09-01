@@ -6,9 +6,10 @@ const addItem = name => ({
   name
 });
 
-const mapStateToProps = ({ room }) => {
+const mapStateToProps = ({ rooms, player }) => {
+  const currentRoom = rooms[player.currentRoom];
   return {
-    items: room.items
+    items: currentRoom.items
   };
 };
 

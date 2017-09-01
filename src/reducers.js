@@ -16,7 +16,6 @@ const player = (state = {}, action) => {
 };
 
 const menu = (state = 'MENU', action) => {
-  console.log(action)
   switch (action.type) {
     case 'SHOW_MENU':
       return action.menu;
@@ -37,7 +36,7 @@ const ui = (state = {}, action) => {
   }
 };
 
-const room = (state = {}, action) => {
+const rooms = (state = {}, action) => {
   switch (action.type) {
     default:
       return state;
@@ -48,7 +47,7 @@ const reducers = combineReducers({
   player,
   menu,
   ui,
-  room
+  rooms
 });
 
 export default reducers;

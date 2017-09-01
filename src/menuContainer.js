@@ -8,7 +8,6 @@ const hideMenu = menu => ({
 
 const mapStateToProps = (state) => {
   const { menu } = state;
-  console.log(state);
   return { menu }
 };
 
