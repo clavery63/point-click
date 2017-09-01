@@ -12,8 +12,10 @@ const setPage = page => ({
 });
 
 const mapStateToProps = (state) => {
-  const { items, ui } = state;
-  console.log(state)
+  const {
+    player: { items },
+    ui
+  } = state;
   return { items, ui }
 };
 

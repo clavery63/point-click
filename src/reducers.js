@@ -1,21 +1,25 @@
 import { combineReducers } from 'redux'
 
-const items = (state = [], action) => {
+const player = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_ITEM':
-      return [
+      return {
         ...state,
-        action.name
-      ]
+        items: [
+          ...state.items,
+          action.name
+        ]
+      }
     default:
       return state
   }
 };
 
-const mode = (state = 'MENU', action) => {
+const menu = (state = 'MENU', action) => {
+  console.log(action)
   switch (action.type) {
-    case 'SWITCH_MODE':
-      return action.mode;
+    case 'SHOW_MENU':
+      return action.menu;
     default:
       return state;
   }
@@ -41,8 +45,8 @@ const room = (state = {}, action) => {
 };
 
 const reducers = combineReducers({
-  items,
-  mode,
+  player,
+  menu,
   ui,
   room
 });
