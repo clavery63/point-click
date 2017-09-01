@@ -30,11 +30,23 @@ html, body {
   background-color: white;
 }
 
-.item-list {
+.item-list-container {
   position: absolute;
   left: 50%;
   width: 50%;
-  height: 40%;
+  height: 60%;
+}
+
+.prev {
+  position: absolute;
+  left: 50px;
+  bottom: 10px;
+}
+
+.next {
+  position: absolute;
+  right: 50px;
+  bottom: 10px;
 }
 
 .bottom-content {

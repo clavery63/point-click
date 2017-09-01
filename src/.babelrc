@@ -9,5 +9,5 @@
     ],
     "react"
   ],
-  "plugins": ["external-helpers"]
+  "plugins": ["external-helpers", "transform-object-rest-spread"]
 }

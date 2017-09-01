@@ -13,6 +13,9 @@ const store = createStore(reducers, {
     'key2',
     'key3'
   ],
+  ui: {
+    page: 0
+  },
   room: {
     items: [
       {

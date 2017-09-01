@@ -6,12 +6,24 @@ const addItem = name => ({
   name
 });
 
-const mapStateToProps = ({ items }) => ({ items });
+const setPage = page => ({
+  type: 'SET_PAGE',
+  page
+});
+
+const mapStateToProps = (state) => {
+  const { items, ui } = state;
+  console.log(state)
+  return { items, ui }
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     onItemClick: name => {
       dispatch(addItem(name))
+    },
+    onPageClick: page => {
+      dispatch(setPage(page))
     }
   }
 };
