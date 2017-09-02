@@ -20,6 +20,25 @@ const player = (state = {}, action) => {
   }
 };
 
+const text = (state = '', action) => {
+  switch (action.type) {
+    case 'NUDGE_TEXT':
+      return {
+        content: [],
+        line: 0,
+        char: 0
+      };
+    case 'GO_TO_ROOM':
+      return {
+        content: action.text,
+        line: 0,
+        char: 0
+      }
+    default:
+      return state;
+  }
+}
+
 const menu = (state = '', action) => {
   switch (action.type) {
     case 'SHOW_MENU':
@@ -52,7 +71,8 @@ const reducers = combineReducers({
   player,
   menu,
   ui,
-  rooms
+  rooms,
+  text
 });
 
 export default reducers;

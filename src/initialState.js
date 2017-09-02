@@ -13,9 +13,15 @@ export default {
   ui: {
     page: 0
   },
+  text: {
+    content: [],
+    line: 0,
+    char: 0
+  },
   rooms: {
     1: {
       name: 'Redd\'s: Main Room',
+      text: ['It\'s Redd\'s Tavern.  You\'ve been here a million times before, but something just doesn\'t feel right'],
       doors: [
         {
           style: {
@@ -67,6 +73,7 @@ export default {
     },
     2: {
       name: 'Redd\'s: Bathroom',
+      text: ['Redd\'s bathroom.  Looks like its been cleaned recently'],
       doors: [
         {
           style: {

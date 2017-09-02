@@ -6,7 +6,7 @@ const showMenu = menu => ({
   menu
 });
 
-const mapStateToProps = ({ menu }) => menu;
+const mapStateToProps = () => {};
 
 const mapDispatchToProps = dispatch => {
   return {

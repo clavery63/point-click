@@ -12,7 +12,7 @@ html, body {
 }
 
 .main-game {
-  position: relative;
+  position: absolute;
   background-color: blue;
   height: 100%;
   width: 100%;
@@ -20,12 +20,18 @@ html, body {
 
 .menu-background {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   height: 100%;
   width: 100%;
 }
 
-.background-mask {
+.menu-button {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+}
+
+.menu-background-mask {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -47,6 +53,28 @@ html, body {
   width: 50%;
   height: 60%;
   background-color: white;
+}
+
+.text-background {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.text-click-mask {
+  position: absolute;
+  height: 60%;
+  width: 100%;
+  opacity: 0;
+}
+
+.text-area {
+  position: absolute;
+  top: 60%;
+  height: 40%;
+  width: 100%;
+  background-color: orange;
 }
 
 .item-list-container {
