@@ -10,6 +10,11 @@ const player = (state = {}, action) => {
           action.name
         ]
       }
+    case 'GO_TO_ROOM':
+      return {
+        ...state,
+        currentRoom: action.dest
+      }
     default:
       return state
   }

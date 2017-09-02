@@ -6,10 +6,19 @@ const addItem = name => ({
   name
 });
 
+const goToRoom = (dest, text) => ({
+  type: 'GO_TO_ROOM',
+  dest,
+  text
+});
+
 const mapStateToProps = ({ rooms, player }) => {
-  const currentRoom = rooms[player.currentRoom];
+  const { doors, items, name } = rooms[player.currentRoom];
   return {
-    items: currentRoom.items
+    doors,
+    items,
+    name,
+    rooms
   };
 };
 
@@ -17,6 +26,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onItemClick: name => {
       dispatch(addItem(name))
+    },
+    onDoorClick: (dest, text) => {
+      dispatch(goToRoom(dest, text))
     }
   }
 };

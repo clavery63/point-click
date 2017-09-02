@@ -15,6 +15,20 @@ export default {
   },
   rooms: {
     1: {
+      name: 'Redd\'s: Main Room',
+      doors: [
+        {
+          style: {
+            position: 'absolute',
+            left: 200,
+            top: 100,
+            width: 50,
+            height: 50,
+            'background-color': 'black'
+          },
+          dest: 2
+        },
+      ],
       items: [
         {
           style: {
@@ -48,6 +62,35 @@ export default {
             'background-color': 'red'
           },
           name: 'gun'
+        }
+      ]
+    },
+    2: {
+      name: 'Redd\'s: Bathroom',
+      doors: [
+        {
+          style: {
+            position: 'absolute',
+            left: 200,
+            top: 200,
+            width: 50,
+            height: 50,
+            'background-color': 'black'
+          },
+          dest: 1
+        },
+      ],
+      items: [
+        {
+          style: {
+            position: 'absolute',
+            left: 300,
+            top: 250,
+            width: 40,
+            height: 40,
+            'background-color': 'purple'
+          },
+          name: 'small grape'
         }
       ]
     }
