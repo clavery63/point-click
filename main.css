@@ -18,12 +18,28 @@ html, body {
   width: 100%;
 }
 
-.main-menu {
+.menu-background {
   position: absolute;
   z-index: 1;
-  background-color: green;
   height: 100%;
   width: 100%;
+}
+
+.background-mask {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.8;
+}
+
+.main-menu {
+  position: absolute;
+  height: 50%;
+  width: 50%;
+  left: 25%;
+  top: 25%;
+  background-color: green;
 }
 
 .view-port {

@@ -15,7 +15,7 @@ const player = (state = {}, action) => {
   }
 };
 
-const menu = (state = 'MENU', action) => {
+const menu = (state = '', action) => {
   switch (action.type) {
     case 'SHOW_MENU':
       return action.menu;

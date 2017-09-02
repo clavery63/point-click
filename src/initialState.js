@@ -9,7 +9,7 @@ export default {
       'key3'
     ]
   },
-  menu: 'MAIN',
+  menu: 'NONE',
   ui: {
     page: 0
   },
