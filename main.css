@@ -9,6 +9,7 @@ html, body {
   width: 800px;
   height: 600px;
   font-size: 20px;
+  font-family: monospace;
 }
 
 .main-game {
@@ -75,6 +76,7 @@ html, body {
   height: 40%;
   width: 100%;
   background-color: orange;
+  font-size: 30px;
 }
 
 .item-list-container {

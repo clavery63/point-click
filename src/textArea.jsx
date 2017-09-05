@@ -10,7 +10,7 @@ export default function TextArea({ text, onTextClick }) {
         <div className='text-click-mask'></div>
         <div className='text-area'>
           {lines.map(line => (
-            <span className='text-line'>{line}</span>
+            <div className='text-line'>{line}</div>
           ))}
         </div>
       </div>
