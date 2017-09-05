@@ -20,14 +20,25 @@ const player = (state = {}, action) => {
   }
 };
 
-const text = (state = '', action) => {
+const text = (state = {}, action) => {
   switch (action.type) {
-    case 'NUDGE_TEXT':
+    case 'SET_CHAR':
+      return {
+        ...state,
+        char: action.char
+      }
+    case 'SET_LINE':
+      return {
+        ...state,
+        char: 0,
+        line: action.line
+      }
+    case 'CLEAR_TEXT':
       return {
         content: [],
         line: 0,
         char: 0
-      };
+      }
     case 'GO_TO_ROOM':
       return {
         content: action.text,

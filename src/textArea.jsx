@@ -1,10 +1,30 @@
 import React from 'react';
 
-export default function TextArea({ text, onTextClick }) {
-  const lines = text.content;
-  if (lines.length === 0) {
-    return <div></div>
-  } else {
+class TextArea extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    const { text, setChar, setLine } = nextProps;
+    const { content, char, line } = text;
+    if (content.length > 0) {
+      if (char < content[line].length) {
+        console.log('adding char')
+        window.setTimeout(() => {
+          setChar(char + 1);
+        }, 60);
+      } else if (line < content.length) {
+        console.log('adding line')
+        window.setTimeout(() => {
+          setLine(line + 1);
+        }, 60);
+      }
+    }
+  }
+
+  renderText() {
+    const { text, onTextClick } = this.props;
+    const { content, line, char } = text;
+    const lines = content.slice(0, line + 1);
+    const lastLine = lines[lines.length - 1].slice(0, char + 1);
+    lines[lines.length - 1] = lastLine;
     return (
       <div className='text-background' onClick={onTextClick}>
         <div className='text-click-mask'></div>
@@ -16,4 +36,14 @@ export default function TextArea({ text, onTextClick }) {
       </div>
     )
   }
+
+  render() {
+    if (this.props.text.content.length === 0) {
+      return <div></div>
+    } else {
+      return this.renderText()
+    }
+  }
 }
+
+export default TextArea;

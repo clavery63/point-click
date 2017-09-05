@@ -21,7 +21,11 @@ export default {
   rooms: {
     1: {
       name: 'Redd\'s: Main Room',
-      text: ['It\'s Redd\'s Tavern.  You\'ve been here a million times before, but something just doesn\'t feel right'],
+      text: [
+        'It\'s Redd\'s Tavern.',
+        'You\'ve been here a million times before,',
+        'but something just doesn\'t feel right'
+      ],
       doors: [
         {
           style: {
