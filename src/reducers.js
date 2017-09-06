@@ -23,27 +23,49 @@ const player = (state = {}, action) => {
 const text = (state = {}, action) => {
   switch (action.type) {
     case 'SET_CHAR':
-      return {
-        ...state,
-        char: action.char
+      if (state.scrolling) {
+        return {
+          ...state,
+          char: action.char
+        };
+      } else {
+        return state;
       }
     case 'SET_LINE':
-      return {
-        ...state,
-        char: 0,
-        line: action.line
+      if (state.scrolling) {
+        return {
+          ...state,
+          char: 0,
+          line: action.line
+        };
+      } else {
+        return state;
       }
     case 'CLEAR_TEXT':
-      return {
-        content: [],
-        line: 0,
-        char: 0
+      const { content, line, char } = state;
+      const lastLine = content.length - 1;
+      const lastLineLength = content[content.length - 1].length;
+      if (line === lastLine && char === lastLineLength) {
+        return {
+          content: [],
+          line: 0,
+          char: 0,
+          scrolling: false
+        }
+      } else {
+        return {
+          ...state,
+          char: lastLineLength,
+          line: lastLine,
+          scrolling: false
+        }
       }
     case 'GO_TO_ROOM':
       return {
         content: action.text,
         line: 0,
-        char: 0
+        char: 0,
+        scrolling: true
       }
     default:
       return state;

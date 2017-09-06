@@ -6,15 +6,13 @@ class TextArea extends React.Component {
     const { content, char, line } = text;
     if (content.length > 0) {
       if (char < content[line].length) {
-        console.log('adding char')
         window.setTimeout(() => {
           setChar(char + 1);
-        }, 60);
-      } else if (line < content.length) {
-        console.log('adding line')
+        }, 40);
+      } else if (line < content.length - 1) {
         window.setTimeout(() => {
           setLine(line + 1);
-        }, 60);
+        }, 40);
       }
     }
   }
