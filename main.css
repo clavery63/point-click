@@ -131,3 +131,19 @@ html, body {
   width: 100%;
   background-color: gray;
 }
+
+.door-map {
+  position: absolute;
+  left: 3%;
+  top: 10%;
+  height: 80%;
+  width: 26%;
+  background-color: white;
+}
+
+.door-map-door {
+  position: absolute;
+  background-color: black;
+  width: 20%;
+  height: 20%;
+}
