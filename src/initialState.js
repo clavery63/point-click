@@ -24,7 +24,7 @@ export default {
       text: [
         'It\'s Redd\'s Tavern.',
         'You\'ve been here a million times before,',
-        'but something just doesn\'t feel right'
+        'but something just doesn\'t feel right.'
       ],
       doors: [
         {
@@ -78,6 +78,10 @@ export default {
     2: {
       name: 'Redd\'s: Bathroom',
       text: ['Redd\'s bathroom.  Looks like its been cleaned recently'],
+      text: [
+        'Redd\'s bathroom.  Looks like its been',
+        'cleaned recently.'
+      ],
       doors: [
         {
           style: {
@@ -102,6 +106,19 @@ export default {
             'background-color': 'purple'
           },
           name: 'small grape'
+        },
+        {
+          style: {
+            position: 'absolute',
+            left: 10,
+            top: 80,
+            width: 150,
+            height: 200,
+            background: 'url(img/toilet-1.png) no-repeat',
+            'background-size': '100% 100%',
+            'image-rendering': 'pixelated'
+          },
+          name: 'toilet'
         }
       ]
     }
