@@ -2,18 +2,13 @@ import { combineReducers } from 'redux'
 
 const player = (state = {}, action) => {
   switch (action.type) {
-    case 'ADD_ITEM':
+    case 'ITEM_TO_PLAYER':
       return {
         ...state,
         items: [
           ...state.items,
           action.name
         ]
-      }
-    case 'GO_TO_ROOM':
-      return {
-        ...state,
-        currentRoom: action.dest
       }
     default:
       return state
@@ -60,7 +55,7 @@ const text = (state = {}, action) => {
           scrolling: false
         }
       }
-    case 'GO_TO_ROOM':
+    case 'SET_TEXT':
       return {
         content: action.text,
         line: 0,
@@ -88,6 +83,25 @@ const ui = (state = {}, action) => {
         ...state,
         page: action.page
       };
+    case 'START_TRANSITION':
+      return {
+        ...state,
+        transition: {
+          enabled: true,
+          toRoom: action.dest,
+          text: action.text,
+          dir: action.dir
+        }
+      }
+    case 'CLEAR_TRANSITION':
+      return {
+        ...state,
+        transition: {
+          enabled: false,
+          toRoom: 0,
+          text: ''
+        }
+      }
     default:
       return state;
   }
@@ -95,6 +109,20 @@ const ui = (state = {}, action) => {
 
 const rooms = (state = {}, action) => {
   switch (action.type) {
+    case 'ITEM_TO_PLAYER':
+      const currentRoom = state[state.current];
+      return {
+        ...state,
+        [state.current]: {
+          ...currentRoom,
+          items: currentRoom.items.filter(({ name }) => name !== action.name)
+        }
+      }
+    case 'SET_ROOM':
+      return {
+        ...state,
+        current: action.room
+      }
     default:
       return state;
   }

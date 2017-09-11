@@ -2,33 +2,57 @@ import { connect } from 'react-redux'
 import ViewPort from './viewPort.jsx'
 
 const addItem = name => ({
-  type: 'ADD_ITEM',
+  type: 'ITEM_TO_PLAYER',
   name
 });
 
-const goToRoom = (dest, text) => ({
-  type: 'GO_TO_ROOM',
-  dest,
+const goToRoom = room => ({
+  type: 'SET_ROOM',
+  room
+});
+
+const setText = text => ({
+  type: 'SET_TEXT',
   text
 });
 
-const mapStateToProps = ({ rooms, player }) => {
-  const { doors, items, name } = rooms[player.currentRoom];
+const startTransition = (dest, dir, text) => ({
+  type: 'START_TRANSITION',
+  dest,
+  dir,
+  text
+});
+
+const clearTransition = () => ({
+  type: 'CLEAR_TRANSITION'
+})
+
+const mapStateToProps = ({ rooms, player, ui }) => {
+  const { doors, items, name } = rooms[rooms.current];
+  const { transition } = ui;
   return {
     doors,
     items,
     name,
-    rooms
+    rooms,
+    transition
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onItemClick: name => {
-      dispatch(addItem(name))
+      dispatch(addItem(name));
     },
-    onDoorClick: (dest, text) => {
-      dispatch(goToRoom(dest, text))
+    onDoorClick: (dest, dir, text) => {
+      dispatch(startTransition(dest, dir, text));
+    },
+    onTransitionMid: room => {
+      dispatch(goToRoom(room));
+    },
+    onTransitionEnd: text => {
+      dispatch(setText(text));
+      dispatch(clearTransition());
     }
   }
 };
