@@ -7,7 +7,7 @@ const Viewport = ({ fill, width, onClick }) => {
       x={20} 
       y={20} 
       width={width} 
-      height={50} 
+      height={200} 
       fill={fill}
       onClick={onClick}
     />

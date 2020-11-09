@@ -5,8 +5,8 @@ const rootEpic = action$ => {
   return action$.pipe(
     filter(({ type }) => type === 'EXPAND'),
     switchMapTo(
-      interval(20).pipe(
-        scan((acc, cur) => acc + 10, 50),
+      interval(10).pipe(
+        scan((acc, cur) => acc + 5, 50),
         takeWhile(x => x < 200)
       )
     ),
