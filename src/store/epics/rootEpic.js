@@ -1,4 +1,4 @@
-import { filter, map, scan, startWith, takeWhile, switchMapTo } from 'rxjs/operators';
+import { filter, map, scan, takeWhile, switchMapTo } from 'rxjs/operators';
 import { interval } from 'rxjs';
 
 const rootEpic = action$ => {

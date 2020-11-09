@@ -15,3 +15,7 @@ code {
 canvas {
   background-color: grey !important;
 }
+
+img {
+  image-rendering: pixelated;
+}

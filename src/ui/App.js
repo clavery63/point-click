@@ -5,27 +5,33 @@ import ViewportContainer from './sections/viewport/ViewportContainer';
 
 const numPixels = 240;
 
-const calculateSize = canvasRef => {
+const calculateSize = stageRef => {
   const size = Math.min(window.innerHeight, window.innerWidth) * 0.9;
   const left = (window.innerWidth - size) / 2;
   const top = (window.innerHeight - size) / 2;
-  canvasRef.current.content.style.left = `${left}px`;
-  canvasRef.current.content.style.top = `${top}px`;
+  stageRef.current.content.style.left = `${left}px`;
+  stageRef.current.content.style.top = `${top}px`;
 
   return size;
 };
 
 const App = () => {
-  const canvasRef = useRef(null);
+  const stageRef = useRef(null);
+  const layerRef = useRef(null);
   const [size, setSize] = useState(0);
   const scale = size / numPixels;
 
   useEffect(() => {
-    setSize(calculateSize(canvasRef));
-    const resize = () => setSize(calculateSize(canvasRef));
+    stageRef.current.bufferCanvas.getContext('2d').imageSmoothingEnabled = false;
+    setSize(calculateSize(stageRef));
+    const resize = () => setSize(calculateSize(stageRef));
     window.addEventListener('resize', resize);
     return () => window.removeEventListener('resize', resize);
-  }, [canvasRef]);
+  }, [stageRef]);
+
+  useEffect(() => {
+    layerRef.current.imageSmoothingEnabled(false);
+  }, [layerRef]);
 
   return (
     <ReactReduxContext.Consumer>
@@ -34,10 +40,10 @@ const App = () => {
           width={size}
           height={size}
           scale={{ x: scale, y: scale}}
-          ref={canvasRef}
+          ref={stageRef}
         >
           <Provider store={store}>
-            <Layer>
+            <Layer ref={layerRef}>
               <Text text='Hi' />
               <ViewportContainer />
             </Layer>
