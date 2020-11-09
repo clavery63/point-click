@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { ReactReduxContext, Provider } from 'react-redux';
 import { Stage, Layer, Text } from 'react-konva';
-import './App.css';
 import ViewportContainer from './sections/viewport/ViewportContainer';
 
 const numPixels = 240;
