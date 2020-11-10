@@ -1,31 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Rect, Image } from 'react-konva';
-import srcS from '../../../images/S.png';
-import srcA from '../../../images/A.png';
-import srcV from '../../../images/V.png';
-import srcE from '../../../images/E.png';
+import React from 'react';
+import { Rect } from 'react-konva';
+import TextOverlay from '../textOverlay/TextOverlay';
 
 const Viewport = ({ fill, width, onClick }) => {
-  const [S, setS] = useState(null);
-  const [A, setA] = useState(null);
-  const [V, setV] = useState(null);
-  const [E, setE] = useState(null);
-
-  useEffect(() => {
-    const imageS = new window.Image();
-    const imageA = new window.Image();
-    const imageV = new window.Image();
-    const imageE = new window.Image();
-    imageS.src = srcS;
-    imageA.src = srcA;
-    imageV.src = srcV;
-    imageE.src = srcE;
-    setS(imageS);
-    setA(imageA);
-    setV(imageV);
-    setE(imageE);
-  }, [])
-
   return (
     <>
       <Rect 
@@ -36,26 +13,7 @@ const Viewport = ({ fill, width, onClick }) => {
         fill={fill}
         onClick={onClick}
       />
-      <Image 
-        x={100}
-        y={100}
-        image={S}
-      />
-      <Image 
-        x={108}
-        y={100}
-        image={A}
-      />
-      <Image 
-        x={116}
-        y={100}
-        image={V}
-      />
-      <Image 
-        x={124}
-        y={100}
-        image={E}
-      />
+      <TextOverlay />
     </>
   );
 };
