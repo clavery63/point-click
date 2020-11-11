@@ -16,7 +16,8 @@ const epicMiddleware = createEpicMiddleware();
 
 const initialState = {
   fillColor: 'blue',
-  width: 50
+  width: 50,
+  text: []
 };
 
 const store = createStore(rootReducer, initialState, applyMiddleware(epicMiddleware));

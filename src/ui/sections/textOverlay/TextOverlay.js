@@ -3,24 +3,19 @@ import { Image } from 'react-konva';
 import { connect } from 'react-redux';
 import alphaSrc from '../../../images/alpha.png';
 
-const testStrs = [
-  'Lorem ipsum dolor sit  ',
-  'amet, consectetur',
-  'adipiscing elit, sed',
-  'do eiusmod'
-];
+// 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod test'
+
 const sheetWidth = 8;
 const spriteWidth = 7;
 const spriteHeight = 7;
-const lineWidth = 24;
 
 const TextOverlay = ({ text }) => {
   const [alphabet, setAlphabet] = useState(null);
 
   const top = 100;
-  const left = 50;
+  const left = 20;
   const shift = ' '.charCodeAt(0);
-  const strs = [text || ''].map(str => {
+  const strs = text.map(str => {
     const upper = str.toUpperCase();
     return upper.split('').map(char => char.charCodeAt(0) - shift);
   });
