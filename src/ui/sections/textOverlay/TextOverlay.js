@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Image } from 'react-konva';
+import { connect } from 'react-redux';
 import alphaSrc from '../../../images/alpha.png';
 
 const testStrs = [
-  'Water cascades over a',
-  'subterranean cliff into',
-  'a cool, clean stream.'
+  'Lorem ipsum dolor sit  ',
+  'amet, consectetur',
+  'adipiscing elit, sed',
+  'do eiusmod'
 ];
 const sheetWidth = 8;
 const spriteWidth = 7;
 const spriteHeight = 7;
 const lineWidth = 24;
 
-const TextOverlay = () => {
-  const [alpha, setAlpha] = useState(null);
+const TextOverlay = ({ text }) => {
+  const [alphabet, setAlphabet] = useState(null);
 
   const top = 100;
   const left = 50;
   const shift = ' '.charCodeAt(0);
-  const strs = testStrs.map(str => {
+  const strs = [text || ''].map(str => {
     const upper = str.toUpperCase();
     return upper.split('').map(char => char.charCodeAt(0) - shift);
   });
@@ -26,7 +28,7 @@ const TextOverlay = () => {
   useEffect(() => {
     const alphaImg = new window.Image();
     alphaImg.src = alphaSrc;
-    setAlpha(alphaImg);
+    setAlphabet(alphaImg);
   }, []);
 
   return (
@@ -39,13 +41,14 @@ const TextOverlay = () => {
             y={top + lineNumber * (spriteHeight + 1)}
             width={spriteWidth}
             height={spriteHeight}
-            image={alpha}
+            image={alphabet}
             crop={{ 
               x: (code % sheetWidth) * spriteWidth,
               y: Math.floor(code / sheetWidth) * spriteHeight,
               width: spriteWidth, 
               height: spriteHeight 
             }}
+            perfectDrawEnabled={false}
           />
         ));
       })}
@@ -53,4 +56,4 @@ const TextOverlay = () => {
   );
 };
 
-export default TextOverlay;
+export default connect(({ text }) => ({ text }))(TextOverlay);

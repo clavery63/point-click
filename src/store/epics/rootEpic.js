@@ -1,16 +1,13 @@
-import { filter, map, scan, takeWhile, switchMapTo } from 'rxjs/operators';
-import { interval } from 'rxjs';
+import { filter, map, scan, mapTo, switchMap, concatMap, tap } from 'rxjs/operators';
+import { interval, from, timer } from 'rxjs';
 
 const rootEpic = action$ => {
   return action$.pipe(
-    filter(({ type }) => type === 'EXPAND'),
-    switchMapTo(
-      interval(10).pipe(
-        scan((acc, cur) => acc + 5, 50),
-        takeWhile(x => x < 200)
-      )
-    ),
-    map(x => ({ type: 'SET_WIDTH', payload: x }))
+    filter(({ type }) => type === 'RUN_TEXT'),
+    switchMap(({ payload }) => from(payload.split(''))),
+    concatMap(char => timer(100).pipe(mapTo(char))),
+    scan((acc, cur) => acc + cur, ''),
+    map(text => ({ type: 'SET_TEXT', payload: text }))
   );
 };
 
