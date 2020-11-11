@@ -8,6 +8,7 @@ const CHARS_PER_LINE = 24;
 const MS_PER_CHAR = 100;
 
 const makeLines = text => {
+  if (!text.length) return [];
   const words = text.split(' ');
   return words.slice(1).reduce((lines, word) => {
     if (last(lines).length + word.length + 1 > CHARS_PER_LINE) {
@@ -24,12 +25,12 @@ const getLines = (lines, [row, col]) => {
   return [...fullLines, lastLine];
 };
 
-const mapToPositions = lines => lines.flatMap((line, row) => {
+const linesToPositions = lines => lines.flatMap((line, row) => {
   return range(line.length).map(col => [row, col]);
 });
 
 const renderPage$ = action$ => lines => {
-  const allPositions = mapToPositions(lines);
+  const allPositions = linesToPositions(lines);
   return concat(
     from(allPositions).pipe(
       concatMap(position => timer(MS_PER_CHAR).pipe(mapTo(getLines(lines, position)))),
