@@ -3,12 +3,14 @@ import { from, timer, of, concat } from 'rxjs';
 import { chunk, range, last } from 'lodash';
 import { ofType } from 'redux-observable';
 
-const MAX_LINE_LEN = 24;
+const LINES_PER_PAGE = 3;
+const CHARS_PER_LINE = 24;
+const MS_PER_CHAR = 100;
 
 const makeLines = text => {
   const words = text.split(' ');
   return words.slice(1).reduce((lines, word) => {
-    if (last(lines).length + word.length + 1 > MAX_LINE_LEN) {
+    if (last(lines).length + word.length + 1 > CHARS_PER_LINE) {
       return [...lines, [word]];
     }
     const firstLines = lines.slice(0, lines.length - 1);
@@ -26,11 +28,11 @@ const mapToPositions = lines => lines.flatMap((line, row) => {
   return range(line.length).map(col => [row, col]);
 });
 
-const renderChunk$ = action$ => lines => {
+const renderPage$ = action$ => lines => {
   const allPositions = mapToPositions(lines);
   return concat(
     from(allPositions).pipe(
-      concatMap(position => timer(100).pipe(mapTo(getLines(lines, position)))),
+      concatMap(position => timer(MS_PER_CHAR).pipe(mapTo(getLines(lines, position)))),
       takeUntil(action$.ofType('PAGE_CLICK'))
     ),
     of(getLines(lines, last(allPositions))),
@@ -42,8 +44,8 @@ const rootEpic = action$ => {
   return action$.pipe(
     ofType('RUN_TEXT'),
     map(({ payload }) => makeLines(payload)),
-    switchMap(lines => from(chunk(lines, 3)).pipe(
-      concatMap(renderChunk$(action$))
+    switchMap(lines => from(chunk(lines, LINES_PER_PAGE)).pipe(
+      concatMap(renderPage$(action$))
     )),
     map(text => ({ type: 'SET_TEXT', payload: text }))
   );
