@@ -3,42 +3,37 @@ import { from, timer, of, concat } from 'rxjs';
 import { chunk, range, last } from 'lodash';
 import { ofType } from 'redux-observable';
 
-const maxLineLen = 24;
+const MAX_LINE_LEN = 24;
 
 const makeLines = text => {
-  const output = [];
   const words = text.split(' ');
-  for (let i = 0; i < words.length; i++) {
-    if (!output.length) {
-      output.push(words[i]);
-      continue;
+  return words.slice(1).reduce((lines, word) => {
+    if (last(lines).length + word.length + 1 > MAX_LINE_LEN) {
+      return [...lines, [word]];
     }
-    const lastLine = output[output.length - 1];
-    if (lastLine.length + words[i].length + 1 > maxLineLen) {
-      output.push(words[i]);
-      continue;
-    }
-    output[output.length - 1] = lastLine.concat(' ' + words[i]);
-  }
-  return output;
+    const firstLines = lines.slice(0, lines.length - 1);
+    return [...firstLines, `${last(lines)} ${word}`];
+  }, [words[0]]);
 };
 
-const mapLines = (lines, [row, col]) => {
+const getLines = (lines, [row, col]) => {
   const fullLines = lines.slice(0, row);
   const lastLine = lines[row].slice(0, col + 1);
   return [...fullLines, lastLine];
 };
 
+const mapToPositions = lines => lines.flatMap((line, row) => {
+  return range(line.length).map(col => [row, col]);
+});
+
 const renderChunk$ = action$ => lines => {
-  const allCoords = lines.flatMap((line, row) => {
-    return range(line.length).map(col => [row, col]);
-  });
+  const allPositions = mapToPositions(lines);
   return concat(
-    from(allCoords).pipe(
-      concatMap(coords => timer(100).pipe(mapTo(mapLines(lines, coords)))),
+    from(allPositions).pipe(
+      concatMap(position => timer(100).pipe(mapTo(getLines(lines, position)))),
       takeUntil(action$.ofType('PAGE_CLICK'))
     ),
-    of(mapLines(lines, last(allCoords))),
+    of(getLines(lines, last(allPositions))),
     action$.ofType('PAGE_CLICK').pipe(mapTo([]), take(1))
   );
 };

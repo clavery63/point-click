@@ -3,8 +3,6 @@ import { Image } from 'react-konva';
 import { connect } from 'react-redux';
 import alphaSrc from '../../../images/alpha.png';
 
-// 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod test'
-
 const sheetWidth = 8;
 const spriteWidth = 7;
 const spriteHeight = 7;
