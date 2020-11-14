@@ -6,6 +6,8 @@ const reducer = (state = {}, { type, payload }) => {
       return { ...state, width: payload  };
     case 'SET_TEXT':
       return { ...state, text: payload  };
+    case 'MENU_OPTION':
+      return { ...state, menuOption: payload };
     default:
       return state;
   }

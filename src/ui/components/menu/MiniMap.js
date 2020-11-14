@@ -3,7 +3,7 @@ import { Group } from 'react-konva';
 
 const MiniMap = ({ top, left, onClick }) => {
   return (
-    <Group>
+    <Group top={12} left={12}>
     </Group>
   );
 };

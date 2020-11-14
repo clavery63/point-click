@@ -3,7 +3,7 @@ import { Image, Group } from 'react-konva';
 import MenuLeft from './MenuLeft';
 import menuSrc from '../../../images/menu.png';
 
-const Menu = ({ text }) => {
+const Menu = ({ text, dispatchMove, dispatchMap, menuOption }) => {
   const [menuImg, setMenuImg] = useState(null);
 
   useEffect(() => {
@@ -23,7 +23,11 @@ const Menu = ({ text }) => {
         height={78}
         image={menuImg}
       />
-      <MenuLeft />
+      <MenuLeft
+        menuOption={menuOption}
+        onMoveClick={dispatchMove} 
+        onMapClick={dispatchMap}
+      />
     </Group>
   );
 };

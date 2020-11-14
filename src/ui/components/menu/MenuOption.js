@@ -1,9 +1,15 @@
 import React from 'react';
-import { Group } from 'react-konva';
+import { Group, Rect } from 'react-konva';
 
-const MenuOption = ({ top, left, onClick }) => {
+const MenuOption = ({ top, left, onClick, isActive }) => {
   return (
-    <Group>
+    <Group x={left} y={top}>
+      <Rect
+        fill={isActive ? 'black' : null}
+        onClick={isActive ? () => {} : onClick}
+        width={8}
+        height={8}
+      />
     </Group>
   );
 };
