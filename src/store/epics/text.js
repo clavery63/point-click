@@ -36,8 +36,11 @@ const text$ = action$ => {
   return action$.pipe(
     ofType('RUN_TEXT'),
     map(({ payload }) => makeLines(payload)),
-    switchMap(lines => from(chunk(lines, LINES_PER_PAGE)).pipe(
-      concatMap(renderPage$(action$))
+    switchMap(lines => concat(
+      from(chunk(lines, LINES_PER_PAGE)).pipe(
+        concatMap(renderPage$(action$))
+      ),
+      of(null)
     )),
     map(text => ({ type: 'SET_TEXT', payload: text }))
   );
