@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { ReactReduxContext, Provider, connect } from 'react-redux';
-import { Stage, Layer } from 'react-konva';
-import ViewportContainer from './sections/viewport/ViewportContainer';
+import { ReactReduxContext, Provider } from 'react-redux';
+import { Stage } from 'react-konva';
+import MainLayer from './MainLayer';
+import TextInput from './TextInput';
 
 const pixelWidth = 256;
 const pixelHeight = 240;
@@ -22,34 +23,8 @@ const calculateSize = stageRef => {
   return width;
 };
 
-const runText = (text) => {
-  return {
-    type: 'RUN_TEXT',
-    payload: text
-  }
-} 
-
-const pageClick = () => {
-  return {
-    type: 'PAGE_CLICK'
-  }
-}
-
-const TextInput = connect(null, { pageClick, runText })(({ pageClick, runText }) => {
-  const [text, setText] = useState('');
-
-  return (
-    <div>
-      <textarea onChange={e => setText(e.target.value)} value={text} />
-      <button onClick={() => runText(text)}>RUN TEXT</button>
-      <button onClick={() => pageClick()}>PAGE CLICK</button>
-    </div>
-  );
-});
-
 const App = () => {
   const stageRef = useRef(null);
-  const layerRef = useRef(null);
   const [width, setWidth] = useState(0);
   const scale = width / pixelWidth;
 
@@ -60,10 +35,6 @@ const App = () => {
     window.addEventListener('resize', resize);
     return () => window.removeEventListener('resize', resize);
   }, [stageRef]);
-
-  useEffect(() => {
-    layerRef.current.imageSmoothingEnabled(false);
-  }, [layerRef]);
 
   return (
     <ReactReduxContext.Consumer>
@@ -78,9 +49,7 @@ const App = () => {
             ref={stageRef}
           >
             <Provider store={store}>
-              <Layer ref={layerRef}>
-                <ViewportContainer />
-              </Layer>
+              <MainLayer />
             </Provider>
           </Stage>
         </>
