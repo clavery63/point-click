@@ -3,16 +3,16 @@ import { from, timer, of, concat } from 'rxjs';
 import { chunk, range, last } from 'lodash';
 import { ofType } from 'redux-observable';
 
-const LINES_PER_PAGE = 3;
+const LINES_PER_PAGE = 4;
 const CHARS_PER_LINE = 24;
-const MS_PER_CHAR = 100;
+const MS_PER_CHAR = 75;
 
 const makeLines = text => {
   if (!text.length) return [];
-  const words = text.split(' ');
+  const words = text.trim().split(' ');
   return words.slice(1).reduce((lines, word) => {
     if (last(lines).length + word.length + 1 > CHARS_PER_LINE) {
-      return [...lines, [word]];
+      return [...lines, word];
     }
     const firstLines = lines.slice(0, lines.length - 1);
     return [...firstLines, `${last(lines)} ${word}`];

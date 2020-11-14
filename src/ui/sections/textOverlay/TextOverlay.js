@@ -10,7 +10,7 @@ const spriteHeight = 7;
 const TextOverlay = ({ text }) => {
   const [alphabet, setAlphabet] = useState(null);
 
-  const top = 100;
+  const top = 150;
   const left = 20;
   const shift = ' '.charCodeAt(0);
   const strs = text.map(str => {
