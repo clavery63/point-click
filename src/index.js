@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import { createEpicMiddleware } from 'redux-observable';
 
 import * as serviceWorker from './serviceWorker';
-import rootEpic from './store/epics/rootEpic';
+import rootEpic from './store/epics/root';
 import rootReducer from './store/reducers/rootReducer';
 
 const epicMiddleware = createEpicMiddleware();

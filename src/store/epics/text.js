@@ -2,22 +2,13 @@ import { take, map, takeUntil, mapTo, switchMap, concatMap } from 'rxjs/operator
 import { from, timer, of, concat } from 'rxjs';
 import { chunk, range, last } from 'lodash';
 import { ofType } from 'redux-observable';
+import { textToLines } from './util';
 
 const LINES_PER_PAGE = 4;
 const CHARS_PER_LINE = 24;
 const MS_PER_CHAR = 75;
 
-const makeLines = text => {
-  if (!text.length) return [];
-  const words = text.trim().split(' ');
-  return words.slice(1).reduce((lines, word) => {
-    if (last(lines).length + word.length + 1 > CHARS_PER_LINE) {
-      return [...lines, word];
-    }
-    const firstLines = lines.slice(0, lines.length - 1);
-    return [...firstLines, `${last(lines)} ${word}`];
-  }, [words[0]]);
-};
+const makeLines = textToLines(CHARS_PER_LINE);
 
 const getLines = (lines, [row, col]) => {
   const fullLines = lines.slice(0, row);
@@ -41,7 +32,7 @@ const renderPage$ = action$ => lines => {
   );
 };
 
-const rootEpic = action$ => {
+const text$ = action$ => {
   return action$.pipe(
     ofType('RUN_TEXT'),
     map(({ payload }) => makeLines(payload)),
@@ -52,4 +43,4 @@ const rootEpic = action$ => {
   );
 };
 
-export default rootEpic;
+export default text$;

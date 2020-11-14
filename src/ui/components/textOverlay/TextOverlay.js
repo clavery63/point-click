@@ -1,22 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Image } from 'react-konva';
-import { connect } from 'react-redux';
 import alphaSrc from '../../../images/alpha.png';
 
 const sheetWidth = 8;
 const spriteWidth = 7;
 const spriteHeight = 7;
+const top = 150;
+const left = 20;
 
-const TextOverlay = ({ text }) => {
+const TextOverlay = ({ lines }) => {
   const [alphabet, setAlphabet] = useState(null);
-
-  const top = 150;
-  const left = 20;
-  const shift = ' '.charCodeAt(0);
-  const strs = text.map(str => {
-    const upper = str.toUpperCase();
-    return upper.split('').map(char => char.charCodeAt(0) - shift);
-  });
 
   useEffect(() => {
     const alphaImg = new window.Image();
@@ -26,7 +19,7 @@ const TextOverlay = ({ text }) => {
 
   return (
     <>
-      {strs.map((line, lineNumber) => {
+      {lines.map((line, lineNumber) => {
         return line.map((code, charNumber) => (
           <Image 
             key={lineNumber * 1000 + charNumber}
@@ -49,4 +42,4 @@ const TextOverlay = ({ text }) => {
   );
 };
 
-export default connect(({ text }) => ({ text }))(TextOverlay);
+export default TextOverlay;
