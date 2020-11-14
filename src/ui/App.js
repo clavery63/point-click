@@ -44,8 +44,8 @@ const App = () => {
           <Stage
             width={width}
             height={width * aspectRatio}
-            scaleX={scale * horizStretch}
-            scaleY={scale}
+            scaleX={scale}
+            scaleY={scale / horizStretch}
             ref={stageRef}
           >
             <Provider store={store}>
