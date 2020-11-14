@@ -1,26 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './ui/App';
-
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-
 import { createEpicMiddleware } from 'redux-observable';
 
 import * as serviceWorker from './serviceWorker';
 import rootEpic from './store/epics/root';
 import rootReducer from './store/reducers/rootReducer';
+import textMiddleware from './store/middleware/textMiddleware';
+
+import './index.css';
+import App from './ui/App';
 
 const epicMiddleware = createEpicMiddleware();
 
 const initialState = {
-  fillColor: 'blue',
-  width: 50,
-  text: null
+  menuOption: null,
+  nextText: null,
+  text: null,
 };
 
-const store = createStore(rootReducer, initialState, applyMiddleware(epicMiddleware));
+const store = createStore(rootReducer, initialState, applyMiddleware(epicMiddleware, textMiddleware));
 epicMiddleware.run(rootEpic);
 
 ReactDOM.render(

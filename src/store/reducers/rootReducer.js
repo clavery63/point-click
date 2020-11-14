@@ -1,13 +1,15 @@
 const reducer = (state = {}, { type, payload }) => {
   switch (type) {
-    case 'MAKE_RED':
-      return { ...state, fillColor: 'red'  };
-    case 'SET_WIDTH':
-      return { ...state, width: payload  };
     case 'SET_TEXT':
       return { ...state, text: payload  };
+    case 'CLEAR_NEXT_TEXT':
+      return { ...state, nextText: null };
     case 'MENU_OPTION':
-      return { ...state, menuOption: payload };
+      return { 
+        ...state,
+        menuOption: payload,
+        nextText: 'Where would you like to move?'
+      };
     default:
       return state;
   }
