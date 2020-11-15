@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Image } from 'react-konva';
+import { Group, Rect } from 'react-konva';
+import Text from '../shared/Text';
 import alphaSrc from '../../../images/alpha.png';
 
-const sheetWidth = 8;
-const spriteWidth = 7;
-const spriteHeight = 7;
-const top = 150;
-const left = 20;
+const TEXT_AREA_WIDTH = 240;
+const TEXT_AREA_HEIGHT = 100;
+const TEXT_AREA_COLOR = '#f6d7ae';
 
-const TextOverlay = ({ lines }) => {
+const TextOverlay = ({ lines, onClick }) => {
   const [alphabet, setAlphabet] = useState(null);
 
   useEffect(() => {
@@ -17,28 +16,26 @@ const TextOverlay = ({ lines }) => {
     setAlphabet(alphaImg);
   }, []);
 
+  if (!lines) {
+    return null;
+  }
+
   return (
-    <>
-      {lines.map((line, lineNumber) => {
-        return line.map((code, charNumber) => (
-          <Image 
-            key={lineNumber * 1000 + charNumber}
-            x={left + charNumber * (spriteWidth + 1)}
-            y={top + lineNumber * (spriteHeight + 1)}
-            width={spriteWidth}
-            height={spriteHeight}
-            image={alphabet}
-            crop={{ 
-              x: (code % sheetWidth) * spriteWidth,
-              y: Math.floor(code / sheetWidth) * spriteHeight,
-              width: spriteWidth, 
-              height: spriteHeight 
-            }}
-            perfectDrawEnabled={false}
+    <Group>
+      <Rect width={256} height={240} onClick={onClick} />
+      <Group x={8} y={156} width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT}>
+        <Rect width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT} fill={TEXT_AREA_COLOR} />
+        {lines.map((line, lineNumber) => (
+          <Text
+            key={lineNumber}
+            left={12}
+            top={12 + lineNumber * 16}
+            text={line}
+            alphabet={alphabet}
           />
-        ));
-      })}
-    </>
+        ))}
+      </Group>
+    </Group>
   );
 };
 

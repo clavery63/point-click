@@ -4,6 +4,7 @@ import TextOverlay from './TextOverlay';
 const shift = ' '.charCodeAt(0);
 
 const mapStateToProps = ({ text }) => {
+  if (!text) return { lines: null };
   const lines = (text || []).map(str => {
     const upper = str.toUpperCase();
     return upper.split('').map(char => char.charCodeAt(0) - shift);
@@ -11,4 +12,8 @@ const mapStateToProps = ({ text }) => {
   return { lines };
 };
 
-export default connect(mapStateToProps)(TextOverlay);
+const mapDispatchToProps = {
+  onClick: () => ({ type: 'PAGE_CLICK' })
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TextOverlay);
