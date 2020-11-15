@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import { ReactReduxContext, Provider } from 'react-redux';
 import { Stage } from 'react-konva';
 import MainLayer from './MainLayer';
-import TextInput from './TextInput';
 
 const pixelWidth = 256;
 const pixelHeight = 240;
@@ -38,20 +37,17 @@ const App = () => {
   return (
     <ReactReduxContext.Consumer>
       {({ store }) => (
-        <>
-          {/* <TextInput /> */}
-          <Stage
-            width={width}
-            height={width * aspectRatio}
-            scaleX={scale}
-            scaleY={scale / horizStretch}
-            ref={stageRef}
-          >
-            <Provider store={store}>
-              <MainLayer />
-            </Provider>
-          </Stage>
-        </>
+        <Stage
+          width={width}
+          height={width * aspectRatio}
+          scaleX={scale}
+          scaleY={scale / horizStretch}
+          ref={stageRef}
+        >
+          <Provider store={store}>
+            <MainLayer />
+          </Provider>
+        </Stage>
       )}
     </ReactReduxContext.Consumer>
   );
