@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
 import Viewport from './Viewport';
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = ({ gameState }) => {
+  return {
+    borderImg: gameState.images.border
+  };
 };
 
 const mapDispatchToProps = {

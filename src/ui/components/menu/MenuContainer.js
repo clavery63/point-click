@@ -1,8 +1,15 @@
 import { connect } from 'react-redux';
 import Menu from './Menu';
 
-const mapStateToProps = ({ text, menuOption }) => {
-  return { text, menuOption };
+const mapStateToProps = ({ text, menuOption, gameState }) => {
+  /**
+   * TODO: replace menuOption
+   */
+  return { 
+    text, 
+    menuOption,
+    menuImg: gameState.images.menu
+  };
 };
 
 const mapDispatchToProps = {

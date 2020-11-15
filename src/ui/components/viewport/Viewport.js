@@ -1,15 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Image, Group } from 'react-konva';
-import borderSrc from '../../../images/border.png';
 
-const Viewport = ({ onClick }) => {
-  const [borderImg, setBorderImg] = useState(null);
-
-  useEffect(() => {
-    const borderImage = new window.Image();
-    borderImage.src = borderSrc;
-    setBorderImg(borderImage);
-  }, []);
+const Viewport = ({ onClick, borderImg }) => {
 
   return (
     <Group x={8} y={23}>

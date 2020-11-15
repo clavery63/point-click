@@ -1,6 +1,43 @@
-import { map, switchMap, mapTo } from 'rxjs/operators';
-import { of, timer } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { Observable, of, forkJoin } from 'rxjs';
 import initialState from '../initialState';
+import imageFiles from '../../images';
+
+const image$ = src => new Observable(observer => {
+  const image = new Image();
+  const load = () => {
+    observer.next(image);
+    observer.complete();
+  };
+  const error = e => {
+    console.error(e);
+    observer.error(e);
+  }
+  image.addEventListener('load', load);
+  image.addEventListener('error', error);
+  image.src = src;
+  return () => {
+    image.removeEventListener('load', load);
+    image.removeEventListener('error', error);
+  }
+});
+
+const withImages = state => pairs => ({
+  ...state,
+  gameState: {
+    ...state.gameState,
+    images: pairs.reduce((obj, [key, value]) => ({
+      ...obj,
+      [key]: value
+    }))
+  }
+});
+
+const loadImages$ = state => {
+  return forkJoin(Object.keys(state.gameState.images).map(key => {
+    return image$(imageFiles[key]).pipe(map(image => [key, image]));
+  })).pipe(map(withImages(state)));
+};
 
 const load$ = () => {
   /**
@@ -9,10 +46,7 @@ const load$ = () => {
    */
   const initialState$ = of(initialState);
   return initialState$.pipe(
-    /**
-     * Force it to be async so we don't shoot ourselves in the foot later
-     */
-    switchMap(state => timer(0).pipe(mapTo(state))),
+    switchMap(loadImages$),
     map(state => ({ type: 'SET_STATE', payload: state }))
   );
 };

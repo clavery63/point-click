@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Image, Group } from 'react-konva';
 import MenuLeft from './MenuLeft';
-import menuSrc from '../../../images/menu.png';
 
-const Menu = ({ text, dispatchMove, dispatchMap, menuOption }) => {
-  const [menuImg, setMenuImg] = useState(null);
-
-  useEffect(() => {
-    const menuImage = new window.Image();
-    menuImage.src = menuSrc;
-    setMenuImg(menuImage);
-  }, []);
+const Menu = props => {
+  const { 
+    text, 
+    dispatchMove, 
+    dispatchMap, 
+    menuOption,
+    menuImg
+  } = props;
 
   if (text) {
     return null;
