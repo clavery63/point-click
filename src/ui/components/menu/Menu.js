@@ -17,7 +17,7 @@ const Menu = ({ text, dispatchMove, dispatchMap, menuOption }) => {
   }
 
   return (
-    <Group x={17} y={150}>
+    <Group x={17} y={152}>
       <Image
         width={222}
         height={78}

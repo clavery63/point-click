@@ -8,7 +8,7 @@ const pixelWidth = 256;
 const pixelHeight = 240;
 const horizStretch = 1.1;
 const aspectRatio = (pixelHeight / (pixelWidth * horizStretch));
-const paddingFactor = 0.9;
+const paddingFactor = 1;
 
 const calculateSize = stageRef => {
   const { innerHeight, innerWidth } = window;
@@ -40,7 +40,7 @@ const App = () => {
     <ReactReduxContext.Consumer>
       {({ store }) => (
         <>
-          <TextInput />
+          {/* <TextInput /> */}
           <Stage
             width={width}
             height={width * aspectRatio}
