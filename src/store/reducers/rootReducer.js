@@ -1,5 +1,7 @@
 const reducer = (state = {}, { type, payload }) => {
   switch (type) {
+    case 'SET_STATE':
+      return payload;
     case 'SET_TEXT':
       return { ...state, text: payload  };
     case 'CLEAR_NEXT_TEXT':

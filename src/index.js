@@ -15,9 +15,7 @@ import App from './ui/App';
 const epicMiddleware = createEpicMiddleware();
 
 const initialState = {
-  menuOption: null,
-  nextText: null,
-  text: null,
+  loading: true
 };
 
 const store = createStore(rootReducer, initialState, applyMiddleware(epicMiddleware, textMiddleware));

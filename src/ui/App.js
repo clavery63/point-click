@@ -10,15 +10,15 @@ const horizStretch = 1.1;
 const aspectRatio = (pixelHeight / (pixelWidth * horizStretch));
 const paddingFactor = 1;
 
-const calculateSize = stageRef => {
+const calculateSize = stage => {
   const { innerHeight, innerWidth } = window;
   const fullWidth = Math.min(innerHeight / aspectRatio, innerWidth);
   const width = fullWidth * paddingFactor;
   const height = width * aspectRatio;
   const left = (window.innerWidth - width) / 2;
   const top = (window.innerHeight - height) / 2;
-  stageRef.current.content.style.left = `${left}px`;
-  stageRef.current.content.style.top = `${top}px`;
+  stage.content.style.left = `${left}px`;
+  stage.content.style.top = `${top}px`;
 
   return width;
 };
@@ -29,9 +29,8 @@ const App = () => {
   const scale = width / pixelWidth;
 
   useEffect(() => {
-    // stageRef.current.bufferCanvas.getContext('2d').imageSmoothingEnabled = false;
-    setWidth(calculateSize(stageRef));
-    const resize = () => setWidth(calculateSize(stageRef));
+    setWidth(calculateSize(stageRef.current));
+    const resize = () => setWidth(calculateSize(stageRef.current));
     window.addEventListener('resize', resize);
     return () => window.removeEventListener('resize', resize);
   }, [stageRef]);
@@ -57,5 +56,6 @@ const App = () => {
     </ReactReduxContext.Consumer>
   );
 };
+
 
 export default App;
