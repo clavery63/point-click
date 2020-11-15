@@ -44,7 +44,6 @@ const TextOverlay = ({ lines, onClick }) => {
 
   return (
     <Group>
-      <Rect width={256} height={240} onClick={onClick} />
       <Group x={16} y={160} width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT}>
         <Rect width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT} fill={TEXT_AREA_COLOR} />
         <Rows hr={hr} />
@@ -58,6 +57,7 @@ const TextOverlay = ({ lines, onClick }) => {
           />
         ))}
       </Group>
+      <Rect width={256} height={240} onClick={onClick} />
     </Group>
   );
 };
