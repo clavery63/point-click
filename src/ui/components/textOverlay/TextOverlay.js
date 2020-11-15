@@ -1,19 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { Group, Rect } from 'react-konva';
+import { Group, Rect, Image } from 'react-konva';
+import { range } from 'lodash';
 import Text from '../shared/Text';
 import alphaSrc from '../../../images/alpha.png';
+import hrSrc from '../../../images/line.png';
 
-const TEXT_AREA_WIDTH = 240;
+const TEXT_AREA_WIDTH = 224;
 const TEXT_AREA_HEIGHT = 96;
 const TEXT_AREA_COLOR = '#f6d7ae';
 
+const Hr = ({ left, top, hr }) => range(26).map(i => (
+  <Image
+    key={i}
+    x={left + 8 * i}
+    y={top}
+    width={8}
+    height={1}
+    image={hr}
+  />
+));
+
+const Rows = ({ hr }) => range(5).map(i => (
+  <Hr key={i} left={8} top={2 + i * 16}  hr={hr} />
+));
+
 const TextOverlay = ({ lines, onClick }) => {
   const [alphabet, setAlphabet] = useState(null);
+  const [hr, setHr] = useState(null);
 
   useEffect(() => {
     const alphaImg = new window.Image();
     alphaImg.src = alphaSrc;
     setAlphabet(alphaImg);
+
+    const hrImg = new window.Image();
+    hrImg.src = hrSrc;
+    setHr(hrImg);
   }, []);
 
   if (!lines) {
@@ -23,13 +45,14 @@ const TextOverlay = ({ lines, onClick }) => {
   return (
     <Group>
       <Rect width={256} height={240} onClick={onClick} />
-      <Group x={8} y={160} width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT}>
+      <Group x={16} y={160} width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT}>
         <Rect width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT} fill={TEXT_AREA_COLOR} />
+        <Rows hr={hr} />
         {lines.map((line, lineNumber) => (
           <Text
             key={lineNumber}
-            left={12}
-            top={12 + lineNumber * 16}
+            left={9}
+            top={9 + lineNumber * 16}
             text={line}
             alphabet={alphabet}
           />
