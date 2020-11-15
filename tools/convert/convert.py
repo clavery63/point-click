@@ -11,12 +11,21 @@ import numpy
 # DEST_WIDTH = 112
 
 ## menu
-SOURCE_TOP = 1428
-SOURCE_LEFT = 610
-SOURCE_HEIGHT = 728
-SOURCE_WIDTH = 2364
-DEST_HEIGHT= 78
-DEST_WIDTH = 222
+# SOURCE_TOP = 1428
+# SOURCE_LEFT = 610
+# SOURCE_HEIGHT = 728
+# SOURCE_WIDTH = 2364
+# DEST_HEIGHT= 78
+# DEST_WIDTH = 222
+
+## items
+SOURCE_TOP = 158
+SOURCE_LEFT = 1887
+SOURCE_HEIGHT = 1252
+SOURCE_WIDTH = 1173
+DEST_HEIGHT= 134
+DEST_WIDTH = 110
+
 
 def convert(filename, index):
     print(filename)
@@ -40,6 +49,6 @@ def convert(filename, index):
     cv2.imwrite('dest/{}.png'.format(index), dest)
 
 for i, filename in enumerate(sorted(os.listdir('source'))[-1:]):
-    convert(filename, 'menu')
+    convert(filename, 'items')
 
 
