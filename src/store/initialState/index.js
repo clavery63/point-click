@@ -74,7 +74,7 @@ const rooms = {
     items: [
     ]
   },
-}
+};
 
 const scenery = {
   1: {
@@ -96,6 +96,19 @@ const scenery = {
   }
 };
 
+const images = {
+  alpha: null,
+  border: null,
+  door1: null,
+  entryway: null,
+  items: null,
+  key1: null,
+  line: null,
+  menuButton: null,
+  menu: null,
+  skull: null
+};
+
 const playerState = {
   verb: null,
   using: null,
@@ -108,7 +121,8 @@ const gameState = {
   doors,
   items,
   rooms,
-  scenery
+  scenery,
+  images
 };
 
 const initialState = {
