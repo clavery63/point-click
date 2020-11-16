@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
 import Inventory from './Inventory';
 
-const mapStateToProps = ({ text, menuOption }) => {
-  return { text, menuOption };
+const mapStateToProps = ({  gameState }) => {
+  return {
+    inventoryImg: gameState.images.items
+  };
 };
 
 const mapDispatchToProps = {

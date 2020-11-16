@@ -1,11 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Image, Group } from 'react-konva';
 
 const sheetWidth = 8;
 const spriteWidth = 7;
 const spriteHeight = 7;
 
-const Text = ({ text, left, top, alphabet }) => {
+const mapStateToProps = ({ gameState }) => {
+  return {
+    alphabetImg: gameState.images.alpha
+  };
+};
+
+const Text = ({ text, left, top, alphabetImg }) => {
   return (
     <Group>
       {text.map((code, charNumber) => (
@@ -15,7 +22,7 @@ const Text = ({ text, left, top, alphabet }) => {
           y={top}
           width={spriteWidth}
           height={spriteHeight}
-          image={alphabet}
+          image={alphabetImg}
           crop={{ 
             x: (code % sheetWidth) * spriteWidth,
             y: Math.floor(code / sheetWidth) * spriteHeight,
@@ -29,4 +36,4 @@ const Text = ({ text, left, top, alphabet }) => {
   );
 };
 
-export default Text;
+export default connect(mapStateToProps)(Text);

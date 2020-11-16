@@ -29,7 +29,7 @@ const withImages = state => pairs => ({
     images: pairs.reduce((obj, [key, value]) => ({
       ...obj,
       [key]: value
-    }))
+    }), {})
   }
 });
 

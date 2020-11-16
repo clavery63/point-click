@@ -3,13 +3,17 @@ import TextOverlay from './TextOverlay';
 
 const shift = ' '.charCodeAt(0);
 
-const mapStateToProps = ({ text }) => {
+const mapStateToProps = ({ text, gameState }) => {
   if (!text) return { lines: null };
   const lines = (text || []).map(str => {
     const upper = str.toUpperCase();
     return upper.split('').map(char => char.charCodeAt(0) - shift);
   });
-  return { lines };
+
+  return { 
+    lines,
+    hrImg: gameState.images.line
+  };
 };
 
 const mapDispatchToProps = {
