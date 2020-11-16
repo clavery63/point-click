@@ -1,13 +1,14 @@
 import React from 'react';
 import { Image, Group } from 'react-konva';
 import MenuLeft from './MenuLeft';
+import MenuCenter from './MenuCenter';
 
 const Menu = props => {
   const { 
     text, 
-    dispatchMove, 
+    dispatchVerb, 
     dispatchDoor, 
-    menuOption,
+    currentVerb,
     menuImg,
     menuButtonImg,
     doors
@@ -25,11 +26,15 @@ const Menu = props => {
         image={menuImg}
       />
       <MenuLeft
-        menuOption={menuOption}
+        currentVerb={currentVerb}
         doors={doors}
-        onMoveClick={dispatchMove} 
+        onMenuClick={dispatchVerb} 
         onDoorClick={dispatchDoor}
         menuButtonImg={menuButtonImg}
+      />
+      <MenuCenter
+        currentVerb={currentVerb}
+        onClick={dispatchVerb} 
       />
     </Group>
   );

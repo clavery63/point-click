@@ -6,11 +6,14 @@ const reducer = (state = {}, { type, payload }) => {
       return { ...state, text: payload  };
     case 'CLEAR_NEXT_TEXT':
       return { ...state, nextText: null };
-    case 'MENU_OPTION':
+    case 'SELECT_VERB':
       return { 
         ...state,
-        menuOption: payload,
-        nextText: 'Where would you like to move?'
+        playerState: {
+          ...state.playerState,
+          verb: payload
+        },
+        nextText: `You have selected ${payload}`
       };
     case 'OBJECT_CLICK':
       console.log('OBJECT:', payload);

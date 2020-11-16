@@ -1,16 +1,13 @@
 import { connect } from 'react-redux';
 import Menu from './Menu';
 
-const mapStateToProps = ({ text, menuOption, gameState, playerState }) => {
+const mapStateToProps = ({ text, gameState, playerState }) => {
   const { images, rooms } = gameState;
-  const { room } = playerState;
+  const { room, verb } = playerState;
   const { doors } = rooms[room];
 
-  /**
-   * TODO: replace menuOption
-   */
   return { 
-    menuOption,
+    currentVerb: verb,
     text,
     doors: doors.map(id => ({
       id,
@@ -22,7 +19,7 @@ const mapStateToProps = ({ text, menuOption, gameState, playerState }) => {
 };
 
 const mapDispatchToProps = {
-  dispatchMove: () => ({ type: 'MENU_OPTION', payload: 'MOVE' }),
+  dispatchVerb: verb => ({ type: 'SELECT_VERB', payload: verb }),
   dispatchDoor: id => ({ type: 'DOOR', payload: id })
 };
 

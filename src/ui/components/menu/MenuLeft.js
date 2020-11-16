@@ -3,14 +3,15 @@ import { Group } from 'react-konva';
 import MenuOption from './MenuOption';
 import MiniMap from './MiniMap';
 
-const MenuLeft = ({ onMoveClick, onDoorClick, menuOption, doors, menuButtonImg }) => {
+const MenuLeft = ({ onMenuClick, onDoorClick, currentVerb, doors, menuButtonImg }) => {
   return (
     <Group x={7} y={7}>
-      <MenuOption 
+      <MenuOption
+        verb={'MOVE'}
         left={8}
         top={0}
-        onClick={onMoveClick}
-        isActive={menuOption === 'MOVE'}
+        onClick={onMenuClick}
+        currentVerb={currentVerb}
       />
       <MiniMap onClick={onDoorClick} doors={doors} menuButtonImg={menuButtonImg} />
     </Group>

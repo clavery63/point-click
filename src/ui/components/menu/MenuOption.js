@@ -1,12 +1,13 @@
 import React from 'react';
 import { Group, Rect } from 'react-konva';
 
-const MenuOption = ({ top, left, onClick, isActive }) => {
+const MenuOption = ({ verb, top, left, onClick, currentVerb }) => {
+  const isActive = verb === currentVerb;
   return (
     <Group x={left} y={top}>
       <Rect
         fill={isActive ? 'black' : null}
-        onClick={isActive ? () => {} : onClick}
+        onClick={isActive ? () => {} : () => onClick(verb)}
         width={8}
         height={8}
       />
