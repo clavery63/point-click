@@ -1,9 +1,18 @@
 import React from 'react';
-import { Group } from 'react-konva';
+import { Group, Image } from 'react-konva';
 
-const MiniMap = ({ top, left, onClick }) => {
+const MiniMap = ({ onClick, doors, menuButtonImg }) => {
   return (
-    <Group top={12} left={12}>
+    <Group x={0} y={16}>
+      {doors.map(door => (
+        <Image
+          key={door.id}
+          x={door.position.x * 8}
+          y={ door.position.y * 8}
+          onClick={() => onClick(door.id)}
+          image={menuButtonImg}
+        />
+      ))}
     </Group>
   );
 };

@@ -13,7 +13,10 @@ const reducer = (state = {}, { type, payload }) => {
         nextText: 'Where would you like to move?'
       };
     case 'OBJECT_CLICK':
-      console.log(payload);
+      console.log('OBJECT:', payload);
+      return state;
+    case 'DOOR':
+      console.log('DOOR:', payload);
       return state;
     default:
       return state;

@@ -6,9 +6,11 @@ const Menu = props => {
   const { 
     text, 
     dispatchMove, 
-    dispatchMap, 
+    dispatchDoor, 
     menuOption,
-    menuImg
+    menuImg,
+    menuButtonImg,
+    doors
   } = props;
 
   if (text) {
@@ -24,8 +26,10 @@ const Menu = props => {
       />
       <MenuLeft
         menuOption={menuOption}
+        doors={doors}
         onMoveClick={dispatchMove} 
-        onMapClick={dispatchMap}
+        onDoorClick={dispatchDoor}
+        menuButtonImg={menuButtonImg}
       />
     </Group>
   );
