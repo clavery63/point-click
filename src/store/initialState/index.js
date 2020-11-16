@@ -1,12 +1,13 @@
 const doors = {
-  1: {
+  0: {
+    name: 'door1',
     position: {
-      left: 200,
-      top: 100,
+      left: 40,
+      top: 17,
       width: 50,
       height: 50
     },
-    dest: 2,
+    dest: 1,
     dir: 'FORWARD',
     mapPosition: {
       x: 3,
@@ -16,8 +17,8 @@ const doors = {
     lockedText: 'Darn it, the thing\'s locked.  Now where could that key be???',
     need: 'key-1',
   },
-  2: {
-    dest: 1,
+  1: {
+    dest: 0,
     dir: 'DOWN',
     mapPosition: {
       x: 3,
@@ -27,18 +28,18 @@ const doors = {
 };
 
 const items = {
-  1: {
+  0: {
     position: {
-      left: 70,
-      top: 280,
+      left: 52,
+      top: 8,
       width: 74,
       height: 53,
     },
-    name: 'key-1',
+    name: 'key1',
     description: 'This is a nice-looking key.',
     itemListDescription: 'I wonder what it\'s used for'
   },
-  2: {
+  1: {
     position: {
       left: 80,
       top: 108,
@@ -48,7 +49,7 @@ const items = {
     name: 'plunger',
     description: 'Your average, run of the mill plunger. How boring.'
   },
-  3: {
+  2: {
     position: {
       left: 99,
       top: 75,
@@ -61,13 +62,14 @@ const items = {
 };
 
 const rooms = {
-  1: {
+  0: {
     name: 'entryway',
     text: 'It\'s the entrance to Shadowgate. You can hear wolves howling deep in the forest behind you',
-    doors: [1, 2],
-    items: [1],
+    doors: [0],
+    items: [0],
+    scenery: [0]
   },
-  2: {
+  1: {
     name: 'Redd\'s: Bathroom',
     text: 'Redd\'s bathroom.  Looks like its been cleaned recently, which is odd.',
     doors: [3],
@@ -77,12 +79,12 @@ const rooms = {
 };
 
 const scenery = {
-  1: {
-    name: 'Skull',
+  0: {
+    name: 'skull',
     text: 'It\'s the skull of some creature. Its meaning seems quite clear: death lurks inside',
     position: {
-      left: 50,
-      top: 0,
+      left: 49,
+      top: 4,
       width: 10,
       height: 10
     },

@@ -12,6 +12,9 @@ const reducer = (state = {}, { type, payload }) => {
         menuOption: payload,
         nextText: 'Where would you like to move?'
       };
+    case 'OBJECT_CLICK':
+      console.log(payload);
+      return state;
     default:
       return state;
   }
