@@ -1,29 +1,18 @@
-const reducer = (state = {}, { type, payload }) => {
-  switch (type) {
-    case 'SET_STATE':
-      return payload;
-    case 'SET_TEXT':
-      return { ...state, text: payload  };
-    case 'CLEAR_NEXT_TEXT':
-      return { ...state, nextText: null };
-    case 'SELECT_VERB':
-      return { 
-        ...state,
-        playerState: {
-          ...state.playerState,
-          verb: payload
-        },
-        nextText: `You have selected ${payload}`
-      };
-    case 'OBJECT_CLICK':
-      console.log('OBJECT:', payload);
-      return state;
-    case 'DOOR':
-      console.log('DOOR:', payload);
-      return state;
-    default:
-      return state;
-  }
+import selectObjectReducer from './selectObjectReducer';
+import selectVerbReducer from './selectVerbReducer';
+import { setValue, clearValue } from './utils';
+
+const reducers = {
+  SET_STATE: (_, payload) => payload,
+  SET_TEXT: setValue('text'),
+  CLEAR_NEXT_TEXT: clearValue('nextText'),
+  SELECT_VERB: selectVerbReducer,
+  SELECT_OBJECT: selectObjectReducer
 };
 
-export default reducer;
+const rootReducer = (state = {}, { type, payload }) => {
+  const reducer = reducers[type] || (() => state);
+  return reducer(state, payload);
+};
+
+export default rootReducer;
