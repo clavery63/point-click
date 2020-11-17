@@ -3,14 +3,14 @@ import { Image, Group } from 'react-konva';
 
 const ObjectGroup = ({ objects, onClick }) => (
   <Group>
-    {objects.map(({ id, position, type, img }) => (
+    {objects.map(({ id, position, type, render }) => (
       <Image
         key={id}
         x={position.left}
         y={position.top}
         width={position.width}
         height={position.height}
-        image={img}
+        image={render()}
         onClick={() => onClick(id, type)}
       />
     ))}
