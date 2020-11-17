@@ -8,6 +8,8 @@ const ObjectGroup = ({ objects, onClick }) => (
         key={id}
         x={position.left}
         y={position.top}
+        width={position.width}
+        height={position.height}
         image={img}
         onClick={() => onClick(id, type)}
       />

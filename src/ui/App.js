@@ -5,7 +5,7 @@ import MainLayer from './MainLayer';
 
 const pixelWidth = 256;
 const pixelHeight = 240;
-const horizStretch = 1.1;
+const horizStretch = 1.13;
 const aspectRatio = (pixelHeight / (pixelWidth * horizStretch));
 const paddingFactor = 1;
 

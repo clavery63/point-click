@@ -6,7 +6,7 @@ import { textToLines } from './util';
 
 const LINES_PER_PAGE = 4;
 const CHARS_PER_LINE = 24;
-const MS_PER_CHAR = 75;
+const MS_PER_CHAR = 65;
 
 const makeLines = textToLines(CHARS_PER_LINE);
 

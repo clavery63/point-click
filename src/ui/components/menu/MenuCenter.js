@@ -3,7 +3,7 @@ import { Group } from 'react-konva';
 import MenuOption from './MenuOption';
 
 /**
- * If this needs to be more dynamic at some point, we'll pass it in
+ * If this ever needs to be more dynamic, we'll pass it in.
  * At that point, we will probably also need to pass in menuButtonImg, since it
  * would no longer be baked into the menu background
  */

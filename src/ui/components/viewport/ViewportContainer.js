@@ -10,19 +10,19 @@ const mapStateToProps = ({ gameState, playerState }) => {
     doors: doors.map(id => ({
       id,
       ...gameState.doors[id], 
-      type: 'DOOR', 
+      type: 'doors', 
       img: images[gameState.doors[id].name]
     })),
     items: items.map(id => ({
       id,
       ...gameState.items[id], 
-      type: 'ITEM', 
+      type: 'items', 
       img: images[gameState.items[id].name] 
     })),
     scenery: scenery.map(id => ({
       id,
       ...gameState.scenery[id], 
-      type: 'SCENERY', 
+      type: 'scenery', 
       img: images[gameState.scenery[id].name] 
     })),
     borderImg: images.border,
@@ -32,7 +32,7 @@ const mapStateToProps = ({ gameState, playerState }) => {
 
 const mapDispatchToProps = {
   onClick: (id, type) => ({ 
-    type: 'OBJECT_CLICK', 
+    type: 'SELECT_OBJECT', 
     payload: { id, type }
   })
 };

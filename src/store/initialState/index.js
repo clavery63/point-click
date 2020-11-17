@@ -4,8 +4,8 @@ const doors = {
     position: {
       left: 40,
       top: 17,
-      width: 50,
-      height: 50
+      width: 32,
+      height: 79
     },
     dest: 1,
     dir: 'FORWARD',
@@ -13,9 +13,10 @@ const doors = {
       x: 3,
       y: 0
     },
-    state: 'LOCKED',
+    state: 'CLOSED',
+    description: 'It\'s a heavy wooden door with iron hinges.',
     lockedText: 'Darn it, the thing\'s locked.  Now where could that key be???',
-    need: 'key-1',
+    need: 'key1'
   },
   1: {
     dest: 0,
@@ -23,7 +24,8 @@ const doors = {
     mapPosition: {
       x: 3,
       y: 5
-    }
+    },
+    state: 'OPEN'
   }
 };
 
@@ -32,8 +34,8 @@ const items = {
     position: {
       left: 52,
       top: 8,
-      width: 74,
-      height: 53,
+      width: 8,
+      height: 6,
     },
     name: 'key1',
     description: 'This is a nice-looking key.',
@@ -61,32 +63,15 @@ const items = {
   }
 };
 
-const rooms = {
-  0: {
-    name: 'entryway',
-    text: 'It\'s the entrance to Shadowgate. You can hear wolves howling deep in the forest behind you',
-    doors: [0],
-    items: [0],
-    scenery: [0]
-  },
-  1: {
-    name: 'Redd\'s: Bathroom',
-    text: 'Redd\'s bathroom.  Looks like its been cleaned recently, which is odd.',
-    doors: [3],
-    items: [
-    ]
-  },
-};
-
 const scenery = {
   0: {
     name: 'skull',
-    text: 'It\'s the skull of some creature. Its meaning seems quite clear: death lurks inside',
+    description: 'It\'s the skull of some creature. Its meaning seems quite clear: death lurks inside.',
     position: {
       left: 49,
       top: 4,
-      width: 10,
-      height: 10
+      width: 14,
+      height: 15
     },
     endPosition: {
       left: 50,
@@ -96,6 +81,22 @@ const scenery = {
     },
     trigger: 'OPEN'
   }
+};
+
+const rooms = {
+  0: {
+    name: 'entryway',
+    description: 'It\'s the entrance to Shadowgate. You can hear wolves howling deep in the forest behind you',
+    doors: [0],
+    items: [0],
+    scenery: [0]
+  },
+  1: {
+    name: 'Redd\'s: Bathroom',
+    description: 'Redd\'s bathroom.  Looks like its been cleaned recently, which is odd.',
+    doors: [3],
+    items: []
+  },
 };
 
 const images = {
@@ -112,7 +113,7 @@ const images = {
 };
 
 const playerState = {
-  verb: null,
+  verb: 'LOOK',
   using: null,
   room: 0,
   items: [],
