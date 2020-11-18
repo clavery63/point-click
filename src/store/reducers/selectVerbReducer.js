@@ -1,4 +1,4 @@
-const selectVerbReducer = (state, payload) => ({ 
+const selectVerbReducer = payload => state => ({ 
   ...state,
   playerState: {
     ...state.playerState,

@@ -16,7 +16,7 @@ const doorReducer = (state, door) => {
   }
 };
 
-const moveReducer = (state, object) => {
+const moveReducer = object => state => {
   if (object.type === 'doors') {
     return doorReducer(state, object);
   }

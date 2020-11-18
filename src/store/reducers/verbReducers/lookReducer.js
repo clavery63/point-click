@@ -1,4 +1,4 @@
-const lookReducer = (state, object) => ({
+const lookReducer = object => state => ({
   ...state,
   nextText: object.description
 });

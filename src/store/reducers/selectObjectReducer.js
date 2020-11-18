@@ -6,21 +6,21 @@ const verbReducers = {
   MOVE: moveReducer,
   LOOK: lookReducer,
   OPEN: openReducer,
-  USE: (state, object) => state,
-  LEAVE: (state, object) => state,
-  TAKE: (state, object) => state,
-  CLOSE: (state, object) => state,
-  HIT: (state, object) => state,
-  SPEAK: (state, object) => state
+  USE: object => state => state,
+  LEAVE: object => state => state,
+  TAKE: object => state => state,
+  CLOSE: object => state => state,
+  HIT: object => state => state,
+  SPEAK: object => state => state
 };
 
-const selectObjectReducer = (state, payload) => {
+const selectObjectReducer = payload => state => {
   const { gameState, playerState } = state;
   const { type, id } = payload;
   const object = { ...gameState[type][id], type, id };
   const item = gameState.items[playerState.using];
   const reducer = verbReducers[playerState.verb] || (() => state);
-  return reducer(state, object, item);
+  return reducer(object, item)(state);
 };
 
 export default selectObjectReducer;
