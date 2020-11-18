@@ -3,7 +3,7 @@ import { Group, Image } from 'react-konva';
 
 const MiniMap = ({ onClick, doors, menuButtonImg }) => {
   return (
-    <Group x={0} y={16}>
+    <Group x={8} y={16}>
       {doors.map(door => (
         <Image
           key={door.id}

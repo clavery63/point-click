@@ -1,6 +1,6 @@
 const doors = {
   0: {
-    name: 'door1',
+    img: 'door1',
     position: {
       left: 40,
       top: 17,
@@ -10,22 +10,55 @@ const doors = {
     dest: 1,
     dir: 'FORWARD',
     mapPosition: {
-      x: 3,
+      x: 2,
       y: 0
     },
     state: 'CLOSED',
     description: 'It\'s a heavy wooden door with iron hinges.',
     lockedText: 'Darn it, the thing\'s locked.  Now where could that key be???',
+    openText: ['You open the door.', 'It\'s the door leading into castle shadowgate.'],
     need: 'key1'
   },
   1: {
     dest: 0,
     dir: 'DOWN',
     mapPosition: {
-      x: 3,
-      y: 5
+      x: 2,
+      y: 4
     },
     state: 'OPEN'
+  },
+  2: {
+    img: 'door2',
+    position: {
+      left: 48,
+      top: 58,
+      width: 16,
+      height: 37
+    },
+    dest: 2,
+    dir: 'FORWARD',
+    mapPosition: {
+      x: 2,
+      y: 0
+    },
+    state: 'LOCKED'
+  },
+  3: {
+    // img: 'door3',
+    position: {
+      left: 40,
+      top: 17,
+      width: 32,
+      height: 79
+    },
+    dest: 3,
+    dir: 'FORWARD',
+    mapPosition: {
+      x: 4,
+      y: 2
+    },
+    state: 'LOCKED'
   }
 };
 
@@ -37,7 +70,7 @@ const items = {
       width: 8,
       height: 6,
     },
-    name: 'key1',
+    img: 'key1',
     description: 'This is a nice-looking key.',
     itemListDescription: 'I wonder what it\'s used for'
   },
@@ -48,7 +81,7 @@ const items = {
       width: 28,
       height: 60,
     },
-    name: 'plunger',
+    img: 'plunger',
     description: 'Your average, run of the mill plunger. How boring.'
   },
   2: {
@@ -58,14 +91,14 @@ const items = {
       width: 72,
       height: 150
     },
-    name: 'toilet',
+    img: 'toilet',
     description: 'Welp, so much for using this toilet'
   }
 };
 
 const scenery = {
   0: {
-    name: 'skull',
+    img: 'skull',
     description: 'It\'s the skull of some creature. Its meaning seems quite clear: death lurks inside.',
     position: {
       left: 49,
@@ -85,17 +118,18 @@ const scenery = {
 
 const rooms = {
   0: {
-    name: 'entryway',
+    img: 'room0',
     description: 'It\'s the entrance to Shadowgate. You can hear wolves howling deep in the forest behind you',
     doors: [0],
     items: [0],
     scenery: [0]
   },
   1: {
-    name: 'Redd\'s: Bathroom',
-    description: 'Redd\'s bathroom.  Looks like its been cleaned recently, which is odd.',
-    doors: [3],
-    items: []
+    img: 'room1',
+    description: '"That pitiful wizard Lakmir was a fool to send a buffoon like you to stop me. You will surely regret it for the only thing here for you is a forrible death!" The sound of maniacal laughter echoes in your ears.',
+    doors: [1, 2, 3],
+    items: [],
+    scenery: [] 
   },
 };
 
@@ -103,7 +137,9 @@ const images = {
   alpha: null,
   border: null,
   door1: null,
-  entryway: null,
+  door2: null,
+  room0: null,
+  room1: null,
   items: null,
   key1: null,
   line: null,

@@ -14,7 +14,7 @@ const collectProps = (gameState, type) => id => {
     ...gameState[type][id],
     id,
     type,
-    img: gameState.images[gameState[type][id].name] 
+    img: gameState.images[gameState[type][id].img] 
   };
   return {
     ...object,
@@ -25,14 +25,15 @@ const collectProps = (gameState, type) => id => {
 const mapStateToProps = ({ gameState, playerState }) => {
   const { images, rooms } = gameState;
   const { room } = playerState;
-  const { name, doors, items, scenery } = rooms[room];
+  const { img, doors, items, scenery } = rooms[room];
+  const visibleDoors = doors.filter(id => !!gameState.doors[id].img);
 
   return {
-    doors: doors.map(collectProps(gameState, 'doors')),
+    doors: visibleDoors.map(collectProps(gameState, 'doors')),
     items: items.map(collectProps(gameState, 'items')),
     scenery: scenery.map(collectProps(gameState, 'scenery')),
     borderImg: images.border,
-    roomImg: images[name]
+    roomImg: images[img]
   };
 };
 
