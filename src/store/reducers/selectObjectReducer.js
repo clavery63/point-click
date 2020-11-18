@@ -7,12 +7,12 @@ const verbReducers = {
   MOVE: moveReducer,
   LOOK: lookReducer,
   OPEN: openReducer,
-  USE: object => state => state,
-  LEAVE: object => state => state,
-  TAKE: object => state => state,
-  CLOSE: object => state => state,
-  HIT: object => state => state,
-  SPEAK: object => state => state
+  USE: keepState,
+  LEAVE: keepState,
+  TAKE: keepState,
+  CLOSE: keepState,
+  HIT: keepState,
+  SPEAK: keepState
 };
 
 const selectObjectReducer = payload => state => {
