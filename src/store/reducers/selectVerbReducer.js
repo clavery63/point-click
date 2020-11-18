@@ -3,8 +3,7 @@ const selectVerbReducer = (state, payload) => ({
   playerState: {
     ...state.playerState,
     verb: payload
-  },
-  nextText: `You have selected ${payload}`
+  }
 });
 
 export default selectVerbReducer;

@@ -22,7 +22,7 @@ const doorReducer = (state, door) => {
   if (door.state === 'LOCKED') {
     return {
       ...state,
-      nextText: 'It\'s locked!'
+      nextText: 'The door is locked.'
     };
   }
 };

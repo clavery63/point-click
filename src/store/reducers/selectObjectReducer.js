@@ -1,8 +1,9 @@
 import lookReducer from './verbReducers/lookReducer';
+import moveReducer from './verbReducers/moveReducer';
 import openReducer from './verbReducers/openReducer';
 
 const verbReducers = {
-  MOVE: (state, object) => state,
+  MOVE: moveReducer,
   LOOK: lookReducer,
   OPEN: openReducer,
   USE: (state, object) => state,
