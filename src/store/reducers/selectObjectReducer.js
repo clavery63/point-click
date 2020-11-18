@@ -1,6 +1,7 @@
 import lookReducer from './verbReducers/lookReducer';
 import moveReducer from './verbReducers/moveReducer';
 import openReducer from './verbReducers/openReducer';
+import { keepState } from './utils';
 
 const verbReducers = {
   MOVE: moveReducer,
@@ -19,7 +20,7 @@ const selectObjectReducer = payload => state => {
   const { type, id } = payload;
   const object = { ...gameState[type][id], type, id };
   const item = gameState.items[playerState.using];
-  const reducer = verbReducers[playerState.verb] || (() => state);
+  const reducer = verbReducers[playerState.verb] || keepState;
   return reducer(object, item)(state);
 };
 

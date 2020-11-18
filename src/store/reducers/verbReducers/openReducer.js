@@ -1,4 +1,4 @@
-import { withText, setState } from '../utils';
+import { withText, setValue } from '../utils';
 import { compose } from 'lodash/fp';
 
 const doorReducer = door => {
@@ -6,7 +6,7 @@ const doorReducer = door => {
     case 'CLOSED': 
       return compose(
         withText(door.openText),
-        setState(`gameState.doors.${door.id}.state`, 'OPEN')
+        setValue(`gameState.doors.${door.id}.state`)('OPEN')
       );
     case 'LOCKED':
       return withText('The door is locked.');

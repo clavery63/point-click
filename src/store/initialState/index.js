@@ -16,6 +16,7 @@ const doors = {
     state: 'CLOSED',
     description: 'It\'s a heavy wooden door with iron hinges.',
     lockedText: 'Darn it, the thing\'s locked.  Now where could that key be???',
+    // TODO: allow text to come in array form to customize pages
     openText: 'You open the door. It\'s the door leading into castle shadowgate.',
     need: 'key1'
   },

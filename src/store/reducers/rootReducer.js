@@ -1,6 +1,6 @@
 import selectObjectReducer from './selectObjectReducer';
 import selectVerbReducer from './selectVerbReducer';
-import { setValue, clearValue } from './utils';
+import { setValue, clearValue, keepState } from './utils';
 
 const reducers = {
   SET_STATE: payload => () => payload,
@@ -11,7 +11,7 @@ const reducers = {
 };
 
 const rootReducer = (state = {}, { type, payload }) => {
-  const reducer = reducers[type] || (() => () => state);
+  const reducer = reducers[type] || keepState;
   return reducer(payload)(state);
 };
 

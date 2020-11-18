@@ -1,9 +1,9 @@
-import { withText, setState } from '../utils';
+import { withText, setValue } from '../utils';
 
 const doorReducer = door => {
   switch (door.state) {
     case 'OPEN': 
-      return setState('playerState.room', door.dest);
+      return setValue('playerState.room')(door.dest);
     default:
       return withText('You have to open the door before you go through it.');
   }
