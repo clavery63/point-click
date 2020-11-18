@@ -1,24 +1,18 @@
-import { withText } from '../utils';
+import { withText, setState } from '../utils';
+import { compose } from 'lodash/fp';
 
 const doorReducer = door => {
-  if (door.state === 'CLOSED') {
-    const newDoor = { ...door, state: 'OPEN' };
-    return state => ({
-      ...state,
-      gameState: {
-        ...state.gameState,
-        doors: {
-          ...state.gameState.doors,
-          [door.id]: newDoor
-        }
-      }
-    });
-  }
-  if (door.state === 'OPEN') {
-    return withText('It\'s already open!');
-  }
-  if (door.state === 'LOCKED') {
-    return withText('The door is locked.');
+  switch(door.state) {
+    case 'CLOSED': 
+      return compose(
+        withText(door.openText),
+        setState(`gameState.doors.${door.id}.state`, 'OPEN')
+      );
+    case 'LOCKED':
+      return withText('The door is locked.');
+    case 'OPEN':
+    default:
+      return withText('It\'s already open!');
   }
 };
 
