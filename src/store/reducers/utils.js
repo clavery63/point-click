@@ -7,3 +7,5 @@ export const clearValue = key => () => state => ({
   ...state,
   [key]: null
 });
+
+export const withText = nextText => state => ({ ...state, nextText });

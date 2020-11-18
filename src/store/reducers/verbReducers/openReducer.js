@@ -1,40 +1,32 @@
-const doorReducer = (state, door) => {
-  const { gameState } = state;
+import { withText } from '../utils';
+
+const doorReducer = door => {
   if (door.state === 'CLOSED') {
     const newDoor = { ...door, state: 'OPEN' };
-    return {
+    return state => ({
       ...state,
       gameState: {
-        ...gameState,
+        ...state.gameState,
         doors: {
-          ...gameState.doors,
+          ...state.gameState.doors,
           [door.id]: newDoor
         }
       }
-    };
+    });
   }
   if (door.state === 'OPEN') {
-    return {
-      ...state,
-      nextText: 'It\'s already open!'
-    };
+    return withText('It\'s already open!');
   }
   if (door.state === 'LOCKED') {
-    return {
-      ...state,
-      nextText: 'The door is locked.'
-    };
+    return withText('The door is locked.');
   }
 };
 
-const openReducer = object => state => {
+const openReducer = object => {
   if (object.type === 'doors') {
-    return doorReducer(state, object);
+    return doorReducer(object);
   }
-  return {
-    ...state,
-    nextText: 'Can\'t open it.'
-  }
+  return withText('Can\'t open it.');
 };
 
 

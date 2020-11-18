@@ -1,29 +1,24 @@
-const doorReducer = (state, door) => {
-  const { playerState } = state;
+import { withText } from '../utils';
+
+const doorReducer = door => {
   if (door.state === 'OPEN') {
-    return {
+    return state => ({
       ...state,
       playerState: {
-        ...playerState,
+        ...state.playerState,
         room: door.dest
       }
-    };
+    });
   }
 
-  return {
-    ...state,
-    nextText: 'You have to open the door before you go through it.'
-  }
+  return withText('You have to open the door before you go through it.');
 };
 
-const moveReducer = object => state => {
+const moveReducer = object => {
   if (object.type === 'doors') {
-    return doorReducer(state, object);
+    return doorReducer(object);
   }
-  return {
-    ...state,
-    nextText: 'You can\'t do that!'
-  }
+  return withText('You can\'t do that!');
 };
 
 
