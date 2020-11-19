@@ -3,17 +3,16 @@ import { Image, Group, Rect } from 'react-konva';
 import Text from '../shared/Text';
 
 const InventoryItem = ({ item, index, onClick, using }) => {
-  console.log(item)
-  return <Group x={20} y={16 * index}>
+  return <Group x={15} y={21 + 16 * index}>
     <Rect 
-      x={10} 
+      x={0} 
       y={2} 
       width={8}
       height={8}
       fill={item.id === using ? 'black' : null}
       onClick={() => onClick(item.id)}
     />
-    <Text left={20} top={2} text={item.name} />
+    <Text left={9} top={3} text={item.name} />
   </Group>
 };
 
@@ -25,6 +24,7 @@ const Inventory = ({ items, inventoryImg, using, onClick }) => {
         height={134}
         image={inventoryImg}
       />
+      <Text left={24} top={8} text={'GOODS'} />
       {items.map((item, i) => (
         <InventoryItem
           key={i}
