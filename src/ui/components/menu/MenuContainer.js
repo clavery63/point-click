@@ -20,7 +20,10 @@ const mapStateToProps = ({ text, gameState, playerState }) => {
 
 const mapDispatchToProps = {
   dispatchVerb: verb => ({ type: 'SELECT_VERB', payload: verb }),
-  dispatchDoor: id => ({ type: 'DOOR', payload: id })
+  dispatchDoor: id => ({ 
+    type: 'SELECT_OBJECT', 
+    payload: { id, type: 'doors' } 
+  })
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
