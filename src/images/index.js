@@ -10,6 +10,7 @@ import line from './line.png';
 import menuButton from './menu-button.png';
 import menu from './menu.png';
 import skull from './skull.png';
+import torch1 from './torch-1.png';
 
 export default {
   alpha,
@@ -23,5 +24,6 @@ export default {
   line,
   menuButton,
   menu,
-  skull
+  skull,
+  torch1
 };

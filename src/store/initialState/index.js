@@ -65,6 +65,7 @@ const doors = {
 
 const items = {
   0: {
+    name: 'key1',
     position: {
       left: 52,
       top: 8,
@@ -94,6 +95,28 @@ const items = {
     },
     img: 'toilet',
     description: 'Welp, so much for using this toilet'
+  },
+  3: {
+    name: 'torch',
+    position: {
+      left: 1,
+      top: 20,
+      width: 6,
+      height: 27
+    },
+    img: 'torch1',
+    description: 'One of two torches in this room'
+  },
+  4: {
+    name: 'torch',
+    position: {
+      left: 105,
+      top: 20,
+      width: 6,
+      height: 27
+    },
+    img: 'torch1',
+    description: 'The other torch'
   }
 };
 
@@ -129,7 +152,7 @@ const rooms = {
     img: 'room1',
     description: '"That pitiful wizard Lakmir was a fool to send a buffoon like you to stop me. You will surely regret it for the only thing here for you is a forrible death!" The sound of maniacal laughter echoes in your ears.',
     doors: [1, 2, 3],
-    items: [],
+    items: [3, 4],
     scenery: [] 
   },
 };
@@ -146,13 +169,14 @@ const images = {
   line: null,
   menuButton: null,
   menu: null,
-  skull: null
+  skull: null,
+  torch1: null
 };
 
 const playerState = {
   verb: 'LOOK',
   using: null,
-  room: 0,
+  room: 1,
   items: [],
   page: 0
 };
