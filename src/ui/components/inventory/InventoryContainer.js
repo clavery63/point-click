@@ -1,14 +1,17 @@
 import { connect } from 'react-redux';
 import Inventory from './Inventory';
 
-const mapStateToProps = ({  gameState }) => {
+const mapStateToProps = ({ gameState, playerState }) => {
+  const { items, itemPage, using } = playerState;
   return {
-    inventoryImg: gameState.images.items
+    items: items.map(id => ({ ...gameState.items[id], id })),
+    inventoryImg: gameState.images.items,
+    using
   };
 };
 
 const mapDispatchToProps = {
-  onClick: item => ({ type: 'ITEM_CLICK', payload: item })
+  onClick: itemId => ({ type: 'ITEM_CLICK', payload: itemId })
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inventory);

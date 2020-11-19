@@ -5,6 +5,9 @@ const shift = ' '.charCodeAt(0);
 
 const mapStateToProps = ({ text, gameState }) => {
   if (!text) return { lines: null };
+  /**
+   * TODO: move this into Text component
+   */
   const lines = (text || []).map(str => {
     const upper = str.toUpperCase();
     return upper.split('').map(char => char.charCodeAt(0) - shift);
