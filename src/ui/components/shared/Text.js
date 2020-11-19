@@ -5,6 +5,7 @@ import { Image, Group } from 'react-konva';
 const sheetWidth = 8;
 const spriteWidth = 7;
 const spriteHeight = 7;
+const shift = ' '.charCodeAt(0);
 
 const mapStateToProps = ({ gameState }) => {
   return {
@@ -13,12 +14,15 @@ const mapStateToProps = ({ gameState }) => {
 };
 
 const Text = ({ text, left, top, alphabetImg }) => {
+  const upper = text.toUpperCase();
+  const charCodes = upper.split('').map(char => char.charCodeAt(0) - shift);
+
   return (
     <Group>
-      {text.map((code, charNumber) => (
+      {charCodes.map((code, index) => (
         <Image 
-          key={charNumber}
-          x={left + charNumber * (spriteWidth + 1)}
+          key={index}
+          x={left + index * (spriteWidth + 1)}
           y={top}
           width={spriteWidth}
           height={spriteHeight}
