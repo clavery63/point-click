@@ -143,14 +143,14 @@ const scenery = {
 const rooms = {
   0: {
     img: 'room0',
-    description: 'It\'s the entrance to Shadowgate. You can hear wolves howling deep in the forest behind you',
+    description: 'It\'s the entrance to Shadowgate. You can hear wolves howling deep in the forest behind you.',
     doors: [0],
     items: [0],
     scenery: [0]
   },
   1: {
     img: 'room1',
-    description: '"That pitiful wizard Lakmir was a fool to send a buffoon like you to stop me. You will surely regret it for the only thing here for you is a forrible death!" The sound of maniacal laughter echoes in your ears.',
+    description: '"That pitiful wizard Lakmir was a fool to send a buffoon like you to stop me. You will surely regret it for the only thing here for you is a horrible death!" The sound of maniacal laughter echoes in your ears.',
     doors: [1, 2, 3],
     items: [3, 4],
     scenery: [] 

@@ -6,6 +6,7 @@ const itemReducer = item => state => {
   const newRoomItems = room.items.filter(id => id !== item.id);
   const newPlayerItems = [...playerState.items, item.id];
   return {
+    ...state,
     gameState: setValue(`rooms.${playerState.room}.items`)(newRoomItems)(gameState),
     playerState: setValue('items')(newPlayerItems)(playerState),
     nextText: `Took the ${item.name}`

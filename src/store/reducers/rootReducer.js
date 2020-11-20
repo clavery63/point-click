@@ -7,10 +7,7 @@ const reducers = {
   SET_STATE: payload => () => payload,
   SET_TEXT: setValue('text'),
   SET_ROOM: setValue('playerState.room'),
-  SET_FRAME: val => state => {
-    console.log('val:', val)
-    return setValue('transition.frame')(val)(state)
-  },
+  SET_FRAME: setValue('transition.frame'),
   CLEAR_NEXT_TEXT: clearValue('nextText'),
   CLEAR_TRANSITION_DEST: clearValue('transition.dest'),
   SELECT_VERB: selectVerbReducer,
@@ -19,7 +16,6 @@ const reducers = {
 };
 
 const rootReducer = (state = {}, { type, payload }) => {
-  console.log(type)
   const reducer = reducers[type] || keepState;
   return reducer(payload)(state);
 };
