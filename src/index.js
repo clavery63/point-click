@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { createEpicMiddleware } from 'redux-observable';
 
@@ -18,7 +18,11 @@ const initialState = {
   loading: true
 };
 
-const store = createStore(rootReducer, initialState, applyMiddleware(epicMiddleware, effectsMiddleware));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducer, initialState, composeEnhancers(
+  applyMiddleware(epicMiddleware, effectsMiddleware)
+));
+
 epicMiddleware.run(rootEpic);
 
 ReactDOM.render(
