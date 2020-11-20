@@ -176,7 +176,7 @@ const images = {
 const playerState = {
   verb: 'LOOK',
   using: null,
-  room: 1,
+  room: 0,
   items: [],
   page: 0
 };
@@ -189,9 +189,15 @@ const gameState = {
   images
 };
 
+const transition = {
+  dest: null,
+  frame: 0
+};
+
 const initialState = {
   playerState,
   gameState,
+  transition,
   text: null,
   nextText: null,
   loading: false

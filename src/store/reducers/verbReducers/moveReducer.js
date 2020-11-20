@@ -2,8 +2,8 @@ import { withText, setValue } from '../utils';
 
 const doorReducer = door => {
   switch (door.state) {
-    case 'OPEN': 
-      return setValue('playerState.room')(door.dest);
+    case 'OPEN':
+      return setValue('transition')({ dest: door.dest, frame: 0 });
     default:
       return withText('You have to open the door before you go through it.');
   }

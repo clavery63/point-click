@@ -7,7 +7,7 @@ import { createEpicMiddleware } from 'redux-observable';
 import * as serviceWorker from './serviceWorker';
 import rootEpic from './store/epics/root';
 import rootReducer from './store/reducers/rootReducer';
-import textMiddleware from './store/middleware/textMiddleware';
+import effectsMiddleware from './store/middleware/effectsMiddleware';
 
 import './index.css';
 import App from './ui/App';
@@ -18,7 +18,7 @@ const initialState = {
   loading: true
 };
 
-const store = createStore(rootReducer, initialState, applyMiddleware(epicMiddleware, textMiddleware));
+const store = createStore(rootReducer, initialState, applyMiddleware(epicMiddleware, effectsMiddleware));
 epicMiddleware.run(rootEpic);
 
 ReactDOM.render(
