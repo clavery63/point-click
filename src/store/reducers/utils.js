@@ -15,9 +15,11 @@ export const withText = setValue('nextText');
 
 export const keepState = () => state => state;
 
-export const ifState = (path, predicate = notNull) => reducer => value => state => {
-  if (predicate(get(state, path))) {
-    return reducer(value)(state);
+export const ifState = (path, predicate = notNull) => (ifReducer, elseReducer) => {
+  return value => state => {
+    if (predicate(get(state, path), value)) {
+      return ifReducer(value)(state);
+    }
+    return elseReducer ? elseReducer(value)(state) : state;
   }
-  return state;
-}
+};

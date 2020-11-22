@@ -17,8 +17,7 @@ const doors = {
     description: 'It\'s a heavy wooden door with iron hinges.',
     lockedText: 'Darn it, the thing\'s locked.  Now where could that key be???',
     // TODO: allow text to come in array form to customize pages
-    openText: 'You open the door. It\'s the door leading into castle shadowgate.',
-    need: 'key1'
+    openText: 'You open the door. It\'s the door leading into castle shadowgate.'
   },
   1: {
     dest: 0,
@@ -43,7 +42,11 @@ const doors = {
       x: 2,
       y: 0
     },
-    state: 'LOCKED'
+    state: 'LOCKED',
+    description: 'Yet another door. Great.',
+    unlockText: 'Yay! You\'ve unlocked it!',
+    openText: 'Hooray! You\'ve opened it!',
+    need: 0,
   },
   3: {
     // img: 'door3',
@@ -60,6 +63,15 @@ const doors = {
       y: 2
     },
     state: 'LOCKED'
+  },
+  4: {
+    dest: 1,
+    dir: 'BACK',
+    mapPosition: {
+      x: 2,
+      y: 4
+    },
+    state: 'OPEN'
   }
 };
 
@@ -73,8 +85,8 @@ const items = {
       height: 6,
     },
     img: 'key1',
-    description: 'This is a nice-looking key.',
-    itemListDescription: 'I wonder what it\'s used for'
+    description: 'There\'s a random key embedded in the wall.',
+    itemListDescription: 'This is a real nice-looking key.'
   },
   1: {
     position: {
@@ -151,9 +163,20 @@ const rooms = {
   },
   1: {
     img: 'room1',
+    /**
+     * TODO:
+     * Differentiate between a room's initial text and text for subsequent visits
+     */
     description: '"That pitiful wizard Lakmir was a fool to send a buffoon like you to stop me. You will surely regret it for the only thing here for you is a horrible death!" The sound of maniacal laughter echoes in your ears.',
     doors: [1, 2, 3],
     items: [3, 4],
+    scenery: [] 
+  },
+  2: {
+    img: 'room2',
+    description: 'The stone passage winds to an unseen end',
+    doors: [4],
+    items: [],
     scenery: [] 
   },
 };
@@ -170,6 +193,7 @@ const images = {
   menuButton: null,
   room0: null,
   room1: null,
+  room2: null,
   skull: null,
   torch1: null,
   cursor: null

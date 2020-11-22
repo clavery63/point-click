@@ -9,7 +9,7 @@ const itemReducer = item => state => {
     ...state,
     gameState: setValue(`rooms.${playerState.room}.items`)(newRoomItems)(gameState),
     playerState: setValue('items')(newPlayerItems)(playerState),
-    nextText: `Took the ${item.name}`
+    nextText: `The ${item.name} is in hand.`
   };
 };
 

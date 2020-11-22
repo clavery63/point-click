@@ -2,13 +2,14 @@ import lookReducer from './verbReducers/lookReducer';
 import moveReducer from './verbReducers/moveReducer';
 import openReducer from './verbReducers/openReducer';
 import takeReducer from './verbReducers/takeReducer';
+import useReducer from './verbReducers/useReducer';
 import { keepState } from './utils';
 
 const verbReducers = {
   MOVE: moveReducer,
   LOOK: lookReducer,
   OPEN: openReducer,
-  USE: keepState,
+  USE: useReducer,
   LEAVE: keepState,
   TAKE: takeReducer,
   CLOSE: keepState,

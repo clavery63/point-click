@@ -9,6 +9,7 @@ import menu from './menu.png';
 import menuButton from './menu-button.png';
 import room0 from './room-0.png';
 import room1 from './room-1.png';
+import room2 from './room-2.png';
 import skull from './skull.png';
 import torch1 from './torch-1.png';
 import cursor from './cursor.png';
@@ -25,6 +26,7 @@ export default {
   menuButton,
   room0,
   room1,
+  room2,
   skull,
   torch1,
   cursor

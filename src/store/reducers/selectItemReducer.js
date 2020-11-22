@@ -7,13 +7,23 @@ const useReducer = id => compose(
 );
 
 const defaultReducer = () => withText('You seem to be wasting your time');
+const lookReducer = description => () => withText(description);
+
+const getReducer = (verb, object) => {
+  switch (verb) {
+    case 'USE':
+      return useReducer;
+    case 'LOOK':
+      return lookReducer(object.itemListDescription || object.description);
+    default:
+      return defaultReducer;
+  }
+};
 
 const selectItemReducer = id => state => {
-  const { playerState } = state;
-  /**
-   * TODO: display item description if verb is LOOK
-   */
-  const reducer = playerState.verb === 'USE' ? useReducer : defaultReducer;
+  const { gameState, playerState } = state;
+  const object = gameState.items[id];
+  const reducer = getReducer(playerState.verb, object)
   return reducer(id)(state);
 };
 
