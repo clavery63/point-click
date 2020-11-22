@@ -144,9 +144,7 @@ const scenery = {
     },
     endPosition: {
       left: 49,
-      top: -8,
-      width: 14,
-      height: 15
+      top: -8
     },
     trigger: 'OPEN',
     movedText: 'Well I\'ll be dipped in shit and rolled in breadcrumbs. That skull just moved!'
