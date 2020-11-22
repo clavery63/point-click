@@ -124,19 +124,20 @@ const scenery = {
   0: {
     img: 'skull',
     description: 'It\'s the skull of some creature. Its meaning seems quite clear: death lurks inside.',
-    position: {
+    startPosition: {
       left: 49,
       top: 4,
       width: 14,
       height: 15
     },
     endPosition: {
-      left: 50,
+      left: 49,
       top: -8,
-      width: 10,
-      height: 10
+      width: 14,
+      height: 15
     },
-    trigger: 'OPEN'
+    trigger: 'OPEN',
+    movedText: 'Well I\'ll be dipped in shit and rolled in breadcrumbs. That skull just moved!'
   }
 };
 

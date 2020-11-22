@@ -1,4 +1,4 @@
-import { withText, setValue } from '../utils';
+import { withText, setValue, keepState } from '../utils';
 import { compose } from 'lodash/fp';
 
 const doorReducer = door => {
@@ -16,16 +16,12 @@ const doorReducer = door => {
   }
 };
 
-const sceneryReducer = scenery => {
-  return withText('Nice try, man.');
-};
-
 const openReducer = object => {
   if (object.type === 'doors') {
     return doorReducer(object);
   }
   if (object.type === 'scenery') {
-    return sceneryReducer(object);
+    return keepState();
   }
   return withText('Can\'t open it.');
 };

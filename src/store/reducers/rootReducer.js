@@ -1,6 +1,7 @@
 import selectObjectReducer from './selectObjectReducer';
 import selectVerbReducer from './selectVerbReducer';
 import selectItemReducer from './selectItemReducer';
+import setPositionReducer from './setPositionReducer';
 import { setValue, clearValue, keepState } from './utils';
 
 const reducers = {
@@ -10,6 +11,7 @@ const reducers = {
   SET_FRAME: setValue('transition.frame'),
   SET_CURSOR_POSITION: setValue('cursor.position'),
   SET_CURSOR_ENABLED: setValue('cursor.enabled'),
+  SET_POSITION: setPositionReducer,
   CLEAR_NEXT_TEXT: clearValue('nextText'),
   CLEAR_TRANSITION_DEST: clearValue('transition.dest'),
   SELECT_VERB: selectVerbReducer,

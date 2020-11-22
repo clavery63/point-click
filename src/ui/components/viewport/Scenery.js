@@ -1,14 +1,15 @@
 import React from 'react';
 import { Image } from 'react-konva';
 
-const Scenery = ({ object, onClick}) => {
-  const { position, img } = object;
+const Scenery = ({ object, onClick }) => {
+  const { startPosition, currentPosition, img } = object;
+  const position = currentPosition || startPosition;
   return (
     <Image
       x={position.left}
       y={position.top}
-      width={position.width}
-      height={position.height}
+      width={startPosition.width}
+      height={startPosition.height}
       image={img}
       onClick={() => onClick(object.id, 'scenery')}
     />
