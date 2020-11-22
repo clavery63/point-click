@@ -1,25 +1,10 @@
 import { connect } from 'react-redux';
 import Viewport from './Viewport';
 
-const renderFns = {
-  items: ({ img }) => () => img,
-  scenery: ({ img }) => () => img,
-  doors: ({ img, state }) => () => {
-    return state === 'OPEN' ? null : img
-  }
-};
-
-const collectProps = (gameState, type) => id => {
-  const object = {
-    ...gameState[type][id],
-    id,
-    type,
-    img: gameState.images[gameState[type][id].img] 
-  };
-  return {
-    ...object,
-    render: renderFns[type](object)
-  }
+const withImage = (gameState, collection) => id => {
+  const object = gameState[collection][id];
+  const img = gameState.images[object.img];
+  return { ...object, img, id };
 };
 
 const mapStateToProps = ({ gameState, playerState }) => {
@@ -29,9 +14,9 @@ const mapStateToProps = ({ gameState, playerState }) => {
   const visibleDoors = doors.filter(id => !!gameState.doors[id].img);
 
   return {
-    doors: visibleDoors.map(collectProps(gameState, 'doors')),
-    items: items.map(collectProps(gameState, 'items')),
-    scenery: scenery.map(collectProps(gameState, 'scenery')),
+    doors: visibleDoors.map(withImage(gameState, 'doors')),
+    items: items.map(withImage(gameState, 'items')),
+    scenery: scenery.map(withImage(gameState, 'scenery')),
     borderImg: images.border,
     roomImg: images[img]
   };

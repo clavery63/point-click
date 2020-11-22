@@ -1,18 +1,17 @@
 import React from 'react';
 import { Image, Group } from 'react-konva';
 import TransitionContainer from '../transition/TransitionContainer';
+import Door from './Door';
+import Item from './Item';
+import Scenery from './Scenery';
 
-const ObjectGroup = ({ objects, onClick }) => (
+const ObjectGroup = ({ Component, objects, onClick }) => (
   <Group>
-    {objects.map(({ id, position, type, render }) => (
-      <Image
-        key={id}
-        x={position.left}
-        y={position.top}
-        width={position.width}
-        height={position.height}
-        image={render()}
-        onClick={() => onClick(id, type)}
+    {objects.map(object => (
+      <Component
+        key={object.id}
+        object={object}
+        onClick={onClick}
       />
     ))}
   </Group>
@@ -30,20 +29,12 @@ const Viewport = props => {
 
   return (
     <Group x={8} y={23}>
-      <Image
-        width={128}
-        height={128}
-        image={borderImg}
-      />
+      <Image width={128} height={128} image={borderImg} />
       <Group x={8} y={8}>
-        <Image
-          width={112}
-          height={112}
-          image={roomImg}
-        />
-        <ObjectGroup objects={doors} onClick={onClick} />
-        <ObjectGroup objects={items} onClick={onClick} />
-        <ObjectGroup objects={scenery} onClick={onClick} />
+        <Image width={112} height={112} image={roomImg} />
+        <ObjectGroup objects={doors} onClick={onClick} Component={Door} />
+        <ObjectGroup objects={items} onClick={onClick} Component={Item} />
+        <ObjectGroup objects={scenery} onClick={onClick} Component={Scenery} />
       </Group>
       <TransitionContainer />
     </Group>

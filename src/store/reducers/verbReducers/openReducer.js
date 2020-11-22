@@ -3,7 +3,7 @@ import { compose } from 'lodash/fp';
 
 const doorReducer = door => {
   switch(door.state) {
-    case 'CLOSED': 
+    case 'CLOSED':
       return compose(
         withText(door.openText),
         setValue(`gameState.doors.${door.id}.state`)('OPEN')
@@ -16,9 +16,16 @@ const doorReducer = door => {
   }
 };
 
+const sceneryReducer = scenery => {
+  return withText('Nice try, man.');
+};
+
 const openReducer = object => {
   if (object.type === 'doors') {
     return doorReducer(object);
+  }
+  if (object.type === 'scenery') {
+    return sceneryReducer(object);
   }
   return withText('Can\'t open it.');
 };
