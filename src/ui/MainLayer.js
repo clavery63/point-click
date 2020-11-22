@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
-import { connect } from 'react-redux';
 import { Layer } from 'react-konva';
 import ViewportContainer from './components/viewport/ViewportContainer';
 import InventoryContainer from './components/inventory/InventoryContainer';
 import MenuContainer from './components/menu/MenuContainer';
 import TextOverlayContainer from './components/textOverlay/TextOverlayContainer';
+import CursorContainer from './components/cursor/CursorContainer';
 
 const MainLayer = ({ loading }) => {
   const layerRef = useCallback(layer => {
@@ -23,8 +23,9 @@ const MainLayer = ({ loading }) => {
       <InventoryContainer />
       <MenuContainer />
       <TextOverlayContainer />
+      <CursorContainer />
     </Layer>
   );
 };
 
-export default connect(({ loading }) => ({ loading }))(MainLayer);
+export default MainLayer;

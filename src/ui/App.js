@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { ReactReduxContext, Provider } from 'react-redux';
+import { connect, ReactReduxContext, Provider } from 'react-redux';
 import { Stage } from 'react-konva';
 import MainLayer from './MainLayer';
 
@@ -22,10 +22,11 @@ const calculateSize = stage => {
   return width;
 };
 
-const App = () => {
+const App = ({ setStageData, loading }) => {
   const stageRef = useRef(null);
   const [width, setWidth] = useState(0);
-  const scale = width / pixelWidth;
+  const scaleX = width / pixelWidth;
+  const scaleY = scaleX / horizStretch;
 
   useEffect(() => {
     setWidth(calculateSize(stageRef.current));
@@ -34,18 +35,24 @@ const App = () => {
     return () => window.removeEventListener('resize', resize);
   }, [stageRef]);
 
+  useEffect(() => {
+    if (scaleX) {
+      setStageData({ stage: stageRef.current, scaleX, scaleY });
+    }
+  }, [setStageData, stageRef, scaleX, scaleY]);
+
   return (
     <ReactReduxContext.Consumer>
       {({ store }) => (
         <Stage
           width={width}
           height={width * aspectRatio}
-          scaleX={scale}
-          scaleY={scale / horizStretch}
+          scaleX={scaleX}
+          scaleY={scaleY}
           ref={stageRef}
         >
           <Provider store={store}>
-            <MainLayer />
+            <MainLayer loading={loading} />
           </Provider>
         </Stage>
       )}
@@ -53,5 +60,10 @@ const App = () => {
   );
 };
 
+const mapStateToProps = ({ loading }) => ({ loading });
+const mapDispatchToProps = {
+  setStageData: payload => ({ type: 'STAGE_DATA', payload })
+};
 
-export default App;
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

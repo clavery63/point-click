@@ -3,12 +3,12 @@ import cv2
 import numpy
 
 ## background image
-# SOURCE_TOP = 299
-# SOURCE_LEFT = 600
-# SOURCE_HEIGHT = 1045
-# SOURCE_WIDTH = 1192
-# DEST_HEIGHT = 112
-# DEST_WIDTH = 112
+SOURCE_TOP = 299
+SOURCE_LEFT = 600
+SOURCE_HEIGHT = 1045
+SOURCE_WIDTH = 1192
+DEST_HEIGHT = 112
+DEST_WIDTH = 112
 
 ## menu
 # SOURCE_TOP = 1428
@@ -19,16 +19,15 @@ import numpy
 # DEST_WIDTH = 222
 
 ## items
-SOURCE_TOP = 158
-SOURCE_LEFT = 1887
-SOURCE_HEIGHT = 1252
-SOURCE_WIDTH = 1173
-DEST_HEIGHT= 134
-DEST_WIDTH = 110
+# SOURCE_TOP = 158
+# SOURCE_LEFT = 1887
+# SOURCE_HEIGHT = 1252
+# SOURCE_WIDTH = 1173
+# DEST_HEIGHT= 134
+# DEST_WIDTH = 110
 
 
 def convert(filename, index):
-    print(filename)
     source = cv2.imread('source/{}'.format(filename))
 
     height_ratio = SOURCE_HEIGHT / DEST_HEIGHT
@@ -48,7 +47,8 @@ def convert(filename, index):
 
     cv2.imwrite('dest/{}.png'.format(index), dest)
 
-for i, filename in enumerate(sorted(os.listdir('source'))[-1:]):
-    convert(filename, 'items')
+for i, filename in enumerate(sorted(os.listdir('source'))):
+    print(filename)
+    convert(filename, i)
 
 

@@ -8,6 +8,7 @@ const reducers = {
   SET_TEXT: setValue('text'),
   SET_ROOM: setValue('playerState.room'),
   SET_FRAME: setValue('transition.frame'),
+  SET_CURSOR: setValue('cursor'),
   CLEAR_NEXT_TEXT: clearValue('nextText'),
   CLEAR_TRANSITION_DEST: clearValue('transition.dest'),
   SELECT_VERB: selectVerbReducer,

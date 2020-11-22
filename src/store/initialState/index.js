@@ -162,15 +162,16 @@ const images = {
   border: null,
   door1: null,
   door2: null,
-  room0: null,
-  room1: null,
   items: null,
   key1: null,
   line: null,
-  menuButton: null,
   menu: null,
+  menuButton: null,
+  room0: null,
+  room1: null,
   skull: null,
-  torch1: null
+  torch1: null,
+  cursor: null
 };
 
 const playerState = {
@@ -194,10 +195,17 @@ const transition = {
   frame: 0
 };
 
+const cursor = {
+  enabled: true,
+  x: 128,
+  y: 120
+};
+
 const initialState = {
   playerState,
   gameState,
   transition,
+  cursor,
   text: null,
   nextText: null,
   loading: false

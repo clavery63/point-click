@@ -1,3 +1,5 @@
+import { get } from 'lodash';
+
 const textMiddleware = store => next => action => {
   const result = next(action);
   const { nextText, transition } = store.getState();
@@ -5,7 +7,7 @@ const textMiddleware = store => next => action => {
     store.dispatch({ type: 'CLEAR_NEXT_TEXT' });
     store.dispatch({ type: 'RUN_TEXT', payload: nextText });
   }
-  if (transition.dest !== null) {
+  if (get(transition, 'dest', null) !== null) {
     store.dispatch({ type: 'CLEAR_TRANSITION_DEST' });
     store.dispatch({ type: 'RUN_TRANSITION', payload: transition });
   }
