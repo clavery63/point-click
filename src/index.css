@@ -21,7 +21,3 @@ canvas {
 img {
   image-rendering: pixelated;
 }
-
-.mouse-disabled {
-  cursor: none;
-}

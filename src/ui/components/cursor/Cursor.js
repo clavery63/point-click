@@ -6,10 +6,10 @@ const Inventory = ({ cursor, cursorImg }) => {
     <Image
       width={8}
       height={16}
-      x={cursor.x - 2}
-      y={cursor.y - 1}
-      image={cursorImg}
-      listening={false}
+      x={cursor.position.x - 2}
+      y={cursor.position.y - 1}
+      image={cursor.enabled ? cursorImg : null}
+      listening={cursor.enabled ? false : true}
     />
   );
 };

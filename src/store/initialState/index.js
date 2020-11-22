@@ -197,8 +197,10 @@ const transition = {
 
 const cursor = {
   enabled: true,
-  x: 128,
-  y: 120
+  position: {
+    x: 128,
+    y: 120
+  }
 };
 
 const initialState = {

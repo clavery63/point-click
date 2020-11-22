@@ -1,22 +1,24 @@
-import { mapTo, switchMap, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
+import { mapTo, switchMap, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { from, timer, concat, of } from 'rxjs';
 import { range } from 'lodash';
 import { ofType } from 'redux-observable';
 
 const MS_PER_FRAME = 65;
 
-const updateMouseState = frame => {
+const getCursorAction = frame => {
   if (frame === 0) {
-    document.querySelector('canvas').classList.add('mouse-disabled');
+    return { type: 'SET_CURSOR_ENABLED', payload: false };
   }
   if (frame === 14) {
-    document.querySelector('canvas').classList.remove('mouse-disabled');
+    return { type: 'SET_CURSOR_ENABLED', payload: true };
   }
+  return { type: null };
 };
 
 const getAction$ = ({ dest }) => frame => {
   const setRoomType = frame === 7 ? 'SET_ROOM' : null;
   return from([
+    getCursorAction(frame),
     { type: setRoomType, payload: dest },
     { type: 'SET_FRAME', payload: frame % 14 }
   ]);
@@ -40,7 +42,6 @@ const transition$ = (action$, state$) => {
     switchMap(([{ payload }, { gameState }]) => concat(
       from(range(15)).pipe(
         mergeMap(frame => timer(MS_PER_FRAME * frame).pipe(mapTo(frame))),
-        tap(updateMouseState),
         mergeMap(getAction$(payload))
       ),
       of(dispatchRoomText(payload, gameState))

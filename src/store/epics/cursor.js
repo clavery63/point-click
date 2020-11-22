@@ -21,10 +21,7 @@ const cursor$ = action$ => {
       startWith({ x: 128, y: 120 })
     )),
     filter(Boolean),
-    map(coords => ({ 
-      type: 'SET_CURSOR', 
-      payload: { ...coords, enabled: true } 
-    }))
+    map(payload => ({ type: 'SET_CURSOR_POSITION', payload }))
   );
 };
 
