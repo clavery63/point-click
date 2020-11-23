@@ -182,8 +182,10 @@ const rooms = {
 const images = {
   alpha: null,
   border: null,
+  cursor: null,
   door1: null,
   door2: null,
+  flame1: null,
   items: null,
   key1: null,
   line: null,
@@ -193,8 +195,7 @@ const images = {
   room1: null,
   room2: null,
   skull: null,
-  torch1: null,
-  cursor: null
+  torch1: null
 };
 
 const playerState = {

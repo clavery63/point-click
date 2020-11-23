@@ -2,6 +2,7 @@ import alpha from './alpha.png';
 import border from './border.png';
 import door1 from './door-1.png';
 import door2 from './door-2.png';
+import flame1 from './flame-1.png';
 import items from './items.png';
 import key1 from './key-1.png';
 import line from './line.png';
@@ -19,6 +20,7 @@ export default {
   border,
   door1,
   door2,
+  flame1,
   items,
   key1,
   line,
