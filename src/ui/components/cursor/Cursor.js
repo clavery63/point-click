@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-konva';
 
-const Inventory = ({ cursor, cursorImg }) => {
+const Cursor = ({ cursor, cursorImg }) => {
   return (
     <Image
       width={9}
@@ -14,4 +14,4 @@ const Inventory = ({ cursor, cursorImg }) => {
   );
 };
 
-export default Inventory;
+export default Cursor;
