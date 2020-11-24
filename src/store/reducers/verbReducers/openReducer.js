@@ -2,7 +2,7 @@ import { withText, setValue, keepState } from '../utils';
 import { compose } from 'lodash/fp';
 
 const doorReducer = door => {
-  switch(door.state) {
+  switch (door.state) {
     case 'CLOSED':
       return compose(
         withText(door.openText),
@@ -16,12 +16,20 @@ const doorReducer = door => {
   }
 };
 
+const sceneryReducer = scenery => {
+  if (!scenery.contains) {
+    return withText('Can\'t open it!');
+  }
+
+  return setValue('playerState.examining')(scenery.id);
+}
+
 const openReducer = object => {
   if (object.type === 'doors') {
     return doorReducer(object);
   }
   if (object.type === 'scenery') {
-    return keepState();
+    return sceneryReducer(object);
   }
   return withText('Can\'t open it.');
 };

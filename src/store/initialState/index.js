@@ -77,7 +77,7 @@ const doors = {
 
 const items = {
   0: {
-    name: 'key1',
+    name: 'key 1',
     position: {
       left: 52,
       top: 8,
@@ -129,6 +129,11 @@ const items = {
     },
     img: 'torch1',
     description: 'The other torch'
+  },
+  5: {
+    name: 'key 2',
+    img: 'key2',
+    description: 'This key bears a skull. This must be a skeleton key.'
   }
 };
 
@@ -148,6 +153,18 @@ const scenery = {
     },
     trigger: 'OPEN',
     movedText: 'Well I\'ll be dipped in shit and rolled in breadcrumbs. That skull just moved!'
+  },
+  1: {
+    name: 'book',
+    description: 'It\'s an ancient tome. It seems that no one has disturbed its pages for centuries.',
+    startPosition: {
+      left: 21,
+      top: 62,
+      width: 15,
+      height: 6
+    },
+    contains: [5],
+    openText: 'The book is opened and examined. A rectangular hole has been cut out of the inside of the book'
   }
 };
 
@@ -172,11 +189,11 @@ const rooms = {
   },
   2: {
     img: 'room2',
-    description: 'The stone passage winds to an unseen end',
+    description: 'The stone passage winds to an unseen end.',
     doors: [4],
     items: [],
-    scenery: [] 
-  },
+    scenery: [1] 
+  }
 };
 
 const images = {
@@ -201,6 +218,7 @@ const images = {
 const playerState = {
   verb: 'LOOK',
   using: null,
+  examining: null,
   room: 0,
   items: [],
   page: 0

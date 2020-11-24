@@ -1,9 +1,13 @@
-import { withText, setValue } from '../utils';
+import { compose } from 'lodash/fp';
+import { withText, setValue, clearValue } from '../utils';
 
 const doorReducer = ({ state, dest, dir }) => {
   switch (state) {
     case 'OPEN':
-      return setValue('transition')({ dest, dir, frame: 0 });
+      return compose(
+        clearValue('playerState.examining')(),
+        setValue('transition')({ dest, dir, frame: 0 })
+      );
     default:
       return withText('You have to open the door before you go through it.');
   }

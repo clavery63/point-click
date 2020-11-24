@@ -17,7 +17,9 @@ const InventoryItem = ({ item, index, onClick, using }) => {
   </Group>
 };
 
-const Inventory = ({ items, inventoryImg, using, onClick }) => {
+const Inventory = ({ items, inventoryImg, using, examining, onClick }) => {
+  const text = examining?.name || 'GOODS';
+  const currentList = examining?.contains || items;
   return (
     <Group x={137} y={16}>
       <Image
@@ -25,9 +27,9 @@ const Inventory = ({ items, inventoryImg, using, onClick }) => {
         height={134}
         image={inventoryImg}
       />
-      <Text left={24} top={8} text={'GOODS'} />
+      <Text left={24} top={8} text={text} />
       <Torches />
-      {items.map((item, i) => (
+      {currentList.map((item, i) => (
         <InventoryItem
           key={i}
           item={item}
