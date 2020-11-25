@@ -1,27 +1,41 @@
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect'
 import Inventory from './Inventory';
 
-const addItems = (examining, gameState) => {
-  if (!examining) {
-    return null;
-  }
-  /**
-   * TODO: player can be examining items too
-   */
-  const object = gameState.scenery[examining];
-  const contains = object.contains.map(id => gameState.items[id]);
-  return { ...object, contains };
-};
+const getExamining = state => state.playerState.examining;
+const getPlayerItems = state => state.playerState.items;
+const getGameItems = state => state.gameState.items;
+const getScenery = state => state.gameState.scenery;
 
-const mapStateToProps = ({ gameState, playerState }) => {
-  const { items, page, using, examining } = playerState;
-  const examiningWithItems = addItems(examining, gameState);
+const getItemObjects = createSelector(
+  [getPlayerItems, getGameItems],
+  (playerItems, gameItems) => playerItems.map(id => ({ ...gameItems[id], id }))
+);
+
+const getExaminingWithItems = createSelector(
+  [getExamining, getGameItems, getScenery],
+  (examining, gameItems, scenery) => {
+    if (!examining) {
+      return null;
+    }
+    /**
+     * TODO: player can be examining items too
+     */
+    const object = scenery[examining];
+    const contains = object.contains.map(id => gameItems[id]);
+    return { ...object, contains };
+  }
+);
+
+const mapStateToProps = (state) => {
+  const { gameState, playerState } = state;
+  const { page, using } = playerState;
   return {
-    items: items.map(id => ({ ...gameState.items[id], id })),
+    items: getItemObjects(state),
     page,
     inventoryImg: gameState.images.items,
     using,
-    examining: examiningWithItems
+    examining: getExaminingWithItems(state)
   };
 };
 
