@@ -22,7 +22,7 @@ const getExaminingWithItems = createSelector(
      * TODO: player can be examining items too
      */
     const object = scenery[examining];
-    const contains = object.contains.map(id => gameItems[id]);
+    const contains = object.contains.map(id => ({ ...gameItems[id], id }));
     return { ...object, contains };
   }
 );
