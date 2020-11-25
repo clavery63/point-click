@@ -1,6 +1,6 @@
 import { map, switchMap, concatMapTo, withLatestFrom, filter, scan } from 'rxjs/operators';
 import { from, timer, concat, of } from 'rxjs';
-import { range } from 'lodash';
+import { range, isEqual } from 'lodash';
 import { ofType } from 'redux-observable';
 
 /**
@@ -11,8 +11,10 @@ const MS_PER_FRAME = 200;
 
 const shouldAnimate = ([{ payload }, { gameState, playerState }]) => {
   const { id, type } = payload;
-  const trigger = gameState[type][id].trigger;
-  return trigger && (playerState.verb === trigger);
+  const object = gameState[type][id];
+  const hasAnimated = isEqual(object.currentPosition, object.endPosition);
+  const isTriggered = playerState.verb === object.trigger;
+  return isTriggered && !hasAnimated;
 };
 
 const withStepSizes = ([{ payload }, { gameState }]) => {

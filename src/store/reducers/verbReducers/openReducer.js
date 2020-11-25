@@ -18,7 +18,7 @@ const doorReducer = door => {
 
 const sceneryReducer = scenery => {
   if (!scenery.contains) {
-    return withText('Can\'t open it!');
+    return keepState();
   }
 
   return setValue('playerState.examining')(scenery.id);
