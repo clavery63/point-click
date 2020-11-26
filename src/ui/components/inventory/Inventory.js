@@ -5,9 +5,9 @@ import Text from '../shared/Text';
 
 const InventoryItem = ({ item, index, onClick, using }) => {
   return <Group x={15} y={21 + 16 * index}>
-    <Rect 
-      x={0} 
-      y={2} 
+    <Rect
+      x={0}
+      y={2}
       width={8}
       height={8}
       fill={item.id === using ? 'black' : null}

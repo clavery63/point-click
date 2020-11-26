@@ -1,6 +1,6 @@
 const doors = {
   0: {
-    img: 'door1',
+    closedImg: 'door1',
     position: {
       left: 40,
       top: 17,
@@ -29,7 +29,7 @@ const doors = {
     state: 'OPEN'
   },
   2: {
-    img: 'door2',
+    closedImg: 'door2',
     position: {
       left: 48,
       top: 58,
@@ -49,12 +49,12 @@ const doors = {
     need: 0,
   },
   3: {
-    // img: 'door3',
+    openImg: 'door3',
     position: {
-      left: 40,
-      top: 17,
-      width: 32,
-      height: 79
+      left: 76,
+      top: 59,
+      width: 9,
+      height: 44
     },
     dest: 3,
     dir: 'FORWARD',
@@ -62,9 +62,22 @@ const doors = {
       x: 4,
       y: 2
     },
-    state: 'LOCKED'
+    state: 'LOCKED',
+    description: 'This door probably leads someplace unintersting',
+    unlockText: 'Great, it\'s unlocked now',
+    openText: 'Aaaaand you opened the door. How exciting.',
+    need: 5
   },
   4: {
+    dest: 1,
+    dir: 'BACK',
+    mapPosition: {
+      x: 2,
+      y: 4
+    },
+    state: 'OPEN'
+  },
+  5: {
     dest: 1,
     dir: 'BACK',
     mapPosition: {
@@ -134,7 +147,29 @@ const items = {
     name: 'key 2',
     img: 'key2',
     description: 'This key bears a skull. This must be a skeleton key.'
-  }
+  },
+  6: {
+    name: 'sword',
+    position: {
+      left: 32,
+      top: 30,
+      width: 49,
+      height: 9
+    },
+    img: 'sword',
+    description: 'A sword'
+  },
+  7: {
+    name: 'sling',
+    position: {
+      left: 43,
+      top: 64,
+      width: 29,
+      height: 8
+    },
+    img: 'sling',
+    description: 'A sling'
+  },
 };
 
 const scenery = {
@@ -193,6 +228,13 @@ const rooms = {
     doors: [4],
     items: [],
     scenery: [1] 
+  },
+  3: {
+    img: 'room3',
+    description: 'It\'s nothing but a closet. An ordinary, run-of-the-mill closet. Oh, and some items.',
+    doors: [5],
+    items: [6, 7],
+    scenery: [] 
   }
 };
 
@@ -202,6 +244,7 @@ const images = {
   cursor: null,
   door1: null,
   door2: null,
+  door3: null,
   flame1: null,
   items: null,
   key1: null,
@@ -211,7 +254,10 @@ const images = {
   room0: null,
   room1: null,
   room2: null,
+  room3: null,
+  sling: null,
   skull: null,
+  sword: null,
   torch1: null
 };
 
@@ -219,7 +265,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 0,
+  room: 3,
   items: [],
   page: 0
 };
