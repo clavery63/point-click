@@ -22,9 +22,9 @@ const pinwheel = (origX, origY, frame) => {
 };
 
 const boxes = (origX, origY, origFrame) => {
-  const x = Math.abs(origX - HALF_GRID);
-  const y = Math.abs(origY - HALF_GRID);
-  const frame = 7 - origFrame;
+  const x = Math.abs(origX - HALF_GRID + 0.5);
+  const y = Math.abs(origY - HALF_GRID + 0.5);
+  const frame = 6 - origFrame;
   return (x > frame && y > frame) ? 1 : 0;
 };
 
