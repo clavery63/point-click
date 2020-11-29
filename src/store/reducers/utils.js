@@ -7,6 +7,11 @@ export const setValue = path => value => state => {
   return setWith(clone(state), path, value, clone);
 };
 
+export const updateValue = path => fn => state => {
+  const oldValue = get(state, path);
+  return setWith(clone(state), path, fn(oldValue), clone);
+};
+
 export const clearValue = path => () => state => {
   return setWith(clone(state), path, null, clone);
 };

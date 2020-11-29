@@ -1,16 +1,15 @@
-import { withText, setValue } from '../utils';
+import { compose } from 'lodash/fp';
+import { withText, updateValue } from '../utils';
 
 const itemReducer = item => state => {
-  const { gameState, playerState } = state;
-  const room = gameState.rooms[playerState.room];
-  const newRoomItems = room.items.filter(id => id !== item.id);
-  const newPlayerItems = [...playerState.items, item.id];
-  return {
-    ...state,
-    gameState: setValue(`rooms.${playerState.room}.items`)(newRoomItems)(gameState),
-    playerState: setValue('items')(newPlayerItems)(playerState),
-    nextText: `The ${item.name} is in hand.`
-  };
+  const { playerState } = state;
+  const filterItem = items => items.filter(id => id !== item.id);
+  return compose(
+    updateValue(`gameState.rooms.${playerState.room}.items`)(filterItem),
+    updateValue(`gameState.scenery.${playerState.examining}.contains`)(filterItem),
+    updateValue('playerState.items')(items => [...items, item.id]),
+    withText(`The ${item.name} is in hand.`)
+  )(state);
 };
 
 const takeReducer = object => {
