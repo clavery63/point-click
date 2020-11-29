@@ -85,6 +85,24 @@ const doors = {
       y: 4
     },
     state: 'OPEN'
+  },
+  6: {
+    dest: 4,
+    openImg: 'door4',
+    position: {
+      left: 49,
+      top: 50,
+      width: 6,
+      height: 13
+    },
+    dir: 'FORWARD',
+    mapPosition: {
+      x: 1,
+      y: 0
+    },
+    hidden: true,
+    state: 'CLOSED',
+    openText: 'Oh nice. I guess there was a hidden door there.'
   }
 };
 
@@ -170,6 +188,28 @@ const items = {
     img: 'sling',
     description: 'A sling'
   },
+  8: {
+    name: 'torch',
+    position: {
+      left: 5,
+      top: 33,
+      width: 12,
+      height: 21
+    },
+    img: 'torch2',
+    description: 'A torch'
+  },
+  9: {
+    name: 'torch',
+    position: {
+      left: 38,
+      top: 36,
+      width: 11,
+      height: 15
+    },
+    img: 'torch3',
+    description: 'A torch, man'
+  },
 };
 
 const scenery = {
@@ -225,8 +265,8 @@ const rooms = {
   2: {
     img: 'room2',
     description: 'The stone passage winds to an unseen end.',
-    doors: [4],
-    items: [],
+    doors: [4, 6],
+    items: [8, 9],
     scenery: [1] 
   },
   3: {
@@ -245,6 +285,7 @@ const images = {
   door1: null,
   door2: null,
   door3: null,
+  door4: null,
   flame1: null,
   items: null,
   key1: null,
@@ -258,14 +299,16 @@ const images = {
   sling: null,
   skull: null,
   sword: null,
-  torch1: null
+  torch1: null,
+  torch2: null,
+  torch3: null
 };
 
 const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 3,
+  room: 2,
   items: [],
   page: 0
 };

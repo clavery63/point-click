@@ -6,7 +6,8 @@ const doorReducer = door => {
     case 'CLOSED':
       return compose(
         withText(door.openText),
-        setValue(`gameState.doors.${door.id}.state`)('OPEN')
+        setValue(`gameState.doors.${door.id}.state`)('OPEN'),
+        setValue(`gameState.doors.${door.id}.hidden`)(false)
       );
     case 'LOCKED':
       return withText('The door is locked.');

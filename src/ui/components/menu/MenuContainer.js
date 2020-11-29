@@ -1,20 +1,31 @@
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect'
 import Menu from './Menu';
 
-const mapStateToProps = ({ text, gameState, playerState }) => {
-  const { images, rooms } = gameState;
-  const { room, verb } = playerState;
-  const { doors } = rooms[room];
+const getText = state => state.text;
+const getDoors = state => state.gameState.doors;
+const getRooms = state => state.gameState.rooms;
+const getPlayerRoom = state => state.playerState.room;
+const hasText = createSelector([getText], text => text !== null);
+const revealedDoors = createSelector(
+  [getDoors, getRooms, getPlayerRoom], 
+  (doors, rooms, playerRoom) => {
+    const doorIds = rooms[playerRoom].doors;
+    return doorIds
+      .map(id => ({ ...doors[id], id }))
+      .filter(door => !door.hidden);
+  }
+);
+
+const mapStateToProps = state => {
+  const { gameState, playerState } = state;
 
   return { 
-    currentVerb: verb,
-    text,
-    doors: doors.map(id => ({
-      id,
-      position: gameState.doors[id].mapPosition
-    })),
-    menuImg: images.menu,
-    menuButtonImg: images.menuButton
+    currentVerb: playerState.verb,
+    hasText: hasText(state),
+    doors: revealedDoors(state),
+    menuImg: gameState.images.menu,
+    menuButtonImg: gameState.images.menuButton
   };
 };
 

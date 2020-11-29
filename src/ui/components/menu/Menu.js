@@ -5,7 +5,7 @@ import MenuCenter from './MenuCenter';
 
 const Menu = props => {
   const { 
-    text, 
+    hasText, 
     dispatchVerb, 
     dispatchDoor, 
     currentVerb,
@@ -14,7 +14,7 @@ const Menu = props => {
     doors
   } = props;
 
-  if (text) {
+  if (hasText) {
     return null;
   }
 

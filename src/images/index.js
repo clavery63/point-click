@@ -3,6 +3,7 @@ import border from './border.png';
 import door1 from './door-1.png';
 import door2 from './door-2.png';
 import door3 from './door-3.png';
+import door4 from './door-4.png';
 import flame1 from './flame-1.png';
 import items from './items.png';
 import key1 from './key-1.png';
@@ -17,6 +18,8 @@ import sling from './sling.png';
 import skull from './skull.png';
 import sword from './sword.png';
 import torch1 from './torch-1.png';
+import torch2 from './torch-2.png';
+import torch3 from './torch-3.png';
 import cursor from './cursor.png';
 
 export default {
@@ -25,6 +28,7 @@ export default {
   door1,
   door2,
   door3,
+  door4,
   flame1,
   items,
   key1,
@@ -39,5 +43,7 @@ export default {
   skull,
   sword,
   torch1,
+  torch2,
+  torch3,
   cursor
 };

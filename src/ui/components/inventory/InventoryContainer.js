@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 import Inventory from './Inventory';
 
 const getExamining = state => state.playerState.examining;

@@ -7,8 +7,8 @@ const MiniMap = ({ onClick, doors, menuButtonImg }) => {
       {doors.map(door => (
         <Image
           key={door.id}
-          x={door.position.x * 8}
-          y={ door.position.y * 8}
+          x={door.mapPosition.x * 8}
+          y={door.mapPosition.y * 8}
           onClick={() => onClick(door.id)}
           image={menuButtonImg}
         />
