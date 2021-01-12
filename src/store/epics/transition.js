@@ -1,4 +1,4 @@
-import { mapTo, switchMap, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { mapTo, switchMap, mergeMap, concatMap, withLatestFrom } from 'rxjs/operators';
 import { from, timer, concat, of } from 'rxjs';
 import { range } from 'lodash';
 import { ofType } from 'redux-observable';
@@ -41,7 +41,7 @@ const transition$ = (action$, state$) => {
     withLatestFrom(state$),
     switchMap(([{ payload }, { gameState }]) => concat(
       from(range(15)).pipe(
-        mergeMap(frame => timer(MS_PER_FRAME * frame).pipe(mapTo(frame))),
+        concatMap(frame => timer(MS_PER_FRAME).pipe(mapTo(frame))),
         mergeMap(getAction$(payload))
       ),
       of(dispatchRoomText(payload, gameState))

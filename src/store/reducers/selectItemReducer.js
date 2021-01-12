@@ -1,6 +1,15 @@
 import { compose } from 'redux';
-import takeReducer from './verbReducers/takeReducer';
-import { setValue, withText } from './utils';
+import { setValue, updateValue, withText } from './utils';
+
+const takeReducer = item => state => {
+  const { playerState } = state;
+  const filterItem = items => items.filter(id => id !== item.id);
+  return compose(
+    updateValue(`gameState.scenery.${playerState.examining}.contains`)(filterItem),
+    updateValue('playerState.items')(items => [...items, item.id]),
+    withText(`Took the ${item.name}.`)
+  )(state);
+};
 
 const useReducer = ({ id }) => compose(
   withText('What would you like to use this on?'),

@@ -6,7 +6,6 @@ const itemReducer = item => state => {
   const filterItem = items => items.filter(id => id !== item.id);
   return compose(
     updateValue(`gameState.rooms.${playerState.room}.items`)(filterItem),
-    updateValue(`gameState.scenery.${playerState.examining}.contains`)(filterItem),
     updateValue('playerState.items')(items => [...items, item.id]),
     withText(`The ${item.name} is in hand.`)
   )(state);

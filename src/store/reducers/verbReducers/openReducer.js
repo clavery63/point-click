@@ -23,7 +23,7 @@ const sceneryReducer = scenery => {
   }
 
   return setValue('playerState.examining')(scenery.id);
-}
+};
 
 const openReducer = object => {
   if (object.type === 'doors') {
