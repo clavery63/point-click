@@ -9,11 +9,15 @@ const shift = ' '.charCodeAt(0);
 
 const mapStateToProps = ({ gameState }) => {
   return {
-    alphabetImg: gameState.images.alpha
+    spriteSheets: {
+      dark: gameState.images.alphaDark,
+      light: gameState.images.alphaLight,
+    }
   };
 };
 
-const Text = ({ text, left, top, alphabetImg }) => {
+const Text = ({ text, left, top, color, spriteSheets }) => {
+  const image = spriteSheets[color] || spriteSheets.dark;
   const upper = text.toUpperCase();
   const charCodes = upper.split('').map(char => char.charCodeAt(0) - shift);
 
@@ -26,7 +30,7 @@ const Text = ({ text, left, top, alphabetImg }) => {
           y={top}
           width={spriteWidth}
           height={spriteHeight}
-          image={alphabetImg}
+          image={image}
           crop={{ 
             x: (code % sheetWidth) * spriteWidth,
             y: Math.floor(code / sheetWidth) * spriteHeight,

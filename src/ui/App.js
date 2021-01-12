@@ -22,7 +22,7 @@ const calculateSize = stage => {
   return width;
 };
 
-const App = ({ setStageData, loading }) => {
+const App = ({ setStageData, loading, menu }) => {
   const stageRef = useRef(null);
   const [width, setWidth] = useState(0);
   const scaleX = width / pixelWidth;
@@ -52,7 +52,7 @@ const App = ({ setStageData, loading }) => {
           ref={stageRef}
         >
           <Provider store={store}>
-            <MainLayer loading={loading} />
+            <MainLayer loading={loading} menu={menu} />
           </Provider>
         </Stage>
       )}
@@ -60,7 +60,7 @@ const App = ({ setStageData, loading }) => {
   );
 };
 
-const mapStateToProps = ({ loading }) => ({ loading });
+const mapStateToProps = ({ loading, menu }) => ({ loading, menu });
 const mapDispatchToProps = {
   setStageData: payload => ({ type: 'STAGE_DATA', payload })
 };

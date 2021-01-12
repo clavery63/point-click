@@ -1,4 +1,5 @@
-import alpha from './alpha.png';
+import alphaDark from './alpha-dark.png';
+import alphaLight from './alpha-light.png';
 import border from './border.png';
 import door1 from './door-1.png';
 import door2 from './door-2.png';
@@ -23,7 +24,8 @@ import torch3 from './torch-3.png';
 import cursor from './cursor.png';
 
 export default {
-  alpha,
+  alphaDark,
+  alphaLight,
   border,
   door1,
   door2,

@@ -2,6 +2,7 @@ import selectObjectReducer from './selectObjectReducer';
 import selectVerbReducer from './selectVerbReducer';
 import selectItemReducer from './selectItemReducer';
 import setPositionReducer from './setPositionReducer';
+import startGameReducer from './startGameReducer';
 import { setValue, clearValue, keepState } from './utils';
 
 const reducers = {
@@ -16,11 +17,13 @@ const reducers = {
   CLEAR_TRANSITION_DEST: clearValue('transition.dest'),
   SELECT_VERB: selectVerbReducer,
   SELECT_OBJECT: selectObjectReducer,
-  SELECT_ITEM: selectItemReducer
+  SELECT_ITEM: selectItemReducer,
+  START_GAME: startGameReducer,
 };
 
 const rootReducer = (state = {}, { type, payload }) => {
   const reducer = reducers[type] || keepState;
+  console.log(reducer)
   return reducer(payload)(state);
 };
 

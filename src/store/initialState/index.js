@@ -279,7 +279,8 @@ const rooms = {
 };
 
 const images = {
-  alpha: null,
+  alphaDark: null,
+  alphaLight: null,
   border: null,
   cursor: null,
   door1: null,
@@ -308,7 +309,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 2,
+  room: 0,
   items: [],
   page: 0
 };
@@ -341,7 +342,8 @@ const initialState = {
   cursor,
   text: null,
   nextText: null,
-  loading: false
+  loading: false,
+  menu: 'START'
 };
 
 export default initialState;
