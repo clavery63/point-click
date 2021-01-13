@@ -17,7 +17,7 @@ const doors = {
     description: 'It\'s a heavy wooden door with iron hinges.',
     lockedText: 'Darn it, the thing\'s locked.  Now where could that key be???',
     // TODO: allow text to come in array form to customize pages
-    openText: 'You open the door. It\'s the door leading into castle shadowgate.'
+    openText: 'You open the door. It\'s the door leading into Birthday Castle.'
   },
   1: {
     dest: 0,
@@ -210,6 +210,20 @@ const items = {
     img: 'torch3',
     description: 'A torch, man'
   },
+  10: {
+    name: 'scott',
+    position: {
+      left: 0,
+      top: 0,
+      width: 112,
+      height: 112
+    },
+    img: 'scott',
+    description: 'He seems aggressive, but you don\'t think there\'s any reason to be concerned at the moment.',
+    onHit: '"Cool man. got any beer?"',
+    onSpeak: '"I thought you said this party would be cool.", says Scott, looking concerned. "Why haven\'t I had any beer yet?"',
+    requiresPrecision: true
+  },
 };
 
 const scenery = {
@@ -227,7 +241,7 @@ const scenery = {
       top: -8
     },
     trigger: 'OPEN',
-    movedText: 'Well I\'ll be dipped in shit and rolled in breadcrumbs. That skull just moved!'
+    movedText: '"Whaaaaaat," you think to yourself as you watch the skull move itself upward. "That is absolutely fucking nuts."'
   },
   1: {
     name: 'book',
@@ -253,13 +267,10 @@ const rooms = {
   },
   1: {
     img: 'room1',
-    /**
-     * TODO:
-     * Differentiate between a room's initial text and text for subsequent visits
-     */
-    description: '"That pitiful wizard Lakmir was a fool to send a buffoon like you to stop me. You will surely regret it for the only thing here for you is a horrible death!" The sound of maniacal laughter echoes in your ears.',
+    description: 'The lobby of Birthday Castle',
+    initialDescription: 'A man stumbles toward you. "Oh shit is that Scott?" You think to yourself as you pull yourself through half-ajar door. "Why am I not shocked to find him here..."',
     doors: [1, 2, 3],
-    items: [3, 4],
+    items: [3, 4, 10],
     scenery: [] 
   },
   2: {
@@ -279,6 +290,7 @@ const rooms = {
 };
 
 const images = {
+  scott: null,
   alphaDark: null,
   alphaLight: null,
   border: null,

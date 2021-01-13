@@ -23,7 +23,6 @@ const reducers = {
 
 const rootReducer = (state = {}, { type, payload }) => {
   const reducer = reducers[type] || keepState;
-  console.log(reducer)
   return reducer(payload)(state);
 };
 

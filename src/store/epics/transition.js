@@ -31,7 +31,7 @@ const dispatchRoomText = ({ dest }, { rooms }) => {
   }
   return {
     type: 'RUN_TEXT',
-    payload: room.description
+    payload: room.initialDescription || room.description
   };
 }
 

@@ -7,8 +7,8 @@ const OuterMenu = ({ menu, onStartClick }) => {
 
   return (
     <>
-      <Text left={50} top={50} color={'light'} text={'currently unavailable'} />
-      <Rect x={50} y={50} height={8} width={40} />
+      <Text left={50} top={50} color={'light'} text={'start game'} />
+      <Rect x={50} y={50} height={8} width={40} onClick={onStartClick} />
     </>
   );
 };

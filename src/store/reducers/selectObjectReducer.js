@@ -3,6 +3,8 @@ import moveReducer from './verbReducers/moveReducer';
 import openReducer from './verbReducers/openReducer';
 import takeReducer from './verbReducers/takeReducer';
 import useReducer from './verbReducers/useReducer';
+import hitReducer from './verbReducers/hitReducer';
+import speakReducer from './verbReducers/speakReducer';
 import { keepState } from './utils';
 
 const verbReducers = {
@@ -13,8 +15,8 @@ const verbReducers = {
   LEAVE: keepState,
   TAKE: takeReducer,
   CLOSE: keepState,
-  HIT: keepState,
-  SPEAK: keepState
+  HIT: hitReducer,
+  SPEAK: speakReducer
 };
 
 const selectObjectReducer = payload => state => {
