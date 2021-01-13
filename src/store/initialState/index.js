@@ -220,10 +220,23 @@ const items = {
     },
     img: 'scott',
     description: 'He seems aggressive, but you don\'t think there\'s any reason to be concerned at the moment.',
+    itemListDescription: 'Scott is in your inventory now. Feel free to use him as you would any other items or spells.',
     onHit: '"Cool man. got any beer?"',
     onSpeak: '"I thought you said this party would be cool.", says Scott, looking concerned. "Why haven\'t I had any beer yet?"',
     requiresPrecision: true
   },
+  11: {
+    name: 'sign',
+    img: 'welcomeSign',
+    description: '_____The sign reads: ______"Welcome to" ____"Lobotomy Manor."                             But I\'m not at Lobotomy Manor!                   I\'m at Birthday Castle... right?' ,
+    itemListDescription: 'Lobotomy Manor? Boy does this sign give me the creeps!',
+    position: {
+      left: 44,
+      top: 36,
+      width: 24,
+      height: 18
+    }
+  }
 };
 
 const scenery = {
@@ -268,9 +281,9 @@ const rooms = {
   1: {
     img: 'room1',
     description: 'The lobby of Birthday Castle',
-    initialDescription: 'A man stumbles toward you. "Oh shit is that Scott?" You think to yourself as you pull yourself through half-ajar door. "Why am I not shocked to find him here..."',
+    initialDescription: 'A man stumbles toward you. "Oh shit is that Scott?" you wonder yourself as you pull yourself through half-ajar door. "Why am I not shocked to find him here..."',
     doors: [1, 2, 3],
-    items: [3, 4, 10],
+    items: [11, 3, 4, 10],
     scenery: [] 
   },
   2: {
@@ -291,6 +304,7 @@ const rooms = {
 
 const images = {
   scott: null,
+  welcomeSign: null,
   alphaDark: null,
   alphaLight: null,
   border: null,

@@ -23,8 +23,10 @@ import torch2 from './torch-2.png';
 import torch3 from './torch-3.png';
 import cursor from './cursor.png';
 import scott from './scott.png';
+import welcomeSign from './welcome-sign.png';
 
 export default {
+  welcomeSign,
   scott,
   alphaDark,
   alphaLight,
