@@ -281,7 +281,7 @@ const rooms = {
   1: {
     img: 'room1',
     description: 'The lobby of Birthday Castle',
-    initialDescription: 'A man stumbles toward you. "Oh shit is that Scott?" you wonder yourself as you pull yourself through half-ajar door. "Why am I not shocked to find him here..."',
+    initialDescription: 'A man stumbles toward you. "Oh shit is that Scott?" you wonder yourself as you pull yourself through the half-ajar door. "Why am I not shocked to find him here..."',
     doors: [1, 2, 3],
     items: [11, 3, 4, 10],
     scenery: [] 

@@ -3,6 +3,7 @@ import { setValue, updateValue, withText } from './utils';
 
 const takeReducer = item => state => {
   const { playerState } = state;
+  if (!playerState.examining) return state;
   const filterItem = items => items.filter(id => id !== item.id);
   return compose(
     updateValue(`gameState.scenery.${playerState.examining}.contains`)(filterItem),
