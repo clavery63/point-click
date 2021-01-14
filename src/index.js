@@ -28,6 +28,7 @@ epicMiddleware.run(rootEpic);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <audio className='audio-player' loop />
       <App />
     </Provider>
   </React.StrictMode>,

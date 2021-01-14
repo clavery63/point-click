@@ -8,7 +8,7 @@ const X_OFFSET = 6;
 const Y_OFFSET = 3;
 const MS_PER_FRAME = 40;
 
-const Torches = ({ torchImg }) => {
+const Torches = ({ torchImg, onClick }) => {
   const [flip, setFlip] = useState(0);
   const x = X_OFFSET + flip * WIDTH;
   const scaleX = 1 + flip * -2;
@@ -28,6 +28,7 @@ const Torches = ({ torchImg }) => {
       height={HEIGHT}
       image={torchImg}
       scaleX={scaleX}
+      onClick={onClick}
     />
   );
 };
@@ -38,4 +39,14 @@ const mapStateToProps = ({ gameState }) => {
   };
 };
 
-export default connect(mapStateToProps)(Torches);
+const mapDispatchToProps = {
+  onClick: () => ({ 
+    type: 'PLAY_AUDIO', 
+    payload: {
+      text: 'With all the antics going on in this crazy castle, the last thing you need to worry about is this torch going out. Lucky for you, that won\'t be a problem. This is an eternal torch... It is a light that never goes out.',
+      fileName: 'light.m4a' 
+    }
+  })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Torches);

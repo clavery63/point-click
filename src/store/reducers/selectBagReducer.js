@@ -1,5 +1,4 @@
-import { compose } from 'redux';
-import { setValue, updateValue, withText } from './utils';
+import { withText } from './utils';
 
 const getText = bagLevel => {
   if (bagLevel < 2) {
