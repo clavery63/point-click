@@ -9,7 +9,8 @@ import { compose } from 'redux';
 
 const roomReducer = payload => compose(
   setValue('playerState.room')(payload),
-  updateValue('playerState.bagLevel')(level => level + 1)
+  updateValue('playerState.bagLevel')(level => level + 1),
+  setValue(`gameState.rooms.${payload}.initialDescription`)(null)
 );
 
 const reducers = {
