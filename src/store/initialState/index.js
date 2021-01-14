@@ -303,6 +303,7 @@ const rooms = {
 };
 
 const images = {
+  bag: null,
   scott: null,
   welcomeSign: null,
   alphaDark: null,
@@ -337,7 +338,8 @@ const playerState = {
   examining: null,
   room: 0,
   items: [],
-  page: 0
+  page: 0,
+  bagLevel: 0
 };
 
 const gameState = {

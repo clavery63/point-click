@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, Group, Rect } from 'react-konva';
 import Torches from './Torches';
+import Bag from './Bag';
 import Text from '../shared/Text';
 
 const InventoryItem = ({ item, index, onClick, using }) => {
@@ -29,6 +30,7 @@ const Inventory = ({ items, inventoryImg, using, examining, onClick }) => {
       />
       <Text left={24} top={8} text={text} />
       <Torches />
+      <Bag />
       {currentList.map((item, i) => (
         <InventoryItem
           key={i}
