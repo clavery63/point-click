@@ -13,8 +13,8 @@ import numpy
 # other image
 SOURCE_TOP = 0
 SOURCE_LEFT = 0
-SOURCE_HEIGHT = 540
-SOURCE_WIDTH = 540
+SOURCE_HEIGHT = 896
+SOURCE_WIDTH = 896
 DEST_HEIGHT = 112
 DEST_WIDTH = 112
 
@@ -52,7 +52,7 @@ def convert(filename, index):
             sample_y = round(start_y + height_ratio * row)
             sample_x = round(start_x + width_ratio * col)
             sample = source[sample_y][sample_x]
-            dest[row][col] = [((sample[0] + 5) // 10) * 10, ((sample[1] + 5) // 10) * 10, ((sample[2] + 5) // 10) * 10]
+            dest[row][col] = sample
 
     cv2.imwrite('dest/{}.png'.format(index), dest)
 
