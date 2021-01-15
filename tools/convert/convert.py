@@ -3,20 +3,20 @@ import cv2
 import numpy
 
 ## background image
-SOURCE_TOP = 299
-SOURCE_LEFT = 600
-SOURCE_HEIGHT = 1045
-SOURCE_WIDTH = 1192
-DEST_HEIGHT = 112
-DEST_WIDTH = 112
+# SOURCE_TOP = 299
+# SOURCE_LEFT = 600
+# SOURCE_HEIGHT = 1045
+# SOURCE_WIDTH = 1192
+# DEST_HEIGHT = 112
+# DEST_WIDTH = 112
 
 # other image
-# SOURCE_TOP = 0
-# SOURCE_LEFT = 0
-# SOURCE_HEIGHT = 112
-# SOURCE_WIDTH = 112
-# DEST_HEIGHT = 56
-# DEST_WIDTH = 56
+SOURCE_TOP = 0
+SOURCE_LEFT = 0
+SOURCE_HEIGHT = 990
+SOURCE_WIDTH = 990
+DEST_HEIGHT = 15
+DEST_WIDTH = 15
 
 
 ## menu
@@ -36,7 +36,7 @@ DEST_WIDTH = 112
 # DEST_WIDTH = 110
 
 
-def convert(filename, index):
+def convert(filename):
     source = cv2.imread('source/{}'.format(filename))
 
     height_ratio = SOURCE_HEIGHT / DEST_HEIGHT
@@ -54,10 +54,10 @@ def convert(filename, index):
             sample = source[sample_y][sample_x]
             dest[row][col] = sample
 
-    cv2.imwrite('dest/{}.png'.format(index), dest)
+    cv2.imwrite('dest/{}'.format(filename), dest)
 
-for i, filename in enumerate(sorted(os.listdir('source'))):
-    print(filename)
-    convert(filename, i)
+# for i, filename in enumerate(sorted(os.listdir('source'))):
+#     print(filename)
+convert('frying-pan.png')
 
 
