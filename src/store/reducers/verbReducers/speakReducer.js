@@ -8,7 +8,7 @@ const speakReducer = object => {
   } else if (speakTexts) {
     return compose(
       withText(speakTexts[speakIndex]),
-      updateValue(`gameState.scenery.${id}.speakIndex`)(index => Math.min(index + 1, speakTexts.length - 1))
+      updateValue(`gameState.scenery.${id}.speakIndex`)(index => (index + 1) % speakTexts.length)
     );
   }
 

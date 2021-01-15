@@ -2,8 +2,7 @@ import { compose } from 'lodash/fp';
 import { withText, setValue, clearValue, updateValue } from '../utils';
 
 const useReducer = object => state => {
-  console.log(object)
-  if (state.playerState.using === object.need) {
+  if (state.playerState.using === object.keyId) {
     return compose(
       setValue(`gameState.doors.${object.id}.state`)('CLOSED'),
       clearValue('playerState.using')(),
@@ -14,12 +13,19 @@ const useReducer = object => state => {
       withText(object.useTexts[object.useIndex]),
       updateValue(`gameState.scenery.${object.id}.useIndex`)(index => (index + 1) % object.useTexts.length)
     )(state);
-  } else {
+  } else if (state.playerState.using === object.vanishOn) {
     return compose(
+      withText(object.vanishText),
+      updateValue(`gameState.rooms.${state.playerState.room}.scenery`)(scenery => scenery.filter(id => id !== object.id)),
+      updateValue(`playerState.items`)(items => items.filter(id => id !== state.playerState.using)),
       clearValue('playerState.using')(),
-      withText('That ain\'t workin\'.')
     )(state);
   }
+
+  return compose(
+    clearValue('playerState.using')(),
+    withText('That ain\'t workin\'.')
+  )(state);
 };
 
 export default useReducer;

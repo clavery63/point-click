@@ -1,5 +1,6 @@
 import { compose } from 'redux';
 import { setValue, updateValue, withText } from './utils';
+import smokeReducer from './verbReducers/smokeReducer';
 
 const takeReducer = item => state => {
   const { playerState } = state;
@@ -17,7 +18,7 @@ const useReducer = ({ id }) => compose(
   setValue('playerState.using')(id)
 );
 
-const defaultReducer = () => withText('You seem to be wasting your time');
+const defaultReducer = () => withText('You seem to be wasting your time.');
 const lookReducer = description => () => withText(description);
 
 const getReducer = (verb, object) => {
@@ -26,6 +27,8 @@ const getReducer = (verb, object) => {
       return useReducer;
     case 'TAKE':
       return takeReducer;
+    case 'SMOKE':
+      return smokeReducer;
     case 'LOOK':
       return lookReducer(object.itemListDescription || object.description);
     default:

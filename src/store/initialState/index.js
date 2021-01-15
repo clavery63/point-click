@@ -46,7 +46,7 @@ const doors = {
     description: 'Yet another door. Great.',
     unlockText: 'Yay! You\'ve unlocked it!',
     openText: 'Hooray! You\'ve opened it!',
-    need: 0,
+    keyId: 0,
   },
   3: {
     openImg: 'door3',
@@ -66,7 +66,7 @@ const doors = {
     description: 'This door probably leads someplace unintersting',
     unlockText: 'Great, it\'s unlocked now',
     openText: 'Aaaaand you opened the door. How exciting.',
-    need: 5
+    keyId: 5
   },
   4: {
     dest: 1,
@@ -257,26 +257,30 @@ const items = {
     description: 'This key bears a skull. This must be a skeleton key.'
   },
   6: {
-    name: 'sword',
+    name: 'lockpick',
     position: {
       left: 32,
-      top: 30,
-      width: 49,
-      height: 9
+      top: 26,
+      width: 10,
+      height: 10
     },
-    img: 'sword',
-    description: 'A sword'
+    img: 'lockpick',
+    description: 'Mike, here is a lockpick. It might be handy if you, the master of unlocking, take it with you.',
+    itemListDescription: 'You can use this for picking locks.'
   },
   7: {
-    name: 'sling',
+    name: 'bong',
     position: {
-      left: 43,
-      top: 64,
-      width: 29,
-      height: 8
+      left: 48,
+      top: 52,
+      width: 14,
+      height: 20
     },
-    img: 'sling',
-    description: 'A sling'
+    img: 'bong',
+    description: 'It\'s some kind of strange vessel. Its base is filled with a murky, dank liquid, and there is an acrid vapor eminating from its spout.',
+    movesTo: 10,
+    moveDir: 'RIGHT',
+    moveOn: 'SMOKE'
   },
   8: {
     name: 'torch',
@@ -464,13 +468,32 @@ const scenery = {
       width: 13,
       height: 21
     }
+  },
+  7: {
+    img: 'santos',
+    description: 'It\'s Santos. If only you could get past him, you might be able to collect some more useful items.',
+    speakTexts: [
+      '"Yooo, get this. This dude over there says he\'s a fan of mega man but he\'s only play 3 out of the original 6 of them. Or at least only beaten 3"',
+      '"This party\'s kinda random right?"',
+      '"Don\'t worry about me. I can literally sleep anywhere I don\'t care. I literally don\'t care I can sleep anywhere. Like it doesn\'t matter. It literally doesn\'t matter. I know that sounds crazy right? I don\'t know. I guess it\'s basically my super power. Like how random would that be, if your superpower was just to be able to sleep anywhere. But like literally I think that would be mine. Either that or drinking tequila without flinching. Who do you know here again?"',
+      '"Who\'s Scott? ohhhhh! You mean Scott. Yeah, I know him"'
+    ],
+    speakIndex: 0,
+    startPosition: {
+      left: 0,
+      top: 0,
+      width: 112,
+      height: 112
+    },
+    vanishOn: 10,
+    vanishText: 'With a desperate yell, you hurl Scott at Santos and shield your eyes. Scott beckons Santos with some strange incantations, and they part ways.'
   }
 };
 
 const rooms = {
   0: {
     img: 'room0',
-    description: 'It\'s the entrance to Shadowgate. You can hear wolves howling deep in the forest behind you.',
+    description: 'It\'s the entrance to Birthay Castle. You can faintly hear the sound of several full grown adults chanting inside.',
     doors: [0],
     items: [0],
     scenery: [0]
@@ -495,7 +518,7 @@ const rooms = {
     description: 'It\'s nothing but a closet. An ordinary, run-of-the-mill closet. Oh, and some items.',
     doors: [5],
     items: [6, 7],
-    scenery: [] 
+    scenery: [7] 
   },
   4: {
     img: 'room4',
@@ -535,6 +558,14 @@ const rooms = {
   9: {
     img: 'beerman',
     description: 'You completey blew it. You tried to eat one of those magic 8 balls and it made you die.',
+    gameOver: true,
+    doors: [],
+    items: [],
+    scenery: [] 
+  },
+  10: {
+    img: 'beerman',
+    description: "You take an aggressive pull out of the bong and feel nothing. Nothing for a while, really. But after a few minutes it starts to kick in and you start to feel funny. You'd never smoked weed before, so you didn't really know what to expect. Anyway, days go by and you don't stop feeling high, it just gets more and more intense. You become convinced that the weed was laced with something, except you saw other people take hits from teh same stash and they were completely fine. You wonder if Scott and Santos are drug dealers who conspired against you to get you high. No matter. The feeling excalates. You begin to have an out of body experience. It's been almost a week now, and you are no longer at the castle. You're home, or at least some place that looks like home. You have no recollection of leaving the castle. Has it been weeks, months, years? All of your friends know  you are high. They must. Next thing you know, you're on a hospital bed. Everyone you know is there, giving you fist bumps and crying tears of joy. Doug is in the corner, staring at your with a warm, fatherly smirk. \"You did it, man\", he says. You die.",
     gameOver: true,
     doors: [],
     items: [],
@@ -584,15 +615,18 @@ const images = {
   torch1: null,
   torch2: null,
   torch3: null,
-  bottle: null
+  bottle: null,
+  santos: null,
+  bong: null,
+  lockpick: null
 };
 
 const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 0,
-  items: [],
+  room: 3,
+  items: [7],
   page: 0,
   bagLevel: 0
 };

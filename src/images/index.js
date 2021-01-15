@@ -40,8 +40,14 @@ import welcomeSign from './welcome-sign.png';
 import bag from './bag.png';
 import jasonHidden from './jason-hidden.png';
 import beerman from './beerman.png';
+import santos from './santos.png';
+import bong from './bong.png';
+import lockpick from './lockpick.png';
 
 export default {
+  bong,
+  lockpick,
+  santos,
   beerman,
   garfield,
   bartender,
