@@ -317,7 +317,32 @@ const items = {
       width: 24,
       height: 18
     }
-  }
+  },
+  12: {
+    name: 'frying pan',
+    img: 'fryingPan',
+    description: 'A commercial for a frying pan plays quietly in the background.',
+    itemListDescription: 'Congratulations. You are the proud owner of a shiney, new frying pan',
+    position: {
+      left: 71,
+      top: 20,
+      width: 15,
+      height: 15
+    },
+  },
+  13: {
+    name: 'bottle',
+    img: 'bottle',
+    description: 'You grow enraged as you realize that, while there is an unattended drink on the counter, it is simply a beer and not a gin and soda.',
+    itemListDescription: 'A bottle. Ugh... You remember how you had to drink that beer instead of gin and soda. What an awful time you had. Frankly you could do without the soda too. All you really want is the gin. That sweet, nourishing gin.',
+    position: {
+      left: 50,
+      top: 48,
+      width: 8,
+      height: 8
+    },
+    onTake: 'You chug the beer angrily in the hopes the bottle might come in handy later on.'
+  },
 };
 
 const scenery = {
@@ -369,8 +394,17 @@ const scenery = {
       width: 80,
       height: 30
     },
-    contains: [],
   },
+  4: {
+    img: 'eightBallSmall',
+    description: 'It is an eight ball',
+    startPosition: {
+      left: 103,
+      top: 73,
+      width: 9,
+      height: 9
+    },
+  }
 };
 
 const rooms = {
@@ -412,10 +446,10 @@ const rooms = {
   },
   5: {
     img: 'room5',
-    description: 'Why it\'s simply Redd\'s! For some reason you seem to have entered from the back',
+    description: 'Why it\'s simply Redd\'s! For some reason you seem to have entered from the back.',
     doors: [12],
-    items: [],
-    scenery: [] 
+    items: [12, 13],
+    scenery: [4] 
   },
   6: {
     img: 'room6',
@@ -449,6 +483,8 @@ const images = {
   door5: null,
   door6: null,
   door7: null,
+  eightBallSmall: null,
+  fryingPan: null,
   flame1: null,
   items: null,
   key1: null,
@@ -468,14 +504,15 @@ const images = {
   sword: null,
   torch1: null,
   torch2: null,
-  torch3: null
+  torch3: null,
+  bottle: null
 };
 
 const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 0,
+  room: 5,
   items: [],
   page: 0,
   bagLevel: 0

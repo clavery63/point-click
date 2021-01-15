@@ -7,7 +7,7 @@ const itemReducer = item => state => {
   return compose(
     updateValue(`gameState.rooms.${playerState.room}.items`)(filterItem),
     updateValue('playerState.items')(items => [...items, item.id]),
-    withText(`The ${item.name} is in hand.`)
+    withText(item.onTake || `The ${item.name} is in hand.`)
   )(state);
 };
 

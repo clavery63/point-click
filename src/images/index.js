@@ -1,6 +1,7 @@
 import alphaDark from './alpha-dark.png';
 import alphaLight from './alpha-light.png';
 import border from './border.png';
+import bottle from './bottle.png';
 import door1 from './door-1.png';
 import door2 from './door-2.png';
 import door3 from './door-3.png';
@@ -8,6 +9,8 @@ import door4 from './door-4.png';
 import door5 from './door-5.png';
 import door6 from './door-6.png';
 import door7 from './door-7.png';
+import eightBallSmall from './eight-ball-small.png';
+import fryingPan from './frying-pan.png';
 import flame1 from './flame-1.png';
 import items from './items.png';
 import key1 from './key-1.png';
@@ -35,6 +38,7 @@ import bag from './bag.png';
 import jasonHidden from './jason-hidden.png';
 
 export default {
+  bottle,
   jasonHidden,
   bag,
   welcomeSign,
@@ -49,6 +53,8 @@ export default {
   door5,
   door6,
   door7,
+  eightBallSmall,
+  fryingPan,
   flame1,
   items,
   key1,
