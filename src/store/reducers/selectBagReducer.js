@@ -8,8 +8,10 @@ const getText = bagLevel => {
   } else if (bagLevel < 8) {
     return 'Your bag is filling up faster than you expected. You had better find some place to empty it!';
   } else if (bagLevel < 11) {
+    return 'You don\'t know and frankly don\'t want to know what will happen if the bag ruptures';
+  } else if (bagLevel < 13) {
     return 'The bag contains near-critical levels of piss. If you don\'t empty it soon, it will explode, I guess?';
-  } else if (bagLevel < 14) {
+  } else if (bagLevel < 17) {
     return 'Not much time left... Empty your bag now!';
   }
 

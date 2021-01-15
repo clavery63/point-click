@@ -25,11 +25,17 @@ const getAction$ = ({ dest }) => frame => {
   ]);
 };
 
-const dispatchRoomText = (action$, { dest }, { rooms }) => {
-  const room = rooms[dest];
+const dispatchRoom = (action$, { dest }, state) => {
+  const { gameState, playerState } = state;
+  const room = gameState.rooms[dest];
   if (!room.description) {
     return { type: null }
   }
+
+  if (playerState.bagLevel === 17) {
+    return of({ type: 'RUN_TRANSITION', payload: { dest: 11, dir: 'FORWARD', frame: 0 } });
+  }
+
   const gameOverAudioType = room.gameOver ? 'PLAY_AUDIO' : null;
   return concat(
     of(({ type: gameOverAudioType, payload: { fileName: 'puppets.m4a' }})),
@@ -42,12 +48,12 @@ const transition$ = (action$, state$) => {
   return action$.pipe(
     ofType('RUN_TRANSITION'),
     withLatestFrom(state$),
-    switchMap(([{ payload }, { gameState }]) => concat(
+    switchMap(([{ payload }, state]) => concat(
       from(range(15)).pipe(
         concatMap(frame => timer(MS_PER_FRAME).pipe(mapTo(frame))),
         mergeMap(getAction$(payload))
       ),
-      from(dispatchRoomText(action$, payload, gameState)),
+      from(dispatchRoom(action$, payload, state)),
     ))
   );
 };

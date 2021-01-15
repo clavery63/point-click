@@ -570,6 +570,14 @@ const rooms = {
     doors: [],
     items: [],
     scenery: [] 
+  },
+  11: {
+    img: 'beerman',
+    description: 'What you feared most has happened: your bag got too filled up with piss, shit and cum, and then it exploded. You slipped on some of the spillage on the floor and died from the fall.',
+    gameOver: true,
+    doors: [],
+    items: [],
+    scenery: [] 
   }
 };
 
@@ -625,8 +633,8 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 3,
-  items: [7],
+  room: 0,
+  items: [],
   page: 0,
   bagLevel: 0
 };
