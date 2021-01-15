@@ -10,6 +10,7 @@ import door4 from './door-4.png';
 import door5 from './door-5.png';
 import door6 from './door-6.png';
 import door7 from './door-7.png';
+import door8 from './door-8.png';
 import eightBallSmall from './eight-ball-small.png';
 import eightBallLarge from './eight-ball-large.png';
 import fryingPan from './frying-pan.png';
@@ -28,6 +29,7 @@ import room4 from './room-4.png';
 import room5 from './room-5.png';
 import room6 from './room-6.png';
 import room7 from './room-7.png';
+import room8 from './room-8.png';
 import sling from './sling.png';
 import skull from './skull.png';
 import sword from './sword.png';
@@ -43,8 +45,10 @@ import beerman from './beerman.png';
 import santos from './santos.png';
 import bong from './bong.png';
 import lockpick from './lockpick.png';
+import motorcycle from './motorcycle.png';
 
 export default {
+  motorcycle,
   bong,
   lockpick,
   santos,
@@ -66,6 +70,7 @@ export default {
   door5,
   door6,
   door7,
+  door8,
   eightBallSmall,
   eightBallLarge,
   fryingPan,
@@ -83,6 +88,7 @@ export default {
   room5,
   room6,
   room7,
+  room8,
   sling,
   skull,
   sword,

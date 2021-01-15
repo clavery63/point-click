@@ -193,7 +193,27 @@ const doors = {
       y: 3
     },
     state: 'OPEN'
-  }
+  },
+  14: {
+    closedImg: 'door8',
+    position: {
+      left: 33,
+      top: 40,
+      width: 17,
+      height: 44
+    },
+    dest: 12,
+    dir: 'FORWARD',
+    mapPosition: {
+      x: 1,
+      y: 0
+    },
+    state: 'LOCKED',
+    keyId: 6,
+    description: 'Sometimes the best way into Valencia Tavern is through the front door',
+    openText: 'Opened Valencia Tavern',
+    unlockText: 'Hell yeah! Let\'s do this! Woo!!!'
+  },
 };
 
 const items = {
@@ -487,6 +507,16 @@ const scenery = {
     },
     vanishOn: 10,
     vanishText: 'With a desperate yell, you hurl Scott at Santos and shield your eyes. Scott beckons Santos with some strange incantations, and they part ways.'
+  },
+  8: {
+    img: 'motorcycle',
+    description: 'This must by one of those poorly-parked motorcycles Valencia Tavern is famous for.',
+    startPosition: {
+      left: 0,
+      top: 64,
+      width: 34,
+      height: 42
+    }
   }
 };
 
@@ -544,9 +574,9 @@ const rooms = {
   7: {
     img: 'room7',
     description: 'You are delighted to find yourself outside of a friendly-looking pub resaurant. Though it seems the surrounding area is overrun with some kind of bulbous green gunk.',
-    doors: [12],
+    doors: [12, 14],
     items: [14],
-    scenery: [3] 
+    scenery: [3, 8] 
   },
   8: {
     img: 'eightBallLarge',
@@ -578,10 +608,18 @@ const rooms = {
     doors: [],
     items: [],
     scenery: [] 
+  },
+  12: {
+    img: 'room8',
+    description: 'You find yourself in a cool lockerroom. A wonderful-smelling man greets you as you walk in.',
+    doors: [],
+    items: [],
+    scenery: [] 
   }
 };
 
 const images = {
+  motorcycle: null,
   bartender: null,
   beerman: null,
   jasonHidden: null,
@@ -599,6 +637,7 @@ const images = {
   door5: null,
   door6: null,
   door7: null,
+  door8: null,
   eightBallSmall: null,
   eightBallLarge: null,
   fryingPan: null,
@@ -617,6 +656,7 @@ const images = {
   room5: null,
   room6: null,
   room7: null,
+  room8: null,
   sling: null,
   skull: null,
   sword: null,
