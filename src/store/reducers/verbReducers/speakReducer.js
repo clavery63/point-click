@@ -1,8 +1,15 @@
-import { withText } from '../utils';
+import { compose } from 'redux';
+import { withText, updateValue } from '../utils';
 
 const speakReducer = object => {
-  if (object.onSpeak) {
-    return withText(object.onSpeak);
+  const { onSpeak, speakTexts, speakIndex, id } = object;
+  if (onSpeak) {
+    return withText(onSpeak);
+  } else if (speakTexts) {
+    return compose(
+      withText(speakTexts[speakIndex]),
+      updateValue(`gameState.scenery.${id}.speakIndex`)(index => Math.min(index + 1, speakTexts.length - 1))
+    );
   }
 
   return withText('Nope. No can do.');

@@ -1,5 +1,6 @@
 import alphaDark from './alpha-dark.png';
 import alphaLight from './alpha-light.png';
+import bartender from './bartender.png';
 import border from './border.png';
 import bottle from './bottle.png';
 import door1 from './door-1.png';
@@ -39,6 +40,7 @@ import bag from './bag.png';
 import jasonHidden from './jason-hidden.png';
 
 export default {
+  bartender,
   bottle,
   jasonHidden,
   bag,

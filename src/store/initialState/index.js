@@ -345,7 +345,7 @@ const items = {
     description: 'You grow enraged as you realize that, while there is an unattended drink on the counter, it is simply a beer and not a gin and soda.',
     itemListDescription: 'A bottle. Ugh... You remember how you had to drink that beer instead of gin and soda. What an awful time you had. Frankly you could do without the soda too. All you really want is the gin. That sweet, nourishing gin.',
     position: {
-      left: 50,
+      left: 46,
       top: 48,
       width: 8,
       height: 8
@@ -421,9 +421,9 @@ const scenery = {
     description: 'It appears you can shake this and receive answers to your problems.',
     useTexts: [
       'You shake the magic eight ball. It says you are doing a great job! but you knew that already :)',
-      'You shake it again. It says "Ted Dansen is in this castle somewhere."',
-      'You shake it again. "No, seriously," it says. "Dansen is here somewhere. He\'s with George Wendt and they\'ve consumed so much beer they\'ve nearly fallen asleep."',
-      'You shake it again. "You will have some good luck. I guarantee it," it says.'
+      'You shake it again. It says "Sam Malone is in this castle somewhere."',
+      'You shake it again. "No, seriously," it says. "Sam is here somewhere. He\'s with Norm and they\'ve consumed so much beer they\'ve nearly fallen asleep."',
+      'You shake it one more time. "You will have some good luck. I guarantee it," it says.'
     ],
     useIndex: 0,
     startPosition: {
@@ -431,6 +431,22 @@ const scenery = {
       top: 0,
       width: 112,
       height: 112
+    }
+  },
+  6: {
+    img: 'bartender',
+    description: 'Meaghan notices you. She\'ll probably offer you some gin if you talk to her.',
+    speakTexts: [
+      'Heyyy what\'s up. Let me guess. Gin?',
+      'Sorta random question, but do you want that frying pan up there on the T.V.?',
+      'It\'s for sale. But you can just go ahead and grab it.'
+    ],
+    speakIndex: 0,
+    startPosition: {
+      left: 54,
+      top: 34,
+      width: 13,
+      height: 21
     }
   }
 };
@@ -477,7 +493,7 @@ const rooms = {
     description: 'Why it\'s simply Redd\'s! For some reason you seem to have entered from the back.',
     doors: [12],
     items: [12, 13],
-    scenery: [4] 
+    scenery: [4, 6] 
   },
   6: {
     img: 'room6',
@@ -503,6 +519,7 @@ const rooms = {
 };
 
 const images = {
+  bartender: null,
   jasonHidden: null,
   bag: null,
   scott: null,
@@ -548,7 +565,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 8,
+  room: 5,
   items: [],
   page: 0,
   bagLevel: 0
@@ -559,7 +576,8 @@ const gameState = {
   items,
   rooms,
   scenery,
-  images
+  images,
+  flags: new Set()
 };
 
 const transition = {
