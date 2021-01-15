@@ -112,15 +112,15 @@ const doors = {
       width: 9,
       height: 57
     },
-    dest: 4,
+    dest: 5,
     dir: 'LEFT',
     mapPosition: {
       x: 0,
       y: 2
     },
     state: 'CLOSED',
-    description: 'This door probably leads someplace unintersting',
-    openText: 'You keep opening doors. That\'s the spirit!'
+    description: 'A familiar, acrid odor eminates from the other side of of this door, as if seeping through the pores of the woods itself. There is a Buffolo Bills ensignia engraved on the side.',
+    openText: 'Opened it! You have a good feeling about this one.'
   },
   8: {
     closedImg: 'door6',
@@ -130,7 +130,7 @@ const doors = {
       width: 9,
       height: 57
     },
-    dest: 4,
+    dest: 6,
     dir: 'RIGHT',
     mapPosition: {
       x: 4,
@@ -148,7 +148,7 @@ const doors = {
       width: 12,
       height: 23
     },
-    dest: 4,
+    dest: 7,
     dir: 'FORWARD',
     mapPosition: {
       x: 2,
@@ -176,6 +176,15 @@ const doors = {
     },
     state: 'OPEN'
   },
+  12: {
+    dest: 4,
+    dir: 'DOWN',
+    mapPosition: {
+      x: 2,
+      y: 4
+    },
+    state: 'OPEN'
+  }
 };
 
 const items = {
@@ -350,7 +359,18 @@ const scenery = {
       height: 56
     },
     onSpeak: 'You can\'t be sure, but you could swear you heard the words "Uncle Flesh" uttered from deep within this corridor.'
-  }
+  },
+  3: {
+    name: 'gunk',
+    description: 'The ground outside the entrance is overrun with bulbous green gunk.',
+    startPosition: {
+      left: 27,
+      top: 73,
+      width: 80,
+      height: 30
+    },
+    contains: [],
+  },
 };
 
 const rooms = {
@@ -389,6 +409,27 @@ const rooms = {
     doors: [7, 8, 9, 11],
     items: [],
     scenery: [] 
+  },
+  5: {
+    img: 'room5',
+    description: 'Why it\'s simply Redd\'s! For some reason you seem to have entered from the back',
+    doors: [12],
+    items: [],
+    scenery: [] 
+  },
+  6: {
+    img: 'room6',
+    description: 'This place looks familiar. It\'s some place you haven\'t been in a long time.',
+    doors: [12],
+    items: [],
+    scenery: [] 
+  },
+  7: {
+    img: 'room7',
+    description: 'You are delighted to find yourself outside of a friendly-looking pub resaurant.',
+    doors: [12],
+    items: [],
+    scenery: [3] 
   }
 };
 
@@ -419,6 +460,9 @@ const images = {
   room2: null,
   room3: null,
   room4: null,
+  room5: null,
+  room6: null,
+  room7: null,
   sling: null,
   skull: null,
   sword: null,
@@ -431,7 +475,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 4,
+  room: 0,
   items: [],
   page: 0,
   bagLevel: 0

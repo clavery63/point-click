@@ -19,6 +19,9 @@ import room1 from './room-1.png';
 import room2 from './room-2.png';
 import room3 from './room-3.png';
 import room4 from './room-4.png';
+import room5 from './room-5.png';
+import room6 from './room-6.png';
+import room7 from './room-7.png';
 import sling from './sling.png';
 import skull from './skull.png';
 import sword from './sword.png';
@@ -57,6 +60,9 @@ export default {
   room2,
   room3,
   room4,
+  room5,
+  room6,
+  room7,
   sling,
   skull,
   sword,
