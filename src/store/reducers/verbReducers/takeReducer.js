@@ -12,7 +12,7 @@ const itemReducer = item => state => {
 };
 
 const takeReducer = object => {
-  if (object.type === 'items') {
+  if (object.type === 'items' && !object.onEat) {
     return itemReducer(object);
   }
   if (object.type === 'doors') {

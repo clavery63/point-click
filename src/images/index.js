@@ -14,6 +14,7 @@ import eightBallSmall from './eight-ball-small.png';
 import eightBallLarge from './eight-ball-large.png';
 import fryingPan from './frying-pan.png';
 import flame1 from './flame-1.png';
+import garfield from './garfield.png';
 import items from './items.png';
 import key1 from './key-1.png';
 import line from './line.png';
@@ -38,8 +39,11 @@ import scott from './scott.png';
 import welcomeSign from './welcome-sign.png';
 import bag from './bag.png';
 import jasonHidden from './jason-hidden.png';
+import beerman from './beerman.png';
 
 export default {
+  beerman,
+  garfield,
   bartender,
   bottle,
   jasonHidden,

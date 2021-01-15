@@ -352,6 +352,18 @@ const items = {
     },
     onTake: 'You chug the beer angrily in the hopes the bottle might come in handy later on.'
   },
+  14: {
+    name: 'garfield',
+    img: 'garfield',
+    description: 'A fearsome, rapacious cat is eating the gunk with lunatic vigor. This must be the only nearby form of nourishment. It might be best to leave him be.',
+    position: {
+      left: 44,
+      top: 52,
+      width: 68,
+      height: 55
+    },
+    onEat: 'With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.'
+  },
 };
 
 const scenery = {
@@ -400,7 +412,7 @@ const scenery = {
     startPosition: {
       left: 27,
       top: 73,
-      width: 80,
+      width: 40,
       height: 30
     },
   },
@@ -414,7 +426,8 @@ const scenery = {
       height: 9
     },
     movesTo: 8,
-    moveDir: 'FORWARD'
+    moveDir: 'FORWARD',
+    moveOn: 'LOOK',
   },
   5: {
     name: 'eightBallMask',
@@ -431,7 +444,10 @@ const scenery = {
       top: 0,
       width: 112,
       height: 112
-    }
+    },
+    movesTo: 9,
+    moveDir: 'DOWN',
+    moveOn: 'EAT'
   },
   6: {
     img: 'bartender',
@@ -504,9 +520,9 @@ const rooms = {
   },
   7: {
     img: 'room7',
-    description: 'You are delighted to find yourself outside of a friendly-looking pub resaurant.',
+    description: 'You are delighted to find yourself outside of a friendly-looking pub resaurant. Though it seems the surrounding area is overrun with some kind of bulbous green gunk.',
     doors: [12],
-    items: [],
+    items: [14],
     scenery: [3] 
   },
   8: {
@@ -516,10 +532,19 @@ const rooms = {
     items: [],
     scenery: [5] 
   },
+  9: {
+    img: 'beerman',
+    description: 'You completey blew it. You tried to eat one of those magic 8 balls and it made you die.',
+    gameOver: true,
+    doors: [],
+    items: [],
+    scenery: [] 
+  }
 };
 
 const images = {
   bartender: null,
+  beerman: null,
   jasonHidden: null,
   bag: null,
   scott: null,
@@ -539,6 +564,7 @@ const images = {
   eightBallLarge: null,
   fryingPan: null,
   flame1: null,
+  garfield: null,
   items: null,
   key1: null,
   line: null,
@@ -565,7 +591,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 5,
+  room: 8,
   items: [],
   page: 0,
   bagLevel: 0

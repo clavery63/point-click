@@ -13,10 +13,10 @@ import numpy
 # other image
 SOURCE_TOP = 0
 SOURCE_LEFT = 0
-SOURCE_HEIGHT = 1000
-SOURCE_WIDTH = 1000
-DEST_HEIGHT = 50
-DEST_WIDTH = 50
+SOURCE_HEIGHT = 936
+SOURCE_WIDTH = 936
+DEST_HEIGHT = 72
+DEST_WIDTH = 72
 
 
 ## menu
@@ -58,6 +58,6 @@ def convert(filename):
 
 # for i, filename in enumerate(sorted(os.listdir('source'))):
 #     print(filename)
-convert('bartender.png')
+convert('garfield.png')
 
 

@@ -2,6 +2,7 @@ import { mapTo, switchMap, mergeMap, concatMap, withLatestFrom } from 'rxjs/oper
 import { from, timer, concat, of } from 'rxjs';
 import { range } from 'lodash';
 import { ofType } from 'redux-observable';
+import runText$ from './observables/runText';
 
 const MS_PER_FRAME = 65;
 
@@ -24,15 +25,15 @@ const getAction$ = ({ dest }) => frame => {
   ]);
 };
 
-const dispatchRoomText = ({ dest }, { rooms }) => {
+const dispatchRoomText = (action$, { dest }, { rooms }) => {
   const room = rooms[dest];
   if (!room.description) {
     return { type: null }
   }
-  return {
-    type: 'RUN_TEXT',
-    payload: room.initialDescription || room.description
-  };
+  return concat(
+    runText$(action$)(room.initialDescription || room.description),
+    of(({ type: 'SET_CURSOR_ENABLED', payload: !room.gameOver }))
+  );
 }
 
 const transition$ = (action$, state$) => {
@@ -44,7 +45,7 @@ const transition$ = (action$, state$) => {
         concatMap(frame => timer(MS_PER_FRAME).pipe(mapTo(frame))),
         mergeMap(getAction$(payload))
       ),
-      of(dispatchRoomText(payload, gameState))
+      from(dispatchRoomText(action$, payload, gameState)),
     ))
   );
 };

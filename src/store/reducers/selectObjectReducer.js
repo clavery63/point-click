@@ -5,6 +5,7 @@ import takeReducer from './verbReducers/takeReducer';
 import useReducer from './verbReducers/useReducer';
 import hitReducer from './verbReducers/hitReducer';
 import speakReducer from './verbReducers/speakReducer';
+import eatReducer from './verbReducers/eatReducer';
 import { keepState } from './utils';
 
 const verbReducers = {
@@ -14,7 +15,7 @@ const verbReducers = {
   USE: useReducer,
   SMOKE: keepState,
   TAKE: takeReducer,
-  EAT: keepState,
+  EAT: eatReducer,
   HIT: hitReducer,
   SPEAK: speakReducer
 };
