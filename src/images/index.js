@@ -10,6 +10,7 @@ import door5 from './door-5.png';
 import door6 from './door-6.png';
 import door7 from './door-7.png';
 import eightBallSmall from './eight-ball-small.png';
+import eightBallLarge from './eight-ball-large.png';
 import fryingPan from './frying-pan.png';
 import flame1 from './flame-1.png';
 import items from './items.png';
@@ -54,6 +55,7 @@ export default {
   door6,
   door7,
   eightBallSmall,
+  eightBallLarge,
   fryingPan,
   flame1,
   items,

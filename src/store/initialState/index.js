@@ -184,6 +184,15 @@ const doors = {
       y: 4
     },
     state: 'OPEN'
+  },
+  13: {
+    dest: 5,
+    dir: 'BACK',
+    mapPosition: {
+      x: 2,
+      y: 3
+    },
+    state: 'OPEN'
   }
 };
 
@@ -404,6 +413,8 @@ const scenery = {
       width: 9,
       height: 9
     },
+    movesTo: 8,
+    moveDir: 'FORWARD'
   }
 };
 
@@ -464,7 +475,14 @@ const rooms = {
     doors: [12],
     items: [],
     scenery: [3] 
-  }
+  },
+  8: {
+    img: 'eightBallLarge',
+    description: 'It\'s one of those magic 8 balls! What a treat! Maybe this will have the answer. You want gin.',
+    doors: [13],
+    items: [],
+    scenery: [3] 
+  },
 };
 
 const images = {
@@ -484,6 +502,7 @@ const images = {
   door6: null,
   door7: null,
   eightBallSmall: null,
+  eightBallLarge: null,
   fryingPan: null,
   flame1: null,
   items: null,
@@ -512,7 +531,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 5,
+  room: 0,
   items: [],
   page: 0,
   bagLevel: 0
