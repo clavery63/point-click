@@ -28,7 +28,8 @@ epicMiddleware.run(rootEpic);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <audio className='audio-player' loop />
+      <audio className='music-player' loop />
+      <audio className='sfx-player' src='https://doublehamburger.com/transition.mp3' />
       <App />
     </Provider>
   </React.StrictMode>,

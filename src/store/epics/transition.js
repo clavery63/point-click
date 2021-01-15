@@ -18,10 +18,12 @@ const getCursorAction = frame => {
 
 const getAction$ = ({ dest }) => frame => {
   const setRoomType = frame === 7 ? 'SET_ROOM' : null;
+  const sfxType = frame === 0 || frame === 7 ? 'PLAY_SFX' : null;
   return from([
     getCursorAction(frame),
     { type: setRoomType, payload: dest },
-    { type: 'SET_FRAME', payload: frame % 14 }
+    { type: 'SET_FRAME', payload: frame % 14 },
+    { type: sfxType, payload: 'transition.mp3' }
   ]);
 };
 
@@ -36,7 +38,7 @@ const dispatchRoom = (action$, { dest }, state) => {
     return of({ type: 'RUN_TRANSITION', payload: { dest: 11, dir: 'FORWARD', frame: 0 } });
   }
 
-  const gameOverAudioType = room.gameOver ? 'PLAY_AUDIO' : null;
+  const gameOverAudioType = room.gameOver ? 'PLAY_MUSIC' : null;
   return concat(
     of(({ type: gameOverAudioType, payload: { fileName: 'puppets.m4a' }})),
     runText$(action$)(room.initialDescription || room.description),
