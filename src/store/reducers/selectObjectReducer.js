@@ -12,9 +12,9 @@ const verbReducers = {
   LOOK: lookReducer,
   OPEN: openReducer,
   USE: useReducer,
-  LEAVE: keepState,
+  SMOKE: keepState,
   TAKE: takeReducer,
-  CLOSE: keepState,
+  EAT: keepState,
   HIT: hitReducer,
   SPEAK: speakReducer
 };

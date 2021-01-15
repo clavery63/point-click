@@ -87,7 +87,7 @@ const doors = {
     state: 'OPEN'
   },
   6: {
-    dest: 4,
+    dest: 5,
     openImg: 'door4',
     position: {
       left: 49,
@@ -103,7 +103,79 @@ const doors = {
     hidden: true,
     state: 'CLOSED',
     openText: 'Oh nice. I guess there was a hidden door there.'
-  }
+  },
+  7: {
+    closedImg: 'door5',
+    position: {
+      left: 17,
+      top: 15,
+      width: 9,
+      height: 57
+    },
+    dest: 4,
+    dir: 'LEFT',
+    mapPosition: {
+      x: 0,
+      y: 2
+    },
+    state: 'CLOSED',
+    description: 'This door probably leads someplace unintersting',
+    openText: 'You keep opening doors. That\'s the spirit!'
+  },
+  8: {
+    closedImg: 'door6',
+    position: {
+      left: 86,
+      top: 15,
+      width: 9,
+      height: 57
+    },
+    dest: 4,
+    dir: 'RIGHT',
+    mapPosition: {
+      x: 4,
+      y: 2
+    },
+    state: 'CLOSED',
+    description: 'This door probably leads someplace unintersting',
+    openText: 'You keep opening doors. That\'s the spirit!'
+  },
+  9: {
+    closedImg: 'door7',
+    position: {
+      left: 50,
+      top: 25,
+      width: 12,
+      height: 23
+    },
+    dest: 4,
+    dir: 'FORWARD',
+    mapPosition: {
+      x: 2,
+      y: 0
+    },
+    state: 'CLOSED',
+    description: 'This door probably leads someplace unintersting',
+    openText: 'You keep opening doors. That\'s the spirit!'
+  },
+  10: {
+    dest: 4,
+    dir: 'FORWARD',
+    mapPosition: {
+      x: 4,
+      y: 1
+    },
+    state: 'OPEN'
+  },
+  11: {
+    dest: 2,
+    dir: 'BACK',
+    mapPosition: {
+      x: 2,
+      y: 4
+    },
+    state: 'OPEN'
+  },
 };
 
 const items = {
@@ -266,7 +338,18 @@ const scenery = {
       height: 6
     },
     contains: [5],
-    openText: 'The book is opened and examined. A rectangular hole has been cut out of the inside of the book'
+    openText: 'The book is opened and examined. A rectangular hole has been cut out of the inside of the book.'
+  },
+  2: {
+    img: 'jasonHidden',
+    description: 'You must be seeing things. It is as though a man is there beyond the corner, doing a poor job of hiding from you.',
+    startPosition: {
+      left: 72,
+      top: 22,
+      width: 8,
+      height: 56
+    },
+    onSpeak: 'You can\'t be sure, but you could swear you heard the words "Uncle Flesh" uttered from deep within this corridor.'
   }
 };
 
@@ -281,7 +364,7 @@ const rooms = {
   1: {
     img: 'room1',
     description: 'The lobby of Birthday Castle',
-    initialDescription: 'A man stumbles toward you. "Oh shit is that Scott?" you wonder yourself as you pull yourself through the half-ajar door. "Why am I not shocked to find him here..."',
+    initialDescription: 'A man stumbles toward you. "Oh shit is that Scott?" you wonder as you pull yourself through the half-ajar door. "Why am I not shocked to find him here..."',
     doors: [1, 2, 3],
     items: [11, 3, 4, 10],
     scenery: [] 
@@ -289,9 +372,9 @@ const rooms = {
   2: {
     img: 'room2',
     description: 'The stone passage winds to an unseen end.',
-    doors: [4, 6],
+    doors: [4, 6, 10],
     items: [8, 9],
-    scenery: [1] 
+    scenery: [1, 2] 
   },
   3: {
     img: 'room3',
@@ -299,10 +382,18 @@ const rooms = {
     doors: [5],
     items: [6, 7],
     scenery: [] 
+  },
+  4: {
+    img: 'room4',
+    description: 'There are more doors here.',
+    doors: [7, 8, 9, 11],
+    items: [],
+    scenery: [] 
   }
 };
 
 const images = {
+  jasonHidden: null,
   bag: null,
   scott: null,
   welcomeSign: null,
@@ -314,6 +405,9 @@ const images = {
   door2: null,
   door3: null,
   door4: null,
+  door5: null,
+  door6: null,
+  door7: null,
   flame1: null,
   items: null,
   key1: null,
@@ -324,6 +418,7 @@ const images = {
   room1: null,
   room2: null,
   room3: null,
+  room4: null,
   sling: null,
   skull: null,
   sword: null,
@@ -336,7 +431,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 0,
+  room: 4,
   items: [],
   page: 0,
   bagLevel: 0

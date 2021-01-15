@@ -11,9 +11,9 @@ const menuOptions = [
   { verb: 'LOOK',  left: 8, top: 8 },
   { verb: 'OPEN',  left: 8, top: 24 },
   { verb: 'USE',   left: 8, top: 40 },
-  { verb: 'LEAVE', left: 8, top: 56 },
+  { verb: 'SMOKE', left: 8, top: 56 },
   { verb: 'TAKE',  left: 56, top: 8 },
-  { verb: 'CLOSE', left: 56, top: 24 },
+  { verb: 'EAT',   left: 56, top: 24 },
   { verb: 'HIT',   left: 56, top: 40 },
   { verb: 'SPEAK', left: 56, top: 56 }
 ];
