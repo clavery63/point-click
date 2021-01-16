@@ -214,6 +214,37 @@ const doors = {
     openText: 'Opened Valencia Tavern',
     unlockText: 'Hell yeah! Let\'s do this! Woo!!!'
   },
+  15: {
+    name: 'fridge',
+    closedImg: 'fridgeSmall',
+    position: {
+      left: 5,
+      top: 76,
+      width: 16,
+      height: 23
+    },
+    mapPosition: {
+      x: 0,
+      y: 3
+    },
+    description: 'A handy little fridge',
+    closedText: 'With all your might, you yank on the handle. But it won\'t budge - you are far too weak to open this fridge.',
+    openText: 'Eating Garfield gave you the strength you needed to open this bad boy. Good work!',
+    dir: 'DOWN',
+    dest: 14,
+    state: 'CLOSED',
+    openCondition: 'GARFIELD'
+  },
+  16: {
+    mapPosition: {
+      x: 2,
+      y: 3
+    },
+    description: 'Back to the outside',
+    dir: 'UP',
+    dest: 0,
+    state: 'OPEN'
+  },
 };
 
 const items = {
@@ -386,7 +417,8 @@ const items = {
       width: 68,
       height: 55
     },
-    onEat: 'With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.'
+    onEat: 'With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.',
+    eatEffect: 'GARFIELD'
   },
 };
 
@@ -553,14 +585,14 @@ const scenery = {
     movesTo: 13,
     moveDir: 'FORWARD',
     moveOn: 'LOOK',
-  },
+  }
 };
 
 const rooms = {
   0: {
     img: 'room0',
     description: 'It\'s the entrance to Birthay Castle. You can faintly hear the sound of several full grown adults chanting inside.',
-    doors: [0],
+    doors: [0, 15],
     items: [0],
     scenery: [0]
   },
@@ -659,6 +691,13 @@ const rooms = {
     doors: [13],
     items: [],
     scenery: [] 
+  },
+  14: {
+    img: 'fridgeLarge',
+    description: 'A smattering of items can be found here.',
+    doors: [16],
+    items: [],
+    scenery: [] 
   }
 };
 
@@ -711,7 +750,9 @@ const images = {
   santos: null,
   bong: null,
   lockpick: null,
-  bed: null
+  bed: null,
+  fridgeSmall: null,
+  fridgeLarge: null
 };
 
 const playerState = {
@@ -730,7 +771,7 @@ const gameState = {
   rooms,
   scenery,
   images,
-  flags: new Set()
+  flags: new Set(['GARFIELD'])
 };
 
 const transition = {

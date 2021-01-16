@@ -47,8 +47,12 @@ import bong from './bong.png';
 import lockpick from './lockpick.png';
 import motorcycle from './motorcycle.png';
 import bed from './bed.png';
+import fridgeSmall from './fridge-small.png';
+import fridgeLarge from './fridge-large.png';
 
 export default {
+  fridgeSmall,
+  fridgeLarge,
   motorcycle,
   bed,
   bong,

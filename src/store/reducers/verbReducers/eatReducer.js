@@ -19,7 +19,13 @@ const eatReducer = object => state => {
     updateValue(`gameState.rooms.${room}.items`)(items => {
       return items.filter(id => id !== object.id);
     }),
-    withText(object.onEat)
+    updateValue('gameState.flags')(flags => {
+      if (object.eatEffect) {
+        flags.add(object.eatEffect);
+      }
+      return flags;
+    }),
+    withText(object.onEat),
   )(state);
 };
 
