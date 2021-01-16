@@ -63,7 +63,7 @@ const doors = {
       y: 2
     },
     state: 'LOCKED',
-    description: 'This door probably leads someplace unintersting',
+    description: 'This door probably leads someplace uninteresting',
     unlockText: 'Great, it\'s unlocked now',
     openText: 'Aaaaand you opened the door. How exciting.',
     keyId: 5
@@ -119,7 +119,7 @@ const doors = {
       y: 2
     },
     state: 'CLOSED',
-    description: 'A familiar, acrid odor eminates from the other side of of this door, as if seeping through the pores of the woods itself. There is a Buffolo Bills ensignia engraved on the side.',
+    description: 'A familiar, acrid odor emanates from the other side of of this door, as if seeping through the pores of the woods itself. There is a Buffalo Bills insignia engraved on the side.',
     openText: 'Opened it! You have a good feeling about this one.'
   },
   8: {
@@ -137,7 +137,7 @@ const doors = {
       y: 2
     },
     state: 'CLOSED',
-    description: 'This door probably leads someplace unintersting',
+    description: 'This door probably leads someplace uninteresting',
     openText: 'You keep opening doors. That\'s the spirit!'
   },
   9: {
@@ -155,7 +155,7 @@ const doors = {
       y: 0
     },
     state: 'CLOSED',
-    description: 'This door probably leads someplace unintersting',
+    description: 'This door probably leads someplace uninteresting',
     openText: 'You keep opening doors. That\'s the spirit!'
   },
   10: {
@@ -346,7 +346,7 @@ const items = {
       height: 20
     },
     img: 'bong',
-    description: 'It\'s some kind of strange vessel. Its base is filled with a murky, dank liquid, and there is an acrid vapor eminating from its spout.',
+    description: 'It\'s some kind of strange vessel. Its base is filled with a murky, dank liquid, and there is an acrid vapor emanating from its spout.',
     movesTo: 10,
     moveDir: 'RIGHT',
     moveOn: 'SMOKE'
@@ -391,8 +391,8 @@ const items = {
   11: {
     name: 'sign',
     img: 'welcomeSign',
-    description: '_____The sign reads: ______"Welcome to" ____"Lobotomy Manor."                             But I\'m not at Lobotomy Manor!                   I\'m at Birthday Castle... right?' ,
-    itemListDescription: 'Lobotomy Manor? Boy does this sign give me the creeps!',
+    description: '_____The sign reads: ______"Welcome to" ____"Lobotomy Manor."                             But I\'m not at Lobotomy Manor!!                   I\'m at Birthday Castle... right?' ,
+    itemListDescription: 'Lobotomy Manor? Boy does this sign give me the creeps!!',
     position: {
       left: 44,
       top: 36,
@@ -404,7 +404,7 @@ const items = {
     name: 'frying pan',
     img: 'fryingPan',
     description: 'A commercial for a frying pan plays quietly in the background.',
-    itemListDescription: 'Congratulations. You are the proud owner of a shiney, new frying pan',
+    itemListDescription: 'Congratulations. You are the proud owner of a shiny, new frying pan',
     position: {
       left: 71,
       top: 20,
@@ -464,7 +464,7 @@ const items = {
   19: {
     name: 'mo disk',
     img: 'floppy',
-    description: 'Congratualtions, you have found this game\'s MO disk. Every game has one, and you found this game\'s. That\'s awesome. Some games have more than one mo disk, but that\'s less common. Most games have exactly one.',
+    description: 'Congratulations, you have found this game\'s MO disk. Every game has one, and you found this game\'s. That\'s awesome. Some games have more than one mo disk, but that\'s less common. Most games have exactly one.',
     position: {
       left: 58,
       top: 65,
@@ -493,7 +493,7 @@ const scenery = {
   },
   1: {
     name: 'book',
-    description: 'It\'s an ancient tome. It seems that no one has disturbed its pages for centuries.',
+    description: 'It\'s the famous book by H. Saul Caesein, “Protocol for the Success Lover." I've always wanted to read this one.',
     startPosition: {
       left: 21,
       top: 62,
@@ -501,7 +501,7 @@ const scenery = {
       height: 6
     },
     contains: [5],
-    openText: 'The book is opened and examined. A rectangular hole has been cut out of the inside of the book.'
+    openText: '  "CHAPTER ONE: FORGET ALL PRIOR MISGIVINGS."  Huh, a rectangular hole has been cut out of the inside of the book.  You are disconcerted to also discover a steaming residue of unknown origin staining the pages.'
   },
   2: {
     img: 'jasonHidden',
@@ -577,7 +577,7 @@ const scenery = {
     img: 'santos',
     description: 'It\'s Santos. If only you could get past him, you might be able to collect some more useful items.',
     speakTexts: [
-      '"Yooo, get this. This dude over there says he\'s a fan of mega man but he\'s only play 3 out of the original 6 of them. Or at least only beaten 3"',
+      '"Yooo, get this. This dude over there says he\'s a fan of Mega Man but he\'s only play 3 out of the original 6 of them. Or at least only beaten 3"',
       '"This party\'s kinda random right?"',
       '"Don\'t worry about me. I can literally sleep anywhere I don\'t care. I literally don\'t care I can sleep anywhere. Like it doesn\'t matter. It literally doesn\'t matter. I know that sounds crazy right? I don\'t know. I guess it\'s basically my super power. Like how random would that be, if your superpower was just to be able to sleep anywhere. But like literally I think that would be mine. Either that or drinking tequila without flinching. Who do you know here again?"',
       '"Who\'s Scott? ohhhhh! You mean Scott. Yeah, I know him"'
@@ -700,7 +700,7 @@ const scenery = {
   16: {
     name: 'computer',
     img: 'computer',
-    description: 'You laugh uncontrolably at an out-of-place computer sitting in this hallway. You nearly fall down, and can feel your bag tear a little bit as a result. Unfortunately, it won\'t boot up.',
+    description: 'You laugh uncontrollably at an out-of-place computer sitting in this hallway. You nearly fall down, and can feel your bag tear a little bit as a result. Unfortunately, it won\'t boot up.',
     startPosition: {
       left: 72,
       top: 73,
@@ -718,7 +718,7 @@ const scenery = {
   17: {
     name: 'locker door',
     img: 'lockerDoor',
-    description: 'Succumbing to your unquenchable thirst for destuction, you decide you\'d rather break into one of these lockers with a concussive blow than ask Jason to open it for you. This locker might open if had something to violently hit it with?',
+    description: 'Succumbing to your unquenchable thirst for destruction, you decide you\'d rather break into one of these lockers with a concussive blow than ask Jason to open it for you. This locker might open if had something to violently hit it with?',
     startPosition: {
       left: 91,
       top: 0,
@@ -758,7 +758,7 @@ const scenery = {
 const rooms = {
   0: {
     img: 'room0',
-    description: 'It\'s the entrance to Birthay Castle. You can faintly hear the sound of several full grown adults chanting inside.',
+    description: 'It\'s the entrance to Birthday Castle. You can faintly hear the sound of several full grown adults chanting inside.',
     doors: [0, 15],
     items: [0],
     scenery: [0]
@@ -767,7 +767,7 @@ const rooms = {
     img: 'room1',
     music: 'spreadsheet-man.mp3',
     description: 'The lobby of Birthday Castle',
-    initialDescription: 'A man stumbles toward you. "Oh shit is that Scott?" you wonder as you pull yourself through the half-ajar door. "Why am I not shocked to find him here..."',
+    initialDescription: 'A man stumbles toward you. "Oh shit, is that Scott?" you wonder as you pull yourself through the half-ajar door. "Why am I not shocked to find him here..."',
     doors: [1, 2, 3],
     items: [11, 3, 4, 10],
     scenery: [] 
@@ -809,7 +809,7 @@ const rooms = {
   },
   7: {
     img: 'room7',
-    description: 'You are delighted to find yourself outside of a friendly-looking pub resaurant. Though it seems the surrounding area is overrun with some kind of bulbous green gunk.',
+    description: 'You are delighted to find yourself outside of a friendly-looking pub restaurant. Though it seems the surrounding area is overrun with some kind of bulbous green gunk.',
     doors: [12, 14],
     items: [14],
     scenery: [3, 8] 
@@ -823,7 +823,7 @@ const rooms = {
   },
   9: {
     img: 'beerman',
-    description: 'You completey blew it. You tried to eat one of those magic 8 balls and it made you die.',
+    description: 'You completely blew it. You tried to eat one of those magic 8 balls and it made you die.',
     gameOver: true,
     doors: [],
     items: [],
@@ -831,7 +831,7 @@ const rooms = {
   },
   10: {
     img: 'bed',
-    description: "You take an aggressive pull out of the bong and feel nothing. Nothing for a while, really. But after a few minutes it starts to kick in and you start to feel funny. You'd never smoked weed before, so you didn't really know what to expect. Anyway, days go by and you don't stop feeling high, it just gets more and more intense. You become convinced that the weed was laced with something, except you saw other people take hits from the same stash and they were completely fine. You wonder if Scott and Santos are drug dealers who conspired against you to get you high. No matter. The feeling excalates. You begin to have an out of body experience. It's been almost a week now, and you are no longer at the castle. You're home, or at least some place that looks like home. You have no recollection of leaving the castle. Has it been weeks, months, years? All of your friends know  you are high. They must. Next thing you know, you're on a hospital bed. Everyone you know is there, giving you fist bumps and crying tears of joy. Doug is in the corner, staring at your with a warm, fatherly smirk. \"You did it, man\", he says. You die.",
+    description: "You take an aggressive pull out of the bong and feel nothing. Nothing for a while, really. But after a few minutes it starts to kick in and you start to feel funny. You'd never smoked weed before, so you didn't really know what to expect. Anyway, days go by and you don't stop feeling high, it just gets more and more intense. You become convinced that the weed was laced with something, except you saw other people take hits from the same stash and they were completely fine. You wonder if Scott and Santos are drug dealers who conspired against you to get you high. No matter. The feeling escalates. You begin to have an out of body experience. It's been almost a week now, and you are no longer at the castle. You're home, or at least some place that looks like home. You have no recollection of leaving the castle. Has it been weeks, months, years? All of your friends know  you are high. They must. Next thing you know, you're on a hospital bed. Everyone you know is there, giving you fist bumps and crying tears of joy. Doug is in the corner, staring at your with a warm, fatherly smirk. \"You did it, man\", he says. You die.",
     gameOver: true,
     doors: [],
     items: [],
@@ -854,7 +854,7 @@ const rooms = {
   },
   13: {
     video: 'slam-city.mp4',
-    description: 'An uplifting video emboldens your with newfound confidence.',
+    description: 'An uplifting video emboldens you with newfound confidence.',
     doors: [13],
     items: [],
     scenery: [] 
@@ -884,6 +884,7 @@ const rooms = {
   17: {
     img: 'robLarge',
     description: "You begin to feel headstrong, as though you could take on anyone, from studying the remarkable image in this locker. Oh, looks like there is a poem underneath! It says: Opaque, pale cakes of fermented lard, 40 gallon drum of butter posted up in my yard. Smelling like oil for the rest of my life, air's so dank hard to cut with a knife.  Chubby rain, vacuoles of pain stifling my brain. Ludicrous lipid levels compressing my lid, rendering down fat from a P.I.G. pig.  Hot skulls baking in the summer heat; basted onion heads filled with day old bread.  Glazed doughnut & a bottle of anything,  lipid rivers in the sewer lead to Wendy's and Burger King. Hey Alopecia, nice ta meet ya. I take a ride to the hairpiece store, Can't flip my wig proper no more. Hollow-tipped biological slugs hopping in a vat of beer, rest in piece to a shelled bug.  Mayonnaise on my mind, oil on my bread, Cold cut hypnosis, olive loaf's starting to own me. Now I'm feeling lonely without fried bologna.          -RH",
+    music: 'up-in-da-club.mp3',
     doors: [18],
     items: [],
     scenery: [] 
@@ -965,8 +966,8 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 0,
-  items: [],
+  room: 12,
+  items: [12],
   page: 0,
   bagLevel: 0
 };
