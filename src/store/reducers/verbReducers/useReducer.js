@@ -20,6 +20,15 @@ const useReducer = object => state => {
       updateValue(`playerState.items`)(items => items.filter(id => id !== state.playerState.using)),
       clearValue('playerState.using')(),
     )(state);
+  } else if (state.playerState.using === object.activeOn) {
+    return compose(
+      withText(object.activeText),
+      updateValue('gameState.flags')(flags => {
+        flags.add(object.activeFlag);
+        return flags;
+      }),
+      clearValue('playerState.using')(),
+    )(state);
   }
 
   return compose(

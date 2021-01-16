@@ -57,8 +57,12 @@ import computer from './computer.png';
 import lockerDoor from './locker-door.png';
 import robSmall from './rob-small.png';
 import robLarge from './rob-large.png';
+import monitor from './monitor.png';
+import pumpkin from './pumpkin.png';
 
 export default {
+  pumpkin,
+  monitor,
   robSmall,
   robLarge,
   lockerDoor,

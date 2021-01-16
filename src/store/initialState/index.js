@@ -707,6 +707,13 @@ const scenery = {
       width: 24,
       height: 26
     },
+    activeOn: 19,
+    activeText: 'You insert the MO disk into the computer, and it boots up. Your heart pounds with anticipation as you prepare to visit your all-time favorite webpage. You feel the room shake with each keystroke - www.ebaumsworld.com___ /____________ jetsfumble.',
+    activeFlag: 'COMPUTER',
+    movesTo: 18,
+    moveDir: 'FORWARD',
+    moveOn: 'LOOK'
+
   },
   17: {
     name: 'locker door',
@@ -735,6 +742,16 @@ const scenery = {
     movesTo: 17,
     moveDir: 'FORWARD',
     moveOn: 'LOOK',
+  },
+  19: {
+    name: 'monitor',
+    img: 'monitor',
+    startPosition: {
+      left: 0,
+      top: 0,
+      width: 112,
+      height: 112
+    }
   },
 };
 
@@ -871,9 +888,17 @@ const rooms = {
     items: [],
     scenery: [] 
   },
+  18: {
+    video: 'jetsFumble.mp4',
+    description: 'Hell yeah. That\'s some good fumbling. Gin. Love to see a good fumble ya hear. Gin. Gin. I like it when the Jets Fumble! I need gin.',
+    doors: [12],
+    items: [],
+    scenery: [19] 
+  },
 };
 
 const images = {
+  monitor: null,
   pie: null,
   justin: null,
   park: null,
@@ -887,6 +912,7 @@ const images = {
   alphaDark: null,
   alphaLight: null,
   border: null,
+  pumpkin: null,
   cursor: null,
   door1: null,
   door2: null,
@@ -939,8 +965,8 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 12,
-  items: [12],
+  room: 0,
+  items: [],
   page: 0,
   bagLevel: 0
 };
