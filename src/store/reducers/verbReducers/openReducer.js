@@ -26,7 +26,10 @@ const sceneryReducer = scenery => {
     return keepState();
   }
 
-  return setValue('playerState.examining')(scenery.id);
+  return compose(
+    setValue('playerState.examining')(scenery.id),
+    withText(scenery.openText)
+  );
 };
 
 const openReducer = object => {
