@@ -245,6 +245,15 @@ const doors = {
     dest: 0,
     state: 'OPEN'
   },
+  17: {
+    mapPosition: {
+      x: 1,
+      y: 4
+    },
+    dir: 'BACK',
+    dest: 7,
+    state: 'OPEN'
+  },
 };
 
 const items = {
@@ -597,7 +606,7 @@ const scenery = {
       width: 11,
       height: 13
     },
-    movesTo: 13,
+    movesTo: 16,
     moveDir: 'FORWARD',
     moveOn: 'LOOK',
   },
@@ -655,6 +664,20 @@ const scenery = {
     ],
     speakIndex: 0,
     contains: [18, 18, 18, 16, 18, 18]
+  },
+  15: {
+    name: 'jason',
+    description: 'This muse be Jason. You learned about him. He is totally, unmistakably jacked.',
+    startPosition: {
+      left: 25,
+      top: 13,
+      width: 51,
+      height: 92
+    },
+    speakTexts: [
+      '"I am the civilian you choose to meet. The continuity of the species depends on your ability to choose. Will you join me? Locker rentals are free. Execute wisely. Woce."',
+    ],
+    speakIndex: 0
   },
 };
 
@@ -751,9 +774,9 @@ const rooms = {
   12: {
     img: 'room8',
     description: 'You find yourself in a cool lockerroom. A wonderful-smelling man greets you as you walk in.',
-    doors: [],
+    doors: [17],
     items: [],
-    scenery: [] 
+    scenery: [15] 
   },
   13: {
     video: 'slam-city.mp4',
@@ -776,7 +799,14 @@ const rooms = {
     doors: [11],
     items: [],
     scenery: [12, 13, 14] 
-  }
+  },
+  16: {
+    video: 'buckner.mp4',
+    description: 'A fun, funny video is on display here. But you get the horrible feeling that you\'ve traveled back in time, or to some alternate reality.',
+    doors: [13],
+    items: [],
+    scenery: [] 
+  },
 };
 
 const images = {
@@ -840,8 +870,8 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 15,
-  items: [15],
+  room: 12,
+  items: [],
   page: 0,
   bagLevel: 0
 };
