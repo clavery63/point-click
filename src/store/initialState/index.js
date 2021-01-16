@@ -254,6 +254,15 @@ const doors = {
     dest: 7,
     state: 'OPEN'
   },
+  18: {
+    mapPosition: {
+      x: 2,
+      y: 4
+    },
+    dir: 'BACK',
+    dest: 12,
+    state: 'OPEN'
+  },
 };
 
 const items = {
@@ -441,11 +450,11 @@ const items = {
     }
   },
   16: {
-    name: 'good gin',
+    name: 'cold gin',
     description: 'Your mouth waters just thinking about this high-quality gin.',
   },
   17: {
-    name: 'bad gin',
+    name: 'warm gin',
     description: 'Real bottom-of-the-barrel stuff. But what do you care? It\'s gin, isn\'t it?',
   },
   18: {
@@ -676,7 +685,7 @@ const scenery = {
   },
   15: {
     name: 'jason',
-    description: 'This muse be Jason. You learned about him. He is totally, unmistakably jacked.',
+    description: 'This must be Jason. You learned about him. He is totally, unmistakably jacked.',
     startPosition: {
       left: 25,
       top: 13,
@@ -698,6 +707,34 @@ const scenery = {
       width: 24,
       height: 26
     },
+  },
+  17: {
+    name: 'locker door',
+    img: 'lockerDoor',
+    description: 'Succumbing to your unquenchable thirst for destuction, you decide you\'d rather break into one of these lockers with a concussive blow than ask Jason to open it for you. This locker might open if had something to violently hit it with?',
+    startPosition: {
+      left: 91,
+      top: 0,
+      width: 20,
+      height: 69
+    },
+    onHit: 'Youch! That was a good thought, but you weren\'t able to open up the damn door. You\'ll need something better-suited to bludgeoning.',
+    vanishOn: 12,
+    vanishText: '"Blammo!" The damn door opened because you smacked it with a fucking frying pan. Nice fucking work.'
+  },
+  18: {
+    name: 'rob small',
+    img: 'robSmall',
+    description: 'An alluring image',
+    startPosition: {
+      left: 93,
+      top: 15,
+      width: 16,
+      height: 16
+    },
+    movesTo: 17,
+    moveDir: 'FORWARD',
+    moveOn: 'LOOK',
   },
 };
 
@@ -793,10 +830,10 @@ const rooms = {
   },
   12: {
     img: 'room8',
-    description: 'You find yourself in a cool lockerroom. A wonderful-smelling man greets you as you walk in.',
+    description: 'You find yourself in a cool locker room. A wonderful-smelling man greets you as you walk in.',
     doors: [17],
     items: [],
-    scenery: [15] 
+    scenery: [18, 15, 17] 
   },
   13: {
     video: 'slam-city.mp4',
@@ -827,6 +864,13 @@ const rooms = {
     items: [],
     scenery: [] 
   },
+  17: {
+    img: 'robLarge',
+    description: "You begin to feel headstrong, as though you could take on anyone, from studying the remarkable image in this locker. Oh, looks like there is a poem underneath! It says: Opaque, pale cakes of fermented lard, 40 gallon drum of butter posted up in my yard. Smelling like oil for the rest of my life, air's so dank hard to cut with a knife.  Chubby rain, vacuoles of pain stifling my brain. Ludicrous lipid levels compressing my lid, rendering down fat from a P.I.G. pig.  Hot skulls baking in the summer heat; basted onion heads filled with day old bread.  Glazed doughnut & a bottle of anything,  lipid rivers in the sewer lead to Wendy's and Burger King. Hey Alopecia, nice ta meet ya. I take a ride to the hairpiece store, Can't flip my wig proper no more. Hollow-tipped biological slugs hopping in a vat of beer, rest in piece to a shelled bug.  Mayonnaise on my mind, oil on my bread, Cold cut hypnosis, olive loaf's starting to own me. Now I'm feeling lonely without fried bologna.          -RH",
+    doors: [18],
+    items: [],
+    scenery: [] 
+  },
 };
 
 const images = {
@@ -852,6 +896,8 @@ const images = {
   door6: null,
   door7: null,
   door8: null,
+  robSmall: null,
+  robLarge: null,
   eightBallSmall: null,
   eightBallLarge: null,
   fryingPan: null,
@@ -885,15 +931,16 @@ const images = {
   lockpick: null,
   bed: null,
   fridgeSmall: null,
-  fridgeLarge: null
+  fridgeLarge: null,
+  lockerDoor: null
 };
 
 const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 4,
-  items: [],
+  room: 12,
+  items: [12],
   page: 0,
   bagLevel: 0
 };

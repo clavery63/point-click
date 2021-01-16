@@ -54,8 +54,14 @@ import justin from './justin.png';
 import pie from './pie.png';
 import floppy from './floppy.png';
 import computer from './computer.png';
+import lockerDoor from './locker-door.png';
+import robSmall from './rob-small.png';
+import robLarge from './rob-large.png';
 
 export default {
+  robSmall,
+  robLarge,
+  lockerDoor,
   floppy,
   computer,
   pie,
