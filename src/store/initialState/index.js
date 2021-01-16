@@ -766,6 +766,16 @@ const scenery = {
     },
     eatText: 'You whip out a knife and fork, and cut off the juiciest part of the pumpkin you can find. You lick your lips as it slides down your gullet. No way you can eat the whole thing though.'
   },
+  21: {
+    name: 'malone',
+    img: 'malone',
+    startPosition: {
+      left: 88,
+      top: 35,
+      width: 16,
+      height: 16
+    },
+  },
 };
 
 const rooms = {
@@ -912,6 +922,7 @@ const rooms = {
 };
 
 const images = {
+  ginAndSoda: null,
   monitor: null,
   pie: null,
   justin: null,
@@ -972,7 +983,8 @@ const images = {
   bed: null,
   fridgeSmall: null,
   fridgeLarge: null,
-  lockerDoor: null
+  lockerDoor: null,
+  malone: null,
 };
 
 const playerState = {

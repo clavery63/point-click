@@ -39,7 +39,7 @@ const dispatchRoom = (action$, { dest }, state) => {
   }
 
   const gameOverAudioType = (room.gameOver || room.music) ? 'PLAY_MUSIC' : null;
-  const fileName = room.music || 'puppets.m4a';
+  const fileName = room.music || 'puppets.mp3';
   return concat(
     of(({ type: gameOverAudioType, payload: { fileName }})),
     runText$(action$)(room.initialDescription || room.description),
