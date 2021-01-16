@@ -754,6 +754,18 @@ const scenery = {
       height: 112
     }
   },
+  20: {
+    name: 'pumpkin',
+    img: 'pumpkin',
+    description: 'You spy a comforting sight: a luscious gourd in the moonlight. Ahh, the crisp flesh of a fresh white pumpkin. Wait a minute....Oh no!! It\'s something foul!! The pumpkin has been hollowed. Someone, or some thing, has been using this for "storage." Every fiber is completely soaked with urine. You shudder with disapproval.  It\'s been "bleached."',
+    startPosition: {
+      left: 88,
+      top: 35,
+      width: 16,
+      height: 16
+    },
+    eatText: 'You whip out a knife and fork, and cut off the juiciest part of the pumpkin you can find. You lick your lips as it slides down your gullet. No way you can eat the whole thing though.'
+  },
 };
 
 const rooms = {
@@ -873,7 +885,7 @@ const rooms = {
     description: 'Remember this park? It\'s kind of nice.',
     doors: [11],
     items: [],
-    scenery: [12, 13, 14] 
+    scenery: [12, 13, 14, 20] 
   },
   16: {
     video: 'buckner.mp4',
@@ -967,8 +979,8 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 12,
-  items: [12],
+  room: 15,
+  items: [15],
   page: 0,
   bagLevel: 0
 };

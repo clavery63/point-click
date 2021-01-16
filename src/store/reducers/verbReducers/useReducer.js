@@ -36,6 +36,12 @@ const useReducer = object => state => {
       }),
       clearValue('playerState.using')(),
     )(state);
+  } else if (state.playerState.using === 'BAG' && object.name === 'pumpkin') {
+    return compose(
+      clearValue('playerState.using')(),
+      withText('Seeing that this pumpkin has already been "marked" as a safe vessel for storage, you hurriedly collapse the liquid contents from your bag into the gourd\'s saturated depths.  You breathe an exasperated sigh of relief.  Your bag is once again empty.'),
+      setValue('playerState.bagLevel')(0)
+      )(state);
   }
 
   return compose(

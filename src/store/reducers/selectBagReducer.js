@@ -1,4 +1,5 @@
-import { withText } from './utils';
+import { compose } from 'redux';
+import { withText, setValue } from './utils';
 
 const getText = bagLevel => {
   if (bagLevel < 2) {
@@ -21,10 +22,19 @@ const getText = bagLevel => {
 const defaultReducer = () => withText('That is not something you can do with your bag.');
 const lookReducer = bagLevel => withText(getText(bagLevel));
 
+const useReducer = () => {
+  return compose(
+    withText('So you\'ve decided to use your bag... What would you like to use it on?'),
+    setValue('playerState.using')('BAG')
+  );
+};
+
 const getReducer = verb => {
   switch (verb) {
   case 'LOOK':
     return lookReducer;
+  case 'USE':
+    return useReducer;
   default:
     return defaultReducer;
   }

@@ -10,6 +10,10 @@ const eatReducer = object => state => {
     })(state);
   }
 
+  if (object.eatText) {
+    return withText(object.eatText)(state);
+  }
+
   if (!object.onEat) {
     return withText('Don\'t eat that')(state);
   }
