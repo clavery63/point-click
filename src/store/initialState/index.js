@@ -770,10 +770,30 @@ const scenery = {
     name: 'malone',
     img: 'malone',
     startPosition: {
+      left: 8,
+      top: 34,
+      width: 43,
+      height: 66
+    },
+  },
+  22: {
+    name: 'badGin',
+    img: 'ginAndSoda',
+    startPosition: {
       left: 88,
+      top: 95,
+      width: 8,
+      height: 13
+    },
+  },
+  23: {
+    name: 'goodGin',
+    img: 'ginAndSoda',
+    startPosition: {
+      left: 78,
       top: 35,
-      width: 16,
-      height: 16
+      width: 8,
+      height: 13
     },
   },
 };
@@ -781,6 +801,7 @@ const scenery = {
 const rooms = {
   0: {
     img: 'room0',
+    music: 'outdoor-ambience.mp3',
     description: 'It\'s the entrance to Birthday Castle. You can faintly hear the sound of several full grown adults chanting inside.',
     doors: [0, 15],
     items: [0],
@@ -818,6 +839,7 @@ const rooms = {
   },
   5: {
     img: 'room5',
+    music: 'xfiles.mp3',
     description: 'Why it\'s simply Redd\'s! For some reason you seem to have entered from the back.',
     doors: [12],
     items: [12, 13],
@@ -825,13 +847,15 @@ const rooms = {
   },
   6: {
     img: 'room6',
+    music: 'crummy-roads.mp3',
     description: 'This place looks familiar. It\'s some place you haven\'t been in a long time.',
     doors: [12],
     items: [],
-    scenery: [] 
+    scenery: [21, 22] 
   },
   7: {
     img: 'room7',
+    music: 'coldgin.mp3',
     description: 'You are delighted to find yourself outside of a friendly-looking pub restaurant. Though it seems the surrounding area is overrun with some kind of bulbous green gunk.',
     doors: [12, 14],
     items: [14],
@@ -870,6 +894,7 @@ const rooms = {
   },
   12: {
     img: 'room8',
+    music: 'blinded-by-the-light.mp3',
     description: 'You find yourself in a cool locker room. A wonderful-smelling man greets you as you walk in.',
     doors: [17],
     items: [],
@@ -891,6 +916,7 @@ const rooms = {
   },
   15: {
     img: 'park',
+    music: 'cliffside.mp3',
     initialDescription: 'You find yourself in a serene park.',
     description: 'Remember this park? It\'s kind of nice.',
     doors: [11],
@@ -914,6 +940,20 @@ const rooms = {
   },
   18: {
     video: 'jetsFumble.mp4',
+    description: 'Hell yeah. That\'s some good fumbling. Gin. Love to see a good fumble ya hear. Gin. Gin. I like it when the Jets Fumble! I need gin.',
+    doors: [12],
+    items: [],
+    scenery: [19] 
+  },
+  19: {
+    video: 'good-ending.mp4',
+    description: 'Hell yeah. That\'s some good fumbling. Gin. Love to see a good fumble ya hear. Gin. Gin. I like it when the Jets Fumble! I need gin.',
+    doors: [12],
+    items: [],
+    scenery: [19] 
+  },
+  19: {
+    video: 'bad-ending.mp4',
     description: 'Hell yeah. That\'s some good fumbling. Gin. Love to see a good fumble ya hear. Gin. Gin. I like it when the Jets Fumble! I need gin.',
     doors: [12],
     items: [],
@@ -991,8 +1031,8 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 15,
-  items: [15],
+  room: 6,
+  items: [],
   page: 0,
   bagLevel: 0
 };

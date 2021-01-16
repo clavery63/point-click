@@ -60,7 +60,7 @@ import robLarge from './rob-large.png';
 import monitor from './monitor.png';
 import pumpkin from './pumpkin.png';
 import malone from './malone.png';
-import ginAndSoda from './ginAndSoda.png';
+import ginAndSoda from './gin-and-soda.png';
 
 export default {
   ginAndSoda,

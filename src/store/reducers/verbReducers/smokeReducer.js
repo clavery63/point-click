@@ -10,6 +10,10 @@ const smokeReducer = object => state => {
     })(state);
   }
 
+  if (object.name === 'garfield') {
+    return withText('Smoking Garfiled is illegal in this state')(state);
+  }
+
   if (!object.onEat) {
     return withText(`Smoking ${object.name} simply isn't going to work. It's too logistically difficult.`)(state);
   }
