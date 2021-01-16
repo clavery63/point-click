@@ -16,7 +16,7 @@ const withImages = (gameState, collection, keys = ['img']) => id => {
 const mapStateToProps = ({ gameState, playerState }) => {
   const { images, rooms } = gameState;
   const { room } = playerState;
-  const { img, doors, items, scenery } = rooms[room];
+  const { img, doors, items, scenery, video } = rooms[room];
   const visibleDoors = doors.filter(id => {
     return !!(gameState.doors[id].openImg || gameState.doors[id].closedImg);
   });
@@ -32,7 +32,8 @@ const mapStateToProps = ({ gameState, playerState }) => {
     items: items.map(withImages(gameState, 'items')),
     scenery: scenery.map(withImages(gameState, 'scenery')),
     borderImg: images.border,
-    roomImg: images[img]
+    roomImg: images[img],
+    video
   };
 };
 

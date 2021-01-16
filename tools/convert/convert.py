@@ -13,10 +13,10 @@ import numpy
 # other image
 SOURCE_TOP = 0
 SOURCE_LEFT = 0
-SOURCE_HEIGHT = 987
-SOURCE_WIDTH = 987
-DEST_HEIGHT = 21
-DEST_WIDTH = 21
+SOURCE_HEIGHT = 896
+SOURCE_WIDTH = 896
+DEST_HEIGHT = 112
+DEST_WIDTH = 112
 
 
 ## menu
@@ -58,6 +58,6 @@ def convert(filename):
 
 # for i, filename in enumerate(sorted(os.listdir('source'))):
 #     print(filename)
-convert('bong.png')
+convert('bed.png')
 
 

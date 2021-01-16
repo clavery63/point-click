@@ -517,7 +517,46 @@ const scenery = {
       width: 34,
       height: 42
     }
-  }
+  },
+  9: {
+    name: 'tv1',
+    img: 'skull',
+    startPosition: {
+      left: 56,
+      top: 20,
+      width: 14,
+      height: 13
+    },
+    movesTo: 13,
+    moveDir: 'FORWARD',
+    moveOn: 'LOOK',
+  },
+  10: {
+    name: 'tv2',
+    img: 'skull',
+    startPosition: {
+      left: 45,
+      top: 22,
+      width: 11,
+      height: 13
+    },
+    movesTo: 13,
+    moveDir: 'FORWARD',
+    moveOn: 'LOOK',
+  },
+  11: {
+    name: 'tv3',
+    img: 'skull',
+    startPosition: {
+      left: 12,
+      top: 31,
+      width: 15,
+      height: 9
+    },
+    movesTo: 13,
+    moveDir: 'FORWARD',
+    moveOn: 'LOOK',
+  },
 };
 
 const rooms = {
@@ -562,7 +601,7 @@ const rooms = {
     description: 'Why it\'s simply Redd\'s! For some reason you seem to have entered from the back.',
     doors: [12],
     items: [12, 13],
-    scenery: [4, 6] 
+    scenery: [4, 6, 9, 10, 11] 
   },
   6: {
     img: 'room6',
@@ -594,8 +633,8 @@ const rooms = {
     scenery: [] 
   },
   10: {
-    img: 'beerman',
-    description: "You take an aggressive pull out of the bong and feel nothing. Nothing for a while, really. But after a few minutes it starts to kick in and you start to feel funny. You'd never smoked weed before, so you didn't really know what to expect. Anyway, days go by and you don't stop feeling high, it just gets more and more intense. You become convinced that the weed was laced with something, except you saw other people take hits from teh same stash and they were completely fine. You wonder if Scott and Santos are drug dealers who conspired against you to get you high. No matter. The feeling excalates. You begin to have an out of body experience. It's been almost a week now, and you are no longer at the castle. You're home, or at least some place that looks like home. You have no recollection of leaving the castle. Has it been weeks, months, years? All of your friends know  you are high. They must. Next thing you know, you're on a hospital bed. Everyone you know is there, giving you fist bumps and crying tears of joy. Doug is in the corner, staring at your with a warm, fatherly smirk. \"You did it, man\", he says. You die.",
+    img: 'bed',
+    description: "You take an aggressive pull out of the bong and feel nothing. Nothing for a while, really. But after a few minutes it starts to kick in and you start to feel funny. You'd never smoked weed before, so you didn't really know what to expect. Anyway, days go by and you don't stop feeling high, it just gets more and more intense. You become convinced that the weed was laced with something, except you saw other people take hits from the same stash and they were completely fine. You wonder if Scott and Santos are drug dealers who conspired against you to get you high. No matter. The feeling excalates. You begin to have an out of body experience. It's been almost a week now, and you are no longer at the castle. You're home, or at least some place that looks like home. You have no recollection of leaving the castle. Has it been weeks, months, years? All of your friends know  you are high. They must. Next thing you know, you're on a hospital bed. Everyone you know is there, giving you fist bumps and crying tears of joy. Doug is in the corner, staring at your with a warm, fatherly smirk. \"You did it, man\", he says. You die.",
     gameOver: true,
     doors: [],
     items: [],
@@ -613,6 +652,13 @@ const rooms = {
     img: 'room8',
     description: 'You find yourself in a cool lockerroom. A wonderful-smelling man greets you as you walk in.',
     doors: [],
+    items: [],
+    scenery: [] 
+  },
+  13: {
+    video: 'slam-city.mp4',
+    description: 'An uplifting video emboldens your with newfound confidence.',
+    doors: [13],
     items: [],
     scenery: [] 
   }
@@ -666,14 +712,15 @@ const images = {
   bottle: null,
   santos: null,
   bong: null,
-  lockpick: null
+  lockpick: null,
+  bed: null
 };
 
 const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 0,
+  room: 5,
   items: [],
   page: 0,
   bagLevel: 0

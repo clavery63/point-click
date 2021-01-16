@@ -46,9 +46,11 @@ import santos from './santos.png';
 import bong from './bong.png';
 import lockpick from './lockpick.png';
 import motorcycle from './motorcycle.png';
+import bed from './bed.png';
 
 export default {
   motorcycle,
+  bed,
   bong,
   lockpick,
   santos,
