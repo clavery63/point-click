@@ -160,7 +160,7 @@ const doors = {
   },
   10: {
     dest: 4,
-    dir: 'FORWARD',
+    dir: 'RIGHT',
     mapPosition: {
       x: 4,
       y: 1
@@ -520,7 +520,6 @@ const scenery = {
   },
   9: {
     name: 'tv1',
-    img: 'skull',
     startPosition: {
       left: 56,
       top: 20,
@@ -533,7 +532,6 @@ const scenery = {
   },
   10: {
     name: 'tv2',
-    img: 'skull',
     startPosition: {
       left: 45,
       top: 22,
@@ -546,7 +544,6 @@ const scenery = {
   },
   11: {
     name: 'tv3',
-    img: 'skull',
     startPosition: {
       left: 12,
       top: 31,
@@ -569,6 +566,7 @@ const rooms = {
   },
   1: {
     img: 'room1',
+    music: 'spreadsheet-man.mp3',
     description: 'The lobby of Birthday Castle',
     initialDescription: 'A man stumbles toward you. "Oh shit is that Scott?" you wonder as you pull yourself through the half-ajar door. "Why am I not shocked to find him here..."',
     doors: [1, 2, 3],
@@ -720,7 +718,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 5,
+  room: 0,
   items: [],
   page: 0,
   bagLevel: 0

@@ -38,9 +38,10 @@ const dispatchRoom = (action$, { dest }, state) => {
     return of({ type: 'RUN_TRANSITION', payload: { dest: 11, dir: 'FORWARD', frame: 0 } });
   }
 
-  const gameOverAudioType = room.gameOver ? 'PLAY_MUSIC' : null;
+  const gameOverAudioType = (room.gameOver || room.music) ? 'PLAY_MUSIC' : null;
+  const fileName = room.music || 'puppets.m4a';
   return concat(
-    of(({ type: gameOverAudioType, payload: { fileName: 'puppets.m4a' }})),
+    of(({ type: gameOverAudioType, payload: { fileName }})),
     runText$(action$)(room.initialDescription || room.description),
     of(({ type: 'SET_CURSOR_ENABLED', payload: !room.gameOver }))
   );

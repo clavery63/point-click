@@ -15,9 +15,11 @@ const Video = ({ src }) => {
   }, [src]);
   
   useEffect(() => {
+    document.querySelector('.music-player').pause();
     return () => {
       videoElement.pause();
       videoElement.removeAttribute('src');
+      document.querySelector('.music-player').play();
     }
   }, []);
 
