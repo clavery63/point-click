@@ -771,7 +771,7 @@ const gameState = {
   rooms,
   scenery,
   images,
-  flags: new Set(['GARFIELD'])
+  flags: new Set()
 };
 
 const transition = {
