@@ -807,6 +807,17 @@ const scenery = {
     moveDir: 'UP',
     moveOn: 'EAT',
   },
+  24: {
+    name: 'jukebox',
+    img: 'jukebox',
+    startPosition: {
+      left:0,
+      top: 62,
+      width: 36,
+      height: 50
+    },
+    description: 'Someone used this jukebox to put on the xfiles theme in the bar. now that\'s funny! That\'s just good comedy.'
+  },
 };
 
 const rooms = {
@@ -854,7 +865,7 @@ const rooms = {
     description: 'Why it\'s simply Redd\'s! For some reason you seem to have entered from the back.',
     doors: [12],
     items: [12, 13],
-    scenery: [4, 6, 9, 10, 11] 
+    scenery: [4, 6, 9, 10, 11, 24] 
   },
   6: {
     img: 'room6',
@@ -862,7 +873,7 @@ const rooms = {
     description: 'This place looks familiar. It\'s some place you haven\'t been in a long time.',
     doors: [12],
     items: [],
-    scenery: [21] 
+    scenery: [] 
   },
   7: {
     img: 'room7',
@@ -973,6 +984,7 @@ const rooms = {
 };
 
 const images = {
+  jukebox: null,
   ginAndSoda: null,
   monitor: null,
   pie: null,
@@ -1042,7 +1054,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 0,
+  room: 5,
   items: [],
   page: 0,
   bagLevel: 0

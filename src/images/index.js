@@ -61,8 +61,10 @@ import monitor from './monitor.png';
 import pumpkin from './pumpkin.png';
 import malone from './malone.png';
 import ginAndSoda from './gin-and-soda.png';
+import jukebox from './jukebox.png';
 
 export default {
+  jukebox,
   ginAndSoda,
   malone,
   pumpkin,
