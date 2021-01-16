@@ -493,7 +493,7 @@ const scenery = {
   },
   1: {
     name: 'book',
-    description: 'It\'s the famous book by H. Saul Caesein, “Protocol for the Success Lover." I've always wanted to read this one.',
+    description: 'It\'s the famous book by H. Saul Caesein, “Protocol for the Success Lover." I\'ve always wanted to read this one.',
     startPosition: {
       left: 21,
       top: 62,
@@ -547,6 +547,7 @@ const scenery = {
       'You shake it one more time. "You will have some good luck. I guarantee it," it says.'
     ],
     useIndex: 0,
+    onUseFlag: 'DANSEN',
     startPosition: {
       left: 0,
       top: 0,

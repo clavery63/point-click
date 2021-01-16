@@ -11,7 +11,14 @@ const useReducer = object => state => {
   } else if (object.useTexts) {
     return compose(
       withText(object.useTexts[object.useIndex]),
-      updateValue(`gameState.scenery.${object.id}.useIndex`)(index => (index + 1) % object.useTexts.length)
+      updateValue(`gameState.scenery.${object.id}.useIndex`)(index => (index + 1) % object.useTexts.length),
+      updateValue('gameState.flags')(flags => {
+        if (object.useIndex === object.useTexts.length - 1) {
+          flags.add(object.onUseFlag);
+        }
+        console.log(flags);
+        return flags;
+      }),
     )(state);
   } else if (state.playerState.using === object.vanishOn) {
     return compose(
