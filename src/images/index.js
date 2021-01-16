@@ -49,8 +49,12 @@ import motorcycle from './motorcycle.png';
 import bed from './bed.png';
 import fridgeSmall from './fridge-small.png';
 import fridgeLarge from './fridge-large.png';
+import park from './park.png';
+import justin from './justin.png';
 
 export default {
+  justin,
+  park,
   fridgeSmall,
   fridgeLarge,
   motorcycle,

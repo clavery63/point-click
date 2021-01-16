@@ -87,7 +87,7 @@ const doors = {
     state: 'OPEN'
   },
   6: {
-    dest: 5,
+    dest: 15,
     openImg: 'door4',
     position: {
       left: 49,
@@ -548,7 +548,8 @@ const scenery = {
       top: 64,
       width: 34,
       height: 42
-    }
+    },
+    contains: [/** gin */]
   },
   9: {
     name: 'tv1',
@@ -585,7 +586,35 @@ const scenery = {
     movesTo: 13,
     moveDir: 'FORWARD',
     moveOn: 'LOOK',
-  }
+  },
+  12: {
+    name: 'bench',
+    description: 'It\'s a standard park bench.  You see a message carved in the wood: "STEVE MILLER SUCKS."  The words feel nostalgic, like you\'ve seen them somewhere before.  Hmm...I guess the statement is probably true, but that song Abracadabra isn\'t so bad, right?',
+    startPosition: {
+      left: 3,
+      top: 75,
+      width: 35,
+      height: 20
+    },
+    contains: [],
+  },
+  13: {
+    name: 'justin',
+    img: 'justin',
+    description: 'Justin',
+    speakTexts: [
+      '"Hey Mike!  Happy birthday!  I thought you\'d like a brief escape from all of the unhinged shit going on in the castle, so I brought you to this peaceful place.  Check out the nice waterfowl over there, or "birdbrain" as you\'d say.  Wow...you\'ve collected a lot of torches!  That\'s cool, even though they don\'t serve any functional purpose in this game at all.  Well, keep on picking them up if you want to, just for fun."'
+    ],
+    speakIndex: 0,
+    startPosition: {
+      left: 0,
+      top: 0,
+      width: 112,
+      height: 112
+    },
+    vanishOn: 15,
+    vanishText: 'Thats a great lookine pie! Oh, I will get out of your way'
+  },
 };
 
 const rooms = {
@@ -698,10 +727,20 @@ const rooms = {
     doors: [16],
     items: [],
     scenery: [] 
+  },
+  15: {
+    img: 'park',
+    initialDescription: 'You find yourself in a serene park. Oh! it\'s Justin! Hi Justin!',
+    description: 'Remember this park? It\'s kind of nice.',
+    doors: [11],
+    items: [],
+    scenery: [12, 13] 
   }
 };
 
 const images = {
+  justin: null,
+  park: null,
   motorcycle: null,
   bartender: null,
   beerman: null,
@@ -759,7 +798,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 0,
+  room: 15,
   items: [],
   page: 0,
   bagLevel: 0
