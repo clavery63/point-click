@@ -2,14 +2,20 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import Inventory from './Inventory';
 
+const ITEMS_PER_PAGE = 7;
+
+const getPlayer = state => state.playerState;
 const getExamining = state => state.playerState.examining;
-const getPlayerItems = state => state.playerState.items;
 const getGameItems = state => state.gameState.items;
 const getScenery = state => state.gameState.scenery;
 
 const getItemObjects = createSelector(
-  [getPlayerItems, getGameItems],
-  (playerItems, gameItems) => playerItems.map(id => ({ ...gameItems[id], id }))
+  [getPlayer, getGameItems],
+  ({ items, page }, gameItems) => {
+    return items
+      .map(id => ({ ...gameItems[id], id }))
+      .slice(page * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE + ITEMS_PER_PAGE);
+  }
 );
 
 const getExaminingWithItems = createSelector(

@@ -2,12 +2,14 @@ import React from 'react';
 import { Image, Group } from 'react-konva';
 import MenuLeft from './MenuLeft';
 import MenuCenter from './MenuCenter';
+import MenuRight from './MenuRight';
 
 const Menu = props => {
   const { 
     hasText, 
     dispatchVerb, 
     dispatchDoor, 
+    dispatchPage, 
     currentVerb,
     menuImg,
     menuButtonImg,
@@ -35,6 +37,10 @@ const Menu = props => {
       <MenuCenter
         currentVerb={currentVerb}
         onClick={dispatchVerb} 
+      />
+      <MenuRight
+        onClick={dispatchPage}
+        menuButtonImg={menuButtonImg}
       />
     </Group>
   );

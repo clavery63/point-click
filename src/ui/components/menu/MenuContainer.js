@@ -34,7 +34,8 @@ const mapDispatchToProps = {
   dispatchDoor: id => ({ 
     type: 'SELECT_OBJECT', 
     payload: { id, type: 'doors' } 
-  })
+  }),
+  dispatchPage: dir => ({ type: 'CHANGE_PAGE', payload: dir})
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

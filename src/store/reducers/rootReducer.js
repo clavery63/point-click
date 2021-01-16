@@ -13,6 +13,21 @@ const roomReducer = payload => compose(
   setValue(`gameState.rooms.${payload}.initialDescription`)(null)
 );
 
+const ITEMS_PER_PAGE = 7;
+
+const changePageReducer = payload => state => {
+  const { items, page } = state.playerState;
+  switch (payload) {
+    case 'DOWN':
+      const newPage = Math.min(page + 1, Math.floor((items.length - 1) / ITEMS_PER_PAGE));
+      return setValue('playerState.page')(newPage)(state);
+    case 'UP':
+      return setValue('playerState.page')(Math.max(page - 1, 0))(state);
+    default:
+      return state;
+  }
+};
+
 const reducers = {
   SET_STATE: payload => () => payload,
   SET_TEXT: setValue('text'),
@@ -28,6 +43,7 @@ const reducers = {
   SELECT_ITEM: selectItemReducer,
   START_GAME: startGameReducer,
   SELECT_BAG: selectBagReducer,
+  CHANGE_PAGE: changePageReducer
 };
 
 const rootReducer = (state = {}, { type, payload }) => {
