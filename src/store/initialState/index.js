@@ -775,6 +775,9 @@ const scenery = {
       width: 43,
       height: 66
     },
+    onSpeak: 'Hey buddy, welcome to The Abbey! Norm is in the bathroom, but he\'ll be back soon. You can have this beer if you like, but you look like you\'re craving something else... I only have beer, but if you give me something to mix I could whip you up something else.',
+    speakGood: 'Ah, now that\'s the stuff! I can make you an ice cold gin and soda with this that\'ll go down real smooth!',
+    speakBad: 'Hmm, this gin looks a little funny, but if you really want, I guess I can make you a gin and soda with this...'
   },
   22: {
     name: 'badGin',
@@ -785,16 +788,24 @@ const scenery = {
       width: 8,
       height: 13
     },
+    description: 'You don\'t like the looks of this gin and soda, but there is no turning back now. There\'s no concept of save states in this game, so you might as well just drink it and see what happens.',
+    movesTo: 20,
+    moveDir: 'DOWN',
+    moveOn: 'EAT',
   },
   23: {
     name: 'goodGin',
     img: 'ginAndSoda',
     startPosition: {
       left: 78,
-      top: 35,
+      top: 95,
       width: 8,
       height: 13
     },
+    description: 'Holy crap! The moment has finally arrived! You will finally drink some gin!',
+    movesTo: 19,
+    moveDir: 'UP',
+    moveOn: 'EAT',
   },
 };
 
@@ -851,7 +862,7 @@ const rooms = {
     description: 'This place looks familiar. It\'s some place you haven\'t been in a long time.',
     doors: [12],
     items: [],
-    scenery: [21, 22] 
+    scenery: [21] 
   },
   7: {
     img: 'room7',
@@ -947,17 +958,17 @@ const rooms = {
   },
   19: {
     video: 'good-ending.mp4',
-    description: 'Hell yeah. That\'s some good fumbling. Gin. Love to see a good fumble ya hear. Gin. Gin. I like it when the Jets Fumble! I need gin.',
-    doors: [12],
+    description: 'As you sip on your refreshing beverage, you feel your mania fading. Norm returns from the bathroom and slaps you on the back. With a jolt you have a flash of a memory of falling...a pit...pain...light... but it quickly fades. Better not to focus on that. You\'re comfortable here. In fact you feel you like you could stay here forever, sipping on this delicious gin and tonic. Surrounded by people who know your name...',
+    doors: [],
     items: [],
-    scenery: [19] 
+    scenery: [] 
   },
-  19: {
+  20: {
     video: 'bad-ending.mp4',
-    description: 'Hell yeah. That\'s some good fumbling. Gin. Love to see a good fumble ya hear. Gin. Gin. I like it when the Jets Fumble! I need gin.',
-    doors: [12],
+    description: 'Unfortunately this gin and soda is really not doing the trick. The gin must have been contaminated by sitting in that motorcycle for so long, it\'s really warm and tastes off. If only you could have found some delicious ice cold gin! You feel more sober than ever. Looking at Sam Malone, you remember that he\'s not even real. He\'s a fictional character played by Ted Danson who you\'re pretty sure is not here right now. In fact it occurs to you that nobody is here right now, and "here" isn\'t really anywhere. You look behind you and see only a void. The Abbey is fading away before your eyes. You feel cold. You remember that The Abbey is gone forever, and realize that the only piece of it left is what lives on in your memory. You\'re starting to feel sick looking at this fading simulacrum. Ugly though it may be, you\'d be better off in the real world, living with your memories of good times. It\'s time to stop playing this game and face reality.',
+    doors: [],
     items: [],
-    scenery: [19] 
+    scenery: [] 
   },
 };
 
@@ -1031,7 +1042,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 6,
+  room: 0,
   items: [],
   page: 0,
   bagLevel: 0

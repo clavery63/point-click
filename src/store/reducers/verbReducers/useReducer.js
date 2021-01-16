@@ -2,6 +2,33 @@ import { compose } from 'lodash/fp';
 import { withText, setValue, clearValue, updateValue } from '../utils';
 
 const useReducer = object => state => {
+  if (state.playerState.using === 16 && object.id === 21) {
+    if (!state.gameState.flags.has('GOOD') && !state.gameState.flags.has('BAD')) {
+      state.gameState.flags.add('GOOD');
+  
+      state.gameState.rooms[6].scenery = [21, 23];
+  
+      return compose(
+        withText('You give Sam the ice cold gin.'),
+        clearValue('playerState.using')()
+      )(state);
+    }
+  }
+
+  if (state.playerState.using === 17 && object.id === 21) {
+    if (!state.gameState.flags.has('GOOD') && !state.gameState.flags.has('BAD')) {
+      state.gameState.flags.add('BAD');
+
+      state.gameState.rooms[6].scenery = [21, 22];
+
+      return compose(
+        withText('You give Sam the gin.'),
+        clearValue('playerState.using')()
+      )(state);
+    }
+  }
+
+
   if (state.playerState.using === object.keyId) {
     return compose(
       setValue(`gameState.doors.${object.id}.state`)('CLOSED'),
@@ -14,7 +41,7 @@ const useReducer = object => state => {
       updateValue(`gameState.scenery.${object.id}.useIndex`)(index => (index + 1) % object.useTexts.length),
       updateValue('gameState.flags')(flags => {
         if (object.useIndex === object.useTexts.length - 1) {
-          flags.add(object.onUseFlag);
+          state.gameState.rooms[6].scenery = [21];
         }
         console.log(flags);
         return flags;
