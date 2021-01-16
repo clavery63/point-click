@@ -1054,7 +1054,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 5,
+  room: 0,
   items: [],
   page: 0,
   bagLevel: 0
