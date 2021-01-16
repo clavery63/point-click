@@ -420,6 +420,31 @@ const items = {
     onEat: 'With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.',
     eatEffect: 'GARFIELD'
   },
+  15: {
+    name: 'pie',
+    img: 'pie',
+    description: 'A delicious-looking pie',
+    position: {
+      left: 44,
+      top: 52,
+      width: 68,
+      height: 55
+    },
+    onEat: 'With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.',
+    eatEffect: 'GARFIELD'
+  },
+  16: {
+    name: 'good gin',
+    description: 'Your mouth waters just thinking about this high-quality gin.',
+  },
+  17: {
+    name: 'bad gin',
+    description: 'Real bottom-of-the-barrel stuff. But what do you care? It\'s gin, isn\'t it?',
+  },
+  18: {
+    name: 'hamburgers',
+    description: 'The hamburger. One of the most famous sandwiches of all time. You feel safe knowing you have some of these at your disposal',
+  },
 };
 
 const scenery = {
@@ -542,6 +567,7 @@ const scenery = {
   },
   8: {
     img: 'motorcycle',
+    name: 'motorcycle',
     description: 'This must by one of those poorly-parked motorcycles Valencia Tavern is famous for.',
     startPosition: {
       left: 0,
@@ -549,7 +575,7 @@ const scenery = {
       width: 34,
       height: 42
     },
-    contains: [/** gin */]
+    contains: [17]
   },
   9: {
     name: 'tv1',
@@ -601,7 +627,7 @@ const scenery = {
   13: {
     name: 'justin',
     img: 'justin',
-    description: 'Justin',
+    description: 'Well, would you look at that?! Justin is in the park too, just hanging out with that goose.  You can tell that he\'s pleased to see you.  He seems to be holding an unlit torch in one of his hands.',
     speakTexts: [
       '"Hey Mike!  Happy birthday!  I thought you\'d like a brief escape from all of the unhinged shit going on in the castle, so I brought you to this peaceful place.  Check out the nice waterfowl over there, or "birdbrain" as you\'d say.  Wow...you\'ve collected a lot of torches!  That\'s cool, even though they don\'t serve any functional purpose in this game at all.  Well, keep on picking them up if you want to, just for fun."'
     ],
@@ -613,7 +639,22 @@ const scenery = {
       height: 112
     },
     vanishOn: 15,
-    vanishText: 'Thats a great lookine pie! Oh, I will get out of your way'
+    vanishText: '"Oh, nice.  Thanks.  I was hoping someone would have something to eat.  I brought a bag of grapes with me but ended up giving all of them to that goose over there."'
+  },
+  14: {
+    name: 'goose',
+    description: 'It\'s a beautiful Canada goose.  You watch as it quietly eats grass, occasionally letting out a soft HONK.',
+    startPosition: {
+      left: 72,
+      top: 67,
+      width: 32,
+      height: 40
+    },
+    speakTexts: [
+      '"HONK!"'
+    ],
+    speakIndex: 0,
+    contains: [18, 18, 18, 16, 18, 18]
   },
 };
 
@@ -725,20 +766,21 @@ const rooms = {
     img: 'fridgeLarge',
     description: 'A smattering of items can be found here.',
     doors: [16],
-    items: [],
+    items: [15],
     scenery: [] 
   },
   15: {
     img: 'park',
-    initialDescription: 'You find yourself in a serene park. Oh! it\'s Justin! Hi Justin!',
+    initialDescription: 'You find yourself in a serene park.',
     description: 'Remember this park? It\'s kind of nice.',
     doors: [11],
     items: [],
-    scenery: [12, 13] 
+    scenery: [12, 13, 14] 
   }
 };
 
 const images = {
+  pie: null,
   justin: null,
   park: null,
   motorcycle: null,
@@ -799,7 +841,7 @@ const playerState = {
   using: null,
   examining: null,
   room: 15,
-  items: [],
+  items: [15],
   page: 0,
   bagLevel: 0
 };

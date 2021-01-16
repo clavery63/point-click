@@ -51,8 +51,10 @@ import fridgeSmall from './fridge-small.png';
 import fridgeLarge from './fridge-large.png';
 import park from './park.png';
 import justin from './justin.png';
+import pie from './pie.png';
 
 export default {
+  pie,
   justin,
   park,
   fridgeSmall,
