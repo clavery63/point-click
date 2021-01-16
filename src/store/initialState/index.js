@@ -432,15 +432,13 @@ const items = {
   15: {
     name: 'pie',
     img: 'pie',
-    description: 'A delicious-looking pie',
+    description: 'A delicious-looking pie balances perfectly on its side. Do you really want to disrupt that?',
     position: {
-      left: 44,
-      top: 52,
-      width: 68,
-      height: 55
-    },
-    onEat: 'With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.',
-    eatEffect: 'GARFIELD'
+      left: 28,
+      top: 24,
+      width: 9,
+      height: 9
+    }
   },
   16: {
     name: 'good gin',
@@ -453,6 +451,17 @@ const items = {
   18: {
     name: 'hamburgers',
     description: 'The hamburger. One of the most famous sandwiches of all time. You feel safe knowing you have some of these at your disposal',
+  },
+  19: {
+    name: 'mo disk',
+    img: 'floppy',
+    description: 'Congratualtions, you have found this game\'s MO disk. Every game has one, and you found this game\'s. That\'s awesome. Some games have more than one mo disk, but that\'s less common. Most games have exactly one.',
+    position: {
+      left: 58,
+      top: 65,
+      width: 16,
+      height: 19
+    }
   },
 };
 
@@ -679,6 +688,17 @@ const scenery = {
     ],
     speakIndex: 0
   },
+  16: {
+    name: 'computer',
+    img: 'computer',
+    description: 'You laugh uncontrolably at an out-of-place computer sitting in this hallway. You nearly fall down, and can feel your bag tear a little bit as a result. Unfortunately, it won\'t boot up.',
+    startPosition: {
+      left: 72,
+      top: 73,
+      width: 24,
+      height: 26
+    },
+  },
 };
 
 const rooms = {
@@ -717,7 +737,7 @@ const rooms = {
     description: 'There are more doors here.',
     doors: [7, 8, 9, 11],
     items: [],
-    scenery: [] 
+    scenery: [16] 
   },
   5: {
     img: 'room5',
@@ -789,7 +809,7 @@ const rooms = {
     img: 'fridgeLarge',
     description: 'A smattering of items can be found here.',
     doors: [16],
-    items: [15],
+    items: [15, 19],
     scenery: [] 
   },
   15: {
@@ -846,11 +866,13 @@ const images = {
   room1: null,
   room2: null,
   room3: null,
+  computer: null,
   room4: null,
   room5: null,
   room6: null,
   room7: null,
   room8: null,
+  floppy: null,
   sling: null,
   skull: null,
   sword: null,
@@ -870,7 +892,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 12,
+  room: 4,
   items: [],
   page: 0,
   bagLevel: 0

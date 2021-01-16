@@ -52,8 +52,12 @@ import fridgeLarge from './fridge-large.png';
 import park from './park.png';
 import justin from './justin.png';
 import pie from './pie.png';
+import floppy from './floppy.png';
+import computer from './computer.png';
 
 export default {
+  floppy,
+  computer,
   pie,
   justin,
   park,
