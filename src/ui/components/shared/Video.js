@@ -1,10 +1,9 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 import { Image } from 'react-konva';
 import Konva from 'konva';
 
 const Video = ({ src }) => {
   const imageRef = useRef(null);
-  const [size, setSize] = useState({ width: 50, height: 50 });
 
   // we need to use 'useMemo' here, so we don't create new video elment on any render
   const videoElement = useMemo(() => {
@@ -22,20 +21,6 @@ const Video = ({ src }) => {
       document.querySelector('.music-player').play();
     }
   }, []);
-
-  // when video is loaded, we should read it size
-  useEffect(() => {
-    const onload = function() {
-      setSize({
-        width: videoElement.videoWidth,
-        height: videoElement.videoHeight
-      });
-    };
-    videoElement.addEventListener('loadedmetadata', onload);
-    return () => {
-      videoElement.removeEventListener('loadedmetadata', onload);
-    };
-  }, [videoElement]);
 
   // use Konva.Animation to redraw a layer
   useEffect(() => {

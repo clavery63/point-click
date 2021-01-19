@@ -3,14 +3,14 @@ import { Image } from 'react-konva';
 
 const Item = ({ object, onClick}) => {
   const imgRef = useRef(null);
-  const { position, img } = object;
+  const { position, img, requiresPrecision } = object;
 
   useEffect(() => {
-    if (object.requiresPrecision) {
+    if (requiresPrecision) {
       imgRef.current.cache({ imageSmoothingEnabled: false });
       imgRef.current.drawHitFromCache();
     }
-  }, [imgRef]);
+  }, [imgRef, requiresPrecision]);
 
   return (
     <Image

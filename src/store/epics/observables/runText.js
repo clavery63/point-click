@@ -1,4 +1,4 @@
-import { take, map, takeUntil, mapTo, switchMap, concatMap } from 'rxjs/operators';
+import { take, map, takeUntil, mapTo, concatMap } from 'rxjs/operators';
 import { from, timer, of, concat } from 'rxjs';
 import { chunk, range, last } from 'lodash';
 import { textToLines } from '../util';
