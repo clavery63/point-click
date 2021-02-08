@@ -1,7 +1,7 @@
 import React from 'react';
 import { Group, Image } from 'react-konva';
 
-const MenuRight = ({ onClick, menuButtonImg }) => {
+const MenuRight = ({ onClick, onSaveClick, menuButtonImg }) => {
   return (
     <Group x={170} y={5}>
       <Image
@@ -16,6 +16,13 @@ const MenuRight = ({ onClick, menuButtonImg }) => {
         x={5}
         y={26}
         onClick={() => onClick('DOWN')}
+        image={menuButtonImg}
+      />
+      <Image
+        key={3}
+        x={5}
+        y={58}
+        onClick={onSaveClick}
         image={menuButtonImg}
       />
     </Group>

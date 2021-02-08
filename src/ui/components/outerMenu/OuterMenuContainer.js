@@ -8,7 +8,8 @@ const mapStateToProps = ({ menu }) => {
 };
 
 const mapDispatchToProps = {
-  onStartClick: () => ({ type: 'START_GAME' })
+  onStartClick: () => ({ type: 'START_GAME' }),
+  onLoadClick: () => ({ type: 'LOAD_GAME' })
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OuterMenu);

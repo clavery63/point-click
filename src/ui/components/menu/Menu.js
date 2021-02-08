@@ -9,7 +9,8 @@ const Menu = props => {
     hasText, 
     dispatchVerb, 
     dispatchDoor, 
-    dispatchPage, 
+    dispatchPage,
+    dispatchSave,
     currentVerb,
     menuImg,
     menuButtonImg,
@@ -39,7 +40,8 @@ const Menu = props => {
         onClick={dispatchVerb} 
       />
       <MenuRight
-        onClick={dispatchPage}
+        onPageClick={dispatchPage}
+        onSaveClick={dispatchSave}
         menuButtonImg={menuButtonImg}
       />
     </Group>
