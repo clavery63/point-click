@@ -17,7 +17,8 @@
     "redux-observable": "^1.2.0",
     "reselect": "^4.0.0",
     "rxjs": "^6.5.5",
-    "source-map-explorer": "^2.4.2"
+    "source-map-explorer": "^2.4.2",
+    "typescript": "^4.1.5"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
