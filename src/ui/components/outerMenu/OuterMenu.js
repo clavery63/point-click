@@ -25,7 +25,7 @@ const Unavailable = () => (
 const OuterMenu = ({ menu, onStartClick, onLoadClick }) => {
   if (menu === 'NONE') return null;
 
-  const canStart = window.location.search.indexOf('giantsfumble') > -1;
+  const canStart = true;
   const loadData = !!window.localStorage.getItem(KEY);
 
   return (
