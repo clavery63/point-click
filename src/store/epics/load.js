@@ -34,7 +34,7 @@ const withImages = state => pairs => ({
 });
 
 const loadImages$ = state => {
-  return forkJoin(Object.keys(state.gameState.images).map(key => {
+  return forkJoin(Object.keys(imageFiles).map(key => {
     return image$(imageFiles[key]).pipe(map(image => [key, image]));
   })).pipe(map(withImages(state)));
 };

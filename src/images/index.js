@@ -62,8 +62,12 @@ import pumpkin from './pumpkin.png';
 import malone from './malone.png';
 import ginAndSoda from './gin-and-soda.png';
 import jukebox from './jukebox.png';
+import oscar from './oscar.png';
+import oscarGlasses from './oscarGlasses.png';
 
 export default {
+  oscarGlasses,
+  oscar,
   jukebox,
   ginAndSoda,
   malone,

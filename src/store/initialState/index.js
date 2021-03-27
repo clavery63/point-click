@@ -818,6 +818,28 @@ const scenery = {
     },
     description: 'Someone used this jukebox to put on the xfiles theme in the bar. now that\'s funny! That\'s just good comedy.'
   },
+  25: {
+    name: 'oscar',
+    img: 'oscar',
+    startPosition: {
+      left: 0,
+      top: 0,
+      width: 112,
+      height: 112
+    },
+    description: 'Hi. I am Oscar.'
+  },
+  26: {
+    name: 'glasses',
+    img: 'oscarGlasses',
+    startPosition: {
+      left: 30,
+      top: 42,
+      width: 45,
+      height: 8
+    },
+    description: 'These glasses belong to Oscar.'
+  },
 };
 
 const rooms = {
@@ -835,9 +857,18 @@ const rooms = {
     description: 'The lobby of Birthday Castle',
     initialDescription: 'A man stumbles toward you. "Oh shit, is that Scott?" you wonder as you pull yourself through the half-ajar door. "Why am I not shocked to find him here..."',
     doors: [1, 2, 3],
-    items: [11, 3, 4, 10],
-    scenery: [] 
+    items: [],
+    scenery: [25, 26] 
   },
+  // 1: {
+  //   img: 'room1',
+  //   music: 'spreadsheet-man.mp3',
+  //   description: 'The lobby of Birthday Castle',
+  //   initialDescription: 'A man stumbles toward you. "Oh shit, is that Scott?" you wonder as you pull yourself through the half-ajar door. "Why am I not shocked to find him here..."',
+  //   doors: [1, 2, 3],
+  //   items: [11, 3, 4, 10],
+  //   scenery: [] 
+  // },
   2: {
     img: 'room2',
     description: 'The stone passage winds to an unseen end.',
@@ -908,7 +939,7 @@ const rooms = {
   },
   11: {
     img: 'beerman',
-    description: 'What you feared most has happened: your bag got too filled up with piss, shit and cum, and then it exploded. You slipped on some of the spillage on the floor and died from the fall.',
+    description: 'What you feared most has happened: your bag has exploded. You slipped on some of the spillage on the floor and died from the fall.',
     gameOver: true,
     doors: [],
     items: [],
@@ -983,78 +1014,11 @@ const rooms = {
   },
 };
 
-const images = {
-  jukebox: null,
-  ginAndSoda: null,
-  monitor: null,
-  pie: null,
-  justin: null,
-  park: null,
-  motorcycle: null,
-  bartender: null,
-  beerman: null,
-  jasonHidden: null,
-  bag: null,
-  scott: null,
-  welcomeSign: null,
-  alphaDark: null,
-  alphaLight: null,
-  border: null,
-  pumpkin: null,
-  cursor: null,
-  door1: null,
-  door2: null,
-  door3: null,
-  door4: null,
-  door5: null,
-  door6: null,
-  door7: null,
-  door8: null,
-  robSmall: null,
-  robLarge: null,
-  eightBallSmall: null,
-  eightBallLarge: null,
-  fryingPan: null,
-  flame1: null,
-  garfield: null,
-  items: null,
-  key1: null,
-  line: null,
-  menu: null,
-  menuButton: null,
-  room0: null,
-  room1: null,
-  room2: null,
-  room3: null,
-  computer: null,
-  room4: null,
-  room5: null,
-  room6: null,
-  room7: null,
-  room8: null,
-  floppy: null,
-  sling: null,
-  skull: null,
-  sword: null,
-  torch1: null,
-  torch2: null,
-  torch3: null,
-  bottle: null,
-  santos: null,
-  bong: null,
-  lockpick: null,
-  bed: null,
-  fridgeSmall: null,
-  fridgeLarge: null,
-  lockerDoor: null,
-  malone: null,
-};
-
 const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 0,
+  room: 1,
   items: [],
   page: 0,
   bagLevel: 0
@@ -1065,7 +1029,6 @@ const gameState = {
   items,
   rooms,
   scenery,
-  images,
   flags: new Set()
 };
 
