@@ -59,9 +59,17 @@ const App = ({ setStageData, loading, menu }) => {
   //     )}
   //   </ReactReduxContext.Consumer>
   // );
+  const chatMode = window.location.search.indexOf('admin') > -1;
+  if (chatMode) {
+    return (
+      <div className="App">
+        <VideoContainer />
+      </div>
+    );
+  }
   return (
     <div className="App">
-      <VideoContainer />
+      <VideoContainer hasVideo={false} />
     </div>
   );
 };

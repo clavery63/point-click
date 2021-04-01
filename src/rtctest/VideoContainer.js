@@ -4,8 +4,8 @@ import useSocket from './useSocket';
 import useChatClient from './useChatClient';
 import Video from './Video';
 
-const VideoContainer = () => {
-  const { connect, localStream } = useCapture();
+const VideoContainer = ({ hasVideo = true }) => {
+  const { connect, localStream } = useCapture(hasVideo);
   const socket = useSocket();
   const remoteStream = useChatClient(localStream, socket);
 
