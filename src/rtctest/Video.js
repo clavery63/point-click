@@ -5,7 +5,7 @@ const videoStyle = {
   width: '600px'
 };
 
-const Video = ({ stream }) => {
+const Video = ({ stream, muted = false }) => {
   const videoRef = useRef(null);
   useEffect(() => {
     if (stream && videoRef.current) {
@@ -17,7 +17,7 @@ const Video = ({ stream }) => {
   }, [stream, videoRef]);
 
   return (
-    <video ref={videoRef} style={videoStyle} />
+    <video ref={videoRef} style={videoStyle} muted={muted} />
   );
 };
 

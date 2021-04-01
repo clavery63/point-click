@@ -12,7 +12,7 @@ const VideoContainer = () => {
   return (
     <div>
       <button onClick={connect}>Start Connection</button>
-      <Video stream={localStream} />
+      <Video stream={localStream} muted={true} />
       <Video stream={remoteStream} />
     </div>
   );

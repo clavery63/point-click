@@ -27,6 +27,7 @@ class Socket {
     switch (msg.type) {
       case 'num-participants':
         this.numParticipants = msg.num;
+        console.log('numParticipants:', this.numParticipants);
         break;
       case 'video-offer':
         tryCalling(this.onVideoOffer, msg);
