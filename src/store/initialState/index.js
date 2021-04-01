@@ -263,6 +263,24 @@ const doors = {
     dest: 12,
     state: 'OPEN'
   },
+  19: {
+    mapPosition: {
+      x: 4,
+      y: 4
+    },
+    dir: 'DOWN',
+    dest: 21,
+    state: 'OPEN'
+  },
+  20: {
+    mapPosition: {
+      x: 2,
+      y: 0
+    },
+    dir: 'UP',
+    dest: 0,
+    state: 'OPEN'
+  },
 };
 
 const items = {
@@ -470,6 +488,17 @@ const items = {
       top: 65,
       width: 16,
       height: 19
+    }
+  },
+  20: {
+    name: 'dan\'s hat',
+    img: 'danHat',
+    description: 'An irresistable hat',
+    position: {
+      left: 18,
+      top: 11,
+      width: 73,
+      height: 63
     }
   },
 };
@@ -847,7 +876,7 @@ const rooms = {
     img: 'room0',
     music: 'outdoor-ambience.mp3',
     description: 'It\'s the entrance to Birthday Castle. You can faintly hear the sound of several full grown adults chanting inside.',
-    doors: [0, 15],
+    doors: [0, 15, 19],
     items: [0],
     scenery: [0]
   },
@@ -1012,13 +1041,20 @@ const rooms = {
     items: [],
     scenery: [] 
   },
+  21: {
+    img: 'dan',
+    description: 'You found Dan.',
+    doors: [20],
+    items: [20],
+    scenery: [] 
+  },
 };
 
 const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 1,
+  room: 0,
   items: [],
   page: 0,
   bagLevel: 0
