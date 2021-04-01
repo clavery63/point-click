@@ -1,13 +1,14 @@
 class ChatClient {
   constructor(localStream, socket, setRemoteStream) {
+    console.log('makin it')
     this.localStream = localStream;
     this.setRemoteStream = setRemoteStream;
     this.socket = socket;
     this.socket.onPreOffer = this.handlePreOfferMsg;
     this.socket.onVideoOffer = this.handleVideoOfferMsg;
     
-    if (this.socket.numParticipants === 2 && window.location.search.indexOf('admin') < 0) {
-      this.socket.sendMessage({ type: 'pre-offer' });
+    if (window.location.search.indexOf('admin') < 0) {
+      this.socket.onOpen = () => this.socket.sendMessage({ type: 'pre-offer' });
     } else {
       console.log('what you expected hasn\'t happened');
     }

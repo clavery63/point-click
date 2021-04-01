@@ -17,6 +17,7 @@ class Socket {
     this.ws.onopen = () => {
       console.log('this.ws.onopen');
       this.ws.send('POINT_CLICK_INIT');
+      tryCalling(this.onOpen);
     }
     console.log('new Socket');
     this.sendMessage = msg => this.ws.send(JSON.stringify(msg));

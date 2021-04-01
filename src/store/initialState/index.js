@@ -281,6 +281,15 @@ const doors = {
     dest: 0,
     state: 'OPEN'
   },
+  21: {
+    mapPosition: {
+      x: 3,
+      y: 4
+    },
+    dir: 'DOWN',
+    dest: 22,
+    state: 'OPEN'
+  },
 };
 
 const items = {
@@ -876,7 +885,7 @@ const rooms = {
     img: 'room0',
     music: 'outdoor-ambience.mp3',
     description: 'It\'s the entrance to Birthday Castle. You can faintly hear the sound of several full grown adults chanting inside.',
-    doors: [0, 15, 19],
+    doors: [0, 15, 19, 21],
     items: [0],
     scenery: [0]
   },
@@ -1047,6 +1056,12 @@ const rooms = {
     doors: [20],
     items: [20],
     scenery: [] 
+  },
+  22: {
+    description: 'You found some sort of control room',
+    doors: [20],
+    items: [],
+    scenery: [19]
   },
 };
 
