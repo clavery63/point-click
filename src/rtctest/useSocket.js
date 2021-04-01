@@ -29,6 +29,10 @@ class Socket {
         this.numParticipants = msg.num;
         console.log('numParticipants:', this.numParticipants);
         break;
+      case 'pre-offer':
+        console.log('preoffer came in, ', this.onPreOffer)
+        tryCalling(this.onPreOffer, msg);
+        break;
       case 'video-offer':
         tryCalling(this.onVideoOffer, msg);
         break;
