@@ -4,7 +4,7 @@ import useRemoteStream from '../../../rtc/useRemoteStream';
 import Konva from 'konva';
 
 const VIEWPORT_SIZE = 112;
-const SCALE_FACTOR = 0.8;
+const SCALE_FACTOR = 0.80357;
 
 const CoolVideo = () => {
   const imageRef = useRef(null);
