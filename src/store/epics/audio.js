@@ -1,13 +1,12 @@
 import { mapTo, switchMap, tap } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
-import runText$ from './observables/runText';
 import { concat, EMPTY, of, merge } from 'rxjs';
 
-const audio$ = action$ => {
+const audio$ = (action$, state$, { runText$ }) => {
   const music$ = action$.pipe(
     ofType('PLAY_MUSIC'),
     switchMap(({ payload }) => concat(
-      payload.text ? runText$(action$)(payload.text) : EMPTY,
+      payload.text ? runText$(payload.text) : EMPTY,
       of({}).pipe(
         tap(() => {
           const player = document.querySelector('.music-player');

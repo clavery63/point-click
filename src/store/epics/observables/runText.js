@@ -19,23 +19,23 @@ const linesToPositions = lines => lines.flatMap((line, row) => {
   return range(line.length).map(col => [row, col]);
 });
 
-const renderPage$ = action$ => lines => {
+const renderPage$ = pageClick$ => lines => {
   const allPositions = linesToPositions(lines);
   return concat(
     from(allPositions).pipe(
       concatMap(position => timer(MS_PER_CHAR).pipe(mapTo(getLines(lines, position)))),
-      takeUntil(action$.ofType('PAGE_CLICK'))
+      takeUntil(pageClick$)
     ),
     of(getLines(lines, last(allPositions))),
-    action$.ofType('PAGE_CLICK').pipe(mapTo([]), take(1))
+    pageClick$.pipe(mapTo([]), take(1))
   );
 };
 
-const runText$ = action$ => text => {
+const runText$ = pageClick$ => text => {
   const lines = makeLines(text);
   return concat(
     from(chunk(lines, LINES_PER_PAGE)).pipe(
-      concatMap(renderPage$(action$))
+      concatMap(renderPage$(pageClick$))
     ),
     of(null)
   ).pipe(map(text => ({ type: 'SET_TEXT', payload: text })))

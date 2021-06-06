@@ -2,7 +2,6 @@ import { mapTo, switchMap, mergeMap, concatMap, withLatestFrom } from 'rxjs/oper
 import { from, timer, concat, of } from 'rxjs';
 import { range } from 'lodash';
 import { ofType } from 'redux-observable';
-import runText$ from './observables/runText';
 
 const MS_PER_FRAME = 65;
 
@@ -27,7 +26,7 @@ const getAction$ = ({ dest }) => frame => {
   ]);
 };
 
-const dispatchRoom = (action$, { dest }, state) => {
+const dispatchRoom = (dest, state, runText$) => {
   const { gameState, playerState } = state;
   const room = gameState.rooms[dest];
   if (!room.description) {
@@ -42,12 +41,12 @@ const dispatchRoom = (action$, { dest }, state) => {
   const fileName = room.music || 'puppets.mp3';
   return concat(
     of(({ type: gameOverAudioType, payload: { fileName }})),
-    runText$(action$)(room.initialDescription || room.description),
+    runText$(room.initialDescription || room.description),
     of(({ type: 'SET_CURSOR_ENABLED', payload: !room.gameOver }))
   );
 }
 
-const transition$ = (action$, state$) => {
+const transition$ = (action$, state$, { runText$ }) => {
   return action$.pipe(
     ofType('RUN_TRANSITION'),
     withLatestFrom(state$),
@@ -56,7 +55,7 @@ const transition$ = (action$, state$) => {
         concatMap(frame => timer(MS_PER_FRAME).pipe(mapTo(frame))),
         mergeMap(getAction$(payload))
       ),
-      from(dispatchRoom(action$, payload, state)),
+      from(dispatchRoom(payload.dest, state, runText$)),
     ))
   );
 };

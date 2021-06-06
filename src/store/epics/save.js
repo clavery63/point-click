@@ -1,7 +1,6 @@
 import { tap, map, switchMapTo, withLatestFrom } from 'rxjs/operators';
 import { merge } from 'rxjs';
 import { ofType } from 'redux-observable';
-import runText$ from './observables/runText';
 
 const KEY = 'doublehamburger-save-data';
 
@@ -36,12 +35,12 @@ const loadGame = oldState => {
   };
 };
 
-const load$ = (action$, state$) => {
+const load$ = (action$, state$, { runText$ }) => {
   const save$ = action$.pipe(
     ofType('SAVE_GAME'),
     withLatestFrom(state$),
     tap(([,state]) => saveGame(state)),
-    switchMapTo(runText$(action$)('Game Saved Successfully!'))
+    switchMapTo(runText$('Game Saved Successfully!'))
   );
 
   const load$ = action$.pipe(

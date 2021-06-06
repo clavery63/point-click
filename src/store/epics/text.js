@@ -1,11 +1,10 @@
 import { switchMap } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
-import runText$ from './observables/runText';
 
-const text$ = action$ => {
+const text$ = (action$, state$, { runText$ })  => {
   return action$.pipe(
     ofType('RUN_TEXT'),
-    switchMap(({ payload }) => runText$(action$)(payload))
+    switchMap(({ payload }) => runText$(payload))
   );
 };
 

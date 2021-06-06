@@ -14,7 +14,7 @@ const doors = {
       y: 0
     },
     state: 'CLOSED',
-    description: 'It\'s a heavy wooden door with iron hinges.',
+    description: 'An American contractor went to a small town in the Guatemalan mountains with an ambitious goal: to ignite the local economy, and hopefully even persuade people not to migrate north to the United States.',
     lockedText: 'Darn it, the thing\'s locked.  Now where could that key be???',
     // TODO: allow text to come in array form to customize pages
     openText: 'You open the door. It\'s the door leading into Birthday Castle.'
@@ -1089,7 +1089,7 @@ const initialState = {
   text: null,
   nextText: null,
   loading: false,
-  menu: 'START'
+  menu: 'NONE'
 };
 
 export default initialState;
