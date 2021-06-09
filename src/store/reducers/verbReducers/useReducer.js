@@ -11,7 +11,7 @@ const useReducer = (object, playerState, flags) => {
   
       return compose(
         withText('You give Sam the ice cold gin.'),
-        clearValue('playerState.using')()
+        clearValue('playerState.using')
       );
     }
   }
@@ -25,7 +25,7 @@ const useReducer = (object, playerState, flags) => {
 
       return compose(
         withText('You give Sam the gin.'),
-        clearValue('playerState.using')()
+        clearValue('playerState.using')
       );
     }
   }
@@ -33,7 +33,7 @@ const useReducer = (object, playerState, flags) => {
   if (playerState.using === object.keyId) {
     return compose(
       setValue(`gameState.doors.${object.id}.state`)('CLOSED'),
-      clearValue('playerState.using')(),
+      clearValue('playerState.using'),
       withText(object.unlockText)
     );
   } else if (object.useTexts) {
@@ -53,7 +53,7 @@ const useReducer = (object, playerState, flags) => {
       withText(object.vanishText),
       updateValue(`gameState.rooms.${playerState.room}.scenery`)(scenery => scenery.filter(id => id !== object.id)),
       updateValue(`playerState.items`)(items => items.filter(id => id !== playerState.using)),
-      clearValue('playerState.using')(),
+      clearValue('playerState.using'),
     );
   } else if (playerState.using === object.activeOn) {
     return compose(
@@ -62,18 +62,18 @@ const useReducer = (object, playerState, flags) => {
         flags.add(object.activeFlag);
         return flags;
       }),
-      clearValue('playerState.using')(),
+      clearValue('playerState.using'),
     );
   } else if (playerState.using === 'BAG' && object.name === 'pumpkin') {
     return compose(
-      clearValue('playerState.using')(),
+      clearValue('playerState.using'),
       withText('Seeing that this pumpkin has already been "marked" as a safe vessel for storage, you hurriedly collapse the liquid contents from your bag into the gourd\'s saturated depths.  You breathe an exasperated sigh of relief.  Your bag is once again empty.'),
       setValue('playerState.bagLevel')(0)
       );
   }
 
   return compose(
-    clearValue('playerState.using')(),
+    clearValue('playerState.using'),
     withText('That ain\'t workin\'.')
   );
 };

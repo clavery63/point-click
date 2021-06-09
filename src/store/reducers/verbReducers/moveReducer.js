@@ -5,7 +5,7 @@ const doorReducer = ({ state, dest, dir }) => {
   switch (state) {
     case 'OPEN':
       return compose(
-        clearValue('playerState.examining')(),
+        clearValue('playerState.examining'),
         setValue('transition')({ dest, dir, frame: 0 })
       );
     default:

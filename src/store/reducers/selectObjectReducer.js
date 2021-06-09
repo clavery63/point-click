@@ -25,7 +25,6 @@ const selectObjectReducer = (payload, playerState, gameState) => {
   const { type, id } = payload;
   const object = { ...gameState[type][id], type, id };
   const reducer = verbReducers[playerState.verb] || keepState;
-  console.log(object, playerState, gameState.flags);
   return reducer(object, playerState, gameState.flags);
 };
 
