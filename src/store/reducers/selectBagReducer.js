@@ -40,10 +40,9 @@ const getReducer = verb => {
   }
 };
 
-const selectBagReducer = bagLevel => state => {
-  const { playerState } = state;
+const selectBagReducer = (bagLevel, playerState) => {
   const reducer = getReducer(playerState.verb)
-  return reducer(bagLevel)(state);
+  return reducer(bagLevel);
 };
 
 export default selectBagReducer;

@@ -1,27 +1,27 @@
 import { compose } from 'redux';
 import { withText, updateValue } from '../utils';
 
-const speakReducer = object => state => {
+const speakReducer = (object, playerState, flags) => {
   const { onSpeak, speakTexts, speakIndex, id } = object;
 
-  if (state.gameState.flags.has('GOOD') && object.speakGood) {
-    return withText(object.speakGood)(state);
+  if (flags.has('GOOD') && object.speakGood) {
+    return withText(object.speakGood);
   }
 
-  if (state.gameState.flags.has('BAD') && object.speakBad) {
-    return withText(object.speakBad)(state);
+  if (flags.has('BAD') && object.speakBad) {
+    return withText(object.speakBad);
   }
 
   if (onSpeak) {
-    return withText(onSpeak)(state);
+    return withText(onSpeak);
   } else if (speakTexts) {
     return compose(
       withText(speakTexts[speakIndex]),
       updateValue(`gameState.scenery.${id}.speakIndex`)(index => (index + 1) % speakTexts.length)
-    )(state);
+    );
   }
 
-  return withText('Nope. No can do.')(state);
+  return withText('Nope. No can do.');
 };
 
 

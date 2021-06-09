@@ -1,16 +1,16 @@
 import { withText, setValue } from '../utils';
 
-const lookReducer = object => state => {
+const lookReducer = (object, playerState, flags) => {
   if (object.moveOn === 'LOOK') {
-    if (!object.activeFlag || state.gameState.flags.has(object.activeFlag)) {
+    if (!object.activeFlag || flags.has(object.activeFlag)) {
       return setValue('transition')({ 
         dest: object.movesTo, 
         dir: object.moveDir, 
         frame: 0
-      })(state);
+      });
     }
   }
-  return withText(object.description)(state);
+  return withText(object.description);
 };
 
 export default lookReducer;

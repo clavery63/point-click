@@ -15,16 +15,16 @@ const roomReducer = payload => compose(
 
 const ITEMS_PER_PAGE = 7;
 
-const changePageReducer = payload => state => {
-  const { items, page } = state.playerState;
+const changePageReducer = (payload, playerState) => {
+  const { items, page } = playerState;
   switch (payload) {
     case 'DOWN':
       const newPage = Math.min(page + 1, Math.floor((items.length - 1) / ITEMS_PER_PAGE));
-      return setValue('playerState.page')(newPage)(state);
+      return setValue('playerState.page')(newPage);
     case 'UP':
-      return setValue('playerState.page')(Math.max(page - 1, 0))(state);
+      return setValue('playerState.page')(Math.max(page - 1, 0));
     default:
-      return state;
+      return keepState;
   }
 };
 
@@ -47,8 +47,9 @@ const reducers = {
 };
 
 const rootReducer = (state = {}, { type, payload }) => {
+  const { gameState, playerState } = state;
   const reducer = reducers[type] || keepState;
-  return reducer(payload)(state);
+  return reducer(payload, playerState, gameState)(state);
 };
 
 export default rootReducer;

@@ -1,24 +1,24 @@
 import { compose } from 'lodash/fp';
 import { withText, updateValue, setValue } from '../utils';
 
-const eatReducer = object => state => {
+const eatReducer = (object, playerState) => {
   if (object.moveOn === 'EAT') {
     return setValue('transition')({ 
       dest: object.movesTo, 
       dir: object.moveDir, 
       frame: 0
-    })(state);
+    });
   }
 
   if (object.eatText) {
-    return withText(object.eatText)(state);
+    return withText(object.eatText);
   }
 
   if (!object.onEat) {
-    return withText('Don\'t eat that')(state);
+    return withText('Don\'t eat that');
   }
   
-  const room = state.playerState.room;
+  const room = playerState.room;
   return compose(
     updateValue(`gameState.rooms.${room}.items`)(items => {
       return items.filter(id => id !== object.id);
@@ -30,7 +30,7 @@ const eatReducer = object => state => {
       return flags;
     }),
     withText(object.onEat),
-  )(state);
+  );
 };
 
 

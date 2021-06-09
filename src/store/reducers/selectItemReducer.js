@@ -1,16 +1,15 @@
 import { compose } from 'redux';
-import { setValue, updateValue, withText } from './utils';
+import { setValue, updateValue, withText, keepState } from './utils';
 import smokeReducer from './verbReducers/smokeReducer';
 
-const takeReducer = item => state => {
-  const { playerState } = state;
-  if (!playerState.examining) return state;
+const takeReducer = (item, playerState) => {
+  if (!playerState.examining) return keepState;
   const filterItem = items => items.filter(id => id !== item.id);
   return compose(
     updateValue(`gameState.scenery.${playerState.examining}.contains`)(filterItem),
     updateValue('playerState.items')(items => [...items, item.id]),
     withText(`Took the ${item.name}.`)
-  )(state);
+  );
 };
 
 const useReducer = ({ id }) => compose(
@@ -36,11 +35,10 @@ const getReducer = (verb, object) => {
   }
 };
 
-const selectItemReducer = id => state => {
-  const { gameState, playerState } = state;
+const selectItemReducer = (id, playerState, gameState) => {
   const object = { ...gameState.items[id], type: 'items', id };
   const reducer = getReducer(playerState.verb, object)
-  return reducer(object)(state);
+  return reducer(object, playerState);
 };
 
 export default selectItemReducer;

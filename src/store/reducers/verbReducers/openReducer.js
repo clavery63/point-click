@@ -1,23 +1,23 @@
 import { withText, setValue, keepState } from '../utils';
 import { compose } from 'lodash/fp';
 
-const doorReducer = door => state => {
+const doorReducer = (door, flags) => {
   switch (door.state) {
     case 'CLOSED':
-      if (!door.openCondition || state.gameState.flags.has(door.openCondition)) {
+      if (!door.openCondition || flags.has(door.openCondition)) {
         return compose(
           withText(door.openText),
           setValue(`gameState.doors.${door.id}.state`)('OPEN'),
           setValue(`gameState.doors.${door.id}.hidden`)(false)
-        )(state);
+        );
       } else {
-        return withText(door.closedText)(state);
+        return withText(door.closedText);
       }
     case 'LOCKED':
-      return withText('The door is locked.')(state);
+      return withText('The door is locked.');
     case 'OPEN':
     default:
-      return withText('It\'s already open!')(state);
+      return withText('It\'s already open!');
   }
 };
 
@@ -32,9 +32,9 @@ const sceneryReducer = scenery => {
   );
 };
 
-const openReducer = object => {
+const openReducer = (object, playerState, flags) => {
   if (object.type === 'doors') {
-    return doorReducer(object);
+    return doorReducer(object, flags);
   }
   if (object.type === 'scenery') {
     return sceneryReducer(object);
