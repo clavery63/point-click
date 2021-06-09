@@ -1,7 +1,10 @@
-import { setValue, ifState, isNull } from './utils';
+import { setValue, keepState } from './utils';
 
-const playerUsing = 'playerState.using';
-const playerVerb = 'playerState.verb';
-const selectVerbReducer = ifState(playerUsing, isNull)(setValue(playerVerb));
+const selectVerbReducer = (verb, playerState) => {
+  if (playerState.using) {
+    return keepState();
+  }
+  return setValue('playerState.verb')(verb);
+};
 
 export default selectVerbReducer;
