@@ -6,7 +6,7 @@ const doorReducer = ({ state, dest, dir }) => {
     case 'OPEN':
       return compose(
         clearValue('playerState.examining'),
-        setValue('transition')({ dest, dir, frame: 0 })
+        setValue('transition')({ dest, dir })
       );
     default:
       return withText('You have to open the door before you go through it.');

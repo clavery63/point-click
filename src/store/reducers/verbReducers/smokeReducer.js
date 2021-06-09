@@ -5,8 +5,7 @@ const smokeReducer = (object, playerState) => {
   if (object.moveOn === 'SMOKE') {
     return setValue('transition')({ 
       dest: object.movesTo, 
-      dir: object.moveDir, 
-      frame: 0
+      dir: object.moveDir
     });
   }
 

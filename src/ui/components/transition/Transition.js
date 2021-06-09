@@ -4,7 +4,7 @@ import createGrid from './createGrid';
 
 const Transition = ({ transition }) => {
   const { frame, dir } = transition;
-  if (frame === 0) {
+  if (!frame) {
     return null;
   }
 

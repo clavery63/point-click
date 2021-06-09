@@ -1069,8 +1069,7 @@ const gameState = {
 };
 
 const transition = {
-  dest: null,
-  frame: 0
+  dest: null
 };
 
 const cursor = {
