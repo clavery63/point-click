@@ -1,5 +1,5 @@
 import { compose } from 'lodash/fp';
-import { withText, updateValue, setValue } from '../utils';
+import { withText, updateValue, setValue, filterValues } from '../utils';
 
 const eatReducer = (object, playerState) => {
   if (object.moveOn === 'EAT') {
@@ -19,9 +19,7 @@ const eatReducer = (object, playerState) => {
   
   const room = playerState.room;
   return compose(
-    updateValue(`gameState.rooms.${room}.items`)(items => {
-      return items.filter(id => id !== object.id);
-    }),
+    filterValues(`gameState.rooms.${room}.items`)(object.id),
     updateValue('gameState.flags')(flags => {
       if (object.eatEffect) {
         flags.add(object.eatEffect);

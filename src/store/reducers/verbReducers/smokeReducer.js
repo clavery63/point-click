@@ -19,9 +19,7 @@ const smokeReducer = (object, playerState) => {
   
   const room = playerState.room;
   return compose(
-    updateValue(`gameState.rooms.${room}.items`)(items => {
-      return items.filter(id => id !== object.id);
-    }),
+    updateValue(`gameState.rooms.${room}.items`)(object.id),
     withText(object.onEat)
   );
 };

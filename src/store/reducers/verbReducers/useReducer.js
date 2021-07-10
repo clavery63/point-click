@@ -1,5 +1,5 @@
 import { compose } from 'lodash/fp';
-import { withText, setValue, clearValue, updateValue } from '../utils';
+import { withText, setValue, clearValue, updateValue, filterValues } from '../utils';
 
 const useReducer = (object, playerState, flags) => {
   if (playerState.using === 16 && object.id === 21) {
@@ -51,8 +51,8 @@ const useReducer = (object, playerState, flags) => {
   } else if (playerState.using === object.vanishOn) {
     return compose(
       withText(object.vanishText),
-      updateValue(`gameState.rooms.${playerState.room}.scenery`)(scenery => scenery.filter(id => id !== object.id)),
-      updateValue(`playerState.items`)(items => items.filter(id => id !== playerState.using)),
+      filterValues(`gameState.rooms.${playerState.room}.scenery`)(object.id),
+      filterValues(`playerState.items`)(playerState.using),
       clearValue('playerState.using'),
     );
   } else if (playerState.using === object.activeOn) {

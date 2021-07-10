@@ -1,10 +1,9 @@
 import { compose } from 'lodash/fp';
-import { withText, updateValue } from '../utils';
+import { withText, updateValue, filterValues } from '../utils';
 
 const itemReducer = (item, playerState) => {
-  const filterItem = items => items.filter(id => id !== item.id);
   return compose(
-    updateValue(`gameState.rooms.${playerState.room}.items`)(filterItem),
+    filterValues(`gameState.rooms.${playerState.room}.items`)(item.id),
     updateValue('playerState.items')(items => [...items, item.id]),
     withText(item.onTake || `The ${item.name} is in hand.`)
   );

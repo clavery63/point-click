@@ -1,12 +1,11 @@
 import { compose } from 'redux';
-import { setValue, updateValue, withText, keepState } from './utils';
+import { setValue, updateValue, withText, keepState, filterValues } from './utils';
 import smokeReducer from './verbReducers/smokeReducer';
 
 const takeReducer = (item, playerState) => {
   if (!playerState.examining) return keepState;
-  const filterItem = items => items.filter(id => id !== item.id);
   return compose(
-    updateValue(`gameState.scenery.${playerState.examining}.contains`)(filterItem),
+    filterValues(`gameState.scenery.${playerState.examining}.contains`)(item.id),
     updateValue('playerState.items')(items => [...items, item.id]),
     withText(`Took the ${item.name}.`)
   );

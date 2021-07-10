@@ -880,24 +880,24 @@ const rooms = {
     items: [0],
     scenery: [0]
   },
-  1: {
-    img: 'room1',
-    music: 'spreadsheet-man.mp3',
-    description: 'The lobby of Birthday Castle',
-    initialDescription: 'A man stumbles toward you. "Oh shit, is that Scott?" you wonder as you pull yourself through the half-ajar door. "Why am I not shocked to find him here..."',
-    doors: [1, 2, 3],
-    items: [],
-    scenery: [25, 26] 
-  },
   // 1: {
   //   img: 'room1',
   //   music: 'spreadsheet-man.mp3',
   //   description: 'The lobby of Birthday Castle',
   //   initialDescription: 'A man stumbles toward you. "Oh shit, is that Scott?" you wonder as you pull yourself through the half-ajar door. "Why am I not shocked to find him here..."',
   //   doors: [1, 2, 3],
-  //   items: [11, 3, 4, 10],
-  //   scenery: [] 
+  //   items: [],
+  //   scenery: [25, 26] 
   // },
+  1: {
+    img: 'room1',
+    music: 'spreadsheet-man.mp3',
+    description: 'The lobby of Birthday Castle',
+    initialDescription: 'A man stumbles toward you. "Oh shit, is that Scott?" you wonder as you pull yourself through the half-ajar door. "Why am I not shocked to find him here..."',
+    doors: [1, 2, 3],
+    items: [11, 3, 4, 10],
+    scenery: [] 
+  },
   2: {
     img: 'room2',
     description: 'The stone passage winds to an unseen end.',
@@ -1054,7 +1054,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 0,
+  room: 2,
   items: [],
   page: 0,
   bagLevel: 0

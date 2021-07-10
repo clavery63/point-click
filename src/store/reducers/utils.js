@@ -17,3 +17,7 @@ export const clearValue = path => setValue(path)(null);
 export const withText = setValue('nextText');
 
 export const keepState = () => state => state;
+
+export const filterValues = path => id => updateValue(path)(objects => {
+  return objects.filter(objectId => objectId !== id);
+});
