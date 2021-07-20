@@ -1054,7 +1054,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 2,
+  room: 0,
   items: [],
   page: 0,
   bagLevel: 0
@@ -1088,7 +1088,7 @@ const initialState = {
   text: null,
   nextText: null,
   loading: false,
-  menu: 'NONE'
+  menu: 'MAIN'
 };
 
 export default initialState;

@@ -1,7 +1,10 @@
-import { map, switchMap } from 'rxjs/operators';
-import { Observable, of, forkJoin } from 'rxjs';
+import { map, mapTo, switchMap } from 'rxjs/operators';
+import { Observable, of, forkJoin, merge } from 'rxjs';
+import { ofType } from 'redux-observable';
 import initialState from '../initialState';
 import imageFiles from '../../images';
+
+const TEMP_initialText = 'Hi Mike. Welcome to birthday castle. We hope you find it comfortable inside.               And who knows? You might even see some cool s*** along the way.'
 
 const image$ = src => new Observable(observer => {
   const image = new Image();
@@ -39,7 +42,20 @@ const loadImages$ = state => {
   })).pipe(map(withImages(state)));
 };
 
-const load$ = () => {
+const setState$ = startGame$ => state => {
+  return merge(
+    of(state),
+    startGame$.pipe(
+      mapTo({
+        ...state,
+        nextText: TEMP_initialText,
+        menu: 'NONE'
+      })
+    )
+  );
+}
+
+const load$ = action$ => {
   /**
    * Once this is customizable outside of the codebase, we will optionally
    * get this initial state from a network request.
@@ -47,6 +63,7 @@ const load$ = () => {
   const initialState$ = of(initialState);
   return initialState$.pipe(
     switchMap(loadImages$),
+    switchMap(setState$(action$.pipe(ofType('START_GAME')))),
     map(state => ({ type: 'SET_STATE', payload: state }))
   );
 };

@@ -3,7 +3,6 @@ import selectVerbReducer from './selectVerbReducer';
 import selectItemReducer from './selectItemReducer';
 import selectBagReducer from './selectBagReducer';
 import setPositionReducer from './setPositionReducer';
-import startGameReducer from './startGameReducer';
 import { setValue, clearValue, keepState, updateValue } from './utils';
 import { compose } from 'redux';
 
@@ -47,7 +46,6 @@ const reducers = {
   SELECT_VERB: selectVerbReducer,
   SELECT_OBJECT: selectObjectReducer,
   SELECT_ITEM: selectItemReducer,
-  START_GAME: startGameReducer,
   SELECT_BAG: selectBagReducer,
   CHANGE_PAGE: changePageReducer,
   SET_MENU: setValue('menu')

@@ -1,4 +1,4 @@
-import { mapTo, switchMap, mergeMap, concatMap, withLatestFrom, tap } from 'rxjs/operators';
+import { mapTo, switchMap, mergeMap, concatMap, withLatestFrom, take } from 'rxjs/operators';
 import { from, timer, concat, of, NEVER } from 'rxjs';
 import { range } from 'lodash';
 import { ofType } from 'redux-observable';
@@ -53,8 +53,8 @@ const checkGameOver = (dest, state, pageClick$) => {
   }
 
   return pageClick$.pipe(
-    tap(e => console.log('hey:', e)),
-    mapTo({ type: 'SET_MENU', payload: 'GAME_OVER' })
+    mapTo({ type: 'SET_MENU', payload: 'GAME_OVER' }),
+    take(1),
   )
 };
 
