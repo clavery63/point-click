@@ -4,35 +4,34 @@ import Text from '../shared/Text';
 
 const KEY = 'doublehamburger-save-data';
 
+const GameOver = () => (
+  <Text left={92} top={60} color={'light'} text={'game over'} />
+);
+
 const Start = ({ onClick }) => (
   <>
-    <Text left={50} top={50} color={'light'} text={'start game'} />
-    <Rect x={50} y={50} height={8} width={80} onClick={onClick} />
+    <Text left={88} top={100} color={'light'} text={'start game'} />
+    <Rect x={88} y={100} height={8} width={80} onClick={onClick} />
   </>
 );
 
 const Load = ({ onClick }) => (
   <>
-    <Text left={50} top={60} color={'light'} text={'load game'} />
-    <Rect x={50} y={60} height={8} width={80} onClick={onClick} />
+    <Text left={92} top={120} color={'light'} text={'load game'} />
+    <Rect x={92} y={120} height={8} width={72} onClick={onClick} />
   </>
-);
-
-const Unavailable = () => (
-  <Text left={50} top={50} color={'light'} text={'currently unavailable'} />
 );
 
 const OuterMenu = ({ menu, onStartClick, onLoadClick }) => {
   if (menu === 'NONE') return null;
 
-  const canStart = true;
-  const loadData = !!window.localStorage.getItem(KEY);
+  const hasLoadData = !!window.localStorage.getItem(KEY);
 
   return (
     <>
-      {!canStart && <Unavailable />}
-      {canStart && <Start onClick={onStartClick} />}
-      {canStart && loadData && <Load onClick={onLoadClick} />}
+      {menu === 'GAME_OVER' && <GameOver />}
+      <Start onClick={onStartClick} />
+      {hasLoadData && <Load onClick={onLoadClick} />}
     </>
   );
 };

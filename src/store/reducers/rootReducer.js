@@ -49,7 +49,8 @@ const reducers = {
   SELECT_ITEM: selectItemReducer,
   START_GAME: startGameReducer,
   SELECT_BAG: selectBagReducer,
-  CHANGE_PAGE: changePageReducer
+  CHANGE_PAGE: changePageReducer,
+  SET_MENU: setValue('menu')
 };
 
 const rootReducer = (state = {}, { type, payload }) => {

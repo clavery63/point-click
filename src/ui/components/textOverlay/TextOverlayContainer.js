@@ -8,8 +8,4 @@ const mapStateToProps = ({ text, gameState }) => {
   };
 };
 
-const mapDispatchToProps = {
-  onClick: () => ({ type: 'PAGE_CLICK' })
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TextOverlay);
+export default connect(mapStateToProps)(TextOverlay);

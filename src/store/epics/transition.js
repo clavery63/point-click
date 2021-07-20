@@ -1,5 +1,5 @@
-import { mapTo, switchMap, mergeMap, concatMap, withLatestFrom } from 'rxjs/operators';
-import { from, timer, concat, of } from 'rxjs';
+import { mapTo, switchMap, mergeMap, concatMap, withLatestFrom, tap } from 'rxjs/operators';
+import { from, timer, concat, of, NEVER } from 'rxjs';
 import { range } from 'lodash';
 import { ofType } from 'redux-observable';
 
@@ -41,10 +41,22 @@ const dispatchRoom = (dest, state, runText$) => {
   const fileName = room.music || 'puppets.mp3';
   return concat(
     of(({ type: gameOverAudioType, payload: { fileName }})),
-    runText$(room.initialDescription || room.description),
-    of(({ type: 'SET_CURSOR_ENABLED', payload: !room.gameOver }))
+    runText$(room.initialDescription || room.description)
   );
-}
+};
+
+const checkGameOver = (dest, state, pageClick$) => {
+  const { gameState } = state;
+  const room = gameState.rooms[dest];
+  if (!room.gameOver) {
+    return NEVER;
+  }
+
+  return pageClick$.pipe(
+    tap(e => console.log('hey:', e)),
+    mapTo({ type: 'SET_MENU', payload: 'GAME_OVER' })
+  )
+};
 
 const transition$ = (action$, state$, { runText$ }) => {
   return action$.pipe(
@@ -56,6 +68,7 @@ const transition$ = (action$, state$, { runText$ }) => {
         mergeMap(getAction$(payload))
       ),
       from(dispatchRoom(payload.dest, state, runText$)),
+      checkGameOver(payload.dest, state, action$.pipe(ofType('PAGE_CLICK')))
     ))
   );
 };

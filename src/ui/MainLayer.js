@@ -6,6 +6,7 @@ import MenuContainer from './components/menu/MenuContainer';
 import TextOverlayContainer from './components/textOverlay/TextOverlayContainer';
 import CursorContainer from './components/cursor/CursorContainer';
 import OuterMenuContainer from './components/outerMenu/OuterMenuContainer';
+import ClickMask from './components/clickMask/ClickMask';
 
 const GameContent = ({ menu }) => {
   if (menu !== 'NONE') return null;
@@ -15,6 +16,7 @@ const GameContent = ({ menu }) => {
       <InventoryContainer />
       <MenuContainer />
       <TextOverlayContainer />
+      <ClickMask />
     </>
   );
 }

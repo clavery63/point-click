@@ -22,7 +22,7 @@ const Rows = ({ hr }) => range(5).map(i => (
   <Hr key={i} left={8} top={2 + i * 16}  hr={hr} />
 ));
 
-const TextOverlay = ({ lines, onClick, hrImg }) => {
+const TextOverlay = ({ lines, hrImg }) => {
   if (!lines) {
     return null;
   }
@@ -41,7 +41,6 @@ const TextOverlay = ({ lines, onClick, hrImg }) => {
           />
         ))}
       </Group>
-      <Rect width={256} height={240} onClick={onClick} />
     </Group>
   );
 };
