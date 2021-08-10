@@ -1,5 +1,5 @@
-import { map, switchMap, startWith, filter } from 'rxjs/operators';
-import { fromEvent } from 'rxjs';
+import { map, switchMap, filter, take, mapTo } from 'rxjs/operators';
+import { fromEvent, merge } from 'rxjs';
 import { ofType } from 'redux-observable';
 
 const getPixels = ({ stage, scaleX, scaleY }) => () => {
@@ -14,15 +14,24 @@ const getPixels = ({ stage, scaleX, scaleY }) => () => {
 };
 
 const cursor$ = action$ => {
-  return action$.pipe(
+  const cursorMove$ = action$.pipe(
     ofType('STAGE_DATA'),
     switchMap(({ payload }) => fromEvent(window, 'mousemove').pipe(
-      map(getPixels(payload)),
-      startWith({ x: 128, y: 120 })
+      map(getPixels(payload))
     )),
     filter(Boolean),
+  );
+
+  const activate$ = cursorMove$.pipe(
+    take(1),
+    mapTo({ type: 'SET_CURSOR_ENABLED', payload: true })
+  );
+  
+  const setPosition$ = cursorMove$.pipe(
     map(payload => ({ type: 'SET_CURSOR_POSITION', payload }))
   );
+
+  return merge(activate$, setPosition$);
 };
 
 export default cursor$;

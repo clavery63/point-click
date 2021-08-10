@@ -1073,7 +1073,7 @@ const transition = {
 };
 
 const cursor = {
-  enabled: true,
+  enabled: false,
   position: {
     x: 128,
     y: 120
