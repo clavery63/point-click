@@ -1,10 +1,8 @@
-import { map, mapTo, switchMap } from 'rxjs/operators';
-import { Observable, of, forkJoin, merge } from 'rxjs';
+import { map, switchMapTo, switchMap, tap } from 'rxjs/operators';
+import { Observable, of, forkJoin, merge, from } from 'rxjs';
 import { ofType } from 'redux-observable';
 import initialState from '../initialState';
 import imageFiles from '../../images';
-
-const TEMP_initialText = 'Hi Mike. Welcome to birthday castle. We hope you find it comfortable inside.               And who knows? You might even see some cool s*** along the way.'
 
 const image$ = src => new Observable(observer => {
   const image = new Image();
@@ -27,13 +25,10 @@ const image$ = src => new Observable(observer => {
 
 const withImages = state => pairs => ({
   ...state,
-  gameState: {
-    ...state.gameState,
-    images: pairs.reduce((obj, [key, value]) => ({
-      ...obj,
-      [key]: value
-    }), {})
-  }
+  images: pairs.reduce((obj, [key, value]) => ({
+    ...obj,
+    [key]: value
+  }), {})
 });
 
 const loadImages$ = state => {
@@ -42,29 +37,61 @@ const loadImages$ = state => {
   })).pipe(map(withImages(state)));
 };
 
-const setState$ = startGame$ => state => {
-  return merge(
-    of(state),
-    startGame$.pipe(
-      mapTo({
-        ...state,
-        nextText: TEMP_initialText,
-        menu: 'NONE'
-      })
-    )
+const loadFlagsSet = state => {
+  return {
+    ...state,
+    flags: new Set(state.flags)
+  };
+};
+
+const restart$ = (action$, { playerState, gameState }) => {
+  const initialRoom = gameState.rooms[playerState.room];
+  const { description, initialDescription } = initialRoom;
+  return action$.pipe(
+    ofType('START_GAME'),
+    switchMapTo(from([
+      { type: 'RUN_TEXT', payload: initialDescription || description },
+      { type: 'SET_MENU', payload: 'NONE' },
+      { type: 'SET_GAME_STATE', payload: initialState.gameState },
+      { type: 'SET_PLAYER_STATE', payload: initialState.playerState },
+    ]))
+  );
+};
+
+const initializeUiState = () => ({
+  transition: {
+    dest: null
+  },
+  text: null,
+  nextText: null,
+  loading: false,
+  menu: 'MAIN'
+});
+
+const loadPlayerAndGameState$ = uiState => {
+    /**
+   * Once this is customizable outside of the codebase, we will optionally
+   * get this initial state from a network request.
+   */
+  return of(initialState).pipe(
+    map(({ playerState, gameState }) => ({
+      ...uiState,
+      playerState,
+      gameState
+    }))
   );
 }
 
 const load$ = action$ => {
-  /**
-   * Once this is customizable outside of the codebase, we will optionally
-   * get this initial state from a network request.
-   */
-  const initialState$ = of(initialState);
-  return initialState$.pipe(
+  const initialUiState = initializeUiState();
+  return loadPlayerAndGameState$(initialUiState).pipe(
     switchMap(loadImages$),
-    switchMap(setState$(action$.pipe(ofType('START_GAME')))),
-    map(state => ({ type: 'SET_STATE', payload: state }))
+    map(loadFlagsSet),
+    switchMap(state => merge(
+      of({ type: 'SET_STATE', payload: state }),
+      restart$(action$, state)
+    )),
+    tap(e => console.log('state', e))
   );
 };
 

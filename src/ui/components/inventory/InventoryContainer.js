@@ -34,12 +34,12 @@ const getExaminingWithItems = createSelector(
 );
 
 const mapStateToProps = (state) => {
-  const { gameState, playerState } = state;
+  const { images, playerState } = state;
   const { page, using } = playerState;
   return {
     items: getItemObjects(state),
     page,
-    inventoryImg: gameState.images.items,
+    inventoryImg: images.items,
     using,
     examining: getExaminingWithItems(state)
   };

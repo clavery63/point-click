@@ -1,5 +1,5 @@
-import { tap, map, switchMapTo, withLatestFrom } from 'rxjs/operators';
-import { merge } from 'rxjs';
+import { tap, switchMap, switchMapTo, withLatestFrom } from 'rxjs/operators';
+import { from, merge } from 'rxjs';
 import { ofType } from 'redux-observable';
 
 const KEY = 'doublehamburger-save-data';
@@ -11,7 +11,7 @@ const saveGame = ({ gameState, playerState }) => {
   }));
 };
 
-const loadGame = oldState => {
+const loadGame$ = () => {
   const newState = localStorage.getItem(KEY);
   if (!newState) {
     return { type: null }
@@ -19,24 +19,15 @@ const loadGame = oldState => {
 
   const { gameState, playerState } = JSON.parse(newState);
 
-  const payload = {
-    ...oldState,
-    gameState: {
-      ...gameState,
-      images: oldState.gameState.images
-    },
-    playerState,
-    menu: 'NONE'
-  };
-
-  return { 
-    type: 'SET_STATE',
-    payload
-  };
+  return from([
+    { type: 'SET_GAME_STATE', payload: gameState },
+    { type: 'SET_PLAYER_STATE', payload: playerState },
+    { type: 'SET_MENU', payload: 'NONE' },
+  ]);
 };
 
-const load$ = (action$, state$, { runText$ }) => {
-  const save$ = action$.pipe(
+const save$ = (action$, state$, { runText$ }) => {
+  const saveGame$ = action$.pipe(
     ofType('SAVE_GAME'),
     withLatestFrom(state$),
     tap(([,state]) => saveGame(state)),
@@ -46,11 +37,11 @@ const load$ = (action$, state$, { runText$ }) => {
   const load$ = action$.pipe(
     ofType('LOAD_GAME'),
     withLatestFrom(state$),
-    map(([,state]) => loadGame(state))
+    switchMap(([,state]) => loadGame$(state))
   );
 
 
-  return merge(save$, load$);
+  return merge(saveGame$, load$);
 };
 
-export default load$;
+export default save$;

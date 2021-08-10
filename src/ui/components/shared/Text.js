@@ -7,11 +7,11 @@ const spriteWidth = 7;
 const spriteHeight = 7;
 const shift = ' '.charCodeAt(0);
 
-const mapStateToProps = ({ gameState }) => {
+const mapStateToProps = ({ images }) => {
   return {
     spriteSheets: {
-      dark: gameState.images.alphaDark,
-      light: gameState.images.alphaLight,
+      dark: images.alphaDark,
+      light: images.alphaLight,
     }
   };
 };

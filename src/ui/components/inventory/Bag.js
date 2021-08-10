@@ -25,9 +25,9 @@ const Bag = ({ bagImg, onClick, bagLevel }) => {
   );
 };
 
-const mapStateToProps = ({ gameState, playerState }) => {
+const mapStateToProps = ({ images, playerState }) => {
   return {
-    bagImg: gameState.images.bag,
+    bagImg: images.bag,
     bagLevel: playerState.bagLevel
   };
 };

@@ -35,6 +35,8 @@ const changePageReducer = (direction, playerState) => {
 
 const reducers = {
   SET_STATE: payload => () => payload,
+  SET_GAME_STATE: setValue('gameState'),
+  SET_PLAYER_STATE: setValue('playerState'),
   SET_TEXT: setValue('text'),
   SET_ROOM: roomReducer,
   SET_FRAME: setValue('transition.frame'),

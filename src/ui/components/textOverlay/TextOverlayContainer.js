@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import TextOverlay from './TextOverlay';
 
-const mapStateToProps = ({ text, gameState }) => {
+const mapStateToProps = ({ text, images }) => {
   return { 
     lines: text || null,
-    hrImg: gameState.images.line
+    hrImg: images.line
   };
 };
 

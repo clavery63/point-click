@@ -18,14 +18,14 @@ const revealedDoors = createSelector(
 );
 
 const mapStateToProps = state => {
-  const { gameState, playerState } = state;
+  const { images, playerState } = state;
 
   return { 
     currentVerb: playerState.verb,
     hasText: hasText(state),
     doors: revealedDoors(state),
-    menuImg: gameState.images.menu,
-    menuButtonImg: gameState.images.menuButton
+    menuImg: images.menu,
+    menuButtonImg: images.menuButton
   };
 };
 

@@ -875,6 +875,7 @@ const rooms = {
   0: {
     img: 'room0',
     music: 'outdoor-ambience.mp3',
+    initialDescription: 'Hi Mike. Welcome to birthday castle. We hope you find it comfortable inside.               And who knows? You might even see some cool s*** along the way.',
     description: 'It\'s the entrance to Birthday Castle. You can faintly hear the sound of several full grown adults chanting inside.',
     doors: [0, 15, 19],
     items: [0],
@@ -1065,30 +1066,12 @@ const gameState = {
   items,
   rooms,
   scenery,
-  flags: new Set()
-};
-
-const transition = {
-  dest: null
-};
-
-const cursor = {
-  enabled: false,
-  position: {
-    x: 128,
-    y: 120
-  }
+  flags: []
 };
 
 const initialState = {
   playerState,
   gameState,
-  transition,
-  cursor,
-  text: null,
-  nextText: null,
-  loading: false,
-  menu: 'MAIN'
 };
 
 export default initialState;

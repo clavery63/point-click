@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import Cursor from './Cursor';
 
-const mapStateToProps = ({ cursor, gameState }) => {
+const mapStateToProps = ({ cursor, images }) => {
   return {
     cursor,
-    cursorImg: gameState.images.cursor
+    cursorImg: images.cursor
   };
 };
 

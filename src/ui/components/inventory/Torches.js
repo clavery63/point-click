@@ -33,9 +33,9 @@ const Torches = ({ torchImg, onClick }) => {
   );
 };
 
-const mapStateToProps = ({ gameState }) => {
+const mapStateToProps = ({ images }) => {
   return {
-    torchImg: gameState.images.flame1
+    torchImg: images.flame1
   };
 };
 
