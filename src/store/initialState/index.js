@@ -365,9 +365,12 @@ const items = {
     },
     img: 'bong',
     description: 'It\'s some kind of strange vessel. Its base is filled with a murky, dank liquid, and there is an acrid vapor emanating from its spout.',
-    movesTo: 10,
-    moveDir: 'RIGHT',
-    moveOn: 'SMOKE'
+    verbs: {
+      smoke: [{
+        moveTo: 10,
+        moveDir: 'RIGHT'
+      }]
+    }
   },
   8: {
     name: 'torch',
@@ -460,6 +463,9 @@ const items = {
         text: 'With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.',
         addFlag: 'GARFIELD_CONSUMED',
         removeFlag: 'GARFIELD_VISIBLE'
+      }],
+      smoke: [{
+        text: 'Smoking Garfield is illegal in this state.'
       }]
     }
   },

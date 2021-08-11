@@ -1,28 +1,5 @@
-import { compose } from 'lodash/fp';
-import { withText, updateValue, setValue } from '../utils';
+import genericVerbReducer from './genericVerbReducer';
 
-const smokeReducer = (object, playerState) => {
-  if (object.moveOn === 'SMOKE') {
-    return setValue('transition')({ 
-      dest: object.movesTo, 
-      dir: object.moveDir
-    });
-  }
-
-  if (object.name === 'garfield') {
-    return withText('Smoking Garfiled is illegal in this state');
-  }
-
-  if (!object.onEat) {
-    return withText(`Smoking ${object.name} simply isn't going to work. It's too logistically difficult.`);
-  }
-  
-  const room = playerState.room;
-  return compose(
-    updateValue(`gameState.rooms.${room}.items`)(object.id),
-    withText(object.onEat)
-  );
-};
-
+const smokeReducer = genericVerbReducer('smoke', 'Smoking that would be ill-advised.');
 
 export default smokeReducer;
