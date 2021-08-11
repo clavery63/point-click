@@ -9,8 +9,11 @@ const itemReducer = (item, playerState) => {
   );
 };
 
-const takeReducer = (object, playerState) => {
-  if (object.type === 'items' && !object.onEat) {
+const takeReducer = (object, playerState, flags) => {
+  if (object.takeableFlag && !flags.has(object.takableFlag)) {
+    return withText(`No good. Taking ${object.name} isn't working`);
+  }
+  if (object.type === 'items') {
     return itemReducer(object, playerState);
   }
   if (object.type === 'doors') {

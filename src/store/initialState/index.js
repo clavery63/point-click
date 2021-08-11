@@ -233,7 +233,7 @@ const doors = {
     dir: 'DOWN',
     dest: 14,
     state: 'CLOSED',
-    openCondition: 'GARFIELD'
+    openCondition: 'GARFIELD_CONSUMED'
   },
   16: {
     mapPosition: {
@@ -453,8 +453,15 @@ const items = {
       width: 68,
       height: 55
     },
-    onEat: 'With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.',
-    eatEffect: 'GARFIELD'
+    takeableFlag: 'GARFIELD_TAKE',
+    visibleFlag: 'GARFIELD_VISIBLE',
+    verbs: {
+      eat: [{
+        text: 'With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.',
+        addFlag: 'GARFIELD_CONSUMED',
+        removeFlag: 'GARFIELD_VISIBLE'
+      }]
+    }
   },
   15: {
     name: 'pie',
@@ -583,9 +590,12 @@ const scenery = {
       width: 112,
       height: 112
     },
-    movesTo: 9,
-    moveDir: 'DOWN',
-    moveOn: 'EAT'
+    verbs: {
+      eat: [{
+        moveTo: 9,
+        moveDir: 'DOWN'
+      }]
+    }
   },
   6: {
     img: 'bartender',
@@ -711,7 +721,13 @@ const scenery = {
       '"HONK!"'
     ],
     speakIndex: 0,
-    contains: [18, 18, 18, 16, 18, 18]
+    contains: [18, 18, 18, 16, 18, 18],
+    verbs: {
+      eat: [{
+        moveTo: 19,
+        moveDir: 'UP'
+      }]
+    }
   },
   15: {
     name: 'jason',
@@ -793,7 +809,11 @@ const scenery = {
       width: 16,
       height: 16
     },
-    eatText: 'You whip out a knife and fork, and cut off the juiciest part of the pumpkin you can find. You lick your lips as it slides down your gullet. No way you can eat the whole thing though.'
+    verbs: {
+      eat: [{
+        text: 'You whip out a knife and fork, and cut off the juiciest part of the pumpkin you can find. You lick your lips as it slides down your gullet. No way you can eat the whole thing though.'
+      }]
+    }
   },
   21: {
     name: 'malone',
@@ -818,9 +838,12 @@ const scenery = {
       height: 13
     },
     description: 'You don\'t like the looks of this gin and soda, but there is no turning back now. There\'s no concept of save states in this game, so you might as well just drink it and see what happens.',
-    movesTo: 20,
-    moveDir: 'DOWN',
-    moveOn: 'EAT',
+    verbs: {
+      eat: [{
+        moveTo: 20,
+        moveDir: 'DOWN'
+      }]
+    }
   },
   23: {
     name: 'goodGin',
@@ -832,9 +855,12 @@ const scenery = {
       height: 13
     },
     description: 'Holy crap! The moment has finally arrived! You will finally drink some gin!',
-    movesTo: 19,
-    moveDir: 'UP',
-    moveOn: 'EAT',
+    verbs: {
+      eat: [{
+        moveTo: 19,
+        moveDir: 'UP'
+      }]
+    }
   },
   24: {
     name: 'jukebox',
@@ -1066,12 +1092,12 @@ const gameState = {
   items,
   rooms,
   scenery,
-  flags: []
 };
 
 const initialState = {
   playerState,
   gameState,
+  flags: ['GARFIELD_VISIBLE']
 };
 
 export default initialState;

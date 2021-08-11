@@ -1,4 +1,4 @@
-import { map, switchMapTo, switchMap, tap } from 'rxjs/operators';
+import { map, switchMapTo, switchMap } from 'rxjs/operators';
 import { Observable, of, forkJoin, merge, from } from 'rxjs';
 import { ofType } from 'redux-observable';
 import initialState from '../initialState';
@@ -74,10 +74,11 @@ const loadPlayerAndGameState$ = uiState => {
    * get this initial state from a network request.
    */
   return of(initialState).pipe(
-    map(({ playerState, gameState }) => ({
+    map(({ playerState, gameState, flags }) => ({
       ...uiState,
       playerState,
-      gameState
+      gameState,
+      flags
     }))
   );
 }
@@ -90,8 +91,7 @@ const load$ = action$ => {
     switchMap(state => merge(
       of({ type: 'SET_STATE', payload: state }),
       restart$(action$, state)
-    )),
-    tap(e => console.log('state', e))
+    ))
   );
 };
 

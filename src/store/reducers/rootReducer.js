@@ -54,9 +54,9 @@ const reducers = {
 };
 
 const rootReducer = (state = {}, { type, payload }) => {
-  const { gameState, playerState } = state;
+  const { gameState, playerState, flags } = state;
   const reducer = reducers[type] || keepState;
-  return reducer(payload, playerState, gameState)(state);
+  return reducer(payload, playerState, gameState, flags)(state);
 };
 
 export default rootReducer;

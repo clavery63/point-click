@@ -40,7 +40,7 @@ const useReducer = (object, playerState, flags) => {
     return compose(
       withText(object.useTexts[object.useIndex]),
       updateValue(`gameState.scenery.${object.id}.useIndex`)(index => (index + 1) % object.useTexts.length),
-      updateValue('gameState.flags')(flags => {
+      updateValue('flags')(flags => {
         if (object.useIndex === object.useTexts.length - 1) {
           // do this via a flag
           // state.gameState.rooms[6].scenery = [21];
@@ -58,7 +58,7 @@ const useReducer = (object, playerState, flags) => {
   } else if (playerState.using === object.activeOn) {
     return compose(
       withText(object.activeText),
-      updateValue('gameState.flags')(flags => {
+      updateValue('flags')(flags => {
         flags.add(object.activeFlag);
         return flags;
       }),

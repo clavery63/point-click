@@ -21,11 +21,11 @@ const verbReducers = {
   SPEAK: speakReducer
 };
 
-const selectObjectReducer = (payload, playerState, gameState) => {
+const selectObjectReducer = (payload, playerState, gameState, flags) => {
   const { type, id } = payload;
   const object = { ...gameState[type][id], type, id };
   const reducer = verbReducers[playerState.verb] || keepState;
-  return reducer(object, playerState, gameState.flags);
+  return reducer(object, playerState, flags);
 };
 
 export default selectObjectReducer;

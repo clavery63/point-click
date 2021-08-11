@@ -12,6 +12,20 @@ export const updateValue = path => fn => state => {
   return setValue(path)(newValue)(state);
 };
 
+export const addFlag = flag => {
+  return updateValue('flags')(flags => {
+    flags.add(flag);
+    return flags;
+  });
+};
+
+export const removeFlag = flag => {
+  return updateValue('flags')(flags => {
+    flags.delete(flag);
+    return flags;
+  });
+};
+
 export const clearValue = path => setValue(path)(null);
 
 export const withText = setValue('nextText');

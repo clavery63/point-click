@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import Viewport from './Viewport';
 
 const withImages = (gameState, images, collection, keys = ['img']) => id => {
-  console.log('gameState, images, collection', gameState, images, collection)
   const object = gameState[collection][id];
   return keys.reduce((acc, key) => {
     const img = images[object[key]];
@@ -14,7 +13,7 @@ const withImages = (gameState, images, collection, keys = ['img']) => id => {
   }, object);
 };
 
-const mapStateToProps = ({ images, gameState, playerState }) => {
+const mapStateToProps = ({ images, gameState, playerState, flags }) => {
   const { rooms } = gameState;
   const { room } = playerState;
   const { img, doors, items, scenery, video } = rooms[room];
@@ -30,7 +29,8 @@ const mapStateToProps = ({ images, gameState, playerState }) => {
     .map(withImages(gameState, images, 'doors', ['openImg', 'closedImg']));
   return {
     doors: doorsWithImages,
-    items: items.map(withImages(gameState, images, 'items')),
+    items: items.map(withImages(gameState, images, 'items'))
+      .filter(item => !item.visibleFlag || flags.has(item.visibleFlag)),
     scenery: scenery.map(withImages(gameState, images, 'scenery')),
     borderImg: images.border,
     roomImg: images[img],
