@@ -1,15 +1,5 @@
-import { withText, setValue } from '../utils';
+import genericVerbReducer from './genericVerbReducer';
 
-const lookReducer = (object, playerState, flags) => {
-  if (object.moveOn === 'LOOK') {
-    if (!object.activeFlag || flags.has(object.activeFlag)) {
-      return setValue('transition')({ 
-        dest: object.movesTo, 
-        dir: object.moveDir
-      });
-    }
-  }
-  return withText(object.description);
-};
+const lookReducer = genericVerbReducer('look', object => object.description);
 
 export default lookReducer;

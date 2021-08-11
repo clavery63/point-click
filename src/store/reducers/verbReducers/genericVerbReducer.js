@@ -17,10 +17,10 @@ const getVerbLogic = (object, verb, flags) => {
   return null;
 }
 
-const genericVerbReducer = (verb, defaultText) => (object, playerState, flags) => {
+const genericVerbReducer = (verb, getDefaultText) => (object, playerState, flags) => {
   const logic = getVerbLogic(object, verb, flags);
   if (!logic) {
-    return withText(defaultText);
+    return withText(getDefaultText(object));
   }
 
   if (logic.moveTo) {

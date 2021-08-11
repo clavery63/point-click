@@ -28,7 +28,7 @@ const getReducer = (verb, object) => {
     case 'SMOKE':
       return smokeReducer;
     case 'LOOK':
-      return lookReducer(object.itemListDescription || object.description);
+      return lookReducer(object.description);
     default:
       return defaultReducer;
   }

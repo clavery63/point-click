@@ -293,8 +293,12 @@ const items = {
       height: 6,
     },
     img: 'key1',
-    description: 'There\'s a random key embedded in the wall.',
-    itemListDescription: 'This is a real nice-looking key.'
+    verbs: {
+      look: [{
+        text: 'There\'s a random key embedded in the wall.'
+      }]
+    },
+    description: 'This is a real nice-looking key.'
   },
   1: {
     position: {
@@ -352,8 +356,12 @@ const items = {
       height: 10
     },
     img: 'lockpick',
-    description: 'Mike, here is a lockpick. It might be handy if you, the master of unlocking, take it with you.',
-    itemListDescription: 'You can use this for picking locks.'
+    verbs: {
+      look: [{
+        text: 'Mike, here is a lockpick. It might be handy if you, the master of unlocking, take it with you.'
+      }]
+    },
+    description: 'You can use this to pick locks.'
   },
   7: {
     name: 'bong',
@@ -403,14 +411,16 @@ const items = {
       height: 112
     },
     img: 'scott',
-    description: 'He seems aggressive, but you don\'t think there\'s any reason to be concerned at the moment.',
-    itemListDescription: 'Scott is in your inventory now. Feel free to use him as you would any other items or spells.',
+    description: 'Scott is in your inventory now. Feel free to use him as you would any other items or spells.',
     verbs: {
       speak: [{
         text: '"I thought you said this party would be cool.", says Scott, looking concerned. "Why haven\'t I had any beer yet?"',
       }],
       hit: [{
         text: '"Cool man. got any beer?"',
+      }],
+      look: [{
+        text: 'He seems aggressive, but you don\'t think there\'s any reason to be concerned at the moment.'
       }]
     },
     requiresPrecision: true
@@ -418,8 +428,12 @@ const items = {
   11: {
     name: 'sign',
     img: 'welcomeSign',
-    description: '_____The sign reads: ______"Welcome to" ____"Lobotomy Manor."                             But I\'m not at Lobotomy Manor!!                   I\'m at Birthday Castle... right?' ,
-    itemListDescription: 'Lobotomy Manor? Boy does this sign give me the creeps!!',
+    verbs: {
+      look: [{
+        text: '_____The sign reads: ______"Welcome to" ____"Lobotomy Manor."                             But I\'m not at Lobotomy Manor!!                   I\'m at Birthday Castle... right?'
+      }]
+    },
+    description: 'Lobotomy Manor? Boy does this sign give me the creeps!!',
     position: {
       left: 44,
       top: 36,
@@ -430,8 +444,12 @@ const items = {
   12: {
     name: 'frying pan',
     img: 'fryingPan',
-    description: 'A commercial for a frying pan plays quietly in the background.',
-    itemListDescription: 'Congratulations. You are the proud owner of a shiny, new frying pan',
+    verbs: {
+      look: [{
+        text: 'A commercial for a frying pan plays quietly in the background.'
+      }]
+    },
+    description: 'Congratulations. You are the proud owner of a shiny, new frying pan',
     position: {
       left: 71,
       top: 20,
@@ -442,8 +460,12 @@ const items = {
   13: {
     name: 'bottle',
     img: 'bottle',
-    description: 'You grow enraged as you realize that, while there is an unattended drink on the counter, it is simply a beer and not a gin and soda.',
-    itemListDescription: 'A bottle. Ugh... You remember how you had to drink that beer instead of gin and soda. What an awful time you had. Frankly you could do without the soda too. All you really want is the gin. That sweet, nourishing gin.',
+    verbs: {
+      look: [{
+        text: 'You grow enraged as you realize that, while there is an unattended drink on the counter, it is simply a beer and not a gin and soda.'
+      }]
+    },
+    description: 'A bottle. Ugh... You remember how you had to drink that beer instead of gin and soda. What an awful time you had. Frankly you could do without the soda too. All you really want is the gin. That sweet, nourishing gin.',
     position: {
       left: 46,
       top: 48,
@@ -585,13 +607,17 @@ const scenery = {
       width: 9,
       height: 9
     },
-    movesTo: 8,
-    moveDir: 'FORWARD',
-    moveOn: 'LOOK',
+    verbs: {
+      look: [{
+        moveTo: 8,
+        moveDir: 'FORWARD'
+      }]
+    }
   },
   5: {
     name: 'eightBallMask',
     description: 'It appears you can shake this and receive answers to your problems.',
+    // TODO: handle this loop with flags (like you're doing with SPEAK)
     useTexts: [
       'You shake the magic eight ball. It says you are doing a great job! but you knew that already :)',
       'You shake it again. It says "Sam Malone is in this castle somewhere."',
@@ -696,9 +722,12 @@ const scenery = {
       width: 14,
       height: 13
     },
-    movesTo: 13,
-    moveDir: 'FORWARD',
-    moveOn: 'LOOK',
+    verbs: {
+      look: [{
+        moveTo: 13,
+        moveDir: 'FORWARD'
+      }]
+    }
   },
   10: {
     name: 'tv2',
@@ -708,9 +737,12 @@ const scenery = {
       width: 11,
       height: 13
     },
-    movesTo: 16,
-    moveDir: 'FORWARD',
-    moveOn: 'LOOK',
+    verbs: {
+      look: [{
+        moveTo: 16,
+        moveDir: 'FORWARD'
+      }]
+    }
   },
   11: {
     name: 'tv3',
@@ -720,9 +752,12 @@ const scenery = {
       width: 15,
       height: 9
     },
-    movesTo: 13,
-    moveDir: 'FORWARD',
-    moveOn: 'LOOK',
+    verbs: {
+      look: [{
+        moveTo: 13,
+        moveDir: 'FORWARD'
+      }]
+    }
   },
   12: {
     name: 'bench',
@@ -787,20 +822,25 @@ const scenery = {
   16: {
     name: 'computer',
     img: 'computer',
-    description: 'You laugh uncontrollably at an out-of-place computer sitting in this hallway. You nearly fall down, and can feel your bag tear a little bit as a result. Unfortunately, it won\'t boot up.',
     startPosition: {
       left: 72,
       top: 73,
       width: 24,
       height: 26
     },
+    // TODO: replace these (and the malone endings) with a generic use-flag mechanism
     activeOn: 19,
     activeText: 'You insert the MO disk into the computer, and it boots up. Your heart pounds with anticipation as you prepare to visit your all-time favorite webpage. You feel the room shake with each keystroke - www.ebaumsworld.com___ /____________ jetsfumble.',
     activeFlag: 'COMPUTER',
-    movesTo: 18,
-    moveDir: 'FORWARD',
-    moveOn: 'LOOK'
-
+    verbs: {
+      look: [{
+        prereqFlags: ['COMPUTER'],
+        moveTo: 18,
+        moveDir: 'FORWARD'
+      }, {
+        text: 'You laugh uncontrollably at an out-of-place computer sitting in this hallway. You nearly fall down, and can feel your bag tear a little bit as a result. Unfortunately, it won\'t boot up.'
+      }]
+    }
   },
   17: {
     name: 'locker door',
@@ -830,9 +870,12 @@ const scenery = {
       width: 16,
       height: 16
     },
-    movesTo: 17,
-    moveDir: 'FORWARD',
-    moveOn: 'LOOK',
+    verbs: {
+      look: [{
+        moveTo: 17,
+        moveDir: 'FORWARD'
+      }]
+    }
   },
   19: {
     name: 'monitor',
@@ -1134,7 +1177,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 5,
+  room: 0,
   items: [],
   page: 0,
   bagLevel: 0
