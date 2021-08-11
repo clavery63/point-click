@@ -405,10 +405,12 @@ const items = {
     img: 'scott',
     description: 'He seems aggressive, but you don\'t think there\'s any reason to be concerned at the moment.',
     itemListDescription: 'Scott is in your inventory now. Feel free to use him as you would any other items or spells.',
-    onHit: '"Cool man. got any beer?"',
     verbs: {
       speak: [{
         text: '"I thought you said this party would be cool.", says Scott, looking concerned. "Why haven\'t I had any beer yet?"',
+      }],
+      hit: [{
+        text: '"Cool man. got any beer?"',
       }]
     },
     requiresPrecision: true
@@ -810,7 +812,11 @@ const scenery = {
       width: 20,
       height: 69
     },
-    onHit: 'Youch! That was a good thought, but you weren\'t able to open up the damn door. You\'ll need something better-suited to bludgeoning.',
+    verbs: {
+      hit: [{
+        text: 'Youch! That was a good thought, but you weren\'t able to open up the damn door. You\'ll need something better-suited to bludgeoning.'
+      }]
+    },
     vanishOn: 12,
     vanishText: '"Blammo!" The damn door opened because you smacked it with a fucking frying pan. Nice fucking work.'
   },
@@ -1128,7 +1134,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 3,
+  room: 5,
   items: [],
   page: 0,
   bagLevel: 0

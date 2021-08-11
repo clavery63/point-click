@@ -1,12 +1,5 @@
-import { withText } from '../utils';
+import genericVerbReducer from './genericVerbReducer';
 
-const hitReducer = object => {
-  if (object.onHit) {
-    return withText(object.onHit);
-  }
-
-  return withText('Ya blew it. That really hurt.');
-};
-
+const hitReducer = genericVerbReducer('hit', 'Ya blew it. That really hurt.');
 
 export default hitReducer;
