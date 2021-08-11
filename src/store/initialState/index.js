@@ -406,7 +406,11 @@ const items = {
     description: 'He seems aggressive, but you don\'t think there\'s any reason to be concerned at the moment.',
     itemListDescription: 'Scott is in your inventory now. Feel free to use him as you would any other items or spells.',
     onHit: '"Cool man. got any beer?"',
-    onSpeak: '"I thought you said this party would be cool.", says Scott, looking concerned. "Why haven\'t I had any beer yet?"',
+    verbs: {
+      speak: [{
+        text: '"I thought you said this party would be cool.", says Scott, looking concerned. "Why haven\'t I had any beer yet?"',
+      }]
+    },
     requiresPrecision: true
   },
   11: {
@@ -554,7 +558,11 @@ const scenery = {
       width: 8,
       height: 56
     },
-    onSpeak: 'You can\'t be sure, but you could swear you heard the words "Uncle Flesh" uttered from deep within this corridor.'
+    verbs: {
+      speak: [{
+        text: 'You can\'t be sure, but you could swear you heard the words "Uncle Flesh" uttered from deep within this corridor.'
+      }]
+    }
   },
   3: {
     name: 'gunk',
@@ -606,12 +614,24 @@ const scenery = {
   6: {
     img: 'bartender',
     description: 'Meaghan notices you. She\'ll probably offer you some gin if you talk to her.',
-    speakTexts: [
-      'Heyyy what\'s up. Let me guess. Gin?',
-      'Sorta random question, but do you want that frying pan up there on the T.V.?',
-      'It\'s for sale. But you can just go ahead and grab it.'
-    ],
-    speakIndex: 0,
+    verbs: {
+      speak: [{
+        prereqFlags: ['REDDS_1'],
+        text: 'Heyyy what\'s up. Let me guess. Gin?',
+        removeFlag: 'REDDS_1',
+        addFlag: 'REDDS_2'
+      }, {
+        prereqFlags: ['REDDS_2'],
+        text: 'Sorta random question, but do you want that frying pan up there on the T.V.?',
+        removeFlag: 'REDDS_2',
+        addFlag: 'REDDS_3'
+      }, {
+        prereqFlags: ['REDDS_3'],
+        text: 'It\'s for sale. But you can just go ahead and grab it.',
+        removeFlag: 'REDDS_3',
+        addFlag: 'REDDS_1'
+      }]
+    },
     startPosition: {
       left: 54,
       top: 34,
@@ -622,13 +642,29 @@ const scenery = {
   7: {
     img: 'santos',
     description: 'It\'s Santos. If only you could get past him, you might be able to collect some more useful items.',
-    speakTexts: [
-      '"Yooo, get this. This dude over there says he\'s a fan of Mega Man but he\'s only play 3 out of the original 6 of them. Or at least only beaten 3"',
-      '"This party\'s kinda random right?"',
-      '"Don\'t worry about me. I can literally sleep anywhere I don\'t care. I literally don\'t care I can sleep anywhere. Like it doesn\'t matter. It literally doesn\'t matter. I know that sounds crazy right? I don\'t know. I guess it\'s basically my super power. Like how random would that be, if your superpower was just to be able to sleep anywhere. But like literally I think that would be mine. Either that or drinking tequila without flinching. Who do you know here again?"',
-      '"Who\'s Scott? ohhhhh! You mean Scott. Yeah, I know him"'
-    ],
-    speakIndex: 0,
+    verbs: {
+      speak: [{
+        prereqFlags: ['SANTOS_1'],
+        text: '"Yooo, get this. This dude over there says he\'s a fan of Mega Man but he\'s only play 3 out of the original 6 of them. Or at least only beaten 3"',
+        removeFlag: 'SANTOS_1',
+        addFlag: 'SANTOS_2'
+      }, {
+        prereqFlags: ['SANTOS_2'],
+        text: '"This party\'s kinda random right?"',
+        removeFlag: 'SANTOS_2',
+        addFlag: 'SANTOS_3'
+      }, {
+        prereqFlags: ['SANTOS_3'],
+        text: '"Don\'t worry about me. I can literally sleep anywhere I don\'t care. I literally don\'t care I can sleep anywhere. Like it doesn\'t matter. It literally doesn\'t matter. I know that sounds crazy right? I don\'t know. I guess it\'s basically my super power. Like how random would that be, if your superpower was just to be able to sleep anywhere. But like literally I think that would be mine. Either that or drinking tequila without flinching. Who do you know here again?"',
+        removeFlag: 'SANTOS_3',
+        addFlag: 'SANTOS_4'
+      }, {
+        prereqFlags: ['SANTOS_4'],
+        text: '"Who\'s Scott? ohhhhh! You mean Scott. Yeah, I know him"',
+        removeFlag: 'SANTOS_4',
+        addFlag: 'SANTOS_1'
+      }]
+    },
     startPosition: {
       left: 0,
       top: 0,
@@ -701,10 +737,11 @@ const scenery = {
     name: 'justin',
     img: 'justin',
     description: 'Well, would you look at that?! Justin is in the park too, just hanging out with that goose.  You can tell that he\'s pleased to see you.  He seems to be holding an unlit torch in one of his hands.',
-    speakTexts: [
-      '"Hey Mike!  Happy birthday!  I thought you\'d like a brief escape from all of the unhinged shit going on in the castle, so I brought you to this peaceful place.  Check out the nice waterfowl over there, or "birdbrain" as you\'d say.  Wow...you\'ve collected a lot of torches!  That\'s cool, even though they don\'t serve any functional purpose in this game at all.  Well, keep on picking them up if you want to, just for fun."'
-    ],
-    speakIndex: 0,
+    verbs: {
+      speak: [{
+        text: '"Hey Mike!  Happy birthday!  I thought you\'d like a brief escape from all of the unhinged shit going on in the castle, so I brought you to this peaceful place.  Check out the nice waterfowl over there, or "birdbrain" as you\'d say.  Wow...you\'ve collected a lot of torches!  That\'s cool, even though they don\'t serve any functional purpose in this game at all.  Well, keep on picking them up if you want to, just for fun."'
+      }]
+    },
     startPosition: {
       left: 0,
       top: 0,
@@ -723,16 +760,11 @@ const scenery = {
       width: 32,
       height: 40
     },
-    speakTexts: [
-      '"HONK!"'
-    ],
-    speakIndex: 0,
     contains: [18, 18, 18, 16, 18, 18],
     verbs: {
-      eat: [{
-        moveTo: 19,
-        moveDir: 'UP'
-      }]
+      speak: [{
+        text: '"HONK!"'
+      }],
     }
   },
   15: {
@@ -744,10 +776,11 @@ const scenery = {
       width: 51,
       height: 92
     },
-    speakTexts: [
-      '"I am the civilian you choose to meet. The continuity of the species depends on your ability to choose. Will you join me? Locker rentals are free. Execute wisely. Woce."',
-    ],
-    speakIndex: 0
+    verbs: {
+      speak: [{
+        text: '"I am the civilian you choose to meet. The continuity of the species depends on your ability to choose. Will you join me? Locker rentals are free. Execute wisely. Woce."'
+      }],
+    }
   },
   16: {
     name: 'computer',
@@ -830,9 +863,17 @@ const scenery = {
       width: 43,
       height: 66
     },
-    onSpeak: 'Hey buddy, welcome to The Abbey! Norm is in the bathroom, but he\'ll be back soon. You can have this beer if you like, but you look like you\'re craving something else... I only have beer, but if you give me something to mix I could whip you up something else.',
-    speakGood: 'Ah, now that\'s the stuff! I can make you an ice cold gin and soda with this that\'ll go down real smooth!',
-    speakBad: 'Hmm, this gin looks a little funny, but if you really want, I guess I can make you a gin and soda with this...'
+    verbs: {
+      speak: [{
+        prereqFlags: ['GOOD'],
+        text: 'Ah, now that\'s the stuff! I can make you an ice cold gin and soda with this that\'ll go down real smooth!',
+      }, {
+        prereqFlags: ['BAD'],
+        text: 'Hmm, this gin looks a little funny, but if you really want, I guess I can make you a gin and soda with this...',
+      }, {
+        text: 'Hey buddy, welcome to The Abbey! Norm is in the bathroom, but he\'ll be back soon. You can have this beer if you like, but you look like you\'re craving something else... I only have beer, but if you give me something to mix I could whip you up something else.',
+      }],
+    },
   },
   22: {
     name: 'badGin',
@@ -966,7 +1007,7 @@ const rooms = {
     description: 'This place looks familiar. It\'s some place you haven\'t been in a long time.',
     doors: [12],
     items: [],
-    scenery: [] 
+    scenery: [21] 
   },
   7: {
     img: 'room7',
@@ -1087,7 +1128,7 @@ const playerState = {
   verb: 'LOOK',
   using: null,
   examining: null,
-  room: 0,
+  room: 3,
   items: [],
   page: 0,
   bagLevel: 0
@@ -1103,7 +1144,7 @@ const gameState = {
 const initialState = {
   playerState,
   gameState,
-  flags: ['GARFIELD_VISIBLE']
+  flags: ['GARFIELD_VISIBLE', 'REDDS_1', 'SANTOS_1']
 };
 
 export default initialState;

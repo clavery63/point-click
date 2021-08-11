@@ -1,8 +1,9 @@
 import { compose } from 'lodash/fp';
+import { get } from 'lodash';
 import { withText, addFlag, removeFlag, setValue } from '../utils';
 
 const getVerbLogic = (object, verb, flags) => {
-  const options = object.verbs[verb];
+  const options = get(object, `verbs.${verb}`);
   if (!options) {
     return null;
   }
