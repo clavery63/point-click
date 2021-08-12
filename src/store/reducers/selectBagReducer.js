@@ -22,6 +22,7 @@ const getText = bagLevel => {
 const defaultReducer = () => withText('That is not something you can do with your bag.');
 const lookReducer = bagLevel => withText(getText(bagLevel));
 
+// TODO: is it worth making this generic, just like an opt-in timer component with a customizable image and text?
 const useReducer = () => {
   return compose(
     withText('So you\'ve decided to use your bag... What would you like to use it on?'),

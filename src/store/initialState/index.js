@@ -925,6 +925,10 @@ const scenery = {
     verbs: {
       eat: [{
         text: 'You whip out a knife and fork, and cut off the juiciest part of the pumpkin you can find. You lick your lips as it slides down your gullet. No way you can eat the whole thing though.'
+      }],
+      use: [{
+        prereqUsing: 'BAG',
+        text: 'Seeing that this pumpkin has already been "marked" as a safe vessel for storage, you hurriedly collapse the liquid contents from your bag into the gourd\'s saturated depths.  You breathe an exasperated sigh of relief.  Your bag is once again empty.'
       }]
     }
   },

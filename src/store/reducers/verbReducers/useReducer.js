@@ -8,11 +8,6 @@ const useDoorReducer = (object, playerState) => {
       setValue(`gameState.doors.${object.id}.state`)('CLOSED'),
       withText(object.unlockText)
     );
-  } else if (playerState.using === 'BAG' && object.name === 'pumpkin') {
-    return compose(
-      withText('Seeing that this pumpkin has already been "marked" as a safe vessel for storage, you hurriedly collapse the liquid contents from your bag into the gourd\'s saturated depths.  You breathe an exasperated sigh of relief.  Your bag is once again empty.'),
-      setValue('playerState.bagLevel')(0)
-    );
   }
 
   return withText('Damn. Wrong key. The damned door is still locked.');
@@ -21,12 +16,31 @@ const useDoorReducer = (object, playerState) => {
 const forfeitItemReducer = (object, playerState) =>
   when(!object.retainUsing)(filterValues(`playerState.items`)(playerState.using));
 
+  /**
+   * TODO: It wouldn't be too crazy to make this generic. like you select what
+   * action to trigger with what parameters. It would be totally serializable,
+   * and way safer that an eval because we control the function mapping
+   * Something like:
+   * 
+   * use: [{
+   *   text: 'you emptied your bag'
+   *   effect: {
+   *     action: 'setValue',
+   *     parameters: ['playerState.timer', 0]
+   *   }
+   * }]
+   */
+const bagReducer = object =>
+  when(object.name === 'pumpkin')(setValue('playerState.bagLevel')(0));
+
+const extraReducers = combineReducers(forfeitItemReducer, bagReducer);
+
 const useReducerForType = type => {
   if (type === 'doors') {
     return useDoorReducer;
   }
 
-  return genericVerbReducer('use', () => 'That ain\'t workin!\'!', forfeitItemReducer)
+  return genericVerbReducer('use', () => 'That ain\'t workin!\'!', extraReducers)
 };
 
 const useReducer = type => combineReducers(
