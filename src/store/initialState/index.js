@@ -688,7 +688,7 @@ const scenery = {
         prereqFlags: ['SANTOS_1'],
         text: '"Yooo, get this. This dude over there says he\'s a fan of Mega Man but he\'s only play 3 out of the original 6 of them. Or at least only beaten 3"',
         removeFlags: ['SANTOS_1'],
-        addFlasg: ['SANTOS_2']
+        addFlags: ['SANTOS_2']
       }, {
         prereqFlags: ['SANTOS_2'],
         text: '"This party\'s kinda random right?"',
