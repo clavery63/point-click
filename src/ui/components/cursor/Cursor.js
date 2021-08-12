@@ -6,6 +6,8 @@ const Cursor = ({ cursor, cursorImg }) => {
     return null;
   }
 
+  // TODO: looks like we're able to click even when it's invisible...
+
   return (
     <Image
       width={9}

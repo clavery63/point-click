@@ -682,6 +682,7 @@ const scenery = {
   7: {
     img: 'santos',
     description: 'It\'s Santos. If only you could get past him, you might be able to collect some more useful items.',
+    visibleFlag: 'SANTOS_VISIBLE',
     verbs: {
       speak: [{
         prereqFlags: ['SANTOS_1'],
@@ -703,6 +704,11 @@ const scenery = {
         text: '"Who\'s Scott? ohhhhh! You mean Scott. Yeah, I know him"',
         removeFlags: ['SANTOS_4'],
         addFlags: ['SANTOS_1']
+      }],
+      use: [{
+        prereqUsing: 10,
+        text: 'With a desperate yell, you hurl Scott at Santos and shield your eyes. Scott beckons Santos with some strange incantations, and they part ways.',
+        removeFlags: ['SANTOS_VISIBLE']
       }]
     },
     startPosition: {
@@ -710,9 +716,7 @@ const scenery = {
       top: 0,
       width: 112,
       height: 112
-    },
-    vanishOn: 10,
-    vanishText: 'With a desperate yell, you hurl Scott at Santos and shield your eyes. Scott beckons Santos with some strange incantations, and they part ways.'
+    }
   },
   8: {
     img: 'motorcycle',
@@ -786,9 +790,15 @@ const scenery = {
     name: 'justin',
     img: 'justin',
     description: 'Well, would you look at that?! Justin is in the park too, just hanging out with that goose.  You can tell that he\'s pleased to see you.  He seems to be holding an unlit torch in one of his hands.',
+    visibleFlag: 'JUSTIN_VISIBLE',
     verbs: {
       speak: [{
         text: '"Hey Mike!  Happy birthday!  I thought you\'d like a brief escape from all of the unhinged shit going on in the castle, so I brought you to this peaceful place.  Check out the nice waterfowl over there, or "birdbrain" as you\'d say.  Wow...you\'ve collected a lot of torches!  That\'s cool, even though they don\'t serve any functional purpose in this game at all.  Well, keep on picking them up if you want to, just for fun."'
+      }],
+      use: [{
+        prereqUsing: 15,
+        text: '"Oh, nice.  Thanks.  I was hoping someone would have something to eat.  I brought a bag of grapes with me but ended up giving all of them to that goose over there."',
+        removeFlags: ['JUSTIN_VISIBLE']
       }]
     },
     startPosition: {
@@ -796,9 +806,7 @@ const scenery = {
       top: 0,
       width: 112,
       height: 112
-    },
-    vanishOn: 15,
-    vanishText: '"Oh, nice.  Thanks.  I was hoping someone would have something to eat.  I brought a bag of grapes with me but ended up giving all of them to that goose over there."'
+    }
   },
   14: {
     name: 'goose',
@@ -840,10 +848,6 @@ const scenery = {
       width: 24,
       height: 26
     },
-    // TODO: replace these (and the malone endings) with a generic use-flag mechanism
-    activeOn: 19,
-    activeText: 'You insert the MO disk into the computer, and it boots up. Your heart pounds with anticipation as you prepare to visit your all-time favorite webpage. You feel the room shake with each keystroke - www.ebaumsworld.com___ /____________ jetsfumble.',
-    activeFlag: 'COMPUTER',
     verbs: {
       look: [{
         prereqFlags: ['COMPUTER'],
@@ -851,12 +855,18 @@ const scenery = {
         moveDir: 'FORWARD'
       }, {
         text: 'You laugh uncontrollably at an out-of-place computer sitting in this hallway. You nearly fall down, and can feel your bag tear a little bit as a result. Unfortunately, it won\'t boot up.'
+      }],
+      use: [{
+        prereqUsing: 19,
+        text: 'You insert the MO disk into the computer, and it boots up. Your heart pounds with anticipation as you prepare to visit your all-time favorite webpage. You feel the room shake with each keystroke - www.ebaumsworld.com___ /____________ jetsfumble.',
+        addFlags: ['COMPUTER']
       }]
     }
   },
   17: {
     name: 'locker door',
     img: 'lockerDoor',
+    visibleFlag: 'LOCKER_VISIBLE',
     description: 'Succumbing to your unquenchable thirst for destruction, you decide you\'d rather break into one of these lockers with a concussive blow than ask Jason to open it for you. This locker might open if had something to violently hit it with?',
     startPosition: {
       left: 91,
@@ -867,10 +877,13 @@ const scenery = {
     verbs: {
       hit: [{
         text: 'Youch! That was a good thought, but you weren\'t able to open up the damn door. You\'ll need something better-suited to bludgeoning.'
+      }],
+      use: [{
+        prereqUsing: 12,
+        text: '"Blammo!" The damn door opened because you smacked it with a fucking frying pan. Nice fucking work.',
+        removeFlags: ['LOCKER_VISIBLE']
       }]
-    },
-    vanishOn: 12,
-    vanishText: '"Blammo!" The damn door opened because you smacked it with a fucking frying pan. Nice fucking work.'
+    }
   },
   18: {
     name: 'rob small',
@@ -927,19 +940,29 @@ const scenery = {
     visibleFlag: 'DANSEN',
     verbs: {
       speak: [{
-        prereqFlags: ['GOOD'],
+        prereqFlags: ['GOOD_GIN'],
         text: 'Ah, now that\'s the stuff! I can make you an ice cold gin and soda with this that\'ll go down real smooth!',
       }, {
-        prereqFlags: ['BAD'],
+        prereqFlags: ['BAD_GIN'],
         text: 'Hmm, this gin looks a little funny, but if you really want, I guess I can make you a gin and soda with this...',
       }, {
         text: 'Hey buddy, welcome to The Abbey! Norm is in the bathroom, but he\'ll be back soon. You can have this beer if you like, but you look like you\'re craving something else... I only have beer, but if you give me something to mix I could whip you up something else.',
       }],
+      use: [{
+        prereqUsing: 16,
+        text: 'You give Sam the ice cold gin.',
+        addFlags: ['GOOD_GIN']
+      }, {
+        prereqUsing: 17,
+        text: 'You give Sam the gin.',
+        addFlags: ['BAD_GIN']
+      }]
     },
   },
   22: {
     name: 'badGin',
     img: 'ginAndSoda',
+    visibleFlag: 'BAD_GIN',
     startPosition: {
       left: 88,
       top: 95,
@@ -957,6 +980,7 @@ const scenery = {
   23: {
     name: 'goodGin',
     img: 'ginAndSoda',
+    visibleFlag: 'GOOD_GIN',
     startPosition: {
       left: 78,
       top: 95,
@@ -1016,15 +1040,6 @@ const rooms = {
     items: [0],
     scenery: [0]
   },
-  // 1: {
-  //   img: 'room1',
-  //   music: 'spreadsheet-man.mp3',
-  //   description: 'The lobby of Birthday Castle',
-  //   initialDescription: 'A man stumbles toward you. "Oh shit, is that Scott?" you wonder as you pull yourself through the half-ajar door. "Why am I not shocked to find him here..."',
-  //   doors: [1, 2, 3],
-  //   items: [],
-  //   scenery: [25, 26] 
-  // },
   1: {
     img: 'room1',
     music: 'spreadsheet-man.mp3',
@@ -1069,7 +1084,7 @@ const rooms = {
     description: 'This place looks familiar. It\'s some place you haven\'t been in a long time.',
     doors: [12],
     items: [],
-    scenery: [21] 
+    scenery: [21, 22, 23] 
   },
   7: {
     img: 'room7',
@@ -1161,11 +1176,12 @@ const rooms = {
     description: 'Hell yeah. That\'s some good fumbling. Gin. Love to see a good fumble ya hear. Gin. Gin. I like it when the Jets Fumble! I need gin.',
     doors: [12],
     items: [],
-    scenery: [19] 
+    scenery: [19]
   },
   19: {
     video: 'good-ending.mp4',
     description: 'As you sip on your refreshing beverage, you feel your mania fading. Norm returns from the bathroom and slaps you on the back. With a jolt you have a flash of a memory of falling...a pit...pain...light... but it quickly fades. Better not to focus on that. You\'re comfortable here. In fact you feel you like you could stay here forever, sipping on this delicious gin and tonic. Surrounded by people who know your name...',
+    // TODO: give this a flag like "ending" so we can go to a congratulation screen or something
     doors: [],
     items: [],
     scenery: [] 
@@ -1173,6 +1189,7 @@ const rooms = {
   20: {
     video: 'bad-ending.mp4',
     description: 'Unfortunately this gin and soda is really not doing the trick. The gin must have been contaminated by sitting in that motorcycle for so long, it\'s really warm and tastes off. If only you could have found some delicious ice cold gin! You feel more sober than ever. Looking at Sam Malone, you remember that he\'s not even real. He\'s a fictional character played by Ted Danson who you\'re pretty sure is not here right now. In fact it occurs to you that nobody is here right now, and "here" isn\'t really anywhere. You look behind you and see only a void. The Abbey is fading away before your eyes. You feel cold. You remember that The Abbey is gone forever, and realize that the only piece of it left is what lives on in your memory. You\'re starting to feel sick looking at this fading simulacrum. Ugly though it may be, you\'d be better off in the real world, living with your memories of good times. It\'s time to stop playing this game and face reality.',
+    gameOver: true,
     doors: [],
     items: [],
     scenery: [] 
@@ -1206,7 +1223,15 @@ const gameState = {
 const initialState = {
   playerState,
   gameState,
-  flags: ['GARFIELD_VISIBLE', 'REDDS_1', 'SANTOS_1', 'EIGHTBALL_1']
+  flags: [
+    'GARFIELD_VISIBLE',
+    'JUSTIN_VISIBLE',
+    'SANTOS_VISIBLE',
+    'LOCKER_VISIBLE',
+    'REDDS_1',
+    'SANTOS_1',
+    'EIGHTBALL_1'
+  ]
 };
 
 export default initialState;
