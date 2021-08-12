@@ -33,7 +33,7 @@ const dispatchRoom = (dest, state, runText$) => {
     return { type: null }
   }
 
-  if (playerState.bagLevel === 17) {
+  if (playerState.timer === 17) {
     return of({ type: 'RUN_TRANSITION', payload: { dest: 11, dir: 'FORWARD', frame: 0 } });
   }
 

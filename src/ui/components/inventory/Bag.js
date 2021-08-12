@@ -28,7 +28,7 @@ const Bag = ({ bagImg, onClick, bagLevel }) => {
 const mapStateToProps = ({ images, playerState }) => {
   return {
     bagImg: images.bag,
-    bagLevel: playerState.bagLevel
+    bagLevel: playerState.timer
   };
 };
 

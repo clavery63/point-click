@@ -1,5 +1,6 @@
 import { compose } from 'lodash/fp';
 import { get } from 'lodash';
+import effectsReducer from '../effectsReducer';
 import { withText, addFlags, removeFlags, setValue, when, keepState } from '../utils';
 
 const isValid = (option, using, flags) => {
@@ -21,7 +22,7 @@ const getVerbLogic = (object, verb, using, flags) => {
   }
 
   return null;
-}
+};
 
 const genericVerbReducer = (verb, getDefaultText, extraReducer = keepState) => {
   return (object, playerState, flags) => {
@@ -42,6 +43,7 @@ const genericVerbReducer = (verb, getDefaultText, extraReducer = keepState) => {
       when(logic.addFlags)(addFlags(logic.addFlags)),
       when(logic.removeFlags)(removeFlags(logic.removeFlags)),
       withText(logic.text),
+      effectsReducer(logic),
       extraReducer(object, playerState, flags)
     );
   };
