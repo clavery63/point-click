@@ -1,6 +1,6 @@
 import { compose } from 'lodash/fp';
 import { get } from 'lodash';
-import { withText, addFlag, removeFlag, setValue } from '../utils';
+import { withText, addFlags, removeFlags, setValue, when } from '../utils';
 
 const getVerbLogic = (object, verb, flags) => {
   const options = get(object, `verbs.${verb}`);
@@ -19,6 +19,7 @@ const getVerbLogic = (object, verb, flags) => {
 
 const genericVerbReducer = (verb, getDefaultText) => (object, playerState, flags) => {
   const logic = getVerbLogic(object, verb, flags);
+
   if (!logic) {
     return withText(getDefaultText(object));
   }
@@ -31,8 +32,8 @@ const genericVerbReducer = (verb, getDefaultText) => (object, playerState, flags
   }
 
   return compose(
-    addFlag(logic.addFlag),
-    removeFlag(logic.removeFlag),
+    when(logic.addFlags)(addFlags(logic.addFlags)),
+    when(logic.removeFlags)(removeFlags(logic.removeFlags)),
     withText(logic.text),
   );
 };

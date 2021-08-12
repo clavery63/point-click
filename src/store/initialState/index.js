@@ -489,8 +489,8 @@ const items = {
     verbs: {
       eat: [{
         text: 'With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.',
-        addFlag: 'GARFIELD_CONSUMED',
-        removeFlag: 'GARFIELD_VISIBLE'
+        addFlags: ['GARFIELD_CONSUMED'],
+        removeFlags: ['GARFIELD_VISIBLE']
       }],
       smoke: [{
         text: 'Smoking Garfield is illegal in this state.'
@@ -617,15 +617,6 @@ const scenery = {
   5: {
     name: 'eightBallMask',
     description: 'It appears you can shake this and receive answers to your problems.',
-    // TODO: handle this loop with flags (like you're doing with SPEAK)
-    useTexts: [
-      'You shake the magic eight ball. It says you are doing a great job! but you knew that already :)',
-      'You shake it again. It says "Sam Malone is in this castle somewhere."',
-      'You shake it again. "No, seriously," it says. "Sam is here somewhere. He\'s with Norm and they\'ve consumed so much beer they\'ve nearly fallen asleep."',
-      'You shake it one more time. "You will have some good luck. I guarantee it," it says.'
-    ],
-    useIndex: 0,
-    onUseFlag: 'DANSEN',
     startPosition: {
       left: 0,
       top: 0,
@@ -636,6 +627,27 @@ const scenery = {
       eat: [{
         moveTo: 9,
         moveDir: 'DOWN'
+      }],
+      use: [{
+        prereqFlags: ['EIGHTBALL_1'],
+        text: 'You shake the magic eight ball. It says you are doing a great job! but you knew that already :)',
+        removeFlags: ['EIGHTBALL_1'],
+        addFlags: ['EIGHTBALL_2']
+      }, {
+        prereqFlags: ['EIGHTBALL_2'],
+        text: 'You shake it again. It says "Sam Malone is in this castle somewhere."',
+        removeFlags: ['EIGHTBALL_2'],
+        addFlags: ['EIGHTBALL_3']
+      }, {
+        prereqFlags: ['EIGHTBALL_3'],
+        text: 'You shake it again. "No, seriously," it says. "Sam is here somewhere. He\'s with Norm and they\'ve consumed so much beer they\'ve nearly fallen asleep."',
+        removeFlags: ['EIGHTBALL_3'],
+        addFlags: ['EIGHTBALL_4']
+      }, {
+        prereqFlags: ['EIGHTBALL_4'],
+        text: 'You shake it one more time. "You will have some good luck. I guarantee it," it says.',
+        removeFlags: ['EIGHTBALL_4'],
+        addFlags: ['EIGHTBALL_1', 'DANSEN']
       }]
     }
   },
@@ -646,18 +658,18 @@ const scenery = {
       speak: [{
         prereqFlags: ['REDDS_1'],
         text: 'Heyyy what\'s up. Let me guess. Gin?',
-        removeFlag: 'REDDS_1',
-        addFlag: 'REDDS_2'
+        removeFlags: ['REDDS_1'],
+        addFlags: ['REDDS_2']
       }, {
         prereqFlags: ['REDDS_2'],
         text: 'Sorta random question, but do you want that frying pan up there on the T.V.?',
-        removeFlag: 'REDDS_2',
-        addFlag: 'REDDS_3'
+        removeFlags: ['REDDS_2'],
+        addFlags: ['REDDS_3']
       }, {
         prereqFlags: ['REDDS_3'],
         text: 'It\'s for sale. But you can just go ahead and grab it.',
-        removeFlag: 'REDDS_3',
-        addFlag: 'REDDS_1'
+        removeFlags: ['REDDS_3'],
+        addFlags: ['REDDS_1']
       }]
     },
     startPosition: {
@@ -674,23 +686,23 @@ const scenery = {
       speak: [{
         prereqFlags: ['SANTOS_1'],
         text: '"Yooo, get this. This dude over there says he\'s a fan of Mega Man but he\'s only play 3 out of the original 6 of them. Or at least only beaten 3"',
-        removeFlag: 'SANTOS_1',
-        addFlag: 'SANTOS_2'
+        removeFlags: ['SANTOS_1'],
+        addFlasg: ['SANTOS_2']
       }, {
         prereqFlags: ['SANTOS_2'],
         text: '"This party\'s kinda random right?"',
-        removeFlag: 'SANTOS_2',
-        addFlag: 'SANTOS_3'
+        removeFlags: ['SANTOS_2'],
+        addFlags: ['SANTOS_3']
       }, {
         prereqFlags: ['SANTOS_3'],
         text: '"Don\'t worry about me. I can literally sleep anywhere I don\'t care. I literally don\'t care I can sleep anywhere. Like it doesn\'t matter. It literally doesn\'t matter. I know that sounds crazy right? I don\'t know. I guess it\'s basically my super power. Like how random would that be, if your superpower was just to be able to sleep anywhere. But like literally I think that would be mine. Either that or drinking tequila without flinching. Who do you know here again?"',
-        removeFlag: 'SANTOS_3',
-        addFlag: 'SANTOS_4'
+        removeFlags: ['SANTOS_3'],
+        addFlags: ['SANTOS_4']
       }, {
         prereqFlags: ['SANTOS_4'],
         text: '"Who\'s Scott? ohhhhh! You mean Scott. Yeah, I know him"',
-        removeFlag: 'SANTOS_4',
-        addFlag: 'SANTOS_1'
+        removeFlags: ['SANTOS_4'],
+        addFlags: ['SANTOS_1']
       }]
     },
     startPosition: {
@@ -912,6 +924,7 @@ const scenery = {
       width: 43,
       height: 66
     },
+    visibleFlag: 'DANSEN',
     verbs: {
       speak: [{
         prereqFlags: ['GOOD'],
@@ -1193,7 +1206,7 @@ const gameState = {
 const initialState = {
   playerState,
   gameState,
-  flags: ['GARFIELD_VISIBLE', 'REDDS_1', 'SANTOS_1']
+  flags: ['GARFIELD_VISIBLE', 'REDDS_1', 'SANTOS_1', 'EIGHTBALL_1']
 };
 
 export default initialState;

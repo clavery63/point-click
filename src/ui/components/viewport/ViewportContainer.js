@@ -31,7 +31,8 @@ const mapStateToProps = ({ images, gameState, playerState, flags }) => {
     doors: doorsWithImages,
     items: items.map(withImages(gameState, images, 'items'))
       .filter(item => !item.visibleFlag || flags.has(item.visibleFlag)),
-    scenery: scenery.map(withImages(gameState, images, 'scenery')),
+    scenery: scenery.map(withImages(gameState, images, 'scenery'))
+      .filter(scenery => !scenery.visibleFlag || flags.has(scenery.visibleFlag)),
     borderImg: images.border,
     roomImg: images[img],
     video

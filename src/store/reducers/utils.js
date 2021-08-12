@@ -1,4 +1,5 @@
 import { setWith, clone, get } from 'lodash';
+import { compose } from 'redux';
 
 export const isNull = value => value === null;
 export const notNull = value => !isNull(value);
@@ -12,18 +13,22 @@ export const updateValue = path => fn => state => {
   return setValue(path)(newValue)(state);
 };
 
-export const addFlag = flag => {
+export const addFlags = flagsToAdd => {
   return updateValue('flags')(flags => {
-    flags.add(flag);
+    flagsToAdd.forEach(flag => flags.add(flag));
     return flags;
   });
 };
 
-export const removeFlag = flag => {
+export const removeFlags = flagsToRemove => {
   return updateValue('flags')(flags => {
-    flags.delete(flag);
+    flagsToRemove.forEach(flag => flags.delete(flag));
     return flags;
   });
+};
+
+export const combineReducers = (...reducers) => (...args) => {
+  return compose(...reducers.map(reducer => reducer(...args)));
 };
 
 export const clearValue = path => setValue(path)(null);
@@ -31,6 +36,10 @@ export const clearValue = path => setValue(path)(null);
 export const withText = setValue('nextText');
 
 export const keepState = () => state => state;
+
+export const when = pred => transform => {
+  return pred ? transform : keepState();
+};
 
 export const filterValues = path => id => updateValue(path)(objects => {
   return objects.filter(objectId => objectId !== id);
