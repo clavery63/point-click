@@ -28,13 +28,15 @@ class S3 {
   }
 
   async listObjects() {
-    return this.client.send(
+    const { Contents } = await this.client.send(
       new ListObjectsCommand({ 
         Delimiter: `/`,
         Prefix: `${this.rootPath}/`,
         Bucket: this.bucketName
       })
     );
+
+    return Contents;
   };
 
   async getStreamContent(stream) {

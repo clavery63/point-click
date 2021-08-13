@@ -53,7 +53,13 @@ const loadPlayerAndGameState$ = uiState => {
 const load$ = action$ => {
   const initialUiState = initializeUiState();
   return loadPlayerAndGameState$(initialUiState).pipe(
-    switchMap(loadImages$(testGameName)),
+    // TODO: the game name will come from react router
+    switchMap(state => loadImages$(testGameName).pipe(
+      map(images => ({
+        ...state,
+        images
+      }))
+    )),
     map(loadFlagsSet),
     switchMap(state => merge(
       of({ type: 'SET_STATE', payload: state }),
