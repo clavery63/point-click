@@ -44,7 +44,7 @@ const mapDispatchToProps = {
     type: 'PLAY_MUSIC', 
     payload: {
       text: 'With all the antics going on in this crazy castle, the last thing you need to worry about is this torch going out. Lucky for you, that won\'t be a problem. This is an eternal torch... It is a light that never goes out.',
-      fileName: 'light.m4a' 
+      fileName: 'light.mp3' 
     }
   })
 }
