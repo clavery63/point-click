@@ -5,7 +5,6 @@ import { ofType } from 'redux-observable';
 import loadImages$ from './loadImages';
 
 const assetsBase = process.env.REACT_APP_ASSETS_BASE;
-const testGameName = 'test-game';
 
 const loadFlagsSet = state => {
   return {
@@ -28,33 +27,37 @@ const restart$ = (action$, { playerState, gameState }) => {
   );
 };
 
-const initializeUiState = () => ({
+const initializeState = bootInfo => ({
   transition: {
     dest: null
   },
   text: null,
   nextText: null,
   loading: false,
-  menu: 'MAIN'
+  menu: 'MAIN',
+  gameName: bootInfo.gameName
 });
 
-const loadPlayerAndGameState$ = uiState => {
-  return fromFetch(`${assetsBase}/${testGameName}/gamedata.json`).pipe(
+const loadPlayerAndGameState$ = initialState => {
+  const dataSource = `${assetsBase}/${initialState.gameName}/gamedata.json`;
+  return fromFetch(dataSource).pipe(
+    // TODO: render something useful if the response is no good
     switchMap(resp => resp.json()),
     map(({ playerState, gameState, flags }) => ({
-      ...uiState,
+      ...initialState,
       playerState,
       gameState,
-      flags
+      flags,
     }))
   );
 }
 
 const load$ = action$ => {
-  const initialUiState = initializeUiState();
-  return loadPlayerAndGameState$(initialUiState).pipe(
-    // TODO: the game name will come from react router
-    switchMap(state => loadImages$(testGameName).pipe(
+  return action$.pipe(
+    ofType('BOOT_GAME'),
+    map(initializeState),
+    switchMap(loadPlayerAndGameState$),
+    switchMap(state => loadImages$(state.gameName).pipe(
       map(images => ({
         ...state,
         images

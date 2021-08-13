@@ -22,7 +22,7 @@ const calculateSize = stage => {
   return width;
 };
 
-const App = ({ setStageData, loading, menu }) => {
+const GameContainer = ({ setStageData, loading, menu }) => {
   const stageRef = useRef(null);
   const [width, setWidth] = useState(0);
   const scaleX = width / pixelWidth;
@@ -66,4 +66,4 @@ const mapDispatchToProps = {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(GameContainer);

@@ -10,7 +10,7 @@ import rootReducer from './store/reducers/rootReducer';
 import effectsMiddleware from './store/middleware/effectsMiddleware';
 
 import './index.css';
-import App from './ui/App';
+import Router from './ui/Router';
 
 const epicMiddleware = createEpicMiddleware();
 
@@ -30,7 +30,7 @@ ReactDOM.render(
     <Provider store={store}>
       <audio className='music-player' loop />
       <audio className='sfx-player' src='https://doublehamburger.com/transition.mp3' />
-      <App />
+      <Router />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
