@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { createEpicMiddleware } from 'redux-observable';
-
 import * as serviceWorker from './serviceWorker';
 import rootEpic from './store/epics/root';
 import rootReducer from './store/reducers/rootReducer';
 import effectsMiddleware from './store/middleware/effectsMiddleware';
-
 import './index.css';
 import Router from './ui/Router';
+
+// TODO: universal assets like this should live somewhere else
+const audioAssetsRoot = `${process.env.REACT_APP_ASSETS_BASE}/test-game/audio`;
 
 const epicMiddleware = createEpicMiddleware();
 
@@ -29,7 +30,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <audio className='music-player' loop />
-      <audio className='sfx-player' src='https://doublehamburger.com/transition.mp3' />
+      <audio className='sfx-player' src={`${audioAssetsRoot}/transition.mp3`} />
       <Router />
     </Provider>
   </React.StrictMode>,

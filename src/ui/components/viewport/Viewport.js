@@ -6,6 +6,9 @@ import Item from './Item';
 import Scenery from './Scenery';
 import Video from '../shared/Video';
 
+// TODO: derive the gameName part from state
+const videoAssetsRoot = `${process.env.REACT_APP_ASSETS_BASE}/test-game/video`;
+
 const ObjectGroup = ({ Component, objects, onClick }) => (
   <Group>
     {objects.map(object => (
@@ -22,7 +25,7 @@ const Background = ({ image, video }) => {
   if (video) {
     // TODO: whoa, is this rendering on every cursor and text update? This should get
     // its own connected component, but also lets get those out of redux
-    return <Video src={`https://doublehamburger.com/${video}`} />
+    return <Video src={`${videoAssetsRoot}/${video}`} />
   }
 
   return <Image width={112} height={112} image={image} />
