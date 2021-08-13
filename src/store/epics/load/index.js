@@ -4,7 +4,8 @@ import { fromFetch } from 'rxjs/fetch';
 import { ofType } from 'redux-observable';
 import loadImages$ from './loadImages';
 
-const assetsBase = 'https://d1r480m6ifdvvq.cloudfront.net/test-game';
+const assetsBase = 'https://d1r480m6ifdvvq.cloudfront.net';
+const testGameName = 'test-game';
 
 const loadFlagsSet = state => {
   return {
@@ -38,7 +39,7 @@ const initializeUiState = () => ({
 });
 
 const loadPlayerAndGameState$ = uiState => {
-  return fromFetch(`${assetsBase}/gamedata.json`).pipe(
+  return fromFetch(`${assetsBase}/${testGameName}/gamedata.json`).pipe(
     switchMap(resp => resp.json()),
     map(({ playerState, gameState, flags }) => ({
       ...uiState,
@@ -52,7 +53,7 @@ const loadPlayerAndGameState$ = uiState => {
 const load$ = action$ => {
   const initialUiState = initializeUiState();
   return loadPlayerAndGameState$(initialUiState).pipe(
-    switchMap(loadImages$),
+    switchMap(loadImages$(testGameName)),
     map(loadFlagsSet),
     switchMap(state => merge(
       of({ type: 'SET_STATE', payload: state }),
