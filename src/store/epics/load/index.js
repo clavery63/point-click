@@ -4,7 +4,7 @@ import { fromFetch } from 'rxjs/fetch';
 import { ofType } from 'redux-observable';
 import loadImages$ from './loadImages';
 
-const assetsBase = 'https://d1r480m6ifdvvq.cloudfront.net';
+const assetsBase = process.env.REACT_APP_ASSETS_BASE;
 const testGameName = 'test-game';
 
 const loadFlagsSet = state => {
