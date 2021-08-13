@@ -7,6 +7,7 @@ const Item = ({ object, onClick}) => {
 
   useEffect(() => {
     if (requiresPrecision) {
+      // TODO: make cloudfront cross origin. otherwise Konva can't tolerate this
       imgRef.current.cache({ imageSmoothingEnabled: false });
       imgRef.current.drawHitFromCache();
     }

@@ -20,6 +20,8 @@ const ObjectGroup = ({ Component, objects, onClick }) => (
 
 const Background = ({ image, video }) => {
   if (video) {
+    // TODO: whoa, is this rendering on every cursor and text update? This should get
+    // its own connected component, but also lets get those out of redux
     return <Video src={`https://doublehamburger.com/${video}`} />
   }
 

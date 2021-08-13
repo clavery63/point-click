@@ -25,7 +25,7 @@ const mapStateToProps = state => {
     hasText: hasText(state),
     doors: revealedDoors(state),
     menuImg: images.menu,
-    menuButtonImg: images.menuButton
+    menuButtonImg: images['menu-button']
   };
 };
 

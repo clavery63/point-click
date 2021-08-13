@@ -10,8 +10,8 @@ const shift = ' '.charCodeAt(0);
 const mapStateToProps = ({ images }) => {
   return {
     spriteSheets: {
-      dark: images.alphaDark,
-      light: images.alphaLight,
+      dark: images['alpha-dark'],
+      light: images['alpha-light'],
     }
   };
 };
