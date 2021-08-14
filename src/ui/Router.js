@@ -4,7 +4,7 @@ import PlayRoute from './PlayRoute';
 
 const Router = () => {
   return (
-  <BrowserRouter>
+    <BrowserRouter>
       <Switch>
         <Route path='/play/:gameName'>
           <PlayRoute />

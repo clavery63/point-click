@@ -1,20 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { connect } from 'react-redux';
-import GameContainer from './GameContainer';
+import GameRoot from './GameRoot';
 
-const PlayRoute = ({ bootGame }) => {
+const PlayRoute = () => {
   const { gameName } = useParams();
 
-  useEffect(() => {
-    bootGame(gameName);
-  }, [gameName]);
-
-  return <GameContainer />;
+  return <GameRoot gameName={gameName} />;
 };
 
-const mapDispatchToProps = {
-  bootGame: gameName => ({ type: 'BOOT_GAME', gameName })
-};
-
-export default connect(() => ({}), mapDispatchToProps)(PlayRoute);
+export default PlayRoute;

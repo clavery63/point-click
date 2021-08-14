@@ -1,4 +1,4 @@
-import { map, switchMapTo, switchMap } from 'rxjs/operators';
+import { map, switchMapTo, switchMap, take } from 'rxjs/operators';
 import { of, merge, from } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 import { ofType } from 'redux-observable';
@@ -35,10 +35,18 @@ const initializeState = bootInfo => ({
   nextText: null,
   loading: false,
   menu: 'MAIN',
-  gameName: bootInfo.gameName
+  gameName: bootInfo.gameName,
+  playerState: bootInfo.playerState,
+  gameState: bootInfo.gameState,
+  flags: bootInfo.flags,
 });
 
 const loadPlayerAndGameState$ = initialState => {
+  if (initialState.playerState) {
+    // If there is playerState it was passed into GameRoot
+    return of(initialState);
+  }
+
   const dataSource = `${assetsBase}/${initialState.gameName}/gamedata.json`;
   return fromFetch(dataSource).pipe(
     // TODO: render something useful if the response is no good
@@ -52,11 +60,13 @@ const loadPlayerAndGameState$ = initialState => {
   );
 }
 
-const load$ = action$ => {
-  return action$.pipe(
-    ofType('BOOT_GAME'),
+const load$ = (action$, state$) => {
+  return state$.pipe(
+    take(1),
     map(initializeState),
     switchMap(loadPlayerAndGameState$),
+    // TODO: we should support passing images along with the initial state
+    // so we can skip downloading the images
     switchMap(state => loadImages$(state.gameName).pipe(
       map(images => ({
         ...state,
