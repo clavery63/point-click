@@ -21,7 +21,7 @@ const GameContent = ({ menu }) => {
   );
 }
 
-const MainLayer = ({ loading, menu }) => {
+const MainLayer = ({ loading, menu, stageData }) => {
   const layerRef = useCallback(layer => {
     if (layer) {
       layer.imageSmoothingEnabled(false);
@@ -36,7 +36,7 @@ const MainLayer = ({ loading, menu }) => {
     <Layer ref={layerRef}>
       <GameContent menu={menu} />
       <OuterMenuContainer />
-      <CursorContainer />
+      <CursorContainer stageData={stageData} />
     </Layer>
   );
 };

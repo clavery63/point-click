@@ -1,11 +1,15 @@
 import { connect } from 'react-redux';
 import Cursor from './Cursor';
 
-const mapStateToProps = ({ cursor, images }) => {
+const mapStateToProps = ({ cursorEnabled, images }) => {
   return {
-    cursor,
+    cursorEnabled,
     cursorImg: images.cursor
   };
 };
 
-export default connect(mapStateToProps)(Cursor);
+const mapDispatchToProps = {
+  enableCursor: () => ({ type: 'SET_CURSOR_ENABLED', payload: true})
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cursor);

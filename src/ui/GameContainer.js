@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { connect, ReactReduxContext, Provider } from 'react-redux';
 import { Stage } from 'react-konva';
 import MainLayer from './MainLayer';
@@ -22,7 +22,7 @@ const calculateSize = stage => {
   return width;
 };
 
-const GameContainer = ({ setStageData, loading, menu }) => {
+const GameContainer = ({ loading, menu }) => {
   const stageRef = useRef(null);
   const [width, setWidth] = useState(0);
   const scaleX = width / pixelWidth;
@@ -35,11 +35,13 @@ const GameContainer = ({ setStageData, loading, menu }) => {
     return () => window.removeEventListener('resize', resize);
   }, [stageRef]);
 
-  useEffect(() => {
-    if (scaleX) {
-      setStageData({ stage: stageRef.current, scaleX, scaleY });
+  const stageData = useMemo(() => {
+    return { 
+      stage: stageRef.current, 
+      scaleX, 
+      scaleY
     }
-  }, [setStageData, stageRef, scaleX, scaleY]);
+  }, [stageRef, scaleX, scaleY]);
 
   return (
     <ReactReduxContext.Consumer>
@@ -52,7 +54,7 @@ const GameContainer = ({ setStageData, loading, menu }) => {
           ref={stageRef}
         >
           <Provider store={store}>
-            <MainLayer loading={loading} menu={menu} />
+            <MainLayer loading={loading} menu={menu} stageData={stageData} />
           </Provider>
         </Stage>
       )}
@@ -61,9 +63,6 @@ const GameContainer = ({ setStageData, loading, menu }) => {
 };
 
 const mapStateToProps = ({ loading, menu }) => ({ loading, menu });
-const mapDispatchToProps = {
-  setStageData: payload => ({ type: 'STAGE_DATA', payload })
-};
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameContainer);
+export default connect(mapStateToProps)(GameContainer);
