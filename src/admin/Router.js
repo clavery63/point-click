@@ -1,8 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, useRouteMatch } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useRouteMatch, useParams } from 'react-router-dom';
+import Home from './ui/Home';
 
 const Router = () => {
   const { path, url } = useRouteMatch();
+  const { gameName } = useParams();
+
   return (
     <BrowserRouter>
       <Switch>
@@ -10,7 +13,7 @@ const Router = () => {
           rooms!
         </Route>
         <Route path='/'>
-          root
+          <Home gameName={gameName} />
         </Route>
       </Switch>
     </BrowserRouter>
