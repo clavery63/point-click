@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 // TODO: The GameRoot component will need its own CSS for when it's embedded
 import './index.css';
-import Router from './ui/Router';
+import Router from './Router';
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 import { Layer } from 'react-konva';
-import ViewportContainer from './components/viewport/ViewportContainer';
-import InventoryContainer from './components/inventory/InventoryContainer';
-import MenuContainer from './components/menu/MenuContainer';
-import TextOverlayContainer from './components/textOverlay/TextOverlayContainer';
-import CursorContainer from './components/cursor/CursorContainer';
-import OuterMenuContainer from './components/outerMenu/OuterMenuContainer';
-import ClickMask from './components/clickMask/ClickMask';
+import ViewportContainer from './ui/viewport/ViewportContainer';
+import InventoryContainer from './ui/inventory/InventoryContainer';
+import MenuContainer from './ui/menu/MenuContainer';
+import TextOverlayContainer from './ui/textOverlay/TextOverlayContainer';
+import CursorContainer from './ui/cursor/CursorContainer';
+import OuterMenuContainer from './ui/outerMenu/OuterMenuContainer';
+import ClickMask from './ui/clickMask/ClickMask';
 
 const GameContent = ({ menu }) => {
   if (menu !== 'NONE') return null;

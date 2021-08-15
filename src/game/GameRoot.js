@@ -2,9 +2,9 @@ import React from 'react';
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { createEpicMiddleware } from 'redux-observable';
-import rootEpic from '../store/epics/root';
-import rootReducer from '../store/reducers/rootReducer';
-import effectsMiddleware from '../store/middleware/effectsMiddleware';
+import rootEpic from './store/epics/root';
+import rootReducer from './store/reducers/rootReducer';
+import effectsMiddleware from './store/middleware/effectsMiddleware';
 import GameContainer from './GameContainer';
 
 const GameRoot = React.memo(({ gameName, state }) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import GameRoot from './GameRoot';
+import GameRoot from './game/GameRoot';
 
 const PlayRoute = () => {
   const { gameName } = useParams();

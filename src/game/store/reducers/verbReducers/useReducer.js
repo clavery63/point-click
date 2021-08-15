@@ -10,6 +10,7 @@ const useDoorReducer = (object, playerState) => {
     );
   }
 
+  // TODO: say something else if they aren't using a key
   return withText('Damn. Wrong key. The damned door is still locked.');
 };
 
