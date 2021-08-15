@@ -3,35 +3,9 @@ import selectVerbReducer from './selectVerbReducer';
 import selectItemReducer from './selectItemReducer';
 import selectBagReducer from './selectBagReducer';
 import setPositionReducer from './setPositionReducer';
-import { setValue, clearValue, keepState, updateValue } from './utils';
-import { compose } from 'redux';
-
-const roomReducer = payload => compose(
-  setValue('playerState.room')(payload),
-  updateValue('playerState.timer')(time => time + 1),
-  setValue(`gameState.rooms.${payload}.initialDescription`)(null)
-);
-
-const ITEMS_PER_PAGE = 7;
-
-const changePageReducer = (direction, playerState) => {
-  const { items, page, examining } = playerState;
-  const lastPage = Math.floor((items.length - 1) / ITEMS_PER_PAGE);
-
-  if (!!examining) {
-    return setValue('playerState.examining')(null);
-  }
-  
-  switch (direction) {
-    case 'DOWN':
-      const newPage = Math.min(page + 1, lastPage);
-      return setValue('playerState.page')(newPage);
-    case 'UP':
-      return setValue('playerState.page')(Math.max(page - 1, 0));
-    default:
-      return keepState;
-  }
-};
+import changePageReducer from './changePageReducer';
+import roomReducer from './roomReducer';
+import { setValue, clearValue, keepState } from './utils';
 
 const reducers = {
   SET_STATE: payload => () => payload,
