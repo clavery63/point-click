@@ -2,25 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Image } from 'react-konva';
 import cursor$ from './cursorStream';
 
-const Cursor = ({ cursorEnabled, cursorImg, enableCursor, stageData }) => {
+const Cursor = ({ cursorEnabled, cursorImg, stageData }) => {
   const [position, setPosition] = useState(null);
 
   useEffect(() => {
     const subscription = cursor$(stageData).subscribe(newPosition => {
-      if (!position) {
-        enableCursor();
-      }
       setPosition(newPosition);
     });
 
     return () => subscription.unsubscribe();
   }, [stageData])
 
-  if (!cursorEnabled || !position) {
+  if (!position) {
     return null;
   }
-
-  // TODO: looks like we're able to click even when it's invisible...
 
   return (
     <Image
@@ -28,8 +23,8 @@ const Cursor = ({ cursorEnabled, cursorImg, enableCursor, stageData }) => {
       height={16}
       x={position?.x - 3}
       y={position?.y - 1}
-      image={cursorImg}
-      listening={false}
+      image={cursorEnabled ? cursorImg : null}
+      listening={!cursorEnabled}
     />
   );
 };

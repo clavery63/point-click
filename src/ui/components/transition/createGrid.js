@@ -1,4 +1,4 @@
-const GRID_SIZE = 14;
+export const GRID_SIZE = 14;
 const HALF_GRID = GRID_SIZE / 2;
 
 const arrow = transform => (origX, origY, frame) => {
@@ -50,5 +50,7 @@ const createGrid = (frame, direction) => {
       return withInverse(transitions[direction], x, y, frame);
     }));
 };
+
+export const directions = Object.keys(transitions);
 
 export default createGrid;

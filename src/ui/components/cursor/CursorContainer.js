@@ -8,8 +8,4 @@ const mapStateToProps = ({ cursorEnabled, images }) => {
   };
 };
 
-const mapDispatchToProps = {
-  enableCursor: () => ({ type: 'SET_CURSOR_ENABLED', payload: true})
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cursor);
+export default connect(mapStateToProps)(Cursor);

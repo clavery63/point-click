@@ -35,6 +35,7 @@ const initializeState = bootInfo => ({
   nextText: null,
   loading: false,
   menu: 'MAIN',
+  cursorEnabled: true,
   gameName: bootInfo.gameName,
   playerState: bootInfo.playerState,
   gameState: bootInfo.gameState,

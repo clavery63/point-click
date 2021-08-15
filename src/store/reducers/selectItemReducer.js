@@ -3,7 +3,7 @@ import { setValue, updateValue, withText, keepState, filterValues } from './util
 import smokeReducer from './verbReducers/smokeReducer';
 
 const takeReducer = (item, playerState) => {
-  if (!playerState.examining) return keepState;
+  if (!playerState.examining) return keepState();
   return compose(
     filterValues(`gameState.scenery.${playerState.examining}.contains`)(item.id),
     updateValue('playerState.items')(items => [...items, item.id]),
