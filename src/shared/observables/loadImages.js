@@ -15,7 +15,7 @@ const loadImages$ = gameKey => {
     switchMap(objects => {
       const imageKeys = getFilenames(objects, gameKey);
       return forkJoin(imageKeys.map(imageKey => {
-        return image$(s3, imageKey).pipe(
+        return image$(s3, imageKey, gameKey).pipe(
           map(image => [imageKey, image])
         );
       }));
