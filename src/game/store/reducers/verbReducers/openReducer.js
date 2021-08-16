@@ -7,8 +7,8 @@ const doorReducer = (door, flags) => {
       if (!door.openCondition || flags.has(door.openCondition)) {
         return compose(
           withText(door.openText),
-          setValue(`gameState.doors.${door.id}.state`)('OPEN'),
-          setValue(`gameState.doors.${door.id}.hidden`)(false)
+          setValue(`worldState.doors.${door.id}.state`)('OPEN'),
+          setValue(`worldState.doors.${door.id}.hidden`)(false)
         );
       } else {
         return withText(door.closedText);

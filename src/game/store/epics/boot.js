@@ -10,15 +10,15 @@ const loadFlagsSet = state => {
   };
 };
 
-const restart$ = (action$, { playerState, gameState }) => {
-  const initialRoom = gameState.rooms[playerState.room];
+const restart$ = (action$, { playerState, worldState }) => {
+  const initialRoom = worldState.rooms[playerState.room];
   const { description, initialDescription } = initialRoom;
   return action$.pipe(
     ofType('START_GAME'),
     switchMapTo(from([
       { type: 'RUN_TEXT', payload: initialDescription || description },
       { type: 'SET_MENU', payload: 'NONE' },
-      { type: 'SET_GAME_STATE', payload: gameState },
+      { type: 'SET_WORLD_STATE', payload: worldState },
       { type: 'SET_PLAYER_STATE', payload: playerState },
     ]))
   );
@@ -35,7 +35,7 @@ const initializeGame = bootInfo => ({
   cursorEnabled: true,
   gameName: bootInfo.gameName,
   playerState: bootInfo.playerState,
-  gameState: bootInfo.gameState,
+  worldState: bootInfo.worldState,
   flags: bootInfo.flags,
 });
 

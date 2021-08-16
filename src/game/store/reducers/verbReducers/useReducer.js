@@ -5,7 +5,7 @@ import genericVerbReducer from './genericVerbReducer';
 const useDoorReducer = (object, playerState) => {
   if (playerState.using === object.keyId) {
     return compose(
-      setValue(`gameState.doors.${object.id}.state`)('CLOSED'),
+      setValue(`worldState.doors.${object.id}.state`)('CLOSED'),
       withText(object.unlockText)
     );
   }

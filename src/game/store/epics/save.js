@@ -4,9 +4,9 @@ import { ofType } from 'redux-observable';
 
 const KEY = 'doublehamburger-save-data';
 
-const saveGame = ({ gameState, playerState, flags }) => {
+const saveGame = ({ worldState, playerState, flags }) => {
   localStorage.setItem(KEY, JSON.stringify({
-    gameState,
+    worldState,
     playerState,
     flags: [...flags]
   }));
@@ -18,10 +18,10 @@ const loadGame$ = () => {
     return { type: null }
   }
 
-  const { gameState, playerState, flags } = JSON.parse(newState);
+  const { worldState, playerState, flags } = JSON.parse(newState);
 
   return from([
-    { type: 'SET_GAME_STATE', payload: gameState },
+    { type: 'SET_WORLD_STATE', payload: worldState },
     { type: 'SET_PLAYER_STATE', payload: playerState },
     { type: 'SET_FLAGS', payload: new Set(flags) },
     { type: 'SET_MENU', payload: 'NONE' },

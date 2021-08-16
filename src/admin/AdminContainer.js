@@ -9,7 +9,7 @@ const AdminContainer = ({ children, gameName, showPreview }) => {
       {showPreview && (
         <div className={styles.leftColumn}>
           <div className={styles.gameWrapper}>
-            <GameRoot gameName={gameName} />
+            {/* <GameRoot gameName={gameName} /> */}
           </div>
         </div>
       )}

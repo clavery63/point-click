@@ -6,8 +6,8 @@ const ITEMS_PER_PAGE = 7;
 
 const getPlayer = state => state.playerState;
 const getExamining = state => state.playerState.examining;
-const getGameItems = state => state.gameState.items;
-const getScenery = state => state.gameState.scenery;
+const getGameItems = state => state.worldState.items;
+const getScenery = state => state.worldState.scenery;
 
 const getItemObjects = createSelector(
   [getPlayer, getGameItems],

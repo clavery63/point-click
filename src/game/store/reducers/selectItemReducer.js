@@ -5,7 +5,7 @@ import smokeReducer from './verbReducers/smokeReducer';
 const takeReducer = (item, playerState) => {
   if (!playerState.examining) return keepState();
   return compose(
-    filterValues(`gameState.scenery.${playerState.examining}.contains`)(item.id),
+    filterValues(`worldState.scenery.${playerState.examining}.contains`)(item.id),
     updateValue('playerState.items')(items => [...items, item.id]),
     withText(`Took the ${item.name}.`)
   );
@@ -34,8 +34,8 @@ const getReducer = (verb, object) => {
   }
 };
 
-const selectItemReducer = (id, playerState, gameState) => {
-  const object = { ...gameState.items[id], type: 'items', id };
+const selectItemReducer = (id, playerState, worldState) => {
+  const object = { ...worldState.items[id], type: 'items', id };
   const reducer = getReducer(playerState.verb, object)
   return reducer(object, playerState);
 };

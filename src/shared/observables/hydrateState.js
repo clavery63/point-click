@@ -15,10 +15,10 @@ const loadPlayerAndGameState$ = initialState => {
   return fromFetch(dataSource).pipe(
     // TODO: render something useful if the response is no good
     switchMap(resp => resp.json()),
-    map(({ playerState, gameState, flags }) => ({
+    map(({ playerState, worldState, flags }) => ({
       ...initialState,
       playerState,
-      gameState,
+      worldState,
       flags,
     }))
   );

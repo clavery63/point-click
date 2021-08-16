@@ -1,5 +1,5 @@
 {
-  "gameState": {
+  "worldState": {
     "doors": {
       "0": {
         "closedImg": "door-1",

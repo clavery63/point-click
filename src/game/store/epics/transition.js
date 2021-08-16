@@ -27,8 +27,8 @@ const getAction$ = ({ dest }) => frame => {
 };
 
 const dispatchRoom = (dest, state, runText$) => {
-  const { gameState, playerState } = state;
-  const room = gameState.rooms[dest];
+  const { worldState, playerState } = state;
+  const room = worldState.rooms[dest];
   if (!room.description) {
     return { type: null }
   }
@@ -46,8 +46,8 @@ const dispatchRoom = (dest, state, runText$) => {
 };
 
 const checkGameOver = (dest, state, pageClick$) => {
-  const { gameState } = state;
-  const room = gameState.rooms[dest];
+  const { worldState } = state;
+  const room = worldState.rooms[dest];
   if (!room.gameOver) {
     return NEVER;
   }

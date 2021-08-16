@@ -3,7 +3,7 @@ import { withText, updateValue, filterValues } from '../utils';
 
 const itemReducer = (item, playerState) => {
   return compose(
-    filterValues(`gameState.rooms.${playerState.room}.items`)(item.id),
+    filterValues(`worldState.rooms.${playerState.room}.items`)(item.id),
     updateValue('playerState.items')(items => [...items, item.id]),
     withText(item.onTake || `The ${item.name} is in hand.`)
   );

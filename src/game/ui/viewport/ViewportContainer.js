@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import Viewport from './Viewport';
 
-const withImages = (gameState, images, collection, keys = ['img']) => id => {
-  const object = gameState[collection][id];
+const withImages = (worldState, images, collection, keys = ['img']) => id => {
+  const object = worldState[collection][id];
   return keys.reduce((acc, key) => {
     const img = images[object[key]];
     return { 
@@ -13,12 +13,12 @@ const withImages = (gameState, images, collection, keys = ['img']) => id => {
   }, object);
 };
 
-const mapStateToProps = ({ images, gameState, playerState, flags }) => {
-  const { rooms } = gameState;
+const mapStateToProps = ({ images, worldState, playerState, flags }) => {
+  const { rooms } = worldState;
   const { room } = playerState;
   const { img, doors, items, scenery, video } = rooms[room];
   const visibleDoors = doors.filter(id => {
-    return !!(gameState.doors[id].openImg || gameState.doors[id].closedImg);
+    return !!(worldState.doors[id].openImg || worldState.doors[id].closedImg);
   });
 
   /**
@@ -26,12 +26,12 @@ const mapStateToProps = ({ images, gameState, playerState, flags }) => {
    * TODO: use reselect here
    */
   const doorsWithImages = visibleDoors
-    .map(withImages(gameState, images, 'doors', ['openImg', 'closedImg']));
+    .map(withImages(worldState, images, 'doors', ['openImg', 'closedImg']));
   return {
     doors: doorsWithImages,
-    items: items.map(withImages(gameState, images, 'items'))
+    items: items.map(withImages(worldState, images, 'items'))
       .filter(item => !item.visibleFlag || flags.has(item.visibleFlag)),
-    scenery: scenery.map(withImages(gameState, images, 'scenery'))
+    scenery: scenery.map(withImages(worldState, images, 'scenery'))
       .filter(scenery => !scenery.visibleFlag || flags.has(scenery.visibleFlag)),
     borderImg: images.border,
     roomImg: images[img],

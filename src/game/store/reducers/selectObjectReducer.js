@@ -21,9 +21,9 @@ const getReducer = (verb, objectType) => ({
   SPEAK: speakReducer
 }[verb]);
 
-const selectObjectReducer = (payload, playerState, gameState, flags) => {
+const selectObjectReducer = (payload, playerState, worldState, flags) => {
   const { type, id } = payload;
-  const object = { ...gameState[type][id], type, id };
+  const object = { ...worldState[type][id], type, id };
   const reducer = getReducer(playerState.verb, type) || keepState;
   return reducer(object, playerState, flags);
 };

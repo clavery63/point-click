@@ -13,8 +13,8 @@ const ClickMask = ({ shouldShow, onClick }) => {
   );
 };
 
-const mapStateToProps = ({ text, gameState, playerState }) => {
-  const room = gameState.rooms[playerState.room];
+const mapStateToProps = ({ text, worldState, playerState }) => {
+  const room = worldState.rooms[playerState.room];
   const shouldShow = !!text || !!room.gameOver
   return { 
     shouldShow

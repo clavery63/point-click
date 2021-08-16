@@ -9,17 +9,17 @@ import { ofType } from 'redux-observable';
 const NUM_FRAMES = 12;
 const MS_PER_FRAME = 200;
 
-const shouldAnimate = ([{ payload }, { gameState, playerState }]) => {
+const shouldAnimate = ([{ payload }, { worldState, playerState }]) => {
   const { id, type } = payload;
-  const object = gameState[type][id];
+  const object = worldState[type][id];
   const hasAnimated = isEqual(object.currentPosition, object.endPosition);
   const isTriggered = playerState.verb === object.trigger;
   return isTriggered && !hasAnimated;
 };
 
-const withStepSizes = ([{ payload }, { gameState }]) => {
+const withStepSizes = ([{ payload }, { worldState }]) => {
   const { id, type } = payload;
-  const object = gameState[payload.type][payload.id];
+  const object = worldState[payload.type][payload.id];
   const { startPosition, endPosition } = object;
   const xStep = (endPosition.left - startPosition.left) / NUM_FRAMES;
   const yStep = (endPosition.top - startPosition.top) / NUM_FRAMES;

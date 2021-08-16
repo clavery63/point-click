@@ -6,7 +6,7 @@ import { setValue } from './utils';
  * _guaranteed_ performance hit, it definitiely makes messing things up more likely
  */
 const setPositionReducer = ({ x, y, id, type }) => {
-  return setValue(`gameState.${type}.${id}.currentPosition`)({ left: x, top: y });
+  return setValue(`worldState.${type}.${id}.currentPosition`)({ left: x, top: y });
 };
 
 export default setPositionReducer;

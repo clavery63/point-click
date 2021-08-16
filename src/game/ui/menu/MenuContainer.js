@@ -3,8 +3,8 @@ import { createSelector } from 'reselect'
 import Menu from './Menu';
 
 const getText = state => state.text;
-const getDoors = state => state.gameState.doors;
-const getRooms = state => state.gameState.rooms;
+const getDoors = state => state.worldState.doors;
+const getRooms = state => state.worldState.rooms;
 const getPlayerRoom = state => state.playerState.room;
 const hasText = createSelector([getText], text => text !== null);
 const revealedDoors = createSelector(

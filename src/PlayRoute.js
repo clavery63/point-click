@@ -12,9 +12,9 @@ const PlayRoute = () => {
   const { gameName } = useParams();
 
   return (
-  <div style={divStyle}>
-    <GameRoot gameName={gameName} />
-  </div>
+    <div style={divStyle}>
+      <GameRoot gameName={gameName} />
+    </div>
   );
 };
 

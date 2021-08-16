@@ -9,7 +9,7 @@ import { setValue, clearValue, keepState } from './utils';
 
 const reducers = {
   SET_STATE: payload => () => payload,
-  SET_GAME_STATE: setValue('gameState'),
+  SET_WORLD_STATE: setValue('worldState'),
   SET_PLAYER_STATE: setValue('playerState'),
   SET_FLAGS: setValue('flags'),
   SET_TEXT: setValue('text'),
@@ -28,9 +28,9 @@ const reducers = {
 };
 
 const rootReducer = (state = {}, { type, payload }) => {
-  const { gameState, playerState, flags } = state;
+  const { worldState, playerState, flags } = state;
   const reducer = reducers[type] || keepState;
-  return reducer(payload, playerState, gameState, flags)(state);
+  return reducer(payload, playerState, worldState, flags)(state);
 };
 
 export default rootReducer;
