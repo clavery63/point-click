@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import Home from './Home';
 
-const mapStateToProps = ({ counter }) => {
+const mapStateToProps = ({ showPreview }) => {
   return {
-    counter
+    showPreview
   };
 };
 
 const mapDispatchToProps = {
-  incrementCounter: () => ({ type: 'INCREMENT_COUNTER' })
+  togglePreview: () => ({ type: 'TOGGLE_PREVIEW' })
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

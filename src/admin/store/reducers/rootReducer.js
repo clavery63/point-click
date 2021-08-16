@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import counterReducer from './counterReducer';
+import previewReducer from './previewReducer';
 
 export default combineReducers({
-  counter: counterReducer
+  showPreview: previewReducer
 });

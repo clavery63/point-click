@@ -7,30 +7,21 @@ const pixelWidth = 256;
 const pixelHeight = 240;
 const horizStretch = 1.13;
 const aspectRatio = (pixelHeight / (pixelWidth * horizStretch));
-const paddingFactor = 1;
 
-const calculateSize = stage => {
-  const { innerHeight, innerWidth } = window;
-  const fullWidth = Math.min(innerHeight / aspectRatio, innerWidth);
-  const width = fullWidth * paddingFactor;
-  const height = width * aspectRatio;
-  const left = (window.innerWidth - width) / 2;
-  const top = (window.innerHeight - height) / 2;
-  stage.content.style.left = `${left}px`;
-  stage.content.style.top = `${top}px`;
-
-  return width;
+const calculateSize = (parentRef) => {
+  const { width, height } = parentRef.getBoundingClientRect();
+  return Math.min(height / aspectRatio, width);
 };
 
-const GameContainer = ({ loading, menu }) => {
+const GameContainer = ({ loading, menu, parentRef }) => {
   const stageRef = useRef(null);
   const [width, setWidth] = useState(0);
   const scaleX = width / pixelWidth;
   const scaleY = scaleX / horizStretch;
 
   useEffect(() => {
-    setWidth(calculateSize(stageRef.current));
-    const resize = () => setWidth(calculateSize(stageRef.current));
+    setWidth(calculateSize(parentRef.current));
+    const resize = () => setWidth(calculateSize(parentRef.current));
     window.addEventListener('resize', resize);
     return () => window.removeEventListener('resize', resize);
   }, [stageRef]);
@@ -63,6 +54,5 @@ const GameContainer = ({ loading, menu }) => {
 };
 
 const mapStateToProps = ({ loading, menu }) => ({ loading, menu });
-
 
 export default connect(mapStateToProps)(GameContainer);

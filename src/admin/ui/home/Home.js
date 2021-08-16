@@ -1,13 +1,10 @@
 import React from 'react';
-import GameRoot from '../../../game/GameRoot';
 
-const Home = ({ gameName, counter, incrementCounter }) => {
+const Home = ({ gameName, counter, togglePreview }) => {
   return (
     <div>
       <div>GameName: {gameName}</div>
-      <div>count: {counter}</div>
-      <button onClick={incrementCounter}>INCREMENT</button>
-      <GameRoot gameName={gameName} />
+      <button onClick={togglePreview}>toggle preview</button>
     </div>
   );
 };
