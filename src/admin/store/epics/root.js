@@ -1,7 +1,4 @@
-import { EMPTY } from "rxjs";
+import { combineEpics } from 'redux-observable';
+import load$ from './load';
 
-const placeholder = () => {
-  return EMPTY;
-}
-
-export default placeholder;
+export default combineEpics(load$);

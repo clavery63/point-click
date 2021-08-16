@@ -1,5 +1,4 @@
-import { from } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import hydrateState$ from '../../../shared/observables/hydrateState';
 
 const initializeState = bootInfo => {
@@ -10,9 +9,7 @@ const initializeState = bootInfo => {
 
 const load$ = (action$, state$) => {
   return hydrateState$(state$, initializeState).pipe(
-    switchMap(state => from([
-      ({ type: null })
-    ]))
+    map(state => ({ type: 'SET_GAME_STATE', payload: state }))
   )
 };
 
