@@ -35,6 +35,9 @@ const GameRoot = React.memo(({ gameName, state }) => {
   return (
     <div className={gameContainer} ref={containerRef}>
       {store && (
+        // This seems potentially relevant for our use-case, especially if
+        // we decide to start using hooks for the game's redux instance:
+        // https://react-redux.js.org/api/hooks#custom-context
         <Provider store={store}>
           <audio className='music-player' loop />
           <audio className='sfx-player' src={`${audioAssetsRoot}/transition.mp3`} />

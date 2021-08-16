@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, useRouteMatch, useParams } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useRouteMatch } from 'react-router-dom';
 import AdminContainer from './AdminContainer';
 import HomeContainer from './ui/home/HomeContainer';
+import EditRoom from './ui/rooms/EditRoom';
 
 const Router = ({ gameName }) => {
   const { path, url } = useRouteMatch();
@@ -10,8 +11,11 @@ const Router = ({ gameName }) => {
     <BrowserRouter>
       <AdminContainer gameName={gameName}>
         <Switch>
+          <Route path={`${path}/rooms/:roomId`}>
+            <EditRoom />
+          </Route>
           <Route path={`${path}/rooms`}>
-            rooms!
+            Rooms List
           </Route>
           <Route path='/'>
             <HomeContainer gameName={gameName} />

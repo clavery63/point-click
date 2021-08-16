@@ -13,6 +13,9 @@ const Router = () => {
         <Route path='/admin/:gameName'>
           <Admin />
         </Route>
+        <Route path='/admin'>
+          Admin
+        </Route>
         <Route path='/'>
           <div>nah</div>
         </Route>
