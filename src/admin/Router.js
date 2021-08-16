@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, useRouteMatch, useParams } from 'react-router-dom';
-import Home from './ui/Home';
+import HomeContainer from './ui/home/HomeContainer';
 
 const Router = () => {
   const { path, url } = useRouteMatch();
@@ -13,7 +13,7 @@ const Router = () => {
           rooms!
         </Route>
         <Route path='/'>
-          <Home gameName={gameName} />
+          <HomeContainer gameName={gameName} />
         </Route>
       </Switch>
     </BrowserRouter>
