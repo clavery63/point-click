@@ -3,9 +3,8 @@ import { BrowserRouter, Switch, Route, useRouteMatch, useParams } from 'react-ro
 import AdminContainer from './AdminContainer';
 import HomeContainer from './ui/home/HomeContainer';
 
-const Router = () => {
+const Router = ({ gameName }) => {
   const { path, url } = useRouteMatch();
-  const { gameName } = useParams();
 
   return (
     <BrowserRouter>

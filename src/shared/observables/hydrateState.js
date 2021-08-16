@@ -1,0 +1,43 @@
+import { map, switchMap, take } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { fromFetch } from 'rxjs/fetch';
+import loadImages$ from './loadImages';
+
+const assetsBase = process.env.REACT_APP_ASSETS_BASE;
+
+const loadPlayerAndGameState$ = initialState => {
+  if (initialState.playerState) {
+    // If there is already playerState we don't need to fetch it
+    return of(initialState);
+  }
+
+  const dataSource = `${assetsBase}/${initialState.gameName}/gamedata.json`;
+  return fromFetch(dataSource).pipe(
+    // TODO: render something useful if the response is no good
+    switchMap(resp => resp.json()),
+    map(({ playerState, gameState, flags }) => ({
+      ...initialState,
+      playerState,
+      gameState,
+      flags,
+    }))
+  );
+};
+
+const hydrateState$ = (state$, initialize) => {
+  return state$.pipe(
+    take(1),
+    map(initialize),
+    switchMap(loadPlayerAndGameState$),
+    // TODO: we should support passing images along with the initial state
+    // so we can skip downloading the images
+    switchMap(state => loadImages$(state.gameName).pipe(
+      map(images => ({
+        ...state,
+        images
+      }))
+    ))
+  );
+};
+
+export default hydrateState$;

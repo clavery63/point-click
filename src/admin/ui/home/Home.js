@@ -1,10 +1,9 @@
 import React from 'react';
 
-const Home = ({ gameName, counter, togglePreview }) => {
+const Home = ({ gameName }) => {
   return (
     <div>
       <div>GameName: {gameName}</div>
-      <button onClick={togglePreview}>toggle preview</button>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-const previewReducer = (state = true, action) => {
+const previewReducer = (state = false, action) => {
   switch (action.type) {
     case 'TOGGLE_PREVIEW':
       return !state;

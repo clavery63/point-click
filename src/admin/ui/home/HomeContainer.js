@@ -8,7 +8,6 @@ const mapStateToProps = ({ showPreview }) => {
 };
 
 const mapDispatchToProps = {
-  togglePreview: () => ({ type: 'TOGGLE_PREVIEW' })
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
