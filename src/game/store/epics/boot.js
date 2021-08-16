@@ -1,7 +1,7 @@
 import { map, switchMapTo, switchMap } from 'rxjs/operators';
 import { of, merge, from } from 'rxjs';
 import { ofType } from 'redux-observable';
-import hydrateState$ from '../../../shared/observables/hydrateState';
+import hydrateState$ from 'shared/observables/hydrateState';
 
 const loadFlagsSet = state => {
   return {

@@ -1,5 +1,5 @@
 import { map } from 'rxjs/operators';
-import hydrateState$ from '../../../shared/observables/hydrateState';
+import hydrateState$ from 'shared/observables/hydrateState';
 
 const initializeState = bootInfo => {
   return {
