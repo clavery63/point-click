@@ -1,27 +1,28 @@
 import React from 'react';
-import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
+import LongTextField from '../shared/LongTextField';
+import useStyles from '../shared/useStyles';
+import UploadButton from '../shared/UploadButton';
 
 const EditRoom = () => {
   const { roomId } = useParams();
+  const styles = useStyles();
   const dispatch = useDispatch();
   const room = useSelector(state => {
     return state.gameState.worldState.rooms[roomId];
   });
-
-  const handleChange = event => {
-    // TODO: make this more general
+  
+  const handleChange = fieldName => event => {
     dispatch({
       type: 'SET_ROOM',
       payload: {
         id: roomId,
         room: {
           ...room,
-          description: event.target.value
+          [fieldName]: event.target.value
         }
       }
     });
@@ -32,17 +33,24 @@ const EditRoom = () => {
   }
 
   return (
-    <Box>
+    <Grid container className={styles.container}>
       <Typography variant="h4">Edit Room: {roomId}</Typography>
-      <TextField
-          label="description"
-          multiline
-          maxRows={4}
-          value={room.description}
-          onChange={handleChange}
-          variant="outlined"
+      <Grid item xs={12}>
+        <LongTextField
+          label="initial description"
+          value={room.initialDescription}
+          onChange={handleChange('initialDescription')}
         />
-    </Box>
+      </Grid>
+      <Grid item xs={12}>
+        <LongTextField
+          label="description"
+          value={room.description}
+          onChange={handleChange('description')}
+        />
+      </Grid>
+      <UploadButton />
+    </Grid>
   );
 };
 

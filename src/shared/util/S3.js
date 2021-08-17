@@ -1,6 +1,6 @@
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity';
 import { fromCognitoIdentityPool} from '@aws-sdk/credential-provider-cognito-identity';
-import { S3Client, ListObjectsCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, ListObjectsCommand, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 
 class S3 {
   constructor(rootPath, bucketName = process.env.REACT_APP_GAMES_BUCKET) {
@@ -25,6 +25,17 @@ class S3 {
     );
 
     return this.getStreamContent(Body);
+  }
+
+  async writeObject(key, data) {
+    const result = await this.client.send(
+      new PutObjectCommand({
+        Bucket: this.bucketName,
+        Key: `${this.rootPath}/${key}`,
+        Body: data
+      })
+    );
+    return result;
   }
 
   async listObjects() {
