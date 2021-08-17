@@ -3,7 +3,7 @@ import previewReducer from './previewReducer';
 import gameStateReducer from './gameStateReducer';
 
 export default combineReducers({
-  showPreview: previewReducer,
+  previewState: previewReducer,
   gameName: (state = '') => state,
   gameState: gameStateReducer,
 });

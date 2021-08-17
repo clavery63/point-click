@@ -1,7 +1,9 @@
-const previewReducer = (state = false, action) => {
+const previewReducer = (state = null, action) => {
   switch (action.type) {
-    case 'TOGGLE_PREVIEW':
-      return !state;
+    case 'SET_PREVIEW':
+      return action.payload;
+    case 'CLEAR_PREVIEW':
+      return null;
     default:
       return state;
   }

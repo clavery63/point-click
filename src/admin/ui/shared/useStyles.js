@@ -6,7 +6,7 @@ const useStyles = makeStyles({
     margin: '10px'
   },
   field: {
-    margin: '10px 0'
+    margin: '10px 20px 10px 0'
   }
 });
 

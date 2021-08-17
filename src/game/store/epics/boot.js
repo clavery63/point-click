@@ -31,7 +31,7 @@ const initializeGame = bootInfo => ({
   text: null,
   nextText: null,
   loading: false,
-  menu: 'MAIN',
+  menu: bootInfo.menu || 'MAIN',
   cursorEnabled: true,
   gameName: bootInfo.gameName,
   playerState: bootInfo.playerState,

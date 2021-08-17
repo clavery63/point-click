@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
+import PreviewButton from '../shared/PreviewButton';
 import UploadButton from '../shared/UploadButton';
 
 const EditRoom = () => {
@@ -49,6 +50,7 @@ const EditRoom = () => {
           onChange={handleChange('description')}
         />
       </Grid>
+      <PreviewButton roomId={roomId} />
       <UploadButton />
     </Grid>
   );

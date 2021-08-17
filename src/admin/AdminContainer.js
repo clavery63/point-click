@@ -1,18 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import styles from './Admin.module.css';
-import GameRoot from '../game/GameRoot';
+import GamePreview from './ui/preview/GamePreview';
 
-const AdminContainer = ({ children, gameName, showPreview }) => {
+const AdminContainer = ({ children }) => {
   return (
     <div className={styles.adminContainer}>
-      {showPreview && (
-        <div className={styles.leftColumn}>
-          <div className={styles.gameWrapper}>
-            {/* <GameRoot gameName={gameName} /> */}
-          </div>
-        </div>
-      )}
+      <GamePreview />
       <div className={styles.rightColumn}>
         {children}
       </div>
@@ -20,6 +13,4 @@ const AdminContainer = ({ children, gameName, showPreview }) => {
   );
 };
 
-const mapStateToProps = ({ showPreview }) => ({ showPreview });
-
-export default connect(mapStateToProps)(AdminContainer);
+export default AdminContainer;
