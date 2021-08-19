@@ -3,6 +3,11 @@
   position: relative;
 }
 
+.adminContainer canvas {
+  cursor: auto;
+  background-color: white !important;
+}
+
 .leftColumn {
   float: left;
   display: inline;

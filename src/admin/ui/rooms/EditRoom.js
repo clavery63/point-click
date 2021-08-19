@@ -5,8 +5,9 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
-import PreviewButton from '../shared/PreviewButton';
+import TestGameButton from '../shared/TestGameButton';
 import UploadButton from '../shared/UploadButton';
+import PreviewWidget from '../preview/PreviewWidget';
 
 const EditRoom = () => {
   const { roomId } = useParams();
@@ -50,7 +51,10 @@ const EditRoom = () => {
           onChange={handleChange('description')}
         />
       </Grid>
-      <PreviewButton roomId={roomId} />
+      <Grid item xs={12}>
+        <PreviewWidget room={room} />
+      </Grid>
+      <TestGameButton roomId={roomId} />
       <UploadButton />
     </Grid>
   );
