@@ -1,37 +1,42 @@
 import React from 'react';
-import { Image } from 'react-konva';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import assetsPathSelector from 'admin/store/selectors/assetsSelector';
+import useStyles from './useStyles';
+import { SCALE } from './constants';
 
-const Scenery = ({ id, editing = 'startPosition' }) => {
-  const dispatch = useDispatch();
-  const scenery = useSelector(state => {
+const Scenery = ({ id, Behavior }) => {
+  const classes = useStyles();
+  const { getImage } = useSelector(assetsPathSelector);
+  const { img, startPosition } = useSelector(state => {
     return state.gameState.worldState.scenery[id];
   });
-  const image = useSelector(state => state.gameState.images[scenery.img]);
 
-  const position = scenery[editing];
+  const style = {
+    left: startPosition.left * SCALE,
+    top: startPosition.top * SCALE,
+    width: startPosition.width * SCALE,
+    height: startPosition.height * SCALE,
+  };
 
   return (
-    <Image
-      x={position.left}
-      y={position.top}
-      width={position.width}
-      height={position.height}
-      image={image}
-      draggable
-      onDragEnd={(e) => {
-        dispatch({
-          type: 'SET_SCENERY_POSITION',
-          payload: {
-            id,
-            field: editing,
-            x: Math.round(e.target.x()),
-            y: Math.round(e.target.y())
-          }
-        })
-      }}
-    />
+    <Behavior 
+      position={startPosition}
+      id={id}
+      type='SCENERY'
+      field='startPosition'>
+      <img
+        className={classes.entity}
+        alt={img}
+        style={style}
+        src={getImage(img)}
+        draggable={false}
+      />
+    </Behavior>
   );
 };
+
+Scenery.defaultProps = {
+  Behavior: ({ children }) => (<>{children}</>)
+}
 
 export default Scenery;

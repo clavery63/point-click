@@ -65,7 +65,7 @@ const EditRoom = () => {
         />
       </Grid>
       <Grid item xs={12}>
-        <PreviewWidget room={room} />
+        <PreviewWidget room={room} gameName={gameName} />
       </Grid>
       <TestGameButton roomId={roomId} />
       <UploadButton />

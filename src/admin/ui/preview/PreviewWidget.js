@@ -1,35 +1,50 @@
-import React, { useCallback } from 'react';
-import { ReactReduxContext, Provider } from 'react-redux';
-import { Layer, Stage } from 'react-konva';
-import Viewport from './Viewport';
+import { Box } from '@material-ui/core';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Item from './Item';
+import Scenery from './Scenery';
+import useStyles from './useStyles';
+import Draggable from '../shared/Draggable';
+import assetsPathSelector from 'admin/store/selectors/assetsSelector';
 
-const VIEWPORT_SIZE = 112;
-const SCALE = 5;
+const ObjectGroup = ({ Component, ids }) => (
+  <Box>
+    {ids.map(id => (
+      <Component
+        key={id}
+        id={id}
+        Behavior={Draggable}
+      />
+    ))}
+  </Box>
+);
 
-const PreviewWidget = ({ room }) => {
-  const layerRef = useCallback(layer => {
-    if (layer) {
-      layer.imageSmoothingEnabled(false);
-    }
-  }, []);
+const Background = ({ imageKey }) => {
+  const classes = useStyles();
+  const { getImage } = useSelector(assetsPathSelector);
+  // TODO: set opactity to 0.5 when editing a single object
+  return (
+    <img
+      className={classes.background}
+      src={getImage(imageKey)}
+      draggable={false}
+      alt={imageKey}
+    />
+  );
+};
+
+const PreviewWidget = props => {
+  const { doors, items, scenery, img } = props.room;
+  const roomImg = useSelector(state => state.gameState.images[img]);
+  const classes = useStyles();
 
   return (
-    <ReactReduxContext.Consumer>
-      {({ store }) => (
-        <Stage
-          width={VIEWPORT_SIZE * SCALE}
-          height={VIEWPORT_SIZE * SCALE}
-          scaleX={SCALE}
-          scaleY={SCALE}
-        >
-          <Provider store={store}>
-            <Layer ref={layerRef} >
-              <Viewport room={room} />
-            </Layer>
-          </Provider>
-        </Stage>
-      )}
-    </ReactReduxContext.Consumer>
+    <Box className={classes.viewport}>
+      <Background imageKey={img} />
+      {/* <ObjectGroup ids={doors} collection={'doors'} /> */}
+      <ObjectGroup ids={items} Component={Item} />
+      <ObjectGroup ids={scenery} Component={Scenery} />
+    </Box>
   );
 };
 

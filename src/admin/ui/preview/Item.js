@@ -1,34 +1,38 @@
 import React from 'react';
-import { Image } from 'react-konva';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import assetsPathSelector from 'admin/store/selectors/assetsSelector';
+import useStyles from './useStyles';
+import { SCALE } from './constants';
 
-const Item = ({ id }) => {
-  const dispatch = useDispatch();
+const Item = ({ id, Behavior }) => {
+  const classes = useStyles();
+  const { getImage } = useSelector(assetsPathSelector);
   const { img, position } = useSelector(state => {
     return state.gameState.worldState.items[id];
   });
-  const image = useSelector(state => state.gameState.images[img]);
+
+  const style = {
+    left: position.left * SCALE,
+    top: position.top * SCALE,
+    width: position.width * SCALE,
+    height: position.height * SCALE,
+  };
 
   return (
-    <Image
-      x={position.left}
-      y={position.top}
-      width={position.width}
-      height={position.height}
-      image={image}
-      draggable
-      onDragEnd={(e) => {
-        dispatch({
-          type: 'SET_ITEM_POSITION',
-          payload: {
-            id,
-            x: Math.round(e.target.x()),
-            y: Math.round(e.target.y())
-          }
-        })
-      }}
-    />
+    <Behavior position={position} id={id} type='ITEM'>
+      <img
+        className={classes.entity}
+        alt={img}
+        style={style}
+        src={getImage(img)}
+        draggable={false}
+      />
+    </Behavior>
   );
 };
+
+Item.defaultProps = {
+  Behavior: ({ children }) => (<>{children}</>)
+}
 
 export default Item;
