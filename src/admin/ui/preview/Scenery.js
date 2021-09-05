@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image } from 'react-konva';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Scenery = ({ id, editing = 'startPosition' }) => {
+  const [cachebuster, setCachebuster] = useState(null);
   const dispatch = useDispatch();
   const scenery = useSelector(state => {
     return state.gameState.worldState.scenery[id];
@@ -11,10 +12,15 @@ const Scenery = ({ id, editing = 'startPosition' }) => {
 
   const position = scenery[editing];
 
+  useEffect(() => {
+    // This forces a rerender on drag and resize
+    setCachebuster(Math.random() / 1000);
+  }, [position]);
+
   return (
     <Image
-      x={position.left}
-      y={position.top}
+      x={position.left + cachebuster}
+      y={position.top + cachebuster}
       width={position.width}
       height={position.height}
       image={image}
