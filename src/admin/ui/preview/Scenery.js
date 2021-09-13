@@ -1,41 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { Image } from 'react-konva';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import VisibleScenery from './VisibleScenery';
+import InvisibleScenery from './InvisibleScenery';
 
 const Scenery = ({ id, editing = 'startPosition' }) => {
-  const [cachebuster, setCachebuster] = useState(null);
   const dispatch = useDispatch();
   const scenery = useSelector(state => {
     return state.gameState.worldState.scenery[id];
   });
-  const image = useSelector(state => state.gameState.images[scenery.img]);
 
   const position = scenery[editing];
 
-  useEffect(() => {
-    // This forces a rerender on drag and resize
-    setCachebuster(Math.random() / 1000);
-  }, [position]);
+  const onDragEnd = (e) => {
+    dispatch({
+      type: 'SET_SCENERY_POSITION',
+      payload: {
+        id,
+        field: editing,
+        x: Math.round(e.target.x()),
+        y: Math.round(e.target.y())
+      }
+    })
+  }
+
+  const SceneryComponent = scenery.img ? VisibleScenery : InvisibleScenery;
 
   return (
-    <Image
-      x={position.left + cachebuster}
-      y={position.top + cachebuster}
-      width={position.width}
-      height={position.height}
-      image={image}
-      draggable
-      onDragEnd={(e) => {
-        dispatch({
-          type: 'SET_SCENERY_POSITION',
-          payload: {
-            id,
-            field: editing,
-            x: Math.round(e.target.x()),
-            y: Math.round(e.target.y())
-          }
-        })
-      }}
+    <SceneryComponent 
+      scenery={scenery}
+      position={position}
+      onDragEnd={onDragEnd}
     />
   );
 };
