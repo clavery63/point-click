@@ -15,6 +15,20 @@ const sceneryReducer = (state = {}, action) => {
           }
         }
       }
+    case 'SET_SCENERY_SIZE':
+      // TODO: resize should also use SET_SCENERY_POSITION
+      const oldScenery2 = state[action.payload.id];
+      return {
+        ...state,
+        [action.payload.id]: {
+          ...oldScenery2,
+          startPosition: {
+            ...oldScenery2.startPosition,
+            width: action.payload.width,
+            height: action.payload.height,
+          }
+        }
+      }
     default:
       return state;
   }

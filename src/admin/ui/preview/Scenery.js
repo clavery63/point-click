@@ -20,13 +20,14 @@ const Scenery = ({ id, editing = 'startPosition' }) => {
         x: Math.round(e.target.x()),
         y: Math.round(e.target.y())
       }
-    })
-  }
+    });
+  };
 
   const SceneryComponent = scenery.img ? VisibleScenery : InvisibleScenery;
 
   return (
     <SceneryComponent 
+      id={id}
       scenery={scenery}
       position={position}
       onDragEnd={onDragEnd}
