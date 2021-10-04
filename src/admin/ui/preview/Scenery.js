@@ -26,11 +26,20 @@ const Scenery = ({ id, editing = 'startPosition' }) => {
   const SceneryComponent = scenery.img ? VisibleScenery : InvisibleScenery;
 
   return (
-    <SceneryComponent 
+    <SceneryComponent
       id={id}
       scenery={scenery}
       position={position}
       onDragEnd={onDragEnd}
+      onClick={(e) => {
+        dispatch({
+          type: 'SET_SELECTED',
+          payload: {
+            id,
+            type: 'scenery'
+          }
+        })
+      }}
     />
   );
 };

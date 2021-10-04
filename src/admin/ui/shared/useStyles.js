@@ -1,8 +1,12 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
-  container: {
-    width: '600px',
+  adminContent: {
+    display: 'flex',
+  },
+  leftColumn: {
+    flex: 1,
+    maxWidth: '600px',
     margin: '10px'
   },
   field: {

@@ -15,6 +15,8 @@ const itemsReducer = (state = {}, action) => {
           }
         }
       }
+    case 'SET_ITEM':
+      return action.payload;
     default:
       return state;
   }

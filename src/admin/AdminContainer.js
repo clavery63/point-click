@@ -6,9 +6,7 @@ const AdminContainer = ({ children }) => {
   return (
     <div className={styles.adminContainer}>
       <GamePreview />
-      <div className={styles.rightColumn}>
-        {children}
-      </div>
+      {children}
     </div>
   );
 };

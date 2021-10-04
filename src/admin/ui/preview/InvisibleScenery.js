@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Rect, Transformer } from 'react-konva';
 import useCachebuster from '../hooks/useCachebuster';
 
-const InisibleScenery = ({ id, position, onDragEnd }) => {
+const InisibleScenery = ({ id, position, onDragEnd, onClick }) => {
   const dispatch = useDispatch();
   const cachebuster = useCachebuster(position);
   const rectRef = useRef(null);
@@ -42,6 +42,7 @@ const InisibleScenery = ({ id, position, onDragEnd }) => {
             }
           })
         }}
+        onClick={onClick}
       />
       <Transformer
         ref={trRef}

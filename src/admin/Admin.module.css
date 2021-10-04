@@ -8,21 +8,7 @@
   background-color: white !important;
 }
 
-.leftColumn {
-  float: left;
-  display: inline;
-  width: 40%;
-  height: 100%;
-}
-
 .gameWrapper {
   height: 100%;
   margin: 10px;
-}
-
-.rightColumn {
-  position: absolute;
-  float: left;
-  display: inline;
-  height: 100%;
 }

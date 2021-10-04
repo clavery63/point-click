@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Item from './Item';
 import Scenery from './Scenery';
 
-const ObjectGroup = ({ Component, ids }) => (
+const ObjectGroup = ({ Component, ids, type }) => (
   <Group>
     {ids.map(id => (
       <Component
@@ -28,8 +28,8 @@ const Viewport = props => {
     <Group>
       <Background image={roomImg} />
       {/* <ObjectGroup ids={doors} collection={'doors'} /> */}
-      <ObjectGroup ids={items} Component={Item} />
-      <ObjectGroup ids={scenery} Component={Scenery} />
+      <ObjectGroup ids={items} Component={Item} type='item' />
+      <ObjectGroup ids={scenery} Component={Scenery} type='scenery' />
     </Group>
   );
 };

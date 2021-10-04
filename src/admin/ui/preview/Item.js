@@ -27,6 +27,15 @@ const Item = ({ id }) => {
           }
         })
       }}
+      onClick={(e) => {
+        dispatch({
+          type: 'SET_SELECTED',
+          payload: {
+            id,
+            type: 'item'
+          }
+        })
+      }}
     />
   );
 };
