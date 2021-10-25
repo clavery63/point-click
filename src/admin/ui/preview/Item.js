@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image } from 'react-konva';
 import { useSelector, useDispatch } from 'react-redux';
+import useCachebuster from '../hooks/useCachebuster';
 
 const Item = ({ id }) => {
   const dispatch = useDispatch();
@@ -8,11 +9,12 @@ const Item = ({ id }) => {
     return state.gameState.worldState.items[id];
   });
   const image = useSelector(state => state.gameState.images[img]);
+  const cachebuster = useCachebuster(position);
 
   return (
     <Image
-      x={position.left}
-      y={position.top}
+      x={position.left + cachebuster}
+      y={position.top + cachebuster}
       width={position.width}
       height={position.height}
       image={image}
