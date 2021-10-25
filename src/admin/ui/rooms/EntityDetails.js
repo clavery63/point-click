@@ -13,8 +13,6 @@ const EntityDetails = () => {
       return null;
   }
 
-  console.log('selectedEntity:', selectedEntity)
-
   const Component = components[selectedEntity.type];
 
   if (!Component) {
