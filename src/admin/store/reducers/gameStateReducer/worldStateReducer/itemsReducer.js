@@ -16,7 +16,10 @@ const itemsReducer = (state = {}, action) => {
         }
       }
     case 'SET_ITEM':
-      return action.payload;
+      return {
+        ...state,
+        [action.payload.id]: action.payload.item
+      };
     default:
       return state;
   }

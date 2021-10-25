@@ -12,11 +12,11 @@ const ItemDetails = ({ entity }) => {
     return state.gameState.worldState.items[entity.id];
   });
 
-    const handleChange = fieldName => event => {
+  const handleChange = fieldName => event => {
     dispatch({
       type: 'SET_ITEM',
       payload: {
-        id: item.id,
+        id: entity.id,
         item: {
           ...item,
           [fieldName]: event.target.value
