@@ -33,6 +33,6 @@ const useStyles = makeStyles({
     height: '50%',
     width: '50%',
   },
-});
+}, { index: 1 });
 
 export default useStyles;
