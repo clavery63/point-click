@@ -38,3 +38,51 @@ There are basically three places a config can "live" at a given time, which I th
 **(3) In local storage:** It's nearly trivial to "save" a game the way this is set up--the engine just saves whatever the current config is in a local file (i.e. the browser's Local Storage). To load from that save file, the engine just needs to load that particular config into memory.
 
 ### The Format
+
+#### Top level
+
+There are three top-level concepts, each taking up their own section of the config. They are **world state**, **player state**, and **flags**. World state contains entites--**rooms**, **doors**, **scenery** and **items** (although scenary and items are coneptually fairly similar and might get combined).
+
+There is a design decision here that is important to point out. All entities must have an id, and therefore must live in their respective place in the config. If one entity has to reference another (e.g. a room contains items), then it must represent this as an id, which is then dereferenced in the appropriate part of the config.
+
+If this seems weird or confusing, let me know. But the summary of why I'm doing it this way is ease of maintenence.
+
+I'll try to illustate the difference here:
+
+```javascript
+// BAD
+{
+  rooms: {
+    1: {
+      description: 'hi'
+      items: [
+        {
+          name: 'torch'
+        },
+        {
+          name: 'pipe'
+        }
+      ]
+    }
+  }
+}
+
+// GOOD
+{
+  rooms: {
+    1: {
+      description: 'hi'
+      items: [1, 2]
+    }
+  },
+  items: {
+    1: {
+      name: 'torch'
+    },
+    2: {
+      name: 'pipe'
+    }
+  }
+}
+```
+
