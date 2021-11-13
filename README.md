@@ -31,7 +31,7 @@ You will find that most of the data in the config file is conceptually immutable
 
 There are basically three places a config can "live" at a given time, which I think are illuminating to go over. They are (1) stored someplace on the Internet (currently on S3), (2) in local memory (i.e. the player's browser until someone ports this to native), and (3) in local storage.
 
-**(1) On the Internet:** When a person first goes to play the game, their browser downloads the game engine, which then goes to download the config from some server. Currently this is represented by the game name in the URL. This config effective _is_ the game. It contains all of the immutable data and references the assets, as well as the initial state of the game.
+**(1) On the Internet:** When a person first goes to play the game, their browser downloads the game engine, which then goes to download the config from some server. Currently this is represented by the game name in the URL. This config effectively _is_ the game. It contains all of the immutable data and references the assets, as well as the initial state of the game.
 
 **(2) In the browser:** As the player progresses through the game, they are continually updating the config on their machine. The visual state of the game is nothing but a reflection of these updates. So effectively what has happened is, you got a copy of the config when the game engine downloaded it, and then the engine is free to alter it as it pleases without affecting the version on the Internet. Someone else could download that and start the game from the beginning. This version of the config is more of a game _state_ than a _definition_.
 
@@ -39,11 +39,13 @@ There are basically three places a config can "live" at a given time, which I th
 
 ### The Format
 
+I've kept sample copy of the config around in this repo here: https://github.com/clavery63/point-click/blob/master/public/gamedata.json. It might be helpful to reference that as you read through these docs.
+
 #### Top level
 
-There are three top-level concepts, each taking up their own section of the config. They are **world state**, **player state**, and **flags**. World state contains entites--**rooms**, **doors**, **scenery** and **items** (although scenary and items are coneptually fairly similar and might get combined).
+There are three top-level concepts, each taking up their own section of the config. They are **world state**, **player state**, and **flags**. World state contains four entities--**rooms**, **doors**, **scenery** and **items** (although scenary and items are coneptually fairly similar and might get combined).
 
-There is a design decision here that is important to point out. All entities must have an id, and therefore must live in their respective place in the config. If one entity has to reference another (e.g. a room contains items), then it must represent this as an id, which is then dereferenced in the appropriate part of the config.
+There is a fundamental design decision here that is important to point out. All entities must have an id, and therefore must live in their respective place in the config. If one entity has to reference another (e.g. a room contains items), then it must represent this as an id, which is then dereferenced in the appropriate part of the config.
 
 If this seems weird or confusing, let me know. But the summary of why I'm doing it this way is ease of maintenence.
 
@@ -54,7 +56,7 @@ I'll try to illustate the difference here:
 {
   rooms: {
     1: {
-      description: 'hi'
+      description: 'hi',
       items: [
         {
           name: 'torch'
@@ -71,7 +73,7 @@ I'll try to illustate the difference here:
 {
   rooms: {
     1: {
-      description: 'hi'
+      description: 'hi',
       items: [1, 2]
     }
   },
@@ -85,4 +87,16 @@ I'll try to illustate the difference here:
   }
 }
 ```
+
+#### Player State
+
+| Field Name | Type      | Description
+| -----------| --------- | ----- |
+| verb       |  String   | Current action the player is taking
+| using      |  ID       | Item the player is using (selected "using" then clicked the item)
+| examining  |  ID       | Item or scenery the player has "opened"
+| room       |  ID       | Player's current location
+| items      |  List[ID] | Items in player's inventory
+| page       |  Int      | Item list page
+| timer      |  Int      | Tracks number of room visits (for timed events like the torch)
 
