@@ -162,3 +162,40 @@ I'll try to illustate the difference here:
 | trigger           | ?String    | The verb the player uses to begin animation
 | movedText         | ?String    | Text to display after animation completes
 | visibleFlag       | ?Flag      | Flag whose presence makes the scenery visible
+
+### Flags and Verb Rules
+
+As mentioned earlier, most parts of the config file are meant to be immutable. But of course for the game to actually do anything, some state needs to change. Initially, the changeable state  comprised of:
+
+1. Lists of items, which can change hands from rooms to the player.
+2. Doors, which can be unlocked and opened.
+
+And that was basically it. There was transient player state like selected verb and current room, but the actual "world state" as it were consisted of nothing but items moving and doors opening. This meant that, other than doors (barely), entities in the game were effectively static. We needed a way to make entity behavior dynamic, preferably in a way that was verb-aware, and ideally in a way that would be reasonably expressible in a simple game editor UI.
+
+That's where flags and verb rules come in. They work together to form the programable logic of the game, enabling entities (i.e. `items` and `scenery`) to change their behavior dynamically. 
+
+* Each entity houses a list of zero or more verb rules for each verb in the game (e.g. "look", "speak", etc). These are stored in an optional field called `verbs`
+* The list of rules for a given verb + entity are cascading in nature--the first whose rule "passes" will be selected
+* The rules are governed by the presence and absence of flags
+* If no rules pass (or none are defined) a hard-coded default is selected
+* The rules themselves, when successfully enacted, can add and remove flags.
+
+Hence, the interplay of all of the verb rules in the game form a state machine, where the state is the combination of all active flags, and the transitions are the player using verbs. The best way to familiarize yourself with how these work is to look at the same config to see the behavior they're driving. Simple programming paradigms such as if/else logic and loops are expressible with flags.
+
+`flags` is a top-level field in the config that houses the names of whatever flags are currently active. It initially can house zero or more flags. `verbs` is a nested structure within `items` and `scenery` entities that implement the specification described above, with the following available fields
+
+#### Verb Rule
+
+| Field Name        | Type       | Description
+| ------------------| ---------- | -----------
+| moveTo            | ID         | Room the player goes to after triggering this rule
+| moveDir           | String     | Animation direction when moving
+| text              | String     | Text to display after triggering this rule
+| addFlags          | List[Flag] | Flags to switch to active after triggering this rule
+| removeFlags       | List[Flag] | Flags to switch to inactive after triggering this rule
+| prereqFlags       | List[Flag] | Flags that must be active for this rule to trigger
+| prereqUsing       | List[Flag] | Item that player must be using for this rule to tigger
+
+#### Effects
+
+Effects are an experimental feature that gives the game designer a level of control above just flags. They define an interface that exposes some of the reducer functionality directly, allowing you to, for instance, directly overwrite a value that isn't just a flag. This level of control might not be worth providing. The only current occurrence of it is to allow some action to reset the user timer to zero.
