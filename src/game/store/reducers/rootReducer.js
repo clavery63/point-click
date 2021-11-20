@@ -6,6 +6,7 @@ import setPositionReducer from './setPositionReducer';
 import changePageReducer from './changePageReducer';
 import roomReducer from './roomReducer';
 import { setValue, clearValue, keepState } from './utils';
+import testFn from './test';
 
 const reducers = {
   SET_STATE: payload => () => payload,
@@ -28,6 +29,7 @@ const reducers = {
 };
 
 const rootReducer = (state = {}, { type, payload }) => {
+  testFn();
   const { worldState, playerState, flags } = state;
   const reducer = reducers[type] || keepState;
   return reducer(payload, playerState, worldState, flags)(state);
