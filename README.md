@@ -194,7 +194,7 @@ Hence, the interplay of all of the verb rules in the game form a state machine, 
 | addFlags          | List[Flag] | Flags to switch to active after triggering this rule
 | removeFlags       | List[Flag] | Flags to switch to inactive after triggering this rule
 | prereqFlags       | List[Flag] | Flags that must be active for this rule to trigger
-| prereqUsing       | List[Flag] | Item that player must be using for this rule to tigger
+| prereqUsing       | ID         | Item that player must be using for this rule to tigger
 
 #### Effects
 
