@@ -1,18 +1,3 @@
-type Address = {
-  postCode: string
-  street: [string, string | undefined]
-}
-
-type Cat = {
-  name: string
-}
-
-type UserInfo = {
-  address: Address
-  previousAddress?: Address
-  cats: Cat[]
-}
-
 type GetIndexedField<T, K> = K extends `${number}`
   ? number extends keyof T
     ? T[number]
@@ -43,7 +28,7 @@ type GetFieldType<T, P> = P extends `${infer Left}.${infer Right}`
         : undefined
       : undefined
 
-export function getValue<
+function get<
   TData,
   TPath extends string,
   TDefault = GetFieldType<TData, TPath>
@@ -63,24 +48,4 @@ export function getValue<
   return value !== undefined ? value : (defaultValue as TDefault);
 }
 
-const testFn = (): Cat => {
-  const myCats = [{ name: 'Oscar' }, { name: 'Oscar' }];
-  const chris: UserInfo = {
-    address: {
-      postCode: '11211',
-      street: ['one', 'two'],
-    },
-    cats: myCats
-  }
-
-  const i = 4
-  const field = 'name';
-
-  const someCat = getValue(chris, `cats[${i}].name`);
-  const otherCat = chris.cats[20];
-  console.log(someCat);
-
-  return otherCat;
-}
-
-export default testFn;
+export default get;

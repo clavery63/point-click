@@ -1,15 +1,16 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { createStore, applyMiddleware, compose, Store } from 'redux'
+import React, { useRef, useMemo } from 'react';
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { createEpicMiddleware } from 'redux-observable';
 import rootEpic from './store/epics/root';
 import rootReducer from './store/reducers/rootReducer';
 import effectsMiddleware from './store/middleware/effectsMiddleware';
 import GameContainer from './GameContainer';
+import { GameState } from './store/types';
 
 const containerStyles = {
   display: 'flex',
-  justifyCcontent: 'center',
+  justifyContent: 'center',
   alignItems: 'center',
   height: '100%',
   width: '100%'
@@ -19,15 +20,14 @@ const containerStyles = {
 const audioAssetsRoot = `${process.env.REACT_APP_ASSETS_BASE}/test-game/audio`;
 
 type Props = {
-  gameName: any,
-  state: any
+  gameName: string,
+  state: GameState
 };
 
 const GameRoot = React.memo(({ gameName, state }: Props) => {
   const containerRef = useRef(null);
-  const [store, setStore] = useState<Store<any, { type: any; payload: any; }> | null>(null);
 
-  useEffect(() => {
+  const store = useMemo(() => {
     const epicMiddleware = createEpicMiddleware();
   
     const initialState = {
@@ -40,9 +40,10 @@ const GameRoot = React.memo(({ gameName, state }: Props) => {
     const newStore = createStore(rootReducer, initialState, composeEnhancers(
       applyMiddleware(epicMiddleware, effectsMiddleware)
     ));
-    setStore(newStore);
   
     epicMiddleware.run(rootEpic);
+
+    return newStore;
   }, [gameName, state]);
 
   return (
@@ -54,7 +55,7 @@ const GameRoot = React.memo(({ gameName, state }: Props) => {
         <Provider store={store}>
           <audio className='music-player' loop />
           <audio className='sfx-player' src={`${audioAssetsRoot}/transition.mp3`} />
-            <GameContainer parentRef={containerRef} />
+          <GameContainer parentRef={containerRef} />
         </Provider>
       )}
     </div>

@@ -1,6 +1,9 @@
+import { Store } from "redux";
+
 type MapCoord = 0 | 1 | 2 | 3 | 4;
 type DoorState = 'CLOSED' | 'OPEN' | 'LOCKED';
 type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
+type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
 type EffectAction = 'setValue';
 
 interface Position {
@@ -111,5 +114,16 @@ export interface GameState {
   flags: Flags;
 }
 
+export interface GameStoreState extends GameState {
+  transition: {
+    dest?: string
+  };
+  text?: string;
+  nextText?: string,
+  loading: boolean,
+  menu: Menu;
+  cursorEnabled: boolean,
+  gameName: string,
+}
 
-export default GameState;
+export type GameStore = Store<GameStoreState>;

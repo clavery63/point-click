@@ -1,5 +1,6 @@
-import { setWith, clone, get } from 'lodash';
+import { setWith, clone } from 'lodash';
 import { compose } from 'redux';
+import get from 'shared/util/get';
 
 export const isNull = value => value === null;
 export const notNull = value => !isNull(value);

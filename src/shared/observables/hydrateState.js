@@ -1,4 +1,4 @@
-import { map, switchMap, take, tap } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 import loadImages$ from './loadImages';

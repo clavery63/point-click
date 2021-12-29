@@ -1,8 +1,14 @@
-import { get } from 'lodash';
+import { Middleware } from 'redux';
+import get from 'shared/util/get';
+import { GameStoreState } from '../types';
 
-const textMiddleware = store => next => action => {
+const textMiddleware: Middleware<
+  {},
+  GameStoreState
+> = store => next => action => {
   const result = next(action);
-  const { nextText, transition } = store.getState();
+  const state = store.getState();
+  const { nextText, transition } = state;
   if (nextText) {
     store.dispatch({ type: 'CLEAR_NEXT_TEXT' });
     store.dispatch({ type: 'RUN_TEXT', payload: nextText });
