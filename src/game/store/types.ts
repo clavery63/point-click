@@ -106,13 +106,15 @@ export interface PlayerState {
   timer: number;
 }
 
-export type Flags = string[];
+export type Flags = Set<string>;
 
 export interface GameState {
   worldState: WorldState;
   playerState: PlayerState;
   flags: Flags;
 }
+
+export type Entity = Door | Item | Scenery;
 
 export interface GameStoreState extends GameState {
   transition: {

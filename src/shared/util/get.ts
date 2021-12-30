@@ -12,7 +12,7 @@ type IndexedFieldWithPossiblyUndefined<T, Key> =
   | GetIndexedField<Exclude<T, undefined>, Key>
   | Extract<T, undefined>
 
-type GetFieldType<T, P> = P extends `${infer Left}.${infer Right}`
+export type GetFieldType<T, P> = P extends `${infer Left}.${infer Right}`
   ? Left extends keyof T
     ? FieldWithPossiblyUndefined<T[Left], Right>
     : Left extends `${infer FieldKey}[${infer IndexKey}]`
