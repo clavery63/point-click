@@ -1,6 +1,7 @@
 import { Store } from "redux";
 
 type MapCoord = 0 | 1 | 2 | 3 | 4;
+type VerbIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7; 
 type DoorState = 'CLOSED' | 'OPEN' | 'LOCKED';
 type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
 type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
@@ -44,12 +45,24 @@ export interface Verb {
   text?: string;
   moveTo?: number;
   moveDir?: DoorDir;
-  addFlags?: string[];
-  removeFlags?: string[];
-  prereqFlags?: string[];
+  addFlags: string[];
+  removeFlags: string[];
+  prereqFlags: string[];
   prereqUsing?: number;
   effects?: Effect[];
 }
+
+export type Verbs = [
+  // TODO: TBD how to actually structure this
+  Verb,
+  Verb,
+  Verb,
+  Verb,
+  Verb,
+  Verb,
+  Verb,
+  Verb
+]
 
 export interface Item {
   name: string;
@@ -61,7 +74,7 @@ export interface Item {
   takeableFlag?: string;
   visibleFlag?: string;
   requiresPrecision?: boolean;
-  verbs?: Map<string, Verb>;
+  verbs: Verbs;
 }
 
 export interface Scenery {
@@ -70,8 +83,8 @@ export interface Scenery {
   startPosition: Position;
   endPosition?: Position;
   img?: string;
-  verbs?: Map<string, Verb>;
-  contains?: number[];
+  verbs: Verbs;
+  contains: number[];
   trigger?: string;
   movedText?: string;
   visibleFlag?: string;
@@ -82,7 +95,7 @@ export interface Room {
   music?: string;
   video?: string;
   initialDesciption?: string;
-  description?: string;
+  description: string;
   doors: number[];
   items: number[];
   scenery: number[];
