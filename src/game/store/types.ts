@@ -7,7 +7,7 @@ type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
 type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
 type EffectAction = 'setValue';
 
-interface Position {
+export interface Position {
   left: number;
   top: number;
   width: number;
@@ -49,7 +49,7 @@ export interface Verb {
   removeFlags: string[];
   prereqFlags: string[];
   prereqUsing?: number;
-  effects?: Effect[];
+  // effects?: Effect[];
 }
 
 export type Verbs = [
@@ -79,7 +79,7 @@ export interface Item {
 
 export interface Scenery {
   name: string;
-  description: string;
+  description: number;
   startPosition: Position;
   endPosition?: Position;
   img?: string;

@@ -1,14 +1,14 @@
 import { setWith, clone } from 'lodash';
 import { compose } from 'redux';
 import get, { GetFieldType } from 'shared/util/get';
-import { GameStoreState, Entity, PlayerState, Flags, GameState, WorldState, Item, Door, Scenery } from '../types';
+import { GameStoreState, Entity, PlayerState, Flags, GameState, WorldState, Item, Door, Scenery, Verb, Room, Position } from '../types';
 
 type Transformer<T> = (arg: T) => T;
 
 type StateTransformer = Transformer<GameStoreState>;
 
-type ValueUpdater = {
-  <PathType extends string>(
+type ValueUpdater<Override = string> = {
+  <PathType extends string & Override>(
     path: PathType,
     fn: Transformer<GetFieldType<GameStoreState, PathType>>
   ): StateTransformer
@@ -54,26 +54,46 @@ export const combineReducers = (...reducers: Reducer[]) => (...args: [Entity, Pl
   return compose(...reducers.map(reducer => reducer(...args)));
 };
 
-export const clearValue = path => setValue(path)(null);
+export const clearValue = (path: string) => setValue(path)(null);
 
 export const withText = setValue('nextText');
 
-export const keepState = () => state => state;
+export const keepState = () => (state: GameState) => state;
 
-export const when = pred => transform => {
+export const when = (pred: boolean) => (transform: StateTransformer) => {
   return pred ? transform : keepState();
 };
 
-export const filterValues = path => id => updateValue(path, objects => {
-  return objects.filter(objectId => objectId !== id);
+export const filterValues = <
+  PathType extends NumberArrayPath
+>(path: PathType) => (id: number) => updateValue<NumberArrayPath>(path, objects => {
+  return objects?.filter(objectId => objectId !== id);
 });
+
+const chris = 0;
+
+const index = '0';
+const type = 'scenery';
+
+filterValues(`worldState.${type}[${chris}].contains`)(111)
 
 
 type Basic = number | string | string[] | number[] | Set<any> | boolean | Function;
 
-type ConditionalTypes<Base, Condition, Prefix extends string = ''> =  {
-  // TODO: recursion is fun, but let's just manually loop through the few fields we know we have :-/
-  [Key in keyof Base]: Base[Key] extends Basic ? (Base[Key] extends Condition ? Key extends string ? `${Prefix}${Key}` : never : never) : (Key extends string ? ConditionalTypes<Base[Key], Condition, `${Prefix}${Key}.`> : never);
+type ConstrainedTypes<Base, Constraint, Prefix extends string = '', Dumb = 0> = {
+  [Key in keyof Base]: Key extends string
+    ? Base[Key] extends Basic
+      ? (Base[Key] extends Constraint
+          ? `${Prefix}${Key}`
+        : never)
+      : Base[Key] extends any[]
+        ? Dumb extends keyof Base[Key]
+          // TODO: Only include Key here if the constraint is any[]
+          // Actually it's more nuanced than that... so table it for now
+          ? Key | ConstrainedTypes<Base[Key][Dumb], Constraint, `${Prefix}${Key}[${number}].`> 
+          : never
+        : ConstrainedTypes<Base[Key], Constraint, `${Prefix}${Key}.`>
+    : never
 }[keyof Base]
 
 interface Nested {
@@ -86,19 +106,26 @@ interface RootType {
   verb: string;
   room: number;
   items: number[];
-  nested: Nested
+  nested: Nested[]
   page: number;
 }
 
-type Testing = ConditionalTypes<RootType, any[]>;
+
+// this doesn't look quite perfect. there's a bug where some of the paths seem to be missing prefixes
+type NumberArrayPath = ValidPathsFor<number[]>;
+type ValidPathsFor<Constraint> = Exclude<ConstrainedTypes<GameState, Constraint>, undefined>;
 
 
 
 
-type Base = `worldState.rooms[${number}].description`;
+type Base = `worldState.rooms[3].description`;
 type MyDesc = 'worldState.rooms[2].description';
 type MyDesc2 = 'playerState.verb';
 
+type checkingAgain = MyDesc extends Base ? true : false;
+
 type Result = GetFieldType<GameStoreState, Base | MyDesc2>;
 
-type Verbo = GetFieldType<GameStoreState, `worldState.items[${number}].verbs[10]`>
+type ThisAgain = `worldState.items[0].verbs[420].addFlags` extends `worldState.items[${number}].verbs[${number}].addFlags` ? true : false;
+
+type Verbo = GetFieldType<GameStoreState, `worldState.items[${number}].verbs[${number}].addFlags`>
