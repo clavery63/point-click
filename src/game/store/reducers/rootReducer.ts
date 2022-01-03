@@ -6,8 +6,19 @@ import setPositionReducer from './setPositionReducer';
 import changePageReducer from './changePageReducer';
 import roomReducer from './roomReducer';
 import { setValue, clearValue, keepState } from './utils';
+import { Reducer as ReduxReducer } from 'redux';
+import { Flags, GameStoreState, PlayerState, WorldState } from '../types';
+import { StateTransformer } from 'shared/util/types';
+import defaultState from '../defaultState';
 
-const reducers = {
+type Reducer = {
+  (payload: any, playerState: PlayerState, worldState: WorldState, flags: Flags): StateTransformer;
+}
+
+type ReducersType = {
+  [x: string]: Reducer
+}
+const reducers: ReducersType = {
   SET_STATE: payload => () => payload,
   SET_WORLD_STATE: setValue('worldState'),
   SET_PLAYER_STATE: setValue('playerState'),
@@ -24,10 +35,10 @@ const reducers = {
   SELECT_ITEM: selectItemReducer,
   SELECT_BAG: selectBagReducer,
   CHANGE_PAGE: changePageReducer,
-  SET_MENU: setValue('menu')
+  SET_MENU: setValue('menu'),
 };
 
-const rootReducer = (state = {}, { type, payload }) => {
+const rootReducer: ReduxReducer<GameStoreState> = (state = defaultState, { type, payload }) => {
   const { worldState, playerState, flags } = state;
   const reducer = reducers[type] || keepState;
   return reducer(payload, playerState, worldState, flags)(state);

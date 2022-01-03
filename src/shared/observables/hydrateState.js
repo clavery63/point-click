@@ -6,8 +6,8 @@ import loadImages$ from './loadImages';
 const assetsBase = process.env.REACT_APP_ASSETS_BASE;
 
 const loadPlayerAndGameState$ = initialState => {
-  if (initialState.playerState) {
-    // If there is already playerState we don't need to fetch it
+  if (initialState?.worldState?.rooms?.length > 0) {
+    // If there are rooms, we've already fetched the data
     return of(initialState);
   }
 

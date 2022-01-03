@@ -7,6 +7,7 @@ import rootReducer from './store/reducers/rootReducer';
 import effectsMiddleware from './store/middleware/effectsMiddleware';
 import GameContainer from './GameContainer';
 import { GameState } from './store/types';
+import defaultState from './store/defaultState';
 
 const containerStyles = {
   display: 'flex',
@@ -31,7 +32,7 @@ const GameRoot = React.memo(({ gameName, state }: Props) => {
     const epicMiddleware = createEpicMiddleware();
   
     const initialState = {
-      loading: true,
+      ...defaultState,
       gameName,
       ...state
     };

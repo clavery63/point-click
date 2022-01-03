@@ -17,7 +17,7 @@ const changePageReducer = (direction, playerState) => {
     case 'UP':
       return setValue('playerState.page')(Math.max(page - 1, 0));
     default:
-      return keepState;
+      return keepState();
   }
 };
 

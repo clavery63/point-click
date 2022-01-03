@@ -6,7 +6,7 @@ export type Transformer<T> = (arg: T) => T;
 export type StateTransformer = Transformer<GameStoreState>;
 
 export type Reducer = {
-  (ent: Entity, playerState: PlayerState, flags: Flags): StateTransformer;
+  (ent?: Entity, playerState?: PlayerState, flags?: Flags): StateTransformer;
 }
 
 type Basic = string | string[] | number | number[] | Set<any> | boolean | Function | null | undefined;
