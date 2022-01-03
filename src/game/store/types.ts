@@ -7,6 +7,8 @@ type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
 type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
 type EffectAction = 'setValue';
 
+type Nullable<T> = T | null;
+
 export interface Position {
   left: number;
   top: number;
@@ -134,7 +136,7 @@ export interface GameStoreState extends GameState {
     dest?: string
   };
   text?: string;
-  nextText?: string,
+  nextText: Nullable<string>,
   loading: boolean,
   menu: Menu;
   cursorEnabled: boolean,

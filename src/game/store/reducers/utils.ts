@@ -1,14 +1,24 @@
 import { setWith, clone } from 'lodash';
 import { compose } from 'redux';
 import filter from 'shared/util/filter';
-import get from 'shared/util/get';
-import { ValueUpdater, Reducer, StateTransformer, NumberArrayPath } from 'shared/util/types';
-import { Entity, PlayerState, Flags, GameState } from '../types';
+import get, { GetFieldType } from 'shared/util/get';
+import { ValueUpdater, Reducer, StateTransformer, NumberArrayPath, NullablePath } from 'shared/util/types';
+import { Entity, PlayerState, Flags, GameState, GameStoreState } from '../types';
 
 export const isNull = (value: any) => value === null;
 export const notNull = (value: any) => !isNull(value);
 
-export const setValue = path => value => state => {
+type ValueSetterWithPath<PathType> = {
+  (value: GetFieldType<GameStoreState, PathType>): StateTransformer
+}
+
+type ValueSetter = {
+  <PathType extends string>(
+    path: PathType
+  ): ValueSetterWithPath<PathType>
+};
+
+export const setValue: ValueSetter = path => value => state => {
   return setWith(clone(state), path, value, clone);
 };
 
@@ -35,7 +45,7 @@ export const combineReducers = (...reducers: Reducer[]) => (...args: [Entity, Pl
   return compose(...reducers.map(reducer => reducer(...args)));
 };
 
-export const clearValue = (path: string) => setValue(path)(null);
+export const clearValue = (path: NullablePath) => setValue(path);
 
 export const withText = setValue('nextText');
 
