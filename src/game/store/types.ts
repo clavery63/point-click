@@ -74,7 +74,7 @@ export interface Item {
   takeableFlag?: string;
   visibleFlag?: string;
   requiresPrecision?: boolean;
-  verbs: Verbs;
+  verbs: string[];
 }
 
 export interface Scenery {
@@ -83,7 +83,7 @@ export interface Scenery {
   startPosition: Position;
   endPosition?: Position;
   img?: string;
-  verbs: Verbs;
+  // verbs: Verbs;
   contains: number[];
   trigger?: string;
   movedText?: string;
