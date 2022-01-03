@@ -51,7 +51,7 @@ export interface Verb {
   removeFlags: string[];
   prereqFlags: string[];
   prereqUsing?: number;
-  // effects?: Effect[];
+  effects?: Effect[];
 }
 
 export type Verbs = [
@@ -96,7 +96,7 @@ export interface Room {
   img?: string;
   music?: string;
   video?: string;
-  initialDesciption?: string;
+  initialDescription?: Nullable<string>;
   description: string;
   doors: number[];
   items: number[];
