@@ -1,7 +1,10 @@
 import { compose } from 'redux';
+import { Reducer } from './rootReducer';
 import { withText, setValue } from './utils';
 
-const getText = bagLevel => {
+const BAG_ID = 9999;
+
+const getText = (bagLevel: number) => {
   if (bagLevel < 2) {
     return 'It\'s your bag. You must take care to empty it every now and then. Otherwise, bad things can happen.';
   } else if (bagLevel < 5) {
@@ -20,17 +23,17 @@ const getText = bagLevel => {
 };
 
 const defaultReducer = () => withText('That is not something you can do with your bag.');
-const lookReducer = bagLevel => withText(getText(bagLevel));
+const lookReducer = (bagLevel: number) => withText(getText(bagLevel));
 
 // TODO: is it worth making this generic, just like an opt-in timer component with a customizable image and text?
 const useReducer = () => {
   return compose(
     withText('So you\'ve decided to use your bag... What would you like to use it on?'),
-    setValue('playerState.using')('BAG')
+    setValue('playerState.using')(BAG_ID)
   );
 };
 
-const getReducer = verb => {
+const getReducer = (verb: string) => {
   switch (verb) {
   case 'LOOK':
     return lookReducer;
@@ -41,7 +44,7 @@ const getReducer = verb => {
   }
 };
 
-const selectBagReducer = (bagLevel, playerState) => {
+const selectBagReducer: Reducer = (bagLevel, playerState) => {
   const reducer = getReducer(playerState.verb)
   return reducer(bagLevel);
 };
