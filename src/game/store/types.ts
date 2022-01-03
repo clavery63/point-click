@@ -3,7 +3,7 @@ import { Store } from "redux";
 type MapCoord = 0 | 1 | 2 | 3 | 4;
 type VerbIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7; 
 type DoorState = 'CLOSED' | 'OPEN' | 'LOCKED';
-type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
+export type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
 export type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
 type EffectAction = 'setValue';
 
@@ -114,7 +114,7 @@ export interface WorldState {
 export interface PlayerState {
   verb: string;
   using?: number;
-  examining?: number;
+  examining: Nullable<number>;
   room: number;
   items: number[];
   page: number;

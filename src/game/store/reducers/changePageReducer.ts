@@ -1,8 +1,10 @@
 import { setValue, keepState } from './utils';
+import { Reducer } from './rootReducer';
+import { DoorDir } from '../types';
 
 const ITEMS_PER_PAGE = 7;
 
-const changePageReducer = (direction, playerState) => {
+const changePageReducer: Reducer = (direction: DoorDir, playerState) => {
   const { items, page, examining } = playerState;
   const lastPage = Math.floor((items.length - 1) / ITEMS_PER_PAGE);
 

@@ -17,6 +17,7 @@ const defaultState = {
   menu: 'MAIN' as Menu,
   playerState: {
     verb: 'LOOK',
+    examining: null,
     room: 0,
     items: [],
     timer: 0,

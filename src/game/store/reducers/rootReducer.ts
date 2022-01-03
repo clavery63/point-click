@@ -11,7 +11,7 @@ import { Flags, GameStoreState, PlayerState, WorldState } from '../types';
 import { StateTransformer } from 'shared/util/types';
 import defaultState from '../defaultState';
 
-type Reducer = {
+export type Reducer = {
   (payload: any, playerState: PlayerState, worldState: WorldState, flags: Flags): StateTransformer;
 }
 
