@@ -46,6 +46,5 @@ export type NullablePath = Exclude<GetNullables<GameStoreState>, undefined>;
 export type ValueUpdater<Override = string> = {
   <PathType extends string & Override>(
     path: PathType,
-    fn: Transformer<GetFieldType<GameStoreState, PathType>>
-  ): StateTransformer
+  ): (fn: Transformer<GetFieldType<GameStoreState, PathType>>) => StateTransformer
 };

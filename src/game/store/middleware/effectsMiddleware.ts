@@ -2,7 +2,7 @@ import { Middleware } from 'redux';
 import get from 'shared/util/get';
 import { GameStoreState } from '../types';
 
-const textMiddleware: Middleware<
+const effectsMiddleware: Middleware<
   {},
   GameStoreState
 > = store => next => action => {
@@ -20,4 +20,4 @@ const textMiddleware: Middleware<
   return result;
 };
 
-export default textMiddleware;
+export default effectsMiddleware;

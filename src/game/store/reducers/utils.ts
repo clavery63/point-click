@@ -22,20 +22,20 @@ export const setValue: ValueSetter = path => value => state => {
   return setWith(clone(state), path, value, clone);
 };
 
-export const updateValue: ValueUpdater = (path, fn) => state => {
+export const updateValue: ValueUpdater = (path) => (fn) => state => {
   const newValue = fn(get(state, path));
   return setValue(path)(newValue)(state);
 };
 
 export const addFlags = (flagsToAdd: string[]) => {
-  return updateValue('flags', flags => {
+  return updateValue('flags')(flags => {
     flagsToAdd.forEach(flag => flags.add(flag));
     return flags;
   });
 };
 
 export const removeFlags = (flagsToRemove: string[]) => {
-  return updateValue('flags', flags => {
+  return updateValue('flags')(flags => {
     flagsToRemove.forEach(flag => flags.delete(flag));
     return flags;
   });
@@ -45,7 +45,7 @@ export const combineReducers = (...reducers: Reducer[]) => (...args: [Entity, Pl
   return compose(...reducers.map(reducer => reducer(...args)));
 };
 
-export const clearValue = (path: NullablePath) => setValue(path);
+export const clearValue = (path: NullablePath) => setValue(path)(null);
 
 export const withText = setValue('nextText');
 
@@ -57,6 +57,6 @@ export const when = (pred: boolean) => (transform: StateTransformer) => {
 
 export const filterValues = <
   PathType extends NumberArrayPath
->(path: PathType) => (id: number) => updateValue<NumberArrayPath>(path, objects => {
+>(path: PathType) => (id: number) => updateValue<NumberArrayPath>(path)(objects => {
   return filter(objects, objectId => objectId !== id);
 });
