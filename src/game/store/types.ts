@@ -5,6 +5,7 @@ type VerbIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 type DoorState = 'CLOSED' | 'OPEN' | 'LOCKED';
 export type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
 export type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
+export type EntityType = 'item' | 'scenery';
 type EffectAction = 'setValue';
 
 type Nullable<T> = T | null;
@@ -134,6 +135,7 @@ export type Entity = Door | Item | Scenery;
 export interface GameStoreState extends GameState {
   transition: {
     dest: Nullable<string>
+    frame?: number
   };
   text?: string;
   nextText: Nullable<string>,

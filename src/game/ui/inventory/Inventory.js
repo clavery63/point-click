@@ -19,6 +19,10 @@ const InventoryItem = ({ item, index, onClick, using }) => {
 };
 
 const Inventory = ({ items, inventoryImg, using, examining, onClick }) => {
+  // We can strongly type action dispatching if we move to the useDispatch hook:
+  // const dispatch = useDispatch<Dispatch<NumberAction>>();
+  // dispatch(({ type: 'SET_FRAME', payload: 8}))
+
   const text = examining?.name || 'GOODS';
   const currentList = examining?.contains || items;
   return (

@@ -44,7 +44,7 @@ const getReducer = (verb: string) => {
   }
 };
 
-const selectBagReducer: Reducer = (bagLevel, playerState) => {
+const selectBagReducer: Reducer<number> = (bagLevel, playerState) => {
   const reducer = getReducer(playerState.verb)
   return reducer(bagLevel);
 };

@@ -4,7 +4,7 @@ import { DoorDir } from '../types';
 
 const ITEMS_PER_PAGE = 7;
 
-const changePageReducer: Reducer = (direction: DoorDir, playerState) => {
+const changePageReducer: Reducer<DoorDir> = (direction, playerState) => {
   const { items, page, examining } = playerState;
   const lastPage = Math.floor((items.length - 1) / ITEMS_PER_PAGE);
 

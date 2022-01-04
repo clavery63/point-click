@@ -1,6 +1,7 @@
+import { Reducer } from './rootReducer';
 import { setValue, keepState } from './utils';
 
-const selectVerbReducer = (verb, playerState) => {
+const selectVerbReducer: Reducer<string> = (verb, playerState) => {
   if (playerState.using) {
     return keepState();
   }
