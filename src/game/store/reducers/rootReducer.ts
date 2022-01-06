@@ -84,11 +84,11 @@ const rootReducer: ReduxReducer<GameStoreState, ActionsType> = (state = defaultS
    * 
    * This insanity is here to appease typescript, which is only smart enough to
    * deduce the action type/payload pairing if we use explicit control-flow.
-   * Ordinarily, we would be able to DRY this function up by putting the
+   * Ordinarily, we would be able to simplify this function by putting the
    * reducers in a map, but the type checker won't allow it.
    * 
    * I think it's worth keeping in order to get good compile-time checking.
-   * Ugly as it is, you IDE will make it pretty clear what needs to be added.
+   * Ugly as it is, your IDE will make it pretty clear what needs to be added.
    * 
    * Right now this list of reducers is written out three times to fit these
    * needs. I'm hoping we can get it down to two at least (perhaps by inferring
