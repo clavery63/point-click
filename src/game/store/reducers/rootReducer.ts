@@ -50,7 +50,7 @@ export type ActionsType = {
   }
 }
 
-type AllActions = ActionsType[keyof ActionTypes];
+export type ReducerActions = ActionsType[keyof ActionTypes];
 
 const applyReducer = <
   PayloadType
@@ -76,7 +76,7 @@ const selectBag: ParentReducer<number> = selectBagReducer;
 const changePage: ParentReducer<DoorDir> = changePageReducer;
 const setMenu: ParentReducer<Menu> = setValue('menu');
 
-const rootReducer: ReduxReducer<GameStoreState, AllActions> = (state = defaultState, action) => {
+const rootReducer: ReduxReducer<GameStoreState, ReducerActions> = (state = defaultState, action) => {
   /**
    * README:
    * 
