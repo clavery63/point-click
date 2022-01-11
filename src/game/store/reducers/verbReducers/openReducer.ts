@@ -1,14 +1,16 @@
 import { withText, setValue, keepState } from '../utils';
 import { compose } from 'lodash/fp';
+import { EntityReducer } from 'shared/util/types';
+import { Door, Flags, Scenery } from 'game/store/types';
 
-const doorReducer = (door, flags) => {
+const doorReducer = (door: Door, flags: Flags) => {
   switch (door.state) {
     case 'CLOSED':
       if (!door.openCondition || flags.has(door.openCondition)) {
         return compose(
           withText(door.openText),
-          setValue(`worldState.doors.${door.id}.state`)('OPEN'),
-          setValue(`worldState.doors.${door.id}.hidden`)(false)
+          setValue(`worldState.doors[${door.id}].state`)('OPEN'),
+          setValue(`worldState.doors[${door.id}].hidden`)(false)
         );
       } else {
         return withText(door.closedText);
@@ -21,7 +23,7 @@ const doorReducer = (door, flags) => {
   }
 };
 
-const sceneryReducer = scenery => {
+const sceneryReducer = (scenery: Scenery) => {
   if (!scenery.contains) {
     return keepState();
   }
@@ -32,7 +34,7 @@ const sceneryReducer = scenery => {
   );
 };
 
-const openReducer = (object, playerState, flags) => {
+const openReducer: EntityReducer = (object, _p, flags) => {
   if (object.type === 'doors') {
     return doorReducer(object, flags);
   }

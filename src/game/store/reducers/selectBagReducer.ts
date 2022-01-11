@@ -1,5 +1,5 @@
 import { compose } from 'redux';
-import { Reducer } from './rootReducer';
+import { ParentReducer } from 'shared/util/types';
 import { withText, setValue } from './utils';
 
 const BAG_ID = 9999;
@@ -44,7 +44,7 @@ const getReducer = (verb: string) => {
   }
 };
 
-const selectBagReducer: Reducer<number> = (bagLevel, playerState) => {
+const selectBagReducer: ParentReducer<number> = (bagLevel, playerState) => {
   const reducer = getReducer(playerState.verb)
   return reducer(bagLevel);
 };

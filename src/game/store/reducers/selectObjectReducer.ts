@@ -8,15 +8,15 @@ import speakReducer from './verbReducers/speakReducer';
 import eatReducer from './verbReducers/eatReducer';
 import smokeReducer from './verbReducers/smokeReducer';
 import { keepState } from './utils';
-import { EntityReducer, ParentReducer } from 'shared/util/types';
+import { ParentReducer } from 'shared/util/types';
 import { ObjectType } from './rootReducer';
+import { Entity, VerbIndex } from '../types';
 
-type GetReducer = (verb: string, objectType: string) => EntityReducer;
-const getReducer: GetReducer = (verb, objectType) => ({
+const getReducer = (verb: VerbIndex) => ({
   MOVE: moveReducer,
   LOOK: lookReducer,
   OPEN: openReducer,
-  USE: _useReducer(objectType),
+  USE: _useReducer,
   SMOKE: smokeReducer,
   TAKE: takeReducer,
   EAT: eatReducer,
@@ -26,8 +26,11 @@ const getReducer: GetReducer = (verb, objectType) => ({
 
 const selectObjectReducer: ParentReducer<ObjectType> = (payload, playerState, worldState, flags) => {
   const { type, id } = payload;
-  const object = { ...worldState[type][id], type, id };
-  const reducer = getReducer(playerState.verb, type) || keepState;
+  const object = worldState[type][id];
+  // TODO: We'll add the type and id fields to these entities when hydrating state, not here.
+  object.type = type;
+  object.id = id;
+  const reducer = getReducer(playerState.verb) || keepState;
   return reducer(object, playerState, flags);
 };
 

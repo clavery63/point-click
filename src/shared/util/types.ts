@@ -13,7 +13,6 @@ export type EntityReducer = ChildReducer<Entity>;
 export type ItemReducer = ChildReducer<Item>;
 export type SceneryReducer = ChildReducer<Scenery>;
 export type DoorReducer = ChildReducer<Door>;
-export type ItemOrSceneryReducer = ChildReducer<Item | Scenery>;
 
 export type ParentReducer<PayloadType> = {
   (payload: PayloadType, playerState: PlayerState, worldState: WorldState, flags: Flags): StateTransformer;

@@ -298,7 +298,7 @@
         },
         "img": "key-1",
         "verbs": {
-          "look": [
+          "LOOK": [
             {
               "text": "There's a random key embedded in the wall."
             }
@@ -363,7 +363,7 @@
         },
         "img": "lockpick",
         "verbs": {
-          "look": [
+          "LOOK": [
             {
               "text": "Mike, here is a lockpick. It might be handy if you, the master of unlocking, take it with you."
             }
@@ -382,7 +382,7 @@
         "img": "bong",
         "description": "It's some kind of strange vessel. Its base is filled with a murky, dank liquid, and there is an acrid vapor emanating from its spout.",
         "verbs": {
-          "smoke": [
+          "SMOKE": [
             {
               "moveTo": 10,
               "moveDir": "RIGHT"
@@ -423,17 +423,17 @@
         "img": "scott",
         "description": "Scott is in your inventory now. Feel free to use him as you would any other items or spells.",
         "verbs": {
-          "speak": [
+          "SPEAK": [
             {
               "text": "\"I thought you said this party would be cool.\", says Scott, looking concerned. \"Why haven't I had any beer yet?\""
             }
           ],
-          "hit": [
+          "HIT": [
             {
               "text": "\"Cool man. got any beer?\""
             }
           ],
-          "look": [
+          "LOOK": [
             {
               "text": "He seems aggressive, but you don't think there's any reason to be concerned at the moment."
             }
@@ -445,7 +445,7 @@
         "name": "sign",
         "img": "welcome-sign",
         "verbs": {
-          "look": [
+          "LOOK": [
             {
               "text": "_____The sign reads: ______\"Welcome to\" ____\"Lobotomy Manor.\"                             But I'm not at Lobotomy Manor!!                   I'm at Birthday Castle... right?"
             }
@@ -463,7 +463,7 @@
         "name": "frying pan",
         "img": "frying-pan",
         "verbs": {
-          "look": [
+          "LOOK": [
             {
               "text": "A commercial for a frying pan plays quietly in the background."
             }
@@ -481,7 +481,7 @@
         "name": "bottle",
         "img": "bottle",
         "verbs": {
-          "look": [
+          "LOOK": [
             {
               "text": "You grow enraged as you realize that, while there is an unattended drink on the counter, it is simply a beer and not a gin and soda."
             }
@@ -509,7 +509,7 @@
         "takeableFlag": "GARFIELD_TAKE",
         "visibleFlag": "GARFIELD_VISIBLE",
         "verbs": {
-          "eat": [
+          "EAT": [
             {
               "text": "With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.",
               "addFlags": [
@@ -520,7 +520,7 @@
               ]
             }
           ],
-          "smoke": [
+          "SMOKE": [
             {
               "text": "Smoking Garfield is illegal in this state."
             }
@@ -614,7 +614,7 @@
           "height": 56
         },
         "verbs": {
-          "speak": [
+          "SPEAK": [
             {
               "text": "You can't be sure, but you could swear you heard the words \"Uncle Flesh\" uttered from deep within this corridor."
             }
@@ -641,7 +641,7 @@
           "height": 9
         },
         "verbs": {
-          "look": [
+          "LOOK": [
             {
               "moveTo": 8,
               "moveDir": "FORWARD"
@@ -659,13 +659,13 @@
           "height": 112
         },
         "verbs": {
-          "eat": [
+          "EAT": [
             {
               "moveTo": 9,
               "moveDir": "DOWN"
             }
           ],
-          "use": [
+          "USE": [
             {
               "prereqFlags": [
                 "EIGHTBALL_1"
@@ -722,7 +722,7 @@
         "img": "bartender",
         "description": "Meaghan notices you. She'll probably offer you some gin if you talk to her.",
         "verbs": {
-          "speak": [
+          "SPEAK": [
             {
               "prereqFlags": [
                 "REDDS_1"
@@ -773,7 +773,7 @@
         "description": "It's Santos. If only you could get past him, you might be able to collect some more useful items.",
         "visibleFlag": "SANTOS_VISIBLE",
         "verbs": {
-          "speak": [
+          "SPEAK": [
             {
               "prereqFlags": [
                 "SANTOS_1"
@@ -823,7 +823,7 @@
               ]
             }
           ],
-          "use": [
+          "USE": [
             {
               "prereqUsing": 10,
               "text": "With a desperate yell, you hurl Scott at Santos and shield your eyes. Scott beckons Santos with some strange incantations, and they part ways.",
@@ -863,7 +863,7 @@
           "height": 13
         },
         "verbs": {
-          "look": [
+          "LOOK": [
             {
               "moveTo": 13,
               "moveDir": "FORWARD"
@@ -880,7 +880,7 @@
           "height": 13
         },
         "verbs": {
-          "look": [
+          "LOOK": [
             {
               "moveTo": 16,
               "moveDir": "FORWARD"
@@ -897,7 +897,7 @@
           "height": 9
         },
         "verbs": {
-          "look": [
+          "LOOK": [
             {
               "moveTo": 13,
               "moveDir": "FORWARD"
@@ -922,12 +922,12 @@
         "description": "Well, would you look at that?! Justin is in the park too, just hanging out with that goose.  You can tell that he's pleased to see you.  He seems to be holding an unlit torch in one of his hands.",
         "visibleFlag": "JUSTIN_VISIBLE",
         "verbs": {
-          "speak": [
+          "SPEAK": [
             {
               "text": "\"Hey Mike!  Happy birthday!  I thought you'd like a brief escape from all of the unhinged shit going on in the castle, so I brought you to this peaceful place.  Check out the nice waterfowl over there, or \"birdbrain\" as you'd say.  Wow...you've collected a lot of torches!  That's cool, even though they don't serve any functional purpose in this game at all.  Well, keep on picking them up if you want to, just for fun.\""
             }
           ],
-          "use": [
+          "USE": [
             {
               "prereqUsing": 15,
               "text": "\"Oh, nice.  Thanks.  I was hoping someone would have something to eat.  I brought a bag of grapes with me but ended up giving all of them to that goose over there.\"",
@@ -962,7 +962,7 @@
           18
         ],
         "verbs": {
-          "speak": [
+          "SPEAK": [
             {
               "text": "\"HONK!\""
             }
@@ -979,7 +979,7 @@
           "height": 92
         },
         "verbs": {
-          "speak": [
+          "SPEAK": [
             {
               "text": "\"I am the civilian you choose to meet. The continuity of the species depends on your ability to choose. Will you join me? Locker rentals are free. Execute wisely. Woce.\""
             }
@@ -996,7 +996,7 @@
           "height": 26
         },
         "verbs": {
-          "look": [
+          "LOOK": [
             {
               "prereqFlags": [
                 "COMPUTER"
@@ -1008,7 +1008,7 @@
               "text": "You laugh uncontrollably at an out-of-place computer sitting in this hallway. You nearly fall down, and can feel your bag tear a little bit as a result. Unfortunately, it won't boot up."
             }
           ],
-          "use": [
+          "USE": [
             {
               "prereqUsing": 19,
               "text": "You insert the MO disk into the computer, and it boots up. Your heart pounds with anticipation as you prepare to visit your all-time favorite webpage. You feel the room shake with each keystroke - www.ebaumsworld.com___ /____________ jetsfumble.",
@@ -1031,12 +1031,12 @@
           "height": 69
         },
         "verbs": {
-          "hit": [
+          "HIT": [
             {
               "text": "Youch! That was a good thought, but you weren't able to open up the damn door. You'll need something better-suited to bludgeoning."
             }
           ],
-          "use": [
+          "USE": [
             {
               "prereqUsing": 12,
               "text": "\"Blammo!\" The damn door opened because you smacked it with a fucking frying pan. Nice fucking work.",
@@ -1058,7 +1058,7 @@
           "height": 16
         },
         "verbs": {
-          "look": [
+          "LOOK": [
             {
               "moveTo": 17,
               "moveDir": "FORWARD"
@@ -1087,12 +1087,12 @@
           "height": 16
         },
         "verbs": {
-          "eat": [
+          "EAT": [
             {
               "text": "You whip out a knife and fork, and cut off the juiciest part of the pumpkin you can find. You lick your lips as it slides down your gullet. No way you can eat the whole thing though."
             }
           ],
-          "use": [
+          "USE": [
             {
               "prereqUsing": 9999,
               "text": "Seeing that this pumpkin has already been \"marked\" as a safe vessel for storage, you hurriedly collapse the liquid contents from your bag into the gourd's saturated depths.  You breathe an exasperated sigh of relief.  Your bag is once again empty.",
@@ -1120,7 +1120,7 @@
         },
         "visibleFlag": "DANSEN",
         "verbs": {
-          "speak": [
+          "SPEAK": [
             {
               "prereqFlags": [
                 "GOOD_GIN"
@@ -1137,7 +1137,7 @@
               "text": "Hey buddy, welcome to The Abbey! Norm is in the bathroom, but he'll be back soon. You can have this beer if you like, but you look like you're craving something else... I only have beer, but if you give me something to mix I could whip you up something else."
             }
           ],
-          "use": [
+          "USE": [
             {
               "prereqUsing": 16,
               "text": "You give Sam the ice cold gin.",
@@ -1167,7 +1167,7 @@
         },
         "description": "You don't like the looks of this gin and soda, but there is no turning back now. There's no concept of save states in this game, so you might as well just drink it and see what happens.",
         "verbs": {
-          "eat": [
+          "EAT": [
             {
               "moveTo": 20,
               "moveDir": "DOWN"
@@ -1187,7 +1187,7 @@
         },
         "description": "Holy crap! The moment has finally arrived! You will finally drink some gin!",
         "verbs": {
-          "eat": [
+          "EAT": [
             {
               "moveTo": 19,
               "moveDir": "UP"

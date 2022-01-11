@@ -1,5 +1,5 @@
 import genericVerbReducer from './genericVerbReducer';
 
-const speakReducer = genericVerbReducer('speak', () => 'No response.');
+const speakReducer = genericVerbReducer('SPEAK', () => 'No response.');
 
 export default speakReducer;

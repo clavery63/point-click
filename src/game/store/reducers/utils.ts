@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import filter from 'shared/util/filter';
 import get, { GetFieldType } from 'shared/util/get';
 import { ValueUpdater, EntityReducer, EmptyReducer, StateTransformer, NumberArrayPath, NullablePath } from 'shared/util/types';
-import { Entity, PlayerState, Flags, GameStoreState } from '../types';
+import { GameStoreState, Nullable } from '../types';
 
 export const isNull = (value: any) => value === null;
 export const notNull = (value: any) => !isNull(value);
@@ -41,7 +41,9 @@ export const removeFlags = (flagsToRemove: string[]) => {
   });
 };
 
-export const combineReducers = (...reducers: EntityReducer[]) => (...args: [Entity, PlayerState, Flags]) => {
+
+type CombineReducers = (...reducers: EntityReducer[]) => EntityReducer;
+export const combineReducers: CombineReducers = (...reducers) => (...args) => {
   return compose(...reducers.map(reducer => reducer(...args)));
 };
 
@@ -57,6 +59,6 @@ export const when = (pred: boolean) => (transform: StateTransformer) => {
 
 export const filterValues = <
   PathType extends NumberArrayPath
->(path: PathType) => (id: number) => updateValue<NumberArrayPath>(path)(objects => {
+>(path: PathType) => (id: Nullable<number>) => updateValue<NumberArrayPath>(path)(objects => {
   return filter(objects, objectId => objectId !== id);
 });

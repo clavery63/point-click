@@ -1,4 +1,4 @@
-import { DoorDir, Menu } from './types';
+import { DoorDir, Menu, VerbIndex } from './types';
 
 // TODO: I know this looks bad, but we're leaving it here for now to keep things
 // moving. I think it would be nice to fetch the initial state before calling
@@ -17,7 +17,7 @@ const defaultState = {
   gameName: '',
   menu: 'MAIN' as Menu,
   playerState: {
-    verb: 'LOOK',
+    verb: 'LOOK' as VerbIndex,
     examining: null,
     room: 0,
     items: [],

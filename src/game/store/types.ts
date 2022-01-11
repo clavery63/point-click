@@ -6,7 +6,7 @@ type EffectAction = 'setValue';
 
 export type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
 export type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
-export type EntityType = 'items' | 'scenery';
+export type EntityType = 'items' | 'scenery' | 'doors';
 
 
 export type Nullable<T> = T | null | undefined;
@@ -24,6 +24,7 @@ interface MapPosition {
 }
 
 export interface Door {
+  type: 'doors',
   id: number;
   closedImg?: string;
   openImg?: string;
@@ -33,12 +34,15 @@ export interface Door {
   dir: DoorDir;
   state: DoorState;
   description: string;
+  closedText?: string;
   lockedText?: string;
   unlockText?: string;
   openText?: string;
   keyId?: number;
   hidden?: boolean;
   openCondition?: string;
+  // TODO: Somehow make the shared fields between entities more specific
+  verbs: VerbMappings;
 }
 
 interface Effect {
@@ -72,6 +76,7 @@ export type VerbMappings = {
 export type VerbIndex = keyof VerbMappings;
 
 export interface Item {
+  type: 'items',
   id: number;
   name: string;
   description: string;
@@ -86,12 +91,14 @@ export interface Item {
 }
 
 export interface Scenery {
+  type: 'scenery',
   id: number;
   name: string;
   description: string;
   startPosition: Position;
   endPosition?: Position;
   img?: string;
+  openText?: string;
   verbs: VerbMappings;
   contains: number[];
   trigger?: string;
@@ -120,8 +127,8 @@ export interface WorldState {
 }
 
 export interface PlayerState {
-  verb: string;
-  using?: number;
+  verb: VerbIndex;
+  using?: Nullable<number>;
   examining: Nullable<number>;
   room: number;
   items: number[];

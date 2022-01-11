@@ -38,7 +38,9 @@ const getReducer: GetReducer = (verb, item)  => {
 };
 
 const selectItemReducer: ParentReducer<number> = (id, playerState, worldState, _flags) => {
-  const object = { ...worldState.items[id], type: 'items', id };
+  const object = worldState.items[id];
+  object.type = 'items';
+  object.id = id;
   const reducer = getReducer(playerState.verb, object)
   return reducer(object, playerState, _flags);
 };

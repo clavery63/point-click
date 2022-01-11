@@ -1,11 +1,11 @@
 import { compose } from 'lodash/fp';
 import effectsReducer from '../effectsReducer';
 import { withText, addFlags, removeFlags, setValue, when, keepState } from '../utils';
-import { Flags, Item, Nullable, Scenery, VerbIndex, VerbLogic } from 'game/store/types';
-import { ItemOrSceneryReducer } from 'shared/util/types';
+import { Entity, Flags, Item, Nullable, Scenery, VerbIndex, VerbLogic } from 'game/store/types';
+import { EntityReducer } from 'shared/util/types';
 import get from 'shared/util/get';
 
-const isValid = (verbLogic: VerbLogic, using: number | undefined, flags: Flags) => {
+const isValid = (verbLogic: VerbLogic, using: Nullable<number>, flags: Flags) => {
   const { prereqUsing, prereqFlags } = verbLogic;
   if (prereqUsing && prereqUsing !== using) {
     return false;
@@ -15,9 +15,9 @@ const isValid = (verbLogic: VerbLogic, using: number | undefined, flags: Flags) 
 };
 
 type GetVerbLogic = (
-  object: Item | Scenery,
+  object: Entity,
   verb: VerbIndex,
-  using: number | undefined,
+  using: Nullable<number>,
   flags: Flags
 ) => Nullable<VerbLogic>;
 const getVerbLogic: GetVerbLogic = (object, verb, using, flags) => {
@@ -32,8 +32,12 @@ const getVerbLogic: GetVerbLogic = (object, verb, using, flags) => {
   return null;
 };
 
-type GetDefaultText = (object: Item | Scenery) => string;
-type GenericVerbReducer = (verb: VerbIndex, getDefaultText: GetDefaultText, extraReducer: ItemOrSceneryReducer) => ItemOrSceneryReducer;
+type GetDefaultText = (object: Entity) => string;
+type GenericVerbReducer = (
+  verb: VerbIndex,
+  getDefaultText: GetDefaultText,
+  extraReducer?: EntityReducer
+) => EntityReducer;
 const genericVerbReducer: GenericVerbReducer = (verb, getDefaultText, extraReducer = keepState) => {
   return (object, playerState, flags) => {
     const logic = getVerbLogic(object, verb, playerState.using, flags);

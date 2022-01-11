@@ -1,20 +1,21 @@
 import { compose } from 'lodash/fp';
+import { EntityReducer, ItemReducer } from 'shared/util/types';
 import { withText, updateValue, filterValues } from '../utils';
 
-const itemReducer = (item, playerState) => {
+const itemReducer: ItemReducer = (item, playerState) => {
   return compose(
-    filterValues(`worldState.rooms.${playerState.room}.items`)(item.id),
+    filterValues(`worldState.rooms[${playerState.room}].items`)(item.id),
     updateValue('playerState.items')(items => [...items, item.id]),
     withText(item.onTake || `The ${item.name} is in hand.`)
   );
 };
 
-const takeReducer = (object, playerState, flags) => {
-  if (object.takeableFlag && !flags.has(object.takableFlag)) {
-    return withText(`No good. Taking ${object.name} isn't working`);
-  }
+const takeReducer: EntityReducer = (object, playerState, flags) => {
   if (object.type === 'items') {
-    return itemReducer(object, playerState);
+    if (object.takeableFlag && !flags.has(object.takeableFlag)) {
+      return withText(`No good. Taking ${object.name} isn't working`);
+    }
+    return itemReducer(object, playerState, flags);
   }
   if (object.type === 'doors') {
     return withText('Forget about it. You cannot take a door.');

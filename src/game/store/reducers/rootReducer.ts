@@ -7,7 +7,7 @@ import changePageReducer from './changePageReducer';
 import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
 import { Reducer as ReduxReducer } from 'redux';
-import { Flags, GameStoreState, PlayerState, WorldState, EntityType, Item, DoorDir, Menu } from '../types';
+import { Flags, GameStoreState, PlayerState, WorldState, EntityType, Item, DoorDir, Menu, VerbIndex } from '../types';
 import defaultState from '../defaultState';
 import { ParentReducer } from 'shared/util/types';
 
@@ -35,7 +35,7 @@ type ActionTypes = {
   SET_POSITION: PositionType,
   CLEAR_NEXT_TEXT: null,
   CLEAR_TRANSITION_DEST: null,
-  SELECT_VERB: string,
+  SELECT_VERB: VerbIndex,
   SELECT_OBJECT: ObjectType,
   SELECT_ITEM: number,
   SELECT_BAG: number,
@@ -67,7 +67,7 @@ const setCursorEnabled: ParentReducer<boolean> = setValue('cursorEnabled');
 const setPosition: ParentReducer<PositionType> = setPositionReducer;
 const clearNextText: ParentReducer<null> = () => clearValue('nextText');
 const clearTransitionDest: ParentReducer<null> = () => clearValue('transition.dest');
-const selectVerb: ParentReducer<string> = selectVerbReducer;
+const selectVerb: ParentReducer<VerbIndex> = selectVerbReducer;
 const selectObject: ParentReducer<ObjectType> = selectObjectReducer;
 const selectItem: ParentReducer<number> = selectItemReducer;
 const selectBag: ParentReducer<number> = selectBagReducer;
