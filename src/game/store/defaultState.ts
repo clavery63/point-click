@@ -11,7 +11,7 @@ const defaultState = {
     dir: 'FORWARD' as DoorDir
   },
   nextText: '',
-  text: '',
+  text: null,
   loading: true,
   cursorEnabled: false,
   gameName: '',

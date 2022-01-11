@@ -7,7 +7,7 @@ import changePageReducer from './changePageReducer';
 import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
 import { Reducer as ReduxReducer } from 'redux';
-import { Flags, GameStoreState, PlayerState, WorldState, EntityType, DoorDir, Menu, VerbIndex } from '../types';
+import { Flags, GameStoreState, PlayerState, WorldState, EntityType, DoorDir, Menu, VerbIndex, Nullable } from '../types';
 import defaultState from '../defaultState';
 import { ParentReducer } from 'shared/util/types';
 
@@ -28,7 +28,7 @@ type ActionTypes = {
   SET_WORLD_STATE: WorldState,
   SET_PLAYER_STATE: PlayerState,
   SET_FLAGS: Flags,
-  SET_TEXT: string,
+  SET_TEXT: Nullable<string[]>,
   SET_ROOM: number,
   SET_FRAME: number,
   SET_CURSOR_ENABLED: boolean,
@@ -43,12 +43,14 @@ type ActionTypes = {
   SET_MENU: Menu
 }
 
-type ActionsType = {
+export type ActionsType = {
   [Key in keyof ActionTypes]: {
     type: Key,
     payload: ActionTypes[Key]
   }
-}[keyof ActionTypes]
+}
+
+type AllActions = ActionsType[keyof ActionTypes];
 
 const applyReducer = <
   PayloadType
@@ -60,7 +62,7 @@ const setState: ParentReducer<GameStoreState> = payload => () => payload;
 const setWorldState: ParentReducer<WorldState> = setValue('worldState');
 const setPlayerState: ParentReducer<PlayerState> = setValue('playerState');
 const setFlags: ParentReducer<Flags> = setValue('flags');
-const setText: ParentReducer<string> = setValue('text');
+const setText: ParentReducer<Nullable<string[]>> = setValue('text');
 const setRoom: ParentReducer<number> = roomReducer;
 const setFrame: ParentReducer<number> = setValue('transition.frame');
 const setCursorEnabled: ParentReducer<boolean> = setValue('cursorEnabled');
@@ -74,7 +76,7 @@ const selectBag: ParentReducer<number> = selectBagReducer;
 const changePage: ParentReducer<DoorDir> = changePageReducer;
 const setMenu: ParentReducer<Menu> = setValue('menu');
 
-const rootReducer: ReduxReducer<GameStoreState, ActionsType> = (state = defaultState, action) => {
+const rootReducer: ReduxReducer<GameStoreState, AllActions> = (state = defaultState, action) => {
   /**
    * README:
    * 

@@ -153,7 +153,7 @@ export interface GameStoreState extends GameState {
     dir: DoorDir,
     frame?: number
   };
-  text?: string;
+  text: Nullable<string[]>;
   nextText: Nullable<string>,
   loading: boolean,
   menu: Menu;
