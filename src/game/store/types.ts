@@ -97,6 +97,7 @@ export interface Scenery {
   description: string;
   startPosition: Position;
   endPosition?: Position;
+  currentPosition?: Position;
   img?: string;
   openText?: string;
   verbs: VerbMappings;

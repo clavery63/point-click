@@ -7,15 +7,15 @@ import changePageReducer from './changePageReducer';
 import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
 import { Reducer as ReduxReducer } from 'redux';
-import { Flags, GameStoreState, PlayerState, WorldState, EntityType, Item, DoorDir, Menu, VerbIndex } from '../types';
+import { Flags, GameStoreState, PlayerState, WorldState, EntityType, DoorDir, Menu, VerbIndex } from '../types';
 import defaultState from '../defaultState';
 import { ParentReducer } from 'shared/util/types';
 
-type PositionType = {
-  x: string,
-  y: string,
+export type PositionType = {
+  x: number,
+  y: number,
   id: number,
-  type: EntityType
+  type: 'scenery'
 };
 
 export type ObjectType = {
