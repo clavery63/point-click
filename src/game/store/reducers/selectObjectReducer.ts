@@ -8,8 +8,11 @@ import speakReducer from './verbReducers/speakReducer';
 import eatReducer from './verbReducers/eatReducer';
 import smokeReducer from './verbReducers/smokeReducer';
 import { keepState } from './utils';
+import { EntityReducer, ParentReducer } from 'shared/util/types';
+import { ObjectType } from './rootReducer';
 
-const getReducer = (verb, objectType) => ({
+type GetReducer = (verb: string, objectType: string) => EntityReducer;
+const getReducer: GetReducer = (verb, objectType) => ({
   MOVE: moveReducer,
   LOOK: lookReducer,
   OPEN: openReducer,
@@ -21,7 +24,7 @@ const getReducer = (verb, objectType) => ({
   SPEAK: speakReducer
 }[verb]);
 
-const selectObjectReducer = (payload, playerState, worldState, flags) => {
+const selectObjectReducer: ParentReducer<ObjectType> = (payload, playerState, worldState, flags) => {
   const { type, id } = payload;
   const object = { ...worldState[type][id], type, id };
   const reducer = getReducer(playerState.verb, type) || keepState;

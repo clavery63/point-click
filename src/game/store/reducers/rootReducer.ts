@@ -8,12 +8,8 @@ import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
 import { Reducer as ReduxReducer } from 'redux';
 import { Flags, GameStoreState, PlayerState, WorldState, EntityType, Item, DoorDir, Menu } from '../types';
-import { StateTransformer } from 'shared/util/types';
 import defaultState from '../defaultState';
-
-export type Reducer<PayloadType> = {
-  (payload: PayloadType, playerState: PlayerState, worldState: WorldState, flags: Flags): StateTransformer;
-}
+import { ParentReducer } from 'shared/util/types';
 
 type PositionType = {
   x: string,
@@ -22,7 +18,7 @@ type PositionType = {
   type: EntityType
 };
 
-type ObjectType = {
+export type ObjectType = {
   id: number,
   type: EntityType
 };
@@ -41,7 +37,7 @@ type ActionTypes = {
   CLEAR_TRANSITION_DEST: null,
   SELECT_VERB: string,
   SELECT_OBJECT: ObjectType,
-  SELECT_ITEM: Item,
+  SELECT_ITEM: number,
   SELECT_BAG: number,
   CHANGE_PAGE: DoorDir,
   SET_MENU: Menu
@@ -56,27 +52,27 @@ type ActionsType = {
 
 const applyReducer = <
   PayloadType
->(reducer: Reducer<PayloadType>, state: GameStoreState, payload: PayloadType) => {
+>(reducer: ParentReducer<PayloadType>, state: GameStoreState, payload: PayloadType) => {
   return reducer(payload, state.playerState, state.worldState, state.flags)(state);
 };
 
-const setState: Reducer<GameStoreState> = payload => () => payload;
-const setWorldState: Reducer<WorldState> = setValue('worldState');
-const setPlayerState: Reducer<PlayerState> = setValue('playerState');
-const setFlags: Reducer<Flags> = setValue('flags');
-const setText: Reducer<string> = setValue('text');
-const setRoom: Reducer<number> = roomReducer;
-const setFrame: Reducer<number> = setValue('transition.frame');
-const setCursorEnabled: Reducer<boolean> = setValue('cursorEnabled');
-const setPosition: Reducer<PositionType> = setPositionReducer;
-const clearNextText: Reducer<null> = () => clearValue('nextText');
-const clearTransitionDest: Reducer<null> = () => clearValue('transition.dest');
-const selectVerb: Reducer<string> = selectVerbReducer;
-const selectObject: Reducer<ObjectType> = selectObjectReducer;
-const selectItem: Reducer<Item> = selectItemReducer;
-const selectBag: Reducer<number> = selectBagReducer;
-const changePage: Reducer<DoorDir> = changePageReducer;
-const setMenu: Reducer<Menu> = setValue('menu');
+const setState: ParentReducer<GameStoreState> = payload => () => payload;
+const setWorldState: ParentReducer<WorldState> = setValue('worldState');
+const setPlayerState: ParentReducer<PlayerState> = setValue('playerState');
+const setFlags: ParentReducer<Flags> = setValue('flags');
+const setText: ParentReducer<string> = setValue('text');
+const setRoom: ParentReducer<number> = roomReducer;
+const setFrame: ParentReducer<number> = setValue('transition.frame');
+const setCursorEnabled: ParentReducer<boolean> = setValue('cursorEnabled');
+const setPosition: ParentReducer<PositionType> = setPositionReducer;
+const clearNextText: ParentReducer<null> = () => clearValue('nextText');
+const clearTransitionDest: ParentReducer<null> = () => clearValue('transition.dest');
+const selectVerb: ParentReducer<string> = selectVerbReducer;
+const selectObject: ParentReducer<ObjectType> = selectObjectReducer;
+const selectItem: ParentReducer<number> = selectItemReducer;
+const selectBag: ParentReducer<number> = selectBagReducer;
+const changePage: ParentReducer<DoorDir> = changePageReducer;
+const setMenu: ParentReducer<Menu> = setValue('menu');
 
 const rootReducer: ReduxReducer<GameStoreState, ActionsType> = (state = defaultState, action) => {
   /**
@@ -129,8 +125,9 @@ const rootReducer: ReduxReducer<GameStoreState, ActionsType> = (state = defaultS
       return applyReducer(changePage, state, action.payload);
     case 'SET_MENU':
       return applyReducer(setMenu, state, action.payload);
+    default:
+      return state;
   }
-  return state;
 };
 
 export default rootReducer;

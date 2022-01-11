@@ -1,13 +1,25 @@
-import { Entity, Flags, GameStoreState, PlayerState } from "game/store/types";
+import { Door, Entity, Flags, GameStoreState, Item, PlayerState, Scenery, WorldState } from "game/store/types";
 import { GetFieldType } from "./get";
 
 export type Transformer<T> = (arg: T) => T;
 
 export type StateTransformer = Transformer<GameStoreState>;
 
-export type Reducer = {
-  (ent?: Entity, playerState?: PlayerState, flags?: Flags): StateTransformer;
+type ChildReducer<T> = {
+  (ent: T, playerState: PlayerState, flags: Flags): StateTransformer;
 }
+
+export type EntityReducer = ChildReducer<Entity>;
+export type ItemReducer = ChildReducer<Item>;
+export type SceneryReducer = ChildReducer<Scenery>;
+export type DoorReducer = ChildReducer<Door>;
+export type ItemOrSceneryReducer = ChildReducer<Item | Scenery>;
+
+export type ParentReducer<PayloadType> = {
+  (payload: PayloadType, playerState: PlayerState, worldState: WorldState, flags: Flags): StateTransformer;
+}
+
+export type EmptyReducer = () => StateTransformer;
 
 type Basic = string | string[] | number | number[] | Set<any> | boolean | Function | null | undefined;
 

@@ -1,4 +1,4 @@
-import { Menu } from './types';
+import { DoorDir, Menu } from './types';
 
 // TODO: I know this looks bad, but we're leaving it here for now to keep things
 // moving. I think it would be nice to fetch the initial state before calling
@@ -7,7 +7,8 @@ import { Menu } from './types';
 // can ever be flowing through the reducers...
 const defaultState = {
   transition: {
-    dest: ''
+    dest: 0,
+    dir: 'FORWARD' as DoorDir
   },
   nextText: '',
   text: '',

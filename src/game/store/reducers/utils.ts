@@ -2,7 +2,7 @@ import { setWith, clone } from 'lodash';
 import { compose } from 'redux';
 import filter from 'shared/util/filter';
 import get, { GetFieldType } from 'shared/util/get';
-import { ValueUpdater, Reducer, StateTransformer, NumberArrayPath, NullablePath } from 'shared/util/types';
+import { ValueUpdater, EntityReducer, EmptyReducer, StateTransformer, NumberArrayPath, NullablePath } from 'shared/util/types';
 import { Entity, PlayerState, Flags, GameStoreState } from '../types';
 
 export const isNull = (value: any) => value === null;
@@ -41,7 +41,7 @@ export const removeFlags = (flagsToRemove: string[]) => {
   });
 };
 
-export const combineReducers = (...reducers: Reducer[]) => (...args: [Entity, PlayerState, Flags]) => {
+export const combineReducers = (...reducers: EntityReducer[]) => (...args: [Entity, PlayerState, Flags]) => {
   return compose(...reducers.map(reducer => reducer(...args)));
 };
 
@@ -49,7 +49,7 @@ export const clearValue = (path: NullablePath) => setValue(path)(null);
 
 export const withText = setValue('nextText');
 
-export const keepState: Reducer = () => state => state;
+export const keepState: EmptyReducer = () => state => state;
 
 export const when = (pred: boolean) => (transform: StateTransformer) => {
   return pred ? transform : keepState();

@@ -1,14 +1,15 @@
 import { Store } from "redux";
 
 type MapCoord = 0 | 1 | 2 | 3 | 4;
-type VerbIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7; 
 type DoorState = 'CLOSED' | 'OPEN' | 'LOCKED';
-export type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
-export type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
-export type EntityType = 'item' | 'scenery';
 type EffectAction = 'setValue';
 
-type Nullable<T> = T | null;
+export type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
+export type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
+export type EntityType = 'items' | 'scenery';
+
+
+export type Nullable<T> = T | null | undefined;
 
 export interface Position {
   left: number;
@@ -23,6 +24,7 @@ interface MapPosition {
 }
 
 export interface Door {
+  id: number;
   closedImg?: string;
   openImg?: string;
   position?: Position;
@@ -30,7 +32,7 @@ export interface Door {
   dest: number;
   dir: DoorDir;
   state: DoorState;
-  description?: string;
+  description: string;
   lockedText?: string;
   unlockText?: string;
   openText?: string;
@@ -44,7 +46,7 @@ interface Effect {
   parameters: (string | number)[];
 }
 
-export interface Verb {
+export interface VerbLogic {
   text?: string;
   moveTo?: number;
   moveDir?: DoorDir;
@@ -55,19 +57,22 @@ export interface Verb {
   effects?: Effect[];
 }
 
-export type Verbs = [
-  // TODO: TBD how to actually structure this
-  Verb,
-  Verb,
-  Verb,
-  Verb,
-  Verb,
-  Verb,
-  Verb,
-  Verb
-]
+export type VerbMappings = {
+  'MOVE': VerbLogic[],
+  'LOOK': VerbLogic[],
+  'OPEN': VerbLogic[],
+  'USE': VerbLogic[],
+  'SMOKE': VerbLogic[],
+  'TAKE': VerbLogic[],
+  'EAT': VerbLogic[],
+  'HIT': VerbLogic[],
+  'SPEAK': VerbLogic[]
+}
+
+export type VerbIndex = keyof VerbMappings;
 
 export interface Item {
+  id: number;
   name: string;
   description: string;
   position?: Position;
@@ -77,16 +82,17 @@ export interface Item {
   takeableFlag?: string;
   visibleFlag?: string;
   requiresPrecision?: boolean;
-  verbs: string[];
+  verbs: VerbMappings;
 }
 
 export interface Scenery {
+  id: number;
   name: string;
-  description: number;
+  description: string;
   startPosition: Position;
   endPosition?: Position;
   img?: string;
-  // verbs: Verbs;
+  verbs: VerbMappings;
   contains: number[];
   trigger?: string;
   movedText?: string;
@@ -94,6 +100,7 @@ export interface Scenery {
 }
 
 export interface Room {
+  id: number;
   img?: string;
   music?: string;
   video?: string;
@@ -134,7 +141,8 @@ export type Entity = Door | Item | Scenery;
 
 export interface GameStoreState extends GameState {
   transition: {
-    dest: Nullable<string>
+    dest: Nullable<number>,
+    dir: DoorDir,
     frame?: number
   };
   text?: string;
