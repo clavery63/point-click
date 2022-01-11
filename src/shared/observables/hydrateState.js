@@ -29,8 +29,6 @@ const hydrateState$ = (state$, initialize) => {
     take(1),
     map(initialize),
     switchMap(loadPlayerAndGameState$),
-    // TODO: we should support passing images along with the initial state
-    // so we can skip downloading the images
     switchMap(state => loadImages$(state.gameName).pipe(
       map(images => ({
         ...state,
