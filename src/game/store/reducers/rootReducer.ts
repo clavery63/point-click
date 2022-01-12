@@ -18,10 +18,10 @@ export type PositionType = {
   type: 'scenery'
 };
 
-export type ObjectType = {
-  id: number,
-  type: EntityType
-};
+export type ObjectType = 
+{ id: number, type: 'scenery' } |
+{ id: number, type: 'items' } |
+{ id: number, type: 'doors' };
 
 type ActionTypes = {
   SET_STATE: GameStoreState,

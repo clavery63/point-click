@@ -6,13 +6,9 @@ import { AllActions, MyEpic } from './types';
 import { isOfType } from 'typesafe-actions';
 import { GameStoreState } from '../types';
 import { ActionsType } from '../reducers/rootReducer';
+import { when } from './util';
 
 const MS_PER_FRAME = 65;
-
-type When = (p: boolean, a: AllActions) => AllActions;
-const when: When = (pred, action) => {
-  return pred ? action : { type: 'NULL' };
-};
 
 const getAction$ = (dest: number) => (frame: number) => {
   return from([

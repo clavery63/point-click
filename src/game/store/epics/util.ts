@@ -1,3 +1,6 @@
+import { identity } from "lodash";
+import { AllActions } from "./types";
+
 type TextToLines = (c: number) => (t: string) => string[];
 export const textToLines: TextToLines = charsPerLine => text => {
   if (!text.length) return [];
@@ -11,3 +14,11 @@ export const textToLines: TextToLines = charsPerLine => text => {
     return [...firstLines, `${lastLine} ${word}`];
   }, [words[0]]);
 };
+
+type When = (p: boolean, a: AllActions) => AllActions;
+export const when: When = (pred, action) => {
+  return pred ? action : { type: 'NULL' };
+};
+
+type TypedAction = (a: AllActions) => AllActions;
+export const typedAction: TypedAction = identity;
