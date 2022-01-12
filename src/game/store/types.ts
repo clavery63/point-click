@@ -1,8 +1,8 @@
 import { Store } from "redux";
+import { NumberPath } from "shared/util/types";
 
 type MapCoord = 0 | 1 | 2 | 3 | 4;
 type DoorState = 'CLOSED' | 'OPEN' | 'LOCKED';
-type EffectAction = 'setValue';
 
 export type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
 export type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
@@ -45,9 +45,12 @@ export interface Door {
   verbs: VerbMappings;
 }
 
-interface Effect {
-  action: EffectAction;
-  parameters: (string | number)[];
+// NOTE: This will probably eventually be a union type with different effects,
+// If we actually want to expand this idea. Very hard-coded
+export interface Effect {
+  action: 'SET_NUMBER_VALUE';
+  path: NumberPath;
+  value: number;
 }
 
 export interface VerbLogic {

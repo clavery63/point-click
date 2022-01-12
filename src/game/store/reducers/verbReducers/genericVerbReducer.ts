@@ -1,7 +1,7 @@
 import { compose } from 'lodash/fp';
 import effectsReducer from '../effectsReducer';
 import { withText, addFlags, removeFlags, setValue, when, keepState } from '../utils';
-import { Entity, Flags, Item, Nullable, Scenery, VerbIndex, VerbLogic } from 'game/store/types';
+import { Entity, Flags, Nullable, VerbIndex, VerbLogic } from 'game/store/types';
 import { EntityReducer } from 'shared/util/types';
 import get from 'shared/util/get';
 

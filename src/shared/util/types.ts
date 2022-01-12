@@ -52,6 +52,7 @@ type GetNullables<Base, Prefix extends string = '', AnyNumber = 0> = {
 type ValidPathsFor<Constraint> = Exclude<ConstrainedTypes<GameStoreState, Constraint>, undefined>;
  
 export type NumberArrayPath = ValidPathsFor<number[]>;
+export type NumberPath = ValidPathsFor<number>;
 export type NullablePath = Exclude<GetNullables<GameStoreState>, undefined>;
 
 export type ValueUpdater<Override = string> = {
