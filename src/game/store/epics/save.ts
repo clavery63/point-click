@@ -1,10 +1,14 @@
 import { tap, switchMap, switchMapTo, withLatestFrom } from 'rxjs/operators';
-import { from, merge } from 'rxjs';
+import { from, of, merge, Observable, ObservableInput } from 'rxjs';
 import { ofType } from 'redux-observable';
+import { MyEpic } from './types';
+import { GameStoreState } from '../types';
+import { ReducerActions } from '../reducers/rootReducer';
 
 const KEY = 'doublehamburger-save-data';
 
-const saveGame = ({ worldState, playerState, flags }) => {
+type SaveGame = (g: GameStoreState) => void;
+const saveGame: SaveGame = ({ worldState, playerState, flags }) => {
   localStorage.setItem(KEY, JSON.stringify({
     worldState,
     playerState,
@@ -12,15 +16,17 @@ const saveGame = ({ worldState, playerState, flags }) => {
   }));
 };
 
-const loadGame$ = () => {
+type LoadGame = () => Observable<ReducerActions>
+const loadGame$: LoadGame = () => {
   const newState = localStorage.getItem(KEY);
   if (!newState) {
-    return { type: null }
+    return of({ type: 'NULL' });
   }
 
-  const { worldState, playerState, flags } = JSON.parse(newState);
+  // TODO: create a smart JSON parser that throws if the state is invalid
+  const { worldState, playerState, flags }: GameStoreState = JSON.parse(newState);
 
-  return from([
+  return from<ObservableInput<ReducerActions>>([
     { type: 'SET_WORLD_STATE', payload: worldState },
     { type: 'SET_PLAYER_STATE', payload: playerState },
     { type: 'SET_FLAGS', payload: new Set(flags) },
@@ -28,7 +34,7 @@ const loadGame$ = () => {
   ]);
 };
 
-const save$ = (action$, state$, { runText$ }) => {
+const save$: MyEpic = (action$, state$, { runText$ }) => {
   const saveGame$ = action$.pipe(
     ofType('SAVE_GAME'),
     withLatestFrom(state$),
@@ -39,9 +45,8 @@ const save$ = (action$, state$, { runText$ }) => {
   const load$ = action$.pipe(
     ofType('LOAD_GAME'),
     withLatestFrom(state$),
-    switchMap(([,state]) => loadGame$(state))
+    switchMap(() => loadGame$())
   );
-
 
   return merge(saveGame$, load$);
 };

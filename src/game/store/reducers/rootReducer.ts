@@ -50,7 +50,7 @@ export type ActionsType = {
   }
 }
 
-export type ReducerActions = ActionsType[keyof ActionTypes];
+export type ReducerActions = ActionsType[keyof ActionTypes] | { type: 'NULL' };
 
 const applyReducer = <
   PayloadType
