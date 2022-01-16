@@ -1,4 +1,4 @@
-import { map, filter } from 'rxjs/operators';
+import { map, filter, takeUntil } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
 
 const getPixels = ({ stage, scaleX, scaleY }) => () => {
@@ -16,6 +16,8 @@ const cursor$ = stageData => {
   return fromEvent(window, 'mousemove').pipe(
     map(getPixels(stageData)),
     filter(Boolean),
+    // NOTE: This is how we disable the cursor on mobile.
+    takeUntil(fromEvent(window, 'touchstart'))
   );
 };
 
