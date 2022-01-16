@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-konva';
+import { Image } from 'shared/components/tappables';
 
 const Door = ({ object, onClick}) => {
   const { position, openImg, closedImg, state } = object;

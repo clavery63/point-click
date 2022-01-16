@@ -1,5 +1,6 @@
 import React from 'react';
-import { Group, Image } from 'react-konva';
+import { Group } from 'react-konva';
+import { Image } from 'shared/components/tappables';
 
 const MenuRight = ({ onPageClick, onSaveClick, menuButtonImg }) => {
   return (

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Group, Rect } from 'react-konva';
+import { Group } from 'react-konva';
+import { Rect } from 'shared/components/tappables';
 
 const MenuOption = ({ verb, top, left, onClick, currentVerb }) => {
   const isActive = verb === currentVerb;

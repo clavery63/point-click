@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image } from 'react-konva';
+import { Image } from 'shared/components/tappables';
 import { connect } from 'react-redux';
 
 const WIDTH = 10;

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Image } from 'react-konva';
+import { Image } from 'shared/components/tappables';
 
 const Item = ({ object, onClick}) => {
   const imgRef = useRef(null);

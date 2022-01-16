@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-konva';
+import { Image } from 'shared/components/tappables';
 import { connect } from 'react-redux';
 
 const SHEET_WIDTH = 5;

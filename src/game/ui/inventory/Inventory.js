@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image, Group, Rect } from 'react-konva';
+import { Image, Group,  } from 'react-konva';
+import { Rect } from 'shared/components/tappables';
 import Torches from './Torches';
 import Bag from './Bag';
 import Text from '../shared/Text';

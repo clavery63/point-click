@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Rect } from 'react-konva';
+import { Rect } from 'shared/components/tappables';
 
 
 const ClickMask = ({ shouldShow, onClick }) => {

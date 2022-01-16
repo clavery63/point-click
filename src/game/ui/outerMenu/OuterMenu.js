@@ -1,5 +1,5 @@
 import React from 'react';
-import { Rect } from 'react-konva';
+import { Rect } from 'shared/components/tappables';
 import Text from '../shared/Text';
 
 const KEY = 'doublehamburger-save-data';
@@ -11,7 +11,13 @@ const GameOver = () => (
 const Start = ({ onClick }) => (
   <>
     <Text left={88} top={100} color={'light'} text={'start game'} />
-    <Rect x={88} y={100} height={8} width={80} onClick={onClick} />
+    <Rect 
+      x={88} 
+      y={100} 
+      height={8} 
+      width={80} 
+      onClick={onClick}
+    />
   </>
 );
 
