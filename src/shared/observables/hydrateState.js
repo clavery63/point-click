@@ -1,4 +1,4 @@
-import { map, switchMap, take } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 import loadImages$ from './loadImages';
@@ -24,11 +24,21 @@ const loadPlayerAndGameState$ = initialState => {
   );
 };
 
+const setAudioSrc = state => {
+  const audioRoot = `${assetsBase}/${state.gameName}/audio`;
+  const initialRoom = state.worldState.rooms[state.playerState.room];
+  const musicPlayer = document.querySelector('.music-player');
+  musicPlayer.src = `${audioRoot}/${initialRoom.music ?? ''}`;
+  const sfxPlayer = document.querySelector('.sfx-player');
+  sfxPlayer.src = `${audioRoot}/transition.mp3`;
+};
+
 const hydrateState$ = (state$, initialize) => {
   return state$.pipe(
     take(1),
     map(initialize),
     switchMap(loadPlayerAndGameState$),
+    tap(setAudioSrc),
     switchMap(state => loadImages$(state.gameName).pipe(
       map(images => ({
         ...state,

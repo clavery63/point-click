@@ -31,13 +31,20 @@ const Load = ({ onClick }) => (
 const OuterMenu = ({ menu, onStartClick, onLoadClick }) => {
   if (menu === 'NONE') return null;
 
+  const hack = fn => (...args) => {
+    // NOTE: This hack is here to establish play intent from the user. Otherwise
+    // mobile browsers get angry.
+    document.querySelector('.music-player').play();
+    fn(...args);
+  }
+
   const hasLoadData = !!window.localStorage.getItem(KEY);
 
   return (
     <>
       {menu === 'GAME_OVER' && <GameOver />}
-      <Start onClick={onStartClick} />
-      {hasLoadData && <Load onClick={onLoadClick} />}
+      <Start onClick={hack(onStartClick)} />
+      {hasLoadData && <Load onClick={hack(onLoadClick)} />}
     </>
   );
 };

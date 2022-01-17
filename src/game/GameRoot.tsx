@@ -17,9 +17,6 @@ const containerStyles = {
   width: '100%'
 };
 
-// TODO: universal assets like this should live somewhere else
-const audioAssetsRoot = `${process.env.REACT_APP_ASSETS_BASE}/test-game/audio`;
-
 type Props = {
   gameName: string,
   state: GameState
@@ -55,7 +52,7 @@ const GameRoot = React.memo(({ gameName, state }: Props) => {
         // https://react-redux.js.org/api/hooks#custom-context
         <Provider store={store}>
           <audio className='music-player' loop />
-          <audio className='sfx-player' src={`${audioAssetsRoot}/transition.mp3`} />
+          <audio className='sfx-player' />
           <GameContainer parentRef={containerRef} />
         </Provider>
       )}
