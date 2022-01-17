@@ -27,8 +27,16 @@ const loadPlayerAndGameState$ = initialState => {
 const setAudioSrc = state => {
   const audioRoot = `${assetsBase}/${state.gameName}/audio`;
   const initialRoom = state.worldState.rooms[state.playerState.room];
+  
+  // Crazy hack that causes <audio> el behavior to improve wrt loading and
+  // replaying srcs. Without it, there are hiccups in sfx sounds
+  // https://stackoverflow.com/questions/9811429/html5-audio-tag-on-safari-has-a-delay
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  new AudioContext();
+
   const musicPlayer = document.querySelector('.music-player');
   musicPlayer.src = `${audioRoot}/${initialRoom.music ?? ''}`;
+
   const sfxPlayer = document.querySelector('.sfx-player');
   sfxPlayer.src = `${audioRoot}/transition.mp3`;
 };

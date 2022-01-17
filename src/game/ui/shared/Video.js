@@ -10,6 +10,7 @@ const Video = ({ src }) => {
     const element = document.createElement('video');
     element.loop = true;
     element.src = src;
+    element.playsInline = true;
     return element;
   }, [src]);
   
