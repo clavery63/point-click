@@ -1,4 +1,16 @@
-import { Door, Entity, Flags, GameStoreState, Item, PlayerState, Scenery, WorldState } from "game/store/types";
+import {
+  Door,
+  Entity,
+  Flags,
+  GameStoreState,
+  Item,
+  PlayerState,
+  Scenery,
+  WorldState
+  // NOTE: made this a relative import for validation generation.
+  // We can change this back if ts-json-schema-generator starts tolerating
+  // template string literals.
+} from "../../game/store/types";
 import { GetFieldType } from "./get";
 
 export type Transformer<T> = (arg: T) => T;
@@ -60,3 +72,10 @@ export type ValueUpdater<Override = string> = {
     path: PathType,
   ): (fn: Transformer<GetFieldType<GameStoreState, PathType>>) => StateTransformer
 };
+
+// NOTE: This almost definited doesn't have to be here, but it's needed right
+// now for the validation generator. We should be able to grab this directly from
+// the NumberPath type.
+interface ValidationCreator {
+  numberPath: ValidPathsFor<number>;
+}

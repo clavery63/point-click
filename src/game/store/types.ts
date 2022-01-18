@@ -1,5 +1,8 @@
 import { Store } from "redux";
-import { NumberPath } from "shared/util/types";
+// NOTE: made this a relative import for validation generation.
+// We can change this back if ts-json-schema-generator starts tolerating
+// template string literals.
+import { NumberPath } from "../../shared/util/types";
 
 type MapCoord = 0 | 1 | 2 | 3 | 4;
 type DoorState = 'CLOSED' | 'OPEN' | 'LOCKED';
@@ -7,7 +10,6 @@ type DoorState = 'CLOSED' | 'OPEN' | 'LOCKED';
 export type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
 export type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
 export type EntityType = 'items' | 'scenery' | 'doors';
-
 
 export type Nullable<T> = T | null | undefined;
 
