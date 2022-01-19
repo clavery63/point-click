@@ -35,10 +35,14 @@ const setAudioSrc = state => {
   new AudioContext();
 
   const musicPlayer = document.querySelector('.music-player');
-  musicPlayer.src = `${audioRoot}/${initialRoom.music ?? ''}`;
+  if (musicPlayer) {
+    musicPlayer.src = `${audioRoot}/${initialRoom.music ?? ''}`;
+  }
 
   const sfxPlayer = document.querySelector('.sfx-player');
-  sfxPlayer.src = `${audioRoot}/transition.mp3`;
+  if (sfxPlayer) {
+    sfxPlayer.src = `${audioRoot}/transition.mp3`;
+  }
 };
 
 const hydrateState$ = (state$, initialize) => {
