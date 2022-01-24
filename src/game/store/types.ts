@@ -51,6 +51,9 @@ export interface Door {
 // If we actually want to expand this idea. Very hard-coded
 export interface Effect {
   action: 'SET_NUMBER_VALUE';
+  /**
+   * @type path-number
+   */
   path: NumberPath;
   value: number;
 }
@@ -59,23 +62,23 @@ export interface VerbLogic {
   text?: string;
   moveTo?: number;
   moveDir?: DoorDir;
-  addFlags: string[];
-  removeFlags: string[];
-  prereqFlags: string[];
+  addFlags?: string[];
+  removeFlags?: string[];
+  prereqFlags?: string[];
   prereqUsing?: number;
   effects?: Effect[];
 }
 
 export type VerbMappings = {
-  'MOVE': VerbLogic[],
-  'LOOK': VerbLogic[],
-  'OPEN': VerbLogic[],
-  'USE': VerbLogic[],
-  'SMOKE': VerbLogic[],
-  'TAKE': VerbLogic[],
-  'EAT': VerbLogic[],
-  'HIT': VerbLogic[],
-  'SPEAK': VerbLogic[]
+  'MOVE'?: VerbLogic[],
+  'LOOK'?: VerbLogic[],
+  'OPEN'?: VerbLogic[],
+  'USE'?: VerbLogic[],
+  'SMOKE'?: VerbLogic[],
+  'TAKE'?: VerbLogic[],
+  'EAT'?: VerbLogic[],
+  'HIT'?: VerbLogic[],
+  'SPEAK'?: VerbLogic[]
 }
 
 export type VerbIndex = keyof VerbMappings;
@@ -147,7 +150,7 @@ export type Flags = Set<string>;
 export interface GameState {
   worldState: WorldState;
   playerState: PlayerState;
-  flags: Flags;
+  flags?: Flags;
 }
 
 export type Entity = Door | Item | Scenery;

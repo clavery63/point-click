@@ -1,5 +1,6 @@
+const fs = require('fs');
 const TJS = require('typescript-json-schema');
-
+const Ajv = require("ajv");
 
 /**
  * This generates a schema for our GameState which we can use for validation.
@@ -9,12 +10,10 @@ const TJS = require('typescript-json-schema');
  * 
  */
 
-// optionally pass argument to schema generator
 const settings = {
   required: true,
 };
 
-// optionally pass ts compiler options
 const compilerOptions = {
   strictNullChecks: true,
   esModuleInterop: true,
@@ -22,17 +21,89 @@ const compilerOptions = {
 };
 
 const program = TJS.getProgramFromFiles(
-['../../src/game/store/types.ts'],
+['src/game/store/types.ts'],
 compilerOptions,
 );
 
-// const schema = TJS.generateSchema(program, 'Item', settings);
-
-
 const generator = TJS.buildGenerator(program, settings);
 
-const hi = generator.getSchemaForSymbol('GameState');
+const schema = generator.getSchemaForSymbol('GameState');
 
-// hi.definitions.Effect.properties.path.anyOf
+const replacePathLiterals = s => Object.entries(s).reduce((acc, [k, v]) => {
+  if (typeof v !== 'object' || Array.isArray(v)) {
+    return { ...acc, [k]: v };
+  }
 
-console.log(JSON.stringify(hi, null, 2));
+  if (typeof v.type === 'string') {
+    const [pathKeyword, valueType] = v.type.split('-') || [];
+    if (pathKeyword === 'path' && !!valueType) {
+      return {
+        ...acc,
+        [k]: {
+          type: 'string',
+          ValuePath: valueType
+        }
+      }
+    }
+  }
+  
+  return {
+    ...acc,
+    [k]: replacePathLiterals(v)
+  }
+}, {});
+
+const hackedSchema = replacePathLiterals(schema);
+
+console.log(JSON.stringify(hackedSchema, null, 2));
+const ajv = new Ajv();
+
+ajv.addKeyword({
+  keyword: "ValuePath",
+  type: "string",
+  validate: (schema, data) => {
+    console.log('schema', schema);
+    console.log('data:', data);
+    return data === 'chris';
+  },
+  error: {
+    message: 'you blew it'
+  }
+})
+
+const validate = ajv.compile(hackedSchema);
+
+const data = {
+  playerState: {
+    items: [],
+    page: 2,
+    timer: 0,
+    room: 0,
+    verb: 'EAT'
+  },
+  worldState: {
+    doors: [],
+    items: [
+      {
+        description: 'test',
+        type: 'items',
+        id: 0,
+        name: 'hi',
+        verbs: {
+          EAT: [{
+            effects: [{
+              action: 'SET_NUMBER_VALUE',
+              path: 'chris',
+              value: 0
+            }]
+          }]
+        }
+      }
+    ],
+    rooms: [],
+    scenery: []
+  }
+};
+
+const valid = validate(data);
+if (!valid) console.log(validate.errors);

@@ -9,10 +9,10 @@ const { Project } = require('ts-morph');
  */
 
 const project = new Project({
-  tsConfigFilePath: '../../tsconfig.json',
+  tsConfigFilePath: 'tsconfig.json',
 });
 
-const filePath = '../../src/shared/util/types.ts';
+const filePath = 'src/shared/util/types.ts';
 
 project.addSourceFilesAtPaths([filePath]);
 
