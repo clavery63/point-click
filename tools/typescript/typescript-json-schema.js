@@ -62,6 +62,9 @@ ajv.addKeyword({
   keyword: "ValuePath",
   type: "string",
   validate: (schema, data) => {
+    // TODO: here we would reference list of valid pathnames given a type.
+    // That list along with the schema would be updated via a git hook
+    // And placed in .js files to be used at runtime
     console.log('schema', schema);
     console.log('data:', data);
     return data === 'chris';
