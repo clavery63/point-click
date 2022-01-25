@@ -59,7 +59,7 @@ export interface Effect {
 }
 
 export interface VerbLogic {
-  text?: string;
+  text: string;
   moveTo?: number;
   moveDir?: DoorDir;
   addFlags?: string[];
