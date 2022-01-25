@@ -297,7 +297,10 @@ const gameStateSchema = {
             "$ref": "#/definitions/Effect"
           }
         }
-      }
+      },
+      "required": [
+        "text"
+      ]
     },
     "Effect": {
       "type": "object",

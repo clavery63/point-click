@@ -2,3 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 node tools/typescript/generate-validators.js
+
+git add src/shared/validation/generated
