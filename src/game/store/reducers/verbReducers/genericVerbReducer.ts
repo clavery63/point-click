@@ -54,8 +54,8 @@ const genericVerbReducer: GenericVerbReducer = (verb, getDefaultText, extraReduc
     }
 
     return compose(
-      when(!!logic.addFlags)(addFlags(logic.addFlags)),
-      when(!!logic.removeFlags)(removeFlags(logic.removeFlags)),
+      when(!!logic.addFlags)(addFlags(logic.addFlags || [])),
+      when(!!logic.removeFlags)(removeFlags(logic.removeFlags || [])),
       withText(logic.text),
       effectsReducer(logic),
       extraReducer(object, playerState, flags)

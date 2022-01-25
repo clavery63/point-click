@@ -150,7 +150,7 @@ export type Flags = Set<string>;
 export interface GameState {
   worldState: WorldState;
   playerState: PlayerState;
-  flags?: Flags;
+  flags: Flags;
 }
 
 export type Entity = Door | Item | Scenery;

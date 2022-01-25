@@ -12,6 +12,7 @@ const gameStateSchema = {
     }
   },
   "required": [
+    "flags",
     "playerState",
     "worldState"
   ],
