@@ -21,9 +21,12 @@ const gameStateSchema = {
       "type": "object",
       "properties": {
         "doors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Door"
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[0-9]+$": {
+              "$ref": "#/definitions/Door"
+            }
           }
         },
         "items": {

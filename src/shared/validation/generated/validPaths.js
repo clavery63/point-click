@@ -1,42 +1,6 @@
 export const numberPaths = [
   {
     "texts": [
-      "worldState.doors[",
-      "].dest"
-    ],
-    "types": [
-      "number"
-    ]
-  },
-  {
-    "texts": [
-      "worldState.doors[",
-      "].id"
-    ],
-    "types": [
-      "number"
-    ]
-  },
-  {
-    "texts": [
-      "worldState.doors[",
-      "].mapPosition.x"
-    ],
-    "types": [
-      "number"
-    ]
-  },
-  {
-    "texts": [
-      "worldState.doors[",
-      "].mapPosition.y"
-    ],
-    "types": [
-      "number"
-    ]
-  },
-  {
-    "texts": [
       "worldState.items[",
       "].id"
     ],

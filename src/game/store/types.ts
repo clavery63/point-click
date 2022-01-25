@@ -129,7 +129,7 @@ export interface Room {
 }
 
 export interface WorldState {
-  doors: Door[];
+  doors: Record<number, Door>;
   items: Item[];
   scenery: Scenery[];
   rooms: Room[];

@@ -1,4 +1,4 @@
-import { map, switchMapTo, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMapTo, switchMap } from 'rxjs/operators';
 import { of, merge, from } from 'rxjs';
 import { ofType } from 'redux-observable';
 import hydrateState$ from 'shared/observables/hydrateState';

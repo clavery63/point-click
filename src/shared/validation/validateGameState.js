@@ -1,36 +1,5 @@
 import Ajv from 'ajv';
-
-const testData = {
-  playerState: {
-    items: [],
-    page: 2,
-    timer: 0,
-    room: 0,
-    verb: 'EAT'
-  },
-  worldState: {
-    doors: [],
-    items: [
-      {
-        description: 'test',
-        type: 'items',
-        id: 0,
-        name: 'hi',
-        verbs: {
-          EAT: [{
-            effects: [{
-              action: 'SET_NUMBER_VALUE',
-              path: 'chris',
-              value: 0
-            }]
-          }]
-        }
-      }
-    ],
-    rooms: [],
-    scenery: []
-  }
-};
+import gameStateSchema from './generated/gameStateSchema';
 
 const validateGameState = gameState => {
   const ajv = new Ajv();
@@ -48,9 +17,10 @@ const validateGameState = gameState => {
     }
   })
   
-  const validate = ajv.compile(hackedSchema);
-  const valid = validate(data);
+  const validate = ajv.compile(gameStateSchema);
+  const valid = validate(gameState);
   if (!valid) {
+    console.log(validate.errors);
     throw new Error(validate.errors);
   };
 };
