@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { Project } = require('ts-morph');
 
 /**
@@ -8,22 +9,32 @@ const { Project } = require('ts-morph');
  * 
  */
 
-const project = new Project({
-  tsConfigFilePath: 'tsconfig.json',
-});
+const generateValidPaths = () => {
+  const project = new Project({
+    tsConfigFilePath: 'tsconfig.json',
+  });
 
-const filePath = 'src/shared/util/types.ts';
+  const filePath = 'src/shared/util/types.ts';
 
-project.addSourceFilesAtPaths([filePath]);
+  project.addSourceFilesAtPaths([filePath]);
 
-const sourceFile = project.getSourceFileOrThrow(filePath);
-const stupidInterface = sourceFile.getInterface('ValidationCreator');
-const myType = stupidInterface.getPropertyOrThrow('numberPath').getType();
+  const sourceFile = project.getSourceFileOrThrow(filePath);
+  const interface = sourceFile.getInterface('ValidationCreator');
+  const myType = interface.getPropertyOrThrow('numberPath').getType();
 
-myType.compilerType.types.forEach(t => {
-  console.log('--------')
-  console.log('t.value:', t.value);
-  console.log('t.texts:', t.texts);
-  console.log('t.types:', t.types?.map(t => t.intrinsicName));
-  console.log('\n');
-})
+  const numberPaths = myType.compilerType.types.map(t => ({
+    value: t.value,
+    texts: t.texts,
+    types: t.types?.map(t => t.intrinsicName)
+  }));
+
+  const fileContents =
+`export const numberPaths = ${JSON.stringify(numberPaths, null, 2)};
+`;
+  
+  fs.writeFileSync('src/shared/validation/generated/validPaths.js', fileContents);
+};
+
+module.exports = {
+  generateValidPaths
+};

@@ -13,8 +13,8 @@ const loadPlayerAndGameState$ = initialState => {
 
   const dataSource = `${assetsBase}/${initialState.gameName}/gamedata.json`;
   return fromFetch(dataSource).pipe(
-    // TODO: render something useful if the response is no good
     switchMap(resp => resp.json()),
+    tap(validateGameState),
     map(({ playerState, worldState, flags }) => ({
       ...initialState,
       playerState,

@@ -45,7 +45,11 @@ const boot$ = (action$, state$) => {
     switchMap(state => merge(
       of({ type: 'SET_STATE', payload: state }),
       restart$(action$, state)
-    ))
+    )),
+    catchError(e => of({
+      type: 'ERROR',
+      payload: e
+    }))
   );
 };
 
