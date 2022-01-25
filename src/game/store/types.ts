@@ -177,4 +177,13 @@ export interface GameStoreState extends GameState {
   gameName: string
 }
 
+// Sad, but let's roll with it
+// Ideally we could just add an annotation within GameState and not need this
+// But that's not ovverriding the Set<string> for flags
+export interface GameStateForValidation {
+  worldState: WorldState;
+  playerState: PlayerState;
+  flags: string[];
+}
+
 export type GameStore = Store<GameStoreState>;

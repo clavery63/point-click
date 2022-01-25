@@ -27,7 +27,7 @@ const generateGameStateSchema = () => {
 
   const generator = TJS.buildGenerator(program, settings);
 
-  const schema = generator.getSchemaForSymbol('GameState');
+  const schema = generator.getSchemaForSymbol('GameStateForValidation');
 
   const replacePathLiterals = s => Object.entries(s).reduce((acc, [k, v]) => {
     if (typeof v !== 'object' || Array.isArray(v)) {

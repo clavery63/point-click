@@ -8,7 +8,10 @@ const gameStateSchema = {
       "$ref": "#/definitions/PlayerState"
     },
     "flags": {
-      "$ref": "#/definitions/Flags"
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
   "required": [
@@ -677,21 +680,6 @@ const gameStateSchema = {
         "USE"
       ],
       "type": "string"
-    },
-    "Flags": {
-      "type": "object",
-      "properties": {
-        "size": {
-          "type": "number"
-        },
-        "__@toStringTag@24": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "__@toStringTag@24",
-        "size"
-      ]
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#"

@@ -47,6 +47,7 @@ const boot$ = (action$, state$) => {
       restart$(action$, state)
     )),
     catchError(e => of({
+      // TODO: display something even slightly helpful if this happens
       type: 'ERROR',
       payload: e
     }))
