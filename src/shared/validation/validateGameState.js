@@ -39,9 +39,11 @@ const validateGameState = gameState => {
   const validate = ajv.compile(gameStateSchema);
   const valid = validate(gameState);
   if (!valid) {
-    console.log(validate.errors);
+    console.log('Found some validation errors:', validate.errors);
     throw new Error(validate.errors);
-  };
+  } else {
+    console.log('config is valid');
+  }
 };
 
 export default validateGameState;
