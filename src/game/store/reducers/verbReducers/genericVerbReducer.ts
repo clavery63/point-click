@@ -32,7 +32,7 @@ const getVerbLogic: GetVerbLogic = (object, verb, using, flags) => {
   return null;
 };
 
-type GetDefaultText = (object: Entity) => string;
+type GetDefaultText = (object: Entity) => Nullable<string>;
 type GenericVerbReducer = (
   verb: VerbIndex,
   getDefaultText: GetDefaultText,

@@ -4,6 +4,7 @@ import {
   Flags,
   GameStoreState,
   Item,
+  Nullable,
   PlayerState,
   Scenery,
   WorldState
@@ -40,11 +41,9 @@ type ConstrainedTypes<Base, Constraint, Prefix extends string = '', AnyNumber = 
   [Key in keyof Base]: Key extends string
     ? Base[Key] extends Basic
       ? MaybePathName<Constraint, Base, Key, Prefix>
-      : Base[Key] extends any[]
-        ? AnyNumber extends keyof Base[Key]
+      : AnyNumber extends keyof Base[Key]
           ? MaybePathName<Constraint, Base, Key, Prefix> | ConstrainedTypes<Base[Key][AnyNumber], Constraint, `${Prefix}${Key}[${number}].`> 
-          : never
-        : ConstrainedTypes<Base[Key], Constraint, `${Prefix}${Key}.`>
+          : ConstrainedTypes<Base[Key], Constraint, `${Prefix}${Key}.`>
     : never
 }[keyof Base]
 
@@ -62,8 +61,8 @@ type GetNullables<Base, Prefix extends string = '', AnyNumber = 0> = {
 }[keyof Base]
 
 type ValidPathsFor<Constraint> = Exclude<ConstrainedTypes<GameStoreState, Constraint>, undefined>;
- 
-export type NumberArrayPath = ValidPathsFor<number[]>;
+
+export type NumberArrayPath = ValidPathsFor<Nullable<number[]>>;
 export type NumberPath = ValidPathsFor<number>;
 export type NullablePath = Exclude<GetNullables<GameStoreState>, undefined>;
 
@@ -73,9 +72,9 @@ export type ValueUpdater<Override = string> = {
   ): (fn: Transformer<GetFieldType<GameStoreState, PathType>>) => StateTransformer
 };
 
-// NOTE: This almost definited doesn't have to be here, but it's needed right
-// now for the validation generator. We should be able to grab this directly from
-// the NumberPath type.
+// NOTE: This almost definited doesn't have to be here, but I'm using it right
+// now for the validation generator AST traversal. We should be able to grab
+// this directly from the NumberPath type.
 interface ValidationCreator {
   numberPath: ValidPathsFor<number>;
 }

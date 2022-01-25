@@ -13,7 +13,16 @@ export type EntityType = 'items' | 'scenery' | 'doors';
 
 export type Nullable<T> = T | null | undefined;
 
-export interface Position {
+type Lookup<T> ={
+  [key: number]: T;
+};
+
+interface Position {
+  left: number;
+  top: number;
+}
+
+export interface PositionAndSize {
   left: number;
   top: number;
   width: number;
@@ -30,12 +39,12 @@ export interface Door {
   id: number;
   closedImg?: string;
   openImg?: string;
-  position?: Position;
+  position?: PositionAndSize;
   mapPosition: MapPosition;
   dest: number;
   dir: DoorDir;
   state: DoorState;
-  description: string;
+  description?: string; // Should this be mandatory?
   closedText?: string;
   lockedText?: string;
   unlockText?: string;
@@ -43,8 +52,8 @@ export interface Door {
   keyId?: number;
   hidden?: boolean;
   openCondition?: string;
-  // TODO: Somehow make the shared fields between entities more specific
-  verbs: VerbMappings;
+  // TODO: Somehow make the shared fields between entities more explicit
+  verbs?: VerbMappings;
 }
 
 // NOTE: This will probably eventually be a union type with different effects,
@@ -88,35 +97,34 @@ export interface Item {
   id: number;
   name: string;
   description: string;
-  position?: Position;
+  position?: PositionAndSize;
   img?: string;
   // TODO: see if this can use genericVerbReducer
   onTake?: string;
   takeableFlag?: string;
   visibleFlag?: string;
   requiresPrecision?: boolean;
-  verbs: VerbMappings;
+  verbs?: VerbMappings;
 }
 
 export interface Scenery {
   type: 'scenery',
   id: number;
-  name: string;
-  description: string;
-  startPosition: Position;
+  name?: string;
+  description?: string; // Optional for now since LOOK effects mask it
+  startPosition: PositionAndSize;
   endPosition?: Position;
-  currentPosition?: Position;
+  currentPosition?: PositionAndSize;
   img?: string;
   openText?: string;
-  verbs: VerbMappings;
-  contains: number[];
+  verbs?: VerbMappings;
+  contains: Nullable<number[]>;
   trigger?: string;
   movedText?: string;
   visibleFlag?: string;
 }
 
 export interface Room {
-  id: number;
   img?: string;
   music?: string;
   video?: string;
@@ -129,10 +137,10 @@ export interface Room {
 }
 
 export interface WorldState {
-  doors: Record<number, Door>;
-  items: Item[];
-  scenery: Scenery[];
-  rooms: Room[];
+  doors: Lookup<Door>;
+  items: Lookup<Item>;
+  scenery: Lookup<Scenery>;
+  rooms: Lookup<Room>;
 }
 
 export interface PlayerState {
@@ -166,7 +174,7 @@ export interface GameStoreState extends GameState {
   loading: boolean,
   menu: Menu;
   cursorEnabled: boolean,
-  gameName: string,
+  gameName: string
 }
 
 export type GameStore = Store<GameStoreState>;

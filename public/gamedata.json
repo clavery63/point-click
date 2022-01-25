@@ -307,6 +307,7 @@
         "description": "This is a real nice-looking key."
       },
       "1": {
+        "name": "plunger",
         "position": {
           "left": 80,
           "top": 108,
@@ -317,6 +318,7 @@
         "description": "Your average, run of the mill plunger. How boring."
       },
       "2": {
+        "name": "toilet",
         "position": {
           "left": 99,
           "top": 75,

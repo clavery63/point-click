@@ -1,6 +1,42 @@
 export const numberPaths = [
   {
     "texts": [
+      "worldState.doors[",
+      "].dest"
+    ],
+    "types": [
+      "number"
+    ]
+  },
+  {
+    "texts": [
+      "worldState.doors[",
+      "].id"
+    ],
+    "types": [
+      "number"
+    ]
+  },
+  {
+    "texts": [
+      "worldState.doors[",
+      "].mapPosition.x"
+    ],
+    "types": [
+      "number"
+    ]
+  },
+  {
+    "texts": [
+      "worldState.doors[",
+      "].mapPosition.y"
+    ],
+    "types": [
+      "number"
+    ]
+  },
+  {
+    "texts": [
       "worldState.items[",
       "].id"
     ],
@@ -48,15 +84,6 @@ export const numberPaths = [
     "texts": [
       "worldState.scenery[",
       "].startPosition.height"
-    ],
-    "types": [
-      "number"
-    ]
-  },
-  {
-    "texts": [
-      "worldState.rooms[",
-      "].id"
     ],
     "types": [
       "number"

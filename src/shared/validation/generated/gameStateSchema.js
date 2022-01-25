@@ -30,21 +30,30 @@ const gameStateSchema = {
           }
         },
         "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Item"
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[0-9]+$": {
+              "$ref": "#/definitions/Item"
+            }
           }
         },
         "scenery": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Scenery"
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[0-9]+$": {
+              "$ref": "#/definitions/Scenery"
+            }
           }
         },
         "rooms": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Room"
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[0-9]+$": {
+              "$ref": "#/definitions/Room"
+            }
           }
         }
       },
@@ -74,7 +83,7 @@ const gameStateSchema = {
           "type": "string"
         },
         "position": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/PositionAndSize"
         },
         "mapPosition": {
           "$ref": "#/definitions/MapPosition"
@@ -173,17 +182,15 @@ const gameStateSchema = {
         }
       },
       "required": [
-        "description",
         "dest",
         "dir",
         "id",
         "mapPosition",
         "state",
-        "type",
-        "verbs"
+        "type"
       ]
     },
-    "Position": {
+    "PositionAndSize": {
       "type": "object",
       "properties": {
         "left": {
@@ -345,7 +352,7 @@ const gameStateSchema = {
           "type": "string"
         },
         "position": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/PositionAndSize"
         },
         "img": {
           "type": "string"
@@ -426,8 +433,7 @@ const gameStateSchema = {
         "description",
         "id",
         "name",
-        "type",
-        "verbs"
+        "type"
       ]
     },
     "Scenery": {
@@ -449,13 +455,13 @@ const gameStateSchema = {
           "type": "string"
         },
         "startPosition": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/PositionAndSize"
         },
         "endPosition": {
           "$ref": "#/definitions/Position"
         },
         "currentPosition": {
-          "$ref": "#/definitions/Position"
+          "$ref": "#/definitions/PositionAndSize"
         },
         "img": {
           "type": "string"
@@ -523,10 +529,17 @@ const gameStateSchema = {
           }
         },
         "contains": {
-          "type": "array",
-          "items": {
-            "type": "number"
-          }
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "trigger": {
           "type": "string"
@@ -539,21 +552,29 @@ const gameStateSchema = {
         }
       },
       "required": [
-        "contains",
-        "description",
         "id",
-        "name",
         "startPosition",
-        "type",
-        "verbs"
+        "type"
+      ]
+    },
+    "Position": {
+      "type": "object",
+      "properties": {
+        "left": {
+          "type": "number"
+        },
+        "top": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "left",
+        "top"
       ]
     },
     "Room": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "number"
-        },
         "img": {
           "type": "string"
         },
@@ -597,7 +618,6 @@ const gameStateSchema = {
       "required": [
         "description",
         "doors",
-        "id",
         "items",
         "scenery"
       ]
