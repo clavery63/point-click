@@ -30,7 +30,8 @@ const defaultState: GameStoreState = {
     scenery: {},
     doors: {}
   },
-  flags: new Set()
+  flags: new Set(),
+  images: {}
 };
 
 export default defaultState;

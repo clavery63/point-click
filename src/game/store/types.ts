@@ -13,8 +13,12 @@ export type EntityType = 'items' | 'scenery' | 'doors';
 
 export type Nullable<T> = T | null | undefined;
 
-type Lookup<T> ={
+type Lookup<T> = {
   [key: number]: T;
+};
+
+type StringLookup<T> = {
+  [key: string]: T;
 };
 
 interface Position {
@@ -170,11 +174,13 @@ export interface GameStoreState extends GameState {
     frame?: number
   };
   text: Nullable<string[]>;
-  nextText: Nullable<string>,
+  nextText: Nullable<string>;
   loading: boolean,
   menu: Menu;
-  cursorEnabled: boolean,
-  gameName: string
+  cursorEnabled: boolean;
+  gameName: string;
+  image: Lookup<string>;
+  // images: StringLookup<any>
 }
 
 // Sad, but let's roll with it

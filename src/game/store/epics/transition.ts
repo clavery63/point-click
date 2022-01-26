@@ -16,7 +16,7 @@ const getAction$ = (dest: number) => (frame: number) => {
     when(frame === 14, { type: 'SET_CURSOR_ENABLED', payload: true }),
     when(frame === 7, { type: 'SET_ROOM', payload: dest }),
     when(true, { type: 'SET_FRAME', payload: frame % 14 }),
-    when(frame === 0 || frame === 7, { type: 'PLAY_SFX', payload: null })
+    when(frame === 0 || frame === 7, { type: 'PLAY_SFX' })
   ]);
 };
 

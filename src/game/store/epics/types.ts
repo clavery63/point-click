@@ -3,32 +3,28 @@ import { ActionsType, ReducerActions } from '../reducers/rootReducer';
 import { DoorDir, GameStoreState } from '../types';
 import { Observable } from 'rxjs';
 
-type EpicActionTypes = {
-  RUN_TEXT: string,
-  SAVE_GAME: null,
-  LOAD_GAME: null,
-  PLAY_SFX: null,
-  PLAY_MUSIC: {
-    text?: string,
-    fileName: string
-  },
-  RUN_TRANSITION: {
-    dest: number,
-    dir: DoorDir,
-    frame: number
-  },
-  PAGE_CLICK: null,
-  START_GAME: null,
-};
-
-type EpicActionsType = {
-  [Key in keyof EpicActionTypes]: {
-    type: Key,
-    payload: EpicActionTypes[Key]
-  }
-}
-
-type EpicActions = EpicActionsType[keyof EpicActionTypes];
+type EpicActions =
+  { type: 'SAVE_GAME' } |
+  { type: 'LOAD_GAME' } |
+  { type: 'PLAY_SFX'  } |
+  { type: 'PAGE_CLICK' } |
+  { type: 'START_GAME' } |
+  { type: 'RUN_TEXT', payload: string } |
+  { 
+    type: 'PLAY_MUSIC', 
+    payload: {
+      text?: string,
+      fileName: string
+    }
+  } |
+  { 
+    type: 'RUN_TRANSITION',
+    payload: {
+      dest: number,
+      dir: DoorDir,
+      frame: number
+    }
+  };
 
 export type AllActions = ReducerActions | EpicActions;
 

@@ -1,13 +1,15 @@
+import { GameStoreState } from 'game/store/types';
 import React from 'react';
-import { connect } from 'react-redux';
 import { Image, Group } from 'react-konva';
+import { useSelector } from 'shared/hooks';
 
 const sheetWidth = 8;
 const spriteWidth = 7;
 const spriteHeight = 7;
 const shift = ' '.charCodeAt(0);
 
-const mapStateToProps = ({ images }) => {
+
+const selector = ({ images }: GameStoreState) => {
   return {
     spriteSheets: {
       dark: images['alpha-dark'],
@@ -16,7 +18,16 @@ const mapStateToProps = ({ images }) => {
   };
 };
 
-const Text = ({ text, left, top, color, spriteSheets }) => {
+type Color = 'dark' | 'light';
+type Props = {
+  text: string,
+  left: number,
+  top: number,
+  color: Color,
+  spriteSheets: Record<Color, HTMLImageElement>
+}
+const Text = ({ text, left, top, color }: Props) => {
+  const { spriteSheets } = useSelector(selector);
   const image = spriteSheets[color] || spriteSheets.dark;
   const upper = text.toUpperCase();
   const charCodes = upper.split('').map(char => char.charCodeAt(0) - shift);
@@ -44,4 +55,4 @@ const Text = ({ text, left, top, color, spriteSheets }) => {
   );
 };
 
-export default connect(mapStateToProps)(Text);
+export default Text;
