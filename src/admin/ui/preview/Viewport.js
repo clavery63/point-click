@@ -43,7 +43,7 @@ const Background = ({ image, selectedEntity }) => {
 
 const Viewport = props => {
   const { doors, items, scenery, img } = props.room;
-  const roomImg = useSelector(state => state.gameState.images[img]);
+  const roomImg = useSelector(state => state.gameState.images.get(img));
   const selectedEntity = useSelector(state => state.selectedEntity);
 
   return (

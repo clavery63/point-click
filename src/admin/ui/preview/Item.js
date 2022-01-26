@@ -8,7 +8,7 @@ const Item = ({ id }) => {
   const { img, position } = useSelector(state => {
     return state.gameState.worldState.items[id];
   });
-  const image = useSelector(state => state.gameState.images[img]);
+  const image = useSelector(state => state.gameState.images.get(img));
   const cachebuster = useCachebuster(position);
 
   return (
