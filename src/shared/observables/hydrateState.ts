@@ -1,15 +1,17 @@
 import { map, switchMap, take, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 import loadImages$ from './loadImages';
 import validateGameState from '../validation/validateGameState';
 import prepareEntities from '../util/prepareEntities';
+import { GameStoreState } from 'game/store/types';
 
 const assetsBase = process.env.REACT_APP_ASSETS_BASE;
 
-const loadPlayerAndGameState$ = initialState => {
-  if (initialState?.worldState?.rooms?.length > 0) {
-    // If there are rooms, we've already fetched the data
+type LoadState = (initialState: GameStoreState) => Observable<GameStoreState>;
+const loadPlayerAndGameState$: LoadState = initialState => {
+  const roomKeys = Object.keys(initialState.worldState?.rooms || {});
+  if (roomKeys.length > 0) {
     return of(initialState);
   }
 
@@ -28,28 +30,35 @@ const loadPlayerAndGameState$ = initialState => {
   );
 };
 
-const setAudioSrc = state => {
+const setAudioSrc = (state: GameStoreState) => {
   const audioRoot = `${assetsBase}/${state.gameName}/audio`;
   const initialRoom = state.worldState.rooms[state.playerState.room];
   
   // Crazy hack that causes <audio> el behavior to improve wrt loading and
   // replaying srcs. Without it, there are hiccups in sfx sounds
   // https://stackoverflow.com/questions/9811429/html5-audio-tag-on-safari-has-a-delay
-  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  // const AudioContext = window.AudioContext || window.webkitAudioContext;
   new AudioContext();
 
-  const musicPlayer = document.querySelector('.music-player');
+  const musicPlayer = document.querySelector('.music-player') as HTMLAudioElement;
   if (musicPlayer) {
     musicPlayer.src = `${audioRoot}/${initialRoom.music ?? ''}`;
   }
 
-  const sfxPlayer = document.querySelector('.sfx-player');
+  const sfxPlayer = document.querySelector('.sfx-player') as HTMLAudioElement;
   if (sfxPlayer) {
     sfxPlayer.src = `${audioRoot}/transition.mp3`;
   }
 };
 
-const hydrateState$ = (state$, initialize) => {
+type HydrateState = {
+  (
+    $state: Observable<GameStoreState>,
+    initialize: (state: GameStoreState) => GameStoreState
+  ): Observable<GameStoreState>
+}
+
+const hydrateState$: HydrateState = (state$, initialize) => {
   return state$.pipe(
     take(1),
     map(initialize),

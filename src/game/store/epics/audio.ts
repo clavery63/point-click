@@ -13,13 +13,12 @@ const audio$: MyEpic = (action$, state$, { runText$ }) => {
     filter(isOfType('PLAY_MUSIC')),
     switchMap(({ payload }) => concat(
       payload.text ? runText$(payload.text) : EMPTY,
-      of({}).pipe(
+      of<ReducerActions>({ type: 'NULL' }).pipe(
         tap(() => {
           const player = document.querySelector('.music-player') as HTMLAudioElement;
           player.src = `${audioAssetsRoot}/${payload.fileName}`;
           player.play();
         }),
-        mapTo({ type: 'NULL' as 'NULL' }) // This makes me as sad as it makes you
       )
     )),
   );

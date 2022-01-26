@@ -10,7 +10,7 @@ const filter = <
       out.push(object);
     }
   });
-  return out as ObjectsType;
+  return out;
 };
 
 export default filter;

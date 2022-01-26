@@ -1,21 +1,28 @@
 import { catchError, map, switchMapTo, switchMap } from 'rxjs/operators';
-import { of, merge, from } from 'rxjs';
+import { of, merge, from, Observable, ObservableInput } from 'rxjs';
 import { ofType } from 'redux-observable';
 import hydrateState$ from 'shared/observables/hydrateState';
+import { AllActions, MyEpic } from './types';
+import { GameState, GameStoreState } from '../types';
 
-const loadFlagsSet = state => {
+type LoadFlagsSet = (state: GameStoreState) => GameStoreState;
+const loadFlagsSet: LoadFlagsSet = state => {
   return {
     ...state,
     flags: new Set(state.flags)
   };
 };
 
-const restart$ = (action$, { playerState, worldState }) => {
+type Restart = (
+  action$: Observable<AllActions>,
+  state: GameState
+) => Observable<AllActions>;
+const restart$: Restart = (action$, { playerState, worldState }) => {
   const initialRoom = worldState.rooms[playerState.room];
   const { description, initialDescription } = initialRoom;
   return action$.pipe(
     ofType('START_GAME'),
-    switchMapTo(from([
+    switchMapTo(from<ObservableInput<AllActions>>([
       { type: 'RUN_TEXT', payload: initialDescription || description },
       { type: 'SET_MENU', payload: 'NONE' },
       { type: 'SET_WORLD_STATE', payload: worldState },
@@ -24,9 +31,11 @@ const restart$ = (action$, { playerState, worldState }) => {
   );
 };
 
-const initializeGame = bootInfo => ({
+type InitializeGame = (bootInfo: GameStoreState) => GameStoreState
+const initializeGame: InitializeGame = bootInfo => ({
   transition: {
-    dest: null
+    dest: null,
+    dir: 'UP' // TODO: cleanup transition type requirement
   },
   text: null,
   nextText: null,
@@ -39,14 +48,14 @@ const initializeGame = bootInfo => ({
   flags: bootInfo.flags,
 });
 
-const boot$ = (action$, state$) => {
+const boot$: MyEpic = (action$, state$) => {
   return hydrateState$(state$, initializeGame).pipe(
     map(loadFlagsSet),
     switchMap(state => merge(
-      of({ type: 'SET_STATE', payload: state }),
+      of<AllActions>({ type: 'SET_STATE', payload: state }),
       restart$(action$, state)
     )),
-    catchError(e => of({
+    catchError(e => of<AllActions>({
       // TODO: display something even slightly helpful if this happens
       type: 'ERROR',
       payload: e

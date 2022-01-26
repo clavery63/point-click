@@ -7,7 +7,7 @@ import changePageReducer from './changePageReducer';
 import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
 import { Reducer as ReduxReducer } from 'redux';
-import { Flags, GameStoreState, PlayerState, WorldState, EntityType, DoorDir, Menu, VerbIndex, Nullable } from '../types';
+import { Flags, GameStoreState, PlayerState, WorldState, DoorDir, Menu, VerbIndex, Nullable } from '../types';
 import defaultState from '../defaultState';
 import { ParentReducer } from 'shared/util/types';
 
@@ -40,7 +40,8 @@ type ActionTypes = {
   SELECT_ITEM: number,
   SELECT_BAG: number,
   CHANGE_PAGE: DoorDir,
-  SET_MENU: Menu
+  SET_MENU: Menu,
+  ERROR: null
 }
 
 export type ActionsType = {

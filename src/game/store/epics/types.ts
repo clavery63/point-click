@@ -17,7 +17,8 @@ type EpicActionTypes = {
     dir: DoorDir,
     frame: number
   },
-  PAGE_CLICK: null
+  PAGE_CLICK: null,
+  START_GAME: null,
 };
 
 type EpicActionsType = {
