@@ -4,7 +4,7 @@ import Cursor from './Cursor';
 const mapStateToProps = ({ cursorEnabled, images }) => {
   return {
     cursorEnabled,
-    cursorImg: images.cursor
+    cursorImg: images.get('cursor')
   };
 };
 

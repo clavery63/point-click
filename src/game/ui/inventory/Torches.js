@@ -35,7 +35,7 @@ const Torches = ({ torchImg, onClick }) => {
 
 const mapStateToProps = ({ images }) => {
   return {
-    torchImg: images['flame-1']
+    torchImg: images.get('flame-1')
   };
 };
 

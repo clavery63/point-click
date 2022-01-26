@@ -7,6 +7,7 @@ import {
   Nullable,
   PlayerState,
   Scenery,
+  StringLookup,
   WorldState
   // NOTE: made this a relative import for validation generation.
   // We can change this back if ts-json-schema-generator starts tolerating
@@ -33,7 +34,7 @@ export type ParentReducer<PayloadType> = {
 
 export type EmptyReducer = () => StateTransformer;
 
-type Basic = string | string[] | number | number[] | Set<any> | boolean | Function | null | undefined;
+type Basic = string | string[] | number | number[] | Set<any> | boolean | Function | null | undefined | Map<any, any>;
 
 type MaybePathName<Constraint, Base, Key extends keyof Base & string, Prefix extends string> = (Base[Key] extends Constraint ? `${Prefix}${Key}` : never);
 

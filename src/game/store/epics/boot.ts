@@ -46,6 +46,7 @@ const initializeGame: InitializeGame = bootInfo => ({
   playerState: bootInfo.playerState,
   worldState: bootInfo.worldState,
   flags: bootInfo.flags,
+  images: new Map(),
 });
 
 const boot$: MyEpic = (action$, state$) => {
@@ -55,11 +56,14 @@ const boot$: MyEpic = (action$, state$) => {
       of<AllActions>({ type: 'SET_STATE', payload: state }),
       restart$(action$, state)
     )),
-    catchError(e => of<AllActions>({
+    catchError(e => {
+      console.log('error:', e);
       // TODO: display something even slightly helpful if this happens
-      type: 'ERROR',
-      payload: e
-    }))
+      return of<AllActions>({
+        type: 'ERROR',
+        payload: e
+      })
+    })
   );
 };
 

@@ -4,7 +4,7 @@ import Viewport from './Viewport';
 const withImages = (worldState, images, collection, keys = ['img']) => id => {
   const object = worldState[collection][id];
   return keys.reduce((acc, key) => {
-    const img = images[object[key]];
+    const img = images.get(object[key]);
     return { 
       ...acc, 
       [key]: img, 
@@ -33,8 +33,8 @@ const mapStateToProps = ({ images, worldState, playerState, flags }) => {
       .filter(item => !item.visibleFlag || flags.has(item.visibleFlag)),
     scenery: scenery.map(withImages(worldState, images, 'scenery'))
       .filter(scenery => !scenery.visibleFlag || flags.has(scenery.visibleFlag)),
-    borderImg: images.border,
-    roomImg: images[img],
+    borderImg: images.get('border'),
+    roomImg: images.get(img),
     video
   };
 };

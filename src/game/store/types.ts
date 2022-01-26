@@ -17,7 +17,7 @@ type Lookup<T> = {
   [key: number]: T;
 };
 
-type StringLookup<T> = {
+export type StringLookup<T> = {
   [key: string]: T;
 };
 
@@ -179,8 +179,7 @@ export interface GameStoreState extends GameState {
   menu: Menu;
   cursorEnabled: boolean;
   gameName: string;
-  image: Lookup<string>;
-  // images: StringLookup<any>
+  images: Map<string, HTMLImageElement>;
 }
 
 // Sad, but let's roll with it

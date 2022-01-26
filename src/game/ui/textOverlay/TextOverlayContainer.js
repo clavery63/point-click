@@ -4,7 +4,7 @@ import TextOverlay from './TextOverlay';
 const mapStateToProps = ({ text, images }) => {
   return { 
     lines: text || null,
-    hrImg: images.line
+    hrImg: images.get('line')
   };
 };
 

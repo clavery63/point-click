@@ -24,8 +24,8 @@ const mapStateToProps = state => {
     currentVerb: playerState.verb,
     hasText: hasText(state),
     doors: revealedDoors(state),
-    menuImg: images.menu,
-    menuButtonImg: images['menu-button']
+    menuImg: images.get('menu'),
+    menuButtonImg: images.get('menu-button')
   };
 };
 

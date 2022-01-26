@@ -12,8 +12,8 @@ const shift = ' '.charCodeAt(0);
 const selector = ({ images }: GameStoreState) => {
   return {
     spriteSheets: {
-      dark: images['alpha-dark'],
-      light: images['alpha-light'],
+      dark: images.get('alpha-dark'),
+      light: images.get('alpha-light'),
     }
   };
 };

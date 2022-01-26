@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
   return {
     items: getItemObjects(state),
     page,
-    inventoryImg: images.items,
+    inventoryImg: images.get('items'),
     using,
     examining: getExaminingWithItems(state)
   };

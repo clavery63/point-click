@@ -2,7 +2,6 @@ import { map, switchMap } from 'rxjs/operators';
 import { forkJoin, from } from 'rxjs';
 import S3 from '../util/S3';
 import image$ from '../observables/image';
-import pairsToObj from '../util/pairsToObj';
 
 const getFilenames = (objects, gameKey) => objects
   .map(({ Key }) => Key.match(new RegExp(`${gameKey}/img/(.*).png`)))
@@ -20,7 +19,7 @@ const loadImages$ = gameKey => {
         );
       }));
     }),
-    map(pairsToObj)
+    map(pairs => new Map(pairs))
   );
 };
 
