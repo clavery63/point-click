@@ -4,7 +4,7 @@ import ViewportContainer from './ui/viewport/ViewportContainer';
 import InventoryContainer from './ui/inventory/InventoryContainer';
 import MenuContainer from './ui/menu/MenuContainer';
 import TextOverlayContainer from './ui/textOverlay/TextOverlayContainer';
-import CursorContainer from './ui/cursor/CursorContainer';
+import Cursor from './ui/cursor/Cursor';
 import OuterMenuContainer from './ui/outerMenu/OuterMenuContainer';
 import ClickMask from './ui/clickMask/ClickMask';
 
@@ -36,7 +36,7 @@ const MainLayer = ({ loading, menu, stageData }) => {
     <Layer ref={layerRef}>
       <GameContent menu={menu} />
       <OuterMenuContainer />
-      <CursorContainer stageData={stageData} />
+      <Cursor stageData={stageData} />
     </Layer>
   );
 };
