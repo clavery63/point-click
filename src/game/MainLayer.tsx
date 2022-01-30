@@ -23,7 +23,7 @@ const GameContent = ({ menu }: GameContentProps) => {
       <ClickMask />
     </>
   );
-}
+};
 
 type Props = {
   loading: boolean;

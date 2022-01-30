@@ -6,7 +6,7 @@ import Text from '../shared/Text';
 const KEY = 'doublehamburger-save-data';
 
 const GameOver = () => (
-  <Text left={92} top={60} color={'light'} text={'game over'} />
+  <Text left={92} top={60} color="light" text="game over" />
 );
 
 type Props = {
@@ -15,12 +15,12 @@ type Props = {
 
 const Start = ({ onClick }: Props) => (
   <>
-    <Text left={88} top={100} color={'light'} text={'start game'} />
-    <Rect 
-      x={88} 
-      y={100} 
-      height={8} 
-      width={80} 
+    <Text left={88} top={100} color="light" text="start game" />
+    <Rect
+      x={88}
+      y={100}
+      height={8}
+      width={80}
       onClick={onClick}
     />
   </>
@@ -28,16 +28,15 @@ const Start = ({ onClick }: Props) => (
 
 const Load = ({ onClick }: Props) => (
   <>
-    <Text left={92} top={120} color={'light'} text={'load game'} />
+    <Text left={92} top={120} color="light" text="load game" />
     <Rect x={92} y={120} height={8} width={72} onClick={onClick} />
   </>
 );
 
-
 const OuterMenu = () => {
   const dispatch = useDispatch();
   const menu = useSelector(state => state.menu);
-  
+
   if (menu === 'NONE') return null;
 
   const hack = (fn: () => void) => () => {
@@ -46,7 +45,7 @@ const OuterMenu = () => {
     const el = document.querySelector('.music-player') as HTMLAudioElement;
     el.play();
     fn();
-  }
+  };
 
   const hasLoadData = !!window.localStorage.getItem(KEY);
 

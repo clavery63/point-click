@@ -10,7 +10,7 @@ const SPRITE_HEIGHT = 20;
 const bagSelector = ({ images, playerState }: GameStoreState) => {
   return {
     bagImg: images.get('bag'),
-    bagLevel: playerState.timer
+    bagLevel: playerState.timer,
   };
 };
 
@@ -25,11 +25,11 @@ const Bag = () => {
       height={SPRITE_HEIGHT}
       image={bagImg}
       onClick={() => dispatch({ type: 'SELECT_BAG', payload: bagLevel })}
-      crop={{ 
+      crop={{
         x: (bagLevel % SHEET_WIDTH) * SPRITE_WIDTH,
         y: Math.floor(bagLevel / SHEET_WIDTH) * SPRITE_HEIGHT,
-        width: SPRITE_WIDTH, 
-        height: SPRITE_HEIGHT 
+        width: SPRITE_WIDTH,
+        height: SPRITE_HEIGHT,
       }}
     />
   );

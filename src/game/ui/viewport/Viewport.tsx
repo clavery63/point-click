@@ -1,12 +1,12 @@
 import React from 'react';
 import { Image, Group } from 'react-konva';
+import { useDispatch, useSelector } from 'shared/hooks';
+import { EntityType } from 'game/store/types';
 import Transition from '../transition/Transition';
 import Door from './Door';
 import Item from './Item';
 import Scenery from './Scenery';
 import Video from '../shared/Video';
-import { useDispatch, useSelector } from 'shared/hooks';
-import { EntityType } from 'game/store/types';
 import viewportSelector from './viewportSelector';
 
 // TODO: derive the gameName part from state
@@ -20,27 +20,27 @@ const Background = ({ image, video }: BGProps) => {
   if (video) {
     // TODO: whoa, is this rendering on every cursor and text update? This should get
     // its own connected component, but also lets get those out of redux
-    return <Video src={`${videoAssetsRoot}/${video}`} />
+    return <Video src={`${videoAssetsRoot}/${video}`} />;
   }
 
-  return <Image width={112} height={112} image={image} />
+  return <Image width={112} height={112} image={image} />;
 };
 
 const Viewport = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const {
-    borderImg, 
-    roomImg, 
-    doors, 
-    items, 
+    borderImg,
+    roomImg,
+    doors,
+    items,
     scenery,
-    video
+    video,
   } = useSelector(viewportSelector);
 
-  const onClick = (id: number, type: EntityType) => dispatch({ 
-    type: 'SELECT_OBJECT', 
-    payload: { id, type }
-  })
+  const onClick = (id: number, type: EntityType) => dispatch({
+    type: 'SELECT_OBJECT',
+    payload: { id, type },
+  });
 
   return (
     <Group x={8} y={23}>
@@ -69,10 +69,10 @@ const Viewport = () => {
           ))}
         </Group>
         <Group>
-          {scenery.map(scenery => (
+          {scenery.map(sceneryObject => (
             <Scenery
-              key={scenery.id}
-              object={scenery}
+              key={sceneryObject.id}
+              object={sceneryObject}
               onClick={onClick}
             />
           ))}

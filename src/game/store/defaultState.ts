@@ -8,7 +8,7 @@ import { GameStoreState } from './types';
 const defaultState: GameStoreState = {
   transition: {
     dest: 0,
-    dir: 'FORWARD'
+    dir: 'FORWARD',
   },
   nextText: '',
   text: null,
@@ -22,13 +22,13 @@ const defaultState: GameStoreState = {
     room: 0,
     items: [],
     timer: 0,
-    page: 0
+    page: 0,
   },
   worldState: {
     rooms: {},
     items: {},
     scenery: {},
-    doors: {}
+    doors: {},
   },
   flags: new Set(),
   images: new Map(),

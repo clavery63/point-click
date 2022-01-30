@@ -1,18 +1,18 @@
 import React from 'react';
 import { Group, Rect } from 'react-konva';
 import range from 'lodash/range';
-import createGrid, { GRID_SIZE } from './createGrid';
 import { useSelector } from 'shared/hooks';
 import { DoorDir } from 'game/store/types';
+import createGrid, { GRID_SIZE } from './createGrid';
 
 const getGrids = (dir: DoorDir) => range(GRID_SIZE).map(createGrid(dir));
 const grids = {
   RIGHT: getGrids('RIGHT'),
-  LEFT:  getGrids('LEFT'),
-  UP:  getGrids('UP'),
-  DOWN:  getGrids('DOWN'),
-  FORWARD:  getGrids('FORWARD'),
-  BACK:  getGrids('BACK')
+  LEFT: getGrids('LEFT'),
+  UP: getGrids('UP'),
+  DOWN: getGrids('DOWN'),
+  FORWARD: getGrids('FORWARD'),
+  BACK: getGrids('BACK'),
 };
 
 const Transition = () => {
@@ -27,11 +27,11 @@ const Transition = () => {
       {grids[dir][frame].map((row, y) => row.map((val, x) => (
         <Rect
           key={y * 8 + x}
-          width={8} 
-          height={8} 
-          x={x * 8} 
-          y={y * 8} 
-          fill={val ? 'black' : undefined} 
+          width={8}
+          height={8}
+          x={x * 8}
+          y={y * 8}
+          fill={val ? 'black' : undefined}
         />
       )))}
     </Group>

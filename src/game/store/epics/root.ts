@@ -11,11 +11,11 @@ import { MyEpic } from './types';
 const combined$ = combineEpics(audio$, animation$, boot$, save$, text$, transition$);
 
 const withExtras$: MyEpic = (action$, state$, extras) => {
-  const pageClick$ = action$.pipe(ofType('PAGE_CLICK'))
+  const pageClick$ = action$.pipe(ofType('PAGE_CLICK'));
   return combined$(action$, state$, {
     ...extras,
-    runText$: runText$(pageClick$)
-  })
+    runText$: runText$(pageClick$),
+  });
 };
 
 export default withExtras$;

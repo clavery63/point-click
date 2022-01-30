@@ -5,7 +5,7 @@ const retrieveImage = async (s3: S3, imageKey: string, gameKey: string) => {
   const key = `${gameKey}/${imageKey}`;
   const localImage = localStorage.getItem(key);
   if (localImage) {
-    return [Uint8Array.from(localImage.split(',').map(num => parseInt(num)))];
+    return [Uint8Array.from(localImage.split(',').map(num => parseInt(num, 10)))];
   }
 
   const s3Image = await s3.getObject(`${imageKey}.png`);
@@ -14,28 +14,31 @@ const retrieveImage = async (s3: S3, imageKey: string, gameKey: string) => {
   return s3Image;
 };
 
-const image$ = (s3: S3, imageKey: string, gameKey: string) => new Observable<HTMLImageElement>(observer => {
-  const load = () => {
-    observer.next(image);
-    observer.complete();
-  };
+const image$ = (s3: S3, imageKey: string, gameKey: string) => {
+  return new Observable<HTMLImageElement>(observer => {
+    const image = new Image();
 
-  const error = (e: ErrorEvent) => {
-    console.error(e);
-    observer.error(e);
-  }
-  
-  const image = new Image();
-  retrieveImage(s3, imageKey, gameKey).then(byteArray => {
-    image.src = URL.createObjectURL(new Blob(byteArray));
-  }).catch(e => error(e));
+    const load = () => {
+      observer.next(image);
+      observer.complete();
+    };
 
-  image.addEventListener('load', load);
-  image.addEventListener('error', error);
-  return () => {
-    image.removeEventListener('load', load);
-    image.removeEventListener('error', error);
-  }
-});
+    const error = (e: ErrorEvent) => {
+      console.error(e);
+      observer.error(e);
+    };
+
+    retrieveImage(s3, imageKey, gameKey).then(byteArray => {
+      image.src = URL.createObjectURL(new Blob(byteArray));
+    }).catch(e => error(e));
+
+    image.addEventListener('load', load);
+    image.addEventListener('error', error);
+    return () => {
+      image.removeEventListener('load', load);
+      image.removeEventListener('error', error);
+    };
+  });
+};
 
 export default image$;

@@ -14,7 +14,7 @@ const getItemObjects = createSelector(
     return items
       .map(id => ({ ...gameItems[id], id }))
       .slice(page * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE + ITEMS_PER_PAGE);
-  }
+  },
 );
 
 const getExaminingWithItems = createSelector(
@@ -29,7 +29,7 @@ const getExaminingWithItems = createSelector(
     const object = scenery[examining];
     const contains = object.contains?.map(id => ({ ...gameItems[id], id }));
     return { ...object, contains };
-  }
+  },
 );
 
 const inventorySelector = (state: GameStoreState) => {
@@ -39,7 +39,7 @@ const inventorySelector = (state: GameStoreState) => {
     items: getItemObjects(state),
     inventoryImg: images.get('items'),
     using,
-    examining: getExaminingWithItems(state)
+    examining: getExaminingWithItems(state),
   };
 };
 

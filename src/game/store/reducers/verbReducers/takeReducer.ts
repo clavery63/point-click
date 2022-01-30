@@ -6,7 +6,7 @@ const itemReducer: ItemReducer = (item, playerState) => {
   return compose(
     filterValues(`worldState.rooms[${playerState.room}].items`)(item.id),
     updateValue('playerState.items')(items => [...items, item.id]),
-    withText(item.onTake || `The ${item.name} is in hand.`)
+    withText(item.onTake || `The ${item.name} is in hand.`),
   );
 };
 
@@ -22,6 +22,5 @@ const takeReducer: EntityReducer = (object, playerState, flags) => {
   }
   return withText('Can\'t take it!');
 };
-
 
 export default takeReducer;

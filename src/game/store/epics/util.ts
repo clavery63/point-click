@@ -1,5 +1,5 @@
-import { identity } from "lodash";
-import { AllActions } from "./types";
+import { identity } from 'lodash';
+import { AllActions } from './types';
 
 type TextToLines = (c: number) => (t: string) => string[];
 export const textToLines: TextToLines = charsPerLine => text => {

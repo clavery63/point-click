@@ -7,7 +7,7 @@ const doorReducer: DoorReducer = ({ state, dest, dir }) => {
     case 'OPEN':
       return compose(
         clearValue('playerState.examining'),
-        setValue('transition')({ dest, dir })
+        setValue('transition')({ dest, dir }),
       );
     default:
       return withText('You have to open the door before you go through it.');
@@ -20,6 +20,5 @@ const moveReducer: EntityReducer = (object, _p, _f) => {
   }
   return withText('You can\'t do that!');
 };
-
 
 export default moveReducer;

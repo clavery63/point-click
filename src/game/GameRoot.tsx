@@ -1,6 +1,6 @@
 import React, { useRef, useMemo } from 'react';
-import { createStore, applyMiddleware, compose } from 'redux'
-import { Provider } from 'react-redux'
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
 import { createEpicMiddleware } from 'redux-observable';
 import rootEpic from './store/epics/root';
 import rootReducer from './store/reducers/rootReducer';
@@ -15,7 +15,7 @@ const containerStyles = {
   justifyContent: 'center',
   alignItems: 'center',
   height: '100%',
-  width: '100%'
+  width: '100%',
 };
 
 type Props = {
@@ -28,18 +28,18 @@ const GameRoot = React.memo(({ gameName, state }: Props) => {
 
   const store = useMemo(() => {
     const epicMiddleware = createEpicMiddleware<AllActions, AllActions, GameStoreState>();
-  
+
     const initialState = {
       ...defaultState,
       gameName,
-      ...state
+      ...state,
     };
-  
+
     const composeEnhancers = compose;
     const newStore = createStore(rootReducer, initialState, composeEnhancers(
-      applyMiddleware(epicMiddleware, effectsMiddleware)
+      applyMiddleware(epicMiddleware, effectsMiddleware),
     ));
-  
+
     epicMiddleware.run(rootEpic);
 
     return newStore;
@@ -52,8 +52,8 @@ const GameRoot = React.memo(({ gameName, state }: Props) => {
         // we decide to start using hooks for the game's redux instance:
         // https://react-redux.js.org/api/hooks#custom-context
         <Provider store={store}>
-          <audio className='music-player' loop />
-          <audio className='sfx-player' />
+          <audio className="music-player" loop />
+          <audio className="sfx-player" />
           <GameContainer parentRef={containerRef} />
         </Provider>
       )}

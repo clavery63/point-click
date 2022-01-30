@@ -1,10 +1,10 @@
 import { AllActions } from 'game/store/epics/types';
 import { GameStoreState } from 'game/store/types';
 import { Dispatch } from 'react';
-import { 
+import {
   TypedUseSelectorHook,
   useDispatch as useReduxDispatch,
-  useSelector as useReduxSelector
+  useSelector as useReduxSelector,
 } from 'react-redux';
 
 export const useDispatch = () => useReduxDispatch<Dispatch<AllActions>>();

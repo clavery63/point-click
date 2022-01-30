@@ -1,4 +1,4 @@
-import { DoorDir } from "game/store/types";
+import { DoorDir } from 'game/store/types';
 
 export const GRID_SIZE = 14;
 const HALF_GRID = GRID_SIZE / 2;
@@ -17,12 +17,11 @@ const pinwheel: TransitionFn = (origX, origY, frame) => {
   const y = origY - HALF_GRID;
   if (y === 0 || x === 0) {
     return 1;
-  } else {
-    const angle = ((Math.PI / 2) / 7) * frame;
-    const ratio = Math.tan(angle);
-    const [num, den] = (x * y > 0) ? [x, y] : [y, x];
-    return Math.abs(num / den) < ratio ? 1 : 0;
   }
+  const angle = ((Math.PI / 2) / 7) * frame;
+  const ratio = Math.tan(angle);
+  const [num, den] = (x * y > 0) ? [x, y] : [y, x];
+  return Math.abs(num / den) < ratio ? 1 : 0;
 };
 
 const boxes: TransitionFn = (origX, origY, origFrame) => {
@@ -35,11 +34,11 @@ const boxes: TransitionFn = (origX, origY, origFrame) => {
 type TransitionFn = (x: number, y: number, frame: number) => 0 | 1;
 const transitions: Record<DoorDir, TransitionFn> = {
   RIGHT: arrow((x, y) => ([x, y])),
-  LEFT:  arrow((x, y) => ([-x + 13, y])),
-  UP:    arrow((x, y) => ([-y + 13, x])),
-  DOWN:  arrow((x, y) => ([y, x])),
+  LEFT: arrow((x, y) => ([-x + 13, y])),
+  UP: arrow((x, y) => ([-y + 13, x])),
+  DOWN: arrow((x, y) => ([y, x])),
   FORWARD: pinwheel,
-  BACK: boxes
+  BACK: boxes,
 };
 
 type WithInverse = (transition: TransitionFn, x: number, y: number, frame: number) => 0 | 1;

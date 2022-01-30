@@ -1,8 +1,12 @@
-import { map, switchMap, concatMapTo, withLatestFrom, filter, scan } from 'rxjs/operators';
-import { from, timer, concat, of, Observable } from 'rxjs';
+import {
+  map, switchMap, concatMapTo, withLatestFrom, filter, scan,
+} from 'rxjs/operators';
+import {
+  from, timer, concat, of, Observable,
+} from 'rxjs';
 import { range, isEqual } from 'lodash';
-import { AllActions, MyEpic } from './types';
 import { isOfType } from 'typesafe-actions';
+import { AllActions, MyEpic } from './types';
 import { GameStoreState, Scenery } from '../types';
 import { typedAction } from './util';
 
@@ -12,7 +16,7 @@ import { typedAction } from './util';
 const NUM_FRAMES = 12;
 const MS_PER_FRAME = 200;
 
-type SceneryType = { type: 'scenery' , id: number };
+type SceneryType = { type: 'scenery', id: number };
 type Input = [SceneryType, GameStoreState];
 
 type ShouldAnimate = (i: Input) => boolean;
@@ -35,7 +39,9 @@ const withStepSizes: WithStepSizes = ([payload, { worldState }]) => {
   // endPotition to startPosition as a default when loading the game
   const xStep = ((endPosition?.left ?? 0) - startPosition.left) / NUM_FRAMES;
   const yStep = ((endPosition?.top ?? 0) - startPosition.top) / NUM_FRAMES;
-  return { object, id, type, xStep, yStep };
+  return {
+    object, id, type, xStep, yStep,
+  };
 };
 
 type AnimationData = {
@@ -46,22 +52,26 @@ type AnimationData = {
   yStep: number
 }
 type RunAnimation = (r: AnimationData) => Observable<AllActions>;
-const runAnimation$: RunAnimation = ({ object, id, type, xStep, yStep }) => {
+const runAnimation$: RunAnimation = ({
+  object, id, type, xStep, yStep,
+}) => {
   const { left: startX, top: startY } = object.startPosition;
   return concat(
     of(typedAction({ type: 'SET_CURSOR_ENABLED', payload: false })),
     from(range(NUM_FRAMES)).pipe(
       concatMapTo(timer(MS_PER_FRAME)),
       scan(([x, y]) => [Math.round(x + xStep), Math.round(y + yStep)], [startX, startY]),
-      map(([x, y]) => typedAction({ 
-        type: 'SET_POSITION', 
-        payload: { id, type, x, y } 
-      }))
+      map(([x, y]) => typedAction({
+        type: 'SET_POSITION',
+        payload: {
+          id, type, x, y,
+        },
+      })),
     ),
     of(typedAction({ type: 'SET_CURSOR_ENABLED', payload: true })),
     // TODO: Ensure empty string doesn't just open up an empty dialog
-    of(typedAction({ type: 'RUN_TEXT', payload: object.movedText || '' }))
-  )
+    of(typedAction({ type: 'RUN_TEXT', payload: object.movedText || '' })),
+  );
 };
 
 const animation$: MyEpic = (action$, state$) => {
@@ -75,7 +85,7 @@ const animation$: MyEpic = (action$, state$) => {
     withLatestFrom(state$),
     filter(shouldAnimate),
     map(withStepSizes),
-    switchMap(runAnimation$)
+    switchMap(runAnimation$),
   );
 };
 

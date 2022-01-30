@@ -1,3 +1,5 @@
+import { Reducer as ReduxReducer } from 'redux';
+import { ParentReducer } from 'shared/util/types';
 import selectObjectReducer from './selectObjectReducer';
 import selectVerbReducer from './selectVerbReducer';
 import selectItemReducer from './selectItemReducer';
@@ -6,10 +8,10 @@ import setPositionReducer from './setPositionReducer';
 import changePageReducer from './changePageReducer';
 import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
-import { Reducer as ReduxReducer } from 'redux';
-import { Flags, GameStoreState, PlayerState, WorldState, DoorDir, Menu, VerbIndex, Nullable } from '../types';
+import {
+  Flags, GameStoreState, PlayerState, WorldState, DoorDir, Menu, VerbIndex, Nullable,
+} from '../types';
 import defaultState from '../defaultState';
-import { ParentReducer } from 'shared/util/types';
 
 export type PositionType = {
   x: number,
@@ -18,7 +20,7 @@ export type PositionType = {
   type: 'scenery'
 };
 
-export type ObjectType = 
+export type ObjectType =
 { id: number, type: 'scenery' } |
 { id: number, type: 'items' } |
 { id: number, type: 'doors' };
@@ -77,18 +79,21 @@ const selectBag: ParentReducer<number> = selectBagReducer;
 const changePage: ParentReducer<DoorDir> = changePageReducer;
 const setMenu: ParentReducer<Menu> = setValue('menu');
 
-const rootReducer: ReduxReducer<GameStoreState, ReducerActions> = (state = defaultState, action) => {
+const rootReducer: ReduxReducer<
+  GameStoreState, ReducerActions
+// eslint-disable-next-line default-param-last
+> = (state = defaultState, action) => {
   /**
    * README:
-   * 
+   *
    * This insanity is here to appease typescript, which is only smart enough to
    * deduce the action type/payload pairing if we use explicit control-flow.
    * Ordinarily, we would be able to simplify this function by putting the
    * reducers in a map, but the type checker won't allow it.
-   * 
+   *
    * I think it's worth keeping in order to get good compile-time checking.
    * Ugly as it is, your IDE will make it pretty clear what needs to be added.
-   * 
+   *
    * Right now this list of reducers is written out three times to fit these
    * needs. I'm hoping we can get it down to two at least (perhaps by inferring
    * the action types).

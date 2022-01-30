@@ -23,8 +23,8 @@ const validateGameState = gameState => {
   const numberPathRegExes = numberPaths.map(constructRegExp);
 
   ajv.addKeyword({
-    keyword: "ValuePath",
-    type: "string",
+    keyword: 'ValuePath',
+    type: 'string',
     validate: (schema, data) => {
       // TODO: at some point we might want to work for more than just number
       // paths, at which point we will actually look at `schema` to pick the
@@ -32,10 +32,10 @@ const validateGameState = gameState => {
       return numberPathRegExes.some(regEx => data.match(regEx));
     },
     error: {
-      message: 'you blew it'
-    }
-  })
-  
+      message: 'you blew it',
+    },
+  });
+
   const validate = ajv.compile(gameStateSchema);
   const valid = validate(gameState);
   if (!valid) {

@@ -1,8 +1,12 @@
-import { take, map, takeUntil, mapTo, concatMap } from 'rxjs/operators';
-import { from, timer, of, concat, Observable } from 'rxjs';
+import {
+  take, map, takeUntil, mapTo, concatMap,
+} from 'rxjs/operators';
+import {
+  from, timer, of, concat, Observable,
+} from 'rxjs';
 import { chunk, range } from 'lodash';
-import { textToLines } from '../util';
 import { ActionsType } from 'game/store/reducers/rootReducer';
+import { textToLines } from '../util';
 
 const LINES_PER_PAGE = 4;
 const CHARS_PER_LINE = 24;
@@ -32,22 +36,22 @@ const renderPage$: RenderPage = pageClick$ => lines => {
   return concat(
     from(allPositions).pipe(
       concatMap(position => timer(MS_PER_CHAR).pipe(mapTo(getLines(lines, position)))),
-      takeUntil(pageClick$)
+      takeUntil(pageClick$),
     ),
     of(getLines(lines, lastPosition)),
-    pageClick$.pipe(mapTo([]), take(1))
+    pageClick$.pipe(mapTo([]), take(1)),
   );
 };
 
 type RunText = (p: Observable<any>) => (t: string) => Observable<ActionsType['SET_TEXT']>;
-const runText$: RunText = pageClick$ => text => {
-  const lines = makeLines(text);
+const runText$: RunText = pageClick$ => rawText => {
+  const lines = makeLines(rawText);
   return concat(
     from(chunk(lines, LINES_PER_PAGE)).pipe(
-      concatMap(renderPage$(pageClick$))
+      concatMap(renderPage$(pageClick$)),
     ),
-    of(null)
-  ).pipe(map(text => ({ type: 'SET_TEXT', payload: text })))
+    of(null),
+  ).pipe(map(text => ({ type: 'SET_TEXT', payload: text })));
 };
 
 export default runText$;

@@ -7,9 +7,11 @@ type Props = {
   object: Door;
   onClick: (id: number, type: EntityType) => void;
 };
-const DoorComponent = ({ object, onClick}: Props) => {
-  const { position, openImg, closedImg, state } = object;
-  const images = useSelector(state => state.images);
+const DoorComponent = ({ object, onClick }: Props) => {
+  const {
+    position, openImg, closedImg, state,
+  } = object;
+  const images = useSelector(gameState => gameState.images);
   const img = state === 'OPEN' ? openImg : closedImg;
   return (
     <Image

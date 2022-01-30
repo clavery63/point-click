@@ -3,10 +3,10 @@ import { filter, switchMap } from 'rxjs/operators';
 import { isOfType } from 'typesafe-actions';
 import { MyEpic } from './types';
 
-const text$: MyEpic = (action$, state$, { runText$ })  => {
+const text$: MyEpic = (action$, state$, { runText$ }) => {
   return action$.pipe(
     filter(isOfType('RUN_TEXT')),
-    switchMap(({ payload }) => runText$(payload))
+    switchMap(({ payload }) => runText$(payload)),
   );
 };
 

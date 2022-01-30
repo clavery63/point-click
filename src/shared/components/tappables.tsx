@@ -4,10 +4,10 @@ import { KonvaEventObject } from 'konva/types/Node';
 
 interface OuterProps {
   onClick?: (evt: KonvaEventObject<MouseEvent>) => void;
-};
+}
 
 const tappable = <Props extends OuterProps>(
-  Component: React.FC<Props>
+  Component: React.FC<Props>,
 ) => {
   return React.forwardRef<typeof Component, Props>((outerProps, ref) => (
     <Component

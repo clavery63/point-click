@@ -1,25 +1,25 @@
 import React from 'react';
 import { Image, Group } from 'react-konva';
+import { useDispatch, useSelector } from 'shared/hooks';
+import { PageDir, VerbIndex } from 'game/store/types';
 import MenuLeft from './MenuLeft';
 import MenuCenter from './MenuCenter';
 import MenuRight from './MenuRight';
-import { useDispatch, useSelector } from 'shared/hooks';
 import menuSelector from './menuSelector';
-import { DoorDir, PageDir, VerbIndex } from 'game/store/types';
 
 const Menu = () => {
   const {
-    hasText, currentVerb, menuImg, menuButtonImg, doors
+    hasText, currentVerb, menuImg, menuButtonImg, doors,
   } = useSelector(menuSelector);
 
   const dispatch = useDispatch();
   const dispatchVerb = (verb: VerbIndex) => dispatch({ type: 'SELECT_VERB', payload: verb });
-  const dispatchDoor = (id: number) => dispatch({ 
-    type: 'SELECT_OBJECT', 
-    payload: { id, type: 'doors' } 
+  const dispatchDoor = (id: number) => dispatch({
+    type: 'SELECT_OBJECT',
+    payload: { id, type: 'doors' },
   });
-  const dispatchPage = (dir: PageDir) => dispatch({ type: 'CHANGE_PAGE', payload: dir});
-  const dispatchSave =  () => dispatch({ type: 'SAVE_GAME' });
+  const dispatchPage = (dir: PageDir) => dispatch({ type: 'CHANGE_PAGE', payload: dir });
+  const dispatchSave = () => dispatch({ type: 'SAVE_GAME' });
 
   if (hasText) {
     return null;
@@ -35,13 +35,13 @@ const Menu = () => {
       <MenuLeft
         currentVerb={currentVerb}
         doors={doors}
-        onMenuClick={dispatchVerb} 
+        onMenuClick={dispatchVerb}
         onDoorClick={dispatchDoor}
         menuButtonImg={menuButtonImg}
       />
       <MenuCenter
         currentVerb={currentVerb}
-        onClick={dispatchVerb} 
+        onClick={dispatchVerb}
       />
       <MenuRight
         onPageClick={dispatchPage}

@@ -21,14 +21,14 @@ const Video = ({ src }: Props) => {
     element.playsInline = true;
     return element;
   }, [src]);
-  
+
   useEffect(() => {
     getMusicPlayer().pause();
     return () => {
       videoElement.pause();
       videoElement.removeAttribute('src');
       getMusicPlayer().play();
-    }
+    };
   }, []);
 
   // use Konva.Animation to redraw a layer
@@ -40,7 +40,7 @@ const Video = ({ src }: Props) => {
     anim.start();
 
     return () => {
-      anim.stop()
+      anim.stop();
     };
   }, [videoElement]);
 

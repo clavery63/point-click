@@ -12,7 +12,9 @@ type Props = {
 }
 
 const MenuOption = (props: Props) => {
-  const { verb, top, left, onClick, currentVerb } = props;
+  const {
+    verb, top, left, onClick, currentVerb,
+  } = props;
   const isActive = verb === currentVerb;
   return (
     <Group x={left} y={top}>

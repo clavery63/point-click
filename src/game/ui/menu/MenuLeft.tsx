@@ -12,11 +12,13 @@ type Props = {
   menuButtonImg?: HTMLImageElement;
 }
 const MenuLeft = (props: Props) => {
-  const { onMenuClick, onDoorClick, currentVerb, doors, menuButtonImg } = props;
+  const {
+    onMenuClick, onDoorClick, currentVerb, doors, menuButtonImg,
+  } = props;
   return (
     <Group x={7} y={7}>
       <MenuOption
-        verb={'MOVE'}
+        verb="MOVE"
         left={8}
         top={0}
         onClick={onMenuClick}

@@ -1,8 +1,8 @@
-import { Store } from "redux";
+import { Store } from 'redux';
 // NOTE: made this a relative import for validation generation.
 // We can change this back if ts-json-schema-generator starts tolerating
 // template string literals.
-import { NumberPath } from "../../shared/util/types";
+import { NumberPath } from '../../shared/util/types';
 
 type MapCoord = 0 | 1 | 2 | 3 | 4;
 type DoorState = 'CLOSED' | 'OPEN' | 'LOCKED';

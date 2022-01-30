@@ -1,4 +1,6 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react';
+import React, {
+  useRef, useEffect, useState, useMemo,
+} from 'react';
 import { connect, ReactReduxContext, Provider } from 'react-redux';
 import { Stage } from 'react-konva';
 import MainLayer from './MainLayer';
@@ -13,6 +15,7 @@ const calculateSize = (parentRef) => {
   return Math.min(height / aspectRatio, width);
 };
 
+// eslint-disable-next-line react/prop-types
 const GameContainer = ({ loading, menu, parentRef }) => {
   const stageRef = useRef(null);
   const [width, setWidth] = useState(0);
@@ -20,18 +23,20 @@ const GameContainer = ({ loading, menu, parentRef }) => {
   const scaleY = scaleX / horizStretch;
 
   useEffect(() => {
+    // eslint-disable-next-line react/prop-types
     setWidth(calculateSize(parentRef.current));
+    // eslint-disable-next-line react/prop-types
     const resize = () => setWidth(calculateSize(parentRef.current));
     window.addEventListener('resize', resize);
     return () => window.removeEventListener('resize', resize);
   }, [stageRef]);
 
   const stageData = useMemo(() => {
-    return { 
-      stage: stageRef.current, 
-      scaleX, 
-      scaleY
-    }
+    return {
+      stage: stageRef.current,
+      scaleX,
+      scaleY,
+    };
   }, [stageRef, scaleX, scaleY]);
 
   return (

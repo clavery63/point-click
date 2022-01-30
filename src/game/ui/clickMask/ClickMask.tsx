@@ -6,9 +6,9 @@ import { Rect } from 'shared/components/tappables';
 const selector = (state: GameStoreState) => {
   const { text, worldState, playerState } = state;
   const room = worldState.rooms[playerState.room];
-  const shouldShow = !!text || !!room.gameOver
-  return { 
-    shouldShow
+  const shouldShow = !!text || !!room.gameOver;
+  return {
+    shouldShow,
   };
 };
 
@@ -21,9 +21,9 @@ const ClickMask = () => {
   }
 
   return (
-    <Rect 
-      width={256} 
-      height={240} 
+    <Rect
+      width={256}
+      height={240}
       onClick={() => dispatch({ type: 'PAGE_CLICK' })}
     />
   );

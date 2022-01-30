@@ -1,10 +1,12 @@
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity';
-import { fromCognitoIdentityPool} from '@aws-sdk/credential-provider-cognito-identity';
-import { S3Client, ListObjectsCommand, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+import { fromCognitoIdentityPool } from '@aws-sdk/credential-provider-cognito-identity';
+import {
+  S3Client, ListObjectsCommand, GetObjectCommand, PutObjectCommand,
+} from '@aws-sdk/client-s3';
 
 /**
  * README:
- * 
+ *
  * Strongly typing this is a mess because of all of the shitty AWS interfaces
  * you have to deal with. I'd rather just treat this as unsafe and null check
  * everything that comes out of it :(
@@ -27,8 +29,8 @@ class S3 {
     const { Body } = await this.client.send(
       new GetObjectCommand({
         Bucket: this.bucketName,
-        Key: `${this.rootPath}/${key}`
-      })
+        Key: `${this.rootPath}/${key}`,
+      }),
     );
 
     return this.getStreamContent(Body);
@@ -39,25 +41,25 @@ class S3 {
       new PutObjectCommand({
         Bucket: this.bucketName,
         Key: `${this.rootPath}/${key}`,
-        Body: data
-      })
+        Body: data,
+      }),
     );
     return result;
   }
 
   async listObjects() {
     const { Contents } = await this.client.send(
-      new ListObjectsCommand({ 
-        Delimiter: `/`,
+      new ListObjectsCommand({
+        Delimiter: '/',
         Prefix: `${this.rootPath}/`,
-        Bucket: this.bucketName
-      })
+        Bucket: this.bucketName,
+      }),
     );
 
     return Contents;
-  };
+  }
 
-  async getStreamContent(stream) {
+  static async getStreamContent(stream) {
     const reader = stream.getReader();
     const readBytes = async bytes => {
       const { done, value } = await reader.read();
@@ -66,9 +68,9 @@ class S3 {
       }
       return readBytes([...bytes, value]);
     };
-  
-    return await readBytes([]);
-  };
+
+    return readBytes([]);
+  }
 }
 
 export default S3;

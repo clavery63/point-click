@@ -2,7 +2,9 @@ import { setWith, clone } from 'lodash';
 import { compose } from 'redux';
 import filter from 'shared/util/filter';
 import get, { GetFieldType } from 'shared/util/get';
-import { ValueUpdater, EntityReducer, EmptyReducer, StateTransformer, NumberArrayPath, NullablePath } from 'shared/util/types';
+import {
+  ValueUpdater, EntityReducer, EmptyReducer, StateTransformer, NumberArrayPath, NullablePath,
+} from 'shared/util/types';
 import { GameStoreState, Nullable } from '../types';
 
 export const isNull = (value: any) => value === null;
@@ -40,7 +42,6 @@ export const removeFlags = (flagsToRemove: string[]) => {
     return flags;
   });
 };
-
 
 type CombineReducers = (...reducers: EntityReducer[]) => EntityReducer;
 export const combineReducers: CombineReducers = (...reducers) => (...args) => {

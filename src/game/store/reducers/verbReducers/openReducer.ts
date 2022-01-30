@@ -1,7 +1,7 @@
-import { withText, setValue, keepState } from '../utils';
 import { compose } from 'lodash/fp';
 import { EntityReducer } from 'shared/util/types';
 import { Door, Flags, Scenery } from 'game/store/types';
+import { withText, setValue, keepState } from '../utils';
 
 const doorReducer = (door: Door, flags: Flags) => {
   switch (door.state) {
@@ -10,11 +10,11 @@ const doorReducer = (door: Door, flags: Flags) => {
         return compose(
           withText(door.openText),
           setValue(`worldState.doors[${door.id}].state`)('OPEN'),
-          setValue(`worldState.doors[${door.id}].hidden`)(false)
+          setValue(`worldState.doors[${door.id}].hidden`)(false),
         );
-      } else {
-        return withText(door.closedText);
       }
+      return withText(door.closedText);
+
     case 'LOCKED':
       return withText('The door is locked.');
     case 'OPEN':
@@ -30,7 +30,7 @@ const sceneryReducer = (scenery: Scenery) => {
 
   return compose(
     setValue('playerState.examining')(scenery.id),
-    withText(scenery.openText)
+    withText(scenery.openText),
   );
 };
 
@@ -43,6 +43,5 @@ const openReducer: EntityReducer = (object, _p, flags) => {
   }
   return withText('Can\'t open it.');
 };
-
 
 export default openReducer;

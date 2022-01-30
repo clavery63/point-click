@@ -1,5 +1,9 @@
-import { catchError, map, switchMapTo, switchMap } from 'rxjs/operators';
-import { of, merge, from, Observable, ObservableInput } from 'rxjs';
+import {
+  catchError, map, switchMapTo, switchMap,
+} from 'rxjs/operators';
+import {
+  of, merge, from, Observable, ObservableInput,
+} from 'rxjs';
 import { ofType } from 'redux-observable';
 import hydrateState$ from 'shared/observables/hydrateState';
 import { AllActions, MyEpic } from './types';
@@ -9,7 +13,7 @@ type LoadFlagsSet = (state: GameStoreState) => GameStoreState;
 const loadFlagsSet: LoadFlagsSet = state => {
   return {
     ...state,
-    flags: new Set(state.flags)
+    flags: new Set(state.flags),
   };
 };
 
@@ -27,7 +31,7 @@ const restart$: Restart = (action$, { playerState, worldState }) => {
       { type: 'SET_MENU', payload: 'NONE' },
       { type: 'SET_WORLD_STATE', payload: worldState },
       { type: 'SET_PLAYER_STATE', payload: playerState },
-    ]))
+    ])),
   );
 };
 
@@ -35,7 +39,7 @@ type InitializeGame = (bootInfo: GameStoreState) => GameStoreState
 const initializeGame: InitializeGame = bootInfo => ({
   transition: {
     dest: null,
-    dir: 'UP' // TODO: cleanup transition type requirement
+    dir: 'UP', // TODO: cleanup transition type requirement
   },
   text: null,
   nextText: null,
@@ -54,16 +58,16 @@ const boot$: MyEpic = (action$, state$) => {
     map(loadFlagsSet),
     switchMap(state => merge(
       of<AllActions>({ type: 'SET_STATE', payload: state }),
-      restart$(action$, state)
+      restart$(action$, state),
     )),
     catchError(e => {
       console.log('error:', e);
       // TODO: display something even slightly helpful if this happens
       return of<AllActions>({
         type: 'ERROR',
-        payload: e
-      })
-    })
+        payload: e,
+      });
+    }),
   );
 };
 

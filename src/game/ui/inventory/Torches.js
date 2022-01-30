@@ -8,6 +8,7 @@ const X_OFFSET = 6;
 const Y_OFFSET = 3;
 const MS_PER_FRAME = 40;
 
+// eslint-disable-next-line react/prop-types
 const Torches = ({ torchImg, onClick }) => {
   const [flip, setFlip] = useState(0);
   const x = X_OFFSET + flip * WIDTH;
@@ -15,9 +16,9 @@ const Torches = ({ torchImg, onClick }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFlip(Math.floor(Math.random() * 2))
+      setFlip(Math.floor(Math.random() * 2));
     }, MS_PER_FRAME);
-    return () => clearInterval(interval)
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -35,18 +36,18 @@ const Torches = ({ torchImg, onClick }) => {
 
 const mapStateToProps = ({ images }) => {
   return {
-    torchImg: images.get('flame-1')
+    torchImg: images.get('flame-1'),
   };
 };
 
 const mapDispatchToProps = {
-  onClick: () => ({ 
-    type: 'PLAY_MUSIC', 
+  onClick: () => ({
+    type: 'PLAY_MUSIC',
     payload: {
       text: 'With all the antics going on in this crazy castle, the last thing you need to worry about is this torch going out. Lucky for you, that won\'t be a problem. This is an eternal torch... It is a light that never goes out.',
-      fileName: 'light.mp3' 
-    }
-  })
-}
+      fileName: 'light.mp3',
+    },
+  }),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Torches);

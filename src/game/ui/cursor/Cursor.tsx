@@ -6,7 +6,7 @@ import { Image } from 'react-konva';
 import { useSelector } from 'shared/hooks';
 import cursor$ from './cursorStream';
 
-export interface StageData { 
+export interface StageData {
   stage: Stage;
   scaleX: number;
   scaleY: number;
@@ -15,9 +15,9 @@ export interface StageData {
 const cursorSelector = ({ cursorEnabled, images }: GameStoreState) => {
   return {
     cursorEnabled,
-    cursorImg: images.get('cursor')
+    cursorImg: images.get('cursor'),
   };
-}
+};
 
 type Props = {
   stageData: StageData;
@@ -33,7 +33,7 @@ const Cursor = ({ stageData }: Props) => {
     });
 
     return () => subscription.unsubscribe();
-  }, [stageData])
+  }, [stageData]);
 
   if (!position) {
     return null;
@@ -43,8 +43,8 @@ const Cursor = ({ stageData }: Props) => {
     <Image
       width={9}
       height={16}
-      x={position?.x - 3}
-      y={position?.y - 1}
+      x={position.x - 3}
+      y={position.y - 1}
       image={cursorEnabled ? cursorImg : undefined}
       listening={!cursorEnabled}
     />

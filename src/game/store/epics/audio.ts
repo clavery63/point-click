@@ -1,9 +1,13 @@
-import { filter, mapTo, switchMap, tap } from 'rxjs/operators';
+import {
+  filter, mapTo, switchMap, tap,
+} from 'rxjs/operators';
 import { ofType } from 'redux-observable';
-import { concat, EMPTY, of, merge, Observable } from 'rxjs';
+import {
+  concat, EMPTY, of, merge, Observable,
+} from 'rxjs';
+import { isOfType } from 'typesafe-actions';
 import { MyEpic } from './types';
 import { ReducerActions } from '../reducers/rootReducer';
-import { isOfType } from 'typesafe-actions';
 
 // TODO: derive the gameName part from state$
 const audioAssetsRoot = `${process.env.REACT_APP_ASSETS_BASE}/test-game/audio`;
@@ -19,7 +23,7 @@ const audio$: MyEpic = (action$, state$, { runText$ }) => {
           player.src = `${audioAssetsRoot}/${payload.fileName}`;
           player.play();
         }),
-      )
+      ),
     )),
   );
 
@@ -30,7 +34,7 @@ const audio$: MyEpic = (action$, state$, { runText$ }) => {
       player.currentTime = 0;
       player.play();
     }),
-    mapTo({ type: 'NULL' })
+    mapTo({ type: 'NULL' }),
   );
 
   return merge(music$, sfx$);

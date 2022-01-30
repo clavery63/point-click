@@ -17,7 +17,9 @@ export type GetFieldType<T, P> = P extends `${infer Left}.${infer Right}`
     ? FieldWithPossiblyUndefined<T[Left], Right>
     : Left extends `${infer FieldKey}[${infer IndexKey}]`
       ? FieldKey extends keyof T
-        ? FieldWithPossiblyUndefined<IndexedFieldWithPossiblyUndefined<T[FieldKey], IndexKey>, Right>
+        ? FieldWithPossiblyUndefined<
+          IndexedFieldWithPossiblyUndefined<T[FieldKey], IndexKey>, Right
+        >
         : undefined
       : undefined
   : P extends keyof T
@@ -35,14 +37,14 @@ function get<
 >(
   data: TData,
   path: TPath,
-  defaultValue?: TDefault
+  defaultValue?: TDefault,
 ): GetFieldType<TData, TPath> | TDefault {
   const value = path
     .split(/[.[\]]/)
     .filter(Boolean)
     .reduce<GetFieldType<TData, TPath>>(
-      (value, key) => (value as any)?.[key],
-      data as any
+      (val, key) => (val as any)?.[key],
+      data as any,
     );
 
   return value !== undefined ? value : (defaultValue as TDefault);

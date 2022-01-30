@@ -1,9 +1,13 @@
 import { compose } from 'lodash/fp';
-import effectsReducer from '../effectsReducer';
-import { withText, addFlags, removeFlags, setValue, when, keepState } from '../utils';
-import { Entity, Flags, Nullable, VerbIndex, VerbLogic } from 'game/store/types';
+import {
+  Entity, Flags, Nullable, VerbIndex, VerbLogic,
+} from 'game/store/types';
 import { EntityReducer } from 'shared/util/types';
 import get from 'shared/util/get';
+import {
+  withText, addFlags, removeFlags, setValue, when, keepState,
+} from '../utils';
+import effectsReducer from '../effectsReducer';
 
 const isValid = (verbLogic: VerbLogic, using: Nullable<number>, flags: Flags) => {
   const { prereqUsing, prereqFlags } = verbLogic;
@@ -23,7 +27,8 @@ type GetVerbLogic = (
 const getVerbLogic: GetVerbLogic = (object, verb, using, flags) => {
   const options = get(object, `verbs.${verb}`);
 
-  for (let option of (options || [])) {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const option of (options || [])) {
     if (isValid(option, using, flags)) {
       return option;
     }
@@ -47,9 +52,9 @@ const genericVerbReducer: GenericVerbReducer = (verb, getDefaultText, extraReduc
     }
 
     if (logic.moveTo && logic.moveDir) {
-      return setValue('transition')({ 
-        dest: logic.moveTo, 
-        dir: logic.moveDir
+      return setValue('transition')({
+        dest: logic.moveTo,
+        dir: logic.moveDir,
       });
     }
 
@@ -58,7 +63,7 @@ const genericVerbReducer: GenericVerbReducer = (verb, getDefaultText, extraReduc
       when(!!logic.removeFlags)(removeFlags(logic.removeFlags || [])),
       withText(logic.text),
       effectsReducer(logic),
-      extraReducer(object, playerState, flags)
+      extraReducer(object, playerState, flags),
     );
   };
 };

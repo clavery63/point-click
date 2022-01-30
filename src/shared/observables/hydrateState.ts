@@ -1,10 +1,12 @@
-import { map, switchMap, take, tap } from 'rxjs/operators';
+import {
+  map, switchMap, take, tap,
+} from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
+import { GameStoreState } from 'game/store/types';
 import loadImages$ from './loadImages';
 import validateGameState from '../validation/validateGameState';
 import prepareEntities from '../util/prepareEntities';
-import { GameStoreState } from 'game/store/types';
 
 const assetsBase = process.env.REACT_APP_ASSETS_BASE;
 
@@ -26,18 +28,19 @@ const loadPlayerAndGameState$: LoadState = initialState => {
       playerState,
       worldState,
       flags,
-    }))
+    })),
   );
 };
 
 const setAudioSrc = (state: GameStoreState) => {
   const audioRoot = `${assetsBase}/${state.gameName}/audio`;
   const initialRoom = state.worldState.rooms[state.playerState.room];
-  
+
   // Crazy hack that causes <audio> el behavior to improve wrt loading and
   // replaying srcs. Without it, there are hiccups in sfx sounds
   // https://stackoverflow.com/questions/9811429/html5-audio-tag-on-safari-has-a-delay
   // const AudioContext = window.AudioContext || window.webkitAudioContext;
+  // eslint-disable-next-line no-new
   new AudioContext();
 
   const musicPlayer = document.querySelector('.music-player') as HTMLAudioElement;
@@ -67,9 +70,9 @@ const hydrateState$: HydrateState = (state$, initialize) => {
     switchMap(state => loadImages$(state.gameName).pipe(
       map(images => ({
         ...state,
-        images
-      }))
-    ))
+        images,
+      })),
+    )),
   );
 };
 

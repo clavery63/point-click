@@ -8,7 +8,7 @@ type Props = {
   object: Item;
   onClick: (id: number, type: EntityType) => void;
 };
-const ItemComponent = ({ object, onClick}: Props) => {
+const ItemComponent = ({ object, onClick }: Props) => {
   const imgRef = useRef(null);
   const { position, img, requiresPrecision } = object;
   const images = useSelector(state => state.images);

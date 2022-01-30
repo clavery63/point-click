@@ -1,23 +1,23 @@
 import { Epic } from 'redux-observable';
+import { Observable } from 'rxjs';
 import { ActionsType, ReducerActions } from '../reducers/rootReducer';
 import { DoorDir, GameStoreState } from '../types';
-import { Observable } from 'rxjs';
 
 type EpicActions =
   { type: 'SAVE_GAME' } |
   { type: 'LOAD_GAME' } |
-  { type: 'PLAY_SFX'  } |
+  { type: 'PLAY_SFX' } |
   { type: 'PAGE_CLICK' } |
   { type: 'START_GAME' } |
   { type: 'RUN_TEXT', payload: string } |
-  { 
-    type: 'PLAY_MUSIC', 
+  {
+    type: 'PLAY_MUSIC',
     payload: {
       text?: string,
       fileName: string
     }
   } |
-  { 
+  {
     type: 'RUN_TRANSITION',
     payload: {
       dest: number,

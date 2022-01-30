@@ -1,8 +1,8 @@
 import { map, switchMap } from 'rxjs/operators';
 import { forkJoin, from } from 'rxjs';
+import { _Object } from '@aws-sdk/client-s3';
 import S3 from '../util/S3';
 import image$ from './image';
-import { _Object } from '@aws-sdk/client-s3';
 
 const getFilenames = (objects: _Object[], gameKey: string) => objects
   .map(({ Key }) => Key?.match(new RegExp(`${gameKey}/img/(.*).png`)))
@@ -16,11 +16,11 @@ const loadImages$ = (gameKey: string) => {
       const imageKeys = getFilenames(objects || [], gameKey);
       return forkJoin(imageKeys.map(imageKey => {
         return image$(s3, imageKey, gameKey).pipe(
-          map<HTMLImageElement, [string, HTMLImageElement]>(image => [imageKey, image])
+          map<HTMLImageElement, [string, HTMLImageElement]>(image => [imageKey, image]),
         );
       }));
     }),
-    map(pairs => new Map(pairs))
+    map(pairs => new Map(pairs)),
   );
 };
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Group, Rect, Image } from 'react-konva';
 import { range } from 'lodash';
-import Text from '../shared/Text';
 import { GameStoreState } from 'game/store/types';
 import { useSelector } from 'shared/hooks';
+import Text from '../shared/Text';
 
 const TEXT_AREA_WIDTH = 224;
 const TEXT_AREA_HEIGHT = 96;
@@ -35,17 +35,17 @@ type RowsProps = {
 const Rows = ({ hr }: RowsProps) => (
   <>
     {range(5).map(i => (
-      <Hr key={i} left={8} top={2 + i * 16}  hr={hr} />
+      <Hr key={i} left={8} top={2 + i * 16} hr={hr} />
     ))}
   </>
-)
+);
 
 const selector = ({ text, images }: GameStoreState) => {
-  return { 
+  return {
     lines: text || null,
-    hrImg: images.get('line')
+    hrImg: images.get('line'),
   };
-}
+};
 
 const TextOverlay = () => {
   const { lines, hrImg } = useSelector(selector);

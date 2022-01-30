@@ -1,9 +1,13 @@
-import { mapTo, switchMap, mergeMap, concatMap, withLatestFrom, take, filter } from 'rxjs/operators';
-import { from, timer, concat, of, NEVER, Observable } from 'rxjs';
+import {
+  mapTo, switchMap, mergeMap, concatMap, withLatestFrom, take, filter,
+} from 'rxjs/operators';
+import {
+  from, timer, concat, of, NEVER, Observable,
+} from 'rxjs';
 import { range } from 'lodash';
 import { ofType } from 'redux-observable';
-import { AllActions, MyEpic } from './types';
 import { isOfType } from 'typesafe-actions';
+import { AllActions, MyEpic } from './types';
 import { GameStoreState } from '../types';
 import { ActionsType } from '../reducers/rootReducer';
 import { when } from './util';
@@ -16,7 +20,7 @@ const getAction$ = (dest: number) => (frame: number) => {
     when(frame === 14, { type: 'SET_CURSOR_ENABLED', payload: true }),
     when(frame === 7, { type: 'SET_ROOM', payload: dest }),
     when(true, { type: 'SET_FRAME', payload: frame % 14 }),
-    when(frame === 0 || frame === 7, { type: 'PLAY_SFX' })
+    when(frame === 0 || frame === 7, { type: 'PLAY_SFX' }),
   ]);
 };
 
@@ -34,13 +38,13 @@ const dispatchRoom: DispatchRoom = (dest, state, runText$) => {
   }
 
   return concat(
-    of(when(!!room.gameOver || !!room.music, { 
+    of(when(!!room.gameOver || !!room.music, {
       type: 'PLAY_MUSIC',
-      payload: { 
-        fileName: room.music || 'puppets.mp3'
-      }
+      payload: {
+        fileName: room.music || 'puppets.mp3',
+      },
     })),
-    runText$(room.initialDescription || room.description)
+    runText$(room.initialDescription || room.description),
   );
 };
 
@@ -57,10 +61,10 @@ const checkGameOver: CheckGameOver = (dest, state, pageClick$) => {
     // Allows the typechecker to confirm this is valid. Find a better way? :(
     mapTo(when(true, {
       type: 'SET_MENU',
-      payload: 'GAME_OVER'
+      payload: 'GAME_OVER',
     })),
     take(1),
-  )
+  );
 };
 
 const transition$: MyEpic = (action$, state$, { runText$ }) => {
@@ -70,11 +74,11 @@ const transition$: MyEpic = (action$, state$, { runText$ }) => {
     switchMap(([{ payload }, state]) => concat(
       from(range(15)).pipe(
         concatMap(frame => timer(MS_PER_FRAME).pipe(mapTo(frame))),
-        mergeMap(getAction$(payload.dest))
+        mergeMap(getAction$(payload.dest)),
       ),
       from(dispatchRoom(payload.dest, state, runText$)),
-      checkGameOver(payload.dest, state, action$.pipe(ofType('PAGE_CLICK')))
-    ))
+      checkGameOver(payload.dest, state, action$.pipe(ofType('PAGE_CLICK'))),
+    )),
   );
 };
 
