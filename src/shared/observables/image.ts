@@ -26,7 +26,6 @@ const image$ = (s3: S3, imageKey: string, gameKey: string) => new Observable<HTM
   }
   
   const image = new Image();
-  console.log(imageKey);
   retrieveImage(s3, imageKey, gameKey).then(byteArray => {
     image.src = URL.createObjectURL(new Blob(byteArray));
   }).catch(e => error(e));
