@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import VisibleScenery from './VisibleScenery';
 import InvisibleScenery from './InvisibleScenery';
+import { setSelected } from 'admin/store/reducers/selectedEntityReducer';
 
 const Scenery = ({ id, editing = 'startPosition' }) => {
   const dispatch = useDispatch();
@@ -32,13 +33,10 @@ const Scenery = ({ id, editing = 'startPosition' }) => {
       position={position}
       onDragEnd={onDragEnd}
       onClick={(e) => {
-        dispatch({
-          type: 'SET_SELECTED',
-          payload: {
-            id,
-            type: 'scenery'
-          }
-        })
+        dispatch(setSelected({
+          id,
+          type: 'scenery'
+        }))
       }}
     />
   );

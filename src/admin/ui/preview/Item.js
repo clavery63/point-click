@@ -2,6 +2,7 @@ import React from 'react';
 import { Image } from 'react-konva';
 import { useSelector, useDispatch } from 'react-redux';
 import useCachebuster from '../hooks/useCachebuster';
+import { setSelected } from 'admin/store/reducers/selectedEntityReducer';
 
 const Item = ({ id }) => {
   const dispatch = useDispatch();
@@ -30,13 +31,10 @@ const Item = ({ id }) => {
         })
       }}
       onClick={(e) => {
-        dispatch({
-          type: 'SET_SELECTED',
-          payload: {
-            id,
-            type: 'item'
-          }
-        })
+        dispatch(setSelected({
+          id,
+          type: 'item'
+        }))
       }}
     />
   );

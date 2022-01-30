@@ -3,6 +3,7 @@ import { Image, Group } from 'react-konva';
 import { useSelector, useDispatch } from 'react-redux';
 import Item from './Item';
 import Scenery from './Scenery';
+import { clearSelected } from 'admin/store/reducers/selectedEntityReducer';
 
 const shouldDisplay = (id, type, selectedEntity) => {
   if (!selectedEntity) {
@@ -26,9 +27,9 @@ const ObjectGroup = ({ Component, ids, type, selectedEntity }) => (
 
 const Background = ({ image, selectedEntity }) => {
   const dispatch = useDispatch();
-  const clearSelected = () => dispatch({ type: 'CLEAR_SELECTED'});
+  const clear = () => dispatch(clearSelected());
   
-  useEffect(() => clearSelected, []);
+  useEffect(() => clear, []);
 
   return (
     <Image 
@@ -36,7 +37,7 @@ const Background = ({ image, selectedEntity }) => {
       height={112} 
       image={image}
       opacity={selectedEntity ? 0.5 : 1}
-      onClick={clearSelected}
+      onClick={clear}
     />
   );
 };
