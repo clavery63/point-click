@@ -2,24 +2,20 @@ import { Rect as KonvaRect, Image as KonvaImage } from 'react-konva';
 import React from 'react';
 import { KonvaEventObject } from 'konva/types/Node';
 
-interface MyGuys {
+interface OuterProps {
   onClick?: (evt: KonvaEventObject<MouseEvent>) => void;
 };
 
-const tappable = <Props extends MyGuys>(
+const tappable = <Props extends OuterProps>(
   Component: React.FC<Props>
 ) => {
-  const MyHoc = React.forwardRef<typeof Component, Props>((outerProps, ref) => {
-    return (
-      <Component
-        {...outerProps}
-        ref={ref}
-        onTouchEnd={outerProps.onClick}
-      />
-    )
-  });
-
-  return MyHoc;
+  return React.forwardRef<typeof Component, Props>((outerProps, ref) => (
+    <Component
+      {...outerProps}
+      ref={ref}
+      onTouchEnd={outerProps.onClick}
+    />
+  ));
 };
 
 export const Rect = tappable(KonvaRect);

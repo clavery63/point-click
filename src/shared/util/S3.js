@@ -2,6 +2,13 @@ import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity';
 import { fromCognitoIdentityPool} from '@aws-sdk/credential-provider-cognito-identity';
 import { S3Client, ListObjectsCommand, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 
+/**
+ * README:
+ * 
+ * Strongly typing this is a mess because of all of the shitty AWS interfaces
+ * you have to deal with. I'd rather just treat this as unsafe and null check
+ * everything that comes out of it :(
+ */
 class S3 {
   constructor(rootPath, bucketName = process.env.REACT_APP_GAMES_BUCKET) {
     const region = 'us-east-1';
