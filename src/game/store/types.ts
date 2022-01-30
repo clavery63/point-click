@@ -40,7 +40,7 @@ interface MapPosition {
 }
 
 export interface Door {
-  type: 'doors',
+  type: 'doors';
   id: number;
   closedImg?: string;
   openImg?: string;
@@ -84,21 +84,21 @@ export interface VerbLogic {
 }
 
 export type VerbMappings = {
-  'MOVE'?: VerbLogic[],
-  'LOOK'?: VerbLogic[],
-  'OPEN'?: VerbLogic[],
-  'USE'?: VerbLogic[],
-  'SMOKE'?: VerbLogic[],
-  'TAKE'?: VerbLogic[],
-  'EAT'?: VerbLogic[],
-  'HIT'?: VerbLogic[],
-  'SPEAK'?: VerbLogic[]
-}
+  'MOVE'?: VerbLogic[];
+  'LOOK'?: VerbLogic[];
+  'OPEN'?: VerbLogic[];
+  'USE'?: VerbLogic[];
+  'SMOKE'?: VerbLogic[];
+  'TAKE'?: VerbLogic[];
+  'EAT'?: VerbLogic[];
+  'HIT'?: VerbLogic[];
+  'SPEAK'?: VerbLogic[];
+};
 
 export type VerbIndex = keyof VerbMappings;
 
 export interface Item {
-  type: 'items',
+  type: 'items';
   id: number;
   name: string;
   description: string;
@@ -113,7 +113,7 @@ export interface Item {
 }
 
 export interface Scenery {
-  type: 'scenery',
+  type: 'scenery';
   id: number;
   name?: string;
   description?: string; // Optional for now since LOOK effects mask it
@@ -170,13 +170,13 @@ export type Entity = Door | Item | Scenery;
 
 export interface GameStoreState extends GameState {
   transition: {
-    dest: Nullable<number>,
-    dir: DoorDir,
-    frame?: number
+    dest: Nullable<number>;
+    dir: DoorDir;
+    frame?: number;
   };
   text: Nullable<string[]>;
   nextText: Nullable<string>;
-  loading: boolean,
+  loading: boolean;
   menu: Menu;
   cursorEnabled: boolean;
   gameName: string;

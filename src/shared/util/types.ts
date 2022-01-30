@@ -20,7 +20,7 @@ export type StateTransformer = Transformer<GameStoreState>;
 
 type ChildReducer<T> = {
   (ent: T, playerState: PlayerState, flags: Flags): StateTransformer;
-}
+};
 
 export type EntityReducer = ChildReducer<Entity>;
 export type ItemReducer = ChildReducer<Item>;
@@ -29,7 +29,7 @@ export type DoorReducer = ChildReducer<Door>;
 
 export type ParentReducer<PayloadType> = {
   (p: PayloadType, ps: PlayerState, w: WorldState, f: Flags): StateTransformer;
-}
+};
 
 export type EmptyReducer = () => StateTransformer;
 
@@ -46,7 +46,7 @@ type ConstrainedTypes<Base, Constraint, Prefix extends string = '', AnyNumber = 
           ? MaybePathName<Constraint, Base, Key, Prefix> | ConstrainedTypes<Base[Key][AnyNumber], Constraint, `${Prefix}${Key}[${number}].`>
           : ConstrainedTypes<Base[Key], Constraint, `${Prefix}${Key}.`>
     : never
-}[keyof Base]
+}[keyof Base];
 
 type GetNullables<Base, Prefix extends string = '', AnyNumber = 0> = {
   [Key in keyof Base]: Key extends string
@@ -59,7 +59,7 @@ type GetNullables<Base, Prefix extends string = '', AnyNumber = 0> = {
           : never
         : GetNullables<Base[Key], `${Prefix}${Key}.`>
     : never
-}[keyof Base]
+}[keyof Base];
 
 type ValidPathsFor<Constraint> = Exclude<ConstrainedTypes<GameStoreState, Constraint>, undefined>;
 
@@ -70,7 +70,7 @@ export type NullablePath = Exclude<GetNullables<GameStoreState>, undefined>;
 export type ValueUpdater<Override = string> = {
   <PathType extends string & Override>(
     path: PathType,
-  ): (fn: Transformer<GetFieldType<GameStoreState, PathType>>) => StateTransformer
+  ): (fn: Transformer<GetFieldType<GameStoreState, PathType>>) => StateTransformer;
 };
 
 // NOTE: This almost definited doesn't have to be here, but I'm using it right

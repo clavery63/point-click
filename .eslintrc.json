@@ -20,6 +20,8 @@
         "@typescript-eslint"
     ],
     "rules": {
+      "semi": "off",
+      "@typescript-eslint/semi": ["error"],
       "no-use-before-define": "off",
       "@typescript-eslint/no-use-before-define": ["error"],
       "no-unused-vars": "off",
@@ -42,7 +44,18 @@
           "js": "never",
           "jsx": "never"
         }
-      ]
+      ],
+      "@typescript-eslint/member-delimiter-style": ["error", {
+        "multiline": {
+          "delimiter": "semi",
+          "requireLast": true
+        },
+        "singleline": {
+          "delimiter": "semi",
+          "requireLast": false
+        },
+        "multilineDetection": "brackets"
+      }]
     },
     "settings": {
       "import/resolver": {
