@@ -18,7 +18,6 @@ const loadPlayerAndGameState$: LoadState = initialState => {
   }
 
   const dataSource = `${assetsBase}/${initialState.gameName}/gamedata.json`;
-  // TODO: I think this is running twice. please fix
   return fromFetch(dataSource).pipe(
     switchMap(resp => resp.json()),
     map(prepareEntities),
