@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Group } from 'react-konva';
-import TransitionContainer from '../transition/TransitionContainer';
+import Transition from '../transition/Transition';
 import Door from './Door';
 import Item from './Item';
 import Scenery from './Scenery';
@@ -51,7 +51,7 @@ const Viewport = props => {
         <ObjectGroup objects={items} onClick={onClick} Component={Item} />
         <ObjectGroup objects={scenery} onClick={onClick} Component={Scenery} />
       </Group>
-      <TransitionContainer />
+      <Transition />
     </Group>
   );
 };
