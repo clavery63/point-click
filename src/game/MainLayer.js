@@ -5,7 +5,7 @@ import Inventory from './ui/inventory/Inventory';
 import Menu from './ui/menu/Menu';
 import TextOverlayContainer from './ui/textOverlay/TextOverlayContainer';
 import Cursor from './ui/cursor/Cursor';
-import OuterMenuContainer from './ui/outerMenu/OuterMenuContainer';
+import OuterMenu from './ui/outerMenu/OuterMenu';
 import ClickMask from './ui/clickMask/ClickMask';
 
 const GameContent = ({ menu }) => {
@@ -35,7 +35,7 @@ const MainLayer = ({ loading, menu, stageData }) => {
   return (
     <Layer ref={layerRef}>
       <GameContent menu={menu} />
-      <OuterMenuContainer />
+      <OuterMenu />
       <Cursor stageData={stageData} />
     </Layer>
   );

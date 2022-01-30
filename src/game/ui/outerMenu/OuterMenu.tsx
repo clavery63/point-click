@@ -1,5 +1,6 @@
 import React from 'react';
 import { Rect } from 'shared/components/tappables';
+import { useDispatch, useSelector } from 'shared/hooks';
 import Text from '../shared/Text';
 
 const KEY = 'doublehamburger-save-data';
@@ -8,7 +9,11 @@ const GameOver = () => (
   <Text left={92} top={60} color={'light'} text={'game over'} />
 );
 
-const Start = ({ onClick }) => (
+type Props = {
+  onClick: () => void;
+}
+
+const Start = ({ onClick }: Props) => (
   <>
     <Text left={88} top={100} color={'light'} text={'start game'} />
     <Rect 
@@ -21,21 +26,26 @@ const Start = ({ onClick }) => (
   </>
 );
 
-const Load = ({ onClick }) => (
+const Load = ({ onClick }: Props) => (
   <>
     <Text left={92} top={120} color={'light'} text={'load game'} />
     <Rect x={92} y={120} height={8} width={72} onClick={onClick} />
   </>
 );
 
-const OuterMenu = ({ menu, onStartClick, onLoadClick }) => {
+
+const OuterMenu = () => {
+  const dispatch = useDispatch();
+  const menu = useSelector(state => state.menu);
+  
   if (menu === 'NONE') return null;
 
-  const hack = fn => (...args) => {
+  const hack = (fn: () => void) => () => {
     // NOTE: This hack is here to establish play intent from the user. Otherwise
     // mobile browsers get angry.
-    document.querySelector('.music-player').play();
-    fn(...args);
+    const el = document.querySelector('.music-player') as HTMLAudioElement;
+    el.play();
+    fn();
   }
 
   const hasLoadData = !!window.localStorage.getItem(KEY);
@@ -43,8 +53,8 @@ const OuterMenu = ({ menu, onStartClick, onLoadClick }) => {
   return (
     <>
       {menu === 'GAME_OVER' && <GameOver />}
-      <Start onClick={hack(onStartClick)} />
-      {hasLoadData && <Load onClick={hack(onLoadClick)} />}
+      <Start onClick={hack(() => dispatch({ type: 'START_GAME' }))} />
+      {hasLoadData && <Load onClick={hack(() => dispatch({ type: 'LOAD_GAME' }))} />}
     </>
   );
 };
