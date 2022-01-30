@@ -20,8 +20,6 @@ const cursorSelector = ({ cursorEnabled, images }: GameStoreState) => {
 }
 
 type Props = {
-  cursorEnabled: boolean;
-  cursorImg: HTMLImageElement;
   stageData: StageData;
 };
 

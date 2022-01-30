@@ -29,7 +29,6 @@
     "redux-observable": "^1.2.0",
     "reselect": "^4.0.0",
     "rxjs": "^6.5.5",
-    "source-map-explorer": "^2.4.2",
     "ts-json-schema-generator": "^0.97.0",
     "ts-morph": "^13.0.2",
     "typesafe-actions": "^5.1.0",
@@ -38,7 +37,6 @@
     "typescript-json-validator": "^2.4.2"
   },
   "scripts": {
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

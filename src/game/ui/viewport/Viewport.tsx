@@ -47,7 +47,7 @@ const Viewport = () => {
       <Image width={128} height={128} image={borderImg} />
       <Group x={8} y={8}>
         <Background image={roomImg} video={video} />
-        {/* I had a hell of a time trying to deduplicate this code here in
+        {/* TODO: I had a hell of a time trying to deduplicate this code here in
             typescript. I'm sure it's possible; my brain just can't handle it
             right now */}
         <Group>
