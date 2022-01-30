@@ -1,9 +1,13 @@
-import React, { useRef, useMemo } from 'react';
-import { createStore, applyMiddleware, compose } from 'redux';
+import React, {
+  useRef, useEffect, useState,
+} from 'react';
+import {
+  createStore, applyMiddleware, compose, Store,
+} from 'redux';
 import { Provider } from 'react-redux';
 import { createEpicMiddleware } from 'redux-observable';
 import rootEpic from './store/epics/root';
-import rootReducer from './store/reducers/rootReducer';
+import rootReducer, { ReducerActions } from './store/reducers/rootReducer';
 import effectsMiddleware from './store/middleware/effectsMiddleware';
 import GameContainer from './GameContainer';
 import { GameState, GameStoreState } from './store/types';
@@ -25,24 +29,27 @@ type Props = {
 
 const GameRoot = React.memo(({ gameName, state }: Props) => {
   const containerRef = useRef(null);
+  const [store, setStore] = useState<Store<GameStoreState, ReducerActions> | null>(null);
 
-  const store = useMemo(() => {
-    const epicMiddleware = createEpicMiddleware<AllActions, AllActions, GameStoreState>();
+  useEffect(() => {
+    if (!store) {
+      const epicMiddleware = createEpicMiddleware<AllActions, AllActions, GameStoreState>();
 
-    const initialState = {
-      ...defaultState,
-      gameName,
-      ...state,
-    };
+      const initialState = {
+        ...defaultState,
+        gameName,
+        ...state,
+      };
 
-    const composeEnhancers = compose;
-    const newStore = createStore(rootReducer, initialState, composeEnhancers(
-      applyMiddleware(epicMiddleware, effectsMiddleware),
-    ));
+      const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+      const newStore = createStore(rootReducer, initialState, composeEnhancers(
+        applyMiddleware(epicMiddleware, effectsMiddleware),
+      ));
 
-    epicMiddleware.run(rootEpic);
+      epicMiddleware.run(rootEpic);
 
-    return newStore;
+      setStore(newStore);
+    }
   }, [gameName, state]);
 
   return (
