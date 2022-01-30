@@ -1,8 +1,15 @@
+import { PageDir } from 'game/store/types';
 import React from 'react';
 import { Group } from 'react-konva';
 import { Image } from 'shared/components/tappables';
 
-const MenuRight = ({ onPageClick, onSaveClick, menuButtonImg }) => {
+type Props = {
+  onPageClick: (dir: PageDir) => void;
+  onSaveClick: () => void;
+  menuButtonImg?: HTMLImageElement;
+}
+
+const MenuRight = ({ onPageClick, onSaveClick, menuButtonImg }: Props) => {
   return (
     <Group x={170} y={5}>
       <Image

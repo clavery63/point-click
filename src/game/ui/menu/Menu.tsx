@@ -3,19 +3,23 @@ import { Image, Group } from 'react-konva';
 import MenuLeft from './MenuLeft';
 import MenuCenter from './MenuCenter';
 import MenuRight from './MenuRight';
+import { useDispatch, useSelector } from 'shared/hooks';
+import menuSelector from './menuSelector';
+import { DoorDir, PageDir, VerbIndex } from 'game/store/types';
 
-const Menu = props => {
-  const { 
-    hasText, 
-    dispatchVerb, 
-    dispatchDoor, 
-    dispatchPage,
-    dispatchSave,
-    currentVerb,
-    menuImg,
-    menuButtonImg,
-    doors
-  } = props;
+const Menu = () => {
+  const {
+    hasText, currentVerb, menuImg, menuButtonImg, doors
+  } = useSelector(menuSelector);
+
+  const dispatch = useDispatch();
+  const dispatchVerb = (verb: VerbIndex) => dispatch({ type: 'SELECT_VERB', payload: verb });
+  const dispatchDoor = (id: number) => dispatch({ 
+    type: 'SELECT_OBJECT', 
+    payload: { id, type: 'doors' } 
+  });
+  const dispatchPage = (dir: PageDir) => dispatch({ type: 'CHANGE_PAGE', payload: dir});
+  const dispatchSave =  () => dispatch({ type: 'SAVE_GAME' });
 
   if (hasText) {
     return null;

@@ -1,8 +1,18 @@
+import { VerbIndex } from 'game/store/types';
 import React from 'react';
 import { Group } from 'react-konva';
 import { Rect } from 'shared/components/tappables';
 
-const MenuOption = ({ verb, top, left, onClick, currentVerb }) => {
+type Props = {
+  verb: VerbIndex;
+  top: number;
+  left: number;
+  onClick: (verb: VerbIndex) => void;
+  currentVerb: VerbIndex
+}
+
+const MenuOption = (props: Props) => {
+  const { verb, top, left, onClick, currentVerb } = props;
   const isActive = verb === currentVerb;
   return (
     <Group x={left} y={top}>

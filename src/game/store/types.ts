@@ -8,6 +8,7 @@ type MapCoord = 0 | 1 | 2 | 3 | 4;
 type DoorState = 'CLOSED' | 'OPEN' | 'LOCKED';
 
 export type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
+export type PageDir = 'UP' | 'DOWN';
 export type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
 export type EntityType = 'items' | 'scenery' | 'doors';
 
