@@ -4,8 +4,18 @@ import { Rect } from 'shared/components/tappables';
 import Torches from './Torches';
 import Bag from './Bag';
 import Text from '../shared/Text';
+import { useDispatch, useSelector } from 'shared/hooks';
+import inventorySelector from './inventorySelector';
+import { Item, Nullable } from 'game/store/types';
 
-const InventoryItem = ({ item, index, onClick, using }) => {
+
+type Props = {
+  item: Item,
+  index: number,
+  onClick: (id: number) => void;
+  using: Nullable<number>;
+}
+const InventoryItem = ({ item, index, onClick, using }: Props) => {
   return <Group x={15} y={21 + 16 * index}>
     <Rect
       x={0}
@@ -19,10 +29,9 @@ const InventoryItem = ({ item, index, onClick, using }) => {
   </Group>
 };
 
-const Inventory = ({ items, inventoryImg, using, examining, onClick }) => {
-  // We can strongly type action dispatching if we move to the useDispatch hook:
-  // const dispatch = useDispatch<Dispatch<NumberAction>>();
-  // dispatch(({ type: 'SET_FRAME', payload: 8}))
+const Inventory = () => {
+  const { items, inventoryImg, using, examining } = useSelector(inventorySelector);
+  const dispatch = useDispatch();
 
   const text = examining?.name || 'GOODS';
   const currentList = examining?.contains || items;
@@ -41,7 +50,7 @@ const Inventory = ({ items, inventoryImg, using, examining, onClick }) => {
           key={i}
           item={item}
           index={i}
-          onClick={onClick}
+          onClick={(itemId: number) => dispatch({ type: 'SELECT_ITEM', payload: itemId })}
           using={using}
         />
       ))}

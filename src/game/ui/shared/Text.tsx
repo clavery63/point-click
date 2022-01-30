@@ -23,12 +23,11 @@ type Props = {
   text: string,
   left: number,
   top: number,
-  color: Color,
-  spriteSheets: Record<Color, HTMLImageElement>
+  color?: Color,
 }
 const Text = ({ text, left, top, color }: Props) => {
   const { spriteSheets } = useSelector(selector);
-  const image = spriteSheets[color] || spriteSheets.dark;
+  const image = spriteSheets[color || 'dark'];
   const upper = text.toUpperCase();
   const charCodes = upper.split('').map(char => char.charCodeAt(0) - shift);
 

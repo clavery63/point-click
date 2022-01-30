@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Layer } from 'react-konva';
 import ViewportContainer from './ui/viewport/ViewportContainer';
-import InventoryContainer from './ui/inventory/InventoryContainer';
+import Inventory from './ui/inventory/Inventory';
 import MenuContainer from './ui/menu/MenuContainer';
 import TextOverlayContainer from './ui/textOverlay/TextOverlayContainer';
 import Cursor from './ui/cursor/Cursor';
@@ -13,7 +13,7 @@ const GameContent = ({ menu }) => {
   return (
     <>
       <ViewportContainer />
-      <InventoryContainer />
+      <Inventory />
       <MenuContainer />
       <TextOverlayContainer />
       <ClickMask />

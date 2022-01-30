@@ -1,12 +1,22 @@
 import React from 'react';
 import { Image } from 'shared/components/tappables';
-import { connect } from 'react-redux';
+import { GameStoreState } from 'game/store/types';
+import { useDispatch, useSelector } from 'shared/hooks';
 
 const SHEET_WIDTH = 5;
 const SPRITE_WIDTH = 16;
 const SPRITE_HEIGHT = 20;
 
-const Bag = ({ bagImg, onClick, bagLevel }) => {
+const bagSelector = ({ images, playerState }: GameStoreState) => {
+  return {
+    bagImg: images.get('bag'),
+    bagLevel: playerState.timer
+  };
+};
+
+const Bag = () => {
+  const { bagLevel, bagImg } = useSelector(bagSelector);
+  const dispatch = useDispatch();
   return (
     <Image
       x={88}
@@ -14,7 +24,7 @@ const Bag = ({ bagImg, onClick, bagLevel }) => {
       width={SPRITE_WIDTH}
       height={SPRITE_HEIGHT}
       image={bagImg}
-      onClick={() => onClick(bagLevel)}
+      onClick={() => dispatch({ type: 'SELECT_BAG', payload: bagLevel })}
       crop={{ 
         x: (bagLevel % SHEET_WIDTH) * SPRITE_WIDTH,
         y: Math.floor(bagLevel / SHEET_WIDTH) * SPRITE_HEIGHT,
@@ -25,15 +35,4 @@ const Bag = ({ bagImg, onClick, bagLevel }) => {
   );
 };
 
-const mapStateToProps = ({ images, playerState }) => {
-  return {
-    bagImg: images.get('bag'),
-    bagLevel: playerState.timer
-  };
-};
-
-const mapDispatchToProps = {
-  onClick: bagLevel => ({ type: 'SELECT_BAG', payload: bagLevel })
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Bag);
+export default Bag;
