@@ -5,7 +5,7 @@ import GameRoot from './game/GameRoot';
 const divStyle = {
   width: '100%',
   height: '100%',
-  backgroundColor: 'black'
+  backgroundColor: 'black',
 };
 
 const PlayRoute = () => {

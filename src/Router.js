@@ -7,16 +7,16 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path='/play/:gameName'>
+        <Route path="/play/:gameName">
           <PlayRoute />
         </Route>
-        <Route path='/admin/:gameName'>
+        <Route path="/admin/:gameName">
           <Admin />
         </Route>
-        <Route path='/admin'>
+        <Route path="/admin">
           Admin
         </Route>
-        <Route path='/'>
+        <Route path="/">
           <div>nah</div>
         </Route>
       </Switch>
