@@ -1,5 +1,5 @@
 import React, {
-  useRef, useEffect, useState,
+  useEffect, useState,
 } from 'react';
 import {
   createStore, applyMiddleware, compose, Store,
@@ -24,11 +24,11 @@ const containerStyles = {
 
 type Props = {
   gameName: string;
-  state: GameState;
+  state?: GameState;
 };
 
 const GameRoot = React.memo(({ gameName, state }: Props) => {
-  const containerRef = useRef(null);
+  const containerRef = React.createRef<HTMLDivElement>();
   const [store, setStore] = useState<Store<GameStoreState, ReducerActions> | null>(null);
 
   useEffect(() => {

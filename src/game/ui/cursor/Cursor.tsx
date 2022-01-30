@@ -1,13 +1,12 @@
-import { GameStoreState } from 'game/store/types';
-import { Stage } from 'konva/types/Stage';
+import { GameStoreState, Nullable } from 'game/store/types';
 import { Vector2d } from 'konva/types/types';
 import React, { useState, useEffect } from 'react';
-import { Image } from 'react-konva';
+import { Image, Stage } from 'react-konva';
 import { useSelector } from 'shared/hooks';
 import cursor$ from './cursorStream';
 
 export interface StageData {
-  stage: Stage;
+  stage: Nullable<Stage>;
   scaleX: number;
   scaleY: number;
 }

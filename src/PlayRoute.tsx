@@ -9,7 +9,7 @@ const divStyle = {
 };
 
 const PlayRoute = () => {
-  const { gameName } = useParams();
+  const { gameName } = useParams<{ gameName: string }>();
 
   return (
     <div style={divStyle}>

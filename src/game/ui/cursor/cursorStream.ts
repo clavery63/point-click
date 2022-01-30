@@ -4,7 +4,7 @@ import { Vector2d } from 'konva/types/types';
 import { StageData } from './Cursor';
 
 const getPixels = ({ stage, scaleX, scaleY }: StageData) => () => {
-  const position = stage.getPointerPosition();
+  const position = (stage as any).getPointerPosition(); // Sorry.
   if (!position) {
     return { x: -10, y: -10 }; // Render the cursor offscreen
   }
