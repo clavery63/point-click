@@ -3,7 +3,7 @@ import { Layer } from 'react-konva';
 import ViewportContainer from './ui/viewport/ViewportContainer';
 import Inventory from './ui/inventory/Inventory';
 import Menu from './ui/menu/Menu';
-import TextOverlayContainer from './ui/textOverlay/TextOverlayContainer';
+import TextOverlay from './ui/textOverlay/TextOverlay';
 import Cursor from './ui/cursor/Cursor';
 import OuterMenu from './ui/outerMenu/OuterMenu';
 import ClickMask from './ui/clickMask/ClickMask';
@@ -15,7 +15,7 @@ const GameContent = ({ menu }) => {
       <ViewportContainer />
       <Inventory />
       <Menu />
-      <TextOverlayContainer />
+      <TextOverlay />
       <ClickMask />
     </>
   );

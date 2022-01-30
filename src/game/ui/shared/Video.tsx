@@ -2,8 +2,16 @@ import React, { useRef, useEffect, useMemo } from 'react';
 import { Image } from 'react-konva';
 import Konva from 'konva';
 
-const Video = ({ src }) => {
-  const imageRef = useRef(null);
+type Props = {
+  src: string;
+}
+
+const getMusicPlayer = () => {
+  return document.querySelector('.music-player') as HTMLAudioElement;
+};
+
+const Video = ({ src }: Props) => {
+  const imageRef = useRef<Konva.Image>(null);
 
   // we need to use 'useMemo' here, so we don't create new video elment on any render
   const videoElement = useMemo(() => {
@@ -15,23 +23,25 @@ const Video = ({ src }) => {
   }, [src]);
   
   useEffect(() => {
-    document.querySelector('.music-player').pause();
+    getMusicPlayer().pause();
     return () => {
       videoElement.pause();
       videoElement.removeAttribute('src');
-      document.querySelector('.music-player').play();
+      getMusicPlayer().play();
     }
   }, []);
 
   // use Konva.Animation to redraw a layer
   useEffect(() => {
     videoElement.play();
-    const layer = imageRef.current.getLayer();
+    const layer = imageRef.current?.getLayer();
 
     const anim = new Konva.Animation(() => {}, layer);
     anim.start();
 
-    return () => anim.stop();
+    return () => {
+      anim.stop()
+    };
   }, [videoElement]);
 
   return (
