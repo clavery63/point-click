@@ -2,15 +2,15 @@ type GetIndexedField<T, K> = K extends `${number}`
   ? number extends keyof T
     ? T[number]
     : undefined
-  : undefined
+  : undefined;
 
 type FieldWithPossiblyUndefined<T, Key> =
   | GetFieldType<Exclude<T, undefined>, Key>
-  | Extract<T, undefined>
+  | Extract<T, undefined>;
 
 type IndexedFieldWithPossiblyUndefined<T, Key> =
   | GetIndexedField<Exclude<T, undefined>, Key>
-  | Extract<T, undefined>
+  | Extract<T, undefined>;
 
 export type GetFieldType<T, P> = P extends `${infer Left}.${infer Right}`
   ? Left extends keyof T
@@ -28,7 +28,7 @@ export type GetFieldType<T, P> = P extends `${infer Left}.${infer Right}`
       ? FieldKey extends keyof T
         ? IndexedFieldWithPossiblyUndefined<T[FieldKey], IndexKey> | undefined
         : undefined
-      : undefined
+      : undefined;
 
 function get<
   TData,

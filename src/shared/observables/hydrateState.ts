@@ -58,8 +58,8 @@ type HydrateState = {
   (
     $state: Observable<GameStoreState>,
     initialize: (state: GameStoreState) => GameStoreState
-  ): Observable<GameStoreState>
-}
+  ): Observable<GameStoreState>;
+};
 
 const hydrateState$: HydrateState = (state$, initialize) => {
   return state$.pipe(

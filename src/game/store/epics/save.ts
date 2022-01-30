@@ -20,7 +20,7 @@ const saveGame: SaveGame = ({ worldState, playerState, flags }) => {
   }));
 };
 
-type LoadGame = () => Observable<ReducerActions>
+type LoadGame = () => Observable<ReducerActions>;
 const loadGame$: LoadGame = () => {
   const newState = localStorage.getItem(KEY);
   if (!newState) {

@@ -8,7 +8,7 @@ import MenuOption from './MenuOption';
  * At that point, we will probably also need to pass in menuButtonImg, since it
  * would no longer be baked into the menu background
  */
-const menuOptions: { verb: VerbIndex, left: number, top: number}[] = [
+const menuOptions: { verb: VerbIndex; left: number; top: number}[] = [
   { verb: 'LOOK', left: 8, top: 8 },
   { verb: 'OPEN', left: 8, top: 24 },
   { verb: 'USE', left: 8, top: 40 },
@@ -22,7 +22,7 @@ const menuOptions: { verb: VerbIndex, left: number, top: number}[] = [
 type Props = {
   onClick: (verb: VerbIndex) => void;
   currentVerb: VerbIndex;
-}
+};
 
 const MenuCenter = ({ onClick, currentVerb }: Props) => {
   return (

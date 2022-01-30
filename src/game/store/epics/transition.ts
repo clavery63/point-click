@@ -48,7 +48,7 @@ const dispatchRoom: DispatchRoom = (dest, state, runText$) => {
   );
 };
 
-type CheckGameOver = (d: number, s: GameStoreState, p: Observable<any>) => Observable<AllActions>
+type CheckGameOver = (d: number, s: GameStoreState, p: Observable<any>) => Observable<AllActions>;
 const checkGameOver: CheckGameOver = (dest, state, pageClick$) => {
   const { worldState } = state;
   const room = worldState.rooms[dest];

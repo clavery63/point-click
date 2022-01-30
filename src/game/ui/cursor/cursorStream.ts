@@ -14,7 +14,7 @@ const getPixels = ({ stage, scaleX, scaleY }: StageData) => () => {
   };
 };
 
-type Cursor = (stageData: StageData) => Observable<Vector2d>
+type Cursor = (stageData: StageData) => Observable<Vector2d>;
 const cursor$: Cursor = stageData => {
   return fromEvent(window, 'mousemove').pipe(
     map(getPixels(stageData)),

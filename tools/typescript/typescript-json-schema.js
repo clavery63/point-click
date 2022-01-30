@@ -6,7 +6,7 @@ const TJS = require('typescript-json-schema');
  * The one thing it can't handle well are those dynamically generated template
  * literal strings. For those we use ts-morph (which is just a wrapper for the
  * native typescipt compiler API)
- * 
+ *
  */
 
 const settings = {
@@ -16,7 +16,7 @@ const settings = {
 const compilerOptions = {
   strictNullChecks: true,
   esModuleInterop: true,
-  refs: false
+  refs: false,
 };
 
 const generateGameStateSchema = () => {
@@ -41,22 +41,21 @@ const generateGameStateSchema = () => {
           ...acc,
           [k]: {
             type: 'string',
-            ValuePath: valueType
-          }
-        }
+            ValuePath: valueType,
+          },
+        };
       }
     }
-    
+
     return {
       ...acc,
-      [k]: replacePathLiterals(v)
-    }
+      [k]: replacePathLiterals(v),
+    };
   }, {});
 
   const hackedSchema = replacePathLiterals(schema);
 
-  const fileContents =
-`const gameStateSchema = ${JSON.stringify(hackedSchema, null, 2)};
+  const fileContents = `const gameStateSchema = ${JSON.stringify(hackedSchema, null, 2)};
 
 export default gameStateSchema;
 `;
@@ -65,5 +64,5 @@ export default gameStateSchema;
 };
 
 module.exports = {
-  generateGameStateSchema
+  generateGameStateSchema,
 };

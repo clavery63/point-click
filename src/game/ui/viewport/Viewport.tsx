@@ -13,9 +13,9 @@ import viewportSelector from './viewportSelector';
 const videoAssetsRoot = `${process.env.REACT_APP_ASSETS_BASE}/test-game/video`;
 
 type BGProps = {
-  image?: HTMLImageElement,
-  video?: string
-}
+  image?: HTMLImageElement;
+  video?: string;
+};
 const Background = ({ image, video }: BGProps) => {
   if (video) {
     // TODO: whoa, is this rendering on every cursor and text update? This should get

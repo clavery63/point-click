@@ -19,11 +19,11 @@ const selector = ({ images }: GameStoreState) => {
 
 type Color = 'dark' | 'light';
 type Props = {
-  text: string,
-  left: number,
-  top: number,
-  color?: Color,
-}
+  text: string;
+  left: number;
+  top: number;
+  color?: Color;
+};
 const Text = ({
   text, left, top, color,
 }: Props) => {

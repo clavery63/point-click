@@ -11,7 +11,7 @@ import { Menu } from './store/types';
 
 type GameContentProps = {
   menu: Menu;
-}
+};
 const GameContent = ({ menu }: GameContentProps) => {
   if (menu !== 'NONE') return null;
   return (
@@ -28,8 +28,8 @@ const GameContent = ({ menu }: GameContentProps) => {
 type Props = {
   loading: boolean;
   menu: Menu;
-  stageData: StageData
-}
+  stageData: StageData;
+};
 const MainLayer = ({ loading, menu, stageData }: Props) => {
   const layerRef = useCallback(layer => {
     if (layer) {

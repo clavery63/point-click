@@ -16,7 +16,7 @@ import { typedAction } from './util';
 const NUM_FRAMES = 12;
 const MS_PER_FRAME = 200;
 
-type SceneryType = { type: 'scenery', id: number };
+type SceneryType = { type: 'scenery'; id: number };
 type Input = [SceneryType, GameStoreState];
 
 type ShouldAnimate = (i: Input) => boolean;
@@ -45,12 +45,12 @@ const withStepSizes: WithStepSizes = ([payload, { worldState }]) => {
 };
 
 type AnimationData = {
-  object: Scenery,
-  id: number,
-  type: 'scenery',
-  xStep: number,
-  yStep: number
-}
+  object: Scenery;
+  id: number;
+  type: 'scenery';
+  xStep: number;
+  yStep: number;
+};
 type RunAnimation = (r: AnimationData) => Observable<AllActions>;
 const runAnimation$: RunAnimation = ({
   object, id, type, xStep, yStep,

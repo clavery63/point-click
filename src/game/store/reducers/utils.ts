@@ -11,13 +11,13 @@ export const isNull = (value: any) => value === null;
 export const notNull = (value: any) => !isNull(value);
 
 type ValueSetterWithPath<PathType> = {
-  (value: GetFieldType<GameStoreState, PathType>): StateTransformer
-}
+  (value: GetFieldType<GameStoreState, PathType>): StateTransformer;
+};
 
 type ValueSetter = {
   <PathType extends string>(
     path: PathType
-  ): ValueSetterWithPath<PathType>
+  ): ValueSetterWithPath<PathType>;
 };
 
 export const setValue: ValueSetter = path => value => state => {

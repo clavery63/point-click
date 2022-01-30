@@ -11,9 +11,9 @@ const TEXT_AREA_COLOR = '#f6d7ae';
 
 type HrProps = {
   left: number;
-  top: number
+  top: number;
   hr?: HTMLImageElement;
-}
+};
 const Hr = ({ left, top, hr }: HrProps) => (
   <>
     {range(26).map(i => (
@@ -31,7 +31,7 @@ const Hr = ({ left, top, hr }: HrProps) => (
 
 type RowsProps = {
   hr?: HTMLImageElement;
-}
+};
 const Rows = ({ hr }: RowsProps) => (
   <>
     {range(5).map(i => (

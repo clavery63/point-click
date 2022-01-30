@@ -35,7 +35,7 @@ const restart$: Restart = (action$, { playerState, worldState }) => {
   );
 };
 
-type InitializeGame = (bootInfo: GameStoreState) => GameStoreState
+type InitializeGame = (bootInfo: GameStoreState) => GameStoreState;
 const initializeGame: InitializeGame = bootInfo => ({
   transition: {
     dest: null,

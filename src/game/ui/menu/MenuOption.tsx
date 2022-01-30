@@ -8,8 +8,8 @@ type Props = {
   top: number;
   left: number;
   onClick: (verb: VerbIndex) => void;
-  currentVerb: VerbIndex
-}
+  currentVerb: VerbIndex;
+};
 
 const MenuOption = (props: Props) => {
   const {

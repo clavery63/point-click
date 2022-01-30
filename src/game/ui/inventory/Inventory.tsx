@@ -9,11 +9,11 @@ import Text from '../shared/Text';
 import inventorySelector from './inventorySelector';
 
 type Props = {
-  item: Item,
-  index: number,
+  item: Item;
+  index: number;
   onClick: (id: number) => void;
   using: Nullable<number>;
-}
+};
 const InventoryItem = ({
   item, index, onClick, using,
 }: Props) => {

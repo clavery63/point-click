@@ -4,7 +4,7 @@ import Konva from 'konva';
 
 type Props = {
   src: string;
-}
+};
 
 const getMusicPlayer = () => {
   return document.querySelector('.music-player') as HTMLAudioElement;

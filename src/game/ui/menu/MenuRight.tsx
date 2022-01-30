@@ -7,7 +7,7 @@ type Props = {
   onPageClick: (dir: PageDir) => void;
   onSaveClick: () => void;
   menuButtonImg?: HTMLImageElement;
-}
+};
 
 const MenuRight = ({ onPageClick, onSaveClick, menuButtonImg }: Props) => {
   return (

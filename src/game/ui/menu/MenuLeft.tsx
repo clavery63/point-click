@@ -10,7 +10,7 @@ type Props = {
   currentVerb: VerbIndex;
   doors: Door[];
   menuButtonImg?: HTMLImageElement;
-}
+};
 const MenuLeft = (props: Props) => {
   const {
     onMenuClick, onDoorClick, currentVerb, doors, menuButtonImg,

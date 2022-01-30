@@ -7,7 +7,7 @@ type Props = {
   onClick: (id: number) => void;
   doors: Door[];
   menuButtonImg?: HTMLImageElement;
-}
+};
 const MiniMap = ({ onClick, doors, menuButtonImg }: Props) => {
   return (
     <Group x={8} y={16}>

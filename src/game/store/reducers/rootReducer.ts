@@ -14,44 +14,44 @@ import {
 import defaultState from '../defaultState';
 
 export type PositionType = {
-  x: number,
-  y: number,
-  id: number,
-  type: 'scenery'
+  x: number;
+  y: number;
+  id: number;
+  type: 'scenery';
 };
 
 export type ObjectType =
-{ id: number, type: 'scenery' } |
-{ id: number, type: 'items' } |
-{ id: number, type: 'doors' };
+{ id: number; type: 'scenery' } |
+{ id: number; type: 'items' } |
+{ id: number; type: 'doors' };
 
 type ActionTypes = {
-  SET_STATE: GameStoreState,
-  SET_WORLD_STATE: WorldState,
-  SET_PLAYER_STATE: PlayerState,
-  SET_FLAGS: Flags,
-  SET_TEXT: Nullable<string[]>,
-  SET_ROOM: number,
-  SET_FRAME: number,
-  SET_CURSOR_ENABLED: boolean,
-  SET_POSITION: PositionType,
-  CLEAR_NEXT_TEXT: null,
-  CLEAR_TRANSITION_DEST: null,
-  SELECT_VERB: VerbIndex,
-  SELECT_OBJECT: ObjectType,
-  SELECT_ITEM: number,
-  SELECT_BAG: number,
-  CHANGE_PAGE: DoorDir,
-  SET_MENU: Menu,
-  ERROR: null
-}
+  SET_STATE: GameStoreState;
+  SET_WORLD_STATE: WorldState;
+  SET_PLAYER_STATE: PlayerState;
+  SET_FLAGS: Flags;
+  SET_TEXT: Nullable<string[]>;
+  SET_ROOM: number;
+  SET_FRAME: number;
+  SET_CURSOR_ENABLED: boolean;
+  SET_POSITION: PositionType;
+  CLEAR_NEXT_TEXT: null;
+  CLEAR_TRANSITION_DEST: null;
+  SELECT_VERB: VerbIndex;
+  SELECT_OBJECT: ObjectType;
+  SELECT_ITEM: number;
+  SELECT_BAG: number;
+  CHANGE_PAGE: DoorDir;
+  SET_MENU: Menu;
+  ERROR: null;
+};
 
 export type ActionsType = {
   [Key in keyof ActionTypes]: {
-    type: Key,
-    payload: ActionTypes[Key]
+    type: Key;
+    payload: ActionTypes[Key];
   }
-}
+};
 
 export type ReducerActions = ActionsType[keyof ActionTypes] | { type: 'NULL' };
 

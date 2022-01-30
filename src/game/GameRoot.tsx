@@ -19,8 +19,8 @@ const containerStyles = {
 };
 
 type Props = {
-  gameName: string,
-  state: GameState
+  gameName: string;
+  state: GameState;
 };
 
 const GameRoot = React.memo(({ gameName, state }: Props) => {

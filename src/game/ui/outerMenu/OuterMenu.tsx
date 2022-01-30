@@ -11,7 +11,7 @@ const GameOver = () => (
 
 type Props = {
   onClick: () => void;
-}
+};
 
 const Start = ({ onClick }: Props) => (
   <>

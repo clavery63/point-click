@@ -6,7 +6,7 @@ const { Project } = require('ts-morph');
  * NumberPath that employ a lot of compile-time trickery. The schema-generation
  * libraries I'm looking at aren't able to handle it (yet), so we treat it as a
  * special case.
- * 
+ *
  */
 
 const generateValidPaths = () => {
@@ -22,19 +22,18 @@ const generateValidPaths = () => {
   const interface = sourceFile.getInterface('ValidationCreator');
   const myType = interface.getPropertyOrThrow('numberPath').getType();
 
-  const numberPaths = myType.compilerType.types.map(t => ({
-    value: t.value,
-    texts: t.texts,
-    types: t.types?.map(t => t.intrinsicName)
+  const numberPaths = myType.compilerType.types.map(type => ({
+    value: type.value,
+    texts: type.texts,
+    types: type.types?.map(t => t.intrinsicName),
   }));
 
-  const fileContents =
-`export const numberPaths = ${JSON.stringify(numberPaths, null, 2)};
+  const fileContents = `export const numberPaths = ${JSON.stringify(numberPaths, null, 2)};
 `;
-  
+
   fs.writeFileSync('src/shared/validation/generated/validPaths.js', fileContents);
 };
 
 module.exports = {
-  generateValidPaths
+  generateValidPaths,
 };
