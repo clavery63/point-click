@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Layer } from 'react-konva';
-import ViewportContainer from './ui/viewport/ViewportContainer';
+import Viewport from './ui/viewport/Viewport';
 import Inventory from './ui/inventory/Inventory';
 import Menu from './ui/menu/Menu';
 import TextOverlay from './ui/textOverlay/TextOverlay';
@@ -12,7 +12,7 @@ const GameContent = ({ menu }) => {
   if (menu !== 'NONE') return null;
   return (
     <>
-      <ViewportContainer />
+      <Viewport />
       <Inventory />
       <Menu />
       <TextOverlay />
