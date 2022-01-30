@@ -3,9 +3,11 @@ import DispatchButton from './DispachButton';
 
 const PreviewButton = ({ roomId }) => (
   <DispatchButton
-    action={'START_PREVIEW'}
+    action={{
+      type: 'START_PREVIEW',
+      payload: roomId
+    }}
     callToAction='Test Game'
-    payload={roomId}
   />
 );
 

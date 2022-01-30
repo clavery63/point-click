@@ -3,10 +3,10 @@ import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
 import useStyles from './useStyles';
 
-const DispatchButton = ({ action, callToAction, payload }) => {
+const DispatchButton = ({ action, callToAction }) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const onClick = () => dispatch({ type: action, payload });
+  const onClick = () => dispatch(action);
 
   return (
     <Button 

@@ -10,6 +10,7 @@ import TestGameButton from '../shared/TestGameButton';
 import UploadButton from '../shared/UploadButton';
 import PreviewWidget from '../preview/PreviewWidget';
 import { ArrowBack } from '@material-ui/icons';
+import { setRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
 
 const RoomDetails = () => {
   const { roomId, gameName } = useParams();
@@ -20,16 +21,13 @@ const RoomDetails = () => {
   });
 
   const handleChange = fieldName => event => {
-    dispatch({
-      type: 'SET_ROOM',
-      payload: {
-        id: roomId,
-        room: {
-          ...room,
-          [fieldName]: event.target.value
-        }
+    dispatch(setRoom({
+      id: roomId,
+      room: {
+        ...room,
+        [fieldName]: event.target.value
       }
-    });
+    }));
   };
 
   if (!room) {

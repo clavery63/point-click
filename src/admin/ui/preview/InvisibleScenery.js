@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Rect, Transformer } from 'react-konva';
 import useCachebuster from '../hooks/useCachebuster';
+import { setScenerySize } from 'admin/store/reducers/gameStateReducer/worldStateReducer/sceneryReducer';
 
 const InisibleScenery = ({ id, position, onDragEnd, onClick }) => {
   const dispatch = useDispatch();
@@ -33,14 +34,11 @@ const InisibleScenery = ({ id, position, onDragEnd, onClick }) => {
         onTransformEnd={e => {
           const { x, y } = rectRef.current.scale();
           rectRef.current.setScale(({ x: 1, y: 1 }));
-          dispatch({
-            type: 'SET_SCENERY_SIZE',
-            payload: {
-              id,
-              width: Math.round(position.width * x),
-              height: Math.round(position.height * y),
-            }
-          })
+          dispatch(setScenerySize({
+            id,
+            width: Math.round(position.width * x),
+            height: Math.round(position.height * y),
+          }))
         }}
         onClick={onClick}
       />

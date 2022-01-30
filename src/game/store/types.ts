@@ -14,7 +14,7 @@ export type EntityType = 'items' | 'scenery' | 'doors';
 
 export type Nullable<T> = T | null | undefined;
 
-type Lookup<T> = {
+export type Lookup<T> = {
   [key: number]: T;
 };
 

@@ -3,6 +3,7 @@ import { Image } from 'react-konva';
 import { useSelector, useDispatch } from 'react-redux';
 import useCachebuster from '../hooks/useCachebuster';
 import { setSelected } from 'admin/store/reducers/selectedEntityReducer';
+import { setItemPosition } from 'admin/store/reducers/gameStateReducer/worldStateReducer/itemsReducer';
 
 const Item = ({ id }) => {
   const dispatch = useDispatch();
@@ -21,14 +22,11 @@ const Item = ({ id }) => {
       image={image}
       draggable
       onDragEnd={(e) => {
-        dispatch({
-          type: 'SET_ITEM_POSITION',
-          payload: {
-            id,
-            x: Math.round(e.target.x()),
-            y: Math.round(e.target.y())
-          }
-        })
+        dispatch(setItemPosition({
+          id,
+          x: Math.round(e.target.x()),
+          y: Math.round(e.target.y())
+        }))
       }}
       onClick={(e) => {
         dispatch(setSelected({

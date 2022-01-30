@@ -3,7 +3,7 @@ import DispatchButton from './DispachButton';
 
 const UploadButton = () => (
   <DispatchButton
-    action={'UPLOAD_GAME'}
+    action={{ type: 'UPLOAD_GAME' }}
     callToAction='Save'
   />
 );

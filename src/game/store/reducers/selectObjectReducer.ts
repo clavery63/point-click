@@ -29,9 +29,6 @@ const selectObjectReducer: ParentReducer<
 > = (payload, playerState, worldState, flags) => {
   const { type, id } = payload;
   const object = worldState[type][id];
-  // TODO: We'll add the type and id fields to these entities when hydrating state, not here.
-  object.type = type;
-  object.id = id;
   const reducer = getReducer(playerState.verb) || keepState;
   return reducer(object, playerState, flags);
 };

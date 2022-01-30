@@ -1,5 +1,6 @@
 import { map } from 'rxjs/operators';
 import hydrateState$ from 'shared/observables/hydrateState';
+import { setGameState } from 'admin/store/sharedActions';
 
 const initializeState = bootInfo => {
   return {
@@ -9,7 +10,7 @@ const initializeState = bootInfo => {
 
 const load$ = (action$, state$) => {
   return hydrateState$(state$, initializeState).pipe(
-    map(state => ({ type: 'SET_GAME_STATE', payload: state }))
+    map(setGameState)
   )
 };
 
