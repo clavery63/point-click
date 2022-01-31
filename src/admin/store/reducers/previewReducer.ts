@@ -1,13 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { GameStoreState, Nullable } from 'game/store/types';
 
 export const previewSlice = createSlice({
   name: 'preview',
-  initialState: null,
+  initialState: null as Nullable<GameStoreState>,
   reducers: {
-    setPreview: (state, action) => {
-      console.log('setPreview:', action.payload);
-      return action.payload;
-    },
+    setPreview: (state, action) => action.payload,
     clearPreview: () => null,
   }
 });

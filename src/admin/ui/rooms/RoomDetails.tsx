@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useParams, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import TestGameButton from '../shared/TestGameButton';
@@ -13,14 +13,20 @@ import { ArrowBack } from '@material-ui/icons';
 import { setRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
 
 const RoomDetails = () => {
-  const { roomId, gameName } = useParams();
+  const {
+    roomId: roomIdString,
+    gameName 
+  } = useParams<{ roomId: string, gameName: string }>();
+  const roomId = parseInt(roomIdString, 10);
   const styles = useStyles();
   const dispatch = useDispatch();
   const room = useSelector(state => {
     return state.gameState.worldState.rooms[roomId];
   });
 
-  const handleChange = fieldName => event => {
+  const handleChange = (fieldName: string) => (event: React.ChangeEvent<
+    HTMLInputElement | HTMLTextAreaElement
+  >) => {
     dispatch(setRoom({
       id: roomId,
       room: {

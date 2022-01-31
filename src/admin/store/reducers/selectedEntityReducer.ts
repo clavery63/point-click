@@ -1,10 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Nullable } from 'game/store/types';
+
+type SelectedEntity = {
+  type: 'item' | 'scenery' | 'door';
+  id: number;
+}
 
 export const selectedEntitySlice = createSlice({
   name: 'selectedEntity',
-  initialState: null,
+  initialState: null as Nullable<SelectedEntity>,
   reducers: {
-    setSelected: (state, action) => action.payload,
+    setSelected: (state, action: PayloadAction<SelectedEntity>) => action.payload,
     clearSelected: () => null,
   }
 });

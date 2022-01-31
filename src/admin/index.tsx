@@ -27,7 +27,7 @@ const AdminRoot = () => {
     }).concat(epicMiddleware),
     devTools: process.env.NODE_ENV !== 'production',
     preloadedState: initialState
-  })
+  });
 
   epicMiddleware.run(rootEpic);
 
