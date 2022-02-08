@@ -1,16 +1,21 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, useRouteMatch } from 'react-router-dom';
+import {
+  BrowserRouter, Switch, Route, useRouteMatch,
+} from 'react-router-dom';
 import AdminContainer from './AdminContainer';
 import HomeContainer from './ui/home/HomeContainer';
 import EditRoom from './ui/rooms/EditRoom';
 import ListRooms from './ui/rooms/ListRooms';
 
-const Router = ({ gameName }) => {
+type Props = {
+  gameName: string;
+};
+const Router = ({ gameName }: Props) => {
   const { path } = useRouteMatch();
 
   return (
     <BrowserRouter>
-      <AdminContainer gameName={gameName}>
+      <AdminContainer>
         <Switch>
           <Route path={`${path}/rooms/:roomId`}>
             <EditRoom />
@@ -18,7 +23,7 @@ const Router = ({ gameName }) => {
           <Route path={`${path}/rooms`}>
             <ListRooms />
           </Route>
-          <Route path='/'>
+          <Route path="/">
             <HomeContainer gameName={gameName} />
           </Route>
         </Switch>

@@ -1,31 +1,42 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { useSelector, useDispatch } from 'react-redux';
+import { setItem } from 'admin/store/reducers/gameStateReducer/worldStateReducer/itemsReducer';
+import { SelectedEntity } from 'admin/store/reducers/selectedEntityReducer';
+import { useSelector, useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 
-const ItemDetails = ({ entity }) => {
+type Props = {
+  entity: SelectedEntity;
+};
+const ItemDetails = ({ entity }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const item = useSelector(state => {
     return state.gameState.worldState.items[entity.id];
   });
 
-  const handleChange = fieldName => event => {
+  const handleChange = (fieldName: string) => (event: React.ChangeEvent<
+    HTMLInputElement
+  >) => {
     dispatch(setItem({
       id: entity.id,
       item: {
         ...item,
-        [fieldName]: event.target.value
-      }
+        [fieldName]: event.target.value,
+      },
     }));
   };
 
   return (
     <Grid container className={styles.rightColumn}>
       <Grid item xs={12}>
-        <Typography variant="h5">Edit Item: {item.id}</Typography>
+        <Typography variant="h5">
+          Edit Item:
+          {' '}
+          {item.id}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <LongTextField

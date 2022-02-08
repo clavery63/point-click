@@ -4,13 +4,13 @@ const useStyles = makeStyles({
   leftColumn: {
     width: `${5 * 112}px`,
     float: 'left',
-    margin: '10px 40px 10px 10px'
+    margin: '10px 40px 10px 10px',
   },
   rightColumn: {
-    width: '50%'
+    width: '50%',
   },
   field: {
-    margin: '10px 20px 10px 0'
+    margin: '10px 20px 10px 0',
   },
   roomsPreview: {
     display: 'flex',
@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     margin: '0 20px 20px 0',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   roomImg: {
     height: '100%',

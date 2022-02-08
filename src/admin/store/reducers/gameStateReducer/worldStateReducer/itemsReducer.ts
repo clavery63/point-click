@@ -1,23 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setGameState } from 'admin/store/sharedActions';
-import { Door, Item, Lookup, PositionAndSize } from 'game/store/types';
+import { Item, Lookup } from 'game/store/types';
 
 type PositionWithId = {
-  id: number,
-  x: number,
-  y: number
-}
+  id: number;
+  x: number;
+  y: number;
+};
 
 type ItemWithId = {
-  item: Item,
-  id: number,
-}
+  item: Item;
+  id: number;
+};
+
+const initialState: Lookup<Item> = {};
 
 export const itemsSlice = createSlice({
   name: 'items',
-  initialState: {} as Lookup<Item>,
+  initialState,
   reducers: {
-    setItemPosition: (state: Lookup<Item>, action: PayloadAction<PositionWithId>) => {
+    setItemPosition: (state, action: PayloadAction<PositionWithId>) => {
       const oldItem = state[action.payload.id];
       if (!oldItem.position) {
         return state;
@@ -31,20 +33,20 @@ export const itemsSlice = createSlice({
             height: oldItem.position.height,
             left: action.payload.x,
             top: action.payload.y,
-          }
-        }
-      }
+          },
+        },
+      };
     },
     setItem: (state, action: PayloadAction<ItemWithId>) => {
       return {
         ...state,
-        [action.payload.id]: action.payload.item
-      }
-    }
+        [action.payload.id]: action.payload.item,
+      };
+    },
   },
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.worldState.items);
-  }
+  },
 });
 
 export const { setItemPosition, setItem } = itemsSlice.actions;

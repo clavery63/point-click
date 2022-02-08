@@ -7,7 +7,7 @@ export const flagsSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.flags);
-  }
+  },
 });
 
 export default flagsSlice.reducer;

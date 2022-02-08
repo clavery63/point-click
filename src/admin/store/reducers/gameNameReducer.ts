@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { setGameState } from '../sharedActions';
 
 export const gameNameSlice = createSlice({
@@ -7,7 +7,7 @@ export const gameNameSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.gameName);
-  }
+  },
 });
 
 export default gameNameSlice.reducer;

@@ -3,24 +3,26 @@ import { setGameState } from 'admin/store/sharedActions';
 import { Lookup, Room } from 'game/store/types';
 
 type RoomWithId = {
-  id: number,
-  room: Room,
-}
+  id: number;
+  room: Room;
+};
+
+const initialState: Lookup<Room> = {};
 
 export const roomsSlice = createSlice({
   name: 'rooms',
-  initialState: {} as Lookup<Room>,
+  initialState,
   reducers: {
     setRoom: (state, action: PayloadAction<RoomWithId>) => {
       return {
         ...state,
-        [action.payload.id]: action.payload.room
-      }
-    }
+        [action.payload.id]: action.payload.room,
+      };
+    },
   },
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.worldState.rooms);
-  }
+  },
 });
 
 export const { setRoom } = roomsSlice.actions;

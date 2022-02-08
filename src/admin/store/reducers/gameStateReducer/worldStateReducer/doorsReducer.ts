@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { setGameState } from 'admin/store/sharedActions';
-import { Door, Lookup, PlayerState } from 'game/store/types';
+import { Door, Lookup } from 'game/store/types';
 
 export const doorsSlice = createSlice({
   name: 'doors',
@@ -8,7 +8,7 @@ export const doorsSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.worldState.doors);
-  }
+  },
 });
 
 export default doorsSlice.reducer;

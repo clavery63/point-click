@@ -1,6 +1,5 @@
 import { EntityType, Item } from 'game/store/types';
-import Konva from 'konva';
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Image } from 'shared/components/tappables';
 import { useSelector } from 'shared/hooks';
 
@@ -9,7 +8,7 @@ type Props = {
   onClick: (id: number, type: EntityType) => void;
 };
 const ItemComponent = ({ object, onClick }: Props) => {
-  const imgRef = useRef(null);
+  const imgRef = React.useRef<any>(null); // Sorry.
   const { position, img, requiresPrecision } = object;
   const images = useSelector(state => state.images);
 
@@ -17,8 +16,8 @@ const ItemComponent = ({ object, onClick }: Props) => {
     if (requiresPrecision) {
       // TODO: make cloudfront cross origin. otherwise Konva can't tolerate this
       // TODO: typecasts because I can't deal with this right now
-      (imgRef.current as unknown as Konva.Image).cache({ imageSmoothingEnabled: false });
-      (imgRef.current as unknown as Konva.Image).drawHitFromCache();
+      imgRef.current?.cache({ imageSmoothingEnabled: false });
+      imgRef.current.drawHitFromCache();
     }
   }, [imgRef, requiresPrecision]);
 

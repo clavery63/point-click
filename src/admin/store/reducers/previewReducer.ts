@@ -7,7 +7,7 @@ export const previewSlice = createSlice({
   reducers: {
     setPreview: (state, action) => action.payload,
     clearPreview: () => null,
-  }
+  },
 });
 
 export const { setPreview, clearPreview } = previewSlice.actions;

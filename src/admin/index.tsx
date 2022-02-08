@@ -1,8 +1,8 @@
 import React from 'react';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { useParams } from 'react-router-dom';
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
 import rootEpic from './store/epics/root';
 import rootReducer from './store/reducers/rootReducer';
 import Router from './Router';
@@ -12,8 +12,8 @@ const AdminRoot = () => {
   const epicMiddleware = createEpicMiddleware();
 
   const initialState = {
-    gameName
-  }
+    gameName,
+  };
 
   const store = configureStore({
     reducer: rootReducer,
@@ -26,7 +26,7 @@ const AdminRoot = () => {
       },
     }).concat(epicMiddleware),
     devTools: process.env.NODE_ENV !== 'production',
-    preloadedState: initialState
+    preloadedState: initialState,
   });
 
   epicMiddleware.run(rootEpic);

@@ -4,7 +4,7 @@ import S3 from 'shared/util/S3';
 
 const handleUpload = async state => {
   const s3 = new S3(state.gameName);
-  return s3.writeObject('gamedata.json', JSON.stringify(state.gameState))
+  return s3.writeObject('gamedata.json', JSON.stringify(state.gameState));
 };
 
 const upload$ = (action$, state$) => {
@@ -12,7 +12,7 @@ const upload$ = (action$, state$) => {
     ofType('UPLOAD_GAME'),
     withLatestFrom(state$, (_, state) => state),
     switchMap(handleUpload),
-    mapTo(({ type: 'UPLOAD_COMPLETE'}))
+    mapTo(({ type: 'UPLOAD_COMPLETE' })),
   );
 };
 

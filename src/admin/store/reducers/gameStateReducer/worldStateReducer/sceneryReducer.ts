@@ -3,23 +3,25 @@ import { setGameState } from 'admin/store/sharedActions';
 import { Scenery, Lookup } from 'game/store/types';
 
 type PositionWithId = {
-  id: number,
-  x: number,
-  y: number,
-  field: 'startPosition' | 'endPosition'
-}
+  id: number;
+  x: number;
+  y: number;
+  field: 'startPosition' | 'endPosition';
+};
 
 type SizeWithId = {
-  id: number,
-  width: number,
-  height: number
-}
+  id: number;
+  width: number;
+  height: number;
+};
+
+const initialState: Lookup<Scenery> = {};
 
 export const scenerySlice = createSlice({
   name: 'scenery',
-  initialState: {} as Lookup<Scenery>,
+  initialState,
   reducers: {
-    setSceneryPosition: (state: Lookup<Scenery>, action: PayloadAction<PositionWithId>) => {
+    setSceneryPosition: (state, action: PayloadAction<PositionWithId>) => {
       const oldScenery = state[action.payload.id];
       return {
         ...state,
@@ -29,9 +31,9 @@ export const scenerySlice = createSlice({
             ...oldScenery[action.payload.field],
             left: action.payload.x,
             top: action.payload.y,
-          }
-        }
-      }
+          },
+        },
+      };
     },
     setScenerySize: (state, action: PayloadAction<SizeWithId>) => {
       // TODO: resize should also use SET_SCENERY_POSITION
@@ -44,14 +46,14 @@ export const scenerySlice = createSlice({
             ...oldScenery2.startPosition,
             width: action.payload.width,
             height: action.payload.height,
-          }
-        }
-      }
-    }
+          },
+        },
+      };
+    },
   },
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.worldState.scenery);
-  }
+  },
 });
 
 export const { setSceneryPosition, setScenerySize } = scenerySlice.actions;

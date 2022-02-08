@@ -1,39 +1,50 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { useRouteMatch, useParams, Link } from 'react-router-dom';
 import { Card, Box, Tooltip } from '@material-ui/core';
 import { Videocam } from '@material-ui/icons';
+import { Room } from 'game/store/types';
+import { useSelector } from '../hooks/redux';
 import useStyles from '../shared/useStyles';
 
 const baseUrl = process.env.REACT_APP_ASSETS_BASE;
 
-const RoomImg = ({ img }) => {
+type RoomImgProps = {
+  img: string;
+};
+const RoomImg = ({ img }: RoomImgProps) => {
   const classes = useStyles();
-  const { gameName } = useParams();
+  const { gameName } = useParams<{ gameName: string }>();
   const imgUrl = `${baseUrl}/${gameName}/img/${img}.png`;
 
   return (
     <Tooltip title={img}>
       <img className={classes.roomImg} src={imgUrl} alt={img} />
     </Tooltip>
-  )
-}
+  );
+};
 
-const RoomVideo = ({ video }) => {
+type RoomVideoProps = {
+  video: string;
+};
+const RoomVideo = ({ video }: RoomVideoProps) => {
   const classes = useStyles();
 
   return (
     <Tooltip title={video}>
       <Videocam className={classes.roomVideo} />
     </Tooltip>
-  )
-}
+  );
+};
 
-const RoomCard = ({ room, id }) => {
+type RoomCardProps = {
+  room: Room;
+  id: string;
+};
+const RoomCard = ({ room, id }: RoomCardProps) => {
   const classes = useStyles();
   const { url } = useRouteMatch();
   const { img, video } = room;
-  
+
   return (
     <Link to={`${url}/${id}`}>
       <Card className={classes.roomPreview}>
@@ -47,7 +58,7 @@ const RoomCard = ({ room, id }) => {
 const ListRooms = () => {
   const classes = useStyles();
   const rooms = useSelector(state => state.gameState.worldState.rooms);
-  
+
   return (
     <Box className={classes.roomsPreview}>
       {Object.entries(rooms).map(([id, room]) => (

@@ -3,20 +3,20 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useParams, Link } from 'react-router-dom';
+import { ArrowBack } from '@material-ui/icons';
+import { setRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
 import { useSelector, useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import TestGameButton from '../shared/TestGameButton';
 import UploadButton from '../shared/UploadButton';
 import PreviewWidget from '../preview/PreviewWidget';
-import { ArrowBack } from '@material-ui/icons';
-import { setRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
 
 const RoomDetails = () => {
   const {
     roomId: roomIdString,
-    gameName 
-  } = useParams<{ roomId: string, gameName: string }>();
+    gameName,
+  } = useParams<{ roomId: string; gameName: string }>();
   const roomId = parseInt(roomIdString, 10);
   const styles = useStyles();
   const dispatch = useDispatch();
@@ -31,8 +31,8 @@ const RoomDetails = () => {
       id: roomId,
       room: {
         ...room,
-        [fieldName]: event.target.value
-      }
+        [fieldName]: event.target.value,
+      },
     }));
   };
 
@@ -52,7 +52,11 @@ const RoomDetails = () => {
         </Link>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="h4">Edit Room: {roomId}</Typography>
+        <Typography variant="h4">
+          Edit Room:
+          {' '}
+          {roomId}
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <LongTextField

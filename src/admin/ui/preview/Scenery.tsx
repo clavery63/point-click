@@ -1,24 +1,30 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import VisibleScenery from './VisibleScenery';
-import InvisibleScenery from './InvisibleScenery';
 import { setSelected } from 'admin/store/reducers/selectedEntityReducer';
 import { setSceneryPosition } from 'admin/store/reducers/gameStateReducer/worldStateReducer/sceneryReducer';
+import { KonvaEventObject } from 'konva/types/Node';
+import { useSelector, useDispatch } from '../hooks/redux';
+import VisibleScenery from './VisibleScenery';
+import InvisibleScenery from './InvisibleScenery';
 
-const Scenery = ({ id, editing = 'startPosition' }) => {
+type Props = {
+  id: number;
+};
+const Scenery = ({ id }: Props) => {
   const dispatch = useDispatch();
   const scenery = useSelector(state => {
     return state.gameState.worldState.scenery[id];
   });
 
+  const editing = 'startPosition';
+
   const position = scenery[editing];
 
-  const onDragEnd = (e) => {
+  const onDragEnd = (e: KonvaEventObject<DragEvent>) => {
     dispatch(setSceneryPosition({
       id,
       field: editing,
       x: Math.round(e.target.x()),
-      y: Math.round(e.target.y())
+      y: Math.round(e.target.y()),
     }));
   };
 
@@ -30,11 +36,11 @@ const Scenery = ({ id, editing = 'startPosition' }) => {
       scenery={scenery}
       position={position}
       onDragEnd={onDragEnd}
-      onClick={(e) => {
+      onClick={() => {
         dispatch(setSelected({
           id,
-          type: 'scenery'
-        }))
+          type: 'scenery',
+        }));
       }}
     />
   );

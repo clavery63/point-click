@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
   previewState: previewReducer,
   gameName: gameNameReducer,
   gameState: gameStateReducer,
-  selectedEntity: selectedEntityReducer
+  selectedEntity: selectedEntityReducer,
 });
 
 export default rootReducer;

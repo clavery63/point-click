@@ -1,17 +1,24 @@
 import React from 'react';
 import { Image } from 'react-konva';
-import { useSelector, useDispatch } from 'react-redux';
-import useCachebuster from '../hooks/useCachebuster';
 import { setSelected } from 'admin/store/reducers/selectedEntityReducer';
 import { setItemPosition } from 'admin/store/reducers/gameStateReducer/worldStateReducer/itemsReducer';
+import { useSelector, useDispatch } from '../hooks/redux';
+import useCachebuster from '../hooks/useCachebuster';
 
-const Item = ({ id }) => {
+type Props = {
+  id: number;
+};
+const Item = ({ id }: Props) => {
   const dispatch = useDispatch();
   const { img, position } = useSelector(state => {
     return state.gameState.worldState.items[id];
   });
-  const image = useSelector(state => state.gameState.images.get(img));
+  const image = useSelector(state => state.gameState.images[img || '']);
   const cachebuster = useCachebuster(position);
+
+  if (!position) {
+    return null;
+  }
 
   return (
     <Image
@@ -25,14 +32,14 @@ const Item = ({ id }) => {
         dispatch(setItemPosition({
           id,
           x: Math.round(e.target.x()),
-          y: Math.round(e.target.y())
-        }))
+          y: Math.round(e.target.y()),
+        }));
       }}
-      onClick={(e) => {
+      onClick={() => {
         dispatch(setSelected({
           id,
-          type: 'item'
-        }))
+          type: 'item',
+        }));
       }}
     />
   );

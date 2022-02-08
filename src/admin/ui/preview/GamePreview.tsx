@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import GameRoot from 'game/GameRoot';
 import { clearPreview } from 'admin/store/reducers/previewReducer';
+import { useSelector, useDispatch } from '../hooks/redux';
 
 const GamePreview = () => {
   const dispatch = useDispatch();
@@ -20,11 +20,11 @@ const GamePreview = () => {
       onClose={() => dispatch(clearPreview())}
       maxWidth={false}
     >
-      <DialogContent style={{width: '80vw', height: '80vh'}}>
+      <DialogContent style={{ width: '80vw', height: '80vh' }}>
         <GameRoot gameName={gameName} state={previewState} />
       </DialogContent>
     </Dialog>
-  )
+  );
 };
 
 export default GamePreview;

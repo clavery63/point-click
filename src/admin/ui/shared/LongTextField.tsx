@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import TextField from '@material-ui/core/TextField';
+import { Nullable } from 'game/store/types';
 import useStyles from './useStyles';
 
-const LongTextField = ({ label, value, onChange }) => {
+type Props = {
+  label: string;
+  value: Nullable<string>;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+const LongTextField = ({ label, value, onChange }: Props) => {
   const styles = useStyles();
   return (
     <TextField

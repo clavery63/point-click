@@ -3,7 +3,7 @@ import Home from './Home';
 
 const mapStateToProps = ({ showPreview }) => {
   return {
-    showPreview
+    showPreview,
   };
 };
 
