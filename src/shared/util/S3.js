@@ -33,7 +33,7 @@ class S3 {
       }),
     );
 
-    return this.getStreamContent(Body);
+    return S3.getStreamContent(Body);
   }
 
   async writeObject(key, data) {
