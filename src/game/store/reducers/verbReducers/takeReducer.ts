@@ -12,7 +12,7 @@ const itemReducer: ItemReducer = (item, playerState) => {
 
 const takeReducer: EntityReducer = (object, playerState, flags) => {
   if (object.type === 'items') {
-    if (object.takeableFlag && !flags.has(object.takeableFlag)) {
+    if (object.takeableFlag && !flags.includes(object.takeableFlag)) {
       return withText(`No good. Taking ${object.name} isn't working`);
     }
     return itemReducer(object, playerState, flags);

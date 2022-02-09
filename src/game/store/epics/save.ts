@@ -33,7 +33,7 @@ const loadGame$: LoadGame = () => {
   return from<ObservableInput<ReducerActions>>([
     { type: 'SET_WORLD_STATE', payload: worldState },
     { type: 'SET_PLAYER_STATE', payload: playerState },
-    { type: 'SET_FLAGS', payload: new Set(flags) },
+    { type: 'SET_FLAGS', payload: flags },
     { type: 'SET_MENU', payload: 'NONE' },
   ]);
 };

@@ -1,5 +1,5 @@
 import {
-  catchError, map, switchMapTo, switchMap,
+  catchError, switchMapTo, switchMap,
 } from 'rxjs/operators';
 import {
   of, merge, from, Observable, ObservableInput,
@@ -8,14 +8,6 @@ import { ofType } from 'redux-observable';
 import hydrateState$ from 'shared/observables/hydrateState';
 import { AllActions, MyEpic } from './types';
 import { GameState, GameStoreState } from '../types';
-
-type LoadFlagsSet = (state: GameStoreState) => GameStoreState;
-const loadFlagsSet: LoadFlagsSet = state => {
-  return {
-    ...state,
-    flags: new Set(state.flags),
-  };
-};
 
 type Restart = (
   action$: Observable<AllActions>,
@@ -55,7 +47,6 @@ const initializeGame: InitializeGame = bootInfo => ({
 
 const boot$: MyEpic = (action$, state$) => {
   return hydrateState$(state$, initializeGame).pipe(
-    map(loadFlagsSet),
     switchMap(state => merge(
       of<AllActions>({ type: 'SET_STATE', payload: state }),
       restart$(action$, state),

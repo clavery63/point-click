@@ -21,9 +21,11 @@ const viewportSelector = (state: GameStoreState) => {
     doors: doors.map(populate(worldState, 'doors'))
       .filter(door => !!(door.openImg || door.closedImg)),
     items: items.map(populate(worldState, 'items'))
-      .filter(item => !item.visibleFlag || flags.has(item.visibleFlag)),
+      .filter(item => !item.visibleFlag || flags.includes(item.visibleFlag)),
     scenery: scenery.map(populate(worldState, 'scenery'))
-      .filter(sceneryObject => !sceneryObject.visibleFlag || flags.has(sceneryObject.visibleFlag)),
+      .filter(sceneryObject => {
+        return !sceneryObject.visibleFlag || flags.includes(sceneryObject.visibleFlag);
+      }),
     borderImg: images.get('border'),
     roomImg: images.get(img || ''),
     video,

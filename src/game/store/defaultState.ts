@@ -30,7 +30,7 @@ const defaultState: GameStoreState = {
     scenery: {},
     doors: {},
   },
-  flags: new Set(),
+  flags: [],
   images: new Map(),
 };
 

@@ -6,7 +6,7 @@ import { withText, setValue, keepState } from '../utils';
 const doorReducer = (door: Door, flags: Flags) => {
   switch (door.state) {
     case 'CLOSED':
-      if (!door.openCondition || flags.has(door.openCondition)) {
+      if (!door.openCondition || flags.includes(door.openCondition)) {
         return compose(
           withText(door.openText),
           setValue(`worldState.doors[${door.id}].state`)('OPEN'),

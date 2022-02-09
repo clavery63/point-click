@@ -1,4 +1,4 @@
-import { setWith, clone } from 'lodash';
+import { setWith, clone, without } from 'lodash';
 import { compose } from 'redux';
 import filter from 'shared/util/filter';
 import get, { GetFieldType } from 'shared/util/get';
@@ -30,17 +30,11 @@ export const updateValue: ValueUpdater = (path) => (fn) => state => {
 };
 
 export const addFlags = (flagsToAdd: string[]) => {
-  return updateValue('flags')(flags => {
-    flagsToAdd.forEach(flag => flags.add(flag));
-    return flags;
-  });
+  return updateValue('flags')(flags => [...flags, ...flagsToAdd]);
 };
 
 export const removeFlags = (flagsToRemove: string[]) => {
-  return updateValue('flags')(flags => {
-    flagsToRemove.forEach(flag => flags.delete(flag));
-    return flags;
-  });
+  return updateValue('flags')(flags => without(flags, ...flagsToRemove));
 };
 
 type CombineReducers = (...reducers: EntityReducer[]) => EntityReducer;

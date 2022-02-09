@@ -15,7 +15,7 @@ const isValid = (verbLogic: VerbLogic, using: Nullable<number>, flags: Flags) =>
     return false;
   }
 
-  return !prereqFlags || prereqFlags.every(flag => flags.has(flag));
+  return !prereqFlags || prereqFlags.every(flag => flags.includes(flag));
 };
 
 type GetVerbLogic = (

@@ -19,10 +19,7 @@ const upload$ = (action$: Observable<Action>, state$: Observable<RootState>) => 
   const handleUpload$ = action$.pipe(
     filter(uploadGame.match),
     withLatestFrom(state$, (_, state) => state),
-    tap(state => validateGameState({
-      ...state.gameState,
-      flags: new Set(state.gameState.flags),
-    })),
+    tap(state => validateGameState(state.gameState)),
     switchMap(handleUpload),
     mapTo(uploadComplete()),
   );

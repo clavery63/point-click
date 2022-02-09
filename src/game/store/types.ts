@@ -158,7 +158,7 @@ export interface PlayerState {
   timer: number;
 }
 
-export type Flags = Set<string>;
+export type Flags = string[];
 
 export interface GameState {
   worldState: WorldState;
@@ -181,15 +181,6 @@ export interface GameStoreState extends GameState {
   cursorEnabled: boolean;
   gameName: string;
   images: Map<string, HTMLImageElement>;
-}
-
-// Sad, but let's roll with it
-// Ideally we could just add an annotation within GameState and not need this
-// But that's not ovverriding the Set<string> for flags
-export interface GameStateForValidation {
-  worldState: WorldState;
-  playerState: PlayerState;
-  flags: string[];
 }
 
 export type GameStore = Store<GameStoreState>;
