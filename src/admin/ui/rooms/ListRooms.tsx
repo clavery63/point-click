@@ -1,7 +1,9 @@
 import React from 'react';
 import { useRouteMatch, useParams, Link } from 'react-router-dom';
-import { Card, Box, Tooltip } from '@material-ui/core';
-import { Videocam } from '@material-ui/icons';
+import Card from '@material-ui/core/Card';
+import Box from '@material-ui/core/Box';
+import Tooltip from '@material-ui/core/Tooltip';
+import Videocam from '@material-ui/icons/Videocam';
 import { Room } from 'game/store/types';
 import { useSelector } from '../hooks/redux';
 import useStyles from '../shared/useStyles';

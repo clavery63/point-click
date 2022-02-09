@@ -1,4 +1,4 @@
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 import { EntityReducer } from 'shared/util/types';
 import { Door, Flags, Scenery } from 'game/store/types';
 import { withText, setValue, keepState } from '../utils';

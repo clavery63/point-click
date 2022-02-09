@@ -8,6 +8,9 @@ const retrieveImage = async (s3: S3, imageKey: string, gameKey: string) => {
     return [Uint8Array.from(localImage.split(',').map(num => parseInt(num, 10)))];
   }
 
+  // TODO: the aws-sdk library size is ridiculous. When we create a custom
+  // bundle to ship games, let's use plain old fetch to get these. Might need
+  // to adust to a different data format.
   const s3Image = await s3.getObject(`${imageKey}.png`);
   localStorage.setItem(key, s3Image.join(','));
 

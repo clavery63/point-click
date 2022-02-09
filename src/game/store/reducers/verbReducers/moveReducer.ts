@@ -1,4 +1,4 @@
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 import { DoorReducer, EntityReducer } from 'shared/util/types';
 import { withText, setValue, clearValue } from '../utils';
 

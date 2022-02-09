@@ -25,6 +25,8 @@ const constructRegExp = (type: ValidPath) => {
 };
 
 const validateGameState = (gameState: GameState) => {
+  // TODO: just realized how insanely big Ajv is. We can write our own validator
+  // with literally 1/100 the amount of code. So let's plan on doing that.
   const ajv = new Ajv();
   const numberPathRegExes = numberPaths.map(constructRegExp);
 

@@ -1,4 +1,4 @@
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 import {
   Entity, Flags, Nullable, VerbIndex, VerbLogic,
 } from 'game/store/types';

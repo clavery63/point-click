@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowBack } from '@material-ui/icons';
+import ArrowBack from '@material-ui/icons/ArrowBack';
 import { setRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
 import { useSelector, useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';

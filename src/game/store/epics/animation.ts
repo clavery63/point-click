@@ -4,7 +4,8 @@ import {
 import {
   from, timer, concat, of, Observable,
 } from 'rxjs';
-import { range, isEqual } from 'lodash';
+import range from 'lodash/range';
+import isEqual from 'lodash/isEqual';
 import { isOfType } from 'typesafe-actions';
 import { AllActions, MyEpic } from './types';
 import { GameStoreState, Scenery } from '../types';

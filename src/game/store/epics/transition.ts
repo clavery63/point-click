@@ -4,7 +4,7 @@ import {
 import {
   from, timer, concat, of, NEVER, Observable,
 } from 'rxjs';
-import { range } from 'lodash';
+import range from 'lodash/range';
 import { ofType } from 'redux-observable';
 import { isOfType } from 'typesafe-actions';
 import { AllActions, MyEpic } from './types';

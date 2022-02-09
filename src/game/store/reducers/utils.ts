@@ -1,4 +1,6 @@
-import { setWith, clone, without } from 'lodash';
+import setWith from 'lodash/setWith';
+import clone from 'lodash/clone';
+import without from 'lodash/without';
 import { compose } from 'redux';
 import filter from 'shared/util/filter';
 import get, { GetFieldType } from 'shared/util/get';

@@ -4,7 +4,8 @@ import {
 import {
   from, timer, of, concat, Observable,
 } from 'rxjs';
-import { chunk, range } from 'lodash';
+import chunk from 'lodash/chunk';
+import range from 'lodash/range';
 import { ActionsType } from 'game/store/reducers/rootReducer';
 import { textToLines } from '../util';
 

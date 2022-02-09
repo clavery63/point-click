@@ -1,4 +1,4 @@
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 import { StateTransformer } from 'shared/util/types';
 import { Effect, VerbLogic } from '../types';
 import { setValue, keepState } from './utils';
