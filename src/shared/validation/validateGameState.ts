@@ -46,8 +46,9 @@ const validateGameState = (gameState: GameState) => {
   // TODO(maybe): seems this still accepts any superset of a valid config
   const valid = validate(gameState);
   if (!valid) {
-    console.log('Found some validation errors:', validate.errors);
-    throw new Error(validate.errors as any); // Doesn't matter at this point
+    const errors = JSON.stringify(validate.errors, null, 2);
+    console.log('Found some validation errors:', errors);
+    throw new Error(errors); // Doesn't matter at this point
   } else {
     console.log('config is valid');
   }

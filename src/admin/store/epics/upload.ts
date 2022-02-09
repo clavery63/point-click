@@ -1,9 +1,10 @@
 import { RootState } from 'admin/ui/hooks/redux';
 import { merge, Observable } from 'rxjs';
 import {
-  switchMap, mapTo, withLatestFrom, filter, pairwise,
+  switchMap, mapTo, withLatestFrom, filter, pairwise, tap,
 } from 'rxjs/operators';
 import S3 from 'shared/util/S3';
+import validateGameState from 'shared/validation/validateGameState';
 import { Action } from 'typesafe-actions';
 import {
   uploadComplete, uploadGame, resetUploadState, UploadState,
@@ -18,6 +19,10 @@ const upload$ = (action$: Observable<Action>, state$: Observable<RootState>) => 
   const handleUpload$ = action$.pipe(
     filter(uploadGame.match),
     withLatestFrom(state$, (_, state) => state),
+    tap(state => validateGameState({
+      ...state.gameState,
+      flags: new Set(state.gameState.flags),
+    })),
     switchMap(handleUpload),
     mapTo(uploadComplete()),
   );
@@ -36,7 +41,7 @@ const upload$ = (action$: Observable<Action>, state$: Observable<RootState>) => 
      *
      * Dear redux-toolkit,
      *
-     * I get it. In sotware enginnering, imposing smart restrictions yields
+     * I get it. In software engineering, imposing smart restrictions yields
      * greater freedom in the long run.
      *
      * The problem is, the restrictions you impose aren't all that smart, or
