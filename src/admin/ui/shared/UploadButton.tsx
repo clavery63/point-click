@@ -23,7 +23,7 @@ const UploadButton = () => {
       action={uploadGame()}
       callToAction={callToAction}
       color="primary"
-      disabled={uploadState === UploadState.IN_PROGRESS}
+      disabled={uploadState !== UploadState.NONE}
     />
   );
 };
