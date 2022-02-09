@@ -3,7 +3,7 @@ import {
   BrowserRouter, Switch, Route, useRouteMatch,
 } from 'react-router-dom';
 import AdminContainer from './AdminContainer';
-import HomeContainer from './ui/home/HomeContainer';
+import Home from './ui/home/Home';
 import EditRoom from './ui/rooms/EditRoom';
 import ListRooms from './ui/rooms/ListRooms';
 
@@ -24,7 +24,7 @@ const Router = ({ gameName }: Props) => {
             <ListRooms />
           </Route>
           <Route path="/">
-            <HomeContainer gameName={gameName} />
+            <Home gameName={gameName} />
           </Route>
         </Switch>
       </AdminContainer>

@@ -1,9 +1,10 @@
+import { uploadGame } from 'admin/store/epics/upload';
 import React from 'react';
 import DispatchButton from './DispachButton';
 
 const UploadButton = () => (
   <DispatchButton
-    action={{ type: 'UPLOAD_GAME' }}
+    action={uploadGame()}
     callToAction="Save"
   />
 );
