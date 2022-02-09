@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-konva';
-import { setSelected } from 'admin/store/reducers/selectedEntityReducer';
+import { setSelected } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
 import { setItemPosition } from 'admin/store/reducers/gameStateReducer/worldStateReducer/itemsReducer';
 import { useSelector, useDispatch } from '../hooks/redux';
 import useCachebuster from '../hooks/useCachebuster';

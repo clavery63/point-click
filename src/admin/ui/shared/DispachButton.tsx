@@ -6,8 +6,13 @@ import useStyles from './useStyles';
 type Props = {
   action: any; // TODO: maybe fix one day?
   callToAction: string;
+  color?: 'primary' | 'secondary' | 'default';
+  disabled?: boolean;
 };
-const DispatchButton = ({ action, callToAction }: Props) => {
+const DispatchButton = (props: Props) => {
+  const {
+    action, callToAction, color = 'default', disabled = false,
+  } = props;
   const styles = useStyles();
   const dispatch = useDispatch();
   const onClick = () => dispatch(action);
@@ -15,6 +20,8 @@ const DispatchButton = ({ action, callToAction }: Props) => {
   return (
     <Button
       variant="contained"
+      color={color}
+      disabled={disabled}
       onClick={onClick}
       className={styles.field}
     >

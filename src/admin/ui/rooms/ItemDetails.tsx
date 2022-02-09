@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { setItem } from 'admin/store/reducers/gameStateReducer/worldStateReducer/itemsReducer';
-import { SelectedEntity } from 'admin/store/reducers/selectedEntityReducer';
+import { SelectedEntity } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
 import { useSelector, useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';

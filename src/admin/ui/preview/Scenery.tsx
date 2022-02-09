@@ -1,5 +1,5 @@
 import React from 'react';
-import { setSelected } from 'admin/store/reducers/selectedEntityReducer';
+import { setSelected } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
 import { setSceneryPosition } from 'admin/store/reducers/gameStateReducer/worldStateReducer/sceneryReducer';
 import { KonvaEventObject } from 'konva/types/Node';
 import { useSelector, useDispatch } from '../hooks/redux';

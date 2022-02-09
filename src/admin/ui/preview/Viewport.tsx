@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Image, Group } from 'react-konva';
-import { clearSelected, SelectedEntity } from 'admin/store/reducers/selectedEntityReducer';
+import { clearSelected, SelectedEntity } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
 import { Nullable, Room } from 'game/store/types';
 import { useSelector, useDispatch } from '../hooks/redux';
 import Item from './Item';
@@ -65,7 +65,7 @@ const Viewport = (props: Props) => {
     items, scenery, img,
   } = props.room;
   const roomImg = useSelector(state => state.gameState.images[img || '']);
-  const selectedEntity = useSelector(state => state.selectedEntity);
+  const selectedEntity = useSelector(state => state.editorState.selectedEntity);
 
   return (
     <Group>

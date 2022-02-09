@@ -9,7 +9,7 @@ const components = {
 };
 
 const EntityDetails = () => {
-  const selectedEntity = useSelector(state => state.selectedEntity);
+  const selectedEntity = useSelector(state => state.editorState.selectedEntity);
 
   if (!selectedEntity) {
     return null;
