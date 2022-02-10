@@ -1,7 +1,7 @@
 import { PositionAndSize, Scenery } from 'game/store/types';
 import { KonvaEventObject } from 'konva/types/Node';
 import React from 'react';
-import { Image } from 'react-konva';
+import PreciseImage from 'shared/components/PreciseImage';
 import { useSelector } from '../hooks/redux';
 import useCachebuster from '../hooks/useCachebuster';
 
@@ -22,7 +22,7 @@ const VisibleScenery = ({
   }
 
   return (
-    <Image
+    <PreciseImage
       x={position.left + cachebuster}
       y={position.top + cachebuster}
       width={position.width}

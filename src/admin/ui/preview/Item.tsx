@@ -1,7 +1,8 @@
 import React from 'react';
-import { Image } from 'react-konva';
 import { setSelected } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
 import { setItemPosition } from 'admin/store/reducers/gameStateReducer/worldStateReducer/itemsReducer';
+import { KonvaEventObject } from 'konva/types/Node';
+import PreciseImage from 'shared/components/PreciseImage';
 import { useSelector, useDispatch } from '../hooks/redux';
 import useCachebuster from '../hooks/useCachebuster';
 
@@ -21,14 +22,14 @@ const Item = ({ id }: Props) => {
   }
 
   return (
-    <Image
+    <PreciseImage
       x={position.left + cachebuster}
       y={position.top + cachebuster}
       width={position.width}
       height={position.height}
       image={image}
       draggable
-      onDragEnd={(e) => {
+      onDragEnd={(e: KonvaEventObject<DragEvent>) => {
         dispatch(setItemPosition({
           id,
           x: Math.round(e.target.x()),
