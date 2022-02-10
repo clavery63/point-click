@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { setItem } from 'admin/store/reducers/gameStateReducer/worldStateReducer/itemsReducer';
 import { SelectedEntity } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
+import { Item } from 'game/store/types';
 import { useSelector, useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
@@ -17,7 +18,7 @@ const ItemDetails = ({ entity }: Props) => {
     return state.gameState.worldState.items[entity.id];
   });
 
-  const handleChange = (fieldName: string) => (event: React.ChangeEvent<
+  const handleChange = (fieldName: keyof Item) => (event: React.ChangeEvent<
     HTMLInputElement
   >) => {
     dispatch(setItem({
@@ -50,6 +51,13 @@ const ItemDetails = ({ entity }: Props) => {
           label="description"
           value={item.description}
           onChange={handleChange('description')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <LongTextField
+          label="img"
+          value={item.img}
+          onChange={handleChange('img')}
         />
       </Grid>
     </Grid>
