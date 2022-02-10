@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { Image, Group } from 'react-konva';
+import { Group } from 'react-konva';
+import { Image } from 'shared/components/tappables';
 import { clearSelected, SelectedEntity } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
 import { Nullable, Room } from 'game/store/types';
 import { useSelector, useDispatch } from '../hooks/redux';
