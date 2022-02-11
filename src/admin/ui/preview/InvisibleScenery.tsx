@@ -2,23 +2,26 @@ import React, { useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Rect, Transformer } from 'react-konva';
 import { setScenerySize } from 'admin/store/reducers/gameStateReducer/worldStateReducer/sceneryReducer';
-import { PositionAndSize } from 'game/store/types';
+import { Position, Scenery } from 'game/store/types';
 import { KonvaEventObject } from 'konva/types/Node';
 import useCachebuster from '../hooks/useCachebuster';
 
 type Props = {
   id: number;
-  position: PositionAndSize;
+  position: Position;
+  scenery: Scenery;
   onDragEnd: (e: KonvaEventObject<DragEvent>) => void;
   onClick: () => void;
 };
 const InisibleScenery = ({
-  id, position, onDragEnd, onClick,
+  id, position, scenery, onDragEnd, onClick,
 }: Props) => {
   const dispatch = useDispatch();
   const cachebuster = useCachebuster(position);
   const rectRef = useRef<any>(null); // Sorry.
   const trRef = useRef<any>(null); // Sorry.
+  const width = scenery.size?.width || 0;
+  const height = scenery.size?.height || 0;
 
   useEffect(() => {
     if (rectRef.current && trRef.current) {
@@ -33,8 +36,8 @@ const InisibleScenery = ({
         ref={rectRef}
         x={position.left + cachebuster}
         y={position.top + cachebuster}
-        width={position.width}
-        height={position.height}
+        width={width}
+        height={height}
         scaleX={1}
         scaleY={1}
         fill="red"
@@ -46,8 +49,8 @@ const InisibleScenery = ({
           rectRef.current.setScale(({ x: 1, y: 1 }));
           dispatch(setScenerySize({
             id,
-            width: Math.round(position.width * x),
-            height: Math.round(position.height * y),
+            width: Math.round(width * x),
+            height: Math.round(height * y),
           }));
         }}
         onClick={onClick}

@@ -1,4 +1,4 @@
-import { PositionAndSize, Scenery } from 'game/store/types';
+import { Position, Scenery } from 'game/store/types';
 import { KonvaEventObject } from 'konva/types/Node';
 import React from 'react';
 import PreciseImage from 'shared/components/PreciseImage';
@@ -7,7 +7,7 @@ import useCachebuster from '../hooks/useCachebuster';
 
 type Props = {
   scenery: Scenery;
-  position: PositionAndSize;
+  position: Position;
   onDragEnd: (e: KonvaEventObject<DragEvent>) => void;
   onClick: () => void;
 };

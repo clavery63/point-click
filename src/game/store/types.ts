@@ -22,7 +22,7 @@ export type StringLookup<T> = {
   [key: string]: T;
 };
 
-interface Position {
+export interface Position {
   left: number;
   top: number;
 }

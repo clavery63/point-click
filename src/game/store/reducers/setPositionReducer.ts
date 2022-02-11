@@ -12,8 +12,6 @@ const setPositionReducer: ParentReducer<PositionType> = ({
   return setValue(`worldState.${type}[${id}].currentPosition`)({
     left: x,
     top: y,
-    width: 0, // TODO: separate the idea of width/height from Position
-    height: 0,
   });
 };
 

@@ -6,9 +6,7 @@
         "position": {
           "left": 40,
           "hi": 0,
-          "top": 17,
-          "width": 32,
-          "height": 79
+          "top": 17
         },
         "dest": 1,
         "dir": "FORWARD",
@@ -30,7 +28,7 @@
       },
       "2": {
         "closedImg": "door-2",
-        "position": { "left": 48, "top": 58, "width": 16, "height": 37 },
+        "position": { "left": 48, "top": 58 },
         "dest": 2,
         "dir": "FORWARD",
         "mapPosition": { "x": 2, "y": 0 },
@@ -44,7 +42,7 @@
       },
       "3": {
         "openImg": "door-3",
-        "position": { "left": 76, "top": 59, "width": 9, "height": 44 },
+        "position": { "left": 76, "top": 59 },
         "dest": 3,
         "dir": "FORWARD",
         "mapPosition": { "x": 4, "y": 2 },
@@ -75,7 +73,7 @@
       "6": {
         "dest": 15,
         "openImg": "door-4",
-        "position": { "left": 49, "top": 50, "width": 6, "height": 13 },
+        "position": { "left": 49, "top": 50 },
         "dir": "FORWARD",
         "mapPosition": { "x": 1, "y": 0 },
         "hidden": true,
@@ -86,7 +84,7 @@
       },
       "7": {
         "closedImg": "door-5",
-        "position": { "left": 17, "top": 15, "width": 9, "height": 57 },
+        "position": { "left": 17, "top": 15 },
         "dest": 5,
         "dir": "LEFT",
         "mapPosition": { "x": 0, "y": 2 },
@@ -98,7 +96,7 @@
       },
       "8": {
         "closedImg": "door-6",
-        "position": { "left": 86, "top": 15, "width": 9, "height": 57 },
+        "position": { "left": 86, "top": 15 },
         "dest": 6,
         "dir": "RIGHT",
         "mapPosition": { "x": 4, "y": 2 },
@@ -110,7 +108,7 @@
       },
       "9": {
         "closedImg": "door-7",
-        "position": { "left": 50, "top": 25, "width": 12, "height": 23 },
+        "position": { "left": 50, "top": 25 },
         "dest": 7,
         "dir": "FORWARD",
         "mapPosition": { "x": 2, "y": 0 },
@@ -154,7 +152,7 @@
       },
       "14": {
         "closedImg": "door-8",
-        "position": { "left": 33, "top": 40, "width": 17, "height": 44 },
+        "position": { "left": 33, "top": 40 },
         "dest": 12,
         "dir": "FORWARD",
         "mapPosition": { "x": 1, "y": 0 },
@@ -169,7 +167,7 @@
       "15": {
         "name": "fridge",
         "closedImg": "fridge-small",
-        "position": { "left": 5, "top": 76, "width": 16, "height": 23 },
+        "position": { "left": 5, "top": 76 },
         "mapPosition": { "x": 0, "y": 3 },
         "description": "A handy little fridge",
         "closedText": "With all your might, you yank on the handle. But it won't budge - you are far too weak to open this fridge.",
@@ -399,7 +397,7 @@
       "0": {
         "img": "skull",
         "description": "It's the skull of some creature. Its meaning seems quite clear: death lurks inside.",
-        "startPosition": { "left": 49, "top": 4, "width": 14, "height": 15 },
+        "startPosition": { "left": 49, "top": 4 },
         "endPosition": { "left": 49, "top": -8 },
         "trigger": "OPEN",
         "movedText": "\"Whaaaaaat,\" you think to yourself as you watch the skull move itself upward. \"That is absolutely fucking nuts.\"",
@@ -409,7 +407,8 @@
       "1": {
         "name": "book",
         "description": "It's the famous book by H. Saul Caesein, âProtocol for the Success Lover.\" I've always wanted to read this one.",
-        "startPosition": { "left": 21, "top": 62, "width": 16, "height": 6 },
+        "startPosition": { "left": 21, "top": 62 },
+        "size": { "width": 16, "height": 6 },
         "contains": [5],
         "openText": "  \"CHAPTER ONE: FORGET ALL PRIOR MISGIVINGS.\"  Huh, a rectangular hole has been cut out of the inside of the book.  You are disconcerted to also discover a steaming residue of unknown origin staining the pages.",
         "id": 1,
@@ -418,7 +417,7 @@
       "2": {
         "img": "jason-hidden",
         "description": "You must be seeing things. It is as though a man is there beyond the corner, doing a poor job of hiding from you.",
-        "startPosition": { "left": 72, "top": 22, "width": 8, "height": 56 },
+        "startPosition": { "left": 72, "top": 22 },
         "verbs": {
           "SPEAK": [
             {
@@ -432,14 +431,15 @@
       "3": {
         "name": "gunk",
         "description": "The ground outside the entrance is overrun with bulbous green gunk.",
-        "startPosition": { "left": 27, "top": 73, "width": 40, "height": 30 },
+        "startPosition": { "left": 27, "top": 73 },
+        "size": { "width": 40, "height": 30 },
         "id": 3,
         "type": "scenery"
       },
       "4": {
         "img": "eight-ball-small",
         "description": "It is an eight ball",
-        "startPosition": { "left": 103, "top": 73, "width": 9, "height": 9 },
+        "startPosition": { "left": 103, "top": 73 },
         "verbs": { "LOOK": [{ "moveTo": 8, "moveDir": "FORWARD" }] },
         "id": 4,
         "type": "scenery"
@@ -447,7 +447,8 @@
       "5": {
         "name": "eightBallMask",
         "description": "It appears you can shake this and receive answers to your problems.",
-        "startPosition": { "left": 0, "top": 0, "width": 112, "height": 112 },
+        "startPosition": { "left": 0, "top": 0 },
+        "size": { "width": 112, "height": 112 },
         "verbs": {
           "EAT": [{ "moveTo": 9, "moveDir": "DOWN" }],
           "USE": [
@@ -505,7 +506,7 @@
             }
           ]
         },
-        "startPosition": { "left": 54, "top": 34, "width": 13, "height": 21 },
+        "startPosition": { "left": 54, "top": 34 },
         "id": 6,
         "type": "scenery"
       },
@@ -548,7 +549,7 @@
             }
           ]
         },
-        "startPosition": { "left": 0, "top": 0, "width": 112, "height": 112 },
+        "startPosition": { "left": 0, "top": 0 },
         "id": 7,
         "type": "scenery"
       },
@@ -556,28 +557,31 @@
         "img": "motorcycle",
         "name": "motorcycle",
         "description": "This must by one of those poorly-parked motorcycles Valencia Tavern is famous for.",
-        "startPosition": { "left": 0, "top": 64, "width": 34, "height": 42 },
+        "startPosition": { "left": 0, "top": 64 },
         "contains": [17],
         "id": 8,
         "type": "scenery"
       },
       "9": {
         "name": "tv1",
-        "startPosition": { "left": 56, "top": 20, "width": 14, "height": 13 },
+        "startPosition": { "left": 56, "top": 20 },
+        "size": { "width": 14, "height": 13 },
         "verbs": { "LOOK": [{ "moveTo": 13, "moveDir": "FORWARD" }] },
         "id": 9,
         "type": "scenery"
       },
       "10": {
         "name": "tv2",
-        "startPosition": { "left": 45, "top": 22, "width": 11, "height": 13 },
+        "startPosition": { "left": 45, "top": 22 },
+        "size": { "width": 11, "height": 13 },
         "verbs": { "LOOK": [{ "moveTo": 16, "moveDir": "FORWARD" }] },
         "id": 10,
         "type": "scenery"
       },
       "11": {
         "name": "tv3",
-        "startPosition": { "left": 12, "top": 31, "width": 15, "height": 9 },
+        "startPosition": { "left": 12, "top": 31 },
+        "size": { "width": 15, "height": 9 },
         "verbs": { "LOOK": [{ "moveTo": 13, "moveDir": "FORWARD" }] },
         "id": 11,
         "type": "scenery"
@@ -585,7 +589,8 @@
       "12": {
         "name": "bench",
         "description": "It's a standard park bench.  You see a message carved in the wood: \"STEVE MILLER SUCKS.\"  The words feel nostalgic, like you've seen them somewhere before.  Hmm...I guess the statement is probably true, but that song Abracadabra isn't so bad, right?",
-        "startPosition": { "left": 3, "top": 75, "width": 35, "height": 20 },
+        "startPosition": { "left": 3, "top": 75 },
+        "size": { "width": 35, "height": 20 },
         "contains": [],
         "id": 12,
         "type": "scenery"
@@ -611,9 +616,7 @@
         },
         "startPosition": {
           "left": -78,
-          "top": -16,
-          "width": 112,
-          "height": 112
+          "top": -16
         },
         "id": 13,
         "type": "scenery"
@@ -621,7 +624,8 @@
       "14": {
         "name": "goose",
         "description": "It's a beautiful Canada goose.  You watch as it quietly eats grass, occasionally letting out a soft HONK.",
-        "startPosition": { "left": 73, "top": 66, "width": 29, "height": 40 },
+        "startPosition": { "left": 73, "top": 66 },
+        "size": { "width": 29, "height": 40 },
         "contains": [18, 18, 18, 16, 18, 18],
         "verbs": { "SPEAK": [{ "text": "\"HONK!\"" }] },
         "id": 14,
@@ -630,7 +634,8 @@
       "15": {
         "name": "jason",
         "description": "This must be Jason. You learned about him. He is totally, unmistakably jacked.",
-        "startPosition": { "left": 25, "top": 13, "width": 51, "height": 92 },
+        "startPosition": { "left": 25, "top": 13 },
+        "size": { "width": 51, "height": 92 },
         "verbs": {
           "SPEAK": [
             {
@@ -644,7 +649,7 @@
       "16": {
         "name": "computer",
         "img": "computer",
-        "startPosition": { "left": 72, "top": 73, "width": 24, "height": 26 },
+        "startPosition": { "left": 72, "top": 73 },
         "verbs": {
           "LOOK": [
             { "prereqFlags": ["COMPUTER"], "moveTo": 18, "moveDir": "FORWARD" },
@@ -668,7 +673,7 @@
         "img": "locker-door",
         "visibleFlag": "LOCKER_VISIBLE",
         "description": "Succumbing to your unquenchable thirst for destruction, you decide you'd rather break into one of these lockers with a concussive blow than ask Jason to open it for you. This locker might open if had something to violently hit it with?",
-        "startPosition": { "left": 91, "top": 0, "width": 20, "height": 69 },
+        "startPosition": { "left": 91, "top": 0 },
         "verbs": {
           "HIT": [
             {
@@ -690,7 +695,7 @@
         "name": "rob small",
         "img": "rob-small",
         "description": "An alluring image",
-        "startPosition": { "left": 93, "top": 15, "width": 16, "height": 16 },
+        "startPosition": { "left": 93, "top": 15 },
         "verbs": { "LOOK": [{ "moveTo": 17, "moveDir": "FORWARD" }] },
         "id": 18,
         "type": "scenery"
@@ -698,7 +703,8 @@
       "19": {
         "name": "monitor",
         "img": "monitor",
-        "startPosition": { "left": 0, "top": 0, "width": 112, "height": 112 },
+        "startPosition": { "left": 0, "top": 0 },
+        "size": { "width": 112, "height": 112 },
         "id": 19,
         "type": "scenery"
       },
@@ -706,7 +712,7 @@
         "name": "pumpkin",
         "img": "pumpkin",
         "description": "You spy a comforting sight: a luscious gourd in the moonlight. Ahh, the crisp flesh of a fresh white pumpkin. Wait a minute....Oh no!! It's something foul!! The pumpkin has been hollowed. Someone, or some thing, has been using this for \"storage.\" Every fiber is completely soaked with urine. You shudder with disapproval.  It's been \"bleached.\"",
-        "startPosition": { "left": 71, "top": 20, "width": 16, "height": 16 },
+        "startPosition": { "left": 71, "top": 20 },
         "verbs": {
           "EAT": [
             {
@@ -733,7 +739,7 @@
       "21": {
         "name": "malone",
         "img": "malone",
-        "startPosition": { "left": 8, "top": 34, "width": 43, "height": 66 },
+        "startPosition": { "left": 8, "top": 34 },
         "visibleFlag": "DANSEN",
         "verbs": {
           "SPEAK": [
@@ -769,7 +775,7 @@
         "name": "badGin",
         "img": "gin-and-soda",
         "visibleFlag": "BAD_GIN",
-        "startPosition": { "left": 88, "top": 95, "width": 8, "height": 13 },
+        "startPosition": { "left": 88, "top": 95 },
         "description": "You don't like the looks of this gin and soda, but there is no turning back now. There's no concept of save states in this game, so you might as well just drink it and see what happens.",
         "verbs": { "EAT": [{ "moveTo": 20, "moveDir": "DOWN" }] },
         "id": 22,
@@ -779,7 +785,7 @@
         "name": "goodGin",
         "img": "gin-and-soda",
         "visibleFlag": "GOOD_GIN",
-        "startPosition": { "left": 78, "top": 95, "width": 8, "height": 13 },
+        "startPosition": { "left": 78, "top": 95 },
         "description": "Holy crap! The moment has finally arrived! You will finally drink some gin!",
         "verbs": { "EAT": [{ "moveTo": 19, "moveDir": "UP" }] },
         "id": 23,
@@ -788,7 +794,7 @@
       "24": {
         "name": "jukebox",
         "img": "jukebox",
-        "startPosition": { "left": 0, "top": 62, "width": 36, "height": 50 },
+        "startPosition": { "left": 0, "top": 62 },
         "description": "Someone used this jukebox to put on the xfiles theme in the bar. now that's funny! That's just good comedy.",
         "id": 24,
         "type": "scenery"
@@ -796,7 +802,7 @@
       "25": {
         "name": "oscar",
         "img": "oscar",
-        "startPosition": { "left": 0, "top": 0, "width": 112, "height": 112 },
+        "startPosition": { "left": 0, "top": 0 },
         "description": "Hi. I am Oscar.",
         "id": 25,
         "type": "scenery"
@@ -804,7 +810,7 @@
       "26": {
         "name": "glasses",
         "img": "oscar-glasses",
-        "startPosition": { "left": 30, "top": 42, "width": 45, "height": 8 },
+        "startPosition": { "left": 30, "top": 42 },
         "description": "These glasses belong to Oscar.",
         "id": 26,
         "type": "scenery"
@@ -813,7 +819,7 @@
     "items": {
       "0": {
         "name": "key 1",
-        "position": { "left": 52, "top": 8, "width": 8, "height": 6 },
+        "position": { "left": 52, "top": 8 },
         "img": "key-1",
         "verbs": {
           "LOOK": [{ "text": "There's a random key embedded in the wall." }]
@@ -824,7 +830,7 @@
       },
       "1": {
         "name": "plunger",
-        "position": { "left": 80, "top": 108, "width": 28, "height": 60 },
+        "position": { "left": 80, "top": 108 },
         "img": "plunger",
         "description": "Your average, run of the mill plunger. How boring.",
         "id": 1,
@@ -832,7 +838,7 @@
       },
       "2": {
         "name": "toilet",
-        "position": { "left": 99, "top": 75, "width": 72, "height": 150 },
+        "position": { "left": 99, "top": 75 },
         "img": "toilet",
         "description": "Welp, so much for using this toilet",
         "id": 2,
@@ -840,7 +846,7 @@
       },
       "3": {
         "name": "torch",
-        "position": { "left": 1, "top": 20, "width": 6, "height": 27 },
+        "position": { "left": 1, "top": 20 },
         "img": "torch-1",
         "description": "One of two torches in this room",
         "id": 3,
@@ -848,7 +854,7 @@
       },
       "4": {
         "name": "torch",
-        "position": { "left": 105, "top": 20, "width": 6, "height": 27 },
+        "position": { "left": 105, "top": 20 },
         "img": "torch-1",
         "description": "The other torch",
         "id": 4,
@@ -863,7 +869,7 @@
       },
       "6": {
         "name": "lockpick",
-        "position": { "left": 32, "top": 26, "width": 10, "height": 10 },
+        "position": { "left": 32, "top": 26 },
         "img": "lockpick",
         "verbs": {
           "LOOK": [
@@ -878,7 +884,7 @@
       },
       "7": {
         "name": "bong",
-        "position": { "left": 48, "top": 52, "width": 14, "height": 20 },
+        "position": { "left": 48, "top": 52 },
         "img": "bong",
         "description": "It's some kind of strange vessel. Its base is filled with a murky, dank liquid, and there is an acrid vapor emanating from its spout.",
         "verbs": { "SMOKE": [{ "moveTo": 10, "moveDir": "RIGHT" }] },
@@ -887,7 +893,7 @@
       },
       "8": {
         "name": "torch",
-        "position": { "left": 5, "top": 33, "width": 12, "height": 21 },
+        "position": { "left": 5, "top": 33 },
         "img": "torch-2",
         "description": "A torch",
         "id": 8,
@@ -895,15 +901,15 @@
       },
       "9": {
         "name": "torch",
-        "position": { "width": 11, "height": 15, "left": 38, "top": 36 },
+        "position": { "left": 38, "top": 36 },
         "img": "torch-3",
         "description": "Testing 123",
         "id": 9,
         "type": "items"
       },
       "10": {
-        "name": "scot",
-        "position": { "left": 0, "top": 0, "width": 112, "height": 112 },
+        "name": "scott",
+        "position": { "left": 0, "top": 0 },
         "img": "scott",
         "description": "Scott is in your inventory now. Feel free to use him as you would any other items or spells.",
         "verbs": {
@@ -934,7 +940,7 @@
           ]
         },
         "description": "Lobotomy Manor? Boy does this sign give me the creeps!!",
-        "position": { "left": 44, "top": 36, "width": 24, "height": 18 },
+        "position": { "left": 44, "top": 36 },
         "id": 11,
         "type": "items"
       },
@@ -949,7 +955,7 @@
           ]
         },
         "description": "Congratulations. You are the proud owner of a shiny, new frying pan",
-        "position": { "left": 71, "top": 20, "width": 15, "height": 15 },
+        "position": { "left": 71, "top": 20 },
         "id": 12,
         "type": "items"
       },
@@ -964,7 +970,7 @@
           ]
         },
         "description": "A bottle. Ugh... You remember how you had to drink that beer instead of gin and soda. What an awful time you had. Frankly you could do without the soda too. All you really want is the gin. That sweet, nourishing gin.",
-        "position": { "left": 46, "top": 48, "width": 8, "height": 8 },
+        "position": { "left": 46, "top": 48 },
         "onTake": "You chug the beer angrily in the hopes the bottle might come in handy later on.",
         "id": 13,
         "type": "items"
@@ -973,7 +979,7 @@
         "name": "garfield",
         "img": "garfield",
         "description": "A fearsome, rapacious cat is eating the gunk with lunatic vigor. This must be the only nearby form of nourishment. It might be best to leave him be.",
-        "position": { "left": 44, "top": 52, "width": 68, "height": 55 },
+        "position": { "left": 44, "top": 52 },
         "takeableFlag": "GARFIELD_TAKE",
         "visibleFlag": "GARFIELD_VISIBLE",
         "verbs": {
@@ -993,7 +999,7 @@
         "name": "pie",
         "img": "pie",
         "description": "A delicious-looking pie balances perfectly on its side. Do you really want to disrupt that?",
-        "position": { "left": 28, "top": 24, "width": 9, "height": 9 },
+        "position": { "left": 28, "top": 24 },
         "id": 15,
         "type": "items"
       },
@@ -1019,7 +1025,7 @@
         "name": "mo disk",
         "img": "floppy",
         "description": "Congratulations, you have found this game's MO disk. Every game has one, and you found this game's. That's awesome. Some games have more than one mo disk, but that's less common. Most games have exactly one.",
-        "position": { "left": 58, "top": 65, "width": 16, "height": 19 },
+        "position": { "left": 58, "top": 65 },
         "id": 19,
         "type": "items"
       },
@@ -1027,7 +1033,7 @@
         "name": "dan's hat",
         "img": "danHat",
         "description": "An irresistable hat",
-        "position": { "left": 18, "top": 11, "width": 73, "height": 63 },
+        "position": { "left": 18, "top": 11 },
         "id": 20,
         "type": "items"
       },

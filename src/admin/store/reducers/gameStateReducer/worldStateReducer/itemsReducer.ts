@@ -29,8 +29,6 @@ export const itemsSlice = createSlice({
         [action.payload.id]: {
           ...oldItem,
           position: {
-            width: oldItem.position.width,
-            height: oldItem.position.height,
             left: action.payload.x,
             top: action.payload.y,
           },
