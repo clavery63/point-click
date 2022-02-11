@@ -11,6 +11,7 @@ const ItemComponent = ({ object, onClick }: Props) => {
   const imgRef = React.useRef<any>(null); // Sorry.
   const { position, img, requiresPrecision } = object;
   const images = useSelector(state => state.images);
+  const image = images.get(img || '');
 
   useEffect(() => {
     if (requiresPrecision) {
@@ -26,9 +27,9 @@ const ItemComponent = ({ object, onClick }: Props) => {
       ref={imgRef}
       x={position?.left}
       y={position?.top}
-      width={position?.width}
-      height={position?.height}
-      image={images.get(img || '')}
+      width={image?.width}
+      height={image?.height}
+      image={image}
       onClick={() => onClick(object.id, 'items')}
     />
   );

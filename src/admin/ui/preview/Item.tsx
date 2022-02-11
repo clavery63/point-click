@@ -25,8 +25,8 @@ const Item = ({ id }: Props) => {
     <PreciseImage
       x={position.left + cachebuster}
       y={position.top + cachebuster}
-      width={position.width}
-      height={position.height}
+      width={image.width}
+      height={image.height}
       image={image}
       draggable
       onDragEnd={(e: KonvaEventObject<DragEvent>) => {

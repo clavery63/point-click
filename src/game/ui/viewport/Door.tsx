@@ -12,14 +12,19 @@ const DoorComponent = ({ object, onClick }: Props) => {
     position, openImg, closedImg, state,
   } = object;
   const images = useSelector(gameState => gameState.images);
-  const img = state === 'OPEN' ? openImg : closedImg;
+  const openImage = images.get(openImg || '');
+  const closedImage = images.get(closedImg || '');
+  const image = state === 'OPEN' ? openImage : closedImage;
+  const width = openImage?.width || closedImage?.width;
+  const height = openImage?.height || closedImage?.height;
+
   return (
     <Image
       x={position?.left}
       y={position?.top}
-      width={position?.width}
-      height={position?.height}
-      image={images.get(img || '')}
+      width={width}
+      height={height}
+      image={image}
       onClick={() => onClick(object.id, 'doors')}
     />
   );

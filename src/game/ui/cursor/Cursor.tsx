@@ -40,8 +40,8 @@ const Cursor = ({ stageData }: Props) => {
 
   return (
     <Image
-      width={9}
-      height={16}
+      width={cursorImg?.width}
+      height={cursorImg?.height}
       x={position.x - 3}
       y={position.y - 1}
       image={cursorEnabled ? cursorImg : undefined}
