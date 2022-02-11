@@ -4,7 +4,7 @@
 }
 
 .adminContainer canvas {
-  cursor: auto;
+  cursor: inherit;
   background-color: white !important;
 }
 
