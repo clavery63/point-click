@@ -7,6 +7,7 @@ import { Item } from 'game/store/types';
 import { useSelector, useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
+import ImgSelector from '../shared/ImgSelector';
 
 type Props = {
   entity: SelectedEntity;
@@ -54,7 +55,7 @@ const ItemDetails = ({ entity }: Props) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <LongTextField
+        <ImgSelector
           label="img"
           value={item.img}
           onChange={handleChange('img')}
