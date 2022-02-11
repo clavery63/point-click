@@ -27,9 +27,7 @@ interface Position {
   top: number;
 }
 
-export interface PositionAndSize {
-  left: number;
-  top: number;
+export interface Size {
   width: number;
   height: number;
 }
@@ -44,7 +42,7 @@ export interface Door {
   id: number;
   closedImg?: string;
   openImg?: string;
-  position?: PositionAndSize;
+  position?: Position;
   mapPosition: MapPosition;
   dest: number;
   dir: DoorDir;
@@ -102,7 +100,7 @@ export interface Item {
   id: number;
   name: string;
   description: string;
-  position?: PositionAndSize;
+  position?: Position;
   img?: string;
   // TODO: see if this can use genericVerbReducer
   onTake?: string;
@@ -117,9 +115,10 @@ export interface Scenery {
   id: number;
   name?: string;
   description?: string; // Optional for now since LOOK effects mask it
-  startPosition: PositionAndSize;
+  startPosition: Position;
   endPosition?: Position;
-  currentPosition?: PositionAndSize;
+  currentPosition?: Position;
+  size?: Size;
   img?: string;
   openText?: string;
   verbs?: VerbMappings;

@@ -72,24 +72,6 @@ export const numberPaths = [
     ]
   },
   {
-    "texts": [
-      "worldState.scenery[",
-      "].startPosition.width"
-    ],
-    "types": [
-      "number"
-    ]
-  },
-  {
-    "texts": [
-      "worldState.scenery[",
-      "].startPosition.height"
-    ],
-    "types": [
-      "number"
-    ]
-  },
-  {
     "value": "playerState.room"
   },
   {

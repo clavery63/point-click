@@ -86,7 +86,7 @@ const gameStateSchema = {
           "type": "string"
         },
         "position": {
-          "$ref": "#/definitions/PositionAndSize"
+          "$ref": "#/definitions/Position"
         },
         "mapPosition": {
           "$ref": "#/definitions/MapPosition"
@@ -193,7 +193,7 @@ const gameStateSchema = {
         "type"
       ]
     },
-    "PositionAndSize": {
+    "Position": {
       "type": "object",
       "properties": {
         "left": {
@@ -201,19 +201,11 @@ const gameStateSchema = {
         },
         "top": {
           "type": "number"
-        },
-        "width": {
-          "type": "number"
-        },
-        "height": {
-          "type": "number"
         }
       },
       "required": [
-        "height",
         "left",
-        "top",
-        "width"
+        "top"
       ]
     },
     "MapPosition": {
@@ -355,7 +347,7 @@ const gameStateSchema = {
           "type": "string"
         },
         "position": {
-          "$ref": "#/definitions/PositionAndSize"
+          "$ref": "#/definitions/Position"
         },
         "img": {
           "type": "string"
@@ -458,13 +450,16 @@ const gameStateSchema = {
           "type": "string"
         },
         "startPosition": {
-          "$ref": "#/definitions/PositionAndSize"
+          "$ref": "#/definitions/Position"
         },
         "endPosition": {
           "$ref": "#/definitions/Position"
         },
         "currentPosition": {
-          "$ref": "#/definitions/PositionAndSize"
+          "$ref": "#/definitions/Position"
+        },
+        "size": {
+          "$ref": "#/definitions/Size"
         },
         "img": {
           "type": "string"
@@ -560,19 +555,19 @@ const gameStateSchema = {
         "type"
       ]
     },
-    "Position": {
+    "Size": {
       "type": "object",
       "properties": {
-        "left": {
+        "width": {
           "type": "number"
         },
-        "top": {
+        "height": {
           "type": "number"
         }
       },
       "required": [
-        "left",
-        "top"
+        "height",
+        "width"
       ]
     },
     "Room": {
