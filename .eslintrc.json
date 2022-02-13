@@ -37,6 +37,7 @@
       "react/no-array-index-key": "off",
       "jsx-a11y/media-has-caption": "off",
       "react/destructuring-assignment": "off",
+      "no-param-reassign": ["error", { "props": false }],
       "react/jsx-filename-extension": ["warn", {"extensions": [".tsx"]} ],
       "import/extensions": [
         "error",

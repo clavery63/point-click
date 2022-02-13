@@ -22,33 +22,18 @@ export const scenerySlice = createSlice({
   initialState,
   reducers: {
     setSceneryPosition: (state, action: PayloadAction<PositionWithId>) => {
-      const oldScenery = state[action.payload.id];
-      return {
-        ...state,
-        [action.payload.id]: {
-          ...oldScenery,
-          [action.payload.field]: {
-            ...oldScenery[action.payload.field],
-            left: action.payload.x,
-            top: action.payload.y,
-          },
-        },
-      };
+      const {
+        id, x, y, field,
+      } = action.payload;
+      const scenery = state[id];
+
+      scenery[field] = { left: x, top: y };
     },
     setScenerySize: (state, action: PayloadAction<SizeWithId>) => {
-      // TODO: resize should also use SET_SCENERY_POSITION
-      const oldScenery2 = state[action.payload.id];
-      return {
-        ...state,
-        [action.payload.id]: {
-          ...oldScenery2,
-          startPosition: {
-            ...oldScenery2.startPosition,
-            width: action.payload.width,
-            height: action.payload.height,
-          },
-        },
-      };
+      const { id, width, height } = action.payload;
+      const scenery = state[id];
+
+      scenery.size = { width, height };
     },
   },
   extraReducers: builder => {

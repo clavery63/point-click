@@ -14,10 +14,9 @@ export const roomsSlice = createSlice({
   initialState,
   reducers: {
     setRoom: (state, action: PayloadAction<RoomWithId>) => {
-      return {
-        ...state,
-        [action.payload.id]: action.payload.room,
-      };
+      const { id, room } = action.payload;
+
+      state[id] = room;
     },
   },
   extraReducers: builder => {

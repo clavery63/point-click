@@ -20,26 +20,17 @@ export const itemsSlice = createSlice({
   initialState,
   reducers: {
     setItemPosition: (state, action: PayloadAction<PositionWithId>) => {
-      const oldItem = state[action.payload.id];
-      if (!oldItem.position) {
-        return state;
+      const { x, y, id } = action.payload;
+      const item = state[id];
+
+      if (item.position) {
+        item.position = { left: x, top: y };
       }
-      return {
-        ...state,
-        [action.payload.id]: {
-          ...oldItem,
-          position: {
-            left: action.payload.x,
-            top: action.payload.y,
-          },
-        },
-      };
     },
     setItem: (state, action: PayloadAction<ItemWithId>) => {
-      return {
-        ...state,
-        [action.payload.id]: action.payload.item,
-      };
+      const { id, item } = action.payload;
+
+      state[id] = item;
     },
   },
   extraReducers: builder => {
