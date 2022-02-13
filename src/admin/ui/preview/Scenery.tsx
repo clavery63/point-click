@@ -20,7 +20,7 @@ const Scenery = ({ id, roomId }: Props) => {
   });
   const selectedEnt = useSelector(state => state.editorState.selectedEntity);
 
-  useReordering(scenery, roomId);
+  useReordering(scenery, roomId, 'scenery');
 
   const editing = 'startPosition';
 

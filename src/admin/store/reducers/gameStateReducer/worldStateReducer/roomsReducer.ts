@@ -11,6 +11,7 @@ type Reordering = {
   roomId: number;
   entityId: number;
   direction: 'UP' | 'DOWN';
+  type: 'scenery' | 'items';
 };
 
 const swap = (list: any[], indexOne: number, indexTwo: number) => {
@@ -30,22 +31,24 @@ export const roomsSlice = createSlice({
 
       state[id] = room;
     },
-    reorderScenery: (state, action: PayloadAction<Reordering>) => {
-      const { roomId, entityId, direction } = action.payload;
-      const { scenery } = state[roomId];
-      const entityIndex = scenery.indexOf(entityId);
+    reorderEntity: (state, action: PayloadAction<Reordering>) => {
+      const {
+        roomId, entityId, type, direction,
+      } = action.payload;
+      const entityList = state[roomId][type];
+      const entityIndex = entityList.indexOf(entityId);
 
       if (entityIndex < 0) {
-        console.log(`damn, coudn't find scenery ${entityId} in room ${roomId}`);
+        console.log(`damn, coudn't find ${type} ${entityId} in room ${roomId}`);
         return;
       }
 
       if (direction === 'DOWN') {
-        swap(scenery, entityIndex, Math.max(entityIndex - 1, 0));
+        swap(entityList, entityIndex, Math.max(entityIndex - 1, 0));
       }
 
       if (direction === 'UP') {
-        swap(scenery, entityIndex, Math.min(entityIndex + 1, scenery.length - 1));
+        swap(entityList, entityIndex, Math.min(entityIndex + 1, entityList.length - 1));
       }
     },
   },
@@ -54,6 +57,6 @@ export const roomsSlice = createSlice({
   },
 });
 
-export const { setRoom, reorderScenery } = roomsSlice.actions;
+export const { setRoom, reorderEntity } = roomsSlice.actions;
 
 export default roomsSlice.reducer;

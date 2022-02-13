@@ -1,10 +1,10 @@
-import { reorderScenery } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
+import { reorderEntity } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
 import { Entity } from 'game/store/types';
 import { useEffect } from 'react';
 import { isSelected } from '../utils/isSelected';
 import { useDispatch, useSelector } from './redux';
 
-const useReordering = (entity: Entity, roomId: number) => {
+const useReordering = (entity: Entity, roomId: number, type: 'scenery' | 'items') => {
   const dispatch = useDispatch();
   const selectedEnt = useSelector(state => state.editorState.selectedEntity);
 
@@ -17,11 +17,15 @@ const useReordering = (entity: Entity, roomId: number) => {
       }
 
       if (e.key === 'ArrowUp') {
-        dispatch(reorderScenery({ roomId, entityId: entity.id, direction: 'UP' }));
+        dispatch(reorderEntity({
+          roomId, entityId: entity.id, type, direction: 'UP',
+        }));
       }
 
       if (e.key === 'ArrowDown') {
-        dispatch(reorderScenery({ roomId, entityId: entity.id, direction: 'DOWN' }));
+        dispatch(reorderEntity({
+          roomId, entityId: entity.id, type, direction: 'DOWN',
+        }));
       }
     };
     window.addEventListener('keyup', keyup);

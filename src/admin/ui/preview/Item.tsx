@@ -6,11 +6,13 @@ import PreciseImage from 'shared/components/PreciseImage';
 import { useSelector, useDispatch } from '../hooks/redux';
 import useCachebuster from '../hooks/useCachebuster';
 import { isUnselected } from '../utils/isSelected';
+import useReordering from '../hooks/useReordering';
 
 type Props = {
   id: number;
+  roomId: number;
 };
-const Item = ({ id }: Props) => {
+const Item = ({ id, roomId }: Props) => {
   const dispatch = useDispatch();
   const item = useSelector(state => {
     return state.gameState.worldState.items[id];
@@ -18,6 +20,7 @@ const Item = ({ id }: Props) => {
   const image = useSelector(state => state.gameState.images[item.img || '']);
   const selectedEnt = useSelector(state => state.editorState.selectedEntity);
   const cachebuster = useCachebuster(item.position);
+  useReordering(item, roomId, 'items');
 
   if (!item.position) {
     return null;
@@ -42,7 +45,7 @@ const Item = ({ id }: Props) => {
       onClick={() => {
         dispatch(setSelected({
           id,
-          type: 'item',
+          type: 'items',
         }));
       }}
     />

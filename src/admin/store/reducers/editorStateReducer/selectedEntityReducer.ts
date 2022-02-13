@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Nullable } from 'game/store/types';
 
 export type SelectedEntity = {
-  type: 'item' | 'scenery' | 'door';
+  type: 'items' | 'scenery' | 'doors';
   id: number;
 };
 

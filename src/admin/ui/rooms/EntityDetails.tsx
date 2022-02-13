@@ -3,9 +3,9 @@ import { useSelector } from '../hooks/redux';
 import ItemDetails from './ItemDetails';
 
 const components = {
-  item: ItemDetails,
+  items: ItemDetails,
   scenery: null,
-  door: null,
+  doors: null,
 };
 
 const EntityDetails = () => {
