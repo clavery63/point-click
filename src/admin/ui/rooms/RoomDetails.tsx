@@ -73,6 +73,12 @@ const RoomDetails = () => {
         />
       </Grid>
       <Grid item xs={12}>
+        <Typography>
+          Click an object to select and edit.
+          Press ↑ or ↓ to reorder selected object.
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
         <PreviewWidget room={room} roomId={roomId} />
       </Grid>
       <TestGameButton roomId={roomId} />
