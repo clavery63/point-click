@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { setSelected } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
 import { setSceneryPosition } from 'admin/store/reducers/gameStateReducer/worldStateReducer/sceneryReducer';
 import { KonvaEventObject } from 'konva/types/Node';
+import { reorderScenery } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
 import { useSelector, useDispatch } from '../hooks/redux';
 import VisibleScenery from './VisibleScenery';
 import InvisibleScenery from './InvisibleScenery';
-import { isUnselected } from '../utils/isSelected';
+import { isSelected, isUnselected } from '../utils/isSelected';
 
 type Props = {
   id: number;
@@ -31,6 +32,27 @@ const Scenery = ({ id, roomId }: Props) => {
       y: Math.round(e.target.y()),
     }));
   };
+
+  useEffect(() => {
+    const keyup = (e: KeyboardEvent) => {
+      e.stopPropagation();
+      if (!isSelected(scenery, selectedEnt)) {
+        return;
+      }
+
+      if (e.key === 'ArrowUp') {
+        dispatch(reorderScenery({ roomId, entityId: id, direction: 'UP' }));
+      }
+
+      if (e.key === 'ArrowDown') {
+        dispatch(reorderScenery({ roomId, entityId: id, direction: 'DOWN' }));
+      }
+    };
+    window.addEventListener('keyup', keyup);
+    return () => {
+      window.removeEventListener('keyup', keyup);
+    };
+  }, [selectedEnt]);
 
   const SceneryComponent = scenery.img ? VisibleScenery : InvisibleScenery;
 
