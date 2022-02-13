@@ -41,8 +41,7 @@ const GameRoot = React.memo(({ gameName, state }: Props) => {
         ...state,
       };
 
-      // const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-      const composeEnhancers = compose;
+      const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
       const newStore = createStore(rootReducer, initialState, composeEnhancers(
         applyMiddleware(epicMiddleware, effectsMiddleware),
       ));
