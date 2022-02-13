@@ -12,9 +12,10 @@ type Props = {
   scenery: Scenery;
   onDragEnd: (e: KonvaEventObject<DragEvent>) => void;
   onClick: () => void;
+  opacity: number;
 };
 const InisibleScenery = ({
-  id, position, scenery, onDragEnd, onClick,
+  id, position, scenery, onDragEnd, onClick, opacity,
 }: Props) => {
   const dispatch = useDispatch();
   const cachebuster = useCachebuster(position);
@@ -41,7 +42,7 @@ const InisibleScenery = ({
         scaleX={1}
         scaleY={1}
         fill="red"
-        opacity={0.7}
+        opacity={0.7 * opacity}
         draggable
         onDragEnd={onDragEnd}
         onTransformEnd={() => {

@@ -5,29 +5,32 @@ import { KonvaEventObject } from 'konva/types/Node';
 import PreciseImage from 'shared/components/PreciseImage';
 import { useSelector, useDispatch } from '../hooks/redux';
 import useCachebuster from '../hooks/useCachebuster';
+import { isUnselected } from '../utils/isSelected';
 
 type Props = {
   id: number;
 };
 const Item = ({ id }: Props) => {
   const dispatch = useDispatch();
-  const { img, position } = useSelector(state => {
+  const item = useSelector(state => {
     return state.gameState.worldState.items[id];
   });
-  const image = useSelector(state => state.gameState.images[img || '']);
-  const cachebuster = useCachebuster(position);
+  const image = useSelector(state => state.gameState.images[item.img || '']);
+  const selectedEnt = useSelector(state => state.editorState.selectedEntity);
+  const cachebuster = useCachebuster(item.position);
 
-  if (!position) {
+  if (!item.position) {
     return null;
   }
 
   return (
     <PreciseImage
-      x={position.left + cachebuster}
-      y={position.top + cachebuster}
+      x={item.position.left + cachebuster}
+      y={item.position.top + cachebuster}
       width={image.width}
       height={image.height}
       image={image}
+      opacity={isUnselected(item, selectedEnt) ? 0.5 : 1}
       draggable
       onDragEnd={(e: KonvaEventObject<DragEvent>) => {
         dispatch(setItemPosition({

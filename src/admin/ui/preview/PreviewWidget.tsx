@@ -9,8 +9,9 @@ const SCALE = 5;
 
 type Props = {
   room: Room;
+  roomId: number;
 };
-const PreviewWidget = ({ room }: Props) => {
+const PreviewWidget = ({ room, roomId }: Props) => {
   const layerRef = useCallback(layer => {
     if (layer) {
       layer.imageSmoothingEnabled(false);
@@ -28,7 +29,7 @@ const PreviewWidget = ({ room }: Props) => {
         >
           <Provider store={store}>
             <Layer ref={layerRef}>
-              <Viewport room={room} />
+              <Viewport room={room} roomId={roomId} />
             </Layer>
           </Provider>
         </Stage>

@@ -7,28 +7,21 @@ import { useSelector, useDispatch } from '../hooks/redux';
 import Item from './Item';
 import Scenery from './Scenery';
 
-const shouldDisplay = (id: number, type: string, selectedEntity: Nullable<SelectedEntity>) => {
-  if (!selectedEntity) {
-    return true;
-  }
-  return id === selectedEntity.id && type === selectedEntity.type;
-};
-
 type ObjectGroupType<T> = {
   Component: T;
   ids: number[];
-  type: string;
-  selectedEntity: Nullable<SelectedEntity>;
+  roomId: number;
 };
 const ObjectGroup = ({
-  Component, ids, type, selectedEntity,
-}: ObjectGroupType<React.FC<{ id: number }>>) => (
+  Component, ids, roomId,
+}: ObjectGroupType<React.FC<{ id: number; roomId: number }>>) => (
   <Group>
     {ids.map(id => {
-      return shouldDisplay(id, type, selectedEntity) && (
+      return (
         <Component
           key={id}
           id={id}
+          roomId={roomId}
         />
       );
     })}
@@ -60,6 +53,7 @@ const Background = ({ image, selectedEntity }: BackgroundProps) => {
 
 type Props = {
   room: Room;
+  roomId: number;
 };
 const Viewport = (props: Props) => {
   const {
@@ -72,8 +66,16 @@ const Viewport = (props: Props) => {
     <Group>
       <Background image={roomImg} selectedEntity={selectedEntity} />
       {/* <ObjectGroup ids={doors} collection={'doors'} /> */}
-      <ObjectGroup ids={items} Component={Item} type="item" selectedEntity={selectedEntity} />
-      <ObjectGroup ids={scenery} Component={Scenery} type="scenery" selectedEntity={selectedEntity} />
+      <ObjectGroup
+        ids={items}
+        roomId={props.roomId}
+        Component={Item}
+      />
+      <ObjectGroup
+        ids={scenery}
+        roomId={props.roomId}
+        Component={Scenery}
+      />
     </Group>
   );
 };

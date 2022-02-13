@@ -5,15 +5,19 @@ import { KonvaEventObject } from 'konva/types/Node';
 import { useSelector, useDispatch } from '../hooks/redux';
 import VisibleScenery from './VisibleScenery';
 import InvisibleScenery from './InvisibleScenery';
+import { isUnselected } from '../utils/isSelected';
 
 type Props = {
   id: number;
+  roomId: number;
 };
-const Scenery = ({ id }: Props) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Scenery = ({ id, roomId }: Props) => {
   const dispatch = useDispatch();
   const scenery = useSelector(state => {
     return state.gameState.worldState.scenery[id];
   });
+  const selectedEnt = useSelector(state => state.editorState.selectedEntity);
 
   const editing = 'startPosition';
 
@@ -35,6 +39,7 @@ const Scenery = ({ id }: Props) => {
       id={id}
       scenery={scenery}
       position={position}
+      opacity={isUnselected(scenery, selectedEnt) ? 0.5 : 1}
       onDragEnd={onDragEnd}
       onClick={() => {
         dispatch(setSelected({

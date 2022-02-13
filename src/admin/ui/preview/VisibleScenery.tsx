@@ -10,9 +10,10 @@ type Props = {
   position: Position;
   onDragEnd: (e: KonvaEventObject<DragEvent>) => void;
   onClick: () => void;
+  opacity: number;
 };
 const VisibleScenery = ({
-  scenery, position, onDragEnd, onClick,
+  scenery, position, onDragEnd, onClick, opacity,
 }: Props) => {
   const image = useSelector(state => state.gameState.images[scenery.img || '']);
   const cachebuster = useCachebuster(position);
@@ -28,6 +29,7 @@ const VisibleScenery = ({
       width={image.width}
       height={image.height}
       image={image}
+      opacity={opacity}
       draggable
       onDragEnd={onDragEnd}
       onClick={onClick}

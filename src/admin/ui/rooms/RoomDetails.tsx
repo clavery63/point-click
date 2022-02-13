@@ -73,7 +73,7 @@ const RoomDetails = () => {
         />
       </Grid>
       <Grid item xs={12}>
-        <PreviewWidget room={room} />
+        <PreviewWidget room={room} roomId={roomId} />
       </Grid>
       <TestGameButton roomId={roomId} />
       <UploadButton />
