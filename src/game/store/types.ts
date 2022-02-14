@@ -135,8 +135,7 @@ export interface Room {
   initialDescription?: Nullable<string>;
   description: string;
   doors: number[];
-  items: number[];
-  scenery: number[];
+  entities: number[];
   gameOver?: boolean;
 }
 

@@ -597,13 +597,7 @@ const gameStateSchema = {
             "type": "number"
           }
         },
-        "items": {
-          "type": "array",
-          "items": {
-            "type": "number"
-          }
-        },
-        "scenery": {
+        "entities": {
           "type": "array",
           "items": {
             "type": "number"
@@ -616,8 +610,7 @@ const gameStateSchema = {
       "required": [
         "description",
         "doors",
-        "items",
-        "scenery"
+        "entities"
       ]
     },
     "PlayerState": {

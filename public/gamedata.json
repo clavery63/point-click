@@ -228,8 +228,7 @@
         "initialDescription": "Welcome, newcomer. This is birthday castle. We hope you find it comfortable inside.               And who knows? You might even see some cool s*** along the way.",
         "description": "It's the entrance to Birthday Castle. You can faintly hear the sound of several full grown adults chanting inside.",
         "doors": [48, 63, 67],
-        "items": [0],
-        "scenery": [21]
+        "entities": [0, 21]
       },
       "1": {
         "img": "room-1",
@@ -237,107 +236,93 @@
         "description": "The lobby of Birthday Castle",
         "initialDescription": "A man stumbles toward you. \"Oh shit, is that Scott?\" you wonder as you pull yourself through the half-ajar door. \"Why am I not shocked to find him here...\"",
         "doors": [49, 50, 51],
-        "items": [11, 3, 4, 10],
-        "scenery": []
+        "entities": [11, 3, 4, 10]
       },
       "2": {
         "img": "room-2",
         "description": "The stone passage winds to an unseen end.",
         "doors": [52, 54, 58],
-        "items": [8, 9],
-        "scenery": [22, 23],
+        "entities": [8, 9, 22, 23],
         "initialDescription": "The stone passage winds to an unseen end. Wait, who is that?"
       },
       "3": {
         "img": "room-3",
         "description": "It's nothing but a closet. An ordinary, run-of-the-mill closet. Oh, and some items.",
         "doors": [53],
-        "items": [6, 7],
-        "scenery": [28]
+        "entities": [6, 7, 28]
       },
       "4": {
         "img": "room-4",
         "description": "There are more doors here.",
         "doors": [55, 56, 57, 59],
-        "items": [],
-        "scenery": [37]
+        "entities": [37]
       },
       "5": {
         "img": "room-5",
         "music": "xfiles.mp3",
         "description": "Why it's simply Redd's! For some reason you seem to have entered from the back.",
         "doors": [60],
-        "items": [12, 13],
-        "scenery": [25, 27, 30, 31, 32, 45]
+        "entities": [12, 13, 25, 27, 30, 31, 32, 45]
       },
       "6": {
         "img": "room-6",
         "music": "crummy-roads.mp3",
         "description": "This place looks familiar. It's some place you haven't been in a long time.",
         "doors": [60],
-        "items": [],
-        "scenery": [42, 43, 44]
+        "entities": [42, 43, 44]
       },
       "7": {
         "img": "room-7",
         "music": "coldgin.mp3",
         "description": "You are delighted to find yourself outside of a friendly-looking pub restaurant. Though it seems the surrounding area is overrun with some kind of bulbous green gunk.",
         "doors": [60, 62],
-        "items": [14],
-        "scenery": [24, 29]
+        "entities": [14, 24, 29]
       },
       "8": {
         "img": "eight-ball-large",
         "description": "It's one of those magic 8 balls! What a treat! Maybe this will have the answer. Also, you really want gin.",
         "doors": [61],
-        "items": [],
-        "scenery": [26]
+        "entities": [26]
       },
       "9": {
         "img": "beerman",
         "description": "You completely blew it. You tried to eat one of those magic 8 balls and it made you die.",
         "gameOver": true,
         "doors": [],
-        "items": [],
-        "scenery": []
+        "entities": []
       },
       "10": {
         "img": "bed",
         "description": "You take an aggressive pull out of the bong and feel nothing. Nothing for a while, really. But after a few minutes it starts to kick in and you start to feel funny. You'd never smoked weed before, so you didn't really know what to expect. Anyway, days go by and you don't stop feeling high, it just gets more and more intense. You become convinced that the weed was laced with something, except you saw other people take hits from the same stash and they were completely fine. You wonder if Scott and Santos are drug dealers who conspired against you to get you high. No matter. The feeling escalates. You begin to have an out of body experience. It's been almost a week now, and you are no longer at the castle. You're home, or at least some place that looks like home. You have no recollection of leaving the castle. Has it been weeks, months, years? All of your friends know  you are high. They must. Next thing you know, you're on a hospital bed. Everyone you know is there, giving you fist bumps and crying tears of joy. Doug is in the corner, staring at your with a warm, fatherly smirk. \"You did it, man\", he says. You die.",
         "gameOver": true,
         "doors": [],
-        "items": [],
-        "scenery": []
+        "entities": []
       },
       "11": {
         "img": "beerman",
         "description": "What you feared most has happened: your bag has exploded. You slipped on some of the spillage on the floor and died from the fall.",
         "gameOver": true,
         "doors": [],
-        "items": [],
-        "scenery": []
+        "entities": []
       },
       "12": {
         "img": "room-8",
         "music": "blinded-by-the-light.mp3",
         "description": "You find yourself in a cool locker room. A wonderful-smelling man greets you as you walk in.",
         "doors": [65],
-        "items": [],
-        "scenery": [39, 36, 38]
+        "entities": [39, 36, 38]
       },
       "13": {
         "video": "slam-city.mp4",
         "description": "An uplifting video emboldens you with newfound confidence.",
         "doors": [61],
-        "items": [],
-        "scenery": []
+        "entities": []
       },
       "14": {
         "img": "fridge-large",
         "description": "A smattering of items can be found here.",
         "doors": [64],
-        "items": [15, 19],
-        "scenery": []
+        "entities": [15, 19]
       },
       "15": {
         "img": "park",
@@ -345,52 +330,45 @@
         "initialDescription": "You find yourself in a serene park.",
         "description": "Remember this park? It's kind of nice.",
         "doors": [59],
-        "items": [],
-        "scenery": [33, 34, 35, 41]
+        "entities": [33, 34, 35, 41]
       },
       "16": {
         "video": "buckner.mp4",
         "description": "A fun, funny video is on display here. But you get the horrible feeling that you've traveled back in time, or to some alternate reality.",
         "doors": [61],
-        "items": [],
-        "scenery": []
+        "entities": []
       },
       "17": {
         "img": "rob-large",
         "description": "You begin to feel headstrong, as though you could take on anyone, from studying the remarkable image in this locker. Oh, looks like there is a poem underneath! It says: Opaque, pale cakes of fermented lard, 40 gallon drum of butter posted up in my yard. Smelling like oil for the rest of my life, air's so dank hard to cut with a knife.Â Â Chubby rain, vacuoles of pain stifling my brain. Ludicrous lipid levels compressing my lid, rendering down fat from a P.I.G. pig.  Hot skulls baking in the summer heat; basted onion heads filled with day old bread.Â Â Glazed doughnut & a bottle of anything,Â Â lipid rivers in the sewer lead to Wendy's and Burger King. Hey Alopecia, nice ta meet ya. I take a ride to the hairpiece store, Can't flip my wig proper no more. Hollow-tipped biological slugs hopping in a vat of beer, rest in piece to a shelled bug.  Mayonnaise on my mind, oil on my bread, Cold cut hypnosis, olive loaf's starting to own me. Now I'm feeling lonely without fried bologna.          -RH",
         "music": "up-in-da-club.mp3",
         "doors": [66],
-        "items": [],
-        "scenery": []
+        "entities": []
       },
       "18": {
         "video": "jets-fumble.mp4",
         "description": "Hell yeah. That's some good fumbling. Gin. Love to see a good fumble ya hear. Gin. Gin. I like it when the Jets Fumble! I need gin.",
         "doors": [60],
-        "items": [],
-        "scenery": [40]
+        "entities": [40]
       },
       "19": {
         "video": "good-ending.mp4",
         "description": "As you sip on your refreshing beverage, you feel your mania fading. Norm returns from the bathroom and slaps you on the back. With a jolt you have a flash of a memory of falling...a pit...pain...light... but it quickly fades. Better not to focus on that. You're comfortable here. In fact you feel you like you could stay here forever, sipping on this delicious gin and tonic. Surrounded by people who know your name...",
         "doors": [],
-        "items": [],
-        "scenery": []
+        "entities": []
       },
       "20": {
         "video": "bad-ending.mp4",
         "description": "Unfortunately this gin and soda is really not doing the trick. The gin must have been contaminated by sitting in that motorcycle for so long, it's really warm and tastes off. If only you could have found some delicious ice cold gin! You feel more sober than ever. Looking at Sam Malone, you remember that he's not even real. He's a fictional character played by Ted Danson who you're pretty sure is not here right now. In fact it occurs to you that nobody is here right now, and \"here\" isn't really anywhere. You look behind you and see only a void. The Abbey is fading away before your eyes. You feel cold. You remember that The Abbey is gone forever, and realize that the only piece of it left is what lives on in your memory. You're starting to feel sick looking at this fading simulacrum. Ugly though it may be, you'd be better off in the real world, living with your memories of good times. It's time to stop playing this game and face reality.",
         "gameOver": true,
         "doors": [],
-        "items": [],
-        "scenery": []
+        "entities": []
       },
       "21": {
         "img": "dan",
         "description": "You found Dan.",
         "doors": [68],
-        "items": [20],
-        "scenery": []
+        "entities": [20]
       }
     },
     "scenery": {
