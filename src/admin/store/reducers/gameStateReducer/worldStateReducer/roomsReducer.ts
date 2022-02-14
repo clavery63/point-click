@@ -35,8 +35,8 @@ export const roomsSlice = createSlice({
       const {
         roomId, entityId, type, direction,
       } = action.payload;
-      const entityList = state[roomId][type];
-      const entityIndex = entityList.indexOf(entityId);
+      const { entities } = state[roomId];
+      const entityIndex = entities.indexOf(entityId);
 
       if (entityIndex < 0) {
         console.log(`damn, coudn't find ${type} ${entityId} in room ${roomId}`);
@@ -44,11 +44,11 @@ export const roomsSlice = createSlice({
       }
 
       if (direction === 'DOWN') {
-        swap(entityList, entityIndex, Math.max(entityIndex - 1, 0));
+        swap(entities, entityIndex, Math.max(entityIndex - 1, 0));
       }
 
       if (direction === 'UP') {
-        swap(entityList, entityIndex, Math.min(entityIndex + 1, entityList.length - 1));
+        swap(entities, entityIndex, Math.min(entityIndex + 1, entities.length - 1));
       }
     },
   },

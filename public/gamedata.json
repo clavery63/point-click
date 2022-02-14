@@ -371,7 +371,227 @@
         "entities": [20]
       }
     },
-    "scenery": {
+    "entities": {
+      "0": {
+        "name": "key 1",
+        "position": { "left": 52, "top": 8 },
+        "img": "key-1",
+        "verbs": {
+          "LOOK": [{ "text": "There's a random key embedded in the wall." }]
+        },
+        "description": "This is a real nice-looking key.",
+        "id": 0,
+        "type": "items"
+      },
+      "1": {
+        "name": "plunger",
+        "position": { "left": 80, "top": 108 },
+        "img": "plunger",
+        "description": "Your average, run of the mill plunger. How boring.",
+        "id": 1,
+        "type": "items"
+      },
+      "2": {
+        "name": "toilet",
+        "position": { "left": 99, "top": 75 },
+        "img": "toilet",
+        "description": "Welp, so much for using this toilet",
+        "id": 2,
+        "type": "items"
+      },
+      "3": {
+        "name": "torch",
+        "position": { "left": 1, "top": 20 },
+        "img": "torch-1",
+        "description": "One of two torches in this room",
+        "id": 3,
+        "type": "items"
+      },
+      "4": {
+        "name": "torch",
+        "position": { "left": 105, "top": 20 },
+        "img": "torch-1",
+        "description": "The other torch",
+        "id": 4,
+        "type": "items"
+      },
+      "5": {
+        "name": "key 2",
+        "img": "key2",
+        "description": "This key bears a skull. This must be a skeleton key.",
+        "id": 5,
+        "type": "items"
+      },
+      "6": {
+        "name": "lockpick",
+        "position": { "left": 32, "top": 26 },
+        "img": "lockpick",
+        "verbs": {
+          "LOOK": [
+            {
+              "text": "Mike, here is a lockpick. It might be handy if you, the master of unlocking, take it with you."
+            }
+          ]
+        },
+        "description": "You can use this to pick locks.",
+        "id": 6,
+        "type": "items"
+      },
+      "7": {
+        "name": "bong",
+        "position": { "left": 48, "top": 52 },
+        "img": "bong",
+        "description": "It's some kind of strange vessel. Its base is filled with a murky, dank liquid, and there is an acrid vapor emanating from its spout.",
+        "verbs": { "SMOKE": [{ "moveTo": 10, "moveDir": "RIGHT" }] },
+        "id": 7,
+        "type": "items"
+      },
+      "8": {
+        "name": "torch",
+        "position": { "left": 5, "top": 33 },
+        "img": "torch-2",
+        "description": "A torch",
+        "id": 8,
+        "type": "items"
+      },
+      "9": {
+        "name": "torch",
+        "position": { "left": 38, "top": 36 },
+        "img": "torch-3",
+        "description": "Testing 123",
+        "id": 9,
+        "type": "items"
+      },
+      "10": {
+        "name": "scott",
+        "position": { "left": 0, "top": 0 },
+        "img": "scott",
+        "description": "Scott is in your inventory now. Feel free to use him as you would any other items or spells.",
+        "verbs": {
+          "SPEAK": [
+            {
+              "text": "\"I thought you said this party would be cool.\", says Scott, looking concerned. \"Why haven't I had any beer yet?\""
+            }
+          ],
+          "HIT": [{ "text": "\"Cool man. got any beer?\"" }],
+          "LOOK": [
+            {
+              "text": "He seems aggressive, but you don't think there's any reason to be concerned at the moment."
+            }
+          ]
+        },
+        "requiresPrecision": true,
+        "id": 10,
+        "type": "items"
+      },
+      "11": {
+        "name": "sign",
+        "img": "welcome-sign",
+        "verbs": {
+          "LOOK": [
+            {
+              "text": "_____The sign reads: ______\"Welcome to\" ____\"Lobotomy Manor.\"                             But I'm not at Lobotomy Manor!!                   I'm at Birthday Castle... right?"
+            }
+          ]
+        },
+        "description": "Lobotomy Manor? Boy does this sign give me the creeps!!",
+        "position": { "left": 44, "top": 36 },
+        "id": 11,
+        "type": "items"
+      },
+      "12": {
+        "name": "frying pan",
+        "img": "frying-pan",
+        "verbs": {
+          "LOOK": [
+            {
+              "text": "A commercial for a frying pan plays quietly in the background."
+            }
+          ]
+        },
+        "description": "Congratulations. You are the proud owner of a shiny, new frying pan",
+        "position": { "left": 71, "top": 20 },
+        "id": 12,
+        "type": "items"
+      },
+      "13": {
+        "name": "bottle",
+        "img": "bottle",
+        "verbs": {
+          "LOOK": [
+            {
+              "text": "You grow enraged as you realize that, while there is an unattended drink on the counter, it is simply a beer and not a gin and soda."
+            }
+          ]
+        },
+        "description": "A bottle. Ugh... You remember how you had to drink that beer instead of gin and soda. What an awful time you had. Frankly you could do without the soda too. All you really want is the gin. That sweet, nourishing gin.",
+        "position": { "left": 46, "top": 48 },
+        "onTake": "You chug the beer angrily in the hopes the bottle might come in handy later on.",
+        "id": 13,
+        "type": "items"
+      },
+      "14": {
+        "name": "garfield",
+        "img": "garfield",
+        "description": "A fearsome, rapacious cat is eating the gunk with lunatic vigor. This must be the only nearby form of nourishment. It might be best to leave him be.",
+        "position": { "left": 44, "top": 52 },
+        "takeableFlag": "GARFIELD_TAKE",
+        "visibleFlag": "GARFIELD_VISIBLE",
+        "verbs": {
+          "EAT": [
+            {
+              "text": "With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.",
+              "addFlags": ["GARFIELD_CONSUMED"],
+              "removeFlags": ["GARFIELD_VISIBLE"]
+            }
+          ],
+          "SMOKE": [{ "text": "Smoking Garfield is illegal in this state." }]
+        },
+        "id": 14,
+        "type": "items"
+      },
+      "15": {
+        "name": "pie",
+        "img": "pie",
+        "description": "A delicious-looking pie balances perfectly on its side. Do you really want to disrupt that?",
+        "position": { "left": 28, "top": 24 },
+        "id": 15,
+        "type": "items"
+      },
+      "16": {
+        "name": "cold gin",
+        "description": "Your mouth waters just thinking about this high-quality gin.",
+        "id": 16,
+        "type": "items"
+      },
+      "17": {
+        "name": "warm gin",
+        "description": "Real bottom-of-the-barrel stuff. But what do you care? It's gin, isn't it?",
+        "id": 17,
+        "type": "items"
+      },
+      "18": {
+        "name": "hamburgers",
+        "description": "The hamburger. One of the most famous sandwiches of all time. You feel safe knowing you have some of these at your disposal",
+        "id": 18,
+        "type": "items"
+      },
+      "19": {
+        "name": "mo disk",
+        "img": "floppy",
+        "description": "Congratulations, you have found this game's MO disk. Every game has one, and you found this game's. That's awesome. Some games have more than one mo disk, but that's less common. Most games have exactly one.",
+        "position": { "left": 58, "top": 65 },
+        "id": 19,
+        "type": "items"
+      },
+      "20": {
+        "name": "dan's hat",
+        "img": "danHat",
+        "description": "An irresistable hat",
+        "position": { "left": 18, "top": 11 },
+        "id": 20,
+        "type": "items"
+      },
       "21": {
         "img": "skull",
         "description": "It's the skull of some creature. Its meaning seems quite clear: death lurks inside.",
@@ -792,228 +1012,6 @@
         "description": "These glasses belong to Oscar.",
         "id": 26,
         "type": "scenery"
-      }
-    },
-    "items": {
-      "0": {
-        "name": "key 1",
-        "position": { "left": 52, "top": 8 },
-        "img": "key-1",
-        "verbs": {
-          "LOOK": [{ "text": "There's a random key embedded in the wall." }]
-        },
-        "description": "This is a real nice-looking key.",
-        "id": 0,
-        "type": "items"
-      },
-      "1": {
-        "name": "plunger",
-        "position": { "left": 80, "top": 108 },
-        "img": "plunger",
-        "description": "Your average, run of the mill plunger. How boring.",
-        "id": 1,
-        "type": "items"
-      },
-      "2": {
-        "name": "toilet",
-        "position": { "left": 99, "top": 75 },
-        "img": "toilet",
-        "description": "Welp, so much for using this toilet",
-        "id": 2,
-        "type": "items"
-      },
-      "3": {
-        "name": "torch",
-        "position": { "left": 1, "top": 20 },
-        "img": "torch-1",
-        "description": "One of two torches in this room",
-        "id": 3,
-        "type": "items"
-      },
-      "4": {
-        "name": "torch",
-        "position": { "left": 105, "top": 20 },
-        "img": "torch-1",
-        "description": "The other torch",
-        "id": 4,
-        "type": "items"
-      },
-      "5": {
-        "name": "key 2",
-        "img": "key2",
-        "description": "This key bears a skull. This must be a skeleton key.",
-        "id": 5,
-        "type": "items"
-      },
-      "6": {
-        "name": "lockpick",
-        "position": { "left": 32, "top": 26 },
-        "img": "lockpick",
-        "verbs": {
-          "LOOK": [
-            {
-              "text": "Mike, here is a lockpick. It might be handy if you, the master of unlocking, take it with you."
-            }
-          ]
-        },
-        "description": "You can use this to pick locks.",
-        "id": 6,
-        "type": "items"
-      },
-      "7": {
-        "name": "bong",
-        "position": { "left": 48, "top": 52 },
-        "img": "bong",
-        "description": "It's some kind of strange vessel. Its base is filled with a murky, dank liquid, and there is an acrid vapor emanating from its spout.",
-        "verbs": { "SMOKE": [{ "moveTo": 10, "moveDir": "RIGHT" }] },
-        "id": 7,
-        "type": "items"
-      },
-      "8": {
-        "name": "torch",
-        "position": { "left": 5, "top": 33 },
-        "img": "torch-2",
-        "description": "A torch",
-        "id": 8,
-        "type": "items"
-      },
-      "9": {
-        "name": "torch",
-        "position": { "left": 38, "top": 36 },
-        "img": "torch-3",
-        "description": "Testing 123",
-        "id": 9,
-        "type": "items"
-      },
-      "10": {
-        "name": "scott",
-        "position": { "left": 0, "top": 0 },
-        "img": "scott",
-        "description": "Scott is in your inventory now. Feel free to use him as you would any other items or spells.",
-        "verbs": {
-          "SPEAK": [
-            {
-              "text": "\"I thought you said this party would be cool.\", says Scott, looking concerned. \"Why haven't I had any beer yet?\""
-            }
-          ],
-          "HIT": [{ "text": "\"Cool man. got any beer?\"" }],
-          "LOOK": [
-            {
-              "text": "He seems aggressive, but you don't think there's any reason to be concerned at the moment."
-            }
-          ]
-        },
-        "requiresPrecision": true,
-        "id": 10,
-        "type": "items"
-      },
-      "11": {
-        "name": "sign",
-        "img": "welcome-sign",
-        "verbs": {
-          "LOOK": [
-            {
-              "text": "_____The sign reads: ______\"Welcome to\" ____\"Lobotomy Manor.\"                             But I'm not at Lobotomy Manor!!                   I'm at Birthday Castle... right?"
-            }
-          ]
-        },
-        "description": "Lobotomy Manor? Boy does this sign give me the creeps!!",
-        "position": { "left": 44, "top": 36 },
-        "id": 11,
-        "type": "items"
-      },
-      "12": {
-        "name": "frying pan",
-        "img": "frying-pan",
-        "verbs": {
-          "LOOK": [
-            {
-              "text": "A commercial for a frying pan plays quietly in the background."
-            }
-          ]
-        },
-        "description": "Congratulations. You are the proud owner of a shiny, new frying pan",
-        "position": { "left": 71, "top": 20 },
-        "id": 12,
-        "type": "items"
-      },
-      "13": {
-        "name": "bottle",
-        "img": "bottle",
-        "verbs": {
-          "LOOK": [
-            {
-              "text": "You grow enraged as you realize that, while there is an unattended drink on the counter, it is simply a beer and not a gin and soda."
-            }
-          ]
-        },
-        "description": "A bottle. Ugh... You remember how you had to drink that beer instead of gin and soda. What an awful time you had. Frankly you could do without the soda too. All you really want is the gin. That sweet, nourishing gin.",
-        "position": { "left": 46, "top": 48 },
-        "onTake": "You chug the beer angrily in the hopes the bottle might come in handy later on.",
-        "id": 13,
-        "type": "items"
-      },
-      "14": {
-        "name": "garfield",
-        "img": "garfield",
-        "description": "A fearsome, rapacious cat is eating the gunk with lunatic vigor. This must be the only nearby form of nourishment. It might be best to leave him be.",
-        "position": { "left": 44, "top": 52 },
-        "takeableFlag": "GARFIELD_TAKE",
-        "visibleFlag": "GARFIELD_VISIBLE",
-        "verbs": {
-          "EAT": [
-            {
-              "text": "With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.",
-              "addFlags": ["GARFIELD_CONSUMED"],
-              "removeFlags": ["GARFIELD_VISIBLE"]
-            }
-          ],
-          "SMOKE": [{ "text": "Smoking Garfield is illegal in this state." }]
-        },
-        "id": 14,
-        "type": "items"
-      },
-      "15": {
-        "name": "pie",
-        "img": "pie",
-        "description": "A delicious-looking pie balances perfectly on its side. Do you really want to disrupt that?",
-        "position": { "left": 28, "top": 24 },
-        "id": 15,
-        "type": "items"
-      },
-      "16": {
-        "name": "cold gin",
-        "description": "Your mouth waters just thinking about this high-quality gin.",
-        "id": 16,
-        "type": "items"
-      },
-      "17": {
-        "name": "warm gin",
-        "description": "Real bottom-of-the-barrel stuff. But what do you care? It's gin, isn't it?",
-        "id": 17,
-        "type": "items"
-      },
-      "18": {
-        "name": "hamburgers",
-        "description": "The hamburger. One of the most famous sandwiches of all time. You feel safe knowing you have some of these at your disposal",
-        "id": 18,
-        "type": "items"
-      },
-      "19": {
-        "name": "mo disk",
-        "img": "floppy",
-        "description": "Congratulations, you have found this game's MO disk. Every game has one, and you found this game's. That's awesome. Some games have more than one mo disk, but that's less common. Most games have exactly one.",
-        "position": { "left": 58, "top": 65 },
-        "id": 19,
-        "type": "items"
-      },
-      "20": {
-        "name": "dan's hat",
-        "img": "danHat",
-        "description": "An irresistable hat",
-        "position": { "left": 18, "top": 11 },
-        "id": 20,
-        "type": "items"
       },
       "9999": {
         "name": "bag",
