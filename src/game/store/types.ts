@@ -141,8 +141,7 @@ export interface Room {
 
 export interface WorldState {
   doors: Lookup<Door>;
-  items: Lookup<Item>;
-  scenery: Lookup<Scenery>;
+  entities: Lookup<Entity>;
   rooms: Lookup<Room>;
 }
 

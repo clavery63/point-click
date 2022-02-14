@@ -32,21 +32,22 @@ const gameStateSchema = {
             }
           }
         },
-        "items": {
+        "entities": {
           "type": "object",
           "additionalProperties": false,
           "patternProperties": {
             "^[0-9]+$": {
-              "$ref": "#/definitions/Item"
-            }
-          }
-        },
-        "scenery": {
-          "type": "object",
-          "additionalProperties": false,
-          "patternProperties": {
-            "^[0-9]+$": {
-              "$ref": "#/definitions/Scenery"
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Door"
+                },
+                {
+                  "$ref": "#/definitions/Item"
+                },
+                {
+                  "$ref": "#/definitions/Scenery"
+                }
+              ]
             }
           }
         },
@@ -62,9 +63,8 @@ const gameStateSchema = {
       },
       "required": [
         "doors",
-        "items",
-        "rooms",
-        "scenery"
+        "entities",
+        "rooms"
       ]
     },
     "Door": {

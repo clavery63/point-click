@@ -37,35 +37,8 @@ export const numberPaths = [
   },
   {
     "texts": [
-      "worldState.items[",
+      "worldState.entities[",
       "].id"
-    ],
-    "types": [
-      "number"
-    ]
-  },
-  {
-    "texts": [
-      "worldState.scenery[",
-      "].id"
-    ],
-    "types": [
-      "number"
-    ]
-  },
-  {
-    "texts": [
-      "worldState.scenery[",
-      "].startPosition.left"
-    ],
-    "types": [
-      "number"
-    ]
-  },
-  {
-    "texts": [
-      "worldState.scenery[",
-      "].startPosition.top"
     ],
     "types": [
       "number"
