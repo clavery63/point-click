@@ -16,15 +16,13 @@ type BGProps = {
   image?: HTMLImageElement;
   video?: string;
 };
-const Background = ({ image, video }: BGProps) => {
+const Background = React.memo(({ image, video }: BGProps) => {
   if (video) {
-    // TODO: whoa, is this rendering on every cursor and text update? This should get
-    // its own connected component, but also lets get those out of redux
     return <Video src={`${videoAssetsRoot}/${video}`} />;
   }
 
   return <Image width={112} height={112} image={image} />;
-};
+});
 
 const Viewport = () => {
   const dispatch = useDispatch();
