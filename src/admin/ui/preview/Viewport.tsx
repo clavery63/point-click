@@ -7,18 +7,31 @@ import { useSelector, useDispatch } from '../hooks/redux';
 import Item from './Item';
 import Scenery from './Scenery';
 
-type ObjectGroupType<T> = {
-  Component: T;
+type EntityType = {
+  id: number;
+  roomId: number;
+};
+const Entity = ({ id, roomId }: EntityType) => {
+  const entity = useSelector(state => {
+    return state.gameState.worldState.entities[id];
+  });
+
+  if (entity.type === 'items') {
+    return <Item item={entity} roomId={roomId} />;
+  }
+
+  return <Scenery scenery={entity} roomId={roomId} />;
+};
+
+type EntitiesType = {
   ids: number[];
   roomId: number;
 };
-const ObjectGroup = ({
-  Component, ids, roomId,
-}: ObjectGroupType<React.FC<{ id: number; roomId: number }>>) => (
+const Entities = ({ ids, roomId }: EntitiesType) => (
   <Group>
     {ids.map(id => {
       return (
-        <Component
+        <Entity
           key={id}
           id={id}
           roomId={roomId}
@@ -57,7 +70,7 @@ type Props = {
 };
 const Viewport = (props: Props) => {
   const {
-    items, scenery, img,
+    entities, img,
   } = props.room;
   const roomImg = useSelector(state => state.gameState.images[img || '']);
   const selectedEntity = useSelector(state => state.editorState.selectedEntity);
@@ -66,16 +79,7 @@ const Viewport = (props: Props) => {
     <Group>
       <Background image={roomImg} selectedEntity={selectedEntity} />
       {/* <ObjectGroup ids={doors} collection={'doors'} /> */}
-      <ObjectGroup
-        ids={items}
-        roomId={props.roomId}
-        Component={Item}
-      />
-      <ObjectGroup
-        ids={scenery}
-        roomId={props.roomId}
-        Component={Scenery}
-      />
+      <Entities ids={entities} roomId={props.roomId} />
     </Group>
   );
 };
