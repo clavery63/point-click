@@ -52,7 +52,7 @@ const Inventory = () => {
       <Bag />
       {currentList.map((item, i) => (
         <InventoryItem
-          key={item.id}
+          key={`${item.id}-${i}`}
           item={item}
           index={i}
           onClick={(itemId: number) => dispatch({ type: 'SELECT_ITEM', payload: itemId })}

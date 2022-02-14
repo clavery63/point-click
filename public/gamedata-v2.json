@@ -1,7 +1,7 @@
 {
   "worldState": {
     "doors": {
-      "48": {
+      "0": {
         "closedImg": "door-1",
         "position": {
           "left": 40,
@@ -18,7 +18,7 @@
         "id": 0,
         "type": "doors"
       },
-      "49": {
+      "1": {
         "dest": 0,
         "dir": "DOWN",
         "mapPosition": { "x": 2, "y": 4 },
@@ -26,7 +26,7 @@
         "id": 1,
         "type": "doors"
       },
-      "50": {
+      "2": {
         "closedImg": "door-2",
         "position": { "left": 48, "top": 58 },
         "dest": 2,
@@ -40,7 +40,7 @@
         "id": 2,
         "type": "doors"
       },
-      "51": {
+      "3": {
         "openImg": "door-3",
         "position": { "left": 76, "top": 59 },
         "dest": 3,
@@ -54,7 +54,7 @@
         "id": 3,
         "type": "doors"
       },
-      "52": {
+      "4": {
         "dest": 1,
         "dir": "BACK",
         "mapPosition": { "x": 2, "y": 4 },
@@ -62,7 +62,7 @@
         "id": 4,
         "type": "doors"
       },
-      "53": {
+      "5": {
         "dest": 1,
         "dir": "BACK",
         "mapPosition": { "x": 2, "y": 4 },
@@ -70,7 +70,7 @@
         "id": 5,
         "type": "doors"
       },
-      "54": {
+      "6": {
         "dest": 15,
         "openImg": "door-4",
         "position": { "left": 49, "top": 50 },
@@ -82,7 +82,7 @@
         "id": 6,
         "type": "doors"
       },
-      "55": {
+      "7": {
         "closedImg": "door-5",
         "position": { "left": 17, "top": 15 },
         "dest": 5,
@@ -94,7 +94,7 @@
         "id": 7,
         "type": "doors"
       },
-      "56": {
+      "8": {
         "closedImg": "door-6",
         "position": { "left": 86, "top": 15 },
         "dest": 6,
@@ -106,7 +106,7 @@
         "id": 8,
         "type": "doors"
       },
-      "57": {
+      "9": {
         "closedImg": "door-7",
         "position": { "left": 50, "top": 25 },
         "dest": 7,
@@ -118,7 +118,7 @@
         "id": 9,
         "type": "doors"
       },
-      "58": {
+      "10": {
         "dest": 4,
         "dir": "RIGHT",
         "mapPosition": { "x": 4, "y": 1 },
@@ -126,7 +126,7 @@
         "id": 10,
         "type": "doors"
       },
-      "59": {
+      "11": {
         "dest": 2,
         "dir": "BACK",
         "mapPosition": { "x": 2, "y": 4 },
@@ -134,7 +134,7 @@
         "id": 11,
         "type": "doors"
       },
-      "60": {
+      "12": {
         "dest": 4,
         "dir": "DOWN",
         "mapPosition": { "x": 2, "y": 4 },
@@ -142,7 +142,7 @@
         "id": 12,
         "type": "doors"
       },
-      "61": {
+      "13": {
         "dest": 5,
         "dir": "BACK",
         "mapPosition": { "x": 2, "y": 3 },
@@ -150,7 +150,7 @@
         "id": 13,
         "type": "doors"
       },
-      "62": {
+      "14": {
         "closedImg": "door-8",
         "position": { "left": 33, "top": 40 },
         "dest": 12,
@@ -164,7 +164,7 @@
         "id": 14,
         "type": "doors"
       },
-      "63": {
+      "15": {
         "name": "fridge",
         "closedImg": "fridge-small",
         "position": { "left": 5, "top": 76 },
@@ -179,7 +179,7 @@
         "id": 15,
         "type": "doors"
       },
-      "64": {
+      "16": {
         "mapPosition": { "x": 2, "y": 3 },
         "description": "Back to the outside",
         "dir": "UP",
@@ -188,7 +188,7 @@
         "id": 16,
         "type": "doors"
       },
-      "65": {
+      "17": {
         "mapPosition": { "x": 1, "y": 4 },
         "dir": "BACK",
         "dest": 7,
@@ -196,7 +196,7 @@
         "id": 17,
         "type": "doors"
       },
-      "66": {
+      "18": {
         "mapPosition": { "x": 2, "y": 4 },
         "dir": "BACK",
         "dest": 12,
@@ -204,7 +204,7 @@
         "id": 18,
         "type": "doors"
       },
-      "67": {
+      "19": {
         "mapPosition": { "x": 4, "y": 4 },
         "dir": "DOWN",
         "dest": 21,
@@ -212,7 +212,7 @@
         "id": 19,
         "type": "doors"
       },
-      "68": {
+      "20": {
         "mapPosition": { "x": 2, "y": 0 },
         "dir": "UP",
         "dest": 0,
@@ -227,71 +227,71 @@
         "music": "outdoor-ambience.mp3",
         "initialDescription": "Welcome, newcomer. This is birthday castle. We hope you find it comfortable inside.               And who knows? You might even see some cool s*** along the way.",
         "description": "It's the entrance to Birthday Castle. You can faintly hear the sound of several full grown adults chanting inside.",
-        "doors": [48, 63, 67],
+        "doors": [0, 15, 19],
         "items": [0],
-        "scenery": [21]
+        "scenery": [0]
       },
       "1": {
         "img": "room-1",
         "music": "spreadsheet-man.mp3",
         "description": "The lobby of Birthday Castle",
         "initialDescription": "A man stumbles toward you. \"Oh shit, is that Scott?\" you wonder as you pull yourself through the half-ajar door. \"Why am I not shocked to find him here...\"",
-        "doors": [49, 50, 51],
+        "doors": [1, 2, 3],
         "items": [11, 3, 4, 10],
         "scenery": []
       },
       "2": {
         "img": "room-2",
         "description": "The stone passage winds to an unseen end.",
-        "doors": [52, 54, 58],
+        "doors": [4, 6, 10],
         "items": [8, 9],
-        "scenery": [22, 23],
+        "scenery": [1, 2],
         "initialDescription": "The stone passage winds to an unseen end. Wait, who is that?"
       },
       "3": {
         "img": "room-3",
         "description": "It's nothing but a closet. An ordinary, run-of-the-mill closet. Oh, and some items.",
-        "doors": [53],
+        "doors": [5],
         "items": [6, 7],
-        "scenery": [28]
+        "scenery": [7]
       },
       "4": {
         "img": "room-4",
         "description": "There are more doors here.",
-        "doors": [55, 56, 57, 59],
+        "doors": [7, 8, 9, 11],
         "items": [],
-        "scenery": [37]
+        "scenery": [16]
       },
       "5": {
         "img": "room-5",
         "music": "xfiles.mp3",
         "description": "Why it's simply Redd's! For some reason you seem to have entered from the back.",
-        "doors": [60],
+        "doors": [12],
         "items": [12, 13],
-        "scenery": [25, 27, 30, 31, 32, 45]
+        "scenery": [4, 6, 9, 10, 11, 24]
       },
       "6": {
         "img": "room-6",
         "music": "crummy-roads.mp3",
         "description": "This place looks familiar. It's some place you haven't been in a long time.",
-        "doors": [60],
+        "doors": [12],
         "items": [],
-        "scenery": [42, 43, 44]
+        "scenery": [21, 22, 23]
       },
       "7": {
         "img": "room-7",
         "music": "coldgin.mp3",
         "description": "You are delighted to find yourself outside of a friendly-looking pub restaurant. Though it seems the surrounding area is overrun with some kind of bulbous green gunk.",
-        "doors": [60, 62],
+        "doors": [12, 14],
         "items": [14],
-        "scenery": [24, 29]
+        "scenery": [3, 8]
       },
       "8": {
         "img": "eight-ball-large",
         "description": "It's one of those magic 8 balls! What a treat! Maybe this will have the answer. Also, you really want gin.",
-        "doors": [61],
+        "doors": [13],
         "items": [],
-        "scenery": [26]
+        "scenery": [5]
       },
       "9": {
         "img": "beerman",
@@ -321,21 +321,21 @@
         "img": "room-8",
         "music": "blinded-by-the-light.mp3",
         "description": "You find yourself in a cool locker room. A wonderful-smelling man greets you as you walk in.",
-        "doors": [65],
+        "doors": [17],
         "items": [],
-        "scenery": [39, 36, 38]
+        "scenery": [18, 15, 17]
       },
       "13": {
         "video": "slam-city.mp4",
         "description": "An uplifting video emboldens you with newfound confidence.",
-        "doors": [61],
+        "doors": [13],
         "items": [],
         "scenery": []
       },
       "14": {
         "img": "fridge-large",
         "description": "A smattering of items can be found here.",
-        "doors": [64],
+        "doors": [16],
         "items": [15, 19],
         "scenery": []
       },
@@ -344,14 +344,14 @@
         "music": "cliffside.mp3",
         "initialDescription": "You find yourself in a serene park.",
         "description": "Remember this park? It's kind of nice.",
-        "doors": [59],
+        "doors": [11],
         "items": [],
-        "scenery": [33, 34, 35, 41]
+        "scenery": [12, 13, 14, 20]
       },
       "16": {
         "video": "buckner.mp4",
         "description": "A fun, funny video is on display here. But you get the horrible feeling that you've traveled back in time, or to some alternate reality.",
-        "doors": [61],
+        "doors": [13],
         "items": [],
         "scenery": []
       },
@@ -359,16 +359,16 @@
         "img": "rob-large",
         "description": "You begin to feel headstrong, as though you could take on anyone, from studying the remarkable image in this locker. Oh, looks like there is a poem underneath! It says: Opaque, pale cakes of fermented lard, 40 gallon drum of butter posted up in my yard. Smelling like oil for the rest of my life, air's so dank hard to cut with a knife.Â Â Chubby rain, vacuoles of pain stifling my brain. Ludicrous lipid levels compressing my lid, rendering down fat from a P.I.G. pig.  Hot skulls baking in the summer heat; basted onion heads filled with day old bread.Â Â Glazed doughnut & a bottle of anything,Â Â lipid rivers in the sewer lead to Wendy's and Burger King. Hey Alopecia, nice ta meet ya. I take a ride to the hairpiece store, Can't flip my wig proper no more. Hollow-tipped biological slugs hopping in a vat of beer, rest in piece to a shelled bug.  Mayonnaise on my mind, oil on my bread, Cold cut hypnosis, olive loaf's starting to own me. Now I'm feeling lonely without fried bologna.          -RH",
         "music": "up-in-da-club.mp3",
-        "doors": [66],
+        "doors": [18],
         "items": [],
         "scenery": []
       },
       "18": {
         "video": "jets-fumble.mp4",
         "description": "Hell yeah. That's some good fumbling. Gin. Love to see a good fumble ya hear. Gin. Gin. I like it when the Jets Fumble! I need gin.",
-        "doors": [60],
+        "doors": [12],
         "items": [],
-        "scenery": [40]
+        "scenery": [19]
       },
       "19": {
         "video": "good-ending.mp4",
@@ -388,13 +388,13 @@
       "21": {
         "img": "dan",
         "description": "You found Dan.",
-        "doors": [68],
+        "doors": [20],
         "items": [20],
         "scenery": []
       }
     },
     "scenery": {
-      "21": {
+      "0": {
         "img": "skull",
         "description": "It's the skull of some creature. Its meaning seems quite clear: death lurks inside.",
         "startPosition": { "left": 49, "top": 4 },
@@ -404,7 +404,7 @@
         "id": 0,
         "type": "scenery"
       },
-      "22": {
+      "1": {
         "name": "book",
         "description": "It's the famous book by H. Saul Caesein, âProtocol for the Success Lover.\" I've always wanted to read this one.",
         "startPosition": { "left": 21, "top": 62 },
@@ -414,7 +414,7 @@
         "id": 1,
         "type": "scenery"
       },
-      "23": {
+      "2": {
         "img": "jason-hidden",
         "description": "You must be seeing things. It is as though a man is there beyond the corner, doing a poor job of hiding from you.",
         "startPosition": { "left": 72, "top": 22 },
@@ -428,7 +428,7 @@
         "id": 2,
         "type": "scenery"
       },
-      "24": {
+      "3": {
         "name": "gunk",
         "description": "The ground outside the entrance is overrun with bulbous green gunk.",
         "startPosition": { "left": 27, "top": 73 },
@@ -436,7 +436,7 @@
         "id": 3,
         "type": "scenery"
       },
-      "25": {
+      "4": {
         "img": "eight-ball-small",
         "description": "It is an eight ball",
         "startPosition": { "left": 103, "top": 73 },
@@ -444,7 +444,7 @@
         "id": 4,
         "type": "scenery"
       },
-      "26": {
+      "5": {
         "name": "eightBallMask",
         "description": "It appears you can shake this and receive answers to your problems.",
         "startPosition": { "left": 0, "top": 0 },
@@ -481,7 +481,7 @@
         "id": 5,
         "type": "scenery"
       },
-      "27": {
+      "6": {
         "img": "bartender",
         "description": "Meaghan notices you. She'll probably offer you some gin if you talk to her.",
         "verbs": {
@@ -510,7 +510,7 @@
         "id": 6,
         "type": "scenery"
       },
-      "28": {
+      "7": {
         "img": "santos",
         "description": "It's Santos. If only you could get past him, you might be able to collect some more useful items.",
         "visibleFlag": "SANTOS_VISIBLE",
@@ -553,7 +553,7 @@
         "id": 7,
         "type": "scenery"
       },
-      "29": {
+      "8": {
         "img": "motorcycle",
         "name": "motorcycle",
         "description": "This must by one of those poorly-parked motorcycles Valencia Tavern is famous for.",
@@ -562,7 +562,7 @@
         "id": 8,
         "type": "scenery"
       },
-      "30": {
+      "9": {
         "name": "tv1",
         "startPosition": { "left": 56, "top": 20 },
         "size": { "width": 14, "height": 13 },
@@ -570,7 +570,7 @@
         "id": 9,
         "type": "scenery"
       },
-      "31": {
+      "10": {
         "name": "tv2",
         "startPosition": { "left": 45, "top": 22 },
         "size": { "width": 11, "height": 13 },
@@ -578,7 +578,7 @@
         "id": 10,
         "type": "scenery"
       },
-      "32": {
+      "11": {
         "name": "tv3",
         "startPosition": { "left": 12, "top": 31 },
         "size": { "width": 15, "height": 9 },
@@ -586,7 +586,7 @@
         "id": 11,
         "type": "scenery"
       },
-      "33": {
+      "12": {
         "name": "bench",
         "description": "It's a standard park bench.  You see a message carved in the wood: \"STEVE MILLER SUCKS.\"  The words feel nostalgic, like you've seen them somewhere before.  Hmm...I guess the statement is probably true, but that song Abracadabra isn't so bad, right?",
         "startPosition": { "left": 3, "top": 75 },
@@ -595,7 +595,7 @@
         "id": 12,
         "type": "scenery"
       },
-      "34": {
+      "13": {
         "name": "justin",
         "img": "justin",
         "description": "Well, would you look at that?! Justin is in the park too, just hanging out with that goose.  You can tell that he's pleased to see you.  He seems to be holding an unlit torch in one of his hands.",
@@ -621,7 +621,7 @@
         "id": 13,
         "type": "scenery"
       },
-      "35": {
+      "14": {
         "name": "goose",
         "description": "It's a beautiful Canada goose.  You watch as it quietly eats grass, occasionally letting out a soft HONK.",
         "startPosition": { "left": 73, "top": 66 },
@@ -631,7 +631,7 @@
         "id": 14,
         "type": "scenery"
       },
-      "36": {
+      "15": {
         "name": "jason",
         "description": "This must be Jason. You learned about him. He is totally, unmistakably jacked.",
         "startPosition": { "left": 25, "top": 13 },
@@ -646,7 +646,7 @@
         "id": 15,
         "type": "scenery"
       },
-      "37": {
+      "16": {
         "name": "computer",
         "img": "computer",
         "startPosition": { "left": 72, "top": 73 },
@@ -668,7 +668,7 @@
         "id": 16,
         "type": "scenery"
       },
-      "38": {
+      "17": {
         "name": "locker door",
         "img": "locker-door",
         "visibleFlag": "LOCKER_VISIBLE",
@@ -691,7 +691,7 @@
         "id": 17,
         "type": "scenery"
       },
-      "39": {
+      "18": {
         "name": "rob small",
         "img": "rob-small",
         "description": "An alluring image",
@@ -700,7 +700,7 @@
         "id": 18,
         "type": "scenery"
       },
-      "40": {
+      "19": {
         "name": "monitor",
         "img": "monitor",
         "startPosition": { "left": 0, "top": 0 },
@@ -708,7 +708,7 @@
         "id": 19,
         "type": "scenery"
       },
-      "41": {
+      "20": {
         "name": "pumpkin",
         "img": "pumpkin",
         "description": "You spy a comforting sight: a luscious gourd in the moonlight. Ahh, the crisp flesh of a fresh white pumpkin. Wait a minute....Oh no!! It's something foul!! The pumpkin has been hollowed. Someone, or some thing, has been using this for \"storage.\" Every fiber is completely soaked with urine. You shudder with disapproval.  It's been \"bleached.\"",
@@ -736,7 +736,7 @@
         "id": 20,
         "type": "scenery"
       },
-      "42": {
+      "21": {
         "name": "malone",
         "img": "malone",
         "startPosition": { "left": 8, "top": 34 },
@@ -771,7 +771,7 @@
         "id": 21,
         "type": "scenery"
       },
-      "43": {
+      "22": {
         "name": "badGin",
         "img": "gin-and-soda",
         "visibleFlag": "BAD_GIN",
@@ -781,7 +781,7 @@
         "id": 22,
         "type": "scenery"
       },
-      "44": {
+      "23": {
         "name": "goodGin",
         "img": "gin-and-soda",
         "visibleFlag": "GOOD_GIN",
@@ -791,7 +791,7 @@
         "id": 23,
         "type": "scenery"
       },
-      "45": {
+      "24": {
         "name": "jukebox",
         "img": "jukebox",
         "startPosition": { "left": 0, "top": 62 },
@@ -799,7 +799,7 @@
         "id": 24,
         "type": "scenery"
       },
-      "46": {
+      "25": {
         "name": "oscar",
         "img": "oscar",
         "startPosition": { "left": 0, "top": 0 },
@@ -807,7 +807,7 @@
         "id": 25,
         "type": "scenery"
       },
-      "47": {
+      "26": {
         "name": "glasses",
         "img": "oscar-glasses",
         "startPosition": { "left": 30, "top": 42 },
