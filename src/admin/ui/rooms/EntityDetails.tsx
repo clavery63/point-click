@@ -2,12 +2,6 @@ import React from 'react';
 import { useSelector } from '../hooks/redux';
 import ItemDetails from './ItemDetails';
 
-const components = {
-  items: ItemDetails,
-  scenery: null,
-  doors: null,
-};
-
 const EntityDetails = () => {
   const selectedEntity = useSelector(state => state.editorState.selectedEntity);
 
@@ -15,15 +9,16 @@ const EntityDetails = () => {
     return null;
   }
 
-  const Component = components[selectedEntity.type];
+  const entity = useSelector(state => {
+    return state.gameState.worldState.entities[selectedEntity.id];
+  });
 
-  if (!Component) {
-    return null;
+  if (entity.type === 'items') {
+    <ItemDetails item={entity} />;
   }
 
-  return (
-    <Component entity={selectedEntity} />
-  );
+  // TODO: add scenery and doors
+  return null;
 };
 
 export default EntityDetails;

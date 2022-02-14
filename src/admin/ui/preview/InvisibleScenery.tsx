@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Rect, Transformer } from 'react-konva';
-import { setScenerySize } from 'admin/store/reducers/gameStateReducer/worldStateReducer/sceneryReducer';
+import { setScenerySize } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { Position, Scenery } from 'game/store/types';
 import { KonvaEventObject } from 'konva/types/Node';
 import useCachebuster from '../hooks/useCachebuster';

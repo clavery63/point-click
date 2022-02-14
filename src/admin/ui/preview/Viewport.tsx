@@ -20,7 +20,12 @@ const Entity = ({ id, roomId }: EntityType) => {
     return <Item item={entity} roomId={roomId} />;
   }
 
-  return <Scenery scenery={entity} roomId={roomId} />;
+  if (entity.type === 'scenery') {
+    return <Scenery scenery={entity} roomId={roomId} />;
+  }
+
+  // TODO: doors
+  return null;
 };
 
 type EntitiesType = {
@@ -78,7 +83,6 @@ const Viewport = (props: Props) => {
   return (
     <Group>
       <Background image={roomImg} selectedEntity={selectedEntity} />
-      {/* <ObjectGroup ids={doors} collection={'doors'} /> */}
       <Entities ids={entities} roomId={props.roomId} />
     </Group>
   );

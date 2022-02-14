@@ -1,6 +1,6 @@
 import React from 'react';
 import { setSelected } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
-import { setItemPosition } from 'admin/store/reducers/gameStateReducer/worldStateReducer/itemsReducer';
+import { setEntityPosition } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { KonvaEventObject } from 'konva/types/Node';
 import PreciseImage from 'shared/components/PreciseImage';
 import { Item } from 'game/store/types';
@@ -34,7 +34,7 @@ const ItemComponent = ({ item, roomId }: Props) => {
       opacity={isUnselected(item, selectedEnt) ? 0.5 : 1}
       draggable
       onDragEnd={(e: KonvaEventObject<DragEvent>) => {
-        dispatch(setItemPosition({
+        dispatch(setEntityPosition({
           id: item.id,
           x: Math.round(e.target.x()),
           y: Math.round(e.target.y()),

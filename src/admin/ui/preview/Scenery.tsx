@@ -1,6 +1,6 @@
 import React from 'react';
 import { setSelected } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
-import { setSceneryPosition } from 'admin/store/reducers/gameStateReducer/worldStateReducer/sceneryReducer';
+import { setEntityPosition } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { KonvaEventObject } from 'konva/types/Node';
 import { Scenery } from 'game/store/types';
 import { useSelector, useDispatch } from '../hooks/redux';
@@ -24,7 +24,7 @@ const SceneryComponent = ({ roomId, scenery }: Props) => {
   const position = scenery[editing];
 
   const onDragEnd = (e: KonvaEventObject<DragEvent>) => {
-    dispatch(setSceneryPosition({
+    dispatch(setEntityPosition({
       id: scenery.id,
       field: editing,
       x: Math.round(e.target.x()),

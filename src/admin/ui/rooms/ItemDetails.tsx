@@ -1,29 +1,25 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { setItem } from 'admin/store/reducers/gameStateReducer/worldStateReducer/itemsReducer';
-import { SelectedEntity } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
+import { setItem } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { Item } from 'game/store/types';
-import { useSelector, useDispatch } from '../hooks/redux';
+import { useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import ImgSelector from '../shared/ImgSelector';
 
 type Props = {
-  entity: SelectedEntity;
+  item: Item;
 };
-const ItemDetails = ({ entity }: Props) => {
+const ItemDetails = ({ item }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const item = useSelector(state => {
-    return state.gameState.worldState.items[entity.id];
-  });
 
   const handleChange = (fieldName: keyof Item) => (event: React.ChangeEvent<
     HTMLInputElement
   >) => {
     dispatch(setItem({
-      id: entity.id,
+      id: item.id,
       item: {
         ...item,
         [fieldName]: event.target.value,
