@@ -31,4 +31,14 @@ const selectObjectReducer: ParentReducer<
   return reducer(object, playerState, flags);
 };
 
+// TODO: THis file returns generic selectObjectReducer that accepts a type
+// to define these two functions
+export const selectDoorReducer: ParentReducer<
+  number
+> = (id, playerState, worldState, flags) => {
+  const object = worldState.doors[id];
+  const reducer = getReducer(playerState.verb) || keepState;
+  return reducer(object, playerState, flags);
+};
+
 export default selectObjectReducer;

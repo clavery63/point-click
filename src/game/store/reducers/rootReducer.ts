@@ -1,6 +1,6 @@
 import { Reducer as ReduxReducer } from 'redux';
 import { ParentReducer } from 'shared/util/types';
-import selectObjectReducer from './selectObjectReducer';
+import selectObjectReducer, { selectDoorReducer } from './selectObjectReducer';
 import selectVerbReducer from './selectVerbReducer';
 import selectItemReducer from './selectItemReducer';
 import selectBagReducer from './selectBagReducer';
@@ -33,6 +33,7 @@ type ActionTypes = {
   CLEAR_TRANSITION_DEST: null;
   SELECT_VERB: VerbIndex;
   SELECT_OBJECT: number;
+  SELECT_DOOR: number;
   SELECT_ITEM: number;
   SELECT_BAG: number;
   CHANGE_PAGE: DoorDir;
@@ -68,6 +69,7 @@ const clearNextText: ParentReducer<null> = () => clearValue('nextText');
 const clearTransitionDest: ParentReducer<null> = () => clearValue('transition.dest');
 const selectVerb: ParentReducer<VerbIndex> = selectVerbReducer;
 const selectObject: ParentReducer<number> = selectObjectReducer;
+const selectDoor: ParentReducer<number> = selectDoorReducer;
 const selectItem: ParentReducer<number> = selectItemReducer;
 const selectBag: ParentReducer<number> = selectBagReducer;
 const changePage: ParentReducer<DoorDir> = changePageReducer;
@@ -119,6 +121,8 @@ const rootReducer: ReduxReducer<
       return applyReducer(selectVerb, state, action.payload);
     case 'SELECT_OBJECT':
       return applyReducer(selectObject, state, action.payload);
+    case 'SELECT_DOOR':
+      return applyReducer(selectDoor, state, action.payload);
     case 'SELECT_ITEM':
       return applyReducer(selectItem, state, action.payload);
     case 'SELECT_BAG':

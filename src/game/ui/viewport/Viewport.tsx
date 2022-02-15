@@ -34,7 +34,7 @@ const Viewport = () => {
     video,
   } = useSelector(viewportSelector);
 
-  const onClick = (id: number) => dispatch({
+  const onEntityClick = (id: number) => dispatch({
     type: 'SELECT_OBJECT',
     payload: id,
   });
@@ -49,7 +49,10 @@ const Viewport = () => {
             <Door
               key={door.id}
               object={door}
-              onClick={onClick}
+              onClick={(id: number) => dispatch({
+                type: 'SELECT_DOOR',
+                payload: id,
+              })}
             />
           ))}
         </Group>
@@ -58,7 +61,7 @@ const Viewport = () => {
             <Item
               key={item.id}
               object={item}
-              onClick={onClick}
+              onClick={onEntityClick}
             />
           ))}
         </Group>
@@ -67,7 +70,7 @@ const Viewport = () => {
             <Scenery
               key={sceneryObject.id}
               object={sceneryObject}
-              onClick={onClick}
+              onClick={onEntityClick}
             />
           ))}
         </Group>
