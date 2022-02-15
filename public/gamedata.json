@@ -15,7 +15,7 @@
         "description": "An American contractor went to a small town in the Guatemalan mountains with an ambitious goal: to ignite the local economy, and hopefully even persuade people not to migrate north to the United States.",
         "lockedText": "Darn it, the thing's locked.  Now where could that key be???",
         "openText": "You open the door. It's the door leading into Birthday Castle.",
-        "id": 0,
+        "id": 48,
         "type": "doors"
       },
       "49": {
@@ -23,7 +23,7 @@
         "dir": "DOWN",
         "mapPosition": { "x": 2, "y": 4 },
         "state": "OPEN",
-        "id": 1,
+        "id": 49,
         "type": "doors"
       },
       "50": {
@@ -37,7 +37,7 @@
         "unlockText": "Yay! You've unlocked it!",
         "openText": "Hooray! You've opened it!",
         "keyId": 0,
-        "id": 2,
+        "id": 50,
         "type": "doors"
       },
       "51": {
@@ -51,7 +51,7 @@
         "unlockText": "Great, it's unlocked now",
         "openText": "Aaaaand you opened the door. How exciting.",
         "keyId": 5,
-        "id": 3,
+        "id": 51,
         "type": "doors"
       },
       "52": {
@@ -59,7 +59,7 @@
         "dir": "BACK",
         "mapPosition": { "x": 2, "y": 4 },
         "state": "OPEN",
-        "id": 4,
+        "id": 52,
         "type": "doors"
       },
       "53": {
@@ -67,7 +67,7 @@
         "dir": "BACK",
         "mapPosition": { "x": 2, "y": 4 },
         "state": "OPEN",
-        "id": 5,
+        "id": 53,
         "type": "doors"
       },
       "54": {
@@ -79,7 +79,7 @@
         "hidden": true,
         "state": "CLOSED",
         "openText": "Oh nice. I guess there was a hidden door there.",
-        "id": 6,
+        "id": 54,
         "type": "doors"
       },
       "55": {
@@ -91,7 +91,7 @@
         "state": "CLOSED",
         "description": "A familiar, acrid odor emanates from the other side of of this door, as if seeping through the pores of the woods itself. There is a Buffalo Bills insignia engraved on the side.",
         "openText": "Opened it! You have a good feeling about this one.",
-        "id": 7,
+        "id": 55,
         "type": "doors"
       },
       "56": {
@@ -103,7 +103,7 @@
         "state": "CLOSED",
         "description": "This door probably leads someplace uninteresting",
         "openText": "You keep opening doors. That's the spirit!",
-        "id": 8,
+        "id": 56,
         "type": "doors"
       },
       "57": {
@@ -115,7 +115,7 @@
         "state": "CLOSED",
         "description": "This door probably leads someplace uninteresting",
         "openText": "You keep opening doors. That's the spirit!",
-        "id": 9,
+        "id": 57,
         "type": "doors"
       },
       "58": {
@@ -123,7 +123,7 @@
         "dir": "RIGHT",
         "mapPosition": { "x": 4, "y": 1 },
         "state": "OPEN",
-        "id": 10,
+        "id": 58,
         "type": "doors"
       },
       "59": {
@@ -131,7 +131,7 @@
         "dir": "BACK",
         "mapPosition": { "x": 2, "y": 4 },
         "state": "OPEN",
-        "id": 11,
+        "id": 59,
         "type": "doors"
       },
       "60": {
@@ -139,7 +139,7 @@
         "dir": "DOWN",
         "mapPosition": { "x": 2, "y": 4 },
         "state": "OPEN",
-        "id": 12,
+        "id": 60,
         "type": "doors"
       },
       "61": {
@@ -147,7 +147,7 @@
         "dir": "BACK",
         "mapPosition": { "x": 2, "y": 3 },
         "state": "OPEN",
-        "id": 13,
+        "id": 61,
         "type": "doors"
       },
       "62": {
@@ -161,7 +161,7 @@
         "description": "Sometimes the best way into Valencia Tavern is through the front door",
         "openText": "Opened Valencia Tavern",
         "unlockText": "Hell yeah! Let's do this! Woo!!!",
-        "id": 14,
+        "id": 62,
         "type": "doors"
       },
       "63": {
@@ -176,7 +176,7 @@
         "dest": 14,
         "state": "CLOSED",
         "openCondition": "GARFIELD_CONSUMED",
-        "id": 15,
+        "id": 63,
         "type": "doors"
       },
       "64": {
@@ -185,7 +185,7 @@
         "dir": "UP",
         "dest": 0,
         "state": "OPEN",
-        "id": 16,
+        "id": 64,
         "type": "doors"
       },
       "65": {
@@ -193,7 +193,7 @@
         "dir": "BACK",
         "dest": 7,
         "state": "OPEN",
-        "id": 17,
+        "id": 65,
         "type": "doors"
       },
       "66": {
@@ -201,7 +201,7 @@
         "dir": "BACK",
         "dest": 12,
         "state": "OPEN",
-        "id": 18,
+        "id": 66,
         "type": "doors"
       },
       "67": {
@@ -209,7 +209,7 @@
         "dir": "DOWN",
         "dest": 21,
         "state": "OPEN",
-        "id": 19,
+        "id": 67,
         "type": "doors"
       },
       "68": {
@@ -217,7 +217,7 @@
         "dir": "UP",
         "dest": 0,
         "state": "OPEN",
-        "id": 20,
+        "id": 68,
         "type": "doors"
       }
     },
@@ -599,7 +599,7 @@
         "endPosition": { "left": 49, "top": -8 },
         "trigger": "OPEN",
         "movedText": "\"Whaaaaaat,\" you think to yourself as you watch the skull move itself upward. \"That is absolutely fucking nuts.\"",
-        "id": 0,
+        "id": 21,
         "type": "scenery"
       },
       "22": {
@@ -609,7 +609,7 @@
         "size": { "width": 16, "height": 6 },
         "contains": [5],
         "openText": "  \"CHAPTER ONE: FORGET ALL PRIOR MISGIVINGS.\"  Huh, a rectangular hole has been cut out of the inside of the book.  You are disconcerted to also discover a steaming residue of unknown origin staining the pages.",
-        "id": 1,
+        "id": 22,
         "type": "scenery"
       },
       "23": {
@@ -623,7 +623,7 @@
             }
           ]
         },
-        "id": 2,
+        "id": 23,
         "type": "scenery"
       },
       "24": {
@@ -631,7 +631,7 @@
         "description": "The ground outside the entrance is overrun with bulbous green gunk.",
         "startPosition": { "left": 27, "top": 73 },
         "size": { "width": 40, "height": 30 },
-        "id": 3,
+        "id": 24,
         "type": "scenery"
       },
       "25": {
@@ -639,7 +639,7 @@
         "description": "It is an eight ball",
         "startPosition": { "left": 103, "top": 73 },
         "verbs": { "LOOK": [{ "moveTo": 8, "moveDir": "FORWARD" }] },
-        "id": 4,
+        "id": 25,
         "type": "scenery"
       },
       "26": {
@@ -676,7 +676,7 @@
             }
           ]
         },
-        "id": 5,
+        "id": 26,
         "type": "scenery"
       },
       "27": {
@@ -705,7 +705,7 @@
           ]
         },
         "startPosition": { "left": 54, "top": 34 },
-        "id": 6,
+        "id": 27,
         "type": "scenery"
       },
       "28": {
@@ -748,7 +748,7 @@
           ]
         },
         "startPosition": { "left": 0, "top": 0 },
-        "id": 7,
+        "id": 28,
         "type": "scenery"
       },
       "29": {
@@ -757,7 +757,7 @@
         "description": "This must by one of those poorly-parked motorcycles Valencia Tavern is famous for.",
         "startPosition": { "left": 0, "top": 64 },
         "contains": [17],
-        "id": 8,
+        "id": 29,
         "type": "scenery"
       },
       "30": {
@@ -765,7 +765,7 @@
         "startPosition": { "left": 56, "top": 20 },
         "size": { "width": 14, "height": 13 },
         "verbs": { "LOOK": [{ "moveTo": 13, "moveDir": "FORWARD" }] },
-        "id": 9,
+        "id": 30,
         "type": "scenery"
       },
       "31": {
@@ -773,7 +773,7 @@
         "startPosition": { "left": 45, "top": 22 },
         "size": { "width": 11, "height": 13 },
         "verbs": { "LOOK": [{ "moveTo": 16, "moveDir": "FORWARD" }] },
-        "id": 10,
+        "id": 31,
         "type": "scenery"
       },
       "32": {
@@ -781,7 +781,7 @@
         "startPosition": { "left": 12, "top": 31 },
         "size": { "width": 15, "height": 9 },
         "verbs": { "LOOK": [{ "moveTo": 13, "moveDir": "FORWARD" }] },
-        "id": 11,
+        "id": 32,
         "type": "scenery"
       },
       "33": {
@@ -790,7 +790,7 @@
         "startPosition": { "left": 3, "top": 75 },
         "size": { "width": 35, "height": 20 },
         "contains": [],
-        "id": 12,
+        "id": 33,
         "type": "scenery"
       },
       "34": {
@@ -816,7 +816,7 @@
           "left": -78,
           "top": -16
         },
-        "id": 13,
+        "id": 34,
         "type": "scenery"
       },
       "35": {
@@ -826,7 +826,7 @@
         "size": { "width": 29, "height": 40 },
         "contains": [18, 18, 18, 16, 18, 18],
         "verbs": { "SPEAK": [{ "text": "\"HONK!\"" }] },
-        "id": 14,
+        "id": 35,
         "type": "scenery"
       },
       "36": {
@@ -841,7 +841,7 @@
             }
           ]
         },
-        "id": 15,
+        "id": 36,
         "type": "scenery"
       },
       "37": {
@@ -863,7 +863,7 @@
             }
           ]
         },
-        "id": 16,
+        "id": 37,
         "type": "scenery"
       },
       "38": {
@@ -886,7 +886,7 @@
             }
           ]
         },
-        "id": 17,
+        "id": 38,
         "type": "scenery"
       },
       "39": {
@@ -895,7 +895,7 @@
         "description": "An alluring image",
         "startPosition": { "left": 93, "top": 15 },
         "verbs": { "LOOK": [{ "moveTo": 17, "moveDir": "FORWARD" }] },
-        "id": 18,
+        "id": 39,
         "type": "scenery"
       },
       "40": {
@@ -903,7 +903,7 @@
         "img": "monitor",
         "startPosition": { "left": 0, "top": 0 },
         "size": { "width": 112, "height": 112 },
-        "id": 19,
+        "id": 40,
         "type": "scenery"
       },
       "41": {
@@ -931,7 +931,7 @@
             }
           ]
         },
-        "id": 20,
+        "id": 41,
         "type": "scenery"
       },
       "42": {
@@ -966,7 +966,7 @@
             }
           ]
         },
-        "id": 21,
+        "id": 42,
         "type": "scenery"
       },
       "43": {
@@ -976,7 +976,7 @@
         "startPosition": { "left": 88, "top": 95 },
         "description": "You don't like the looks of this gin and soda, but there is no turning back now. There's no concept of save states in this game, so you might as well just drink it and see what happens.",
         "verbs": { "EAT": [{ "moveTo": 20, "moveDir": "DOWN" }] },
-        "id": 22,
+        "id": 43,
         "type": "scenery"
       },
       "44": {
@@ -986,7 +986,7 @@
         "startPosition": { "left": 78, "top": 95 },
         "description": "Holy crap! The moment has finally arrived! You will finally drink some gin!",
         "verbs": { "EAT": [{ "moveTo": 19, "moveDir": "UP" }] },
-        "id": 23,
+        "id": 44,
         "type": "scenery"
       },
       "45": {
@@ -994,7 +994,7 @@
         "img": "jukebox",
         "startPosition": { "left": 0, "top": 62 },
         "description": "Someone used this jukebox to put on the xfiles theme in the bar. now that's funny! That's just good comedy.",
-        "id": 24,
+        "id": 45,
         "type": "scenery"
       },
       "46": {
@@ -1002,7 +1002,7 @@
         "img": "oscar",
         "startPosition": { "left": 0, "top": 0 },
         "description": "Hi. I am Oscar.",
-        "id": 25,
+        "id": 46,
         "type": "scenery"
       },
       "47": {
@@ -1010,7 +1010,7 @@
         "img": "oscar-glasses",
         "startPosition": { "left": 30, "top": 42 },
         "description": "These glasses belong to Oscar.",
-        "id": 26,
+        "id": 47,
         "type": "scenery"
       },
       "9999": {
