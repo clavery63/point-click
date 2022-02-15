@@ -9,16 +9,16 @@ type Props = {
 };
 const SceneryComponent = ({ object, onClick }: Props) => {
   const {
-    startPosition, currentPosition, size, img,
+    startPosition, position, size, img,
   } = object;
   const images = useSelector(state => state.images);
   const image = images.get(img || '');
-  const position = currentPosition || startPosition;
+  const currentPosition = position || startPosition;
 
   return (
     <Image
-      x={position.left}
-      y={position.top}
+      x={currentPosition.left}
+      y={currentPosition.top}
       width={image?.width || size?.width}
       height={image?.height || size?.height}
       image={image}

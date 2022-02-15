@@ -7,9 +7,9 @@ import { setValue } from './utils';
  * _guaranteed_ performance hit, it definitiely makes messing things up more likely
  */
 const setPositionReducer: ParentReducer<PositionType> = ({
-  x, y, id, type,
+  x, y, id,
 }) => {
-  return setValue(`worldState.${type}[${id}].currentPosition`)({
+  return setValue(`worldState.entities[${id}].position`)({
     left: x,
     top: y,
   });

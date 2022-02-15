@@ -465,7 +465,7 @@ const gameStateSchema = {
         "endPosition": {
           "$ref": "#/definitions/Position"
         },
-        "currentPosition": {
+        "position": {
           "$ref": "#/definitions/Position"
         },
         "size": {

@@ -22,10 +22,10 @@ type Input = [SceneryType, GameStoreState];
 
 type ShouldAnimate = (i: Input) => boolean;
 const shouldAnimate: ShouldAnimate = ([payload, { worldState, playerState }]) => {
-  const { id, type } = payload;
-  if (type !== 'scenery') return false;
-  const object = worldState[type][id];
-  const hasAnimated = isEqual(object.currentPosition, object.endPosition);
+  const { id } = payload;
+  const object = worldState.entities[id];
+  if (object.type !== 'scenery') return false;
+  const hasAnimated = isEqual(object.position, object.endPosition);
   const isTriggered = playerState.verb === object.trigger;
   return isTriggered && !hasAnimated;
 };
@@ -33,7 +33,9 @@ const shouldAnimate: ShouldAnimate = ([payload, { worldState, playerState }]) =>
 type WithStepSizes = (i: Input) => AnimationData;
 const withStepSizes: WithStepSizes = ([payload, { worldState }]) => {
   const { id, type } = payload;
-  const object = worldState[payload.type][payload.id];
+  // TODO: perhaps make it so everything in this file happens ony for things that
+  // have these properties so we don't need to do these type checks/casts
+  const object = worldState.entities[payload.id] as Scenery;
   const { startPosition, endPosition } = object;
   // TODO: endPosition can be undefined. Perhaps we can intelligently make
   // A subtype of Scenery that is animatable. Alternatively, just set

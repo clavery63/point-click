@@ -4,7 +4,7 @@ import { withText, updateValue, filterValues } from '../utils';
 
 const itemReducer: ItemReducer = (item, playerState) => {
   return compose(
-    filterValues(`worldState.rooms[${playerState.room}].items`)(item.id),
+    filterValues(`worldState.rooms[${playerState.room}].entities`)(item.id),
     updateValue('playerState.items')(items => [...items, item.id]),
     withText(item.onTake || `The ${item.name} is in hand.`),
   );

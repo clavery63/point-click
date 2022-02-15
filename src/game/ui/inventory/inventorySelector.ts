@@ -1,33 +1,29 @@
 import { createSelector } from 'reselect';
-import { GameStoreState } from '../../store/types';
+import { GameStoreState, Item } from '../../store/types';
 
 const ITEMS_PER_PAGE = 7;
 
 const getPlayer = (state: GameStoreState) => state.playerState;
 const getExamining = (state: GameStoreState) => state.playerState.examining;
-const getGameItems = (state: GameStoreState) => state.worldState.items;
-const getScenery = (state: GameStoreState) => state.worldState.scenery;
+const getEntities = (state: GameStoreState) => state.worldState.entities;
 
 const getItemObjects = createSelector(
-  [getPlayer, getGameItems],
-  ({ items, page }, gameItems) => {
+  [getPlayer, getEntities],
+  ({ items, page }, entities) => {
     return items
-      .map(id => ({ ...gameItems[id], id }))
+      .map(id => entities[id])
       .slice(page * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE + ITEMS_PER_PAGE);
   },
 );
 
 const getExaminingWithItems = createSelector(
-  [getExamining, getGameItems, getScenery],
-  (examining, gameItems, scenery) => {
+  [getExamining, getEntities],
+  (examining, entities) => {
     if (!examining) {
       return null;
     }
-    /**
-     * TODO: player can be examining items too
-     */
-    const object = scenery[examining];
-    const contains = object.contains?.map(id => ({ ...gameItems[id], id }));
+    const object = entities[examining];
+    const contains = object.contains?.map(id => entities[id]) as Item[];
     return { ...object, contains };
   },
 );
@@ -35,8 +31,13 @@ const getExaminingWithItems = createSelector(
 const inventorySelector = (state: GameStoreState) => {
   const { images, playerState } = state;
   const { using } = playerState;
+
+  // TODO: fix the typecasts in this file, either by treating Item and Scenery
+  // More as the same thing, or by introducing helper functions with control
+  // flow that help typescript narrow the types properly.
+
   return {
-    items: getItemObjects(state),
+    items: getItemObjects(state) as Item[],
     inventoryImg: images.get('items'),
     using,
     examining: getExaminingWithItems(state),

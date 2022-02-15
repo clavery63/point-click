@@ -108,6 +108,7 @@ export interface Item {
   visibleFlag?: string;
   requiresPrecision?: boolean;
   verbs?: VerbMappings;
+  contains: Nullable<number[]>;
 }
 
 export interface Scenery {
@@ -117,7 +118,7 @@ export interface Scenery {
   description?: string; // Optional for now since LOOK effects mask it
   startPosition: Position;
   endPosition?: Position;
-  currentPosition?: Position;
+  position?: Position;
   size?: Size;
   img?: string;
   openText?: string;
@@ -141,7 +142,7 @@ export interface Room {
 
 export interface WorldState {
   doors: Lookup<Door>;
-  entities: Lookup<Entity>;
+  entities: Lookup<Item | Scenery>;
   rooms: Lookup<Room>;
 }
 

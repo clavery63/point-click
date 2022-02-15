@@ -25,9 +25,8 @@ const defaultState: GameStoreState = {
     page: 0,
   },
   worldState: {
+    entities: {},
     rooms: {},
-    items: {},
-    scenery: {},
     doors: {},
   },
   flags: [],
