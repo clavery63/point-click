@@ -39,9 +39,6 @@ const gameStateSchema = {
             "^[0-9]+$": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/Door"
-                },
-                {
                   "$ref": "#/definitions/Item"
                 },
                 {
@@ -422,6 +419,19 @@ const gameStateSchema = {
               }
             }
           }
+        },
+        "contains": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [

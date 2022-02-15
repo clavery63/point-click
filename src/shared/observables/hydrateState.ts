@@ -6,7 +6,6 @@ import { fromFetch } from 'rxjs/fetch';
 import { GameStoreState } from 'game/store/types';
 import loadImages$ from './loadImages';
 import validateGameState from '../validation/validateGameState';
-import prepareEntities from '../util/prepareEntities';
 
 const assetsBase = process.env.REACT_APP_ASSETS_BASE;
 
@@ -20,7 +19,6 @@ const loadPlayerAndGameState$: LoadState = initialState => {
   const dataSource = `${assetsBase}/${initialState.gameName}/gamedata.json`;
   return fromFetch(dataSource).pipe(
     switchMap(resp => resp.json()),
-    map(prepareEntities),
     tap(validateGameState),
     map(({ playerState, worldState, flags }) => ({
       ...initialState,
