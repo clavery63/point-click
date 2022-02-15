@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setGameState } from 'admin/store/sharedActions';
-import { Entity, Item, Lookup } from 'game/store/types';
+import { Item, Lookup, Scenery } from 'game/store/types';
 
 type PositionWithId = {
   id: number;
@@ -20,7 +20,7 @@ type SizeWithId = {
   height: number;
 };
 
-const initialState: Lookup<Entity> = {};
+const initialState: Lookup<Item | Scenery> = {};
 
 export const entitiesSlice = createSlice({
   name: 'entities',

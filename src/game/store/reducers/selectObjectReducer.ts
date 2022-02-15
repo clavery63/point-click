@@ -9,7 +9,6 @@ import speakReducer from './verbReducers/speakReducer';
 import eatReducer from './verbReducers/eatReducer';
 import smokeReducer from './verbReducers/smokeReducer';
 import { keepState } from './utils';
-import { ObjectType } from './rootReducer';
 import { VerbIndex } from '../types';
 
 const getReducer = (verb: VerbIndex) => ({
@@ -25,10 +24,9 @@ const getReducer = (verb: VerbIndex) => ({
 }[verb]);
 
 const selectObjectReducer: ParentReducer<
-  ObjectType
-> = (payload, playerState, worldState, flags) => {
-  const { type, id } = payload;
-  const object = worldState[type][id];
+  number
+> = (id, playerState, worldState, flags) => {
+  const object = worldState.entities[id];
   const reducer = getReducer(playerState.verb) || keepState;
   return reducer(object, playerState, flags);
 };

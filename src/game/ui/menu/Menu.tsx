@@ -16,7 +16,7 @@ const Menu = () => {
   const dispatchVerb = (verb: VerbIndex) => dispatch({ type: 'SELECT_VERB', payload: verb });
   const dispatchDoor = (id: number) => dispatch({
     type: 'SELECT_OBJECT',
-    payload: { id, type: 'doors' },
+    payload: id,
   });
   const dispatchPage = (dir: PageDir) => dispatch({ type: 'CHANGE_PAGE', payload: dir });
   const dispatchSave = () => dispatch({ type: 'SAVE_GAME' });

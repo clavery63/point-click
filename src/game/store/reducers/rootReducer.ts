@@ -17,13 +17,7 @@ export type PositionType = {
   x: number;
   y: number;
   id: number;
-  type: 'scenery';
 };
-
-export type ObjectType =
-{ id: number; type: 'scenery' } |
-{ id: number; type: 'items' } |
-{ id: number; type: 'doors' };
 
 type ActionTypes = {
   SET_STATE: GameStoreState;
@@ -38,7 +32,7 @@ type ActionTypes = {
   CLEAR_NEXT_TEXT: null;
   CLEAR_TRANSITION_DEST: null;
   SELECT_VERB: VerbIndex;
-  SELECT_OBJECT: ObjectType;
+  SELECT_OBJECT: number;
   SELECT_ITEM: number;
   SELECT_BAG: number;
   CHANGE_PAGE: DoorDir;
@@ -73,7 +67,7 @@ const setPosition: ParentReducer<PositionType> = setPositionReducer;
 const clearNextText: ParentReducer<null> = () => clearValue('nextText');
 const clearTransitionDest: ParentReducer<null> = () => clearValue('transition.dest');
 const selectVerb: ParentReducer<VerbIndex> = selectVerbReducer;
-const selectObject: ParentReducer<ObjectType> = selectObjectReducer;
+const selectObject: ParentReducer<number> = selectObjectReducer;
 const selectItem: ParentReducer<number> = selectItemReducer;
 const selectBag: ParentReducer<number> = selectBagReducer;
 const changePage: ParentReducer<DoorDir> = changePageReducer;
