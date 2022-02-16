@@ -1,6 +1,6 @@
 import { Reducer as ReduxReducer } from 'redux';
 import { ParentReducer } from 'shared/util/types';
-import selectObjectReducer, { selectDoorReducer } from './selectObjectReducer';
+import { selectEntityReducer, selectDoorReducer } from './selectObjectReducer';
 import selectVerbReducer from './selectVerbReducer';
 import selectItemReducer from './selectItemReducer';
 import selectBagReducer from './selectBagReducer';
@@ -68,7 +68,7 @@ const setPosition: ParentReducer<PositionType> = setPositionReducer;
 const clearNextText: ParentReducer<null> = () => clearValue('nextText');
 const clearTransitionDest: ParentReducer<null> = () => clearValue('transition.dest');
 const selectVerb: ParentReducer<VerbIndex> = selectVerbReducer;
-const selectObject: ParentReducer<number> = selectObjectReducer;
+const selectObject: ParentReducer<number> = selectEntityReducer;
 const selectDoor: ParentReducer<number> = selectDoorReducer;
 const selectItem: ParentReducer<number> = selectItemReducer;
 const selectBag: ParentReducer<number> = selectBagReducer;

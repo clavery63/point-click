@@ -23,22 +23,14 @@ const getReducer = (verb: VerbIndex) => ({
   SPEAK: speakReducer,
 }[verb]);
 
-const selectObjectReducer: ParentReducer<
-  number
-> = (id, playerState, worldState, flags) => {
-  const object = worldState.entities[id];
-  const reducer = getReducer(playerState.verb) || keepState;
-  return reducer(object, playerState, flags);
+type GenericReducer = (t: 'doors' | 'entities') => ParentReducer<number>;
+const selectObjectReducer: GenericReducer = entType => {
+  return (id, playerState, worldState, flags) => {
+    const object = worldState[entType][id];
+    const reducer = getReducer(playerState.verb) || keepState;
+    return reducer(object, playerState, flags);
+  };
 };
 
-// TODO: THis file returns generic selectObjectReducer that accepts a type
-// to define these two functions
-export const selectDoorReducer: ParentReducer<
-  number
-> = (id, playerState, worldState, flags) => {
-  const object = worldState.doors[id];
-  const reducer = getReducer(playerState.verb) || keepState;
-  return reducer(object, playerState, flags);
-};
-
-export default selectObjectReducer;
+export const selectEntityReducer = selectObjectReducer('entities');
+export const selectDoorReducer = selectObjectReducer('doors');
