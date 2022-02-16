@@ -3,17 +3,15 @@ import { useSelector } from '../hooks/redux';
 import ItemDetails from './ItemDetails';
 
 const EntityDetails = () => {
-  const selectedEntity = useSelector(state => state.editorState.selectedEntity);
-  // TODO: combine these so we don't have to do the weird '-1' hack below
   const entity = useSelector(state => {
-    return state.gameState.worldState.entities[selectedEntity?.id || -1];
+    const { selectedEntity } = state.editorState;
+    if (!selectedEntity) {
+      return null;
+    }
+    return state.gameState.worldState.entities[selectedEntity.id];
   });
 
-  if (!entity) {
-    return null;
-  }
-
-  if (entity.type === 'items') {
+  if (entity?.type === 'items') {
     return <ItemDetails item={entity} />;
   }
 
