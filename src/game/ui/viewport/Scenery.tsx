@@ -1,16 +1,16 @@
-import { EntityType, Scenery } from 'game/store/types';
+import { Scenery } from 'game/store/types';
 import React from 'react';
 import { Image } from 'shared/components/tappables';
 import { useSelector } from 'shared/hooks';
 
 type Props = {
-  object: Scenery;
-  onClick: (id: number, type: EntityType) => void;
+  scenery: Scenery;
+  onClick: (id: number) => void;
 };
-const SceneryComponent = ({ object, onClick }: Props) => {
+const SceneryComponent = ({ scenery, onClick }: Props) => {
   const {
     startPosition, position, size, img,
-  } = object;
+  } = scenery;
   const images = useSelector(state => state.images);
   const image = images.get(img || '');
   const currentPosition = position || startPosition;
@@ -22,7 +22,7 @@ const SceneryComponent = ({ object, onClick }: Props) => {
       width={image?.width || size?.width}
       height={image?.height || size?.height}
       image={image}
-      onClick={() => onClick(object.id, 'scenery')}
+      onClick={() => onClick(scenery.id)}
     />
   );
 };

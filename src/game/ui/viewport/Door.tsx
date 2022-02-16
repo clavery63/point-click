@@ -4,13 +4,13 @@ import { Image } from 'shared/components/tappables';
 import { useSelector } from 'shared/hooks';
 
 type Props = {
-  object: Door;
+  door: Door;
   onClick: (id: number, type: EntityType) => void;
 };
-const DoorComponent = ({ object, onClick }: Props) => {
+const DoorComponent = ({ door, onClick }: Props) => {
   const {
     position, openImg, closedImg, state,
-  } = object;
+  } = door;
   const images = useSelector(gameState => gameState.images);
   const openImage = images.get(openImg || '');
   const closedImage = images.get(closedImg || '');
@@ -25,7 +25,7 @@ const DoorComponent = ({ object, onClick }: Props) => {
       width={width}
       height={height}
       image={image}
-      onClick={() => onClick(object.id, 'doors')}
+      onClick={() => onClick(door.id, 'doors')}
     />
   );
 };

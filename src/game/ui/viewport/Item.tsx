@@ -1,15 +1,15 @@
-import { EntityType, Item } from 'game/store/types';
+import { Item } from 'game/store/types';
 import React, { useEffect } from 'react';
 import { Image } from 'shared/components/tappables';
 import { useSelector } from 'shared/hooks';
 
 type Props = {
-  object: Item;
-  onClick: (id: number, type: EntityType) => void;
+  item: Item;
+  onClick: (id: number) => void;
 };
-const ItemComponent = ({ object, onClick }: Props) => {
+const ItemComponent = ({ item, onClick }: Props) => {
   const imgRef = React.useRef<any>(null); // Sorry.
-  const { position, img, requiresPrecision } = object;
+  const { position, img, requiresPrecision } = item;
   const images = useSelector(state => state.images);
   const image = images.get(img || '');
 
@@ -30,7 +30,7 @@ const ItemComponent = ({ object, onClick }: Props) => {
       width={image?.width}
       height={image?.height}
       image={image}
-      onClick={() => onClick(object.id, 'items')}
+      onClick={() => onClick(item.id)}
     />
   );
 };

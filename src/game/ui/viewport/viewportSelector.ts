@@ -1,5 +1,5 @@
 import {
-  GameStoreState, Item, Scenery, WorldState,
+  GameStoreState, WorldState,
 } from 'game/store/types';
 
 type Populate = <
@@ -11,7 +11,7 @@ const populate: Populate = (worldState, collection) => id => {
 
 const viewportSelector = (state: GameStoreState) => {
   const {
-    images, worldState, playerState, flags,
+    images, worldState, playerState,
   } = state;
   const { rooms } = worldState;
   const { room } = playerState;
@@ -27,12 +27,13 @@ const viewportSelector = (state: GameStoreState) => {
   return {
     doors: doors.map(populate(worldState, 'doors'))
       .filter(door => !!(door.openImg || door.closedImg)),
-    items: entities.filter(entity => entity.type === 'items')
-      .filter(item => !item.visibleFlag || flags.includes(item.visibleFlag)) as Item[],
-    scenery: entities.filter(entity => entity.type === 'scenery')
-      .filter(sceneryObject => {
-        return !sceneryObject.visibleFlag || flags.includes(sceneryObject.visibleFlag);
-      }) as Scenery[],
+    entities,
+    // items: entities.filter(entity => entity.type === 'items')
+    //   .filter(item => !item.visibleFlag || flags.includes(item.visibleFlag)) as Item[],
+    // scenery: entities.filter(entity => entity.type === 'scenery')
+    //   .filter(sceneryObject => {
+    //     return !sceneryObject.visibleFlag || flags.includes(sceneryObject.visibleFlag);
+    //   }) as Scenery[],
     borderImg: images.get('border'),
     roomImg: images.get(img || ''),
     video,

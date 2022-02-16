@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, Group } from 'react-konva';
 import { useDispatch, useSelector } from 'shared/hooks';
+import { Entity } from 'game/store/types';
 import Transition from '../transition/Transition';
 import Door from './Door';
 import Item from './Item';
@@ -23,14 +24,27 @@ const Background = React.memo(({ image, video }: BGProps) => {
   return <Image width={112} height={112} image={image} />;
 });
 
+type EntityProps = { entity: Entity; onClick: (id: number) => void };
+const EntityComponent = (props: EntityProps) => {
+  const { entity, onClick } = props;
+  if (entity.type === 'items') {
+    return <Item item={entity} onClick={onClick} />;
+  }
+  if (entity.type === 'scenery') {
+    return <Scenery scenery={entity} onClick={onClick} />;
+  }
+
+  // unreachable. potentially add doors to the mix here
+  return null;
+};
+
 const Viewport = () => {
   const dispatch = useDispatch();
   const {
     borderImg,
     roomImg,
     doors,
-    items,
-    scenery,
+    entities,
     video,
   } = useSelector(viewportSelector);
 
@@ -48,7 +62,7 @@ const Viewport = () => {
           {doors.map(door => (
             <Door
               key={door.id}
-              object={door}
+              door={door}
               onClick={(id: number) => dispatch({
                 type: 'SELECT_DOOR',
                 payload: id,
@@ -57,19 +71,10 @@ const Viewport = () => {
           ))}
         </Group>
         <Group>
-          {items.map(item => (
-            <Item
-              key={item.id}
-              object={item}
-              onClick={onEntityClick}
-            />
-          ))}
-        </Group>
-        <Group>
-          {scenery.map(sceneryObject => (
-            <Scenery
-              key={sceneryObject.id}
-              object={sceneryObject}
+          {entities.map(entity => (
+            <EntityComponent
+              key={entity.id}
+              entity={entity}
               onClick={onEntityClick}
             />
           ))}
