@@ -9,28 +9,28 @@ const useReordering = (entity: Entity, roomId: number) => {
   const selectedEnt = useSelector(state => state.editorState.selectedEntity);
 
   useEffect(() => {
-    const keyup = (e: KeyboardEvent) => {
-      // TODO: This isn't working. We want to avoid scrolling here.
-      e.preventDefault();
+    const keydown = (e: KeyboardEvent) => {
       if (!isSelected(entity, selectedEnt)) {
         return;
       }
 
       if (e.key === 'ArrowUp') {
+        e.preventDefault();
         dispatch(reorderEntity({
           roomId, entityId: entity.id, type: entity.type, direction: 'UP',
         }));
       }
 
       if (e.key === 'ArrowDown') {
+        e.preventDefault();
         dispatch(reorderEntity({
           roomId, entityId: entity.id, type: entity.type, direction: 'DOWN',
         }));
       }
     };
-    window.addEventListener('keyup', keyup);
+    window.addEventListener('keydown', keydown);
     return () => {
-      window.removeEventListener('keyup', keyup);
+      window.removeEventListener('keydown', keydown);
     };
   }, [selectedEnt]);
 };
