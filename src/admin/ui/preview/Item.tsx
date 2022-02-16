@@ -18,7 +18,7 @@ const ItemComponent = ({ item, roomId }: Props) => {
   const image = useSelector(state => state.gameState.images[item.img || '']);
   const selectedEnt = useSelector(state => state.editorState.selectedEntity);
   const cachebuster = useCachebuster(item.position);
-  useReordering(item, roomId, 'items');
+  useReordering(item, roomId);
 
   if (!item.position) {
     return null;

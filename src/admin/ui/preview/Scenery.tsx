@@ -17,7 +17,7 @@ const SceneryComponent = ({ roomId, scenery }: Props) => {
   const dispatch = useDispatch();
   const selectedEnt = useSelector(state => state.editorState.selectedEntity);
 
-  useReordering(scenery, roomId, 'scenery');
+  useReordering(scenery, roomId);
 
   const editing = 'startPosition';
 

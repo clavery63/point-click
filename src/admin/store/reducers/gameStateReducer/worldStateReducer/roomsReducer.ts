@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setGameState } from 'admin/store/sharedActions';
-import { Lookup, Room } from 'game/store/types';
+import { EntityType, Lookup, Room } from 'game/store/types';
 
 type RoomWithId = {
   id: number;
@@ -11,7 +11,7 @@ type Reordering = {
   roomId: number;
   entityId: number;
   direction: 'UP' | 'DOWN';
-  type: 'scenery' | 'items';
+  type: EntityType;
 };
 
 const swap = (list: any[], indexOne: number, indexTwo: number) => {

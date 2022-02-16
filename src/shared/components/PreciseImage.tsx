@@ -6,7 +6,7 @@ import { Image } from './tappables';
 
 type Props = React.ComponentPropsWithRef<typeof Image>;
 
-const setCursorStyle = (style: string) => (e: KonvaEventObject<MouseEvent>) => {
+export const setCursorStyle = (style: string) => (e: KonvaEventObject<MouseEvent>) => {
   const container = e.target.getStage()?.container();
   if (container) {
     container.style.cursor = style;

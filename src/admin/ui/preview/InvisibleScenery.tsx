@@ -4,6 +4,7 @@ import { Rect, Transformer } from 'react-konva';
 import { setScenerySize } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { Position, Scenery } from 'game/store/types';
 import { KonvaEventObject } from 'konva/types/Node';
+import { setCursorStyle } from 'shared/components/PreciseImage';
 import useCachebuster from '../hooks/useCachebuster';
 
 type Props = {
@@ -55,6 +56,8 @@ const InisibleScenery = ({
           }));
         }}
         onClick={onClick}
+        onMouseEnter={setCursorStyle('pointer')}
+        onMouseLeave={setCursorStyle('default')}
       />
       <Transformer
         ref={trRef}
