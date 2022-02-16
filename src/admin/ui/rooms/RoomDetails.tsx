@@ -11,6 +11,7 @@ import useStyles from '../shared/useStyles';
 import TestGameButton from '../shared/TestGameButton';
 import UploadButton from '../shared/UploadButton';
 import PreviewWidget from '../preview/PreviewWidget';
+import ImgSelector from '../shared/ImgSelector';
 
 const RoomDetails = () => {
   const {
@@ -70,6 +71,13 @@ const RoomDetails = () => {
           label="description"
           value={room.description}
           onChange={handleChange('description')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <ImgSelector
+          label="background image"
+          value={room.img}
+          onChange={handleChange('img')}
         />
       </Grid>
       <Grid item xs={12}>
