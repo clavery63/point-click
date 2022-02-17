@@ -12,6 +12,7 @@ import TestGameButton from '../shared/TestGameButton';
 import UploadButton from '../shared/UploadButton';
 import PreviewWidget from '../preview/PreviewWidget';
 import ImgSelector from '../shared/ImgSelector';
+import ImageUploader from '../shared/ImageUploader';
 
 const RoomDetails = () => {
   const {
@@ -79,6 +80,7 @@ const RoomDetails = () => {
           value={room.img}
           onChange={handleChange('img')}
         />
+        <ImageUploader />
       </Grid>
       <Grid item xs={12}>
         <Typography>
