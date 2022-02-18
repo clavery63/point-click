@@ -12,7 +12,7 @@ import TestGameButton from '../shared/TestGameButton';
 import UploadButton from '../shared/UploadButton';
 import PreviewWidget from '../preview/PreviewWidget';
 import ImgSelector from '../shared/ImgSelector';
-import ImageUploader from '../shared/ImageUploader';
+import ImageUploader from '../shared/FileUploader/ImageUploader';
 
 const RoomDetails = () => {
   const {
