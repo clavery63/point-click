@@ -11,8 +11,8 @@ import useStyles from '../shared/useStyles';
 import TestGameButton from '../shared/TestGameButton';
 import UploadButton from '../shared/UploadButton';
 import PreviewWidget from '../preview/PreviewWidget';
-import ImgSelector from '../shared/ImgSelector';
-import ImageUploader from '../shared/FileUploader/ImageUploader';
+import ImgSelector from '../shared/assets/ImgSelector';
+import ImageUploader from '../shared/assets/ImageUploader';
 
 const RoomDetails = () => {
   const {

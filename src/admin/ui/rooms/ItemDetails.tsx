@@ -6,7 +6,7 @@ import { Item } from 'game/store/types';
 import { useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
-import ImgSelector from '../shared/ImgSelector';
+import ImgSelector from '../shared/assets/ImgSelector';
 
 type Props = {
   item: Item;

@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import { Nullable } from 'game/store/types';
 import FormControl from '@material-ui/core/FormControl';
 import { InputLabel, MenuItem, Select } from '@material-ui/core';
-import { useSelector } from '../hooks/redux';
+import { useSelector } from '../../hooks/redux';
 
 type Props = {
   label: string;
