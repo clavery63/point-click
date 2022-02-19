@@ -2,22 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Nullable } from 'game/store/types';
 import Grid from '@material-ui/core/Grid';
 import S3 from 'shared/util/S3';
-import { _Object } from '@aws-sdk/client-s3';
 import { useParams } from 'react-router-dom';
+import getFilenames from 'shared/util/getFilenames';
 import Selector from '../Selector';
 import AudioUploader from './AudioUploader';
-
-// TODO: dedup with the other getFilenames
-const getFilenames = (objects: _Object[], gameKey: string) => objects
-  .map(({ Key }) => Key?.match(new RegExp(`${gameKey}/audio/(.*)`)))
-  .map(result => (result && result[1]) as string) // <--typescript fail
-  .filter(Boolean);
 
 const loadAudios = async (gameName: string) => {
   const s3 = new S3(`${gameName}/audio`);
   const objects = await s3.listObjects();
 
-  return getFilenames(objects || [], gameName);
+  return getFilenames(objects || [], `${gameName}/audio/(.*)`);
 };
 
 type Props = {

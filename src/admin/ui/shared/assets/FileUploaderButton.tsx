@@ -37,5 +37,3 @@ const FileUploaderButton = ({ validate, onSuccess, filePath }: Props) => {
 };
 
 export default FileUploaderButton;
-
-// style={{ width: '80vw', height: '80vh' }}
