@@ -24,41 +24,79 @@ const useStyles = makeStyles({
   },
 });
 
+enum UploadStatus {
+  NONE,
+  IN_PROGRESS,
+  SUCCESS,
+  ERROR
+}
+
+const statusTexts = {
+  [UploadStatus.IN_PROGRESS]: 'Uploading...',
+  [UploadStatus.SUCCESS]: 'Done!',
+  [UploadStatus.ERROR]: 'Awww, I did bad :(',
+};
+
+type DropAreaProps = {
+  onDrop: (f: any) => Promise<void>;
+};
+const DropArea = ({ onDrop }: DropAreaProps) => {
+  const styles = useStyles();
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  return (
+    <Box {...getRootProps()} className={styles.uploader}>
+      <input {...getInputProps()} />
+      {isDragActive ? (
+        <p>Drop files here</p>
+      ) : (
+        <p>Drop files here, or click to select files</p>
+      )}
+    </Box>
+  );
+};
+
+type MessageBoxProps = { text: string };
+const MessageBox = ({ text }: MessageBoxProps) => {
+  const styles = useStyles();
+  return (
+    <Box className={styles.uploader}>
+      <p>{text}</p>
+    </Box>
+  );
+};
+
 type Props = {
   validate: (f: File) => Promise<void>;
   onSuccess: (f: File) => void;
   filePath: string;
 };
 const FileUploader = ({ validate, onSuccess, filePath }: Props) => {
-  const styles = useStyles();
   const [error, setError] = useState(null);
+  const [status, setStatus] = useState<UploadStatus>(UploadStatus.NONE);
   const { gameName } = useParams<{ gameName: string}>();
 
   const onDrop = useCallback(async acceptedFiles => {
-    const file = acceptedFiles[0];
     try {
+      setStatus(UploadStatus.IN_PROGRESS);
+      const file = acceptedFiles[0];
       await validate(file);
       const s3 = new S3(gameName);
       const path = `${filePath}/${file.name}`;
       await s3.writeObject(path, file);
       onSuccess(file);
+      setStatus(UploadStatus.SUCCESS);
     } catch (e: any) {
+      setStatus(UploadStatus.ERROR);
       setError(e.message);
     }
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  console.log(status);
 
   return (
     <Box>
-      <Box {...getRootProps()} className={styles.uploader}>
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>Drop &#39;em!</p>
-        ) : (
-          <p>Drop files here, or click to select files</p>
-        )}
-      </Box>
+      {status === UploadStatus.NONE && <DropArea onDrop={onDrop} />}
+      {status !== UploadStatus.NONE && <MessageBox text={statusTexts[status]} />}
       <Typography>{error}</Typography>
     </Box>
   );

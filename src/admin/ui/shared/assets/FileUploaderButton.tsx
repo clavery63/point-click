@@ -29,7 +29,11 @@ const FileUploaderButton = ({ validate, onSuccess, filePath }: Props) => {
         maxWidth={false}
       >
         <DialogContent>
-          <FileUploader validate={validate} onSuccess={onSuccess} filePath={filePath} />
+          <FileUploader
+            validate={validate}
+            onSuccess={onSuccess}
+            filePath={filePath}
+          />
         </DialogContent>
       </Dialog>
     </>
