@@ -30,17 +30,14 @@ const validate = async (file: File) => {
   }
 };
 
-const ImageUploader = () => {
-  const handleSuccess = async (file: File) => {
-    // TODO: add image to local store
-    // and call our own onSuccess callback
-    console.log('nice!', file);
-  };
-
+type Props = {
+  onSuccess: (file: File) => void;
+};
+const ImageUploader = ({ onSuccess }: Props) => {
   return (
     <FileUploaderButton
       validate={validate}
-      onSuccess={handleSuccess}
+      onSuccess={onSuccess}
     />
   );
 };

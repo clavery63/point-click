@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 
 type Props = {
   validate: (f: File) => Promise<void>;
-  onSuccess: (f: File) => Promise<void>;
+  onSuccess: (f: File) => void;
 };
 const FileUploader = ({ validate, onSuccess }: Props) => {
   const styles = useStyles();
@@ -37,10 +37,9 @@ const FileUploader = ({ validate, onSuccess }: Props) => {
     const file = acceptedFiles[0];
     try {
       await validate(file);
-      const data = await file.arrayBuffer();
       const s3 = new S3(gameName);
       const path = `img/${file.name}`;
-      await s3.writeObject(path, Uint8Array.from(data));
+      await s3.writeObject(path, file);
       onSuccess(file);
     } catch (e: any) {
       setError(e.message);

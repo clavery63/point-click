@@ -6,7 +6,7 @@ import FileUploader from './FileUploader';
 
 type Props = {
   validate: (f: File) => Promise<void>;
-  onSuccess: (f: File) => Promise<void>;
+  onSuccess: (f: File) => void;
 };
 const FileUploaderButton = ({ validate, onSuccess }: Props) => {
   const [open, setOpen] = useState(false);

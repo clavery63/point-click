@@ -21,7 +21,7 @@ const AdminRoot = () => {
       serializableCheck: {
         // TODO: I bet these images can be moved to a selector without too much
         // trouble
-        ignoredActionPaths: ['payload.images'],
+        ignoredActionPaths: ['payload.images', 'payload.file'],
         ignoredPaths: ['gameState.images', 'previewState.images'],
       },
     }).concat(epicMiddleware),
