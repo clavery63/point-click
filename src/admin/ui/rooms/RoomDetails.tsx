@@ -25,14 +25,12 @@ const RoomDetails = () => {
     return state.gameState.worldState.rooms[roomId];
   });
 
-  const handleChange = (fieldName: string) => (event: React.ChangeEvent<
-    HTMLInputElement | HTMLTextAreaElement
-  >) => {
+  const handleChange = (fieldName: string) => (value: string) => {
     dispatch(setRoom({
       id: roomId,
       room: {
         ...room,
-        [fieldName]: event.target.value,
+        [fieldName]: value,
       },
     }));
   };

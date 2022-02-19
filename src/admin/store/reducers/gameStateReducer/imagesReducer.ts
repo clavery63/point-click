@@ -4,7 +4,8 @@ import { setGameState } from 'admin/store/sharedActions';
 const initialState: Record<string, HTMLImageElement> = {};
 
 type ImgPayload = {
-  file: File;
+  name: string;
+  img: HTMLImageElement;
 };
 
 export const imagesSlice = createSlice({
@@ -12,15 +13,10 @@ export const imagesSlice = createSlice({
   initialState,
   reducers: {
     addImage: (state, action: PayloadAction<ImgPayload>) => {
-      const { file } = action.payload;
-
-      const slug = file.name.split('.')[0];
-      const dataUrl = window.URL.createObjectURL(file);
-      const img = new Image();
-      img.src = dataUrl;
+      const { name, img } = action.payload;
 
       // @ts-ignore ...long story
-      state[slug] = img;
+      state[name] = img;
     },
   },
   extraReducers: builder => {

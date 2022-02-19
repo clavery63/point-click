@@ -15,14 +15,12 @@ const ItemDetails = ({ item }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const handleChange = (fieldName: keyof Item) => (event: React.ChangeEvent<
-    HTMLInputElement
-  >) => {
+  const handleChange = (fieldName: keyof Item) => (value: string) => {
     dispatch(setItem({
       id: item.id,
       item: {
         ...item,
-        [fieldName]: event.target.value,
+        [fieldName]: value,
       },
     }));
   };

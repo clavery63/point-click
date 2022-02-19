@@ -7,17 +7,21 @@ import FileUploader from './FileUploader';
 type Props = {
   validate: (f: File) => Promise<void>;
   onSuccess: (f: File) => void;
+  filePath: string;
 };
-const FileUploaderButton = ({ validate, onSuccess }: Props) => {
+const FileUploaderButton = ({ validate, onSuccess, filePath }: Props) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <Button
+        color="primary"
         variant="contained"
         onClick={() => setOpen(true)}
       >
-        Upload File
+        Upload New
+        {' '}
+        {filePath}
       </Button>
       <Dialog
         open={open}
@@ -25,7 +29,7 @@ const FileUploaderButton = ({ validate, onSuccess }: Props) => {
         maxWidth={false}
       >
         <DialogContent>
-          <FileUploader validate={validate} onSuccess={onSuccess} />
+          <FileUploader validate={validate} onSuccess={onSuccess} filePath={filePath} />
         </DialogContent>
       </Dialog>
     </>

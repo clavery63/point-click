@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Nullable } from 'game/store/types';
 import useStyles from './useStyles';
@@ -6,7 +6,7 @@ import useStyles from './useStyles';
 type Props = {
   label: string;
   value: Nullable<string>;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: string) => void;
 };
 const LongTextField = ({ label, value, onChange }: Props) => {
   const styles = useStyles();
@@ -18,7 +18,7 @@ const LongTextField = ({ label, value, onChange }: Props) => {
       fullWidth
       maxRows={6}
       value={value}
-      onChange={onChange}
+      onChange={e => onChange(e.target.value)}
       variant="outlined"
     />
   );

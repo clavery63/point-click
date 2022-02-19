@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { Nullable } from 'game/store/types';
 import FormControl from '@material-ui/core/FormControl';
 import { InputLabel, MenuItem, Select } from '@material-ui/core';
@@ -6,7 +6,7 @@ import { InputLabel, MenuItem, Select } from '@material-ui/core';
 type Props = {
   label: string;
   value: Nullable<string>;
-  onChange: (e: ChangeEvent<any>) => void;
+  onChange: (value: string) => void;
   options: string[];
 };
 const Selector = ({
@@ -18,7 +18,7 @@ const Selector = ({
       <Select
         value={value}
         label={label}
-        onChange={onChange}
+        onChange={e => onChange(e.target.value as string)}
       >
         {options.map(option => (
           <MenuItem value={option} key={option}>{option}</MenuItem>

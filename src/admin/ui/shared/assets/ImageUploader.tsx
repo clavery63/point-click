@@ -38,6 +38,7 @@ const ImageUploader = ({ onSuccess }: Props) => {
     <FileUploaderButton
       validate={validate}
       onSuccess={onSuccess}
+      filePath="img"
     />
   );
 };
