@@ -6,7 +6,7 @@ import image$ from './image';
 
 const getFilenames = (objects: _Object[], gameKey: string) => objects
   .map(({ Key }) => Key?.match(new RegExp(`${gameKey}/img/(.*).png`)))
-  .map(result => (result && result[1]) as string) // <--trypescript fail
+  .map(result => (result && result[1]) as string) // <--typescript fail
   .filter(Boolean);
 
 const loadImages$ = (gameKey: string) => {

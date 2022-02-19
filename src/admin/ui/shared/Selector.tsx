@@ -13,7 +13,7 @@ const Selector = ({
   label, value, onChange, options,
 }: Props) => {
   return (
-    <FormControl variant="outlined">
+    <FormControl variant="outlined" style={{ minWidth: 120 }}>
       <InputLabel>{label}</InputLabel>
       <Select
         value={value}

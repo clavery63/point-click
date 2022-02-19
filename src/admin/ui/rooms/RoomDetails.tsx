@@ -12,6 +12,7 @@ import TestGameButton from '../shared/TestGameButton';
 import UploadButton from '../shared/UploadButton';
 import PreviewWidget from '../preview/PreviewWidget';
 import ImgSelector from '../shared/assets/ImgSelector';
+import AudioSelector from '../shared/assets/AudioSelector';
 
 const RoomDetails = () => {
   const {
@@ -76,6 +77,13 @@ const RoomDetails = () => {
           label="bg img"
           value={room.img}
           onChange={handleChange('img')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <AudioSelector
+          label="music"
+          value={room.music}
+          onChange={handleChange('music')}
         />
       </Grid>
       <Grid item xs={12}>
