@@ -68,15 +68,19 @@ const MessageBox = ({ text }: MessageBoxProps) => {
 type Props = {
   validate: (f: File) => Promise<void>;
   onSuccess: (f: File) => void;
+  setWaiting: (b: boolean) => void;
   filePath: string;
 };
-const FileUploader = ({ validate, onSuccess, filePath }: Props) => {
+const FileUploader = ({
+  validate, onSuccess, filePath, setWaiting,
+}: Props) => {
   const [error, setError] = useState(null);
   const [status, setStatus] = useState<UploadStatus>(UploadStatus.NONE);
   const { gameName } = useParams<{ gameName: string}>();
 
   const onDrop = useCallback(async acceptedFiles => {
     try {
+      setWaiting(true);
       setStatus(UploadStatus.IN_PROGRESS);
       const file = acceptedFiles[0];
       await validate(file);
@@ -88,10 +92,10 @@ const FileUploader = ({ validate, onSuccess, filePath }: Props) => {
     } catch (e: any) {
       setStatus(UploadStatus.ERROR);
       setError(e.message);
+    } finally {
+      setWaiting(false);
     }
   }, []);
-
-  console.log(status);
 
   return (
     <Box>

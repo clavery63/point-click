@@ -11,6 +11,7 @@ type Props = {
 };
 const FileUploaderButton = ({ validate, onSuccess, filePath }: Props) => {
   const [open, setOpen] = useState(false);
+  const [waiting, setWaiting] = useState(false);
 
   return (
     <>
@@ -27,12 +28,15 @@ const FileUploaderButton = ({ validate, onSuccess, filePath }: Props) => {
         open={open}
         onClose={() => setOpen(false)}
         maxWidth={false}
+        hideBackdrop
+        disableBackdropClick={waiting}
       >
         <DialogContent>
           <FileUploader
             validate={validate}
             onSuccess={onSuccess}
             filePath={filePath}
+            setWaiting={setWaiting}
           />
         </DialogContent>
       </Dialog>
