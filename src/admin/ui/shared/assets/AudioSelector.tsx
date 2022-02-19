@@ -5,6 +5,7 @@ import S3 from 'shared/util/S3';
 import { _Object } from '@aws-sdk/client-s3';
 import { useParams } from 'react-router-dom';
 import Selector from '../Selector';
+import AudioUploader from './AudioUploader';
 
 // TODO: dedup with the other getFilenames
 const getFilenames = (objects: _Object[], gameKey: string) => objects
@@ -27,25 +28,31 @@ type Props = {
 const AudioSelector = ({ label, value, onChange }: Props) => {
   const { gameName } = useParams<{ gameName: string }>();
   const [options, setOptions] = useState<string[]>([]);
+
   useEffect(() => {
     loadAudios(gameName).then(setOptions);
   }, []);
+
+  const handleUploadSuccess = (file: File) => {
+    setOptions(oldOptions => [...oldOptions, file.name]);
+    onChange(file.name);
+  };
 
   return (
     <Grid container>
       <Grid item xs={4}>
         <Selector
           label={label}
-          value={value}
+          value={value || ''}
           onChange={onChange}
           options={options}
         />
       </Grid>
-      {/* <Grid item xs={8} style={{ display: 'flex', alignItems: 'center' }}>
+      <Grid item xs={8} style={{ display: 'flex', alignItems: 'center' }}>
         <AudioUploader
           onSuccess={handleUploadSuccess}
         />
-      </Grid> */}
+      </Grid>
     </Grid>
   );
 };
