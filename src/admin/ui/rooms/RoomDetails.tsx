@@ -5,7 +5,8 @@ import Button from '@material-ui/core/Button';
 import { useParams, Link } from 'react-router-dom';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { setRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
-import { useSelector, useDispatch } from '../hooks/redux';
+import { Room } from 'game/store/types';
+import { useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import TestGameButton from '../shared/TestGameButton';
@@ -14,17 +15,11 @@ import PreviewWidget from '../preview/PreviewWidget';
 import ImgSelector from '../shared/assets/ImgSelector';
 import AudioSelector from '../shared/assets/AudioSelector';
 
-const RoomDetails = () => {
-  const {
-    roomId: roomIdString,
-    gameName,
-  } = useParams<{ roomId: string; gameName: string }>();
-  const roomId = parseInt(roomIdString, 10);
-  const styles = useStyles();
+type Props = { room: Room; roomId: number };
+const RoomDetails = ({ room, roomId }: Props) => {
+  const { gameName } = useParams<{ gameName: string }>();
   const dispatch = useDispatch();
-  const room = useSelector(state => {
-    return state.gameState.worldState.rooms[roomId];
-  });
+  const styles = useStyles();
 
   const handleChange = (fieldName: string) => (value: string) => {
     dispatch(setRoom({

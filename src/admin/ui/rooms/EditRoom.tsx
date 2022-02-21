@@ -1,13 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import RoomDetails from './RoomDetails';
-import EntityDetails from './EntityDetails';
 import { useSelector } from '../hooks/redux';
+import EntityPane from './EntityPane';
 
 const EditRoom = () => {
-  const { roomId } = useParams<{ roomId: string }>();
+  const { roomId: roomIdString } = useParams<{ roomId: string }>();
+  const roomId = parseInt(roomIdString, 10);
   const room = useSelector(state => {
-    return state.gameState.worldState.rooms[parseInt(roomId, 10)];
+    return state.gameState.worldState.rooms[roomId];
   });
 
   if (!room) {
@@ -16,8 +17,8 @@ const EditRoom = () => {
 
   return (
     <div>
-      <RoomDetails />
-      <EntityDetails />
+      <RoomDetails room={room} roomId={roomId} />
+      <EntityPane room={room} />
     </div>
   );
 };
