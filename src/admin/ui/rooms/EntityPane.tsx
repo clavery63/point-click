@@ -14,7 +14,7 @@ const RoomEntities = ({ ids }: Ids) => {
   return (
     <div>
       {entities.map(entity => (
-        <div>
+        <div key={entity.id}>
           {entity.name}
         </div>
       ))}

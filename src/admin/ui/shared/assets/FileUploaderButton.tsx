@@ -26,10 +26,13 @@ const FileUploaderButton = ({ validate, onSuccess, filePath }: Props) => {
       </Button>
       <Dialog
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={() => {
+          if (!waiting) {
+            setOpen(false);
+          }
+        }}
         maxWidth={false}
         hideBackdrop
-        disableBackdropClick={waiting}
       >
         <DialogContent>
           <FileUploader

@@ -21,23 +21,27 @@ type Props = {
 };
 const AudioSelector = ({ label, value, onChange }: Props) => {
   const { gameName } = useParams<{ gameName: string }>();
-  const [options, setOptions] = useState<string[]>([]);
+  const [options, setOptions] = useState<Nullable<string[]>>(null);
 
   useEffect(() => {
     loadAudios(gameName).then(setOptions);
   }, []);
 
   const handleUploadSuccess = (file: File) => {
-    setOptions(oldOptions => [...oldOptions, file.name]);
+    setOptions(oldOptions => [...(oldOptions || []), file.name]);
     onChange(file.name);
   };
+
+  if (!options) {
+    return null;
+  }
 
   return (
     <Grid container>
       <Grid item xs={4}>
         <Selector
           label={label}
-          value={value || ''}
+          value={options.length ? (value || '') : ''}
           onChange={onChange}
           options={options}
         />
