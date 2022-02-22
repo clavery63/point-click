@@ -1,5 +1,5 @@
 import {
-  map, switchMap, take, tap,
+  map, skipWhile, switchMap, take, tap,
 } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
@@ -60,6 +60,7 @@ type HydrateState = {
 
 const hydrateState$: HydrateState = (state$, initialize) => {
   return state$.pipe(
+    skipWhile(state => !state.gameName.length),
     take(1),
     map(initialize),
     switchMap(loadPlayerAndGameState$),
