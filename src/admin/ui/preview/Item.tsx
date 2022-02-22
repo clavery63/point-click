@@ -20,7 +20,7 @@ const ItemComponent = ({ item, roomId }: Props) => {
   const cachebuster = useCachebuster(item.position);
   useReordering(item, roomId);
 
-  if (!item.position) {
+  if (!item.position || !image) {
     return null;
   }
 

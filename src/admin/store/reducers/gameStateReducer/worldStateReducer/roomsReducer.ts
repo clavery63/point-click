@@ -7,6 +7,11 @@ type RoomWithId = {
   room: Room;
 };
 
+type RoomWithItem = {
+  roomId: number;
+  itemId: number;
+};
+
 type Reordering = {
   roomId: number;
   entityId: number;
@@ -30,6 +35,11 @@ export const roomsSlice = createSlice({
       const { id, room } = action.payload;
 
       state[id] = room;
+    },
+    addItemToRoom: (state, action: PayloadAction<RoomWithItem>) => {
+      const { roomId, itemId } = action.payload;
+
+      state[roomId].entities.push(itemId);
     },
     reorderEntity: (state, action: PayloadAction<Reordering>) => {
       const {
@@ -57,6 +67,6 @@ export const roomsSlice = createSlice({
   },
 });
 
-export const { setRoom, reorderEntity } = roomsSlice.actions;
+export const { setRoom, reorderEntity, addItemToRoom } = roomsSlice.actions;
 
 export default roomsSlice.reducer;

@@ -53,12 +53,30 @@ export const entitiesSlice = createSlice({
 
       state[id] = item;
     },
+    createItemWithId: (state, action: PayloadAction<{ id: number}>) => {
+      const { id } = action.payload;
+
+      state[id] = {
+        id,
+        type: 'items',
+        name: 'New Item',
+        description: '',
+        contains: null,
+        // TODO: don't set position for items that don't render in viewport
+        position: {
+          left: 0,
+          top: 0,
+        },
+      };
+    },
   },
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.worldState.entities);
   },
 });
 
-export const { setEntityPosition, setScenerySize, setItem } = entitiesSlice.actions;
+export const {
+  setEntityPosition, setScenerySize, setItem, createItemWithId,
+} = entitiesSlice.actions;
 
 export default entitiesSlice.reducer;
