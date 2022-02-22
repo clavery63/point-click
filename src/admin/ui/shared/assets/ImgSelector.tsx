@@ -2,7 +2,7 @@ import React from 'react';
 import { Nullable } from 'game/store/types';
 import {
   Grid,
-} from '@material-ui/core';
+} from '@mui/material';
 import { addImage } from 'admin/store/reducers/gameStateReducer/imagesReducer';
 import { useDispatch, useSelector } from '../../hooks/redux';
 import ImageUploader from './ImageUploader';

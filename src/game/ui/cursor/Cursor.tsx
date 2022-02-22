@@ -6,7 +6,7 @@ import { useSelector } from 'shared/hooks';
 import cursor$ from './cursorStream';
 
 export interface StageData {
-  stage: Nullable<Stage>;
+  stage: Nullable<typeof Stage>;
   scaleX: number;
   scaleY: number;
 }

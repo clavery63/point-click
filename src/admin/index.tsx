@@ -16,7 +16,7 @@ export const store = configureStore({
     serializableCheck: {
       // TODO: I bet these images can be moved to a selector without too much
       // trouble
-      ignoredActionPaths: ['payload.images', 'payload.file'],
+      ignoredActionPaths: ['payload.images', 'payload.img'],
       ignoredPaths: ['gameState.images', 'previewState.images'],
     },
   }).concat(epicMiddleware),

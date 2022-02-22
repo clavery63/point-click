@@ -1,7 +1,7 @@
 import React from 'react';
 import { Nullable } from 'game/store/types';
-import FormControl from '@material-ui/core/FormControl';
-import { InputLabel, MenuItem, Select } from '@material-ui/core';
+import FormControl from '@mui/material/FormControl';
+import { InputLabel, MenuItem, Select } from '@mui/material';
 
 type Props = {
   label: string;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Nullable } from 'game/store/types';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 import S3 from 'shared/util/S3';
 import { useParams } from 'react-router-dom';
 import getFilenames from 'shared/util/getFilenames';
