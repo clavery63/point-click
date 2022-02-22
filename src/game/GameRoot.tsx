@@ -27,7 +27,9 @@ type Props = {
 
 const epicMiddleware = createEpicMiddleware<AllActions, AllActions, GameStoreState>();
 
-const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// Uncomment this if you are working on the game (as opposed to admin)
+// const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = compose;
 const store = createStore(rootReducer, defaultState, composeEnhancers(
   applyMiddleware(epicMiddleware, effectsMiddleware),
 ));
