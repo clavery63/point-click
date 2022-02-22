@@ -12,7 +12,6 @@ const preview$ = (action$: Observable<Action>, state$: Observable<RootState>) =>
     withLatestFrom(state$),
     map(([{ payload }, { gameState }]) => setPreview({
       ...gameState,
-      menu: 'NONE',
       playerState: {
         ...gameState.playerState,
         // TODO: make this way more easily configurable

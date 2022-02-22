@@ -1,13 +1,11 @@
-import React, {
-  useEffect, useState,
-} from 'react';
+import React, { useEffect } from 'react';
 import {
-  createStore, applyMiddleware, compose, Store,
+  createStore, applyMiddleware, compose,
 } from 'redux';
 import { Provider } from 'react-redux';
 import { createEpicMiddleware } from 'redux-observable';
 import rootEpic from './store/epics/root';
-import rootReducer, { ReducerActions } from './store/reducers/rootReducer';
+import rootReducer from './store/reducers/rootReducer';
 import effectsMiddleware from './store/middleware/effectsMiddleware';
 import GameContainer from './GameContainer';
 import { GameState, GameStoreState } from './store/types';
@@ -27,30 +25,32 @@ type Props = {
   state?: GameState;
 };
 
+const epicMiddleware = createEpicMiddleware<AllActions, AllActions, GameStoreState>();
+
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducer, defaultState, composeEnhancers(
+  applyMiddleware(epicMiddleware, effectsMiddleware),
+));
+
+epicMiddleware.run(rootEpic);
+
 const GameRoot = React.memo(({ gameName, state }: Props) => {
   const containerRef = React.createRef<HTMLDivElement>();
-  const [store, setStore] = useState<Store<GameStoreState, ReducerActions> | null>(null);
 
   useEffect(() => {
-    if (!store) {
-      const epicMiddleware = createEpicMiddleware<AllActions, AllActions, GameStoreState>();
-
-      const initialState = {
-        ...defaultState,
-        gameName,
-        ...state,
-      };
-
-      const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-      const newStore = createStore(rootReducer, initialState, composeEnhancers(
-        applyMiddleware(epicMiddleware, effectsMiddleware),
-      ));
-
-      epicMiddleware.run(rootEpic);
-
-      setStore(newStore);
+    if (state) {
+      // Hydrate from admin
+      store.dispatch({ type: 'SET_WORLD_STATE', payload: state.worldState });
+      store.dispatch({ type: 'SET_PLAYER_STATE', payload: state.playerState });
+      store.dispatch({ type: 'SET_FLAGS', payload: state.flags });
+      store.dispatch({ type: 'SET_MENU', payload: 'NONE' });
     }
-  }, [gameName, state]);
+
+    store.dispatch({
+      type: 'SET_GAME_NAME',
+      payload: gameName,
+    });
+  }, []);
 
   return (
     <div style={containerStyles} ref={containerRef}>

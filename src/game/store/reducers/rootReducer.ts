@@ -38,6 +38,7 @@ type ActionTypes = {
   SELECT_BAG: number;
   CHANGE_PAGE: DoorDir;
   SET_MENU: Menu;
+  SET_GAME_NAME: string;
   ERROR: null;
 };
 
@@ -74,6 +75,7 @@ const selectItem: ParentReducer<number> = selectItemReducer;
 const selectBag: ParentReducer<number> = selectBagReducer;
 const changePage: ParentReducer<DoorDir> = changePageReducer;
 const setMenu: ParentReducer<Menu> = setValue('menu');
+const setGameName: ParentReducer<string> = setValue('gameName');
 
 const rootReducer: ReduxReducer<
   GameStoreState, ReducerActions
@@ -131,6 +133,8 @@ const rootReducer: ReduxReducer<
       return applyReducer(changePage, state, action.payload);
     case 'SET_MENU':
       return applyReducer(setMenu, state, action.payload);
+    case 'SET_GAME_NAME':
+      return applyReducer(setGameName, state, action.payload);
     default:
       return state;
   }

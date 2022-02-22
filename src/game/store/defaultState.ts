@@ -7,7 +7,7 @@ import { GameStoreState } from './types';
 // can ever be flowing through the reducers...
 const defaultState: GameStoreState = {
   transition: {
-    dest: 0,
+    dest: null,
     dir: 'FORWARD',
   },
   nextText: '',
