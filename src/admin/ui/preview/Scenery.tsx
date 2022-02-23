@@ -44,7 +44,6 @@ const SceneryComponent = ({ roomId, scenery }: Props) => {
       onClick={() => {
         dispatch(setSelected({
           id: scenery.id,
-          type: 'scenery',
         }));
       }}
     />

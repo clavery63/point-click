@@ -16,6 +16,10 @@ const Entity = ({ id, roomId }: EntityType) => {
     return state.gameState.worldState.entities[id];
   });
 
+  if (!entity) {
+    return null;
+  }
+
   if (entity.type === 'items') {
     return <Item item={entity} roomId={roomId} />;
   }

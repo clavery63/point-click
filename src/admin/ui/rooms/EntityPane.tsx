@@ -4,6 +4,7 @@ import React from 'react';
 import { createItem } from 'admin/store/epics/createItem';
 import { useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import { deleteEntity } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { useDispatch, useSelector } from '../hooks/redux';
 import EntityDetails from './EntityDetails';
 import DispatchButton from '../shared/DispachButton';
@@ -31,15 +32,13 @@ const RoomEntities = ({ ids }: Ids) => {
   return (
     <div>
       {entities.map(entity => (
-        <div>
+        <div key={entity.id}>
           <div
             onClick={() => {
               dispatch(setSelected({
                 id: entity.id,
-                type: 'items',
               }));
             }}
-            key={entity.id}
           >
             {entity.name}
           </div>
@@ -47,12 +46,11 @@ const RoomEntities = ({ ids }: Ids) => {
             variant="outlined"
             color="error"
             onClick={() => {
-              dispatch(setSelected({
+              dispatch(deleteEntity({
                 id: entity.id,
-                type: 'scenery',
+                roomId,
               }));
             }}
-            key={entity.id}
             size="small"
           >
             delete

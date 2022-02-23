@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setGameState } from 'admin/store/sharedActions';
-import { EntityType, Lookup, Room } from 'game/store/types';
+import {
+  EntityType, Lookup, Room,
+} from 'game/store/types';
+import { deleteEntity } from './entitiesReducer';
 
 type RoomWithId = {
   id: number;
@@ -64,6 +67,11 @@ export const roomsSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.worldState.rooms);
+    builder.addCase(deleteEntity, (state, action) => {
+      const { id, roomId } = action.payload;
+      const room = state[roomId];
+      room.entities = room.entities.filter((item: number) => item !== id);
+    });
   },
 });
 

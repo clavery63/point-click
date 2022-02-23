@@ -53,6 +53,11 @@ export const entitiesSlice = createSlice({
 
       state[id] = entity;
     },
+    deleteEntity: (state, action: PayloadAction<{ id: number; roomId: number }>) => {
+      const { id } = action.payload;
+
+      delete state[id];
+    },
     createItemWithId: (state, action: PayloadAction<{ id: number}>) => {
       const { id } = action.payload;
 
@@ -76,7 +81,7 @@ export const entitiesSlice = createSlice({
 });
 
 export const {
-  setEntityPosition, setScenerySize, setEntity, createItemWithId,
+  setEntityPosition, setScenerySize, setEntity, createItemWithId, deleteEntity,
 } = entitiesSlice.actions;
 
 export default entitiesSlice.reducer;

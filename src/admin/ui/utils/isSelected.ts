@@ -5,7 +5,7 @@ export const isSelected = (entity: Entity, selectedEntity: Nullable<SelectedEnti
   if (!selectedEntity) {
     return false;
   }
-  return entity.id === selectedEntity.id && entity.type === selectedEntity.type;
+  return entity.id === selectedEntity.id;
 };
 
 export const isUnselected = (entity: Entity, selectedEntity: Nullable<SelectedEntity>) => {

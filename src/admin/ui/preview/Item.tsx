@@ -43,7 +43,6 @@ const ItemComponent = ({ item, roomId }: Props) => {
       onClick={() => {
         dispatch(setSelected({
           id: item.id,
-          type: 'items',
         }));
       }}
     />
