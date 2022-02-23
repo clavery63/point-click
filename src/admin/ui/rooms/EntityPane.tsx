@@ -3,6 +3,7 @@ import { Room } from 'game/store/types';
 import React from 'react';
 import { createItem } from 'admin/store/epics/createItem';
 import { useParams } from 'react-router-dom';
+import Button from '@mui/material/Button';
 import { useDispatch, useSelector } from '../hooks/redux';
 import EntityDetails from './EntityDetails';
 import DispatchButton from '../shared/DispachButton';
@@ -30,16 +31,32 @@ const RoomEntities = ({ ids }: Ids) => {
   return (
     <div>
       {entities.map(entity => (
-        <div
-          onClick={() => {
-            dispatch(setSelected({
-              id: entity.id,
-              type: 'items',
-            }));
-          }}
-          key={entity.id}
-        >
-          {entity.name}
+        <div>
+          <div
+            onClick={() => {
+              dispatch(setSelected({
+                id: entity.id,
+                type: 'items',
+              }));
+            }}
+            key={entity.id}
+          >
+            {entity.name}
+          </div>
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={() => {
+              dispatch(setSelected({
+                id: entity.id,
+                type: 'scenery',
+              }));
+            }}
+            key={entity.id}
+            size="small"
+          >
+            delete
+          </Button>
         </div>
       ))}
       <CreateItemButton roomId={roomId} />

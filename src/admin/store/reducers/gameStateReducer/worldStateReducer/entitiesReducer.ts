@@ -9,8 +9,8 @@ type PositionWithId = {
   field?: 'startPosition' | 'endPosition';
 };
 
-type ItemWithId = {
-  item: Item;
+type EntityWithId = {
+  entity: Item | Scenery;
   id: number;
 };
 
@@ -48,10 +48,10 @@ export const entitiesSlice = createSlice({
         scenery.size = { width, height };
       }
     },
-    setItem: (state, action: PayloadAction<ItemWithId>) => {
-      const { id, item } = action.payload;
+    setEntity: (state, action: PayloadAction<EntityWithId>) => {
+      const { id, entity } = action.payload;
 
-      state[id] = item;
+      state[id] = entity;
     },
     createItemWithId: (state, action: PayloadAction<{ id: number}>) => {
       const { id } = action.payload;
@@ -76,7 +76,7 @@ export const entitiesSlice = createSlice({
 });
 
 export const {
-  setEntityPosition, setScenerySize, setItem, createItemWithId,
+  setEntityPosition, setScenerySize, setEntity, createItemWithId,
 } = entitiesSlice.actions;
 
 export default entitiesSlice.reducer;

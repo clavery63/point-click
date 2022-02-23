@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from '../hooks/redux';
 import ItemDetails from './ItemDetails';
+import SceneryDetails from './SceneryDetails';
 
 const EntityDetails = () => {
   const entity = useSelector(state => {
@@ -15,7 +16,11 @@ const EntityDetails = () => {
     return <ItemDetails item={entity} />;
   }
 
-  // TODO: add scenery and doors
+  if (entity?.type === 'scenery') {
+    return <SceneryDetails scenery={entity} />;
+  }
+
+  // TODO: add doors
   return null;
 };
 
