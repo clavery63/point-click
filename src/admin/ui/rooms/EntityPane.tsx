@@ -4,10 +4,12 @@ import React from 'react';
 import { createItem } from 'admin/store/epics/createItem';
 import { useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import { deleteEntity } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { useDispatch, useSelector } from '../hooks/redux';
 import EntityDetails from './EntityDetails';
 import DispatchButton from '../shared/DispachButton';
+import useStyles from '../shared/useStyles';
 
 type Props = { room: Room };
 type Ids = { ids: number[] };
@@ -75,11 +77,12 @@ const EntitySummary = ({ room }: Props) => {
 };
 
 const EntityPane = ({ room }: Props) => {
+  const styles = useStyles();
   return (
-    <div style={{ float: 'left' }}>
+    <Box className={styles.rightColumn}>
       <EntitySummary room={room} />
       <EntityDetails />
-    </div>
+    </Box>
   );
 };
 
