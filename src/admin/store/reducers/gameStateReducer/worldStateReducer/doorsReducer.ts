@@ -9,6 +9,12 @@ type DoorWithId = {
   id: number;
 };
 
+type PositionWithId = {
+  id: number;
+  x: number;
+  y: number;
+};
+
 export const doorsSlice = createSlice({
   name: 'doors',
   initialState: {} as Lookup<Door>,
@@ -17,6 +23,12 @@ export const doorsSlice = createSlice({
       const { id, door } = action.payload;
 
       state[id] = door;
+    },
+    setDoorPosition: (state, action: PayloadAction<PositionWithId>) => {
+      const { id, x, y } = action.payload;
+      const door = state[id];
+
+      door.position = { left: x, top: y };
     },
     deleteDoor: (state, action: PayloadAction<{ id: number; roomId: number }>) => {
       const { id } = action.payload;
@@ -50,6 +62,7 @@ export const {
   setDoor,
   deleteDoor,
   createDoorWithId,
+  setDoorPosition,
 } = doorsSlice.actions;
 
 export default doorsSlice.reducer;

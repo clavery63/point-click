@@ -3,6 +3,7 @@ import { setSelected } from 'admin/store/reducers/editorStateReducer/selectedEnt
 import { KonvaEventObject } from 'konva/types/Node';
 import PreciseImage from 'shared/components/PreciseImage';
 import { Door } from 'game/store/types';
+import { setDoorPosition } from 'admin/store/reducers/gameStateReducer/worldStateReducer/doorsReducer';
 import { useSelector, useDispatch } from '../hooks/redux';
 import useCachebuster from '../hooks/useCachebuster';
 import { isUnselected } from '../utils/isSelected';
@@ -34,12 +35,11 @@ const DoorComponent = ({ door, roomId }: Props) => {
       opacity={isUnselected(door, selectedEnt) ? 0.5 : 1}
       draggable
       onDragEnd={(e: KonvaEventObject<DragEvent>) => {
-        console.log('moved door:', e);
-        // dispatch(setEntityPosition({
-        //   id: item.id,
-        //   x: Math.round(e.target.x()),
-        //   y: Math.round(e.target.y()),
-        // }));
+        dispatch(setDoorPosition({
+          id: door.id,
+          x: Math.round(e.target.x()),
+          y: Math.round(e.target.y()),
+        }));
       }}
       onClick={() => {
         dispatch(setSelected({
