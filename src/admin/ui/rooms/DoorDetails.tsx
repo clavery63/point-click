@@ -1,7 +1,9 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
-import { Door } from 'game/store/types';
+import { Door, DoorDir, DoorState } from 'game/store/types';
 import { setDoor } from 'admin/store/reducers/gameStateReducer/worldStateReducer/doorsReducer';
 import { useDispatch, useSelector } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
@@ -16,8 +18,9 @@ const DoorDetails = ({ door }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const allRoomIds = useSelector(state => Object.keys(state.gameState.worldState.rooms));
+  const allKeyIds = useSelector(state => Object.keys(state.gameState.worldState.entities));
 
-  const handleChange = (fieldName: keyof Door) => (value: string) => {
+  const handleChange = (fieldName: keyof Door) => (value: string | number | boolean) => {
     dispatch(setDoor({
       id: door.id,
       door: {
@@ -72,11 +75,46 @@ const DoorDetails = ({ door }: Props) => {
         />
       </Grid>
       <Grid item xs={12}>
+        <FormControlLabel
+          control={(
+            <Switch
+              checked={!!door.hidden}
+              onChange={e => handleChange('hidden')(e.currentTarget.checked)}
+            />
+          )}
+          label="hidden?"
+        />
+      </Grid>
+      <Grid item xs={12}>
         <Selector
           label="destination"
           value={door.dest}
           onChange={handleChange('dest')}
           options={allRoomIds}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Selector
+          label="key id"
+          value={door.keyId}
+          onChange={id => handleChange('keyId')(parseInt(id, 10))}
+          options={allKeyIds}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Selector
+          label="state"
+          value={door.state}
+          onChange={handleChange('state')}
+          options={Object.keys(DoorState)}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Selector
+          label="animation direction"
+          value={door.dir}
+          onChange={handleChange('dir')}
+          options={Object.keys(DoorDir)}
         />
       </Grid>
       <Grid item xs={12}>
