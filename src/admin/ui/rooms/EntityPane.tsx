@@ -1,7 +1,7 @@
 import { setSelected } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
 import { Room } from 'game/store/types';
 import React from 'react';
-import { createItem } from 'admin/store/epics/createItem';
+import { createDoor, createItem } from 'admin/store/epics/createItem';
 import { useParams } from 'react-router-dom';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { deleteEntity } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
+import { deleteDoor } from 'admin/store/reducers/gameStateReducer/worldStateReducer/doorsReducer';
 import { useDispatch, useSelector } from '../hooks/redux';
 import EntityDetails from './EntityDetails';
 import useStyles from '../shared/useStyles';
@@ -86,10 +87,7 @@ const EntitySummary = ({ room }: Props) => {
           }));
         }}
         onDelete={(id: number) => {
-          dispatch(deleteEntity({
-            id,
-            roomId,
-          }));
+          dispatch(deleteEntity({ id, roomId }));
         }}
         onAdd={() => dispatch(createItem(roomId))}
       />
@@ -103,9 +101,9 @@ const EntitySummary = ({ room }: Props) => {
           }));
         }}
         onDelete={(id: number) => {
-          console.log('deleting door', id);
+          dispatch(deleteDoor({ id, roomId }));
         }}
-        onAdd={() => console.log('creating door')}
+        onAdd={() => dispatch(createDoor(roomId))}
       />
     </div>
   );

@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setGameState } from 'admin/store/sharedActions';
-import { Door, Lookup } from 'game/store/types';
+import {
+  Door, DoorDir, DoorState, Lookup,
+} from 'game/store/types';
 
 type DoorWithId = {
   door: Door;
@@ -16,6 +18,28 @@ export const doorsSlice = createSlice({
 
       state[id] = door;
     },
+    deleteDoor: (state, action: PayloadAction<{ id: number; roomId: number }>) => {
+      const { id } = action.payload;
+
+      delete state[id];
+    },
+    createDoorWithId: (state, action: PayloadAction<{ id: number}>) => {
+      const { id } = action.payload;
+
+      state[id] = {
+        id,
+        type: 'doors',
+        position: {
+          left: 0, top: 0,
+        },
+        mapPosition: {
+          x: 0, y: 0,
+        },
+        dest: 0,
+        dir: DoorDir.FORWARD,
+        state: DoorState.CLOSED,
+      };
+    },
   },
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.worldState.doors);
@@ -24,6 +48,8 @@ export const doorsSlice = createSlice({
 
 export const {
   setDoor,
+  deleteDoor,
+  createDoorWithId,
 } = doorsSlice.actions;
 
 export default doorsSlice.reducer;

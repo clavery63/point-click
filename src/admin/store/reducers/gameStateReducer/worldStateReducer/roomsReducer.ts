@@ -3,6 +3,7 @@ import { setGameState } from 'admin/store/sharedActions';
 import {
   EntityType, Lookup, Room,
 } from 'game/store/types';
+import { deleteDoor } from './doorsReducer';
 import { deleteEntity } from './entitiesReducer';
 
 type RoomWithId = {
@@ -13,6 +14,11 @@ type RoomWithId = {
 type RoomWithItem = {
   roomId: number;
   itemId: number;
+};
+
+type RoomWithDoor = {
+  roomId: number;
+  doorId: number;
 };
 
 type Reordering = {
@@ -44,6 +50,11 @@ export const roomsSlice = createSlice({
 
       state[roomId].entities.push(itemId);
     },
+    addDoorToRoom: (state, action: PayloadAction<RoomWithDoor>) => {
+      const { roomId, doorId } = action.payload;
+
+      state[roomId].doors.push(doorId);
+    },
     reorderEntity: (state, action: PayloadAction<Reordering>) => {
       const {
         roomId, entityId, type, direction,
@@ -72,9 +83,16 @@ export const roomsSlice = createSlice({
       const room = state[roomId];
       room.entities = room.entities.filter((item: number) => item !== id);
     });
+    builder.addCase(deleteDoor, (state, action) => {
+      const { id, roomId } = action.payload;
+      const room = state[roomId];
+      room.doors = room.doors.filter((item: number) => item !== id);
+    });
   },
 });
 
-export const { setRoom, reorderEntity, addItemToRoom } = roomsSlice.actions;
+export const {
+  setRoom, reorderEntity, addItemToRoom, addDoorToRoom,
+} = roomsSlice.actions;
 
 export default roomsSlice.reducer;
