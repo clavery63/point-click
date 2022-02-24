@@ -36,6 +36,7 @@ const MapPositioner = ({ label, value, onChange }: Props) => {
       <div className={styles.outerRect}>
         {zeroThroughFour.flatMap(x => zeroThroughFour.map(y => (
           <div
+            key={`${x},${y}`}
             className={styles.innerRect}
             style={{
               left: `${x * 40}px`,

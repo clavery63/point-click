@@ -3,75 +3,110 @@ import { Room } from 'game/store/types';
 import React from 'react';
 import { createItem } from 'admin/store/epics/createItem';
 import { useParams } from 'react-router-dom';
-import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
 import { deleteEntity } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { useDispatch, useSelector } from '../hooks/redux';
 import EntityDetails from './EntityDetails';
-import DispatchButton from '../shared/DispachButton';
 import useStyles from '../shared/useStyles';
 
 type Props = { room: Room };
-type Ids = { ids: number[] };
 
-type ButtonProps = { roomId: number };
-const CreateItemButton = ({ roomId }: ButtonProps) => (
-  <DispatchButton
-    action={createItem(roomId)}
-    callToAction="create item"
-    color="primary"
-  />
-);
-
-const RoomEntities = ({ ids }: Ids) => {
-  const dispatch = useDispatch();
-  const entities = useSelector(state => ids.map(id => {
-    return state.gameState.worldState.entities[id];
-  }));
-  const { roomId: roomIdString } = useParams<{ roomId: string }>();
-  const roomId = parseInt(roomIdString, 10);
-
+type ButtonProps = { onAdd: () => void };
+const CreateObjectButton = ({ onAdd }: ButtonProps) => {
   return (
-    <div>
-      {entities.map(entity => (
-        <div key={entity.id}>
-          <div
-            onClick={() => {
-              dispatch(setSelected({
-                id: entity.id,
-                type: 'entity',
-              }));
-            }}
-          >
-            {entity.name}
-          </div>
-          <Button
-            variant="outlined"
-            color="error"
-            onClick={() => {
-              dispatch(deleteEntity({
-                id: entity.id,
-                roomId,
-              }));
-            }}
-            size="small"
-          >
-            delete
-          </Button>
-        </div>
+    <IconButton
+      onClick={onAdd}
+      color="primary"
+    >
+      <AddIcon />
+    </IconButton>
+  );
+};
+
+type ObjectsListProps = {
+  objectInfos: { id: number; name: string}[];
+  label: string;
+  onSelect: (id: number) => void;
+  onDelete: (id: number) => void;
+  onAdd: () => void;
+};
+const ObjectsList = ({
+  objectInfos, label, onSelect, onDelete, onAdd,
+}: ObjectsListProps) => {
+  return (
+    <Stack direction="row" spacing={1} style={{ alignItems: 'center' }}>
+      <Typography>{label}</Typography>
+      {objectInfos.map(entity => (
+        <Chip
+          key={entity.id}
+          label={entity.name}
+          onClick={() => onSelect(entity.id)}
+          onDelete={() => onDelete(entity.id)}
+          deleteIcon={<DeleteIcon />}
+          variant="outlined"
+        />
       ))}
-      <CreateItemButton roomId={roomId} />
-    </div>
+      <CreateObjectButton onAdd={onAdd} />
+    </Stack>
   );
 };
 
 const EntitySummary = ({ room }: Props) => {
-  // TODO: add doors
-  const { entities } = room;
+  const dispatch = useDispatch();
+  const { roomId: roomIdString } = useParams<{ roomId: string }>();
+  const roomId = parseInt(roomIdString, 10);
+  const { entities, doors } = room;
+
+  const entityInfos = useSelector(state => entities.map(id => {
+    const ent = state.gameState.worldState.entities[id];
+    return { id, name: ent.name || '' };
+  }));
+
+  const doorInfos = useSelector(state => doors.map(id => {
+    const ent = state.gameState.worldState.doors[id];
+    // TODO: let's force doors to have a name :)
+    return { id, name: ent.closedImg || ent.openImg || ent.id.toString() };
+  }));
 
   return (
     <div>
-      <RoomEntities ids={entities} />
+      <ObjectsList
+        objectInfos={entityInfos}
+        label="Entities:"
+        onSelect={(id: number) => {
+          dispatch(setSelected({
+            id,
+            type: 'entity',
+          }));
+        }}
+        onDelete={(id: number) => {
+          dispatch(deleteEntity({
+            id,
+            roomId,
+          }));
+        }}
+        onAdd={() => dispatch(createItem(roomId))}
+      />
+      <ObjectsList
+        objectInfos={doorInfos}
+        label="Doors:"
+        onSelect={(id: number) => {
+          dispatch(setSelected({
+            id,
+            type: 'doors',
+          }));
+        }}
+        onDelete={(id: number) => {
+          console.log('deleting door', id);
+        }}
+        onAdd={() => console.log('creating door')}
+      />
     </div>
   );
 };

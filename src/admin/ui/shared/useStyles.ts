@@ -4,11 +4,12 @@ const useStyles = makeStyles({
   leftColumn: {
     width: `${5 * 112}px`,
     float: 'left',
-    padding: '10px 40px 10px 10px',
+    padding: '20px',
   },
   rightColumn: {
-    width: `calc(100vw - ${5 * 112 + 50}px)`,
+    width: `calc(100vw - ${5 * 112 + 80}px)`,
     float: 'left',
+    padding: '20px',
   },
   field: {
     margin: '10px 20px 10px 0',

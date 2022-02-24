@@ -43,35 +43,35 @@ const DoorDetails = ({ door }: Props) => {
       <Grid item xs={12}>
         <LongTextField
           label="closedText"
-          value={door.closedText}
+          value={door.closedText || ''}
           onChange={handleChange('closedText')}
         />
       </Grid>
       <Grid item xs={12}>
         <LongTextField
           label="openText"
-          value={door.openText}
+          value={door.openText || ''}
           onChange={handleChange('openText')}
         />
       </Grid>
       <Grid item xs={12}>
         <LongTextField
           label="lockedText"
-          value={door.lockedText}
+          value={door.lockedText || ''}
           onChange={handleChange('lockedText')}
         />
       </Grid>
       <Grid item xs={12}>
         <LongTextField
           label="unlockText"
-          value={door.unlockText}
+          value={door.unlockText || ''}
           onChange={handleChange('unlockText')}
         />
       </Grid>
       <Grid item xs={12}>
         <LongTextField
           label="description"
-          value={door.description}
+          value={door.description || ''}
           onChange={handleChange('description')}
         />
       </Grid>
@@ -97,7 +97,7 @@ const DoorDetails = ({ door }: Props) => {
       <Grid item xs={12}>
         <Selector
           label="key id"
-          value={door.keyId}
+          value={door.keyId || ''}
           onChange={id => handleChange('keyId')(parseInt(id, 10))}
           options={allKeyIds}
         />
@@ -121,14 +121,14 @@ const DoorDetails = ({ door }: Props) => {
       <Grid item xs={12}>
         <ImgSelector
           label="closedImg"
-          value={door.closedImg}
+          value={door.closedImg || ''}
           onChange={handleChange('closedImg')}
         />
       </Grid>
       <Grid item xs={12}>
         <ImgSelector
           label="openImg"
-          value={door.openImg}
+          value={door.openImg || ''}
           onChange={handleChange('openImg')}
         />
       </Grid>
