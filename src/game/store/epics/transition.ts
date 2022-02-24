@@ -8,7 +8,7 @@ import range from 'lodash/range';
 import { ofType } from 'redux-observable';
 import { isOfType } from 'typesafe-actions';
 import { AllActions, MyEpic } from './types';
-import { GameStoreState } from '../types';
+import { DoorDir, GameStoreState } from '../types';
 import { ActionsType } from '../reducers/rootReducer';
 import { when } from './util';
 
@@ -34,7 +34,7 @@ const dispatchRoom: DispatchRoom = (dest, state, runText$) => {
   }
 
   if (playerState.timer === 17) {
-    return of({ type: 'RUN_TRANSITION', payload: { dest: 11, dir: 'FORWARD', frame: 0 } });
+    return of({ type: 'RUN_TRANSITION', payload: { dest: 11, dir: DoorDir.FORWARD, frame: 0 } });
   }
 
   return concat(

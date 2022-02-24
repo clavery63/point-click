@@ -1,4 +1,4 @@
-import { GameStoreState } from './types';
+import { GameStoreState, DoorDir } from './types';
 
 // TODO: I know this looks bad, but we're leaving it here for now to keep things
 // moving. I think it would be nice to fetch the initial state before calling
@@ -8,7 +8,7 @@ import { GameStoreState } from './types';
 const defaultState: GameStoreState = {
   transition: {
     dest: null,
-    dir: 'FORWARD',
+    dir: DoorDir.FORWARD,
   },
   nextText: '',
   text: null,

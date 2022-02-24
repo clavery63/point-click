@@ -7,12 +7,12 @@ import createGrid, { GRID_SIZE } from './createGrid';
 
 const getGrids = (dir: DoorDir) => range(GRID_SIZE).map(createGrid(dir));
 const grids = {
-  RIGHT: getGrids('RIGHT'),
-  LEFT: getGrids('LEFT'),
-  UP: getGrids('UP'),
-  DOWN: getGrids('DOWN'),
-  FORWARD: getGrids('FORWARD'),
-  BACK: getGrids('BACK'),
+  [DoorDir.RIGHT]: getGrids(DoorDir.RIGHT),
+  [DoorDir.LEFT]: getGrids(DoorDir.LEFT),
+  [DoorDir.UP]: getGrids(DoorDir.UP),
+  [DoorDir.DOWN]: getGrids(DoorDir.DOWN),
+  [DoorDir.FORWARD]: getGrids(DoorDir.FORWARD),
+  [DoorDir.BACK]: getGrids(DoorDir.BACK),
 };
 
 const Transition = () => {

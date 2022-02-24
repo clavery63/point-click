@@ -1,10 +1,11 @@
+import { DoorState } from 'game/store/types';
 import { compose } from 'redux';
 import { DoorReducer, EntityReducer } from 'shared/util/types';
 import { withText, setValue, clearValue } from '../utils';
 
 const doorReducer: DoorReducer = ({ state, dest, dir }) => {
   switch (state) {
-    case 'OPEN':
+    case DoorState.OPEN:
       return compose(
         clearValue('playerState.examining'),
         setValue('transition')({ dest, dir }),

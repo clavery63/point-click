@@ -9,7 +9,7 @@ import changePageReducer from './changePageReducer';
 import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
 import {
-  Flags, GameStoreState, PlayerState, WorldState, DoorDir, Menu, VerbIndex, Nullable,
+  Flags, GameStoreState, PlayerState, WorldState, Menu, VerbIndex, Nullable, PageDir,
 } from '../types';
 import defaultState from '../defaultState';
 
@@ -36,7 +36,7 @@ type ActionTypes = {
   SELECT_DOOR: number;
   SELECT_ITEM: number;
   SELECT_BAG: number;
-  CHANGE_PAGE: DoorDir;
+  CHANGE_PAGE: PageDir;
   SET_MENU: Menu;
   SET_GAME_NAME: string;
   ERROR: null;
@@ -73,7 +73,7 @@ const selectObject: ParentReducer<number> = selectEntityReducer;
 const selectDoor: ParentReducer<number> = selectDoorReducer;
 const selectItem: ParentReducer<number> = selectItemReducer;
 const selectBag: ParentReducer<number> = selectBagReducer;
-const changePage: ParentReducer<DoorDir> = changePageReducer;
+const changePage: ParentReducer<PageDir> = changePageReducer;
 const setMenu: ParentReducer<Menu> = setValue('menu');
 const setGameName: ParentReducer<string> = setValue('gameName');
 

@@ -1,3 +1,4 @@
+import { DoorState } from 'game/store/types';
 import { compose } from 'redux';
 import { DoorReducer, EntityReducer } from 'shared/util/types';
 import {
@@ -8,7 +9,7 @@ import genericVerbReducer from './genericVerbReducer';
 const useDoorReducer: DoorReducer = (object, playerState) => {
   if (playerState.using === object.keyId) {
     return compose(
-      setValue(`worldState.doors[${object.id}].state`)('CLOSED'),
+      setValue(`worldState.doors[${object.id}].state`)(DoorState.CLOSED),
       withText(object.unlockText),
     );
   }

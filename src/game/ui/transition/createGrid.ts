@@ -33,12 +33,12 @@ const boxes: TransitionFn = (origX, origY, origFrame) => {
 
 type TransitionFn = (x: number, y: number, frame: number) => 0 | 1;
 const transitions: Record<DoorDir, TransitionFn> = {
-  RIGHT: arrow((x, y) => ([x, y])),
-  LEFT: arrow((x, y) => ([-x + 13, y])),
-  UP: arrow((x, y) => ([-y + 13, x])),
-  DOWN: arrow((x, y) => ([y, x])),
-  FORWARD: pinwheel,
-  BACK: boxes,
+  [DoorDir.RIGHT]: arrow((x, y) => ([x, y])),
+  [DoorDir.LEFT]: arrow((x, y) => ([-x + 13, y])),
+  [DoorDir.UP]: arrow((x, y) => ([-y + 13, x])),
+  [DoorDir.DOWN]: arrow((x, y) => ([y, x])),
+  [DoorDir.FORWARD]: pinwheel,
+  [DoorDir.BACK]: boxes,
 };
 
 type WithInverse = (transition: TransitionFn, x: number, y: number, frame: number) => 0 | 1;
@@ -57,6 +57,6 @@ const createGrid = (direction: DoorDir) => (frame: number) => {
     }));
 };
 
-export const directions = Object.keys(transitions) as Array<keyof typeof transitions>;
+export const directions = Object.keys(transitions);
 
 export default createGrid;

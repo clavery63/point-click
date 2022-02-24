@@ -7,7 +7,7 @@ import {
 import { ofType } from 'redux-observable';
 import hydrateState$ from 'shared/observables/hydrateState';
 import { AllActions, MyEpic } from './types';
-import { GameState, GameStoreState } from '../types';
+import { DoorDir, GameState, GameStoreState } from '../types';
 
 type Restart = (
   action$: Observable<AllActions>,
@@ -31,7 +31,7 @@ type InitializeGame = (bootInfo: GameStoreState) => GameStoreState;
 const initializeGame: InitializeGame = bootInfo => ({
   transition: {
     dest: null,
-    dir: 'UP', // TODO: cleanup transition type requirement
+    dir: DoorDir.UP, // TODO: cleanup transition type requirement
   },
   text: null,
   nextText: null,

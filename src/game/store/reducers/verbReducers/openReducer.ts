@@ -1,23 +1,25 @@
 import { compose } from 'redux';
 import { EntityReducer } from 'shared/util/types';
-import { Door, Flags, Scenery } from 'game/store/types';
+import {
+  Door, DoorState, Flags, Scenery,
+} from 'game/store/types';
 import { withText, setValue, keepState } from '../utils';
 
 const doorReducer = (door: Door, flags: Flags) => {
   switch (door.state) {
-    case 'CLOSED':
+    case DoorState.CLOSED:
       if (!door.openCondition || flags.includes(door.openCondition)) {
         return compose(
           withText(door.openText),
-          setValue(`worldState.doors[${door.id}].state`)('OPEN'),
+          setValue(`worldState.doors[${door.id}].state`)(DoorState.OPEN),
           setValue(`worldState.doors[${door.id}].hidden`)(false),
         );
       }
       return withText(door.closedText);
 
-    case 'LOCKED':
+    case DoorState.LOCKED:
       return withText('The door is locked.');
-    case 'OPEN':
+    case DoorState.OPEN:
     default:
       return withText('It\'s already open!');
   }
