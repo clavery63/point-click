@@ -1,53 +1,54 @@
 import React from 'react';
 import { setSelected } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
-import { setEntityPosition } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { KonvaEventObject } from 'konva/types/Node';
 import PreciseImage from 'shared/components/PreciseImage';
-import { Item } from 'game/store/types';
+import { Door } from 'game/store/types';
 import { useSelector, useDispatch } from '../hooks/redux';
 import useCachebuster from '../hooks/useCachebuster';
 import { isUnselected } from '../utils/isSelected';
 import useReordering from '../hooks/useReordering';
 
 type Props = {
-  item: Item;
+  door: Door;
   roomId: number;
 };
-const ItemComponent = ({ item, roomId }: Props) => {
+const DoorComponent = ({ door, roomId }: Props) => {
   const dispatch = useDispatch();
-  const image = useSelector(state => state.gameState.images[item.img || '']);
+  const imgName = door.openImg || door.closedImg || '';
+  const image = useSelector(state => state.gameState.images[imgName]);
   const selectedEnt = useSelector(state => state.editorState.selectedEntity);
-  const cachebuster = useCachebuster(item.position);
-  useReordering(item, roomId);
+  const cachebuster = useCachebuster(door.position);
+  useReordering(door, roomId);
 
-  if (!item.position || !image) {
+  if (!door.position || !image) {
     return null;
   }
 
   return (
     <PreciseImage
-      x={item.position.left + cachebuster}
-      y={item.position.top + cachebuster}
+      x={door.position.left + cachebuster}
+      y={door.position.top + cachebuster}
       width={image.width}
       height={image.height}
       image={image}
-      opacity={isUnselected(item, selectedEnt) ? 0.5 : 1}
+      opacity={isUnselected(door, selectedEnt) ? 0.5 : 1}
       draggable
       onDragEnd={(e: KonvaEventObject<DragEvent>) => {
-        dispatch(setEntityPosition({
-          id: item.id,
-          x: Math.round(e.target.x()),
-          y: Math.round(e.target.y()),
-        }));
+        console.log('moved door:', e);
+        // dispatch(setEntityPosition({
+        //   id: item.id,
+        //   x: Math.round(e.target.x()),
+        //   y: Math.round(e.target.y()),
+        // }));
       }}
       onClick={() => {
         dispatch(setSelected({
-          id: item.id,
-          type: 'entity',
+          id: door.id,
+          type: 'doors',
         }));
       }}
     />
   );
 };
 
-export default ItemComponent;
+export default DoorComponent;

@@ -37,6 +37,7 @@ const RoomEntities = ({ ids }: Ids) => {
             onClick={() => {
               dispatch(setSelected({
                 id: entity.id,
+                type: 'entity',
               }));
             }}
           >

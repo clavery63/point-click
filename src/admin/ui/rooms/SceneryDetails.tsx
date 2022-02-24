@@ -29,7 +29,7 @@ const ItemDetails = ({ scenery }: Props) => {
     <Grid container className={styles.rightColumn}>
       <Grid item xs={12}>
         <Typography variant="h5">
-          Edit Item:
+          Edit Scenery:
           {' '}
           {scenery.id}
         </Typography>

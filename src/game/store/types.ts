@@ -8,6 +8,12 @@ type MapCoord = 0 | 1 | 2 | 3 | 4;
 type DoorState = 'CLOSED' | 'OPEN' | 'LOCKED';
 
 export type DoorDir = 'UP' | 'DOWN' | 'FORWARD' | 'BACK' | 'LEFT' | 'RIGHT';
+
+// TODO: replace instances of these with the enum
+// so that we can use it to power selectors in admin
+// export enum DoorState { 'CLOSED', 'OPEN', 'LOCKED' }
+// export enum DoorDir { 'UP', 'DOWN', 'FORWARD', 'BACK', 'LEFT', 'RIGHT' }
+
 export type PageDir = 'UP' | 'DOWN';
 export type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
 export type EntityType = 'items' | 'scenery' | 'doors';

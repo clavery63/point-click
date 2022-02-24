@@ -3,6 +3,7 @@ import { Nullable } from 'game/store/types';
 
 export type SelectedEntity = {
   id: number;
+  type: 'entity' | 'doors';
 };
 
 export const selectedEntitySlice = createSlice({

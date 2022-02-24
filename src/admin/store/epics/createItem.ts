@@ -24,6 +24,7 @@ const createItem$ = (action$: Observable<Action>, state$: Observable<RootState>)
         addItemToRoom({ itemId: nextKey, roomId }),
         setSelected({
           id: nextKey,
+          type: 'entity',
         }),
       ]);
     }),

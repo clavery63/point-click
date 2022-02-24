@@ -5,7 +5,7 @@ import { InputLabel, MenuItem, Select } from '@mui/material';
 
 type Props = {
   label: string;
-  value: Nullable<string>;
+  value: Nullable<string | number>;
   onChange: (value: string) => void;
   options: string[];
 };

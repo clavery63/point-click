@@ -5,6 +5,13 @@ export const isSelected = (entity: Entity, selectedEntity: Nullable<SelectedEnti
   if (!selectedEntity) {
     return false;
   }
+
+  if (entity.type === 'doors' && selectedEntity.type !== 'doors') {
+    // TODO: this is a hack and also cuases a bug in the viewport
+    // when a door and entity share an id
+    return false;
+  }
+
   return entity.id === selectedEntity.id;
 };
 

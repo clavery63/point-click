@@ -6,6 +6,7 @@ import { Nullable, Room } from 'game/store/types';
 import { useSelector, useDispatch } from '../hooks/redux';
 import Item from './Item';
 import Scenery from './Scenery';
+import Door from './Door';
 
 type EntityType = {
   id: number;
@@ -16,20 +17,23 @@ const Entity = ({ id, roomId }: EntityType) => {
     return state.gameState.worldState.entities[id];
   });
 
-  if (!entity) {
-    return null;
-  }
-
-  if (entity.type === 'items') {
+  if (entity?.type === 'items') {
     return <Item item={entity} roomId={roomId} />;
   }
 
-  if (entity.type === 'scenery') {
+  if (entity?.type === 'scenery') {
     return <Scenery scenery={entity} roomId={roomId} />;
   }
 
-  // TODO: doors
   return null;
+};
+
+const DoorWrapper = ({ id, roomId }: EntityType) => {
+  const door = useSelector(state => {
+    return state.gameState.worldState.doors[id];
+  });
+
+  return <Door door={door} roomId={roomId} />;
 };
 
 type EntitiesType = {
@@ -41,6 +45,20 @@ const Entities = ({ ids, roomId }: EntitiesType) => (
     {ids.map(id => {
       return (
         <Entity
+          key={id}
+          id={id}
+          roomId={roomId}
+        />
+      );
+    })}
+  </Group>
+);
+
+const Doors = ({ ids, roomId }: EntitiesType) => (
+  <Group>
+    {ids.map(id => {
+      return (
+        <DoorWrapper
           key={id}
           id={id}
           roomId={roomId}
@@ -79,7 +97,7 @@ type Props = {
 };
 const Viewport = (props: Props) => {
   const {
-    entities, img,
+    doors, entities, img,
   } = props.room;
   const roomImg = useSelector(state => state.gameState.images[img || '']);
   const selectedEntity = useSelector(state => state.editorState.selectedEntity);
@@ -87,6 +105,7 @@ const Viewport = (props: Props) => {
   return (
     <Group>
       <Background image={roomImg} selectedEntity={selectedEntity} />
+      <Doors ids={doors} roomId={props.roomId} />
       <Entities ids={entities} roomId={props.roomId} />
     </Group>
   );
