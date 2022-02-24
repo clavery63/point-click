@@ -33,6 +33,10 @@ const DoorWrapper = ({ id, roomId }: EntityType) => {
     return state.gameState.worldState.doors[id];
   });
 
+  if (!door) {
+    return null;
+  }
+
   return <Door door={door} roomId={roomId} />;
 };
 
