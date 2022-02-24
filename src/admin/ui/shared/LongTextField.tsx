@@ -1,7 +1,6 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import { Nullable } from 'game/store/types';
-import useStyles from './useStyles';
 
 type Props = {
   label: string;
@@ -9,11 +8,10 @@ type Props = {
   onChange: (value: string) => void;
 };
 const LongTextField = ({ label, value, onChange }: Props) => {
-  const styles = useStyles();
   return (
     <TextField
       label={label}
-      className={styles.field}
+      margin="normal"
       multiline
       fullWidth
       maxRows={6}
