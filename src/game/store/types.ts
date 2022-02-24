@@ -4,7 +4,7 @@ import { Store } from 'redux';
 // template string literals.
 import { NumberPath } from '../../shared/util/types';
 
-type MapCoord = 0 | 1 | 2 | 3 | 4;
+export type MapCoord = 0 | 1 | 2 | 3 | 4;
 
 export enum DoorState {
   CLOSED = 'CLOSED',
@@ -44,7 +44,7 @@ export interface Size {
   height: number;
 }
 
-interface MapPosition {
+export interface MapPosition {
   x: MapCoord;
   y: MapCoord;
 }

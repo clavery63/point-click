@@ -10,6 +10,7 @@ import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import ImgSelector from '../shared/assets/ImgSelector';
 import Selector from '../shared/Selector';
+import MapPositioner from './MapPositioner';
 
 type Props = {
   door: Door;
@@ -20,7 +21,7 @@ const DoorDetails = ({ door }: Props) => {
   const allRoomIds = useSelector(state => Object.keys(state.gameState.worldState.rooms));
   const allKeyIds = useSelector(state => Object.keys(state.gameState.worldState.entities));
 
-  const handleChange = (fieldName: keyof Door) => (value: string | number | boolean) => {
+  const handleChange = (fieldName: keyof Door) => (value: any) => {
     dispatch(setDoor({
       id: door.id,
       door: {
@@ -129,6 +130,13 @@ const DoorDetails = ({ door }: Props) => {
           label="openImg"
           value={door.openImg}
           onChange={handleChange('openImg')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <MapPositioner
+          label="Select Map Position"
+          value={door.mapPosition}
+          onChange={handleChange('mapPosition')}
         />
       </Grid>
     </Grid>
