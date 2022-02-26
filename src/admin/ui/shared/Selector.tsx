@@ -20,6 +20,7 @@ const Selector = ({
         label={label}
         onChange={e => onChange(e.target.value as string)}
       >
+        <MenuItem value="" key=""><em>none</em></MenuItem>
         {options.map(option => (
           <MenuItem value={option} key={option}>{option}</MenuItem>
         ))}
