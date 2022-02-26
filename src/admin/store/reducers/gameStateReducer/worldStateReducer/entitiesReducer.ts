@@ -55,6 +55,15 @@ const createScenery = (state: Lookup<Item | Scenery>, id: number) => {
   };
 };
 
+const addDefaultSize = (scenery: Scenery) => {
+  if (!scenery.img && !scenery.size) {
+    scenery.size = {
+      width: 10,
+      height: 10,
+    };
+  }
+};
+
 const initialState: Lookup<Item | Scenery> = {};
 
 export const entitiesSlice = createSlice({
@@ -85,6 +94,10 @@ export const entitiesSlice = createSlice({
     },
     setEntity: (state, action: PayloadAction<EntityWithId>) => {
       const { id, entity } = action.payload;
+
+      if (entity.type === 'scenery') {
+        addDefaultSize(entity);
+      }
 
       state[id] = entity;
     },
