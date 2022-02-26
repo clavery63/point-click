@@ -20,7 +20,7 @@ const SceneryComponent = ({ roomId, scenery }: Props) => {
 
   useReordering(scenery, roomId);
 
-  const editing = sceneriesEditing[scenery.id];
+  const editing = sceneriesEditing[scenery.id] || 'startPosition';
   const position = scenery[editing] || scenery.startPosition;
 
   const onDragEnd = (e: KonvaEventObject<DragEvent>) => {

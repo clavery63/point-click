@@ -59,11 +59,11 @@ const runAnimation$: RunAnimation = ({
     of(typedAction({ type: 'SET_CURSOR_ENABLED', payload: false })),
     from(range(NUM_FRAMES)).pipe(
       concatMapTo(timer(MS_PER_FRAME)),
-      scan(([x, y]) => [Math.round(x + xStep), Math.round(y + yStep)], [startX, startY]),
+      scan(([x, y]) => [x + xStep, y + yStep], [startX, startY]),
       map(([x, y]) => typedAction({
         type: 'SET_POSITION',
         payload: {
-          id, x, y,
+          id, x: Math.round(x), y: Math.round(y),
         },
       })),
     ),
