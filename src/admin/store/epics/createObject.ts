@@ -3,12 +3,13 @@ import { filter, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Action, createAction } from '@reduxjs/toolkit';
 import { RootState } from 'admin/ui/hooks/redux';
 import { GameState } from 'game/store/types';
-import { createItemWithId } from '../reducers/gameStateReducer/worldStateReducer/entitiesReducer';
-import { addDoorToRoom, addItemToRoom } from '../reducers/gameStateReducer/worldStateReducer/roomsReducer';
+import { createEntity } from '../reducers/gameStateReducer/worldStateReducer/entitiesReducer';
+import { addDoorToRoom, addEntityToRoom } from '../reducers/gameStateReducer/worldStateReducer/roomsReducer';
 import { setSelected } from '../reducers/editorStateReducer/selectedEntityReducer';
 import { createDoorWithId } from '../reducers/gameStateReducer/worldStateReducer/doorsReducer';
 
 export const createItem = createAction<number>('createItem');
+export const createScenery = createAction<number>('createScenery');
 export const createDoor = createAction<number>('createDoor');
 
 const generateKey = (gameState: GameState) => {
@@ -21,15 +22,20 @@ const generateKey = (gameState: GameState) => {
   return keys[keys.length - 2] + 1;
 };
 
-const createItem$ = (action$: Observable<Action>, state$: Observable<RootState>) => {
-  const entity$ = action$.pipe(
-    filter(createItem.match),
+const match = {
+  items: createItem.match,
+  scenery: createScenery.match,
+};
+
+const createObject$ = (action$: Observable<Action>, state$: Observable<RootState>) => {
+  const entity$ = (type: 'items' | 'scenery') => action$.pipe(
+    filter(match[type]),
     withLatestFrom(state$),
     switchMap(([{ payload: roomId }, { gameState }]) => {
       const id = generateKey(gameState);
       return from([
-        addItemToRoom({ itemId: id, roomId }),
-        createItemWithId({ id }),
+        addEntityToRoom({ entityId: id, roomId }),
+        createEntity({ id, type }),
         setSelected({
           id,
           type: 'entity',
@@ -54,7 +60,7 @@ const createItem$ = (action$: Observable<Action>, state$: Observable<RootState>)
     }),
   );
 
-  return merge(entity$, door$);
+  return merge(entity$('items'), entity$('scenery'), door$);
 };
 
-export default createItem$;
+export default createObject$;

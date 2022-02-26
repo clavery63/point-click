@@ -14,10 +14,45 @@ type EntityWithId = {
   id: number;
 };
 
+type EntityTypeWithId = {
+  type: 'items' | 'scenery';
+  id: number;
+};
+
 type SizeWithId = {
   id: number;
   width: number;
   height: number;
+};
+
+const createItem = (state: Lookup<Item | Scenery>, id: number) => {
+  state[id] = {
+    id,
+    type: 'items',
+    name: 'New Item',
+    description: '',
+    contains: null,
+    // TODO: don't set position for items that don't render in viewport
+    position: {
+      left: 0,
+      top: 0,
+    },
+  };
+};
+
+const createScenery = (state: Lookup<Item | Scenery>, id: number) => {
+  state[id] = {
+    id,
+    type: 'scenery',
+    name: 'New Scenery',
+    description: '',
+    contains: null,
+    // TODO: don't set position for items that don't render in viewport
+    startPosition: {
+      left: 0,
+      top: 0,
+    },
+  };
 };
 
 const initialState: Lookup<Item | Scenery> = {};
@@ -58,21 +93,16 @@ export const entitiesSlice = createSlice({
 
       delete state[id];
     },
-    createItemWithId: (state, action: PayloadAction<{ id: number}>) => {
-      const { id } = action.payload;
+    createEntity: (state, action: PayloadAction<EntityTypeWithId>) => {
+      const { id, type } = action.payload;
 
-      state[id] = {
-        id,
-        type: 'items',
-        name: 'New Item',
-        description: '',
-        contains: null,
-        // TODO: don't set position for items that don't render in viewport
-        position: {
-          left: 0,
-          top: 0,
-        },
-      };
+      if (type === 'items') {
+        createItem(state, id);
+      }
+
+      if (type === 'scenery') {
+        createScenery(state, id);
+      }
     },
   },
   extraReducers: builder => {
@@ -81,7 +111,7 @@ export const entitiesSlice = createSlice({
 });
 
 export const {
-  setEntityPosition, setScenerySize, setEntity, createItemWithId, deleteEntity,
+  setEntityPosition, setScenerySize, setEntity, createEntity, deleteEntity,
 } = entitiesSlice.actions;
 
 export default entitiesSlice.reducer;
