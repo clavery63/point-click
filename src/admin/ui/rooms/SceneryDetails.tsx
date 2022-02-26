@@ -10,6 +10,10 @@ import { useDispatch, useSelector } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import ImgSelector from '../shared/assets/ImgSelector';
+import Selector from '../shared/Selector';
+
+// TODO: this will become less goofy once these are configurable (will be indexes instead)
+const triggerOptions = ['MOVE', 'LOOK', 'OPEN', 'USE', 'SMOKE', 'TAKE', 'EAT', 'HIT', 'SPEAK'];
 
 type Props = {
   scenery: Scenery;
@@ -68,6 +72,14 @@ const SceneryDetails = ({ scenery }: Props) => {
             />
           )}
           label={`Editing: ${positionEditing}`}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Selector
+          label="trigger"
+          value={scenery.trigger || ''}
+          onChange={handleChange('trigger')}
+          options={triggerOptions}
         />
       </Grid>
       <Grid item xs={12}>
