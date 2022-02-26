@@ -48,6 +48,10 @@ const genericVerbReducer: GenericVerbReducer = (verb, getDefaultText, extraReduc
     const logic = getVerbLogic(object, verb, playerState.using, flags);
 
     if (!logic) {
+      if (object.type === 'scenery' && object.trigger === verb) {
+        // Don't display default text if this triggers an animation
+        return keepState();
+      }
       return withText(getDefaultText(object));
     }
 
