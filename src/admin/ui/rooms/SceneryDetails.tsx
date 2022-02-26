@@ -73,7 +73,7 @@ const SceneryDetails = ({ scenery }: Props) => {
       <Grid item xs={12}>
         <ImgSelector
           label="img"
-          value={scenery.img}
+          value={scenery.img || ''}
           onChange={handleChange('img')}
         />
       </Grid>

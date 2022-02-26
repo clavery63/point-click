@@ -25,6 +25,11 @@ type SizeWithId = {
   height: number;
 };
 
+const defaultSize = {
+  width: 10,
+  height: 10,
+};
+
 const createItem = (state: Lookup<Item | Scenery>, id: number) => {
   state[id] = {
     id,
@@ -52,15 +57,13 @@ const createScenery = (state: Lookup<Item | Scenery>, id: number) => {
       left: 0,
       top: 0,
     },
+    size: defaultSize,
   };
 };
 
 const addDefaultSize = (scenery: Scenery) => {
   if (!scenery.img && !scenery.size) {
-    scenery.size = {
-      width: 10,
-      height: 10,
-    };
+    scenery.size = defaultSize;
   }
 };
 
