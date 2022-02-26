@@ -16,12 +16,12 @@ type Props = {
 const SceneryComponent = ({ roomId, scenery }: Props) => {
   const dispatch = useDispatch();
   const selectedEnt = useSelector(state => state.editorState.selectedEntity);
+  const sceneriesEditing = useSelector(state => state.editorState.sceneryEditing);
 
   useReordering(scenery, roomId);
 
-  const editing = 'startPosition';
-
-  const position = scenery[editing];
+  const editing = sceneriesEditing[scenery.id];
+  const position = scenery[editing] || scenery.startPosition;
 
   const onDragEnd = (e: KonvaEventObject<DragEvent>) => {
     dispatch(setEntityPosition({
