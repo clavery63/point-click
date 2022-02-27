@@ -12,7 +12,7 @@ const getReducer = (verb: VerbIndex) => ([
   genericVerbReducer(1, object => object.description),
   openReducer,
   _useReducer,
-  genericVerbReducer(4, () => 'Smoking that would be ill-advised.'),
+  genericVerbReducer(4, () => 'Smoking that would be ill-advised!'),
   takeReducer,
   genericVerbReducer(6, () => 'Don\'t eat that.'),
   genericVerbReducer(7, () => 'Ya blew it. That really hurt.'),

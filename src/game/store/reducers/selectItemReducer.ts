@@ -28,10 +28,10 @@ const getReducer: GetReducer = (verb, item) => {
   switch (verb) {
     case 3:
       return useReducer;
-    case 4:
-      return takeReducer;
     case 5:
-      return genericVerbReducer(4, () => 'Smoking that would be ill-advised.');
+      return takeReducer;
+    case 4:
+      return genericVerbReducer(4, () => 'Smoking that would be ill-advised!');
     case 1:
       return lookReducer(item.description);
     default:
