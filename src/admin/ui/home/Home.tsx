@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
 import React from 'react';
 
 type Props = {
@@ -11,6 +13,12 @@ const Home = ({ gameName }: Props) => {
         {' '}
         {gameName}
       </div>
+      <Link to={`/admin/${gameName}/rooms`}>
+        <Typography>To Rooms List</Typography>
+      </Link>
+      <Link to={`/admin/${gameName}/config`}>
+        <Typography>To Config</Typography>
+      </Link>
     </div>
   );
 };
