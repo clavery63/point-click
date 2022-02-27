@@ -1,5 +1,6 @@
 import { compose } from 'redux';
 import { ParentReducer } from 'shared/util/types';
+import { VerbIndex } from '../types';
 import { withText, setValue } from './utils';
 
 const BAG_ID = 9999;
@@ -34,11 +35,11 @@ const useReducer = () => {
   );
 };
 
-const getReducer = (verb: string) => {
+const getReducer = (verb: VerbIndex) => {
   switch (verb) {
-    case 'LOOK':
+    case 1:
       return lookReducer;
-    case 'USE':
+    case 3:
       return useReducer;
     default:
       return defaultReducer;

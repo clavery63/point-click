@@ -94,15 +94,15 @@ export interface VerbLogic {
 }
 
 export type VerbMappings = {
-  0: VerbLogic[];
-  1: VerbLogic[];
-  2: VerbLogic[];
-  3: VerbLogic[];
-  4: VerbLogic[];
-  5: VerbLogic[];
-  6: VerbLogic[];
-  7: VerbLogic[];
-  8: VerbLogic[];
+  0?: VerbLogic[];
+  1?: VerbLogic[];
+  2?: VerbLogic[];
+  3?: VerbLogic[];
+  4?: VerbLogic[];
+  5?: VerbLogic[];
+  6?: VerbLogic[];
+  7?: VerbLogic[];
+  8?: VerbLogic[];
 };
 
 export type VerbIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;

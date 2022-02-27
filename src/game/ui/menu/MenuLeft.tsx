@@ -18,7 +18,7 @@ const MenuLeft = (props: Props) => {
   return (
     <Group x={7} y={7}>
       <MenuOption
-        verb="MOVE"
+        verbIndex={0}
         left={8}
         top={0}
         onClick={onMenuClick}
