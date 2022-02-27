@@ -94,18 +94,18 @@ export interface VerbLogic {
 }
 
 export type VerbMappings = {
-  'MOVE'?: VerbLogic[];
-  'LOOK'?: VerbLogic[];
-  'OPEN'?: VerbLogic[];
-  'USE'?: VerbLogic[];
-  'SMOKE'?: VerbLogic[];
-  'TAKE'?: VerbLogic[];
-  'EAT'?: VerbLogic[];
-  'HIT'?: VerbLogic[];
-  'SPEAK'?: VerbLogic[];
+  0: VerbLogic[];
+  1: VerbLogic[];
+  2: VerbLogic[];
+  3: VerbLogic[];
+  4: VerbLogic[];
+  5: VerbLogic[];
+  6: VerbLogic[];
+  7: VerbLogic[];
+  8: VerbLogic[];
 };
 
-export type VerbIndex = keyof VerbMappings;
+export type VerbIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
 export interface Item {
   type: 'items';
@@ -136,7 +136,7 @@ export interface Scenery {
   openText?: string;
   verbs?: VerbMappings;
   contains: Nullable<number[]>;
-  trigger?: string;
+  trigger?: VerbIndex;
   movedText?: string;
   visibleFlag?: string;
 }

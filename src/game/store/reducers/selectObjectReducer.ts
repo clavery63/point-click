@@ -1,27 +1,23 @@
 import { ParentReducer } from 'shared/util/types';
-import lookReducer from './verbReducers/lookReducer';
 import moveReducer from './verbReducers/moveReducer';
 import openReducer from './verbReducers/openReducer';
 import takeReducer from './verbReducers/takeReducer';
 import _useReducer from './verbReducers/useReducer';
-import hitReducer from './verbReducers/hitReducer';
-import speakReducer from './verbReducers/speakReducer';
-import eatReducer from './verbReducers/eatReducer';
-import smokeReducer from './verbReducers/smokeReducer';
 import { keepState } from './utils';
 import { VerbIndex } from '../types';
+import genericVerbReducer from './verbReducers/genericVerbReducer';
 
-const getReducer = (verb: VerbIndex) => ({
-  MOVE: moveReducer,
-  LOOK: lookReducer,
-  OPEN: openReducer,
-  USE: _useReducer,
-  SMOKE: smokeReducer,
-  TAKE: takeReducer,
-  EAT: eatReducer,
-  HIT: hitReducer,
-  SPEAK: speakReducer,
-}[verb]);
+const getReducer = (verb: VerbIndex) => ([
+  moveReducer,
+  genericVerbReducer(1, object => object.description),
+  openReducer,
+  _useReducer,
+  genericVerbReducer(4, () => 'Smoking that would be ill-advised.'),
+  takeReducer,
+  genericVerbReducer(6, () => 'Don\'t eat that.'),
+  genericVerbReducer(7, () => 'Ya blew it. That really hurt.'),
+  genericVerbReducer(8, () => 'No response.'),
+][verb]);
 
 type GenericReducer = (t: 'doors' | 'entities') => ParentReducer<number>;
 const selectObjectReducer: GenericReducer = entType => {

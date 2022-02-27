@@ -124,61 +124,72 @@ const gameStateSchema = {
         "verbs": {
           "type": "object",
           "properties": {
-            "MOVE": {
+            "0": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "LOOK": {
+            "1": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "OPEN": {
+            "2": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "USE": {
+            "3": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "SMOKE": {
+            "4": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "TAKE": {
+            "5": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "EAT": {
+            "6": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "HIT": {
+            "7": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "SPEAK": {
+            "8": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             }
-          }
+          },
+          "required": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
         }
       },
       "required": [
@@ -364,61 +375,72 @@ const gameStateSchema = {
         "verbs": {
           "type": "object",
           "properties": {
-            "MOVE": {
+            "0": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "LOOK": {
+            "1": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "OPEN": {
+            "2": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "USE": {
+            "3": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "SMOKE": {
+            "4": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "TAKE": {
+            "5": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "EAT": {
+            "6": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "HIT": {
+            "7": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "SPEAK": {
+            "8": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             }
-          }
+          },
+          "required": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
         },
         "contains": {
           "anyOf": [
@@ -480,61 +502,72 @@ const gameStateSchema = {
         "verbs": {
           "type": "object",
           "properties": {
-            "MOVE": {
+            "0": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "LOOK": {
+            "1": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "OPEN": {
+            "2": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "USE": {
+            "3": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "SMOKE": {
+            "4": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "TAKE": {
+            "5": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "EAT": {
+            "6": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "HIT": {
+            "7": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             },
-            "SPEAK": {
+            "8": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VerbLogic"
               }
             }
-          }
+          },
+          "required": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
         },
         "contains": {
           "anyOf": [
@@ -550,7 +583,18 @@ const gameStateSchema = {
           ]
         },
         "trigger": {
-          "type": "string"
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "type": "number"
         },
         "movedText": {
           "type": "string"
@@ -627,7 +671,18 @@ const gameStateSchema = {
       "type": "object",
       "properties": {
         "verb": {
-          "$ref": "#/definitions/VerbIndex"
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "type": "number"
         },
         "using": {
           "type": [
@@ -664,20 +719,6 @@ const gameStateSchema = {
         "timer",
         "verb"
       ]
-    },
-    "VerbIndex": {
-      "enum": [
-        "EAT",
-        "HIT",
-        "LOOK",
-        "MOVE",
-        "OPEN",
-        "SMOKE",
-        "SPEAK",
-        "TAKE",
-        "USE"
-      ],
-      "type": "string"
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#"

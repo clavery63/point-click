@@ -17,7 +17,7 @@ const defaultState: GameStoreState = {
   gameName: '',
   menu: 'MAIN',
   playerState: {
-    verb: 'LOOK',
+    verb: 1,
     examining: null,
     room: 0,
     items: [],

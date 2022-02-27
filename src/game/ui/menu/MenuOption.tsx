@@ -4,7 +4,7 @@ import { Group } from 'react-konva';
 import { Rect } from 'shared/components/tappables';
 
 type Props = {
-  verb: VerbIndex;
+  verbIndex: VerbIndex;
   top: number;
   left: number;
   onClick: (verb: VerbIndex) => void;
@@ -13,14 +13,14 @@ type Props = {
 
 const MenuOption = (props: Props) => {
   const {
-    verb, top, left, onClick, currentVerb,
+    verbIndex, top, left, onClick, currentVerb,
   } = props;
-  const isActive = verb === currentVerb;
+  const isActive = verbIndex === currentVerb;
   return (
     <Group x={left} y={top}>
       <Rect
         fill={isActive ? 'black' : null}
-        onClick={isActive ? () => {} : () => onClick(verb)}
+        onClick={isActive ? () => {} : () => onClick(verbIndex)}
         width={8}
         height={8}
       />

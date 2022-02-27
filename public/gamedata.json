@@ -377,7 +377,7 @@
         "position": { "left": 52, "top": 8 },
         "img": "key-1",
         "verbs": {
-          "LOOK": [{ "text": "There's a random key embedded in the wall." }]
+          "1": [{ "text": "There's a random key embedded in the wall." }]
         },
         "description": "This is a real nice-looking key.",
         "id": 0,
@@ -427,7 +427,7 @@
         "position": { "left": 32, "top": 26 },
         "img": "lockpick",
         "verbs": {
-          "LOOK": [
+          "1": [
             {
               "text": "Mike, here is a lockpick. It might be handy if you, the master of unlocking, take it with you."
             }
@@ -442,7 +442,7 @@
         "position": { "left": 48, "top": 52 },
         "img": "bong",
         "description": "It's some kind of strange vessel. Its base is filled with a murky, dank liquid, and there is an acrid vapor emanating from its spout.",
-        "verbs": { "SMOKE": [{ "moveTo": 10, "moveDir": "RIGHT" }] },
+        "verbs": { "4": [{ "moveTo": 10, "moveDir": "RIGHT" }] },
         "id": 7,
         "type": "items"
       },
@@ -468,13 +468,13 @@
         "img": "scott",
         "description": "Scott is in your inventory now. Feel free to use him as you would any other items or spells.",
         "verbs": {
-          "SPEAK": [
+          "8": [
             {
               "text": "\"I thought you said this party would be cool.\", says Scott, looking concerned. \"Why haven't I had any beer yet?\""
             }
           ],
-          "HIT": [{ "text": "\"Cool man. got any beer?\"" }],
-          "LOOK": [
+          "7": [{ "text": "\"Cool man. got any beer?\"" }],
+          "1": [
             {
               "text": "He seems aggressive, but you don't think there's any reason to be concerned at the moment."
             }
@@ -488,7 +488,7 @@
         "name": "sign",
         "img": "welcome-sign",
         "verbs": {
-          "LOOK": [
+          "1": [
             {
               "text": "_____The sign reads: ______\"Welcome to\" ____\"Lobotomy Manor.\"                             But I'm not at Lobotomy Manor!!                   I'm at Birthday Castle... right?"
             }
@@ -503,7 +503,7 @@
         "name": "frying pan",
         "img": "frying-pan",
         "verbs": {
-          "LOOK": [
+          "1": [
             {
               "text": "A commercial for a frying pan plays quietly in the background."
             }
@@ -518,7 +518,7 @@
         "name": "bottle",
         "img": "bottle",
         "verbs": {
-          "LOOK": [
+          "1": [
             {
               "text": "You grow enraged as you realize that, while there is an unattended drink on the counter, it is simply a beer and not a gin and soda."
             }
@@ -538,14 +538,14 @@
         "takeableFlag": "GARFIELD_TAKE",
         "visibleFlag": "GARFIELD_VISIBLE",
         "verbs": {
-          "EAT": [
+          "6": [
             {
               "text": "With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.",
               "addFlags": ["GARFIELD_CONSUMED"],
               "removeFlags": ["GARFIELD_VISIBLE"]
             }
           ],
-          "SMOKE": [{ "text": "Smoking Garfield is illegal in this state." }]
+          "4": [{ "text": "Smoking Garfield is illegal in this state." }]
         },
         "id": 14,
         "type": "items"
@@ -597,7 +597,7 @@
         "description": "It's the skull of some creature. Its meaning seems quite clear: death lurks inside.",
         "startPosition": { "left": 49, "top": 4 },
         "endPosition": { "left": 49, "top": -8 },
-        "trigger": "OPEN",
+        "trigger": 2,
         "movedText": "\"Whaaaaaat,\" you think to yourself as you watch the skull move itself upward. \"That is absolutely fucking nuts.\"",
         "id": 21,
         "type": "scenery"
@@ -617,7 +617,7 @@
         "description": "You must be seeing things. It is as though a man is there beyond the corner, doing a poor job of hiding from you.",
         "startPosition": { "left": 72, "top": 22 },
         "verbs": {
-          "SPEAK": [
+          "8": [
             {
               "text": "You can't be sure, but you could swear you heard the words \"Uncle Flesh\" uttered from deep within this corridor."
             }
@@ -638,7 +638,7 @@
         "img": "eight-ball-small",
         "description": "It is an eight ball",
         "startPosition": { "left": 103, "top": 73 },
-        "verbs": { "LOOK": [{ "moveTo": 8, "moveDir": "FORWARD" }] },
+        "verbs": { "1": [{ "moveTo": 8, "moveDir": "FORWARD" }] },
         "id": 25,
         "type": "scenery"
       },
@@ -648,8 +648,8 @@
         "startPosition": { "left": 0, "top": 0 },
         "size": { "width": 112, "height": 112 },
         "verbs": {
-          "EAT": [{ "moveTo": 9, "moveDir": "DOWN" }],
-          "USE": [
+          "6": [{ "moveTo": 9, "moveDir": "DOWN" }],
+          "3": [
             {
               "prereqFlags": ["EIGHTBALL_1"],
               "text": "You shake the magic eight ball. It says you are doing a great job! but you knew that already :)",
@@ -683,7 +683,7 @@
         "img": "bartender",
         "description": "Meaghan notices you. She'll probably offer you some gin if you talk to her.",
         "verbs": {
-          "SPEAK": [
+          "8": [
             {
               "prereqFlags": ["REDDS_1"],
               "text": "Heyyy what's up. Let me guess. Gin?",
@@ -713,7 +713,7 @@
         "description": "It's Santos. If only you could get past him, you might be able to collect some more useful items.",
         "visibleFlag": "SANTOS_VISIBLE",
         "verbs": {
-          "SPEAK": [
+          "8": [
             {
               "prereqFlags": ["SANTOS_1"],
               "text": "\"Yooo, get this. This dude over there says he's a fan of Mega Man but he's only play 3 out of the original 6 of them. Or at least only beaten 3\"",
@@ -739,7 +739,7 @@
               "addFlags": ["SANTOS_1"]
             }
           ],
-          "USE": [
+          "3": [
             {
               "prereqUsing": 10,
               "text": "With a desperate yell, you hurl Scott at Santos and shield your eyes. Scott beckons Santos with some strange incantations, and they part ways.",
@@ -764,7 +764,7 @@
         "name": "tv1",
         "startPosition": { "left": 56, "top": 20 },
         "size": { "width": 14, "height": 13 },
-        "verbs": { "LOOK": [{ "moveTo": 13, "moveDir": "FORWARD" }] },
+        "verbs": { "1": [{ "moveTo": 13, "moveDir": "FORWARD" }] },
         "id": 30,
         "type": "scenery"
       },
@@ -772,7 +772,7 @@
         "name": "tv2",
         "startPosition": { "left": 45, "top": 22 },
         "size": { "width": 11, "height": 13 },
-        "verbs": { "LOOK": [{ "moveTo": 16, "moveDir": "FORWARD" }] },
+        "verbs": { "1": [{ "moveTo": 16, "moveDir": "FORWARD" }] },
         "id": 31,
         "type": "scenery"
       },
@@ -780,7 +780,7 @@
         "name": "tv3",
         "startPosition": { "left": 12, "top": 31 },
         "size": { "width": 15, "height": 9 },
-        "verbs": { "LOOK": [{ "moveTo": 13, "moveDir": "FORWARD" }] },
+        "verbs": { "1": [{ "moveTo": 13, "moveDir": "FORWARD" }] },
         "id": 32,
         "type": "scenery"
       },
@@ -799,12 +799,12 @@
         "description": "Well, would you look at that?! Justin is in the park too, just hanging out with that goose.  You can tell that he's pleased to see you.  He seems to be holding an unlit torch in one of his hands.",
         "visibleFlag": "JUSTIN_VISIBLE",
         "verbs": {
-          "SPEAK": [
+          "8": [
             {
               "text": "\"Hey Mike!  Happy birthday!  I thought you'd like a brief escape from all of the unhinged shit going on in the castle, so I brought you to this peaceful place.  Check out the nice waterfowl over there, or \"birdbrain\" as you'd say.  Wow...you've collected a lot of torches!  That's cool, even though they don't serve any functional purpose in this game at all.  Well, keep on picking them up if you want to, just for fun.\""
             }
           ],
-          "USE": [
+          "3": [
             {
               "prereqUsing": 15,
               "text": "\"Oh, nice.  Thanks.  I was hoping someone would have something to eat.  I brought a bag of grapes with me but ended up giving all of them to that goose over there.\"",
@@ -825,7 +825,7 @@
         "startPosition": { "left": 73, "top": 66 },
         "size": { "width": 29, "height": 40 },
         "contains": [18, 18, 18, 16, 18, 18],
-        "verbs": { "SPEAK": [{ "text": "\"HONK!\"" }] },
+        "verbs": { "8": [{ "text": "\"HONK!\"" }] },
         "id": 35,
         "type": "scenery"
       },
@@ -835,7 +835,7 @@
         "startPosition": { "left": 25, "top": 13 },
         "size": { "width": 51, "height": 92 },
         "verbs": {
-          "SPEAK": [
+          "8": [
             {
               "text": "\"I am the civilian you choose to meet. The continuity of the species depends on your ability to choose. Will you join me? Locker rentals are free. Execute wisely. Woce.\""
             }
@@ -849,13 +849,13 @@
         "img": "computer",
         "startPosition": { "left": 72, "top": 73 },
         "verbs": {
-          "LOOK": [
+          "1": [
             { "prereqFlags": ["COMPUTER"], "moveTo": 18, "moveDir": "FORWARD" },
             {
               "text": "You laugh uncontrollably at an out-of-place computer sitting in this hallway. You nearly fall down, and can feel your bag tear a little bit as a result. Unfortunately, it won't boot up."
             }
           ],
-          "USE": [
+          "3": [
             {
               "prereqUsing": 19,
               "text": "You insert the MO disk into the computer, and it boots up. Your heart pounds with anticipation as you prepare to visit your all-time favorite webpage. You feel the room shake with each keystroke - www.ebaumsworld.com___ /____________ jetsfumble.",
@@ -873,12 +873,12 @@
         "description": "Succumbing to your unquenchable thirst for destruction, you decide you'd rather break into one of these lockers with a concussive blow than ask Jason to open it for you. This locker might open if had something to violently hit it with?",
         "startPosition": { "left": 91, "top": 0 },
         "verbs": {
-          "HIT": [
+          "7": [
             {
               "text": "Youch! That was a good thought, but you weren't able to open up the damn door. You'll need something better-suited to bludgeoning."
             }
           ],
-          "USE": [
+          "3": [
             {
               "prereqUsing": 12,
               "text": "\"Blammo!\" The damn door opened because you smacked it with a fucking frying pan. Nice fucking work.",
@@ -894,7 +894,7 @@
         "img": "rob-small",
         "description": "An alluring image",
         "startPosition": { "left": 93, "top": 15 },
-        "verbs": { "LOOK": [{ "moveTo": 17, "moveDir": "FORWARD" }] },
+        "verbs": { "1": [{ "moveTo": 17, "moveDir": "FORWARD" }] },
         "id": 39,
         "type": "scenery"
       },
@@ -912,12 +912,12 @@
         "description": "You spy a comforting sight: a luscious gourd in the moonlight. Ahh, the crisp flesh of a fresh white pumpkin. Wait a minute....Oh no!! It's something foul!! The pumpkin has been hollowed. Someone, or some thing, has been using this for \"storage.\" Every fiber is completely soaked with urine. You shudder with disapproval.  It's been \"bleached.\"",
         "startPosition": { "left": 71, "top": 20 },
         "verbs": {
-          "EAT": [
+          "6": [
             {
               "text": "You whip out a knife and fork, and cut off the juiciest part of the pumpkin you can find. You lick your lips as it slides down your gullet. No way you can eat the whole thing though."
             }
           ],
-          "USE": [
+          "3": [
             {
               "prereqUsing": 9999,
               "text": "Seeing that this pumpkin has already been \"marked\" as a safe vessel for storage, you hurriedly collapse the liquid contents from your bag into the gourd's saturated depths.  You breathe an exasperated sigh of relief.  Your bag is once again empty.",
@@ -940,7 +940,7 @@
         "startPosition": { "left": 8, "top": 34 },
         "visibleFlag": "DANSEN",
         "verbs": {
-          "SPEAK": [
+          "8": [
             {
               "prereqFlags": ["GOOD_GIN"],
               "text": "Ah, now that's the stuff! I can make you an ice cold gin and soda with this that'll go down real smooth!"
@@ -953,7 +953,7 @@
               "text": "Hey buddy, welcome to The Abbey! Norm is in the bathroom, but he'll be back soon. You can have this beer if you like, but you look like you're craving something else... I only have beer, but if you give me something to mix I could whip you up something else."
             }
           ],
-          "USE": [
+          "3": [
             {
               "prereqUsing": 16,
               "text": "You give Sam the ice cold gin.",
@@ -975,7 +975,7 @@
         "visibleFlag": "BAD_GIN",
         "startPosition": { "left": 88, "top": 95 },
         "description": "You don't like the looks of this gin and soda, but there is no turning back now. There's no concept of save states in this game, so you might as well just drink it and see what happens.",
-        "verbs": { "EAT": [{ "moveTo": 20, "moveDir": "DOWN" }] },
+        "verbs": { "6": [{ "moveTo": 20, "moveDir": "DOWN" }] },
         "id": 43,
         "type": "scenery"
       },
@@ -985,7 +985,7 @@
         "visibleFlag": "GOOD_GIN",
         "startPosition": { "left": 78, "top": 95 },
         "description": "Holy crap! The moment has finally arrived! You will finally drink some gin!",
-        "verbs": { "EAT": [{ "moveTo": 19, "moveDir": "UP" }] },
+        "verbs": { "6": [{ "moveTo": 19, "moveDir": "UP" }] },
         "id": 44,
         "type": "scenery"
       },
@@ -1022,7 +1022,7 @@
     }
   },
   "playerState": {
-    "verb": "LOOK",
+    "verb": 1,
     "using": null,
     "examining": null,
     "room": 0,
@@ -1113,5 +1113,16 @@
     "REDDS_1",
     "SANTOS_1",
     "EIGHTBALL_1"
+  ],
+  "verbNames": [
+    "MOVE",
+    "LOOK",
+    "OPEN",
+    "USE",
+    "SMOKE",
+    "TAKE",
+    "EAT",
+    "HIT",
+    "SPEAK"
   ]
 }

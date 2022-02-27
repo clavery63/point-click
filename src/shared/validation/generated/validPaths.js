@@ -45,6 +45,9 @@ export const numberPaths = [
     ]
   },
   {
+    "value": "playerState.verb"
+  },
+  {
     "value": "playerState.room"
   },
   {

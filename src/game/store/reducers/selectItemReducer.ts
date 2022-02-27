@@ -1,10 +1,10 @@
 import { compose } from 'redux';
 import { ItemReducer, ParentReducer } from 'shared/util/types';
-import { Item } from '../types';
+import { Item, VerbIndex } from '../types';
 import {
   setValue, updateValue, withText, keepState, filterValues,
 } from './utils';
-import smokeReducer from './verbReducers/smokeReducer';
+import genericVerbReducer from './verbReducers/genericVerbReducer';
 
 const takeReducer: ItemReducer = (item, playerState) => {
   if (!playerState.examining) return keepState();
@@ -23,16 +23,16 @@ const useReducer: ItemReducer = ({ id }) => compose(
 const defaultReducer = () => withText('You seem to be wasting your time.');
 const lookReducer = (description: string) => () => withText(description);
 
-type GetReducer = (verb: string, item: Item) => ItemReducer;
+type GetReducer = (verb: VerbIndex, item: Item) => ItemReducer;
 const getReducer: GetReducer = (verb, item) => {
   switch (verb) {
-    case 'USE':
+    case 3:
       return useReducer;
-    case 'TAKE':
+    case 4:
       return takeReducer;
-    case 'SMOKE':
-      return smokeReducer;
-    case 'LOOK':
+    case 5:
+      return genericVerbReducer(4, () => 'Smoking that would be ill-advised.');
+    case 1:
       return lookReducer(item.description);
     default:
       return defaultReducer;

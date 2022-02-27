@@ -29,7 +29,7 @@ const useReducerForType: EntityReducer = (object, ...args) => {
     return useDoorReducer(object, ...args);
   }
 
-  return genericVerbReducer('USE', () => 'That ain\'t workin!\'!', forfeitItemReducer)(object, ...args);
+  return genericVerbReducer(3, () => 'That ain\'t workin!\'!', forfeitItemReducer)(object, ...args);
 };
 
 const useReducer: EntityReducer = combineReducers(
