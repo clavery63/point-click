@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setGameState } from 'admin/store/sharedActions';
 import defaultState from 'game/store/defaultState';
 import { PlayerState } from 'game/store/types';
+import { deleteEntity } from './worldStateReducer/entitiesReducer';
 
 const initialState: PlayerState = defaultState.playerState;
 
@@ -22,6 +23,12 @@ export const playerStateSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.playerState);
+    builder.addCase(deleteEntity, (state, action) => {
+      const { id, roomId } = action.payload;
+      if (roomId === undefined) {
+        state.items = state.items.filter((item: number) => item !== id);
+      }
+    });
   },
 });
 

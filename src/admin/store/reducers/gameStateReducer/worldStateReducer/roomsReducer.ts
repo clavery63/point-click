@@ -80,8 +80,10 @@ export const roomsSlice = createSlice({
     builder.addCase(setGameState, (state, action) => action.payload.worldState.rooms);
     builder.addCase(deleteEntity, (state, action) => {
       const { id, roomId } = action.payload;
-      const room = state[roomId];
-      room.entities = room.entities.filter((item: number) => item !== id);
+      if (roomId !== undefined) {
+        const room = state[roomId];
+        room.entities = room.entities.filter((item: number) => item !== id);
+      }
     });
     builder.addCase(deleteDoor, (state, action) => {
       const { id, roomId } = action.payload;

@@ -104,7 +104,7 @@ export const entitiesSlice = createSlice({
 
       state[id] = entity;
     },
-    deleteEntity: (state, action: PayloadAction<{ id: number; roomId: number }>) => {
+    deleteEntity: (state, action: PayloadAction<{ id: number; roomId?: number }>) => {
       const { id } = action.payload;
 
       delete state[id];
