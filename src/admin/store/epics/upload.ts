@@ -1,14 +1,16 @@
 import { RootState } from 'admin/ui/hooks/redux';
-import { merge, Observable } from 'rxjs';
+import { merge, Observable, of } from 'rxjs';
 import {
-  switchMap, mapTo, withLatestFrom, filter, pairwise, tap,
+  switchMap, mapTo, withLatestFrom, filter, pairwise, tap, catchError,
 } from 'rxjs/operators';
 import S3 from 'shared/util/S3';
 import validateGameState from 'shared/validation/validateGameState';
 import { Action } from 'typesafe-actions';
 import {
-  uploadComplete, uploadGame, resetUploadState, UploadState,
+  uploadComplete, uploadGame, resetUploadState, UploadState, uploadError,
 } from '../reducers/editorStateReducer/uploadStateReducer';
+
+const resetStates = [UploadState.ERROR, UploadState.COMPLETE];
 
 const handleUpload = async (state: RootState) => {
   const s3 = new S3(state.gameName);
@@ -22,6 +24,7 @@ const upload$ = (action$: Observable<Action>, state$: Observable<RootState>) => 
     tap(state => validateGameState(state.gameState)),
     switchMap(handleUpload),
     mapTo(uploadComplete()),
+    catchError(() => of(uploadError())),
   );
 
   const reset$ = state$.pipe(
@@ -49,7 +52,7 @@ const upload$ = (action$: Observable<Action>, state$: Observable<RootState>) => 
      * Love,
      * Chris
      */
-    filter(([previousState]) => previousState.editorState.uploadState === UploadState.COMPLETE),
+    filter(([previousState]) => resetStates.includes(previousState.editorState.uploadState)),
     mapTo(resetUploadState()),
   );
 

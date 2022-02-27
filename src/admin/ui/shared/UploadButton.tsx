@@ -9,6 +9,8 @@ const getCallToAction = (uploadState: UploadState) => {
       return 'Saving...';
     case UploadState.COMPLETE:
       return 'Saved!';
+    case UploadState.ERROR:
+      return 'Something went wrong (check console)';
     default:
       return 'Save';
   }

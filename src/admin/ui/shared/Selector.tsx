@@ -8,9 +8,10 @@ type Props = {
   value: Nullable<string | number>;
   onChange: (value: string) => void;
   options: string[];
+  required?: boolean;
 };
 const Selector = ({
-  label, value, onChange, options,
+  label, value, onChange, options, required = false,
 }: Props) => {
   return (
     <FormControl variant="outlined" style={{ minWidth: 120 }} margin="normal">
@@ -20,7 +21,7 @@ const Selector = ({
         label={label}
         onChange={e => onChange(e.target.value as string)}
       >
-        <MenuItem value="" key=""><em>none</em></MenuItem>
+        {!required && <MenuItem value="" key=""><em>none</em></MenuItem>}
         {options.map(option => (
           <MenuItem value={option} key={option}>{option}</MenuItem>
         ))}

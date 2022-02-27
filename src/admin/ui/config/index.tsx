@@ -1,12 +1,13 @@
+import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-
-import React from 'react';
+import Stack from '@mui/material/Stack';
 import useStyles from '../shared/useStyles';
 import Player from './Player';
 import Flags from './Flags';
 import Settings from './Settings';
+import UploadButton from '../shared/UploadButton';
 
 const ConfigPage = () => {
   const styles = useStyles();
@@ -22,6 +23,9 @@ const ConfigPage = () => {
         <Flags />
         <Settings />
       </Grid>
+      <Stack direction="row" spacing={2}>
+        <UploadButton />
+      </Stack>
     </Box>
   );
 };

@@ -7,10 +7,12 @@ import { createEntity } from '../reducers/gameStateReducer/worldStateReducer/ent
 import { addDoorToRoom, addEntityToRoom } from '../reducers/gameStateReducer/worldStateReducer/roomsReducer';
 import { setSelected } from '../reducers/editorStateReducer/selectedEntityReducer';
 import { createDoorWithId } from '../reducers/gameStateReducer/worldStateReducer/doorsReducer';
+import { addItemToPlayer } from '../reducers/gameStateReducer/playerStateReducer';
 
 export const createItem = createAction<number>('createItem');
 export const createScenery = createAction<number>('createScenery');
 export const createDoor = createAction<number>('createDoor');
+export const createPlayerItem = createAction('createPlayerItem');
 
 const generateKey = (gameState: GameState) => {
   const entityKeys = Object.keys(gameState.worldState.entities);
@@ -60,7 +62,19 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     }),
   );
 
-  return merge(entity$('items'), entity$('scenery'), door$);
+  const playerItem$ = action$.pipe(
+    filter(createPlayerItem.match),
+    withLatestFrom(state$),
+    switchMap(([, { gameState }]) => {
+      const id = generateKey(gameState);
+      return from([
+        addItemToPlayer({ id }),
+        createEntity({ id, type: 'items' }),
+      ]);
+    }),
+  );
+
+  return merge(entity$('items'), entity$('scenery'), door$, playerItem$);
 };
 
 export default createObject$;
