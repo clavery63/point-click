@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import S3 from 'shared/util/S3';
 import { useParams } from 'react-router-dom';
 import getFilenames from 'shared/util/getFilenames';
-import Selector from '../Selector';
+import Selector, { makeOptions } from '../Selector';
 import AudioUploader from './AudioUploader';
 
 const loadAudios = async (gameName: string) => {
@@ -43,7 +43,7 @@ const AudioSelector = ({ label, value, onChange }: Props) => {
           label={label}
           value={options.length ? (value || '') : ''}
           onChange={onChange}
-          options={options}
+          options={makeOptions(options)}
         />
       </Grid>
       <Grid item xs={8} style={{ display: 'flex', alignItems: 'center' }}>

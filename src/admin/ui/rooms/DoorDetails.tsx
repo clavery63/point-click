@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import ImgSelector from '../shared/assets/ImgSelector';
-import Selector from '../shared/Selector';
+import Selector, { makeOptions } from '../shared/Selector';
 import MapPositioner from './MapPositioner';
 
 type Props = {
@@ -91,7 +91,7 @@ const DoorDetails = ({ door }: Props) => {
           label="destination"
           value={door.dest}
           onChange={handleChange('dest')}
-          options={allRoomIds}
+          options={makeOptions(allRoomIds)}
         />
       </Grid>
       <Grid item xs={12}>
@@ -99,7 +99,7 @@ const DoorDetails = ({ door }: Props) => {
           label="key id"
           value={door.keyId || ''}
           onChange={id => handleChange('keyId')(parseInt(id, 10))}
-          options={allKeyIds}
+          options={makeOptions(allKeyIds)}
         />
       </Grid>
       <Grid item xs={12}>
@@ -107,7 +107,7 @@ const DoorDetails = ({ door }: Props) => {
           label="state"
           value={door.state}
           onChange={handleChange('state')}
-          options={Object.keys(DoorState)}
+          options={makeOptions(Object.keys(DoorState))}
         />
       </Grid>
       <Grid item xs={12}>
@@ -115,7 +115,7 @@ const DoorDetails = ({ door }: Props) => {
           label="animation direction"
           value={door.dir}
           onChange={handleChange('dir')}
-          options={Object.keys(DoorDir)}
+          options={makeOptions(Object.keys(DoorDir))}
         />
       </Grid>
       <Grid item xs={12}>

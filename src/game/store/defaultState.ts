@@ -30,6 +30,7 @@ const defaultState: GameStoreState = {
     doors: {},
   },
   flags: [],
+  verbNames: [],
   images: new Map(),
 };
 

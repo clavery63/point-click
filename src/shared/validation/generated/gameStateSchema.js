@@ -12,11 +12,18 @@ const gameStateSchema = {
       "items": {
         "type": "string"
       }
+    },
+    "verbNames": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
   "required": [
     "flags",
     "playerState",
+    "verbNames",
     "worldState"
   ],
   "definitions": {

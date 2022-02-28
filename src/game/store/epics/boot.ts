@@ -42,6 +42,7 @@ const initializeGame: InitializeGame = bootInfo => ({
   playerState: bootInfo.playerState,
   worldState: bootInfo.worldState,
   flags: bootInfo.flags,
+  verbNames: [],
   images: new Map(),
 });
 

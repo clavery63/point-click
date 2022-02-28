@@ -3,11 +3,17 @@ import { Nullable } from 'game/store/types';
 import FormControl from '@mui/material/FormControl';
 import { InputLabel, MenuItem, Select } from '@mui/material';
 
+export const makeOptions = (options: string[]) => {
+  return options.map(option => ({ value: option, label: option }));
+};
+
+type Option = { value: string | number; label: string };
+
 type Props = {
   label: string;
   value: Nullable<string | number>;
   onChange: (value: string) => void;
-  options: string[];
+  options: Option[];
   required?: boolean;
 };
 const Selector = ({
@@ -23,7 +29,7 @@ const Selector = ({
       >
         {!required && <MenuItem value="" key=""><em>none</em></MenuItem>}
         {options.map(option => (
-          <MenuItem value={option} key={option}>{option}</MenuItem>
+          <MenuItem value={option.value} key={option.value}>{option.label}</MenuItem>
         ))}
       </Select>
     </FormControl>

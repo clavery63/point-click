@@ -20,11 +20,14 @@ const loadPlayerAndGameState$: LoadState = initialState => {
   return fromFetch(dataSource).pipe(
     switchMap(resp => resp.json()),
     tap(validateGameState),
-    map(({ playerState, worldState, flags }) => ({
+    map(({
+      playerState, worldState, flags, verbNames,
+    }) => ({
       ...initialState,
       playerState,
       worldState,
       flags,
+      verbNames,
     })),
   );
 };

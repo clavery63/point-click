@@ -6,7 +6,7 @@ import {
 import { addImage } from 'admin/store/reducers/gameStateReducer/imagesReducer';
 import { useDispatch, useSelector } from '../../hooks/redux';
 import ImageUploader from './ImageUploader';
-import Selector from '../Selector';
+import Selector, { makeOptions } from '../Selector';
 
 type Props = {
   label: string;
@@ -39,7 +39,7 @@ const ImgSelector = ({ label, value, onChange }: Props) => {
           label={label}
           value={value}
           onChange={onChange}
-          options={options}
+          options={makeOptions(options)}
         />
       </Grid>
       <Grid item xs={8} style={{ display: 'flex', alignItems: 'center' }}>

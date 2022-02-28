@@ -12,15 +12,13 @@ import useStyles from '../shared/useStyles';
 import ImgSelector from '../shared/assets/ImgSelector';
 import Selector from '../shared/Selector';
 
-// TODO: this will become less goofy once these are configurable (will be indexes instead)
-const triggerOptions = ['MOVE', 'LOOK', 'OPEN', 'USE', 'SMOKE', 'TAKE', 'EAT', 'HIT', 'SPEAK'];
-
 type Props = {
   scenery: Scenery;
 };
 const SceneryDetails = ({ scenery }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
+  const verbNames = useSelector(state => state.gameState.verbNames);
   const sceneriesEditing = useSelector(state => state.editorState.sceneryEditing);
   const positionEditing = sceneriesEditing[scenery.id] || 'startPosition';
 
@@ -79,7 +77,7 @@ const SceneryDetails = ({ scenery }: Props) => {
           label="trigger"
           value={scenery.trigger || ''}
           onChange={handleChange('trigger')}
-          options={triggerOptions}
+          options={verbNames.map((verb, index) => ({ value: index, label: verb }))}
         />
       </Grid>
       <Grid item xs={12}>

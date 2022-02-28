@@ -7,11 +7,8 @@ import { deleteEntity } from 'admin/store/reducers/gameStateReducer/worldStateRe
 import { setSelected } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
 import { createPlayerItem } from 'admin/store/epics/createObject';
 import { useDispatch, useSelector } from '../hooks/redux';
-import Selector from '../shared/Selector';
+import Selector, { makeOptions } from '../shared/Selector';
 import ObjectsList from '../rooms/ObjectsList';
-
-// TODO: this will become less goofy once these are configurable (will be indexes instead)
-const verbOptions = ['MOVE', 'LOOK', 'OPEN', 'USE', 'SMOKE', 'TAKE', 'EAT', 'HIT', 'SPEAK'];
 
 const Player = () => {
   const dispatch = useDispatch();
@@ -21,6 +18,7 @@ const Player = () => {
     const ent = state.gameState.worldState.entities[id];
     return { id, type: ent.type, name: ent.name || ent.id.toString() };
   }));
+  const verbNames = useSelector(state => state.gameState.verbNames);
 
   const handleChange = (fieldName: keyof PlayerState) => (value: any) => {
     dispatch(setPlayer({
@@ -44,7 +42,7 @@ const Player = () => {
           label="initial verb"
           value={player.verb}
           onChange={handleChange('verb')}
-          options={verbOptions}
+          options={verbNames.map((verb, index) => ({ value: index, label: verb }))}
         />
       </Grid>
       <Grid item xs={12}>
@@ -53,7 +51,7 @@ const Player = () => {
           label="initial room"
           value={player.room}
           onChange={val => handleChange('room')(parseInt(val, 10))}
-          options={allRoomIds}
+          options={makeOptions(allRoomIds)}
         />
       </Grid>
       <ObjectsList

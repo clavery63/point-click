@@ -174,6 +174,7 @@ export interface GameState {
   worldState: WorldState;
   playerState: PlayerState;
   flags: Flags;
+  verbNames: string[]; // TODO: make sure there are 9 of these?
 }
 
 export type Entity = Door | Item | Scenery;
