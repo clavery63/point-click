@@ -7,6 +7,7 @@ import { useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import ImgSelector from '../shared/assets/ImgSelector';
+import Verbs from '../verbs';
 
 type Props = {
   item: Item;
@@ -55,6 +56,7 @@ const ItemDetails = ({ item }: Props) => {
           onChange={handleChange('img')}
         />
       </Grid>
+      <Verbs entity={item} />
     </Grid>
   );
 };

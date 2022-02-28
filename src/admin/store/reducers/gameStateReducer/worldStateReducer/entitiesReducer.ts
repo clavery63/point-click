@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setGameState } from 'admin/store/sharedActions';
-import { Item, Lookup, Scenery } from 'game/store/types';
+import {
+  Item, Lookup, Scenery, VerbIndex, VerbLogic,
+} from 'game/store/types';
 
 type PositionWithId = {
   id: number;
@@ -23,6 +25,12 @@ type SizeWithId = {
   id: number;
   width: number;
   height: number;
+};
+
+type EntityVerb = {
+  id: number;
+  verbIndex: VerbIndex;
+  verbLogics: VerbLogic[];
 };
 
 const defaultSize = {
@@ -95,6 +103,14 @@ export const entitiesSlice = createSlice({
         scenery.size = { width, height };
       }
     },
+    setEntityVerb: (state, action: PayloadAction<EntityVerb>) => {
+      const { id, verbIndex, verbLogics } = action.payload;
+      const newVerbs = {
+        ...state[id].verbs,
+        [verbIndex]: verbLogics,
+      };
+      state[id].verbs = newVerbs;
+    },
     setEntity: (state, action: PayloadAction<EntityWithId>) => {
       const { id, entity } = action.payload;
 
@@ -127,7 +143,12 @@ export const entitiesSlice = createSlice({
 });
 
 export const {
-  setEntityPosition, setScenerySize, setEntity, createEntity, deleteEntity,
+  setEntityPosition,
+  setScenerySize,
+  setEntity,
+  createEntity,
+  deleteEntity,
+  setEntityVerb,
 } = entitiesSlice.actions;
 
 export default entitiesSlice.reducer;
