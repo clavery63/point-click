@@ -20,6 +20,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+      "no-plusplus": "off",
       "semi": "off",
       "@typescript-eslint/semi": ["error"],
       "no-use-before-define": "off",
