@@ -1,21 +1,47 @@
 import { GameStoreState } from 'game/store/types';
 import React from 'react';
 import { Image, Group } from 'react-konva';
+import { createSelector } from 'reselect';
 import { useSelector } from 'shared/hooks';
+import range from 'lodash/range';
 
 const sheetWidth = 8;
 const spriteWidth = 7;
 const spriteHeight = 7;
 const shift = ' '.charCodeAt(0);
 
-const selector = ({ images }: GameStoreState) => {
-  return {
-    spriteSheets: {
-      dark: images.get('alpha-dark'),
-      light: images.get('alpha-light'),
-    },
-  };
+const makeCanvasSet = (image: HTMLImageElement) => {
+  return range(sheetWidth).flatMap(y => range(sheetWidth).map(x => {
+    const canvas = document.createElement('canvas');
+    canvas.width = spriteWidth;
+    canvas.height = spriteHeight;
+    const context = canvas.getContext('2d');
+    context?.drawImage(
+      image,
+      x * spriteWidth,
+      y * spriteWidth,
+      spriteWidth,
+      spriteWidth,
+      0,
+      0,
+      spriteWidth,
+      spriteWidth,
+    );
+    return canvas;
+  }));
 };
+
+const selector = createSelector(
+  ({ images }: GameStoreState) => images,
+  (images) => {
+    const dark = images.get('alpha-dark');
+    const light = images.get('alpha-light');
+    return {
+      dark: dark ? makeCanvasSet(dark) : undefined,
+      light: light ? makeCanvasSet(light) : undefined,
+    };
+  },
+);
 
 type Color = 'dark' | 'light';
 type Props = {
@@ -27,8 +53,8 @@ type Props = {
 const Text = ({
   text, left, top, color,
 }: Props) => {
-  const { spriteSheets } = useSelector(selector);
-  const image = spriteSheets[color || 'dark'];
+  const canvasSets = useSelector(selector);
+  const canvases = canvasSets[color || 'dark'];
   const upper = text.toUpperCase();
   const charCodes = upper.split('').map(char => char.charCodeAt(0) - shift);
 
@@ -41,13 +67,7 @@ const Text = ({
           y={top}
           width={spriteWidth}
           height={spriteHeight}
-          image={image}
-          crop={{
-            x: (code % sheetWidth) * spriteWidth,
-            y: Math.floor(code / sheetWidth) * spriteHeight,
-            width: spriteWidth,
-            height: spriteHeight,
-          }}
+          image={canvases && canvases[code]}
           perfectDrawEnabled={false}
         />
       ))}
