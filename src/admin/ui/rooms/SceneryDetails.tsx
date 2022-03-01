@@ -11,6 +11,7 @@ import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import ImgSelector from '../shared/assets/ImgSelector';
 import Selector from '../shared/Selector';
+import Verbs from '../verbs';
 
 type Props = {
   scenery: Scenery;
@@ -18,7 +19,7 @@ type Props = {
 const SceneryDetails = ({ scenery }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const verbNames = useSelector(state => state.gameState.verbNames);
+  const verbNames = useSelector(state => state.gameState.verbNames) as string[];
   const sceneriesEditing = useSelector(state => state.editorState.sceneryEditing);
   const positionEditing = sceneriesEditing[scenery.id] || 'startPosition';
 
@@ -87,6 +88,7 @@ const SceneryDetails = ({ scenery }: Props) => {
           onChange={handleChange('img')}
         />
       </Grid>
+      <Verbs entity={scenery} />
     </Grid>
   );
 };

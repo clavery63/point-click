@@ -1,6 +1,9 @@
 import React from 'react';
 import { VerbIndex, VerbLogic } from 'game/store/types';
-import { Typography } from '@mui/material';
+import {
+  Accordion, AccordionDetails, AccordionSummary, Typography,
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Verb from './Verb';
 
 type Props = {
@@ -19,17 +22,23 @@ const VerbList = ({
   };
 
   return (
-    <>
-      <Typography>{verbName}</Typography>
-      {verbLogics.map((verb, index) => (
-        <Verb
-          key={index}
-          verb={verb}
-          index={index}
-          handleChange={onChange}
-        />
-      ))}
-    </>
+    <Accordion>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+      >
+        <Typography>{verbName}</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        {verbLogics.map((verb, index) => (
+          <Verb
+            key={index}
+            verb={verb}
+            index={index}
+            handleChange={onChange}
+          />
+        ))}
+      </AccordionDetails>
+    </Accordion>
   );
 };
 

@@ -8,6 +8,7 @@ const useStyles = makeStyles({
   },
   rightColumn: {
     width: `calc(100vw - ${5 * 112 + 80}px)`,
+    maxWidth: '620px',
     float: 'left',
     padding: '20px',
   },

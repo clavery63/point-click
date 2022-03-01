@@ -36,6 +36,7 @@ const Verbs = ({ entity }: Props) => {
       <Grid item xs={12}>
         {verbIndexPairings.map(([verbIndex, verbLogics]) => (
           <VerbList
+            key={verbIndex}
             verbIndex={parseInt(verbIndex, 10) as VerbIndex}
             verbLogics={verbLogics}
             verbName={verbNames[parseInt(verbIndex, 10)]}

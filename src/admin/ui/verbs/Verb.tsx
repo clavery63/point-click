@@ -1,7 +1,19 @@
 import React from 'react';
-import Typography from '@mui/material/Typography';
-import { VerbLogic } from 'game/store/types';
+import { DoorDir, VerbLogic } from 'game/store/types';
+import { Card, CardContent } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import LongTextField from '../shared/LongTextField';
+import Selector, { makeOptions } from '../shared/Selector';
+import { useSelector } from '../hooks/redux';
+
+const useStyles = makeStyles({
+  verbCard: {
+    marginBottom: '20px',
+    '&:last-child': {
+      marginBottom: 0,
+    },
+  },
+});
 
 type Props = {
   index: number;
@@ -9,6 +21,10 @@ type Props = {
   handleChange: (index: number, verb: VerbLogic) => void;
 };
 const Verb = ({ verb, index, handleChange }: Props) => {
+  const styles = useStyles();
+  const allRoomIds = useSelector(state => Object.keys(state.gameState.worldState.rooms));
+  const allEntityIds = useSelector(state => Object.keys(state.gameState.worldState.entities));
+
   const onChange = (fieldName: keyof VerbLogic) => (value: any) => {
     handleChange(index, {
       ...verb,
@@ -17,14 +33,48 @@ const Verb = ({ verb, index, handleChange }: Props) => {
   };
 
   return (
-    <>
-      <Typography>{index}</Typography>
-      <LongTextField
-        label="text"
-        value={verb.text}
-        onChange={onChange('text')}
-      />
-    </>
+    <Card className={styles.verbCard}>
+      <CardContent>
+        <LongTextField
+          label="text"
+          value={verb.text || ''}
+          onChange={onChange('text')}
+        />
+        <Selector
+          label="move to"
+          value={verb.moveTo || ''}
+          onChange={onChange('moveTo')}
+          options={makeOptions(allRoomIds)}
+        />
+        <Selector
+          label="animation direction"
+          value={verb.moveDir || ''}
+          onChange={onChange('moveDir')}
+          options={makeOptions(Object.keys(DoorDir))}
+        />
+        <LongTextField
+          label="add flags"
+          value={(verb.addFlags || []).join(',')}
+          onChange={flagString => onChange('addFlags')(flagString.split(','))}
+        />
+        <LongTextField
+          label="remove flags"
+          value={(verb.removeFlags || []).join(',')}
+          onChange={flagString => onChange('removeFlags')(flagString.split(','))}
+        />
+        <LongTextField
+          label="prereq flags"
+          value={(verb.prereqFlags || []).join(',')}
+          onChange={flagString => onChange('prereqFlags')(flagString.split(','))}
+        />
+        <Selector
+          label="prereq using"
+          value={verb.prereqUsing || ''}
+          onChange={onChange('prereqUsing')}
+          options={makeOptions(allEntityIds)}
+        />
+      </CardContent>
+    </Card>
   );
 };
 
