@@ -33,7 +33,9 @@ const Verb = ({
   const onChange = (fieldName: keyof VerbLogic) => (value: any) => {
     handleChange(index, {
       ...verb,
-      [fieldName]: value,
+      // TODO: what we probably want is to convert empty strings to undefined
+      // in the Selector and whatever other components have this problem
+      [fieldName]: value || undefined,
     });
   };
 
@@ -48,7 +50,7 @@ const Verb = ({
         <Selector
           label="move to"
           value={verb.moveTo || ''}
-          onChange={onChange('moveTo')}
+          onChange={val => onChange('moveTo')(val ? parseInt(val, 10) : undefined)}
           options={makeOptions(allRoomIds)}
         />
         <Selector

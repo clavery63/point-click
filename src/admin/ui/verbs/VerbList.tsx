@@ -1,7 +1,7 @@
 import React from 'react';
 import { VerbIndex, VerbLogic } from 'game/store/types';
 import {
-  Accordion, AccordionDetails, AccordionSummary, Typography,
+  Accordion, AccordionDetails, AccordionSummary, Box, Button, Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Verb from './Verb';
@@ -27,6 +27,10 @@ const VerbList = ({
     handleChange(verbIndex, newVerbLogics);
   };
 
+  const onCreate = () => {
+    handleChange(verbIndex, [...verbLogics, {}]);
+  };
+
   return (
     <Accordion>
       <AccordionSummary
@@ -44,6 +48,11 @@ const VerbList = ({
             handleDelete={onDelete}
           />
         ))}
+        <Box>
+          <Button onClick={onCreate}>
+            Add Logic
+          </Button>
+        </Box>
       </AccordionDetails>
     </Accordion>
   );

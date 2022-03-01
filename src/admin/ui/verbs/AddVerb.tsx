@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Stack } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { setEntityVerb } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { VerbIndex } from 'game/store/types';
 import range from 'lodash/range';
-import DispatchButton from '../shared/DispachButton';
 import Selector from '../shared/Selector';
+import { useDispatch } from '../hooks/redux';
 
 const useStyles = makeStyles({
   addVerb: {
@@ -20,9 +20,22 @@ type Props = {
 };
 const AddVerb = ({ indexes, names, entityId }: Props) => {
   const styles = useStyles();
+  const dispatch = useDispatch();
   const remainingIndexes = range(9).filter(i => !indexes.includes(i));
   const [selectedVerbIndex, setSelectedVerbIndex] = useState(remainingIndexes[0]);
   const options = remainingIndexes.map(index => ({ value: index, label: names[index] }));
+
+  const onClick = () => {
+    // We update the selection eagerly to ensure the selector is in a valid state
+    // whenever rendered.
+    const remaining = remainingIndexes.filter(i => i !== selectedVerbIndex);
+    setSelectedVerbIndex(remaining[0]);
+    dispatch(setEntityVerb({
+      id: entityId,
+      verbIndex: selectedVerbIndex as VerbIndex,
+      verbLogics: [],
+    }));
+  };
 
   if (!remainingIndexes.length) {
     return null;
@@ -30,14 +43,12 @@ const AddVerb = ({ indexes, names, entityId }: Props) => {
 
   return (
     <Stack direction="row" spacing={2} className={styles.addVerb}>
-      <DispatchButton
-        action={setEntityVerb({
-          id: entityId,
-          verbIndex: selectedVerbIndex as VerbIndex,
-          verbLogics: [],
-        })}
-        callToAction="Add Verb"
-      />
+      <Button
+        variant="contained"
+        onClick={onClick}
+      >
+        Add Verb
+      </Button>
       <Selector
         required
         label="verb to add"
