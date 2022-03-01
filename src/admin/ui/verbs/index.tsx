@@ -7,6 +7,7 @@ import {
 } from 'game/store/types';
 import { useDispatch, useSelector } from '../hooks/redux';
 import VerbList from './VerbList';
+import AddVerb from './AddVerb';
 
 type Props = {
   entity: Item | Scenery;
@@ -42,6 +43,11 @@ const Verbs = ({ entity }: Props) => {
           />
         ))}
       </Grid>
+      <AddVerb
+        indexes={verbIndexPairings.map(([index]) => parseInt(index, 10))}
+        names={verbNames}
+        entityId={entity.id}
+      />
     </>
   );
 };
