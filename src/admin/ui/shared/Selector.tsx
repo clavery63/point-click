@@ -15,9 +15,10 @@ type Props = {
   onChange: (value: string) => void;
   options: Option[];
   required?: boolean;
+  style?: React.CSSProperties;
 };
 const Selector = ({
-  label, value, onChange, options, required = false,
+  label, value, onChange, options, required = false, style,
 }: Props) => {
   return (
     <FormControl variant="outlined" style={{ minWidth: 120 }} margin="normal">
@@ -26,6 +27,7 @@ const Selector = ({
         value={value}
         label={label}
         onChange={e => onChange(e.target.value as string)}
+        style={style}
       >
         {!required && <MenuItem value="" key=""><em>none</em></MenuItem>}
         {options.map(option => (

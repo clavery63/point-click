@@ -21,6 +21,12 @@ const VerbList = ({
     handleChange(verbIndex, newVerbLogics);
   };
 
+  const onDelete = (index: number) => {
+    const newVerbLogics = [...verbLogics];
+    newVerbLogics.splice(index, 1);
+    handleChange(verbIndex, newVerbLogics);
+  };
+
   return (
     <Accordion>
       <AccordionSummary
@@ -35,6 +41,7 @@ const VerbList = ({
             verb={verb}
             index={index}
             handleChange={onChange}
+            handleDelete={onDelete}
           />
         ))}
       </AccordionDetails>

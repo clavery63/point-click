@@ -1,6 +1,8 @@
 import React from 'react';
 import { DoorDir, VerbLogic } from 'game/store/types';
-import { Card, CardContent } from '@mui/material';
+import {
+  Box, Button, Card, CardContent,
+} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import LongTextField from '../shared/LongTextField';
 import Selector, { makeOptions } from '../shared/Selector';
@@ -19,8 +21,11 @@ type Props = {
   index: number;
   verb: VerbLogic;
   handleChange: (index: number, verb: VerbLogic) => void;
+  handleDelete: (index: number) => void;
 };
-const Verb = ({ verb, index, handleChange }: Props) => {
+const Verb = ({
+  verb, index, handleChange, handleDelete,
+}: Props) => {
   const styles = useStyles();
   const allRoomIds = useSelector(state => Object.keys(state.gameState.worldState.rooms));
   const allEntityIds = useSelector(state => Object.keys(state.gameState.worldState.entities));
@@ -72,7 +77,13 @@ const Verb = ({ verb, index, handleChange }: Props) => {
           value={verb.prereqUsing || ''}
           onChange={onChange('prereqUsing')}
           options={makeOptions(allEntityIds)}
+          style={{ width: '150px' }}
         />
+        <Box>
+          <Button onClick={() => handleDelete(index)} color="error">
+            Delete
+          </Button>
+        </Box>
       </CardContent>
     </Card>
   );
