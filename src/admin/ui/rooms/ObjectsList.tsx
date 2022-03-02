@@ -7,7 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 
 type ButtonProps = { onAdd: () => void };
-const CreateObjectButton = ({ onAdd }: ButtonProps) => {
+export const CreateObjectButton = ({ onAdd }: ButtonProps) => {
   return (
     <IconButton
       onClick={onAdd}

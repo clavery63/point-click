@@ -90,7 +90,7 @@ const DoorDetails = ({ door }: Props) => {
         <Selector
           label="destination"
           value={door.dest}
-          onChange={handleChange('dest')}
+          onChange={val => handleChange('dest')(parseInt(val, 10))}
           options={makeOptions(allRoomIds)}
         />
       </Grid>

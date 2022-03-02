@@ -45,6 +45,19 @@ export const roomsSlice = createSlice({
 
       state[id] = room;
     },
+    createRoom: (state) => {
+      const newRoom = {
+        description: 'New Room',
+        entities: [],
+        doors: [],
+      };
+
+      const exisitingRoomIds = Object.keys(state);
+      const lastRoomId = exisitingRoomIds[exisitingRoomIds.length - 1];
+      const newRoomId = parseInt(lastRoomId, 10) + 1;
+
+      state[newRoomId] = newRoom;
+    },
     addEntityToRoom: (state, action: PayloadAction<RoomWithEntity>) => {
       const { roomId, entityId } = action.payload;
 
@@ -94,7 +107,7 @@ export const roomsSlice = createSlice({
 });
 
 export const {
-  setRoom, reorderEntity, addEntityToRoom, addDoorToRoom,
+  setRoom, reorderEntity, addEntityToRoom, addDoorToRoom, createRoom,
 } = roomsSlice.actions;
 
 export default roomsSlice.reducer;

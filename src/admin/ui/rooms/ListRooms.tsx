@@ -5,8 +5,12 @@ import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Videocam from '@mui/icons-material/Videocam';
 import { Room } from 'game/store/types';
+import { useDispatch } from 'react-redux';
+import { createRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
+import { Typography } from '@mui/material';
 import { useSelector } from '../hooks/redux';
 import useStyles from '../shared/useStyles';
+import { CreateObjectButton } from './ObjectsList';
 
 const baseUrl = process.env.REACT_APP_ASSETS_BASE;
 
@@ -59,13 +63,22 @@ const RoomCard = ({ room, id }: RoomCardProps) => {
 
 const ListRooms = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const rooms = useSelector(state => state.gameState.worldState.rooms);
+
+  const onCreate = () => {
+    dispatch(createRoom());
+  };
 
   return (
     <Box className={classes.roomsPreview}>
       {Object.entries(rooms).map(([id, room]) => (
         <RoomCard key={id} id={id} room={room} />
       ))}
+      <Box className={classes.roomPreview}>
+        <Typography>Create Room</Typography>
+        <CreateObjectButton onAdd={onCreate} />
+      </Box>
     </Box>
   );
 };
