@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import PlayRoute from './PlayRoute';
 import Admin from './admin';
+import GamesList from './admin/ui/gamesList';
 
 const Router = () => {
   return (
@@ -14,10 +15,10 @@ const Router = () => {
           <Admin />
         </Route>
         <Route path="/admin">
-          Admin
+          <GamesList />
         </Route>
         <Route path="/">
-          <div>nah</div>
+          <div>welp. welcome to doublehamburger.com</div>
         </Route>
       </Switch>
     </BrowserRouter>
