@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
@@ -26,6 +26,10 @@ epicMiddleware.run(rootEpic);
 
 const AdminRoot = () => {
   const { gameName } = useParams<{ gameName: string}>();
+
+  useEffect(() => {
+    document.title = 'Admin';
+  }, []);
 
   store.dispatch(setGameName(gameName));
 

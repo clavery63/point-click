@@ -7,6 +7,7 @@ const GamesList = () => {
   const [gameNames, setGameNames] = useState<string[]>([]);
 
   useEffect(() => {
+    document.title = 'Admin';
     const getGameNames = async () => {
       const s3 = new S3();
       const prefixes = await s3.listPrefixes();
