@@ -16,13 +16,17 @@ const Home = ({ gameName }: Props) => {
         {gameName}
       </div>
       <Box style={{ width: '100% ' }}>
-        <Link to="/admin">
+        {/*
+          Making this an actual hyperlink for now, since Link can't seem to
+          find the parent Route component properly
+        */}
+        <a href="/admin">
           <Button
             startIcon={<ArrowBack>back</ArrowBack>}
           >
             To Games List
           </Button>
-        </Link>
+        </a>
       </Box>
       <Box style={{ width: '100% ' }}>
         <Link to={`/admin/${gameName}/rooms`}>

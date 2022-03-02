@@ -12,7 +12,7 @@ import {
  * everything that comes out of it :(
  */
 class S3 {
-  constructor(rootPath, bucketName = process.env.REACT_APP_GAMES_BUCKET) {
+  constructor(rootPath = '', bucketName = process.env.REACT_APP_GAMES_BUCKET) {
     const region = 'us-east-1';
     this.rootPath = rootPath;
     this.bucketName = bucketName;
@@ -57,6 +57,18 @@ class S3 {
     );
 
     return Contents;
+  }
+
+  async listPrefixes() {
+    const { CommonPrefixes } = await this.client.send(
+      new ListObjectsCommand({
+        Delimiter: '/',
+        Prefix: '',
+        Bucket: this.bucketName,
+      }),
+    );
+
+    return CommonPrefixes.map(({ Prefix }) => Prefix.slice(0, Prefix.length - 1));
   }
 
   static async getStreamContent(stream) {
