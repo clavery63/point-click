@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import S3 from 'shared/util/S3';
 
-const retrieveImage = async (s3: S3, imageKey: string, gameKey: string) => {
-  const key = `${gameKey}/${imageKey}`;
+const retrieveImage = async (s3: S3, imageKey: string, prefix: string) => {
+  const key = `${prefix}${imageKey}`;
   const localImage = localStorage.getItem(key);
   if (localImage) {
     return [Uint8Array.from(localImage.split(',').map(num => parseInt(num, 10)))];
@@ -17,7 +17,7 @@ const retrieveImage = async (s3: S3, imageKey: string, gameKey: string) => {
   return s3Image;
 };
 
-const image$ = (s3: S3, imageKey: string, gameKey: string) => {
+const image$ = (s3: S3, imageKey: string, prefix: string) => {
   return new Observable<HTMLImageElement>(observer => {
     const image = new Image();
 
@@ -31,7 +31,7 @@ const image$ = (s3: S3, imageKey: string, gameKey: string) => {
       observer.error(e);
     };
 
-    retrieveImage(s3, imageKey, gameKey).then(byteArray => {
+    retrieveImage(s3, imageKey, prefix).then(byteArray => {
       image.src = URL.createObjectURL(new Blob(byteArray));
     }).catch(e => error(e));
 

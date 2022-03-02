@@ -14,7 +14,7 @@ type EpicActions =
     type: 'PLAY_MUSIC';
     payload: {
       text?: string;
-      fileName: string;
+      fileName?: string;
     };
   } |
   {

@@ -8,6 +8,7 @@ import loadImages$ from './loadImages';
 import validateGameState from '../validation/validateGameState';
 
 const assetsBase = process.env.REACT_APP_ASSETS_BASE;
+const sharedAssetsBase = process.env.REACT_APP_SHARED_ASSETS_BASE;
 
 type LoadState = (initialState: GameStoreState) => Observable<GameStoreState>;
 const loadPlayerAndGameState$: LoadState = initialState => {
@@ -34,6 +35,7 @@ const loadPlayerAndGameState$: LoadState = initialState => {
 
 const setAudioSrc = (state: GameStoreState) => {
   const audioRoot = `${assetsBase}/${state.gameName}/audio`;
+  const sharedAudioRoot = `${sharedAssetsBase}/audio`;
   const initialRoom = state.worldState.rooms[state.playerState.room];
 
   // Crazy hack that causes <audio> el behavior to improve wrt loading and
@@ -50,7 +52,7 @@ const setAudioSrc = (state: GameStoreState) => {
 
   const sfxPlayer = document.querySelector('.sfx-player') as HTMLAudioElement;
   if (sfxPlayer) {
-    sfxPlayer.src = `${audioRoot}/transition.mp3`;
+    sfxPlayer.src = `${sharedAudioRoot}/transition.mp3`;
   }
 };
 

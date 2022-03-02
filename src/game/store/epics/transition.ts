@@ -38,10 +38,10 @@ const dispatchRoom: DispatchRoom = (dest, state, runText$) => {
   }
 
   return concat(
-    of(when(!!room.gameOver || !!room.music, {
+    of(when(!!room.music, {
       type: 'PLAY_MUSIC',
       payload: {
-        fileName: room.music || 'puppets.mp3',
+        fileName: room.music,
       },
     })),
     runText$(room.initialDescription || room.description),
