@@ -20,6 +20,10 @@ const generateKey = (gameState: GameState) => {
   const keys = [...entityKeys, ...doorKeys].map((key: string) => parseInt(key, 10));
   keys.sort((a, b) => a - b);
 
+  if (!keys.length) {
+    return 0;
+  }
+
   // -2 becuase we have the bag with id 9999. That will eventually cause a bug...
   return keys[keys.length - 2] + 1;
 };

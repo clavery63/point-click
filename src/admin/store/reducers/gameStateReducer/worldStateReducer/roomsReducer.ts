@@ -53,6 +53,12 @@ export const roomsSlice = createSlice({
       };
 
       const exisitingRoomIds = Object.keys(state);
+
+      if (!exisitingRoomIds.length) {
+        state[0] = newRoom;
+        return;
+      }
+
       const lastRoomId = exisitingRoomIds[exisitingRoomIds.length - 1];
       const newRoomId = parseInt(lastRoomId, 10) + 1;
 

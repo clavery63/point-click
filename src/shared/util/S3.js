@@ -37,10 +37,11 @@ class S3 {
   }
 
   async writeObject(key, data) {
+    const base = this.rootPath.length ? `${this.rootPath}/` : '';
     const result = await this.client.send(
       new PutObjectCommand({
         Bucket: this.bucketName,
-        Key: `${this.rootPath}/${key}`,
+        Key: `${base}${key}`,
         Body: data,
       }),
     );
