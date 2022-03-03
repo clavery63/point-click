@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { setEntity } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { Item } from 'game/store/types';
+import { FormControlLabel, Switch } from '@mui/material';
 import { useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
@@ -16,7 +17,7 @@ const ItemDetails = ({ item }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const handleChange = (fieldName: keyof Item) => (value: string) => {
+  const handleChange = (fieldName: keyof Item) => (value: any) => {
     dispatch(setEntity({
       id: item.id,
       entity: {
@@ -54,6 +55,38 @@ const ItemDetails = ({ item }: Props) => {
           label="img"
           value={item.img}
           onChange={handleChange('img')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <LongTextField
+          label="on take"
+          value={item.onTake}
+          onChange={handleChange('onTake')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <LongTextField
+          label="takeable flag"
+          value={item.takeableFlag}
+          onChange={handleChange('takeableFlag')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <LongTextField
+          label="visible flag"
+          value={item.visibleFlag}
+          onChange={handleChange('visibleFlag')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <FormControlLabel
+          control={(
+            <Switch
+              checked={!!item.requiresPrecision}
+              onChange={e => handleChange('requiresPrecision')(e.currentTarget.checked)}
+            />
+          )}
+          label="require direct click?"
         />
       </Grid>
       <Verbs entity={item} />

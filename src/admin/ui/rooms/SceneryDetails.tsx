@@ -52,8 +52,22 @@ const SceneryDetails = ({ scenery }: Props) => {
       <Grid item xs={12}>
         <LongTextField
           label="description"
-          value={scenery.description}
+          value={scenery.description || ''}
           onChange={handleChange('description')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <LongTextField
+          label="open text"
+          value={scenery.openText || ''}
+          onChange={handleChange('openText')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <LongTextField
+          label="moved text"
+          value={scenery.movedText}
+          onChange={handleChange('movedText')}
         />
       </Grid>
       <Grid item xs={12}>
@@ -86,6 +100,13 @@ const SceneryDetails = ({ scenery }: Props) => {
           label="img"
           value={scenery.img || ''}
           onChange={handleChange('img')}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <LongTextField
+          label="visible flag"
+          value={scenery.visibleFlag}
+          onChange={handleChange('visibleFlag')}
         />
       </Grid>
       <Verbs entity={scenery} />

@@ -133,6 +133,13 @@ const DoorDetails = ({ door }: Props) => {
         />
       </Grid>
       <Grid item xs={12}>
+        <LongTextField
+          label="open condition"
+          value={door.openCondition || ''}
+          onChange={handleChange('openCondition')}
+        />
+      </Grid>
+      <Grid item xs={12}>
         <MapPositioner
           label="Select Map Position"
           value={door.mapPosition}
