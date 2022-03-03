@@ -39,6 +39,8 @@ const Verb = ({
     });
   };
 
+  const splitFlagString = (str: string) => (str.length ? str.split(',') : undefined);
+
   return (
     <Card className={styles.verbCard}>
       <CardContent>
@@ -62,17 +64,17 @@ const Verb = ({
         <LongTextField
           label="add flags"
           value={(verb.addFlags || []).join(',')}
-          onChange={flagString => onChange('addFlags')(flagString.split(','))}
+          onChange={str => onChange('addFlags')(splitFlagString(str))}
         />
         <LongTextField
           label="remove flags"
           value={(verb.removeFlags || []).join(',')}
-          onChange={flagString => onChange('removeFlags')(flagString.split(','))}
+          onChange={str => onChange('removeFlags')(splitFlagString(str))}
         />
         <LongTextField
           label="prereq flags"
           value={(verb.prereqFlags || []).join(',')}
-          onChange={flagString => onChange('prereqFlags')(flagString.split(','))}
+          onChange={str => onChange('prereqFlags')(splitFlagString(str))}
         />
         <Selector
           label="prereq using"
