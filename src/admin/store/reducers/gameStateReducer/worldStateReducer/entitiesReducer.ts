@@ -33,6 +33,12 @@ type EntityVerb = {
   verbLogics: VerbLogic[];
 };
 
+type DeleteInfo = {
+  id: number;
+  roomId?: number;
+  containerId?: number;
+};
+
 const defaultSize = {
   width: 10,
   height: 10,
@@ -120,8 +126,13 @@ export const entitiesSlice = createSlice({
 
       state[id] = entity;
     },
-    deleteEntity: (state, action: PayloadAction<{ id: number; roomId?: number }>) => {
-      const { id } = action.payload;
+    deleteEntity: (state, action: PayloadAction<DeleteInfo>) => {
+      const { id, containerId } = action.payload;
+
+      if (containerId) {
+        const container = state[containerId];
+        container.contains = container.contains?.filter(itemId => itemId !== id);
+      }
 
       delete state[id];
     },
@@ -136,6 +147,12 @@ export const entitiesSlice = createSlice({
         createScenery(state, id);
       }
     },
+    addItemToContainer: (state, action: PayloadAction<{ id: number; containerId: number }>) => {
+      const { id, containerId } = action.payload;
+      const contains = state[containerId].contains || [];
+
+      state[containerId].contains = [...contains, id];
+    },
   },
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.worldState.entities);
@@ -149,6 +166,7 @@ export const {
   createEntity,
   deleteEntity,
   setEntityVerb,
+  addItemToContainer,
 } = entitiesSlice.actions;
 
 export default entitiesSlice.reducer;

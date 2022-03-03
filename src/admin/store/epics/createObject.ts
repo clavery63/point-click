@@ -3,7 +3,7 @@ import { filter, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Action, createAction } from '@reduxjs/toolkit';
 import { RootState } from 'admin/ui/hooks/redux';
 import { GameState } from 'game/store/types';
-import { createEntity } from '../reducers/gameStateReducer/worldStateReducer/entitiesReducer';
+import { addItemToContainer, createEntity } from '../reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { addDoorToRoom, addEntityToRoom } from '../reducers/gameStateReducer/worldStateReducer/roomsReducer';
 import { setSelected } from '../reducers/editorStateReducer/selectedEntityReducer';
 import { createDoorWithId } from '../reducers/gameStateReducer/worldStateReducer/doorsReducer';
@@ -13,6 +13,7 @@ export const createItem = createAction<number>('createItem');
 export const createScenery = createAction<number>('createScenery');
 export const createDoor = createAction<number>('createDoor');
 export const createPlayerItem = createAction('createPlayerItem');
+export const createContainedItem = createAction<number>('createContainedItem');
 
 const generateKey = (gameState: GameState) => {
   const entityKeys = Object.keys(gameState.worldState.entities);
@@ -78,7 +79,29 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     }),
   );
 
-  return merge(entity$('items'), entity$('scenery'), door$, playerItem$);
+  const containedItem$ = action$.pipe(
+    filter(createContainedItem.match),
+    withLatestFrom(state$),
+    switchMap(([{ payload: containerId }, { gameState }]) => {
+      const id = generateKey(gameState);
+      return from([
+        addItemToContainer({ id, containerId }),
+        createEntity({ id, type: 'items' }),
+        setSelected({
+          id,
+          type: 'entity',
+        }),
+      ]);
+    }),
+  );
+
+  return merge(
+    entity$('items'),
+    entity$('scenery'),
+    door$,
+    playerItem$,
+    containedItem$,
+  );
 };
 
 export default createObject$;

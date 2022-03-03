@@ -12,6 +12,7 @@ import useStyles from '../shared/useStyles';
 import ImgSelector from '../shared/assets/ImgSelector';
 import Selector from '../shared/Selector';
 import Verbs from '../verbs';
+import Contains from './Contains';
 
 type Props = {
   scenery: Scenery;
@@ -109,6 +110,7 @@ const SceneryDetails = ({ scenery }: Props) => {
           onChange={handleChange('visibleFlag')}
         />
       </Grid>
+      <Contains container={scenery} />
       <Verbs entity={scenery} />
     </Grid>
   );
