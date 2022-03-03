@@ -1,6 +1,7 @@
 import { map, switchMap } from 'rxjs/operators';
-import { forkJoin, from, merge } from 'rxjs';
+import { forkJoin, from } from 'rxjs';
 import getFilenames from 'shared/util/getFilenames';
+import { flatten } from 'lodash';
 import S3 from '../util/S3';
 import image$ from './image';
 
@@ -14,7 +15,6 @@ const loadImagesFromBucket$ = (s3: S3, prefix: string) => {
         );
       }));
     }),
-    map(pairs => new Map(pairs)),
   );
 };
 
@@ -22,10 +22,10 @@ const loadImages$ = (gameKey: string) => {
   const s3 = new S3(`${gameKey}/img`);
   const sharedS3 = new S3('img', process.env.REACT_APP_SHARED_BUCKET);
 
-  return merge(
+  return forkJoin([
     loadImagesFromBucket$(s3, `${gameKey}/`),
     loadImagesFromBucket$(sharedS3, ''),
-  ).forkjoin?
+  ]).pipe(map(pairs => new Map(flatten(pairs))));
 };
 
 export default loadImages$;
