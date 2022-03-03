@@ -5,6 +5,18 @@ import { Stack, TextField } from '@mui/material';
 import { GameState, VerbIndex } from 'game/store/types';
 import { useHistory } from 'react-router-dom';
 
+const defaultVerbNames = [
+  'MOVE',
+  'LOOK',
+  'OPEN',
+  'USE',
+  'SMOKE',
+  'TAKE',
+  'EAT',
+  'HIT',
+  'SPEAK',
+];
+
 const defaultGame: GameState = {
   worldState: {
     doors: {},
@@ -20,7 +32,7 @@ const defaultGame: GameState = {
     items: [],
   },
   flags: [],
-  verbNames: [],
+  verbNames: defaultVerbNames,
 };
 
 const CreateGameButton = () => {
