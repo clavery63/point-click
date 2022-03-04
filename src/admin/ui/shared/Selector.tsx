@@ -12,7 +12,7 @@ type Option = { value: string | number; label: string };
 type Props = {
   label: string;
   value: Nullable<string | number>;
-  onChange: (value: string) => void;
+  onChange: (value: any) => void;
   options: Option[];
   required?: boolean;
   style?: React.CSSProperties;
@@ -24,9 +24,15 @@ const Selector = ({
     <FormControl variant="outlined" style={{ minWidth: 120 }} margin="normal">
       <InputLabel>{label}</InputLabel>
       <Select
-        value={value}
+        value={value || ''}
         label={label}
-        onChange={e => onChange(e.target.value as string)}
+        onChange={e => {
+          if (e.target.value === '') {
+            onChange(undefined);
+          } else {
+            onChange(e.target.value);
+          }
+        }}
         style={style}
       >
         {!required && <MenuItem value="" key=""><em>none</em></MenuItem>}

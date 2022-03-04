@@ -23,7 +23,7 @@ const RoomDetails = ({ room, roomId }: Props) => {
   const dispatch = useDispatch();
   const styles = useStyles();
 
-  const handleChange = (fieldName: string) => (value: string) => {
+  const handleChange = (fieldName: keyof Room) => (value: string) => {
     dispatch(setRoom({
       id: roomId,
       room: {
