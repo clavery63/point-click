@@ -3,8 +3,8 @@ import FileUploaderButton from './FileUploaderButton';
 
 const MAX_SIZE = 10 * 1024 * 1024; // 10MB;
 
-type GetImageDimensions = (f: File) => Promise<{ duration: number}>;
-const getAudioDuration: GetImageDimensions = file => new Promise((resolve, reject) => {
+type GetAudioDuration = (f: File) => Promise<{ duration: number}>;
+const getAudioDuration: GetAudioDuration = file => new Promise((resolve, reject) => {
   const dataUrl = window.URL.createObjectURL(file);
   const audio = new Audio();
   audio.onloadeddata = () => {

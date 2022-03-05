@@ -16,6 +16,7 @@ import UploadButton from '../shared/UploadButton';
 import PreviewWidget from '../preview/PreviewWidget';
 import ImgSelector from '../shared/assets/ImgSelector';
 import AudioSelector from '../shared/assets/AudioSelector';
+import VideoSelector from '../shared/assets/VideoSelector';
 
 type Props = { room: Room; roomId: number };
 const RoomDetails = ({ room, roomId }: Props) => {
@@ -75,6 +76,13 @@ const RoomDetails = ({ room, roomId }: Props) => {
             label="bg img"
             value={room.img}
             onChange={handleChange('img')}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <VideoSelector
+            label="bg video"
+            value={room.video}
+            onChange={handleChange('video')}
           />
         </Grid>
         <Grid item xs={12}>
