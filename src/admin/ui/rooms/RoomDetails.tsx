@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 import { useParams, Link } from 'react-router-dom';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import { setRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
-import { Room } from 'game/store/types';
+import { Nullable, Room } from 'game/store/types';
 import { useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
@@ -23,7 +23,7 @@ const RoomDetails = ({ room, roomId }: Props) => {
   const dispatch = useDispatch();
   const styles = useStyles();
 
-  const handleChange = (fieldName: keyof Room) => (value: string) => {
+  const handleChange = (fieldName: keyof Room) => (value: Nullable<string>) => {
     dispatch(setRoom({
       id: roomId,
       room: {

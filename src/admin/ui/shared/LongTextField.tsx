@@ -5,7 +5,7 @@ import { Nullable } from 'game/store/types';
 type Props = {
   label: string;
   value: Nullable<string>;
-  onChange: (value: string) => void;
+  onChange: (value: Nullable<string>) => void;
 };
 const LongTextField = ({ label, value, onChange }: Props) => {
   return (
@@ -15,8 +15,14 @@ const LongTextField = ({ label, value, onChange }: Props) => {
       multiline
       fullWidth
       maxRows={6}
-      value={value}
-      onChange={e => onChange(e.target.value)}
+      value={value || ''}
+      onChange={e => {
+        if (e.target.value === '') {
+          onChange(undefined);
+        } else {
+          onChange(e.target.value);
+        }
+      }}
       variant="outlined"
     />
   );

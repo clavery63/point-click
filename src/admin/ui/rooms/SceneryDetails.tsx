@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { setEntity } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
-import { Scenery } from 'game/store/types';
+import { Nullable, Scenery } from 'game/store/types';
 import { setSceneryEditing } from 'admin/store/reducers/editorStateReducer/sceneryEditingReducer';
 import { useDispatch, useSelector } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
@@ -24,7 +24,7 @@ const SceneryDetails = ({ scenery }: Props) => {
   const sceneriesEditing = useSelector(state => state.editorState.sceneryEditing);
   const positionEditing = sceneriesEditing[scenery.id] || 'startPosition';
 
-  const handleChange = (fieldName: keyof Scenery) => (value: string) => {
+  const handleChange = (fieldName: keyof Scenery) => (value: Nullable<string>) => {
     dispatch(setEntity({
       id: scenery.id,
       entity: {
@@ -53,14 +53,14 @@ const SceneryDetails = ({ scenery }: Props) => {
       <Grid item xs={12}>
         <LongTextField
           label="description"
-          value={scenery.description || ''}
+          value={scenery.description}
           onChange={handleChange('description')}
         />
       </Grid>
       <Grid item xs={12}>
         <LongTextField
           label="open text"
-          value={scenery.openText || ''}
+          value={scenery.openText}
           onChange={handleChange('openText')}
         />
       </Grid>
@@ -91,7 +91,7 @@ const SceneryDetails = ({ scenery }: Props) => {
       <Grid item xs={12}>
         <Selector
           label="trigger"
-          value={scenery.trigger || ''}
+          value={scenery.trigger}
           onChange={handleChange('trigger')}
           options={verbNames.map((verb, index) => ({ value: index, label: verb }))}
         />
@@ -99,7 +99,7 @@ const SceneryDetails = ({ scenery }: Props) => {
       <Grid item xs={12}>
         <ImgSelector
           label="img"
-          value={scenery.img || ''}
+          value={scenery.img}
           onChange={handleChange('img')}
         />
       </Grid>

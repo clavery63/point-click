@@ -1,5 +1,5 @@
 import React from 'react';
-import { DoorDir, VerbLogic } from 'game/store/types';
+import { DoorDir, Nullable, VerbLogic } from 'game/store/types';
 import {
   Box, Button, Card, CardContent,
 } from '@mui/material';
@@ -39,25 +39,25 @@ const Verb = ({
     });
   };
 
-  const splitFlagString = (str: string) => (str.length ? str.split(',') : undefined);
+  const splitFlagString = (str: Nullable<string>) => (str?.length ? str.split(',') : undefined);
 
   return (
     <Card className={styles.verbCard}>
       <CardContent>
         <LongTextField
           label="text"
-          value={verb.text || ''}
+          value={verb.text}
           onChange={onChange('text')}
         />
         <Selector
           label="move to"
-          value={verb.moveTo || ''}
+          value={verb.moveTo}
           onChange={val => onChange('moveTo')(val ? parseInt(val, 10) : undefined)}
           options={makeOptions(allRoomIds)}
         />
         <Selector
           label="animation direction"
-          value={verb.moveDir || ''}
+          value={verb.moveDir}
           onChange={onChange('moveDir')}
           options={makeOptions(Object.keys(DoorDir))}
         />
@@ -78,7 +78,7 @@ const Verb = ({
         />
         <Selector
           label="prereq using"
-          value={verb.prereqUsing || ''}
+          value={verb.prereqUsing}
           onChange={onChange('prereqUsing')}
           options={makeOptions(allEntityIds)}
           style={{ width: '150px' }}

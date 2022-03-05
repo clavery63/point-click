@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { setVerbNames } from 'admin/store/reducers/gameStateReducer/verbNamesReducer';
+import { Nullable } from 'game/store/types';
 import { useDispatch, useSelector } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 
@@ -11,9 +12,9 @@ const Settings = () => {
   const dispatch = useDispatch();
   const allVerbs = useSelector(state => state.gameState.verbNames);
 
-  const handleChange = (value: string) => {
-    const verbs = value.split(',');
-    if (verbs.length !== NUM_VERBS) {
+  const handleChange = (value: Nullable<string>) => {
+    const verbs = value?.split(',');
+    if (!verbs || verbs.length !== NUM_VERBS) {
       console.log(`Must provide ${NUM_VERBS} verb names`);
       return;
     }
