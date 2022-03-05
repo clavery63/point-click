@@ -3,7 +3,11 @@
     "doors": {
       "48": {
         "closedImg": "door-1",
-        "position": { "left": 40, "hi": 0, "top": 17 },
+        "position": {
+          "left": 40,
+          "hi": 0,
+          "top": 17
+        },
         "dest": 1,
         "dir": "FORWARD",
         "mapPosition": { "x": 2, "y": 0 },
@@ -42,7 +46,7 @@
         "dest": 3,
         "dir": "FORWARD",
         "mapPosition": { "x": 4, "y": 2 },
-        "state": "CLOSED",
+        "state": "LOCKED",
         "description": "This door probably leads someplace uninteresting",
         "unlockText": "Great, it's unlocked now",
         "openText": "Aaaaand you opened the door. How exciting.",
@@ -200,6 +204,14 @@
         "id": 66,
         "type": "doors"
       },
+      "67": {
+        "mapPosition": { "x": 4, "y": 4 },
+        "dir": "DOWN",
+        "dest": 21,
+        "state": "OPEN",
+        "id": 67,
+        "type": "doors"
+      },
       "68": {
         "mapPosition": { "x": 2, "y": 0 },
         "dir": "UP",
@@ -207,25 +219,6 @@
         "state": "OPEN",
         "id": 68,
         "type": "doors"
-      },
-      "69": {
-        "id": 69,
-        "type": "doors",
-        "position": { "left": 0, "top": 0 },
-        "mapPosition": { "x": 0, "y": 0 },
-        "dest": 22,
-        "dir": "RIGHT",
-        "state": "OPEN"
-      },
-      "70": {
-        "id": 70,
-        "type": "doors",
-        "position": { "left": 0, "top": 0 },
-        "mapPosition": { "x": 2, "y": 4 },
-        "dest": 0,
-        "dir": "BACK",
-        "state": "CLOSED",
-        "description": "this leads back the the entrance"
       }
     },
     "rooms": {
@@ -234,7 +227,7 @@
         "music": "outdoor-ambience.mp3",
         "initialDescription": "Welcome, newcomer. This is birthday castle. We hope you find it comfortable inside.               And who knows? You might even see some cool s*** along the way.",
         "description": "It's the entrance to Birthday Castle. You can faintly hear the sound of several full grown adults chanting inside.",
-        "doors": [48, 63, 69],
+        "doors": [48, 63, 67],
         "entities": [0, 21]
       },
       "1": {
@@ -256,7 +249,7 @@
         "img": "room-3",
         "description": "It's nothing but a closet. An ordinary, run-of-the-mill closet. Oh, and some items.",
         "doors": [53],
-        "entities": [6, 7]
+        "entities": [6, 7, 28]
       },
       "4": {
         "img": "room-4",
@@ -296,24 +289,21 @@
         "description": "You completely blew it. You tried to eat one of those magic 8 balls and it made you die.",
         "gameOver": true,
         "doors": [],
-        "entities": [],
-        "music": "puppets.mp3"
+        "entities": []
       },
       "10": {
         "img": "bed",
         "description": "You take an aggressive pull out of the bong and feel nothing. Nothing for a while, really. But after a few minutes it starts to kick in and you start to feel funny. You'd never smoked weed before, so you didn't really know what to expect. Anyway, days go by and you don't stop feeling high, it just gets more and more intense. You become convinced that the weed was laced with something, except you saw other people take hits from the same stash and they were completely fine. You wonder if Scott and Santos are drug dealers who conspired against you to get you high. No matter. The feeling escalates. You begin to have an out of body experience. It's been almost a week now, and you are no longer at the castle. You're home, or at least some place that looks like home. You have no recollection of leaving the castle. Has it been weeks, months, years? All of your friends know  you are high. They must. Next thing you know, you're on a hospital bed. Everyone you know is there, giving you fist bumps and crying tears of joy. Doug is in the corner, staring at your with a warm, fatherly smirk. \"You did it, man\", he says. You die.",
         "gameOver": true,
         "doors": [],
-        "entities": [],
-        "music": "puppets.mp3"
+        "entities": []
       },
       "11": {
         "img": "beerman",
         "description": "What you feared most has happened: your bag has exploded. You slipped on some of the spillage on the floor and died from the fall.",
         "gameOver": true,
         "doors": [],
-        "entities": [],
-        "music": "puppets.mp3"
+        "entities": []
       },
       "12": {
         "img": "room-8",
@@ -324,10 +314,9 @@
       },
       "13": {
         "video": "slam-city.mp4",
-        "description": "What a great vid.",
+        "description": "An uplifting video emboldens you with newfound confidence.",
         "doors": [61],
-        "entities": [],
-        "initialDescription": "An uplifting video emboldens you with newfound confidence."
+        "entities": []
       },
       "14": {
         "img": "fridge-large",
@@ -375,13 +364,11 @@
         "doors": [],
         "entities": []
       },
-      "22": {
-        "description": "hi",
-        "entities": [71, 72],
-        "doors": [70],
-        "initialDescription": "yay this worked",
-        "img": "floppy",
-        "music": "coldgin.mp3"
+      "21": {
+        "img": "dan",
+        "description": "You found Dan.",
+        "doors": [68],
+        "entities": [20]
       }
     },
     "entities": {
@@ -430,6 +417,7 @@
       },
       "5": {
         "name": "key 2",
+        "img": "key2",
         "description": "This key bears a skull. This must be a skeleton key.",
         "id": 5,
         "type": "items"
@@ -454,31 +442,7 @@
         "position": { "left": 48, "top": 52 },
         "img": "bong",
         "description": "It's some kind of strange vessel. Its base is filled with a murky, dank liquid, and there is an acrid vapor emanating from its spout.",
-        "verbs": {
-          "0": [],
-          "1": [],
-          "2": [],
-          "3": [],
-          "4": [
-            {
-              "text": "You cautiously take a pull out of the bong. Nothing happens.",
-              "prereqFlags": ["SANTOS_1"],
-              "removeFlags": ["SANTOS_1"],
-              "addFlags": ["SANTOS_2"]
-            },
-            {
-              "text": "Feeling emboldened, you take a much larger hit. This time it causes an uncontrollable coughing fit, but you still don't really feel it.",
-              "prereqFlags": ["SANTOS_2"],
-              "removeFlags": ["SANTOS_2"],
-              "addFlags": ["SANTOS_3"]
-            },
-            { "moveTo": 10, "moveDir": "RIGHT", "prereqFlags": ["SANTOS_3"] }
-          ],
-          "5": [],
-          "6": [],
-          "7": [],
-          "8": []
-        },
+        "verbs": { "4": [{ "moveTo": 10, "moveDir": "RIGHT" }] },
         "id": 7,
         "type": "items"
       },
@@ -504,15 +468,15 @@
         "img": "scott",
         "description": "Scott is in your inventory now. Feel free to use him as you would any other items or spells.",
         "verbs": {
-          "1": [
-            {
-              "text": "He seems aggressive, but you don't think there's any reason to be concerned at the moment."
-            }
-          ],
-          "7": [{ "text": "\"Cool man. got any beer?\"" }],
           "8": [
             {
               "text": "\"I thought you said this party would be cool.\", says Scott, looking concerned. \"Why haven't I had any beer yet?\""
+            }
+          ],
+          "7": [{ "text": "\"Cool man. got any beer?\"" }],
+          "1": [
+            {
+              "text": "He seems aggressive, but you don't think there's any reason to be concerned at the moment."
             }
           ]
         },
@@ -574,14 +538,14 @@
         "takeableFlag": "GARFIELD_TAKE",
         "visibleFlag": "GARFIELD_VISIBLE",
         "verbs": {
-          "4": [{ "text": "Smoking Garfield is illegal in this state." }],
           "6": [
             {
               "text": "With a somber sense of pride and purpose, you devour the animal, as if to put it out of its misery.",
               "addFlags": ["GARFIELD_CONSUMED"],
               "removeFlags": ["GARFIELD_VISIBLE"]
             }
-          ]
+          ],
+          "4": [{ "text": "Smoking Garfield is illegal in this state." }]
         },
         "id": 14,
         "type": "items"
@@ -620,6 +584,14 @@
         "id": 19,
         "type": "items"
       },
+      "20": {
+        "name": "dan's hat",
+        "img": "danHat",
+        "description": "An irresistable hat",
+        "position": { "left": 18, "top": 11 },
+        "id": 20,
+        "type": "items"
+      },
       "21": {
         "img": "skull",
         "description": "It's the skull of some creature. Its meaning seems quite clear: death lurks inside.",
@@ -635,7 +607,7 @@
         "description": "It's the famous book by H. Saul Caesein, âProtocol for the Success Lover.\" I've always wanted to read this one.",
         "startPosition": { "left": 21, "top": 62 },
         "size": { "width": 16, "height": 6 },
-        "contains": [5, 73],
+        "contains": [5],
         "openText": "  \"CHAPTER ONE: FORGET ALL PRIOR MISGIVINGS.\"  Huh, a rectangular hole has been cut out of the inside of the book.  You are disconcerted to also discover a steaming residue of unknown origin staining the pages.",
         "id": 22,
         "type": "scenery"
@@ -676,6 +648,7 @@
         "startPosition": { "left": 0, "top": 0 },
         "size": { "width": 112, "height": 112 },
         "verbs": {
+          "6": [{ "moveTo": 9, "moveDir": "DOWN" }],
           "3": [
             {
               "prereqFlags": ["EIGHTBALL_1"],
@@ -701,8 +674,7 @@
               "removeFlags": ["EIGHTBALL_4"],
               "addFlags": ["EIGHTBALL_1", "DANSEN"]
             }
-          ],
-          "6": [{ "moveTo": 9, "moveDir": "DOWN" }]
+          ]
         },
         "id": 26,
         "type": "scenery"
@@ -734,6 +706,49 @@
         },
         "startPosition": { "left": 54, "top": 34 },
         "id": 27,
+        "type": "scenery"
+      },
+      "28": {
+        "img": "santos",
+        "description": "It's Santos. If only you could get past him, you might be able to collect some more useful items.",
+        "visibleFlag": "SANTOS_VISIBLE",
+        "verbs": {
+          "8": [
+            {
+              "prereqFlags": ["SANTOS_1"],
+              "text": "\"Yooo, get this. This dude over there says he's a fan of Mega Man but he's only play 3 out of the original 6 of them. Or at least only beaten 3\"",
+              "removeFlags": ["SANTOS_1"],
+              "addFlags": ["SANTOS_2"]
+            },
+            {
+              "prereqFlags": ["SANTOS_2"],
+              "text": "\"This party's kinda random right?\"",
+              "removeFlags": ["SANTOS_2"],
+              "addFlags": ["SANTOS_3"]
+            },
+            {
+              "prereqFlags": ["SANTOS_3"],
+              "text": "\"Don't worry about me. I can literally sleep anywhere I don't care. I literally don't care I can sleep anywhere. Like it doesn't matter. It literally doesn't matter. I know that sounds crazy right? I don't know. I guess it's basically my super power. Like how random would that be, if your superpower was just to be able to sleep anywhere. But like literally I think that would be mine. Either that or drinking tequila without flinching. Who do you know here again?\"",
+              "removeFlags": ["SANTOS_3"],
+              "addFlags": ["SANTOS_4"]
+            },
+            {
+              "prereqFlags": ["SANTOS_4"],
+              "text": "\"Who's Scott? ohhhhh! You mean Scott. Yeah, I know him\"",
+              "removeFlags": ["SANTOS_4"],
+              "addFlags": ["SANTOS_1"]
+            }
+          ],
+          "3": [
+            {
+              "prereqUsing": 10,
+              "text": "With a desperate yell, you hurl Scott at Santos and shield your eyes. Scott beckons Santos with some strange incantations, and they part ways.",
+              "removeFlags": ["SANTOS_VISIBLE"]
+            }
+          ]
+        },
+        "startPosition": { "left": 0, "top": 0 },
+        "id": 28,
         "type": "scenery"
       },
       "29": {
@@ -784,20 +799,23 @@
         "description": "Well, would you look at that?! Justin is in the park too, just hanging out with that goose.  You can tell that he's pleased to see you.  He seems to be holding an unlit torch in one of his hands.",
         "visibleFlag": "JUSTIN_VISIBLE",
         "verbs": {
+          "8": [
+            {
+              "text": "\"Hey Mike!  Happy birthday!  I thought you'd like a brief escape from all of the unhinged shit going on in the castle, so I brought you to this peaceful place.  Check out the nice waterfowl over there, or \"birdbrain\" as you'd say.  Wow...you've collected a lot of torches!  That's cool, even though they don't serve any functional purpose in this game at all.  Well, keep on picking them up if you want to, just for fun.\""
+            }
+          ],
           "3": [
             {
               "prereqUsing": 15,
               "text": "\"Oh, nice.  Thanks.  I was hoping someone would have something to eat.  I brought a bag of grapes with me but ended up giving all of them to that goose over there.\"",
               "removeFlags": ["JUSTIN_VISIBLE"]
             }
-          ],
-          "8": [
-            {
-              "text": "\"Hey Mike!  Happy birthday!  I thought you'd like a brief escape from all of the unhinged shit going on in the castle, so I brought you to this peaceful place.  Check out the nice waterfowl over there, or \"birdbrain\" as you'd say.  Wow...you've collected a lot of torches!  That's cool, even though they don't serve any functional purpose in this game at all.  Well, keep on picking them up if you want to, just for fun.\""
-            }
           ]
         },
-        "startPosition": { "left": -78, "top": -16 },
+        "startPosition": {
+          "left": -78,
+          "top": -16
+        },
         "id": 34,
         "type": "scenery"
       },
@@ -855,16 +873,16 @@
         "description": "Succumbing to your unquenchable thirst for destruction, you decide you'd rather break into one of these lockers with a concussive blow than ask Jason to open it for you. This locker might open if had something to violently hit it with?",
         "startPosition": { "left": 91, "top": 0 },
         "verbs": {
+          "7": [
+            {
+              "text": "Youch! That was a good thought, but you weren't able to open up the damn door. You'll need something better-suited to bludgeoning."
+            }
+          ],
           "3": [
             {
               "prereqUsing": 12,
               "text": "\"Blammo!\" The damn door opened because you smacked it with a fucking frying pan. Nice fucking work.",
               "removeFlags": ["LOCKER_VISIBLE"]
-            }
-          ],
-          "7": [
-            {
-              "text": "Youch! That was a good thought, but you weren't able to open up the damn door. You'll need something better-suited to bludgeoning."
             }
           ]
         },
@@ -894,6 +912,11 @@
         "description": "You spy a comforting sight: a luscious gourd in the moonlight. Ahh, the crisp flesh of a fresh white pumpkin. Wait a minute....Oh no!! It's something foul!! The pumpkin has been hollowed. Someone, or some thing, has been using this for \"storage.\" Every fiber is completely soaked with urine. You shudder with disapproval.  It's been \"bleached.\"",
         "startPosition": { "left": 71, "top": 20 },
         "verbs": {
+          "6": [
+            {
+              "text": "You whip out a knife and fork, and cut off the juiciest part of the pumpkin you can find. You lick your lips as it slides down your gullet. No way you can eat the whole thing though."
+            }
+          ],
           "3": [
             {
               "prereqUsing": 9999,
@@ -906,11 +929,6 @@
                 }
               ]
             }
-          ],
-          "6": [
-            {
-              "text": "You whip out a knife and fork, and cut off the juiciest part of the pumpkin you can find. You lick your lips as it slides down your gullet. No way you can eat the whole thing though."
-            }
           ]
         },
         "id": 41,
@@ -922,18 +940,6 @@
         "startPosition": { "left": 8, "top": 34 },
         "visibleFlag": "DANSEN",
         "verbs": {
-          "3": [
-            {
-              "prereqUsing": 16,
-              "text": "You give Sam the ice cold gin.",
-              "addFlags": ["GOOD_GIN"]
-            },
-            {
-              "prereqUsing": 17,
-              "text": "You give Sam the gin.",
-              "addFlags": ["BAD_GIN"]
-            }
-          ],
           "8": [
             {
               "prereqFlags": ["GOOD_GIN"],
@@ -945,6 +951,18 @@
             },
             {
               "text": "Hey buddy, welcome to The Abbey! Norm is in the bathroom, but he'll be back soon. You can have this beer if you like, but you look like you're craving something else... I only have beer, but if you give me something to mix I could whip you up something else."
+            }
+          ],
+          "3": [
+            {
+              "prereqUsing": 16,
+              "text": "You give Sam the ice cold gin.",
+              "addFlags": ["GOOD_GIN"]
+            },
+            {
+              "prereqUsing": 17,
+              "text": "You give Sam the gin.",
+              "addFlags": ["BAD_GIN"]
             }
           ]
         },
@@ -995,61 +1013,6 @@
         "id": 47,
         "type": "scenery"
       },
-      "71": {
-        "id": 71,
-        "type": "scenery",
-        "name": "New Scenery",
-        "description": "",
-        "contains": null,
-        "startPosition": { "left": 70, "top": 6 },
-        "size": { "width": 14, "height": 29 },
-        "verbs": {
-          "0": [],
-          "1": [
-            {
-              "prereqFlags": ["TEST_VERBS"],
-              "text": "nice! you used 'LOOK'",
-              "addFlags": ["TEST_BONG"]
-            }
-          ],
-          "7": [
-            {
-              "text": "Nice job you used the verb 'hit' on this rectangle",
-              "addFlags": ["TEST_VERBS"]
-            }
-          ]
-        }
-      },
-      "72": {
-        "id": 72,
-        "type": "items",
-        "name": "New Item",
-        "description": "",
-        "contains": null,
-        "position": { "left": 0, "top": 0 },
-        "img": "bong",
-        "verbs": {
-          "0": [],
-          "1": [{ "text": "I am a bong" }],
-          "2": [],
-          "4": [
-            {
-              "text": "woo!!!! you smoked more!",
-              "prereqFlags": ["TEST_BONG"]
-            },
-            { "text": "You smoked" }
-          ]
-        }
-      },
-      "73": {
-        "id": 73,
-        "type": "items",
-        "name": "grape",
-        "description": "a random grape? ok!",
-        "contains": null,
-        "position": { "left": 0, "top": 0 },
-        "verbs": { "0": [], "1": [{ "text": "does this override it?" }] }
-      },
       "9999": {
         "name": "bag",
         "description": "Your bag",
@@ -1068,12 +1031,17 @@
     "timer": 0
   },
   "images": {
+    "alpha-dark": {},
+    "alpha-light": {},
+    "bag": {},
     "bartender": {},
     "bed": {},
     "beerman": {},
     "bong": {},
+    "border": {},
     "bottle": {},
     "computer": {},
+    "cursor": {},
     "dan": {},
     "danHat": {},
     "door-1": {},
@@ -1086,6 +1054,7 @@
     "door-8": {},
     "eight-ball-large": {},
     "eight-ball-small": {},
+    "flame-1": {},
     "floppy": {},
     "fridge-large": {},
     "fridge-small": {},
@@ -1094,15 +1063,18 @@
     "gin-and-soda": {},
     "hole": {},
     "items-bak": {},
+    "items": {},
     "jason-hidden": {},
-    "jukebox-clone": {},
     "jukebox": {},
     "justin": {},
     "key-1": {},
+    "line": {},
     "locker-door": {},
     "lockpick": {},
     "malone": {},
     "menu-bak": {},
+    "menu-button": {},
+    "menu": {},
     "monitor": {},
     "motorcycle": {},
     "oscar": {},
@@ -1131,17 +1103,7 @@
     "torch-2": {},
     "torch-3": {},
     "torch3": {},
-    "welcome-sign": {},
-    "alpha-dark": {},
-    "alpha-light": {},
-    "bag": {},
-    "border": {},
-    "cursor": {},
-    "flame-1": {},
-    "items": {},
-    "line": {},
-    "menu-button": {},
-    "menu": {}
+    "welcome-sign": {}
   },
   "flags": [
     "GARFIELD_VISIBLE",
