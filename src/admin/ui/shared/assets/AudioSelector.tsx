@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Nullable } from 'game/store/types';
-import Grid from '@mui/material/Grid';
 import S3 from 'shared/util/S3';
 import { useParams } from 'react-router-dom';
 import getFilenames from 'shared/util/getFilenames';
+import { Stack } from '@mui/material';
 import Selector, { makeOptions } from '../Selector';
 import AudioUploader from './AudioUploader';
 
@@ -37,21 +37,17 @@ const AudioSelector = ({ label, value, onChange }: Props) => {
   }
 
   return (
-    <Grid container>
-      <Grid item xs={4}>
-        <Selector
-          label={label}
-          value={options.length ? (value || '') : ''}
-          onChange={onChange}
-          options={makeOptions(options)}
-        />
-      </Grid>
-      <Grid item xs={8} style={{ display: 'flex', alignItems: 'center' }}>
-        <AudioUploader
-          onSuccess={handleUploadSuccess}
-        />
-      </Grid>
-    </Grid>
+    <Stack direction="row" spacing={2}>
+      <Selector
+        label={label}
+        value={options.length ? (value || '') : ''}
+        onChange={onChange}
+        options={makeOptions(options)}
+      />
+      <AudioUploader
+        onSuccess={handleUploadSuccess}
+      />
+    </Stack>
   );
 };
 

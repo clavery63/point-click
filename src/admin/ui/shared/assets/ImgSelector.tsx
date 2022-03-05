@@ -1,8 +1,6 @@
 import React from 'react';
 import { Nullable } from 'game/store/types';
-import {
-  Grid,
-} from '@mui/material';
+import { Stack } from '@mui/material';
 import { addImage } from 'admin/store/reducers/gameStateReducer/imagesReducer';
 import { useDispatch, useSelector } from '../../hooks/redux';
 import ImageUploader from './ImageUploader';
@@ -33,21 +31,17 @@ const ImgSelector = ({ label, value, onChange }: Props) => {
   };
 
   return (
-    <Grid container>
-      <Grid item xs={4}>
-        <Selector
-          label={label}
-          value={value}
-          onChange={onChange}
-          options={makeOptions(options)}
-        />
-      </Grid>
-      <Grid item xs={8} style={{ display: 'flex', alignItems: 'center' }}>
-        <ImageUploader
-          onSuccess={handleUploadSuccess}
-        />
-      </Grid>
-    </Grid>
+    <Stack direction="row" spacing={2}>
+      <Selector
+        label={label}
+        value={value}
+        onChange={onChange}
+        options={makeOptions(options)}
+      />
+      <ImageUploader
+        onSuccess={handleUploadSuccess}
+      />
+    </Stack>
   );
 };
 

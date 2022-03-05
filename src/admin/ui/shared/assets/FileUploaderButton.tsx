@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Button from '@mui/material/Button';
+import { Box } from '@mui/material';
 import FileUploader from './FileUploader';
 
 type Props = {
@@ -15,15 +16,16 @@ const FileUploaderButton = ({ validate, onSuccess, filePath }: Props) => {
 
   return (
     <>
-      <Button
-        color="primary"
-        variant="contained"
-        onClick={() => setOpen(true)}
-      >
-        Upload New
-        {' '}
-        {filePath}
-      </Button>
+      <Box style={{ display: 'flex', alignItems: 'center' }}>
+        <Button
+          color="primary"
+          onClick={() => setOpen(true)}
+        >
+          Upload New
+          {' '}
+          {filePath}
+        </Button>
+      </Box>
       <Dialog
         open={open}
         onClose={() => {
