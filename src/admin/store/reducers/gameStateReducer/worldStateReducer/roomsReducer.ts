@@ -64,6 +64,18 @@ export const roomsSlice = createSlice({
 
       state[newRoomId] = newRoom;
     },
+    deleteRoom: (state, action: PayloadAction<RoomWithId>) => {
+      const { id } = action.payload;
+
+      delete state[id];
+
+      // TODO: What do we do about doors that point to this room?
+      // - Probably don't want to delete the door. Might still want it.
+      // - We probably do want to enforce that doors point somewhere (right?)
+      // - We probably don't wna tto choos a random room. Too annoying
+      // - So it sounds like we want a panel that displays all current errors
+      // - Also, this is another case for introducing logic-level validation
+    },
     addEntityToRoom: (state, action: PayloadAction<RoomWithEntity>) => {
       const { roomId, entityId } = action.payload;
 
@@ -113,7 +125,12 @@ export const roomsSlice = createSlice({
 });
 
 export const {
-  setRoom, reorderEntity, addEntityToRoom, addDoorToRoom, createRoom,
+  setRoom,
+  reorderEntity,
+  addEntityToRoom,
+  addDoorToRoom,
+  createRoom,
+  deleteRoom,
 } = roomsSlice.actions;
 
 export default roomsSlice.reducer;

@@ -5,11 +5,11 @@ import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Videocam from '@mui/icons-material/Videocam';
 import { Room } from 'game/store/types';
-import { useDispatch } from 'react-redux';
-import { createRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
-import { Button, Typography } from '@mui/material';
+import { createRoom, deleteRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
+import { Button, IconButton, Typography } from '@mui/material';
 import ArrowBack from '@mui/icons-material/ArrowBack';
-import { useSelector } from '../hooks/redux';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useSelector, useDispatch } from '../hooks/redux';
 import useStyles from '../shared/useStyles';
 import { CreateObjectButton } from './ObjectsList';
 
@@ -37,9 +37,30 @@ const RoomVideo = ({ video }: RoomVideoProps) => {
   const classes = useStyles();
 
   return (
-    <Tooltip title={video}>
-      <Videocam className={classes.roomVideo} />
-    </Tooltip>
+    <Box className={classes.videoLink}>
+      <Tooltip title={video}>
+        <Videocam className={classes.roomVideo} />
+      </Tooltip>
+    </Box>
+  );
+};
+
+type DeleteButtonProps = { room: Room; id: number };
+const DeleteButton = ({ room, id }: DeleteButtonProps) => {
+  const dispatch = useDispatch();
+  const classes = useStyles();
+  return (
+    <Box className={classes.deleteButton}>
+      <IconButton
+        onClick={e => {
+          e.stopPropagation();
+          dispatch(deleteRoom({ room, id }));
+        }}
+        color="error"
+      >
+        <DeleteIcon />
+      </IconButton>
+    </Box>
   );
 };
 
@@ -53,12 +74,13 @@ const RoomCard = ({ room, id }: RoomCardProps) => {
   const { img, video } = room;
 
   return (
-    <Link to={`${url}/${id}`}>
-      <Card className={classes.roomPreview}>
+    <Card className={classes.roomPreview}>
+      <Link to={`${url}/${id}`} className={classes.roomLink}>
         {img && <RoomImg img={img} />}
         {video && <RoomVideo video={video} />}
-      </Card>
-    </Link>
+      </Link>
+      <DeleteButton room={room} id={parseInt(id, 10)} />
+    </Card>
   );
 };
 

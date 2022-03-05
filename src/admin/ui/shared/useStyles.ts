@@ -21,9 +21,26 @@ const useStyles = makeStyles({
     margin: '20px 0 0',
   },
   roomPreview: {
+    position: 'relative',
     width: '200px',
     height: '200px',
     margin: '0 20px 20px 0',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '&:hover': {
+      '& $deleteButton': {
+        opacity: 1,
+      },
+    },
+  },
+  roomLink: {
+    height: '100%',
+    width: '100%',
+  },
+  videoLink: {
+    height: '100%',
+    width: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -35,6 +52,12 @@ const useStyles = makeStyles({
   roomVideo: {
     height: '50%',
     width: '50%',
+  },
+  deleteButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    opacity: 0,
   },
 }, { index: 1 });
 

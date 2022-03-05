@@ -3,6 +3,7 @@ import { setGameState } from 'admin/store/sharedActions';
 import {
   Item, Lookup, Scenery, VerbIndex, VerbLogic,
 } from 'game/store/types';
+import { deleteRoom } from './roomsReducer';
 
 type PositionWithId = {
   id: number;
@@ -156,6 +157,12 @@ export const entitiesSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.worldState.entities);
+    builder.addCase(deleteRoom, (state, action) => {
+      const entityIds = action.payload.room.entities;
+      entityIds.forEach(id => {
+        delete state[id];
+      });
+    });
   },
 });
 
