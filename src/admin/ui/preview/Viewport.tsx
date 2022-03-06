@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Group } from 'react-konva';
-import { Image } from 'shared/components/tappables';
-import { clearSelected, SelectedEntity } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
-import { Nullable, Room } from 'game/store/types';
-import { useSelector, useDispatch } from '../hooks/redux';
+import { Room } from 'game/store/types';
+import { useSelector } from '../hooks/redux';
 import Item from './Item';
 import Scenery from './Scenery';
 import Door from './Door';
+import Background from './Background';
 
 type EntityType = {
   id: number;
@@ -72,43 +71,17 @@ const Doors = ({ ids, roomId }: EntitiesType) => (
   </Group>
 );
 
-type BackgroundProps = {
-  image?: HTMLImageElement;
-  selectedEntity: Nullable<SelectedEntity>;
-};
-const Background = ({ image, selectedEntity }: BackgroundProps) => {
-  const dispatch = useDispatch();
-  const clear = () => {
-    dispatch(clearSelected());
-  };
-
-  useEffect(() => clear, []);
-
-  return (
-    <Image
-      width={112}
-      height={112}
-      image={image}
-      opacity={selectedEntity ? 0.5 : 1}
-      onClick={clear}
-    />
-  );
-};
-
 type Props = {
   room: Room;
   roomId: number;
 };
 const Viewport = (props: Props) => {
-  const {
-    doors, entities, img,
-  } = props.room;
-  const roomImg = useSelector(state => state.gameState.images[img || '']);
+  const { doors, entities } = props.room;
   const selectedEntity = useSelector(state => state.editorState.selectedEntity);
 
   return (
     <Group>
-      <Background image={roomImg} selectedEntity={selectedEntity} />
+      <Background room={props.room} selectedEntity={selectedEntity} />
       <Doors ids={doors} roomId={props.roomId} />
       <Entities ids={entities} roomId={props.roomId} />
     </Group>

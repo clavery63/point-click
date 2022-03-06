@@ -4,13 +4,18 @@ import Konva from 'konva';
 
 type Props = {
   src: string;
+  muted?: boolean;
+  opacity?: number;
+  onClick?: () => void;
 };
 
 const getMusicPlayer = () => {
   return document.querySelector('.music-player') as HTMLAudioElement;
 };
 
-const Video = ({ src }: Props) => {
+const Video = ({
+  src, muted = false, opacity = 1, onClick = () => {},
+}: Props) => {
   const imageRef = useRef<Konva.Image>(null);
 
   // we need to use 'useMemo' here, so we don't create new video elment on any render
@@ -19,15 +24,17 @@ const Video = ({ src }: Props) => {
     element.loop = true;
     element.src = src;
     element.playsInline = true;
+    element.muted = muted;
     return element;
   }, [src]);
 
   useEffect(() => {
-    getMusicPlayer().pause();
+    const musicPlayer = getMusicPlayer();
+    musicPlayer?.pause();
     return () => {
       videoElement.pause();
       videoElement.removeAttribute('src');
-      getMusicPlayer().play();
+      musicPlayer?.play();
     };
   }, []);
 
@@ -52,6 +59,8 @@ const Video = ({ src }: Props) => {
       y={0}
       width={112}
       height={112}
+      opacity={opacity}
+      onClick={onClick}
     />
   );
 };
