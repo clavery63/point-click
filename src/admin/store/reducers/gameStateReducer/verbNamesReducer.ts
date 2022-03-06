@@ -6,7 +6,7 @@ export const verbNamesSlice = createSlice({
   initialState: [] as string[],
   reducers: {
     setVerbNames: (state, action: PayloadAction<string[]>) => {
-      Object.assign(state, action.payload);
+      return action.payload;
     },
   },
   extraReducers: builder => {

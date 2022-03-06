@@ -7,7 +7,8 @@ import Stack from '@mui/material/Stack';
 import { useParams, Link } from 'react-router-dom';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import { setRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
-import { Nullable, Room } from 'game/store/types';
+import { Room } from 'game/store/types';
+import { FormControlLabel, Switch } from '@mui/material';
 import { useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
@@ -24,7 +25,7 @@ const RoomDetails = ({ room, roomId }: Props) => {
   const dispatch = useDispatch();
   const styles = useStyles();
 
-  const handleChange = (fieldName: keyof Room) => (value: Nullable<string>) => {
+  const handleChange = (fieldName: keyof Room) => (value: any) => {
     dispatch(setRoom({
       id: roomId,
       room: {
@@ -90,6 +91,17 @@ const RoomDetails = ({ room, roomId }: Props) => {
             label="music"
             value={room.music}
             onChange={handleChange('music')}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <FormControlLabel
+            control={(
+              <Switch
+                checked={!!room.gameOver}
+                onChange={e => handleChange('gameOver')(e.currentTarget.checked)}
+              />
+          )}
+            label="Game Over Screen?"
           />
         </Grid>
         <Grid item xs={12}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { DoorDir, Nullable, VerbLogic } from 'game/store/types';
+import { DoorDir, VerbLogic } from 'game/store/types';
 import {
   Box, Button, Card, CardContent,
 } from '@mui/material';
@@ -7,6 +7,7 @@ import { makeStyles } from '@mui/styles';
 import LongTextField from '../shared/LongTextField';
 import Selector, { makeOptions } from '../shared/Selector';
 import { useSelector } from '../hooks/redux';
+import splitString from '../utils/splitString';
 
 const useStyles = makeStyles({
   verbCard: {
@@ -39,8 +40,6 @@ const Verb = ({
     });
   };
 
-  const splitFlagString = (str: Nullable<string>) => (str?.length ? str.split(',') : undefined);
-
   return (
     <Card className={styles.verbCard}>
       <CardContent>
@@ -64,17 +63,17 @@ const Verb = ({
         <LongTextField
           label="add flags"
           value={(verb.addFlags || []).join(',')}
-          onChange={str => onChange('addFlags')(splitFlagString(str))}
+          onChange={str => onChange('addFlags')(splitString(str))}
         />
         <LongTextField
           label="remove flags"
           value={(verb.removeFlags || []).join(',')}
-          onChange={str => onChange('removeFlags')(splitFlagString(str))}
+          onChange={str => onChange('removeFlags')(splitString(str))}
         />
         <LongTextField
           label="prereq flags"
           value={(verb.prereqFlags || []).join(',')}
-          onChange={str => onChange('prereqFlags')(splitFlagString(str))}
+          onChange={str => onChange('prereqFlags')(splitString(str))}
         />
         <Selector
           label="prereq using"

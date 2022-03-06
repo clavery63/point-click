@@ -13,7 +13,7 @@ export const playerStateSlice = createSlice({
     setPlayer: (state, action: PayloadAction<{ player: PlayerState }>) => {
       const { player } = action.payload;
 
-      Object.assign(state, player);
+      return player;
     },
     addItemToPlayer: (state, action: PayloadAction<{ id: number}>) => {
       const { id } = action.payload;

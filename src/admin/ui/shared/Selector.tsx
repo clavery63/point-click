@@ -7,6 +7,8 @@ export const makeOptions = (options: string[]) => {
   return options.map(option => ({ value: option, label: option }));
 };
 
+const isEmpty = (value: any) => value === undefined || value === null;
+
 type Option = { value: string | number; label: string };
 
 type Props = {
@@ -24,7 +26,7 @@ const Selector = ({
     <FormControl variant="outlined" style={{ minWidth: 120 }} margin="normal">
       <InputLabel>{label}</InputLabel>
       <Select
-        value={value || ''}
+        value={isEmpty(value) ? '' : value}
         label={label}
         onChange={e => {
           if (e.target.value === '') {
