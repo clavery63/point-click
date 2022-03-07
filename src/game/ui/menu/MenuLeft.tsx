@@ -7,13 +7,11 @@ import MiniMap from './MiniMap';
 type Props = {
   onMenuClick: (verb: VerbIndex) => void;
   onDoorClick: (id: number) => void;
-  currentVerb: VerbIndex;
   doors: Door[];
-  menuButtonImg?: HTMLImageElement;
 };
 const MenuLeft = (props: Props) => {
   const {
-    onMenuClick, onDoorClick, currentVerb, doors, menuButtonImg,
+    onMenuClick, onDoorClick, doors,
   } = props;
   return (
     <Group x={7} y={7}>
@@ -22,9 +20,8 @@ const MenuLeft = (props: Props) => {
         left={8}
         top={0}
         onClick={onMenuClick}
-        currentVerb={currentVerb}
       />
-      <MiniMap onClick={onDoorClick} doors={doors} menuButtonImg={menuButtonImg} />
+      <MiniMap onClick={onDoorClick} doors={doors} />
     </Group>
   );
 };

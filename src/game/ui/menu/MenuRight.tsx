@@ -2,14 +2,15 @@ import { PageDir } from 'game/store/types';
 import React from 'react';
 import { Group } from 'react-konva';
 import { Image } from 'shared/components/tappables';
+import { useSelector } from 'shared/hooks';
 
 type Props = {
   onPageClick: (dir: PageDir) => void;
   onSaveClick: () => void;
-  menuButtonImg?: HTMLImageElement;
 };
 
-const MenuRight = ({ onPageClick, onSaveClick, menuButtonImg }: Props) => {
+const MenuRight = ({ onPageClick, onSaveClick }: Props) => {
+  const images = useSelector(state => state.images);
   return (
     <Group x={170} y={5}>
       <Image
@@ -17,21 +18,21 @@ const MenuRight = ({ onPageClick, onSaveClick, menuButtonImg }: Props) => {
         x={5}
         y={10}
         onClick={() => onPageClick('UP')}
-        image={menuButtonImg}
+        image={images.get('menu-button')}
       />
       <Image
         key={2}
         x={5}
         y={26}
         onClick={() => onPageClick('DOWN')}
-        image={menuButtonImg}
+        image={images.get('menu-button')}
       />
       <Image
         key={3}
         x={5}
         y={58}
         onClick={onSaveClick}
-        image={menuButtonImg}
+        image={images.get('menu-button')}
       />
     </Group>
   );

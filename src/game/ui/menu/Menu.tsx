@@ -8,9 +8,7 @@ import MenuRight from './MenuRight';
 import menuSelector from './menuSelector';
 
 const Menu = () => {
-  const {
-    hasText, currentVerb, menuImg, menuButtonImg, doors,
-  } = useSelector(menuSelector);
+  const { hasText, menuImg, doors } = useSelector(menuSelector);
 
   const dispatch = useDispatch();
   const dispatchVerb = (verb: VerbIndex) => dispatch({ type: 'SELECT_VERB', payload: verb });
@@ -33,20 +31,16 @@ const Menu = () => {
         image={menuImg}
       />
       <MenuLeft
-        currentVerb={currentVerb}
         doors={doors}
         onMenuClick={dispatchVerb}
         onDoorClick={dispatchDoor}
-        menuButtonImg={menuButtonImg}
       />
       <MenuCenter
-        currentVerb={currentVerb}
         onClick={dispatchVerb}
       />
       <MenuRight
         onPageClick={dispatchPage}
         onSaveClick={dispatchSave}
-        menuButtonImg={menuButtonImg}
       />
     </Group>
   );
