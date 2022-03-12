@@ -3,8 +3,6 @@ import { Image, Group } from 'react-konva';
 import { Rect } from 'shared/components/tappables';
 import { useDispatch, useSelector } from 'shared/hooks';
 import { Item, Nullable } from 'game/store/types';
-import Torches from './Torches';
-import Bag from './Bag';
 import Text from '../shared/Text';
 import inventorySelector from './inventorySelector';
 
@@ -48,8 +46,6 @@ const Inventory = () => {
         image={inventoryImg}
       />
       <Text left={24} top={8} text={text} />
-      <Torches />
-      <Bag />
       {currentList.map((item, i) => (
         <InventoryItem
           key={`${item.id}-${i}`}

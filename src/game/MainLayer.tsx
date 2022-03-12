@@ -8,6 +8,7 @@ import Cursor, { StageData } from './ui/cursor/Cursor';
 import OuterMenu from './ui/outerMenu/OuterMenu';
 import ClickMask from './ui/clickMask/ClickMask';
 import { Menu } from './store/types';
+import StaticItems from './ui/staticItems/StaticItems';
 
 type GameContentProps = {
   menu: Menu;
@@ -19,6 +20,7 @@ const GameContent = ({ menu }: GameContentProps) => {
       <Viewport />
       <Inventory />
       <MenuComponent />
+      <StaticItems />
       <TextOverlay />
       <ClickMask />
     </>
