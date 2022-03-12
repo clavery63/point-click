@@ -13,7 +13,7 @@ const musicPayload = {
   fileName: 'light.mp3',
 };
 
-const Torche = () => {
+const Torch = () => {
   const dispatch = useDispatch();
   const torchImg = useSelector(({ images }) => images.get('flame-1'));
 
@@ -44,4 +44,4 @@ const Torche = () => {
   );
 };
 
-export default Torche;
+export default Torch;
