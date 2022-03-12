@@ -25,8 +25,7 @@ const generateKey = (gameState: GameState) => {
     return 0;
   }
 
-  // -2 becuase we have the bag with id 9999. That will eventually cause a bug...
-  return keys[keys.length - 2] + 1;
+  return keys[keys.length - 1] + 1;
 };
 
 const match = {

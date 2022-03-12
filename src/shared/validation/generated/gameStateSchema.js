@@ -439,6 +439,12 @@ const gameStateSchema = {
               "type": "null"
             }
           ]
+        },
+        "time": {
+          "type": "number"
+        },
+        "timeEffect": {
+          "$ref": "#/definitions/TimeEffect"
         }
       },
       "required": [
@@ -446,6 +452,21 @@ const gameStateSchema = {
         "id",
         "name",
         "type"
+      ]
+    },
+    "TimeEffect": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "number"
+        },
+        "effect": {
+          "$ref": "#/definitions/VerbLogic"
+        }
+      },
+      "required": [
+        "effect",
+        "time"
       ]
     },
     "Scenery": {
@@ -575,6 +596,15 @@ const gameStateSchema = {
         },
         "visibleFlag": {
           "type": "string"
+        },
+        "static": {
+          "type": "boolean"
+        },
+        "time": {
+          "type": "number"
+        },
+        "timeEffect": {
+          "$ref": "#/definitions/TimeEffect"
         }
       },
       "required": [
@@ -681,16 +711,12 @@ const gameStateSchema = {
         },
         "page": {
           "type": "number"
-        },
-        "timer": {
-          "type": "number"
         }
       },
       "required": [
         "items",
         "page",
         "room",
-        "timer",
         "verb"
       ]
     }

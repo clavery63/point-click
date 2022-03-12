@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'shared/hooks';
 
 const SPRITE_WIDTH = 16;
 
-const bagSelector = ({ images, playerState }: GameStoreState) => {
+const bagSelector = ({ images, worldState }: GameStoreState) => {
   return {
     bagImg: images.get('bag'),
-    bagLevel: playerState.timer,
+    bagLevel: worldState.entities[74].time ?? 0,
   };
 };
 

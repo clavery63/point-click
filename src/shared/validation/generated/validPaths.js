@@ -52,8 +52,5 @@ export const numberPaths = [
   },
   {
     "value": "playerState.page"
-  },
-  {
-    "value": "playerState.timer"
   }
 ];

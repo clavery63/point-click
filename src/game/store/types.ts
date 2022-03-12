@@ -121,6 +121,13 @@ export interface Item {
   requiresPrecision?: boolean;
   verbs?: VerbMappings;
   contains: Nullable<number[]>;
+  time?: number;
+  timeEffect?: TimeEffect;
+}
+
+interface TimeEffect {
+  time: number;
+  effect: VerbLogic;
 }
 
 export interface Scenery {
@@ -139,6 +146,9 @@ export interface Scenery {
   trigger?: VerbIndex;
   movedText?: string;
   visibleFlag?: string;
+  static?: boolean;
+  time?: number;
+  timeEffect?: TimeEffect;
 }
 
 export interface Room {
@@ -165,7 +175,6 @@ export interface PlayerState {
   room: number;
   items: number[];
   page: number;
-  timer: number;
 }
 
 export type Flags = string[];
