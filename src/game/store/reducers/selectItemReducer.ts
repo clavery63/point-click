@@ -15,7 +15,7 @@ const takeReducer: ItemReducer = (item, playerState) => {
   );
 };
 
-const useReducer: ItemReducer = ({ id }) => compose(
+export const useReducer: ItemReducer = ({ id }) => compose(
   withText('What would you like to use this on?'),
   setValue('playerState.using')(id),
 );
