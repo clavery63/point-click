@@ -6,6 +6,7 @@ import { withText, setValue } from './utils';
 const BAG_ID = 9999;
 
 const getText = (bagLevel: number) => {
+  // TODO NOW: all of this stuff comes from the LOOK generic verb for this item
   if (bagLevel < 2) {
     return 'It\'s your bag. You must take care to empty it every now and then. Otherwise, bad things can happen.';
   } if (bagLevel < 5) {

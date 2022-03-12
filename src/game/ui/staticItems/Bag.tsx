@@ -8,6 +8,7 @@ const SPRITE_WIDTH = 16;
 const bagSelector = ({ images, playerState }: GameStoreState) => {
   return {
     bagImg: images.get('bag'),
+    // TODO NOW: this should actually be the item-specific timer
     bagLevel: playerState.timer,
   };
 };

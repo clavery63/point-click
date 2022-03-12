@@ -21,6 +21,8 @@ const Torch = () => {
   const x = X_OFFSET + flip * WIDTH;
   const scaleX = 1 + flip * -2;
 
+  // TODO NOW: This is a "capability" that an item can have
+  // I know it's absurdly specific, but we're going to run with it for now
   useEffect(() => {
     const interval = setInterval(() => {
       setFlip(Math.floor(Math.random() * 2));
