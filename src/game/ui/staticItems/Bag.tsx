@@ -3,9 +3,7 @@ import { Image } from 'shared/components/tappables';
 import { GameStoreState } from 'game/store/types';
 import { useDispatch, useSelector } from 'shared/hooks';
 
-const SHEET_WIDTH = 5;
 const SPRITE_WIDTH = 16;
-const SPRITE_HEIGHT = 20;
 
 const bagSelector = ({ images, playerState }: GameStoreState) => {
   return {
@@ -19,17 +17,15 @@ const Bag = () => {
   const dispatch = useDispatch();
   return (
     <Image
-      x={88}
-      y={8}
+      x={225}
+      y={24}
       width={SPRITE_WIDTH}
-      height={SPRITE_HEIGHT}
       image={bagImg}
       onClick={() => dispatch({ type: 'SELECT_BAG', payload: bagLevel })}
       crop={{
-        x: (bagLevel % SHEET_WIDTH) * SPRITE_WIDTH,
-        y: Math.floor(bagLevel / SHEET_WIDTH) * SPRITE_HEIGHT,
+        x: bagLevel * SPRITE_WIDTH,
         width: SPRITE_WIDTH,
-        height: SPRITE_HEIGHT,
+        height: bagImg?.height,
       }}
     />
   );

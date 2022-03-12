@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'shared/hooks';
 
 const WIDTH = 10;
 const HEIGHT = 16;
-const X_OFFSET = 6;
-const Y_OFFSET = 3;
+const X_OFFSET = 143;
+const Y_OFFSET = 19;
 const MS_PER_FRAME = 40;
 
 const musicPayload = {
@@ -13,7 +13,7 @@ const musicPayload = {
   fileName: 'light.mp3',
 };
 
-const Torches = () => {
+const Torch = () => {
   const dispatch = useDispatch();
   const torchImg = useSelector(({ images }) => images.get('flame-1'));
 
@@ -44,4 +44,4 @@ const Torches = () => {
   );
 };
 
-export default Torches;
+export default Torch;
