@@ -21,7 +21,6 @@ const defaultState: GameStoreState = {
     examining: null,
     room: 0,
     items: [],
-    timer: 0,
     page: 0,
   },
   worldState: {

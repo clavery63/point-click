@@ -8,7 +8,7 @@ import range from 'lodash/range';
 import { ofType } from 'redux-observable';
 import { isOfType } from 'typesafe-actions';
 import { AllActions, MyEpic } from './types';
-import { DoorDir, GameStoreState } from '../types';
+import { GameStoreState } from '../types';
 import { ActionsType } from '../reducers/rootReducer';
 import { when } from './util';
 
@@ -27,14 +27,25 @@ const getAction$ = (dest: number) => (frame: number) => {
 type TextRunner = (t: string) => Observable<ActionsType['SET_TEXT']>;
 type DispatchRoom = (d: number, s: GameStoreState, r: TextRunner) => Observable<AllActions>;
 const dispatchRoom: DispatchRoom = (dest, state, runText$) => {
-  const { worldState, playerState } = state;
+  const { worldState } = state;
   const room = worldState.rooms[dest];
   if (!room.description) {
     return of({ type: 'NULL' });
   }
 
-  if (playerState.timer === 17) {
-    return of({ type: 'RUN_TRANSITION', payload: { dest: 11, dir: DoorDir.FORWARD, frame: 0 } });
+  // eslint-disable-next-line no-restricted-syntax
+  for (const entity of Object.values(worldState.entities)) {
+    const effect = entity.timeEffect?.effect;
+    if (effect?.moveTo && effect?.moveDir) {
+      return of({
+        type: 'RUN_TRANSITION',
+        payload: {
+          dest: effect?.moveTo,
+          dir: effect?.moveDir,
+          frame: 0,
+        },
+      });
+    }
   }
 
   return concat(

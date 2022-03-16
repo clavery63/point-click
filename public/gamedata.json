@@ -1050,11 +1050,19 @@
         "position": { "left": 0, "top": 0 },
         "verbs": { "0": [], "1": [{ "text": "does this override it?" }] }
       },
-      "9999": {
+      "74": {
         "name": "bag",
         "description": "Your bag",
-        "id": 9999,
-        "type": "items"
+        "id": 74,
+        "type": "items",
+        "static": true,
+        "timeEffect": {
+          "time": 17,
+          "effect": {
+            "moveTo": 11,
+            "moveDir": "FORWARD"
+          }
+        }
       }
     }
   },
@@ -1064,8 +1072,7 @@
     "examining": null,
     "room": 0,
     "items": [],
-    "page": 0,
-    "timer": 0
+    "page": 0
   },
   "images": {
     "bartender": {},

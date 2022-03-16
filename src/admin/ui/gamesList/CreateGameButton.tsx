@@ -27,7 +27,6 @@ const defaultGame: GameState = {
     verb: 0 as VerbIndex,
     room: 0,
     page: 0,
-    timer: 0,
     examining: null,
     items: [],
   },
