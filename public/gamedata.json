@@ -901,7 +901,7 @@
               "effects": [
                 {
                   "action": "SET_NUMBER_VALUE",
-                  "path": "playerState.timer",
+                  "path": "worldState.entities[74].time",
                   "value": 0
                 }
               ]

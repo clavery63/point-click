@@ -1,5 +1,11 @@
 export const numberPaths = [
   {
+    "value": "transition.dest"
+  },
+  {
+    "value": "transition.frame"
+  },
+  {
     "texts": [
       "worldState.doors[",
       "].dest"
@@ -37,6 +43,15 @@ export const numberPaths = [
   },
   {
     "texts": [
+      "worldState.doors[",
+      "].keyId"
+    ],
+    "types": [
+      "number"
+    ]
+  },
+  {
+    "texts": [
       "worldState.entities[",
       "].id"
     ],
@@ -45,7 +60,22 @@ export const numberPaths = [
     ]
   },
   {
+    "texts": [
+      "worldState.entities[",
+      "].time"
+    ],
+    "types": [
+      "number"
+    ]
+  },
+  {
     "value": "playerState.verb"
+  },
+  {
+    "value": "playerState.using"
+  },
+  {
+    "value": "playerState.examining"
   },
   {
     "value": "playerState.room"

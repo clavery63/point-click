@@ -78,5 +78,5 @@ export type ValueUpdater<Override = string> = {
 // this directly from the NumberPath type.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface ValidationCreator {
-  numberPath: ValidPathsFor<number>;
+  numberPath: ValidPathsFor<Nullable<number>>;
 }
