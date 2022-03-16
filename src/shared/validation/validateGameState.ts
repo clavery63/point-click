@@ -19,7 +19,7 @@ const constructRegExp = (type: ValidPath) => {
 
   const regExpString = (type.texts || [''])
     .map(escapeRegExp)
-    .join('\\d');
+    .join('\\d*');
 
   return new RegExp(`^${regExpString}$`);
 };
