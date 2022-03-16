@@ -35,8 +35,11 @@ const dispatchRoom: DispatchRoom = (dest, state, runText$) => {
 
   // eslint-disable-next-line no-restricted-syntax
   for (const entity of Object.values(worldState.entities)) {
-    const effect = entity.timeEffect?.effect;
-    if (effect?.moveTo && effect?.moveDir) {
+    const { effect, time } = entity.timeEffect ?? {};
+    if (!entity.time || !time || !effect?.moveTo || !effect?.moveDir) {
+      continue;
+    }
+    if (entity.time === time) {
       return of({
         type: 'RUN_TRANSITION',
         payload: {
