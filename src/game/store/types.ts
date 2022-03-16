@@ -82,13 +82,13 @@ export interface Effect {
   value: number;
 }
 
-enum Operator {
+export enum Operator {
   LT = 'LT',
   EQ = 'EQ',
   GT = 'GT'
 }
 
-interface Condition {
+export interface Condition {
   // TODO: entity-level NumberPath?
   field: string;
   operator: Operator;

@@ -16,6 +16,10 @@ const takeReducer: ItemReducer = (item, playerState) => {
 };
 
 export const useReducer: ItemReducer = ({ id }) => compose(
+  // TODO NOW: allow custom text here, for example with the bag:
+  // "'So you\'ve decided to use your bag... What would you like to use it on?'"
+  // Also should be able to have custom default text:
+  // eg: "'That is not something you can do with your bag.'"
   withText('What would you like to use this on?'),
   setValue('playerState.using')(id),
 );
