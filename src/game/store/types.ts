@@ -82,6 +82,19 @@ export interface Effect {
   value: number;
 }
 
+enum Operator {
+  LT = 'LT',
+  EQ = 'EQ',
+  GT = 'GT'
+}
+
+interface Condition {
+  // TODO: entity-level NumberPath?
+  field: string;
+  operator: Operator;
+  value: number;
+}
+
 export interface VerbLogic {
   text?: string;
   moveTo?: number;
@@ -91,6 +104,7 @@ export interface VerbLogic {
   prereqFlags?: string[];
   prereqUsing?: number;
   effects?: Effect[];
+  condition?: Condition;
 }
 
 export type VerbMappings = {

@@ -1056,6 +1056,61 @@
         "id": 74,
         "type": "items",
         "static": true,
+        "verbs": {
+          "1": [
+            {
+              "text": "It's your bag. You must take care to empty it every now and then. Otherwise, bad things can happen.",
+              "condition": {
+                "field": "time",
+                "operator": "LT",
+                "value": 2
+              }
+            },
+            {
+              "text": "Ah, your bag. Still a long way to go before it poses any threat.",
+              "condition": {
+                "field": "time",
+                "operator": "LT",
+                "value": 5
+              }
+            },
+            {
+              "text": "Your bag is filling up faster than you expected. You had better find some place to empty it!",
+              "condition": {
+                "field": "time",
+                "operator": "LT",
+                "value": 8
+              }
+            },
+            {
+              "text": "You don't know and frankly don't want to know what will happen if the bag ruptures",
+              "condition": {
+                "field": "time",
+                "operator": "LT",
+                "value": 11
+              }
+            },
+            {
+              "text": "The bag contains near-critical levels of piss. If you don't empty it soon, it will explode, I guess?",
+              "condition": {
+                "field": "time",
+                "operator": "LT",
+                "value": 13
+              }
+            },
+            {
+              "text": "Not much time left... Empty your bag now!",
+              "condition": {
+                "field": "time",
+                "operator": "LT",
+                "value": 17
+              }
+            },
+            {
+              "text": "It's going to burst any second!"
+            }
+          ]
+        },
         "timeEffect": {
           "time": 17,
           "effect": {

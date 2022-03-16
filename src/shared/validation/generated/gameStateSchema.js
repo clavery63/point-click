@@ -306,6 +306,9 @@ const gameStateSchema = {
           "items": {
             "$ref": "#/definitions/Effect"
           }
+        },
+        "condition": {
+          "$ref": "#/definitions/Condition"
         }
       }
     },
@@ -331,6 +334,33 @@ const gameStateSchema = {
         "path",
         "value"
       ]
+    },
+    "Condition": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "operator": {
+          "$ref": "#/definitions/Operator"
+        },
+        "value": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "field",
+        "operator",
+        "value"
+      ]
+    },
+    "Operator": {
+      "enum": [
+        "EQ",
+        "GT",
+        "LT"
+      ],
+      "type": "string"
     },
     "Item": {
       "type": "object",

@@ -1,19 +1,12 @@
 import React from 'react';
 import { Image } from 'shared/components/tappables';
-import { GameStoreState } from 'game/store/types';
 import { useDispatch, useSelector } from 'shared/hooks';
 
 const SPRITE_WIDTH = 16;
 
-const bagSelector = ({ images, worldState }: GameStoreState) => {
-  return {
-    bagImg: images.get('bag'),
-    bagLevel: worldState.entities[74].time ?? 0,
-  };
-};
-
 const Bag = () => {
-  const { bagLevel, bagImg } = useSelector(bagSelector);
+  const bagImg = useSelector(({ images }) => images.get('bag'));
+  const time = useSelector(({ worldState }) => worldState.entities[74].time);
   const dispatch = useDispatch();
   return (
     <Image
@@ -21,9 +14,9 @@ const Bag = () => {
       y={24}
       width={SPRITE_WIDTH}
       image={bagImg}
-      onClick={() => dispatch({ type: 'SELECT_BAG', payload: bagLevel })}
+      onClick={() => dispatch({ type: 'SELECT_ITEM', payload: 74 })}
       crop={{
-        x: bagLevel * SPRITE_WIDTH,
+        x: (time ?? 0) * SPRITE_WIDTH,
         width: SPRITE_WIDTH,
         height: bagImg?.height,
       }}

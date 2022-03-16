@@ -3,7 +3,6 @@ import { ParentReducer } from 'shared/util/types';
 import { selectEntityReducer, selectDoorReducer } from './selectObjectReducer';
 import selectVerbReducer from './selectVerbReducer';
 import selectItemReducer from './selectItemReducer';
-import selectBagReducer from './selectBagReducer';
 import setPositionReducer from './setPositionReducer';
 import changePageReducer from './changePageReducer';
 import roomReducer from './roomReducer';
@@ -35,7 +34,6 @@ type ActionTypes = {
   SELECT_OBJECT: number;
   SELECT_DOOR: number;
   SELECT_ITEM: number;
-  SELECT_BAG: number;
   CHANGE_PAGE: PageDir;
   SET_MENU: Menu;
   SET_GAME_NAME: string;
@@ -72,7 +70,6 @@ const selectVerb: ParentReducer<VerbIndex> = selectVerbReducer;
 const selectObject: ParentReducer<number> = selectEntityReducer;
 const selectDoor: ParentReducer<number> = selectDoorReducer;
 const selectItem: ParentReducer<number> = selectItemReducer;
-const selectBag: ParentReducer<number> = selectBagReducer;
 const changePage: ParentReducer<PageDir> = changePageReducer;
 const setMenu: ParentReducer<Menu> = setValue('menu');
 const setGameName: ParentReducer<string> = setValue('gameName');
@@ -127,8 +124,6 @@ const rootReducer: ReduxReducer<
       return applyReducer(selectDoor, state, action.payload);
     case 'SELECT_ITEM':
       return applyReducer(selectItem, state, action.payload);
-    case 'SELECT_BAG':
-      return applyReducer(selectBag, state, action.payload);
     case 'CHANGE_PAGE':
       return applyReducer(changePage, state, action.payload);
     case 'SET_MENU':
