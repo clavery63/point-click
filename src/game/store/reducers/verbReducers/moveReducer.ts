@@ -19,6 +19,12 @@ const moveReducer: EntityReducer = (object, _p, _f) => {
   if (object.type === 'doors') {
     return doorReducer(object, _p, _f);
   }
+  // TODO: No reason entities can't respond to move as well.
+  // Can we make this just use generic reducer?
+  // - One hack would just be to make DoorState auto-generated flag (e.g. DOOR_1_OPEN).
+  //   Not necessarily the craziest thing in the world (we can abstract this in the editor tool)
+  // - Another big idea would be to introduce arbitrary, user-controled variables on all entities
+  //   Which we would also abstract away in the editor tool for doors
   return withText('You can\'t do that!');
 };
 

@@ -3,7 +3,7 @@ import { ParentReducer } from 'shared/util/types';
 import { VerbIndex } from '../types';
 import { withText, setValue } from './utils';
 
-const BAG_ID = 9999;
+const BAG_ID = 74;
 
 const getText = (bagLevel: number) => {
   // TODO NOW: all of this stuff comes from the LOOK generic verb for this item
