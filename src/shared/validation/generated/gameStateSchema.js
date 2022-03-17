@@ -386,6 +386,9 @@ const gameStateSchema = {
         "img": {
           "type": "string"
         },
+        "imgSet": {
+          "$ref": "#/definitions/ImgSet"
+        },
         "onTake": {
           "type": "string"
         },
@@ -470,6 +473,9 @@ const gameStateSchema = {
             }
           ]
         },
+        "isStatic": {
+          "type": "boolean"
+        },
         "time": {
           "type": "number"
         },
@@ -482,6 +488,40 @@ const gameStateSchema = {
         "id",
         "name",
         "type"
+      ]
+    },
+    "ImgSet": {
+      "type": "object",
+      "properties": {
+        "img": {
+          "type": "string"
+        },
+        "width": {
+          "type": "number"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "number"
+              },
+              "condition": {
+                "$ref": "#/definitions/Condition"
+              }
+            },
+            "required": [
+              "condition",
+              "index"
+            ]
+          }
+        }
+      },
+      "required": [
+        "conditions",
+        "img",
+        "width"
       ]
     },
     "TimeEffect": {
@@ -627,7 +667,7 @@ const gameStateSchema = {
         "visibleFlag": {
           "type": "string"
         },
-        "static": {
+        "isStatic": {
           "type": "boolean"
         },
         "time": {

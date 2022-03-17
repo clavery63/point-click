@@ -121,6 +121,15 @@ export type VerbMappings = {
 
 export type VerbIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
+interface ImgSet {
+  img: string;
+  width: number;
+  conditions: {
+    index: number;
+    condition: Condition;
+  }[];
+}
+
 export interface Item {
   type: 'items';
   id: number;
@@ -128,6 +137,7 @@ export interface Item {
   description: string;
   position?: Position;
   img?: string;
+  imgSet?: ImgSet;
   // TODO: see if this can use genericVerbReducer
   onTake?: string;
   takeableFlag?: string;
@@ -135,6 +145,7 @@ export interface Item {
   requiresPrecision?: boolean;
   verbs?: VerbMappings;
   contains: Nullable<number[]>;
+  isStatic?: boolean;
   time?: number;
   timeEffect?: TimeEffect;
 }
@@ -160,7 +171,7 @@ export interface Scenery {
   trigger?: VerbIndex;
   movedText?: string;
   visibleFlag?: string;
-  static?: boolean;
+  isStatic?: boolean;
   time?: number;
   timeEffect?: TimeEffect;
 }
