@@ -2,6 +2,7 @@ import { Item } from 'game/store/types';
 import React, { useEffect } from 'react';
 import { Image } from 'shared/components/tappables';
 import { useSelector } from 'shared/hooks/redux';
+import useCapabilities from 'shared/hooks/useCapabilities';
 import { getValidCondition } from 'shared/util/conditionValid';
 
 // TODO: clean this up. maybe put imgSet version in its own component
@@ -21,6 +22,8 @@ const ItemComponent = ({ item, onClick }: Props) => {
   const condition = imgSet && getValidCondition(imgSet.conditions, item);
   const index = condition?.index;
 
+  const { x, scaleX } = useCapabilities(item, image);
+
   useEffect(() => {
     if (requiresPrecision) {
       // TODO: make cloudfront cross origin. otherwise Konva can't tolerate this
@@ -32,7 +35,8 @@ const ItemComponent = ({ item, onClick }: Props) => {
   return (
     <Image
       ref={imgRef}
-      x={position?.left}
+      x={x}
+      scaleX={scaleX}
       y={position?.top}
       width={imgSet?.width || image?.width}
       height={image?.height}
