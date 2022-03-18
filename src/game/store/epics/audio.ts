@@ -12,17 +12,33 @@ import { ReducerActions } from '../reducers/rootReducer';
 // TODO: derive the gameName part from state$
 const audioAssetsRoot = `${process.env.REACT_APP_ASSETS_BASE}/test-game/audio`;
 
+const updateMusic = (fileName?: string) => {
+  const player = document.querySelector('.music-player') as HTMLAudioElement;
+
+  console.log('fileName:', fileName);
+  console.log('player.src:', player.src);
+
+  if (`${audioAssetsRoot}/${fileName}` === player.src) {
+    // src is unchanged, so continue playing this song
+    return;
+  }
+
+  if (fileName) {
+    player.src = `${audioAssetsRoot}/${fileName}`;
+    player.play();
+  } else {
+    player.src = '';
+    player.pause();
+  }
+};
+
 const audio$: MyEpic = (action$, state$, { runText$ }) => {
   const music$: Observable<ReducerActions> = action$.pipe(
     filter(isOfType('PLAY_MUSIC')),
     switchMap(({ payload }) => concat(
       payload.text ? runText$(payload.text) : EMPTY,
       of<ReducerActions>({ type: 'NULL' }).pipe(
-        tap(() => {
-          const player = document.querySelector('.music-player') as HTMLAudioElement;
-          player.src = `${audioAssetsRoot}/${payload.fileName}`;
-          player.play();
-        }),
+        tap(() => updateMusic(payload.fileName)),
       ),
     )),
   );

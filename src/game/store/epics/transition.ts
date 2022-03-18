@@ -1,8 +1,8 @@
 import {
-  mapTo, switchMap, mergeMap, concatMap, withLatestFrom, take, filter,
+  mapTo, switchMap, mergeMap, concatMap, withLatestFrom, take, filter, switchMapTo,
 } from 'rxjs/operators';
 import {
-  from, timer, concat, of, NEVER, Observable,
+  from, timer, concat, of, Observable,
 } from 'rxjs';
 import range from 'lodash/range';
 import { ofType } from 'redux-observable';
@@ -52,7 +52,7 @@ const dispatchRoom: DispatchRoom = (dest, state, runText$) => {
   }
 
   return concat(
-    of(when(!!room.music, {
+    of(when(true, {
       type: 'PLAY_MUSIC',
       payload: {
         fileName: room.music,
@@ -66,18 +66,19 @@ type CheckGameOver = (d: number, s: GameStoreState, p: Observable<any>) => Obser
 const checkGameOver: CheckGameOver = (dest, state, pageClick$) => {
   const { worldState } = state;
   const room = worldState.rooms[dest];
-  if (!room.gameOver) {
-    return NEVER;
-  }
 
   return pageClick$.pipe(
-    // TODO: yeah, you're reading this right. using that `when` function as a passthru
-    // Allows the typechecker to confirm this is valid. Find a better way? :(
-    mapTo(when(true, {
-      type: 'SET_MENU',
-      payload: 'GAME_OVER',
-    })),
-    take(1),
+    switchMapTo(from([
+      when(!!room.gameOver, {
+        type: 'SET_MENU',
+        payload: 'GAME_OVER',
+      }),
+      when(!!room.gameOver, {
+        type: 'PLAY_MUSIC',
+        payload: {},
+      }),
+    ])),
+    take(2),
   );
 };
 

@@ -33,10 +33,8 @@ const loadPlayerAndGameState$: LoadState = initialState => {
   );
 };
 
-const setAudioSrc = (state: GameStoreState) => {
-  const audioRoot = `${assetsBase}/${state.gameName}/audio`;
+const setAudioSrc = () => {
   const sharedAudioRoot = `${sharedAssetsBase}/audio`;
-  const initialRoom = state.worldState.rooms[state.playerState.room];
 
   // Crazy hack that causes <audio> el behavior to improve wrt loading and
   // replaying srcs. Without it, there are hiccups in sfx sounds
@@ -44,11 +42,6 @@ const setAudioSrc = (state: GameStoreState) => {
   // const AudioContext = window.AudioContext || window.webkitAudioContext;
   // eslint-disable-next-line no-new
   new AudioContext();
-
-  const musicPlayer = document.querySelector('.music-player') as HTMLAudioElement;
-  if (musicPlayer) {
-    musicPlayer.src = `${audioRoot}/${initialRoom.music ?? ''}`;
-  }
 
   const sfxPlayer = document.querySelector('.sfx-player') as HTMLAudioElement;
   if (sfxPlayer) {

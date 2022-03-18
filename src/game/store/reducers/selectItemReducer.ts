@@ -36,6 +36,8 @@ const getReducer: GetReducer = (verb, item) => {
       return takeReducer;
     case 4:
       return genericVerbReducer(4, () => 'Smoking that would be ill-advised!');
+    case 6:
+      return genericVerbReducer(6, () => 'test this eating thing');
     case 1:
       return lookReducer(item.description);
     default:
