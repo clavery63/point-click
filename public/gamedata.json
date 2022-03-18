@@ -1277,6 +1277,27 @@
             "moveDir": "FORWARD"
           }
         }
+      },
+      "75": {
+        "name": "flame",
+        "img": "flame-1",
+        "startPosition": { "left": 143, "top": 19 },
+        "static": true,
+        "verbs": {
+          "3": [
+            {
+              "text": "With all the antics going on in this crazy castle, the last thing you need to worry about is this torch going out. Lucky for you, that won't be a problem. This is an eternal torch... It is a light that never goes out.",
+              "effects": [
+                {
+                  "action": "SET_MUSIC",
+                  "value": "light.mp3"
+                }
+              ]
+            }
+          ]
+        },
+        "id": 75,
+        "type": "items"
       }
     }
   },

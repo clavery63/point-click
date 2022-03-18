@@ -304,36 +304,54 @@ const gameStateSchema = {
         "effects": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Effect"
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "SET_NUMBER_VALUE"
+                    ]
+                  },
+                  "path": {
+                    "type": "path-number"
+                  },
+                  "value": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "action",
+                  "path",
+                  "value"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "SET_MUSIC"
+                    ]
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "action",
+                  "value"
+                ]
+              }
+            ]
           }
         },
         "condition": {
           "$ref": "#/definitions/Condition"
         }
       }
-    },
-    "Effect": {
-      "type": "object",
-      "properties": {
-        "action": {
-          "type": "string",
-          "enum": [
-            "SET_NUMBER_VALUE"
-          ]
-        },
-        "path": {
-          "type": "string",
-          "ValuePath": "number"
-        },
-        "value": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "action",
-        "path",
-        "value"
-      ]
     },
     "Condition": {
       "type": "object",

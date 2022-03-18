@@ -10,7 +10,10 @@ const defaultState: GameStoreState = {
     dest: null,
     dir: DoorDir.FORWARD,
   },
-  nextText: '',
+  transient: {
+    nextText: '',
+    nextMusic: null,
+  },
   text: null,
   loading: true,
   cursorEnabled: false,

@@ -46,7 +46,7 @@ export const combineReducers: CombineReducers = (...reducers) => (...args) => {
 
 export const clearValue = (path: NullablePath) => setValue(path)(null);
 
-export const withText = setValue('nextText');
+export const withText = setValue('transient.nextText');
 
 export const keepState: EmptyReducer = () => state => state;
 

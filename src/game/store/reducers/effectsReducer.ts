@@ -4,10 +4,12 @@ import { Effect, VerbLogic } from '../types';
 import { setValue, keepState } from './utils';
 
 type RunEffect = (e: Effect) => StateTransformer;
-const runEffect: RunEffect = ({ action, path, value }) => {
-  switch (action) {
+const runEffect: RunEffect = effect => {
+  switch (effect.action) {
     case 'SET_NUMBER_VALUE':
-      return setValue(path)(value);
+      return setValue(effect.path)(effect.value);
+    case 'SET_MUSIC':
+      return setValue('transient.nextMusic')(effect.value);
     default:
       return keepState();
   }

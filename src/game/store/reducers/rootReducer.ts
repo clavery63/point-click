@@ -24,12 +24,14 @@ type ActionTypes = {
   SET_PLAYER_STATE: PlayerState;
   SET_FLAGS: Flags;
   SET_TEXT: Nullable<string[]>;
+  SET_NEXT_MUSIC: Nullable<string>;
   SET_ROOM: number;
   SET_FRAME: number;
   SET_CURSOR_ENABLED: boolean;
   SET_POSITION: PositionType;
   CLEAR_NEXT_TEXT: null;
   CLEAR_TRANSITION_DEST: null;
+  CLEAR_NEXT_MUSIC: null;
   SELECT_VERB: VerbIndex;
   SELECT_OBJECT: number;
   SELECT_DOOR: number;
@@ -64,7 +66,9 @@ const setRoom: ParentReducer<number> = roomReducer;
 const setFrame: ParentReducer<number> = setValue('transition.frame');
 const setCursorEnabled: ParentReducer<boolean> = setValue('cursorEnabled');
 const setPosition: ParentReducer<PositionType> = setPositionReducer;
-const clearNextText: ParentReducer<null> = () => clearValue('nextText');
+const clearNextText: ParentReducer<null> = () => clearValue('transient.nextText');
+const setNextMusic: ParentReducer<Nullable<string>> = setValue('transient.nextMusic');
+const clearNextMusic: ParentReducer<null> = () => clearValue('transient.nextMusic');
 const clearTransitionDest: ParentReducer<null> = () => clearValue('transition.dest');
 const selectVerb: ParentReducer<VerbIndex> = selectVerbReducer;
 const selectObject: ParentReducer<number> = selectEntityReducer;
@@ -104,6 +108,10 @@ const rootReducer: ReduxReducer<
       return applyReducer(setFlags, state, action.payload);
     case 'SET_TEXT':
       return applyReducer(setText, state, action.payload);
+    case 'SET_NEXT_MUSIC':
+      return applyReducer(setNextMusic, state, action.payload);
+    case 'CLEAR_NEXT_MUSIC':
+      return applyReducer(clearNextMusic, state, action.payload);
     case 'SET_ROOM':
       return applyReducer(setRoom, state, action.payload);
     case 'SET_FRAME':

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'shared/hooks';
 import Item from '../viewport/Item';
-import Torch from './Torch';
 
 const StaticItems = () => {
   const dispatch = useDispatch();
@@ -10,7 +9,6 @@ const StaticItems = () => {
 
   return (
     <>
-      <Torch />
       {staticEnts.map(entity => {
         if (entity.type !== 'items') {
           return null;

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Image } from 'shared/components/tappables';
 import { useDispatch, useSelector } from 'shared/hooks';
 
-const WIDTH = 10;
-const HEIGHT = 16;
 const X_OFFSET = 143;
 const Y_OFFSET = 19;
 const MS_PER_FRAME = 40;
@@ -18,7 +16,7 @@ const Torch = () => {
   const torchImg = useSelector(({ images }) => images.get('flame-1'));
 
   const [flip, setFlip] = useState(0);
-  const x = X_OFFSET + flip * WIDTH;
+  const x = X_OFFSET + flip * (torchImg?.width ?? 0);
   const scaleX = 1 + flip * -2;
 
   // TODO NEXT: This is a "capability" that an item can have
@@ -34,8 +32,8 @@ const Torch = () => {
     <Image
       x={x}
       y={Y_OFFSET}
-      width={WIDTH}
-      height={HEIGHT}
+      width={torchImg?.width}
+      height={torchImg?.height}
       image={torchImg}
       scaleX={scaleX}
       onClick={() => dispatch({

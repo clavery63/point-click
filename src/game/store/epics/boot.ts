@@ -34,7 +34,10 @@ const initializeGame: InitializeGame = bootInfo => ({
     dir: DoorDir.UP, // TODO: cleanup transition type requirement
   },
   text: null,
-  nextText: null,
+  transient: {
+    nextText: null,
+    nextMusic: null,
+  },
   loading: false,
   menu: bootInfo.menu || 'MAIN',
   cursorEnabled: true,

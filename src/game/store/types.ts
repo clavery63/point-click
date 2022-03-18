@@ -71,16 +71,17 @@ export interface Door {
   verbs?: VerbMappings;
 }
 
-// NOTE: This will probably eventually be a union type with different effects,
-// If we actually want to expand this idea. Very hard-coded
-export interface Effect {
+export type Effect = {
   action: 'SET_NUMBER_VALUE';
   /**
    * @type path-number
    */
   path: NumberPath;
   value: number;
-}
+} | {
+  action: 'SET_MUSIC';
+  value: string;
+};
 
 export enum Operator {
   LT = 'LT',
@@ -219,8 +220,11 @@ export interface GameStoreState extends GameState {
     dir: DoorDir;
     frame?: number;
   };
+  transient: {
+    nextText: Nullable<string>;
+    nextMusic: Nullable<string>;
+  };
   text: Nullable<string[]>;
-  nextText: Nullable<string>;
   loading: boolean;
   menu: Menu;
   cursorEnabled: boolean;

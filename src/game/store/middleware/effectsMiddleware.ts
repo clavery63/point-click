@@ -8,10 +8,14 @@ const effectsMiddleware: Middleware<
 > = store => next => action => {
   const result = next(action);
   const state = store.getState();
-  const { nextText, transition } = state;
-  if (nextText) {
+  const { transient, transition } = state;
+  if (transient.nextText) {
     store.dispatch({ type: 'CLEAR_NEXT_TEXT' });
-    store.dispatch({ type: 'RUN_TEXT', payload: nextText });
+    store.dispatch({ type: 'RUN_TEXT', payload: transient.nextText });
+  }
+  if (transient.nextMusic) {
+    store.dispatch({ type: 'CLEAR_NEXT_MUSIC' });
+    store.dispatch({ type: 'PLAY_MUSIC', payload: transient.nextMusic });
   }
   if (get(transition, 'dest', null) !== null) {
     store.dispatch({ type: 'CLEAR_TRANSITION_DEST' });
