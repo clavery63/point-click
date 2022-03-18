@@ -1284,6 +1284,7 @@
         "description": "Can't read this",
         "position": { "left": 143, "top": 19 },
         "isStatic": true,
+        "capabilities": ["RAND_HORIZ"],
         "verbs": {
           "1": [
             {

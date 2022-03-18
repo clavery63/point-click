@@ -139,6 +139,15 @@ interface ImgSet {
   }[];
 }
 
+/**
+ * README:
+ *
+ * This is where I'm defining really specific things entities can do that require
+ * custom code. It's not great, but it allows us to continue avoiding referencing
+ * any specific entities in the engine itself.
+ */
+type Capability = 'RAND_HORIZ';
+
 export interface Item {
   type: 'items';
   id: number;
@@ -157,6 +166,7 @@ export interface Item {
   isStatic?: boolean;
   time?: number;
   timeEffect?: TimeEffect;
+  capabilities?: Capability[];
 }
 
 interface TimeEffect {

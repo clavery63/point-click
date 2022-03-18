@@ -511,6 +511,15 @@ const gameStateSchema = {
         },
         "timeEffect": {
           "$ref": "#/definitions/TimeEffect"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "RAND_HORIZ"
+            ]
+          }
         }
       },
       "required": [
