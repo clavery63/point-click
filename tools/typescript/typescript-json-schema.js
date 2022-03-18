@@ -29,29 +29,35 @@ const generateGameStateSchema = () => {
 
   const schema = generator.getSchemaForSymbol('GameState');
 
-  const replacePathLiterals = s => Object.entries(s).reduce((acc, [k, v]) => {
-    if (typeof v !== 'object' || Array.isArray(v)) {
-      return { ...acc, [k]: v };
+  const replacePathLiterals = s => {
+    if (Array.isArray(s)) {
+      return s.map(replacePathLiterals);
     }
 
-    if (typeof v.type === 'string') {
-      const [pathKeyword, valueType] = v.type.split('-') || [];
-      if (pathKeyword === 'path' && !!valueType) {
-        return {
-          ...acc,
-          [k]: {
-            type: 'string',
-            ValuePath: valueType,
-          },
-        };
+    if (typeof s !== 'object') {
+      return s;
+    }
+
+    return Object.entries(s).reduce((acc, [k, v]) => {
+      if (typeof v.type === 'string') {
+        const [pathKeyword, valueType] = v.type.split('-') || [];
+        if (pathKeyword === 'path' && !!valueType) {
+          return {
+            ...acc,
+            [k]: {
+              type: 'string',
+              ValuePath: valueType,
+            },
+          };
+        }
       }
-    }
 
-    return {
-      ...acc,
-      [k]: replacePathLiterals(v),
-    };
-  }, {});
+      return {
+        ...acc,
+        [k]: replacePathLiterals(v),
+      };
+    }, {});
+  };
 
   const hackedSchema = replacePathLiterals(schema);
 

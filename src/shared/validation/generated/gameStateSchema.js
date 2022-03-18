@@ -315,7 +315,8 @@ const gameStateSchema = {
                     ]
                   },
                   "path": {
-                    "type": "path-number"
+                    "type": "string",
+                    "ValuePath": "number"
                   },
                   "value": {
                     "type": "number"

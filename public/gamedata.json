@@ -1281,8 +1281,9 @@
       "75": {
         "name": "flame",
         "img": "flame-1",
+        "description": "Can't read this",
         "startPosition": { "left": 143, "top": 19 },
-        "static": true,
+        "isStatic": true,
         "verbs": {
           "3": [
             {
