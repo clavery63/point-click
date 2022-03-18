@@ -12,7 +12,9 @@ const defaultState: GameStoreState = {
   },
   transient: {
     nextText: '',
-    nextMusic: null,
+    nextMusic: {
+      fileName: null,
+    },
   },
   text: null,
   loading: true,

@@ -13,7 +13,7 @@ const effectsMiddleware: Middleware<
     store.dispatch({ type: 'CLEAR_NEXT_TEXT' });
     store.dispatch({ type: 'RUN_TEXT', payload: transient.nextText });
   }
-  if (transient.nextMusic) {
+  if (transient.nextMusic.fileName) {
     store.dispatch({ type: 'CLEAR_NEXT_MUSIC' });
     store.dispatch({ type: 'PLAY_MUSIC', payload: transient.nextMusic });
   }

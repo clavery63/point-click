@@ -7,8 +7,6 @@ const StaticItems = () => {
   const entities = useSelector(state => state.worldState.entities);
   const staticEnts = Object.values(entities).filter(({ isStatic }) => !!isStatic);
 
-  console.log('staticEnts:', staticEnts);
-
   return (
     <>
       {staticEnts.map(entity => {

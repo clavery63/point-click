@@ -49,6 +49,11 @@ export interface MapPosition {
   y: MapCoord;
 }
 
+export interface Music {
+  text?: string;
+  fileName: Nullable<string>;
+}
+
 export interface Door {
   type: 'doors';
   id: number;
@@ -80,7 +85,10 @@ export type Effect = {
   value: number;
 } | {
   action: 'SET_MUSIC';
-  value: string;
+  value: {
+    text?: string;
+    fileName: string;
+  };
 };
 
 export enum Operator {
@@ -222,7 +230,7 @@ export interface GameStoreState extends GameState {
   };
   transient: {
     nextText: Nullable<string>;
-    nextMusic: Nullable<string>;
+    nextMusic: Music;
   };
   text: Nullable<string[]>;
   loading: boolean;

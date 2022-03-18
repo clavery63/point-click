@@ -8,7 +8,7 @@ import changePageReducer from './changePageReducer';
 import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
 import {
-  Flags, GameStoreState, PlayerState, WorldState, Menu, VerbIndex, Nullable, PageDir,
+  Flags, GameStoreState, PlayerState, WorldState, Menu, VerbIndex, Nullable, PageDir, Music,
 } from '../types';
 import defaultState from '../defaultState';
 
@@ -24,7 +24,7 @@ type ActionTypes = {
   SET_PLAYER_STATE: PlayerState;
   SET_FLAGS: Flags;
   SET_TEXT: Nullable<string[]>;
-  SET_NEXT_MUSIC: Nullable<string>;
+  SET_NEXT_MUSIC: Music;
   SET_ROOM: number;
   SET_FRAME: number;
   SET_CURSOR_ENABLED: boolean;
@@ -67,8 +67,8 @@ const setFrame: ParentReducer<number> = setValue('transition.frame');
 const setCursorEnabled: ParentReducer<boolean> = setValue('cursorEnabled');
 const setPosition: ParentReducer<PositionType> = setPositionReducer;
 const clearNextText: ParentReducer<null> = () => clearValue('transient.nextText');
-const setNextMusic: ParentReducer<Nullable<string>> = setValue('transient.nextMusic');
-const clearNextMusic: ParentReducer<null> = () => clearValue('transient.nextMusic');
+const setNextMusic: ParentReducer<Music> = setValue('transient.nextMusic');
+const clearNextMusic: ParentReducer<null> = () => clearValue('transient.nextMusic.fileName');
 const clearTransitionDest: ParentReducer<null> = () => clearValue('transition.dest');
 const selectVerb: ParentReducer<VerbIndex> = selectVerbReducer;
 const selectObject: ParentReducer<number> = selectEntityReducer;

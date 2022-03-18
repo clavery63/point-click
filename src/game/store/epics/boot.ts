@@ -36,7 +36,9 @@ const initializeGame: InitializeGame = bootInfo => ({
   text: null,
   transient: {
     nextText: null,
-    nextMusic: null,
+    nextMusic: {
+      fileName: null,
+    },
   },
   loading: false,
   menu: bootInfo.menu || 'MAIN',

@@ -338,7 +338,18 @@ const gameStateSchema = {
                     ]
                   },
                   "value": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      },
+                      "fileName": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "fileName"
+                    ]
                   }
                 },
                 "required": [
