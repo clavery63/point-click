@@ -2,7 +2,7 @@ import { GameStoreState, Nullable } from 'game/store/types';
 import { Vector2d } from 'konva/types/types';
 import React, { useState, useEffect } from 'react';
 import { Image, Stage } from 'react-konva';
-import { useSelector } from 'shared/hooks';
+import { useSelector } from 'shared/hooks/redux';
 import cursor$ from './cursorStream';
 
 export interface StageData {

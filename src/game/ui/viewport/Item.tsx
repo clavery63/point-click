@@ -1,7 +1,7 @@
 import { Item } from 'game/store/types';
 import React, { useEffect } from 'react';
 import { Image } from 'shared/components/tappables';
-import { useSelector } from 'shared/hooks';
+import { useSelector } from 'shared/hooks/redux';
 import { getValidCondition } from 'shared/util/conditionValid';
 
 // TODO: clean this up. maybe put imgSet version in its own component

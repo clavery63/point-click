@@ -1,7 +1,7 @@
 import React from 'react';
 import { Group, Rect } from 'react-konva';
 import range from 'lodash/range';
-import { useSelector } from 'shared/hooks';
+import { useSelector } from 'shared/hooks/redux';
 import { DoorDir } from 'game/store/types';
 import createGrid, { GRID_SIZE } from './createGrid';
 

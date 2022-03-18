@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, Group } from 'react-konva';
 import { Rect } from 'shared/components/tappables';
-import { useDispatch, useSelector } from 'shared/hooks';
+import { useDispatch, useSelector } from 'shared/hooks/redux';
 import { Item, Nullable } from 'game/store/types';
 import Text from '../shared/Text';
 import inventorySelector from './inventorySelector';

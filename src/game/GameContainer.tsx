@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { ReactReduxContext, Provider } from 'react-redux';
 import { Stage } from 'react-konva';
-import { useSelector } from 'shared/hooks';
+import { useSelector } from 'shared/hooks/redux';
 import MainLayer from './MainLayer';
 import { Nullable } from './store/types';
 

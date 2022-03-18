@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Group } from 'react-konva';
-import { useDispatch, useSelector } from 'shared/hooks';
+import { useDispatch, useSelector } from 'shared/hooks/redux';
 import { PageDir, VerbIndex } from 'game/store/types';
 import MenuLeft from './MenuLeft';
 import MenuCenter from './MenuCenter';

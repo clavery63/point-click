@@ -2,7 +2,7 @@ import React from 'react';
 import { Group, Rect, Image } from 'react-konva';
 import range from 'lodash/range';
 import { GameStoreState } from 'game/store/types';
-import { useSelector } from 'shared/hooks';
+import { useSelector } from 'shared/hooks/redux';
 import Text from '../shared/Text';
 
 const TEXT_AREA_WIDTH = 224;

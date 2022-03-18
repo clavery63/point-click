@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'shared/hooks';
+import { useDispatch, useSelector } from 'shared/hooks/redux';
 import Item from '../viewport/Item';
 
 const StaticItems = () => {

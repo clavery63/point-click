@@ -2,7 +2,7 @@ import { VerbIndex } from 'game/store/types';
 import React from 'react';
 import { Group } from 'react-konva';
 import { Rect, Image } from 'shared/components/tappables';
-import { useSelector } from 'shared/hooks';
+import { useSelector } from 'shared/hooks/redux';
 import Text from '../shared/Text';
 
 type Props = {

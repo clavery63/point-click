@@ -1,7 +1,7 @@
 import { Door, DoorState, EntityType } from 'game/store/types';
 import React from 'react';
 import { Image } from 'shared/components/tappables';
-import { useSelector } from 'shared/hooks';
+import { useSelector } from 'shared/hooks/redux';
 
 type Props = {
   door: Door;

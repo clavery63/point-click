@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Image } from 'shared/components/tappables';
-import { useDispatch, useSelector } from 'shared/hooks';
+import { useDispatch, useSelector } from 'shared/hooks/redux';
 
 const X_OFFSET = 143;
 const Y_OFFSET = 19;

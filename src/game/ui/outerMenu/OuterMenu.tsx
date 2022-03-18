@@ -1,6 +1,6 @@
 import React from 'react';
 import { Rect } from 'shared/components/tappables';
-import { useDispatch, useSelector } from 'shared/hooks';
+import { useDispatch, useSelector } from 'shared/hooks/redux';
 import Text from '../shared/Text';
 
 const KEY = 'doublehamburger-save-data';

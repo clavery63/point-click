@@ -2,7 +2,7 @@ import { GameStoreState } from 'game/store/types';
 import React from 'react';
 import { Image, Group } from 'react-konva';
 import { createSelector } from 'reselect';
-import { useSelector } from 'shared/hooks';
+import { useSelector } from 'shared/hooks/redux';
 import range from 'lodash/range';
 
 const sheetWidth = 8;

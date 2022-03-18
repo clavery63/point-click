@@ -1,6 +1,6 @@
 import { GameStoreState } from 'game/store/types';
 import React from 'react';
-import { useDispatch, useSelector } from 'shared/hooks';
+import { useDispatch, useSelector } from 'shared/hooks/redux';
 import { Rect } from 'shared/components/tappables';
 
 const selector = (state: GameStoreState) => {
