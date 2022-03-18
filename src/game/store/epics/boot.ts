@@ -48,7 +48,10 @@ const initializeGame: InitializeGame = bootInfo => ({
   playerState: bootInfo.playerState,
   worldState: bootInfo.worldState,
   flags: bootInfo.flags,
-  verbNames: [],
+  // TODO NOW: wtf. is this initializeGame stuff still necessary?
+  // Somehow this AND the store.dispatchs in GameRoot are both necessary?
+  // Absolutely must fix
+  verbNames: bootInfo.verbNames,
   images: new Map(),
 });
 

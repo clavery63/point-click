@@ -15,9 +15,6 @@ const audioAssetsRoot = `${process.env.REACT_APP_ASSETS_BASE}/test-game/audio`;
 const updateMusic = (fileName?: string) => {
   const player = document.querySelector('.music-player') as HTMLAudioElement;
 
-  console.log('fileName:', fileName);
-  console.log('player.src:', player.src);
-
   if (`${audioAssetsRoot}/${fileName}` === player.src) {
     // src is unchanged, so continue playing this song
     return;

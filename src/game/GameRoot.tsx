@@ -44,6 +44,7 @@ const GameRoot = React.memo(({ gameName, state }: Props) => {
       // Hydrate from admin
       store.dispatch({ type: 'SET_WORLD_STATE', payload: state.worldState });
       store.dispatch({ type: 'SET_PLAYER_STATE', payload: state.playerState });
+      store.dispatch({ type: 'SET_VERB_NAMES', payload: state.verbNames });
       store.dispatch({ type: 'SET_FLAGS', payload: state.flags });
       store.dispatch({ type: 'SET_MENU', payload: 'NONE' });
     }

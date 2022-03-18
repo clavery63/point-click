@@ -23,6 +23,7 @@ type ActionTypes = {
   SET_WORLD_STATE: WorldState;
   SET_PLAYER_STATE: PlayerState;
   SET_FLAGS: Flags;
+  SET_VERB_NAMES: string[];
   SET_TEXT: Nullable<string[]>;
   SET_NEXT_MUSIC: Music;
   SET_ROOM: number;
@@ -61,6 +62,7 @@ const setState: ParentReducer<GameStoreState> = payload => () => payload;
 const setWorldState: ParentReducer<WorldState> = setValue('worldState');
 const setPlayerState: ParentReducer<PlayerState> = setValue('playerState');
 const setFlags: ParentReducer<Flags> = setValue('flags');
+const setVerbNames: ParentReducer<string[]> = setValue('verbNames');
 const setText: ParentReducer<Nullable<string[]>> = setValue('text');
 const setRoom: ParentReducer<number> = roomReducer;
 const setFrame: ParentReducer<number> = setValue('transition.frame');
@@ -105,7 +107,11 @@ const rootReducer: ReduxReducer<
     case 'SET_PLAYER_STATE':
       return applyReducer(setPlayerState, state, action.payload);
     case 'SET_FLAGS':
+      console.log('setting flags:', action.payload);
       return applyReducer(setFlags, state, action.payload);
+    case 'SET_VERB_NAMES':
+      console.log('setting verb names:', action.payload);
+      return applyReducer(setVerbNames, state, action.payload);
     case 'SET_TEXT':
       return applyReducer(setText, state, action.payload);
     case 'SET_NEXT_MUSIC':
