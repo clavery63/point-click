@@ -6,14 +6,17 @@ type Props = {
   label: string;
   value: Nullable<string>;
   onChange: (value: Nullable<string>) => void;
+  fullWidth?: boolean;
 };
-const LongTextField = ({ label, value, onChange }: Props) => {
+const LongTextField = ({
+  label, value, onChange, fullWidth = true,
+}: Props) => {
   return (
     <TextField
       label={label}
       margin="normal"
       multiline
-      fullWidth
+      fullWidth={fullWidth}
       maxRows={6}
       value={value || ''}
       onChange={e => {

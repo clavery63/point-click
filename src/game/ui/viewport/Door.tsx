@@ -1,11 +1,11 @@
-import { Door, DoorState, EntityType } from 'game/store/types';
+import { Door, DoorState } from 'game/store/types';
 import React from 'react';
 import { Image } from 'shared/components/tappables';
 import { useSelector } from 'shared/hooks/redux';
 
 type Props = {
   door: Door;
-  onClick: (id: number, type: EntityType) => void;
+  onClick: (id: number) => void;
 };
 const DoorComponent = ({ door, onClick }: Props) => {
   const {
@@ -25,7 +25,7 @@ const DoorComponent = ({ door, onClick }: Props) => {
       width={width}
       height={height}
       image={image}
-      onClick={() => onClick(door.id, 'doors')}
+      onClick={() => onClick(door.id)}
     />
   );
 };

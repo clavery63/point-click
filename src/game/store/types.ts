@@ -223,11 +223,16 @@ export interface PlayerState {
 
 export type Flags = string[];
 
+export type VerbName = {
+  name: string;
+  defaultText: string;
+};
+
 export interface GameState {
   worldState: WorldState;
   playerState: PlayerState;
   flags: Flags;
-  verbNames: string[]; // TODO: make sure there are 9 of these?
+  verbNames: VerbName[];
 }
 
 export type Entity = Door | Item | Scenery;

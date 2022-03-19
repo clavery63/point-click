@@ -1,12 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setGameState } from 'admin/store/sharedActions';
+import { VerbName } from 'game/store/types';
+
+type VerbPayload = {
+  verb: VerbName;
+  index: number;
+};
 
 export const verbNamesSlice = createSlice({
   name: 'verbNames',
-  initialState: [] as string[],
+  initialState: [] as VerbName[],
   reducers: {
-    setVerbNames: (state, action: PayloadAction<string[]>) => {
-      return action.payload;
+    setVerb: (state, action: PayloadAction<VerbPayload>) => {
+      const { verb, index } = action.payload;
+
+      state[index] = verb;
     },
   },
   extraReducers: builder => {
@@ -14,6 +22,6 @@ export const verbNamesSlice = createSlice({
   },
 });
 
-export const { setVerbNames } = verbNamesSlice.actions;
+export const { setVerb } = verbNamesSlice.actions;
 
 export default verbNamesSlice.reducer;

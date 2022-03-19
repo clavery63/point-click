@@ -14,7 +14,7 @@ type Props = {
 };
 const Verbs = ({ entity }: Props) => {
   const dispatch = useDispatch();
-  const verbNames = useSelector(state => state.gameState.verbNames) as string[];
+  const verbNames = useSelector(state => state.gameState.verbNames);
 
   const handleChange = (verbIndex: VerbIndex, verbLogics: VerbLogic[]) => {
     dispatch(setEntityVerb({
@@ -39,14 +39,14 @@ const Verbs = ({ entity }: Props) => {
             key={verbIndex}
             verbIndex={parseInt(verbIndex, 10) as VerbIndex}
             verbLogics={verbLogics}
-            verbName={verbNames[parseInt(verbIndex, 10)]}
+            verbName={verbNames[parseInt(verbIndex, 10)].name}
             handleChange={handleChange}
           />
         ))}
       </Grid>
       <AddVerb
         indexes={verbIndexPairings.map(([index]) => parseInt(index, 10))}
-        names={verbNames}
+        names={verbNames.map(verbName => verbName.name)}
         entityId={entity.id}
       />
     </>

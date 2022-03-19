@@ -36,7 +36,7 @@ const MenuOption = (props: Props) => {
           image={images.get('menu-button')}
         />
       )}
-      <Text text={verbNames[verbIndex]} left={9} top={1} />
+      <Text text={verbNames[verbIndex].name} left={9} top={1} />
     </Group>
   );
 };

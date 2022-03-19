@@ -8,7 +8,8 @@ import changePageReducer from './changePageReducer';
 import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
 import {
-  Flags, GameStoreState, PlayerState, WorldState, Menu, VerbIndex, Nullable, PageDir, Music,
+  Flags, GameStoreState, PlayerState, WorldState,
+  Menu, VerbIndex, Nullable, PageDir, Music, VerbName,
 } from '../types';
 import defaultState from '../defaultState';
 
@@ -23,7 +24,7 @@ type ActionTypes = {
   SET_WORLD_STATE: WorldState;
   SET_PLAYER_STATE: PlayerState;
   SET_FLAGS: Flags;
-  SET_VERB_NAMES: string[];
+  SET_VERB_NAMES: VerbName[];
   SET_TEXT: Nullable<string[]>;
   SET_NEXT_MUSIC: Music;
   SET_ROOM: number;
@@ -55,14 +56,14 @@ export type ReducerActions = ActionsType[keyof ActionTypes] | { type: 'NULL' };
 const applyReducer = <
   PayloadType
 >(reducer: ParentReducer<PayloadType>, state: GameStoreState, payload: PayloadType) => {
-  return reducer(payload, state.playerState, state.worldState, state.flags)(state);
+  return reducer(payload, state.playerState, state.worldState, state.flags, state.verbNames)(state);
 };
 
 const setState: ParentReducer<GameStoreState> = payload => () => payload;
 const setWorldState: ParentReducer<WorldState> = setValue('worldState');
 const setPlayerState: ParentReducer<PlayerState> = setValue('playerState');
 const setFlags: ParentReducer<Flags> = setValue('flags');
-const setVerbNames: ParentReducer<string[]> = setValue('verbNames');
+const setVerbNames: ParentReducer<VerbName[]> = setValue('verbNames');
 const setText: ParentReducer<Nullable<string[]>> = setValue('text');
 const setRoom: ParentReducer<number> = roomReducer;
 const setFrame: ParentReducer<number> = setValue('transition.frame');
@@ -107,10 +108,8 @@ const rootReducer: ReduxReducer<
     case 'SET_PLAYER_STATE':
       return applyReducer(setPlayerState, state, action.payload);
     case 'SET_FLAGS':
-      console.log('setting flags:', action.payload);
       return applyReducer(setFlags, state, action.payload);
     case 'SET_VERB_NAMES':
-      console.log('setting verb names:', action.payload);
       return applyReducer(setVerbNames, state, action.payload);
     case 'SET_TEXT':
       return applyReducer(setText, state, action.payload);

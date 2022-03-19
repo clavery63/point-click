@@ -16,7 +16,19 @@ const gameStateSchema = {
     "verbNames": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "defaultText": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "defaultText",
+          "name"
+        ]
       }
     }
   },

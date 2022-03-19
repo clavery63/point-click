@@ -7,6 +7,7 @@ import {
   Nullable,
   PlayerState,
   Scenery,
+  VerbName,
   WorldState,
   // NOTE: made this a relative import for validation generation.
   // We can change this back if ts-json-schema-generator starts tolerating
@@ -28,7 +29,9 @@ export type SceneryReducer = ChildReducer<Scenery>;
 export type DoorReducer = ChildReducer<Door>;
 
 export type ParentReducer<PayloadType> = {
-  (p: PayloadType, ps: PlayerState, w: WorldState, f: Flags): StateTransformer;
+  // TODO: group verb names and flags together
+  // eslint-disable-next-line max-len
+  (p: PayloadType, ps: PlayerState, w: WorldState, f: Flags, verbNames: VerbName[]): StateTransformer;
 };
 
 export type EmptyReducer = () => StateTransformer;

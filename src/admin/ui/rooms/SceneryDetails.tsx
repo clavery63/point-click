@@ -20,7 +20,7 @@ type Props = {
 const SceneryDetails = ({ scenery }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const verbNames = useSelector(state => state.gameState.verbNames) as string[];
+  const verbNames = useSelector(state => state.gameState.verbNames);
   const sceneriesEditing = useSelector(state => state.editorState.sceneryEditing);
   const positionEditing = sceneriesEditing[scenery.id] || 'startPosition';
 
@@ -93,7 +93,7 @@ const SceneryDetails = ({ scenery }: Props) => {
           label="trigger"
           value={scenery.trigger}
           onChange={handleChange('trigger')}
-          options={verbNames.map((verb, index) => ({ value: index, label: verb }))}
+          options={verbNames.map((verb, index) => ({ value: index, label: verb.name }))}
         />
       </Grid>
       <Grid item xs={12}>
