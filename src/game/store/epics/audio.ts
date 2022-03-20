@@ -1,27 +1,26 @@
 import {
-  filter, mapTo, switchMap, tap,
+  filter, mapTo, switchMap, tap, withLatestFrom,
 } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 import {
   concat, EMPTY, of, merge, Observable,
 } from 'rxjs';
 import { isOfType } from 'typesafe-actions';
+import { getAudioPath } from 'shared/util/getAssetsPath';
 import { MyEpic } from './types';
 import { ReducerActions } from '../reducers/rootReducer';
 
-// TODO: derive the gameName part from state$
-const audioAssetsRoot = `${process.env.REACT_APP_ASSETS_BASE}/test-game/audio`;
-
-const updateMusic = (fileName?: string) => {
+const updateMusic = (gameName: string, fileName?: string) => {
+  const audioPath = getAudioPath(gameName);
   const player = document.querySelector('.music-player') as HTMLAudioElement;
 
-  if (`${audioAssetsRoot}/${fileName}` === player.src) {
+  if (`${audioPath}/${fileName}` === player.src) {
     // src is unchanged, so continue playing this song
     return;
   }
 
   if (fileName) {
-    player.src = `${audioAssetsRoot}/${fileName}`;
+    player.src = `${audioPath}/${fileName}`;
     player.play();
   } else {
     player.src = '';
@@ -32,10 +31,11 @@ const updateMusic = (fileName?: string) => {
 const audio$: MyEpic = (action$, state$, { runText$ }) => {
   const music$: Observable<ReducerActions> = action$.pipe(
     filter(isOfType('PLAY_MUSIC')),
-    switchMap(({ payload }) => concat(
+    withLatestFrom(state$),
+    switchMap(([{ payload }, { gameName }]) => concat(
       payload.text ? runText$(payload.text) : EMPTY,
       of<ReducerActions>({ type: 'NULL' }).pipe(
-        tap(() => updateMusic(payload.fileName)),
+        tap(() => updateMusic(gameName, payload.fileName)),
       ),
     )),
   );

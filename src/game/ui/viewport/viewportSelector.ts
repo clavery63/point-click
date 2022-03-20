@@ -11,7 +11,7 @@ const populate: Populate = (worldState, collection) => id => {
 
 const viewportSelector = (state: GameStoreState) => {
   const {
-    images, worldState, playerState, flags,
+    images, worldState, playerState, flags, gameName,
   } = state;
   const { rooms } = worldState;
   const { room } = playerState;
@@ -29,6 +29,7 @@ const viewportSelector = (state: GameStoreState) => {
     borderImg: images.get('border'),
     roomImg: images.get(img || ''),
     video,
+    gameName,
   };
 };
 

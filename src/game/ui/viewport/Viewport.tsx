@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Group } from 'react-konva';
 import { useDispatch, useSelector } from 'shared/hooks/redux';
 import { Entity } from 'game/store/types';
+import { getVideoPath } from 'shared/util/getAssetsPath';
 import Transition from '../transition/Transition';
 import Door from './Door';
 import Item from './Item';
@@ -9,16 +10,14 @@ import Scenery from './Scenery';
 import Video from '../shared/Video';
 import viewportSelector from './viewportSelector';
 
-// TODO: derive the gameName part from state
-const videoAssetsRoot = `${process.env.REACT_APP_ASSETS_BASE}/test-game/video`;
-
 type BGProps = {
   image?: HTMLImageElement;
   video?: string;
+  gameName: string;
 };
-const Background = React.memo(({ image, video }: BGProps) => {
+const Background = React.memo(({ image, video, gameName }: BGProps) => {
   if (video) {
-    return <Video src={`${videoAssetsRoot}/${video}`} />;
+    return <Video src={`${getVideoPath(gameName)}/${video}`} />;
   }
 
   return <Image width={112} height={112} image={image} />;
@@ -46,6 +45,7 @@ const Viewport = () => {
     doors,
     entities,
     video,
+    gameName,
   } = useSelector(viewportSelector);
 
   const onEntityClick = (id: number) => dispatch({
@@ -57,7 +57,7 @@ const Viewport = () => {
     <Group x={8} y={23}>
       <Image width={128} height={128} image={borderImg} />
       <Group x={8} y={8}>
-        <Background image={roomImg} video={video} />
+        <Background image={roomImg} video={video} gameName={gameName} />
         <Group>
           {doors.map(door => (
             <Door
