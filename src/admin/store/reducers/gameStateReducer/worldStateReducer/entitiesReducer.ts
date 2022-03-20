@@ -31,7 +31,7 @@ type SizeWithId = {
 type EntityVerb = {
   id: number;
   verbIndex: VerbIndex;
-  verbLogics: VerbLogic[];
+  verbLogics?: VerbLogic[];
 };
 
 type DeleteInfo = {
@@ -116,6 +116,9 @@ export const entitiesSlice = createSlice({
         ...state[id].verbs,
         [verbIndex]: verbLogics,
       };
+      if(!verbLogics) {
+        delete newVerbs[verbIndex];
+      }
       state[id].verbs = newVerbs;
     },
     setEntity: (state, action: PayloadAction<EntityWithId>) => {
