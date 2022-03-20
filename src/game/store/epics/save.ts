@@ -5,9 +5,8 @@ import {
   from, of, merge, Observable, ObservableInput,
 } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { MyEpic } from './types';
+import { AllActions, MyEpic } from './types';
 import { GameStoreState } from '../types';
-import { ReducerActions } from '../reducers/rootReducer';
 
 const KEY = 'doublehamburger-save-data';
 
@@ -20,21 +19,26 @@ const saveGame: SaveGame = ({ worldState, playerState, flags }) => {
   }));
 };
 
-type LoadGame = () => Observable<ReducerActions>;
+type LoadGame = () => Observable<AllActions>;
 const loadGame$: LoadGame = () => {
   const newState = localStorage.getItem(KEY);
   if (!newState) {
     return of({ type: 'NULL' });
   }
 
-  // TODO: create a smart JSON parser that throws if the state is invalid
   const { worldState, playerState, flags }: GameStoreState = JSON.parse(newState);
 
-  return from<ObservableInput<ReducerActions>>([
+  return from<ObservableInput<AllActions>>([
     { type: 'SET_WORLD_STATE', payload: worldState },
     { type: 'SET_PLAYER_STATE', payload: playerState },
     { type: 'SET_FLAGS', payload: flags },
     { type: 'SET_MENU', payload: 'NONE' },
+    {
+      type: 'PLAY_MUSIC',
+      payload: {
+        fileName: worldState.rooms[playerState.room].music,
+      },
+    },
   ]);
 };
 

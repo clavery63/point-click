@@ -47,12 +47,21 @@ const GameRoot = React.memo(({ gameName, state }: Props) => {
       store.dispatch({ type: 'SET_VERB_NAMES', payload: state.verbNames });
       store.dispatch({ type: 'SET_FLAGS', payload: state.flags });
       store.dispatch({ type: 'SET_MENU', payload: 'NONE' });
+      // TODO: Feels like playing the first room's music should be a little more automatic
+      // Also, For some reason SET_GAME_NAME has to happen after SET_MENU...
+      store.dispatch({ type: 'SET_GAME_NAME', payload: gameName });
+      store.dispatch({
+        type: 'PLAY_MUSIC',
+        payload: {
+          fileName: state.worldState.rooms[state.playerState.room].music,
+        },
+      });
+    } else {
+      store.dispatch({
+        type: 'SET_GAME_NAME',
+        payload: gameName,
+      });
     }
-
-    store.dispatch({
-      type: 'SET_GAME_NAME',
-      payload: gameName,
-    });
   }, []);
 
   return (

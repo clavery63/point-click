@@ -12,6 +12,7 @@ import {
   Menu, VerbIndex, Nullable, PageDir, Music, VerbName,
 } from '../types';
 import defaultState from '../defaultState';
+import { AllActions } from '../epics/types';
 
 export type PositionType = {
   x: number;
@@ -82,7 +83,7 @@ const setMenu: ParentReducer<Menu> = setValue('menu');
 const setGameName: ParentReducer<string> = setValue('gameName');
 
 const rootReducer: ReduxReducer<
-  GameStoreState, ReducerActions
+  GameStoreState, AllActions
 // eslint-disable-next-line default-param-last
 > = (state = defaultState, action) => {
   /**
