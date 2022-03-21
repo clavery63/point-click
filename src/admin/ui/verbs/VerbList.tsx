@@ -53,7 +53,7 @@ const VerbList = ({
           <Button onClick={onCreate}>
             Add Logic
           </Button>
-          <IconButton 
+          <IconButton
             onClick={() => handleChange(verbIndex)}
           >
             <DeleteIcon />

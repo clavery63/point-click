@@ -116,7 +116,7 @@ export const entitiesSlice = createSlice({
         ...state[id].verbs,
         [verbIndex]: verbLogics,
       };
-      if(!verbLogics) {
+      if (!verbLogics) {
         delete newVerbs[verbIndex];
       }
       state[id].verbs = newVerbs;
