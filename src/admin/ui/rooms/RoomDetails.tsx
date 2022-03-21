@@ -8,7 +8,6 @@ import { useParams, Link } from 'react-router-dom';
 import ArrowBack from '@mui/icons-material/ArrowBack';
 import { setRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
 import { Room } from 'game/store/types';
-import { FormControlLabel, Switch } from '@mui/material';
 import { useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
@@ -18,6 +17,7 @@ import PreviewWidget from '../preview/PreviewWidget';
 import ImgSelector from '../shared/assets/ImgSelector';
 import AudioSelector from '../shared/assets/AudioSelector';
 import VideoSelector from '../shared/assets/VideoSelector';
+import Toggle from '../shared/Toggle';
 
 type Props = { room: Room; roomId: number };
 const RoomDetails = ({ room, roomId }: Props) => {
@@ -99,14 +99,11 @@ const RoomDetails = ({ room, roomId }: Props) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <FormControlLabel
-            control={(
-              <Switch
-                checked={!!room.gameOver}
-                onChange={e => handleChange('gameOver')(e.currentTarget.checked)}
-              />
-          )}
-            label="Game Over Screen?"
+          <Toggle
+            value={!!room.gameOver}
+            onChange={handleChange('gameOver')}
+            label="game over screen?"
+            tooltip="If true, this room triggers the game over menu"
           />
         </Grid>
         <Grid item xs={12}>

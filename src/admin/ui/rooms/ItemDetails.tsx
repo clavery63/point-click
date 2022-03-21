@@ -3,12 +3,12 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { setEntity } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { Item } from 'game/store/types';
-import { FormControlLabel, Switch } from '@mui/material';
 import { useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import ImgSelector from '../shared/assets/ImgSelector';
 import Verbs from '../verbs';
+import Toggle from '../shared/Toggle';
 
 type Props = {
   item: Item;
@@ -81,14 +81,11 @@ const ItemDetails = ({ item }: Props) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <FormControlLabel
-          control={(
-            <Switch
-              checked={!!item.requiresPrecision}
-              onChange={e => handleChange('requiresPrecision')(e.currentTarget.checked)}
-            />
-          )}
+        <Toggle
+          value={!!item.requiresPrecision}
+          onChange={handleChange('requiresPrecision')}
           label="require direct click?"
+          tooltip="If true, only opaque parts of the image rectangle are clickable"
         />
       </Grid>
       <Verbs entity={item} />

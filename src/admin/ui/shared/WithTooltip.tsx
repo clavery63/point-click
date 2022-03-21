@@ -11,7 +11,6 @@ const useStyles = makeStyles({
     top: '2px',
     right: '10px',
     cursor: 'pointer',
-    padding: '2px',
     backgroundColor: 'white',
   },
 });
@@ -29,7 +28,7 @@ const WithTooltip = ({ text, children }: Props) => {
         <Tooltip title={text}>
           <Box className={classes.tooltip}>
             <Icon>
-              <Help fontSize="small" />
+              <Help sx={{ fontSize: 16 }} />
             </Icon>
           </Box>
         </Tooltip>

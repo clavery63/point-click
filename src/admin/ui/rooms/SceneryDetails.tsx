@@ -1,8 +1,6 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import { setEntity } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { Nullable, Scenery } from 'game/store/types';
 import { setSceneryEditing } from 'admin/store/reducers/editorStateReducer/sceneryEditingReducer';
@@ -13,6 +11,7 @@ import ImgSelector from '../shared/assets/ImgSelector';
 import Selector from '../shared/Selector';
 import Verbs from '../verbs';
 import Contains from './Contains';
+import Toggle from '../shared/Toggle';
 
 type Props = {
   scenery: Scenery;
@@ -72,20 +71,16 @@ const SceneryDetails = ({ scenery }: Props) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <FormControlLabel
-          control={(
-            <Switch
-              checked={positionEditing === 'endPosition'}
-              onChange={e => {
-                const position = e.currentTarget.checked ? 'endPosition' : 'startPosition';
-                dispatch(setSceneryEditing({
-                  position,
-                  id: scenery.id,
-                }));
-              }}
-            />
-          )}
+        <Toggle
+          value={positionEditing === 'endPosition'}
+          onChange={checked => {
+            dispatch(setSceneryEditing({
+              position: checked ? 'endPosition' : 'startPosition',
+              id: scenery.id,
+            }));
+          }}
           label={`Editing: ${positionEditing}`}
+          tooltip="For animated scenery, determines which part (start or end) of the animation position is currently being edited"
         />
       </Grid>
       <Grid item xs={12}>
