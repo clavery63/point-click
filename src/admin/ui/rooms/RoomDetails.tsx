@@ -63,6 +63,7 @@ const RoomDetails = ({ room, roomId }: Props) => {
             label="initial description"
             value={room.initialDescription}
             onChange={handleChange('initialDescription')}
+            tooltip="Text to display just the first time the player enters this room"
           />
         </Grid>
         <Grid item xs={12}>
@@ -70,6 +71,7 @@ const RoomDetails = ({ room, roomId }: Props) => {
             label="description"
             value={room.description}
             onChange={handleChange('description')}
+            tooltip="Default text that displays upon entering this room"
           />
         </Grid>
         <Grid item xs={12}>
@@ -77,6 +79,7 @@ const RoomDetails = ({ room, roomId }: Props) => {
             label="bg img"
             value={room.img}
             onChange={handleChange('img')}
+            tooltip="Background image for this room"
           />
         </Grid>
         <Grid item xs={12}>
@@ -84,6 +87,7 @@ const RoomDetails = ({ room, roomId }: Props) => {
             label="bg video"
             value={room.video}
             onChange={handleChange('video')}
+            tooltip="Background video for this room. Takes precedence over bg img"
           />
         </Grid>
         <Grid item xs={12}>
@@ -91,6 +95,7 @@ const RoomDetails = ({ room, roomId }: Props) => {
             label="music"
             value={room.music}
             onChange={handleChange('music')}
+            tooltip="Background music to play upon entering the room"
           />
         </Grid>
         <Grid item xs={12}>

@@ -49,6 +49,7 @@ const ItemDetails = ({ item }: Props) => {
           label="description"
           value={item.description}
           onChange={handleChange('description')}
+          tooltip="Displays when 'LOOK's at this item within their inventory"
         />
       </Grid>
       <Grid item xs={12}>

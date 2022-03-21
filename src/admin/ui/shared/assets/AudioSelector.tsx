@@ -6,6 +6,7 @@ import getFilenames from 'shared/util/getFilenames';
 import { Stack } from '@mui/material';
 import Selector, { makeOptions } from '../Selector';
 import AudioUploader from './AudioUploader';
+import WithTooltip from '../WithTooltip';
 
 const loadAudios = async (gameName: string) => {
   const s3 = new S3(`${gameName}/audio`);
@@ -18,8 +19,11 @@ type Props = {
   label: string;
   value: Nullable<string>;
   onChange: (value: string) => void;
+  tooltip?: string;
 };
-const AudioSelector = ({ label, value, onChange }: Props) => {
+const AudioSelector = ({
+  label, value, onChange, tooltip,
+}: Props) => {
   const { gameName } = useParams<{ gameName: string }>();
   const [options, setOptions] = useState<Nullable<string[]>>(null);
 
@@ -38,12 +42,14 @@ const AudioSelector = ({ label, value, onChange }: Props) => {
 
   return (
     <Stack direction="row" spacing={2}>
-      <Selector
-        label={label}
-        value={options.length ? (value || '') : ''}
-        onChange={onChange}
-        options={makeOptions(options)}
-      />
+      <WithTooltip text={tooltip}>
+        <Selector
+          label={label}
+          value={options.length ? (value || '') : ''}
+          onChange={onChange}
+          options={makeOptions(options)}
+        />
+      </WithTooltip>
       <AudioUploader
         onSuccess={handleUploadSuccess}
       />
