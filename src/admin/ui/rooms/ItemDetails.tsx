@@ -41,6 +41,7 @@ const ItemDetails = ({ item }: Props) => {
           label="name"
           value={item.name}
           onChange={handleChange('name')}
+          tooltip="How the item displays in the player's inventory"
         />
       </Grid>
       <Grid item xs={12}>
