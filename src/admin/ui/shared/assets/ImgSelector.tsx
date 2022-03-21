@@ -5,7 +5,6 @@ import { addImage } from 'admin/store/reducers/gameStateReducer/imagesReducer';
 import { useDispatch, useSelector } from '../../hooks/redux';
 import ImageUploader from './ImageUploader';
 import Selector, { makeOptions } from '../Selector';
-import WithTooltip from '../WithTooltip';
 
 type Props = {
   label: string;
@@ -36,14 +35,13 @@ const ImgSelector = ({
 
   return (
     <Stack direction="row" spacing={2}>
-      <WithTooltip text={tooltip}>
-        <Selector
-          label={label}
-          value={value}
-          onChange={onChange}
-          options={makeOptions(options)}
-        />
-      </WithTooltip>
+      <Selector
+        label={label}
+        value={value}
+        onChange={onChange}
+        options={makeOptions(options)}
+        tooltip={tooltip}
+      />
       <ImageUploader
         onSuccess={handleUploadSuccess}
       />

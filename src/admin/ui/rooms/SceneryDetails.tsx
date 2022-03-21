@@ -47,6 +47,7 @@ const SceneryDetails = ({ scenery }: Props) => {
           label="name"
           value={scenery.name}
           onChange={handleChange('name')}
+          tooltip="Convenience for editing. This name does not display in-game"
         />
       </Grid>
       <Grid item xs={12}>
@@ -54,6 +55,7 @@ const SceneryDetails = ({ scenery }: Props) => {
           label="description"
           value={scenery.description}
           onChange={handleChange('description')}
+          tooltip="Text that displays by default whn the player 'LOOK's at this scenery"
         />
       </Grid>
       <Grid item xs={12}>
@@ -61,6 +63,7 @@ const SceneryDetails = ({ scenery }: Props) => {
           label="open text"
           value={scenery.openText}
           onChange={handleChange('openText')}
+          tooltip="Custom text to display when the scenery is opened. Only relevant if the scenery contains items"
         />
       </Grid>
       <Grid item xs={12}>
@@ -68,6 +71,7 @@ const SceneryDetails = ({ scenery }: Props) => {
           label="moved text"
           value={scenery.movedText}
           onChange={handleChange('movedText')}
+          tooltip="Custom text to display after animation has completed"
         />
       </Grid>
       <Grid item xs={12}>
@@ -89,6 +93,7 @@ const SceneryDetails = ({ scenery }: Props) => {
           value={scenery.trigger}
           onChange={handleChange('trigger')}
           options={verbNames.map((verb, index) => ({ value: index, label: verb.name }))}
+          tooltip="Which verb causes this scenery to animate"
         />
       </Grid>
       <Grid item xs={12}>
@@ -103,6 +108,7 @@ const SceneryDetails = ({ scenery }: Props) => {
           label="visible flag"
           value={scenery.visibleFlag}
           onChange={handleChange('visibleFlag')}
+          tooltip="When set, this flag must be on for this scenery to be visible (otherwise, the item is visible by default)"
         />
       </Grid>
       <Contains container={scenery} />

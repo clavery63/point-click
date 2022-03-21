@@ -64,6 +64,7 @@ const ItemDetails = ({ item }: Props) => {
           label="on take"
           value={item.onTake}
           onChange={handleChange('onTake')}
+          tooltip="Custom text to display when user collects this item"
         />
       </Grid>
       <Grid item xs={12}>
@@ -71,6 +72,7 @@ const ItemDetails = ({ item }: Props) => {
           label="takeable flag"
           value={item.takeableFlag}
           onChange={handleChange('takeableFlag')}
+          tooltip="When set, this flag must be on for the player to collect this item (otherwise, the item is takeable by default)"
         />
       </Grid>
       <Grid item xs={12}>
@@ -78,6 +80,7 @@ const ItemDetails = ({ item }: Props) => {
           label="visible flag"
           value={item.visibleFlag}
           onChange={handleChange('visibleFlag')}
+          tooltip="When set, this flag must be on for this item to be visible (otherwise, the item is visible by default)"
         />
       </Grid>
       <Grid item xs={12}>

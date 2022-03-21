@@ -10,6 +10,7 @@ import { useDispatch } from '../hooks/redux';
 const useStyles = makeStyles({
   addVerb: {
     margin: '20px 0',
+    alignItems: 'center',
   },
 });
 

@@ -6,7 +6,6 @@ import getFilenames from 'shared/util/getFilenames';
 import { Stack } from '@mui/material';
 import Selector, { makeOptions } from '../Selector';
 import AudioUploader from './AudioUploader';
-import WithTooltip from '../WithTooltip';
 
 const loadAudios = async (gameName: string) => {
   const s3 = new S3(`${gameName}/audio`);
@@ -42,14 +41,13 @@ const AudioSelector = ({
 
   return (
     <Stack direction="row" spacing={2}>
-      <WithTooltip text={tooltip}>
-        <Selector
-          label={label}
-          value={options.length ? (value || '') : ''}
-          onChange={onChange}
-          options={makeOptions(options)}
-        />
-      </WithTooltip>
+      <Selector
+        label={label}
+        value={options.length ? (value || '') : ''}
+        onChange={onChange}
+        options={makeOptions(options)}
+        tooltip={tooltip}
+      />
       <AudioUploader
         onSuccess={handleUploadSuccess}
       />

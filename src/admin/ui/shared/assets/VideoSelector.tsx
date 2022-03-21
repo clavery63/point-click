@@ -6,8 +6,6 @@ import getFilenames from 'shared/util/getFilenames';
 import { Stack } from '@mui/material';
 import Selector, { makeOptions } from '../Selector';
 import VideoUploader from './VideoUploader';
-import WithTooltip from '../WithTooltip';
-// import VideoUploader from './VideoUploader';
 
 const loadVideos = async (gameName: string) => {
   // TODO: this is almost the same as loadAudios
@@ -44,14 +42,13 @@ const VideoSelector = ({
 
   return (
     <Stack direction="row" spacing={2}>
-      <WithTooltip text={tooltip}>
-        <Selector
-          label={label}
-          value={options.length ? (value || '') : ''}
-          onChange={onChange}
-          options={makeOptions(options)}
-        />
-      </WithTooltip>
+      <Selector
+        label={label}
+        value={options.length ? (value || '') : ''}
+        onChange={onChange}
+        options={makeOptions(options)}
+        tooltip={tooltip}
+      />
       <VideoUploader
         onSuccess={handleUploadSuccess}
       />
