@@ -44,8 +44,8 @@ const defaultVerbNames = [
   },
 ];
 
-const generateFriendlyName = (name: string) => {
-  return name;
+const generateSlug = (name: string) => {
+  return name.toLowerCase().replace(/[^\w]+/g, '-');
 };
 
 const generateGame = (friendlyName: string) => ({
@@ -73,11 +73,11 @@ const CreateGameButton = () => {
   const createGame = async () => {
     if (gameName?.length) {
       const s3 = new S3();
-      const friendlyName = generateFriendlyName(gameName);
-      const gameData = generateGame(friendlyName);
-      const result = await s3.writeObject(`${gameName}/gamedata.json`, gameData);
+      const slug = generateSlug(gameName);
+      const gameData = JSON.stringify(generateGame(gameName));
+      const result = await s3.writeObject(`${slug}/gamedata.json`, gameData);
       if (result.$metadata.httpStatusCode === 200) {
-        history.push(`/admin/${gameName}`);
+        history.push(`/admin/${slug}`);
       }
     }
   };

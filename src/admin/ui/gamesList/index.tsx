@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import {
+  Box, List, ListItem, Typography,
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 import S3 from 'shared/util/S3';
 import CreateGameButton from './CreateGameButton';
@@ -22,9 +24,13 @@ const GamesList = () => {
       <Typography variant="h3">
         Games:
       </Typography>
-      {gameNames.map(gameName => (
-        <Link key={gameName} to={`admin/${gameName}`}>{gameName}</Link>
-      ))}
+      <List>
+        {gameNames.map(gameName => (
+          <ListItem key={gameName}>
+            <Link to={`admin/${gameName}`}>{gameName}</Link>
+          </ListItem>
+        ))}
+      </List>
       <CreateGameButton />
     </Box>
   );
