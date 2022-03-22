@@ -45,6 +45,7 @@ const initializeGame: InitializeGame = bootInfo => ({
   menu: bootInfo.menu || 'MAIN',
   cursorEnabled: true,
   gameName: bootInfo.gameName,
+  friendlyName: bootInfo.friendlyName,
   playerState: bootInfo.playerState,
   worldState: bootInfo.worldState,
   flags: bootInfo.flags,

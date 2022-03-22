@@ -20,6 +20,7 @@ const defaultState: GameStoreState = {
   loading: true,
   cursorEnabled: false,
   gameName: '',
+  friendlyName: '',
   menu: 'MAIN',
   playerState: {
     verb: 1,

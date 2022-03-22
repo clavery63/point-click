@@ -30,10 +30,14 @@ const gameStateSchema = {
           "name"
         ]
       }
+    },
+    "friendlyName": {
+      "type": "string"
     }
   },
   "required": [
     "flags",
+    "friendlyName",
     "playerState",
     "verbNames",
     "worldState"

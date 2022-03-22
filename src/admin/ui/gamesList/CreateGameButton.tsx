@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import S3 from 'shared/util/S3';
 import { Stack, TextField } from '@mui/material';
-import { GameState, VerbIndex } from 'game/store/types';
+import { VerbIndex } from 'game/store/types';
 import { useHistory } from 'react-router-dom';
 
 const defaultVerbNames = [
@@ -44,7 +44,11 @@ const defaultVerbNames = [
   },
 ];
 
-const defaultGame: GameState = {
+const generateFriendlyName = (name: string) => {
+  return name;
+};
+
+const generateGame = (friendlyName: string) => ({
   worldState: {
     doors: {},
     entities: {},
@@ -59,7 +63,8 @@ const defaultGame: GameState = {
   },
   flags: [],
   verbNames: defaultVerbNames,
-};
+  friendlyName,
+});
 
 const CreateGameButton = () => {
   const [gameName, setGameName] = useState<string>('');
@@ -68,7 +73,9 @@ const CreateGameButton = () => {
   const createGame = async () => {
     if (gameName?.length) {
       const s3 = new S3();
-      const result = await s3.writeObject(`${gameName}/gamedata.json`, JSON.stringify(defaultGame));
+      const friendlyName = generateFriendlyName(gameName);
+      const gameData = generateGame(friendlyName);
+      const result = await s3.writeObject(`${gameName}/gamedata.json`, gameData);
       if (result.$metadata.httpStatusCode === 200) {
         history.push(`/admin/${gameName}`);
       }

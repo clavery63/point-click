@@ -22,13 +22,14 @@ const loadPlayerAndGameState$: LoadState = initialState => {
     switchMap(resp => resp.json()),
     tap(validateGameState),
     map(({
-      playerState, worldState, flags, verbNames,
+      playerState, worldState, flags, verbNames, friendlyName,
     }) => ({
       ...initialState,
       playerState,
       worldState,
       flags,
       verbNames,
+      friendlyName,
     })),
   );
 };

@@ -1398,6 +1398,7 @@
     "SANTOS_1",
     "EIGHTBALL_1"
   ],
+  "friendlyName": "Test Game",
   "verbNames": [
     {
       "name": "MOVE",
