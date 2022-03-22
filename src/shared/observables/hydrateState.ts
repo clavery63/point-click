@@ -34,6 +34,10 @@ const loadPlayerAndGameState$: LoadState = initialState => {
   );
 };
 
+const setPageTitle = ({ friendlyName }: GameStoreState) => {
+  document.title = friendlyName;
+};
+
 const setAudioSrc = () => {
   const sharedAudioRoot = `${sharedAssetsBase}/audio`;
 
@@ -63,6 +67,7 @@ const hydrateState$: HydrateState = (state$, initialize) => {
     take(1),
     map(initialize),
     switchMap(loadPlayerAndGameState$),
+    tap(setPageTitle),
     tap(setAudioSrc),
     switchMap(state => loadImages$(state.gameName).pipe(
       map(images => ({
