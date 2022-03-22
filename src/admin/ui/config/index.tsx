@@ -12,6 +12,7 @@ import Flags from './Flags';
 import Settings from './Settings';
 import UploadButton from '../shared/UploadButton';
 import EntityDetails from '../rooms/EntityDetails';
+import GameName from './GameName';
 
 const ConfigPage = () => {
   const { gameName } = useParams<{ gameName: string }>();
@@ -34,6 +35,7 @@ const ConfigPage = () => {
               Edit Game Config:
             </Typography>
           </Grid>
+          <GameName />
           <Player />
           <Flags />
           <Settings />

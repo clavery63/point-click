@@ -57,16 +57,14 @@ const Settings = () => {
         </Typography>
       </Grid>
       {allVerbs.map((verb, index) => (
-        <Grid item xs={12}>
+        <Grid item xs={12} key={index}>
           <LongTextField
-            key={index}
             label={`verb ${index} name`}
             value={verb.name}
             fullWidth={false}
             onChange={value => handleChange(value, index)}
           />
           <LongTextField
-            key={`${index}-2`}
             label={`verb ${index} default text`}
             value={verb.defaultText}
             onChange={value => handleDefaultTextChange(value, index)}
