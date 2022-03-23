@@ -1400,6 +1400,7 @@
   ],
   "config": {
     "friendlyName": "Test Game",
+    "img": {},
     "verbs": [
       {
         "name": "MOVE",

@@ -228,12 +228,19 @@ export type VerbConfig = {
   defaultText: string;
 };
 
+export type ImgConfig = {
+  cursor?: string;
+  menu?: string;
+  itemList?: string;
+};
+
 export interface GameState {
   worldState: WorldState;
   playerState: PlayerState;
   flags: Flags;
   config: {
     verbs: VerbConfig[];
+    img: ImgConfig;
     friendlyName: string;
   };
 }
