@@ -18,6 +18,7 @@ import ImgSelector from '../shared/assets/ImgSelector';
 import AudioSelector from '../shared/assets/AudioSelector';
 import VideoSelector from '../shared/assets/VideoSelector';
 import Toggle from '../shared/Toggle';
+import TooltipToggle from './TooltipToggle';
 
 type Props = { room: Room; roomId: number };
 const RoomDetails = ({ room, roomId }: Props) => {
@@ -42,6 +43,7 @@ const RoomDetails = ({ room, roomId }: Props) => {
   return (
     <Box className={styles.leftColumn}>
       <Grid container>
+        <TooltipToggle />
         <Grid item xs={12}>
           <Link to={`/admin/${gameName}/rooms`}>
             <Button
