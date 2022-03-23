@@ -29,8 +29,9 @@ const getExaminingWithItems = createSelector(
 );
 
 const inventorySelector = (state: GameStoreState) => {
-  const { images, playerState } = state;
+  const { images, playerState, config } = state;
   const { using } = playerState;
+  const inventoryImgName = config.img.itemList || 'items';
 
   // TODO: fix the typecasts in this file, either by treating Item and Scenery
   // More as the same thing, or by introducing helper functions with control
@@ -38,7 +39,7 @@ const inventorySelector = (state: GameStoreState) => {
 
   return {
     items: getItemObjects(state) as Item[],
-    inventoryImg: images.get('items'),
+    inventoryImg: images.get(inventoryImgName),
     using,
     examining: getExaminingWithItems(state),
   };
