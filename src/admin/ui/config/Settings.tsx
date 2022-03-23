@@ -3,12 +3,17 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { setVerb } from 'admin/store/reducers/gameStateReducer/configReducer/verbsReducer';
 import { Nullable } from 'game/store/types';
+import { setImageConfig } from 'admin/store/reducers/gameStateReducer/configReducer/imgReducer';
 import { useDispatch, useSelector } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
+import ImgSelector from '../shared/assets/ImgSelector';
 
 const Settings = () => {
   const dispatch = useDispatch();
-  const allVerbs = useSelector(state => state.gameState.config.verbs);
+  const {
+    verbs: allVerbs,
+    img: imgConfig,
+  } = useSelector(state => state.gameState.config);
 
   const handleChange = (verbName: Nullable<string>, index: number) => {
     if (!verbName) {
@@ -55,6 +60,17 @@ const Settings = () => {
         <Typography variant="h5">
           Edit Settings:
         </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <ImgSelector
+          label="cursor"
+          value={imgConfig.cursor}
+          onChange={imgName => dispatch(setImageConfig({
+            ...imgConfig,
+            cursor: imgName,
+          }))}
+          tooltip="Custom image to use as the cursor (defaults to that skeleton hand)"
+        />
       </Grid>
       {allVerbs.map((verb, index) => (
         <Grid item xs={12} key={index}>

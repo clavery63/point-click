@@ -7,9 +7,7 @@ export const imgSlice = createSlice({
   initialState: {} as ImgConfig,
   reducers: {
     setImageConfig: (state, action: PayloadAction<ImgConfig>) => {
-      console.log(action);
-
-      return state;
+      return action.payload;
     },
   },
   extraReducers: builder => {
