@@ -11,10 +11,11 @@ export interface StageData {
   scaleY: number;
 }
 
-const cursorSelector = ({ cursorEnabled, images }: GameStoreState) => {
+const cursorSelector = ({ cursorEnabled, images, config }: GameStoreState) => {
+  const cursorName = config.img.cursor || 'cursor';
   return {
     cursorEnabled,
-    cursorImg: images.get('cursor'),
+    cursorImg: images.get(cursorName),
   };
 };
 

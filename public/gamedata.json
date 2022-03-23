@@ -1400,7 +1400,9 @@
   ],
   "config": {
     "friendlyName": "Test Game",
-    "img": {},
+    "img": {
+      "cursor": "deja-vu-cursor"
+    },
     "verbs": [
       {
         "name": "MOVE",
