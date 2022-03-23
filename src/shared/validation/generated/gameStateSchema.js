@@ -34,12 +34,27 @@ const gameStateSchema = {
             ]
           }
         },
+        "img": {
+          "type": "object",
+          "properties": {
+            "cursor": {
+              "type": "string"
+            },
+            "menu": {
+              "type": "string"
+            },
+            "itemList": {
+              "type": "string"
+            }
+          }
+        },
         "friendlyName": {
           "type": "string"
         }
       },
       "required": [
         "friendlyName",
+        "img",
         "verbs"
       ]
     }

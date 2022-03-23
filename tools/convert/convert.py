@@ -11,12 +11,12 @@ import numpy
 # DEST_WIDTH = 112
 
 # other image
-SOURCE_TOP = 0
-SOURCE_LEFT = 0
-SOURCE_HEIGHT = 1000
-SOURCE_WIDTH = 1000
-DEST_HEIGHT = 50
-DEST_WIDTH = 50
+# SOURCE_TOP = 0
+# SOURCE_LEFT = 0
+# SOURCE_HEIGHT = 1000
+# SOURCE_WIDTH = 1000
+# DEST_HEIGHT = 50
+# DEST_WIDTH = 50
 
 
 ## menu
@@ -28,12 +28,12 @@ DEST_WIDTH = 50
 # DEST_WIDTH = 222
 
 ## items
-# SOURCE_TOP = 158
-# SOURCE_LEFT = 1887
-# SOURCE_HEIGHT = 1252
-# SOURCE_WIDTH = 1173
-# DEST_HEIGHT= 134
-# DEST_WIDTH = 110
+SOURCE_TOP = 158
+SOURCE_LEFT = 1887
+SOURCE_HEIGHT = 1252
+SOURCE_WIDTH = 1173
+DEST_HEIGHT= 134
+DEST_WIDTH = 110
 
 
 def convert(filename):
@@ -58,6 +58,6 @@ def convert(filename):
 
 # for i, filename in enumerate(sorted(os.listdir('source'))):
 #     print(filename)
-convert('jukebox.png')
+convert('deja-vu.png')
 
 
