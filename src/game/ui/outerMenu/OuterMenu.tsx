@@ -1,9 +1,8 @@
 import React from 'react';
 import { Rect } from 'shared/components/tappables';
 import { useDispatch, useSelector } from 'shared/hooks/redux';
+import { getSaveDataKey } from 'game/store/epics/save';
 import Text from '../shared/Text';
-
-const KEY = 'doublehamburger-save-data';
 
 const GameOver = () => (
   <Text left={92} top={60} color="light" text="game over" />
@@ -36,6 +35,7 @@ const Load = ({ onClick }: Props) => (
 const OuterMenu = () => {
   const dispatch = useDispatch();
   const menu = useSelector(state => state.menu);
+  const gameName = useSelector(state => state.gameName);
 
   if (menu === 'NONE') return null;
 
@@ -47,7 +47,7 @@ const OuterMenu = () => {
     fn();
   };
 
-  const hasLoadData = !!window.localStorage.getItem(KEY);
+  const hasLoadData = !!window.localStorage.getItem(getSaveDataKey(gameName));
 
   return (
     <>

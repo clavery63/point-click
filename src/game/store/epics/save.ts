@@ -8,20 +8,22 @@ import { ofType } from 'redux-observable';
 import { AllActions, MyEpic } from './types';
 import { GameStoreState } from '../types';
 
-const KEY = 'doublehamburger-save-data';
+export const getSaveDataKey = (gameName: string) => `point-click-save-data/${gameName}`;
 
 type SaveGame = (g: GameStoreState) => void;
-const saveGame: SaveGame = ({ worldState, playerState, flags }) => {
-  localStorage.setItem(KEY, JSON.stringify({
+const saveGame: SaveGame = ({
+  worldState, playerState, flags, gameName,
+}) => {
+  localStorage.setItem(getSaveDataKey(gameName), JSON.stringify({
     worldState,
     playerState,
     flags: [...flags],
   }));
 };
 
-type LoadGame = () => Observable<AllActions>;
-const loadGame$: LoadGame = () => {
-  const newState = localStorage.getItem(KEY);
+type LoadGame = (gameName: string) => Observable<AllActions>;
+const loadGame$: LoadGame = gameName => {
+  const newState = localStorage.getItem(getSaveDataKey(gameName));
   if (!newState) {
     return of({ type: 'NULL' });
   }
@@ -53,7 +55,7 @@ const save$: MyEpic = (action$, state$, { runText$ }) => {
   const load$ = action$.pipe(
     ofType('LOAD_GAME'),
     withLatestFrom(state$),
-    switchMap(() => loadGame$()),
+    switchMap(([, { gameName }]) => loadGame$(gameName)),
   );
 
   return merge(saveGame$, load$);
