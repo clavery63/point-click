@@ -3,14 +3,12 @@ import worldStateReducer from './worldStateReducer';
 import playerStateReducer from './playerStateReducer';
 import imagesReducer from './imagesReducer';
 import flagsReducer from './flagsReducer';
-import verbNamesReducer from './verbNamesReducer';
-import friendlyNameReducer from './friendlyNameReducer';
+import configReducer from './configReducer';
 
 export default combineReducers({
   worldState: worldStateReducer,
   playerState: playerStateReducer,
   images: imagesReducer,
   flags: flagsReducer,
-  verbNames: verbNamesReducer,
-  friendlyName: friendlyNameReducer,
+  config: configReducer,
 });

@@ -18,7 +18,7 @@ export const verbNamesSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(setGameState, (state, action) => action.payload.verbNames);
+    builder.addCase(setGameState, (state, action) => action.payload.config.verbNames);
   },
 });
 

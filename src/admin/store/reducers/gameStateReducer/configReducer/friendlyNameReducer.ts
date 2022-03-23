@@ -10,7 +10,7 @@ export const friendlyNameSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(setGameState, (state, action) => action.payload.friendlyName);
+    builder.addCase(setGameState, (state, action) => action.payload.config.friendlyName);
   },
 });
 

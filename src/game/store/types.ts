@@ -232,8 +232,10 @@ export interface GameState {
   worldState: WorldState;
   playerState: PlayerState;
   flags: Flags;
-  verbNames: VerbName[];
-  friendlyName: string;
+  config: {
+    verbNames: VerbName[];
+    friendlyName: string;
+  };
 }
 
 export type Entity = Door | Item | Scenery;

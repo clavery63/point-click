@@ -57,14 +57,20 @@ export type ReducerActions = ActionsType[keyof ActionTypes] | { type: 'NULL' };
 const applyReducer = <
   PayloadType
 >(reducer: ParentReducer<PayloadType>, state: GameStoreState, payload: PayloadType) => {
-  return reducer(payload, state.playerState, state.worldState, state.flags, state.verbNames)(state);
+  return reducer(
+    payload,
+    state.playerState,
+    state.worldState,
+    state.flags,
+    state.config.verbNames,
+  )(state);
 };
 
 const setState: ParentReducer<GameStoreState> = payload => () => payload;
 const setWorldState: ParentReducer<WorldState> = setValue('worldState');
 const setPlayerState: ParentReducer<PlayerState> = setValue('playerState');
 const setFlags: ParentReducer<Flags> = setValue('flags');
-const setVerbNames: ParentReducer<VerbName[]> = setValue('verbNames');
+const setVerbNames: ParentReducer<VerbName[]> = setValue('config.verbNames');
 const setText: ParentReducer<Nullable<string[]>> = setValue('text');
 const setRoom: ParentReducer<number> = roomReducer;
 const setFrame: ParentReducer<number> = setValue('transition.frame');

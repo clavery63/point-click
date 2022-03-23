@@ -1,13 +1,13 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { setFriendlyName } from 'admin/store/reducers/gameStateReducer/friendlyNameReducer';
+import { setFriendlyName } from 'admin/store/reducers/gameStateReducer/configReducer/friendlyNameReducer';
 import LongTextField from '../shared/LongTextField';
 import { useDispatch, useSelector } from '../hooks/redux';
 
 const GameName = () => {
   const dispatch = useDispatch();
-  const gameName = useSelector(state => state.gameState.friendlyName);
+  const gameName = useSelector(state => state.gameState.config.friendlyName);
 
   return (
     <>

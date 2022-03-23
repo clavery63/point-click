@@ -18,7 +18,7 @@ const Player = () => {
     const ent = state.gameState.worldState.entities[id];
     return { id, type: ent.type, name: ent.name || ent.id.toString() };
   }));
-  const verbNames = useSelector(state => state.gameState.verbNames);
+  const verbNames = useSelector(state => state.gameState.config.verbNames);
 
   const handleChange = (fieldName: keyof PlayerState) => (value: any) => {
     dispatch(setPlayer({

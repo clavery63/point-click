@@ -20,7 +20,6 @@ const defaultState: GameStoreState = {
   loading: true,
   cursorEnabled: false,
   gameName: '',
-  friendlyName: '',
   menu: 'MAIN',
   playerState: {
     verb: 1,
@@ -35,7 +34,10 @@ const defaultState: GameStoreState = {
     doors: {},
   },
   flags: [],
-  verbNames: [],
+  config: {
+    friendlyName: '',
+    verbNames: [],
+  },
   images: new Map(),
 };
 

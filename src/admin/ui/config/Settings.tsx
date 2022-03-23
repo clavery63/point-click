@@ -1,14 +1,14 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { setVerb } from 'admin/store/reducers/gameStateReducer/verbNamesReducer';
+import { setVerb } from 'admin/store/reducers/gameStateReducer/configReducer/verbNamesReducer';
 import { Nullable } from 'game/store/types';
 import { useDispatch, useSelector } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 
 const Settings = () => {
   const dispatch = useDispatch();
-  const allVerbs = useSelector(state => state.gameState.verbNames);
+  const allVerbs = useSelector(state => state.gameState.config.verbNames);
 
   const handleChange = (verbName: Nullable<string>, index: number) => {
     if (!verbName) {

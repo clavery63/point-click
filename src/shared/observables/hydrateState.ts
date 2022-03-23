@@ -22,20 +22,19 @@ const loadPlayerAndGameState$: LoadState = initialState => {
     switchMap(resp => resp.json()),
     tap(validateGameState),
     map(({
-      playerState, worldState, flags, verbNames, friendlyName,
+      playerState, worldState, flags, config,
     }) => ({
       ...initialState,
       playerState,
       worldState,
       flags,
-      verbNames,
-      friendlyName,
+      config,
     })),
   );
 };
 
-const setPageTitle = ({ friendlyName }: GameStoreState) => {
-  document.title = friendlyName;
+const setPageTitle = ({ config }: GameStoreState) => {
+  document.title = config.friendlyName;
 };
 
 const setAudioSrc = () => {

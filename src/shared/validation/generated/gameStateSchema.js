@@ -13,33 +13,41 @@ const gameStateSchema = {
         "type": "string"
       }
     },
-    "verbNames": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "defaultText": {
-            "type": "string"
+    "config": {
+      "type": "object",
+      "properties": {
+        "verbNames": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "defaultText": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "defaultText",
+              "name"
+            ]
           }
         },
-        "required": [
-          "defaultText",
-          "name"
-        ]
-      }
-    },
-    "friendlyName": {
-      "type": "string"
+        "friendlyName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "friendlyName",
+        "verbNames"
+      ]
     }
   },
   "required": [
+    "config",
     "flags",
-    "friendlyName",
     "playerState",
-    "verbNames",
     "worldState"
   ],
   "definitions": {
