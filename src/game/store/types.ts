@@ -223,7 +223,7 @@ export interface PlayerState {
 
 export type Flags = string[];
 
-export type VerbName = {
+export type VerbConfig = {
   name: string;
   defaultText: string;
 };
@@ -233,7 +233,7 @@ export interface GameState {
   playerState: PlayerState;
   flags: Flags;
   config: {
-    verbNames: VerbName[];
+    verbs: VerbConfig[];
     friendlyName: string;
   };
 }

@@ -18,7 +18,7 @@ const Player = () => {
     const ent = state.gameState.worldState.entities[id];
     return { id, type: ent.type, name: ent.name || ent.id.toString() };
   }));
-  const verbNames = useSelector(state => state.gameState.config.verbNames);
+  const verbs = useSelector(state => state.gameState.config.verbs);
 
   const handleChange = (fieldName: keyof PlayerState) => (value: any) => {
     dispatch(setPlayer({
@@ -42,7 +42,7 @@ const Player = () => {
           label="initial verb"
           value={player.verb}
           onChange={handleChange('verb')}
-          options={verbNames.map((verb: any, index) => ({ value: index, label: verb.name }))}
+          options={verbs.map((verb: any, index) => ({ value: index, label: verb.name }))}
         />
       </Grid>
       <Grid item xs={12}>

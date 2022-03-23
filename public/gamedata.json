@@ -1400,7 +1400,7 @@
   ],
   "config": {
     "friendlyName": "Test Game",
-    "verbNames": [
+    "verbs": [
       {
         "name": "MOVE",
         "defaultText": "blah"

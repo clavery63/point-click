@@ -18,7 +18,7 @@ const MenuOption = (props: Props) => {
   } = props;
   const images = useSelector(state => state.images);
   const currentVerb = useSelector(state => state.playerState.verb);
-  const verbNames = useSelector(state => state.config.verbNames);
+  const verbNames = useSelector(state => state.config.verbs);
   const isActive = verbIndex === currentVerb;
 
   return (

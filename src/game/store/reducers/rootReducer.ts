@@ -9,7 +9,7 @@ import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
 import {
   Flags, GameStoreState, PlayerState, WorldState,
-  Menu, VerbIndex, Nullable, PageDir, Music, VerbName,
+  Menu, VerbIndex, Nullable, PageDir, Music, VerbConfig,
 } from '../types';
 import defaultState from '../defaultState';
 import { AllActions } from '../epics/types';
@@ -25,7 +25,7 @@ type ActionTypes = {
   SET_WORLD_STATE: WorldState;
   SET_PLAYER_STATE: PlayerState;
   SET_FLAGS: Flags;
-  SET_VERB_NAMES: VerbName[];
+  SET_VERBS: VerbConfig[];
   SET_TEXT: Nullable<string[]>;
   SET_NEXT_MUSIC: Music;
   SET_ROOM: number;
@@ -62,7 +62,7 @@ const applyReducer = <
     state.playerState,
     state.worldState,
     state.flags,
-    state.config.verbNames,
+    state.config.verbs,
   )(state);
 };
 
@@ -70,7 +70,7 @@ const setState: ParentReducer<GameStoreState> = payload => () => payload;
 const setWorldState: ParentReducer<WorldState> = setValue('worldState');
 const setPlayerState: ParentReducer<PlayerState> = setValue('playerState');
 const setFlags: ParentReducer<Flags> = setValue('flags');
-const setVerbNames: ParentReducer<VerbName[]> = setValue('config.verbNames');
+const setVerbs: ParentReducer<VerbConfig[]> = setValue('config.verbs');
 const setText: ParentReducer<Nullable<string[]>> = setValue('text');
 const setRoom: ParentReducer<number> = roomReducer;
 const setFrame: ParentReducer<number> = setValue('transition.frame');
@@ -116,8 +116,8 @@ const rootReducer: ReduxReducer<
       return applyReducer(setPlayerState, state, action.payload);
     case 'SET_FLAGS':
       return applyReducer(setFlags, state, action.payload);
-    case 'SET_VERB_NAMES':
-      return applyReducer(setVerbNames, state, action.payload);
+    case 'SET_VERBS':
+      return applyReducer(setVerbs, state, action.payload);
     case 'SET_TEXT':
       return applyReducer(setText, state, action.payload);
     case 'SET_NEXT_MUSIC':

@@ -16,7 +16,7 @@ const gameStateSchema = {
     "config": {
       "type": "object",
       "properties": {
-        "verbNames": {
+        "verbs": {
           "type": "array",
           "items": {
             "type": "object",
@@ -40,7 +40,7 @@ const gameStateSchema = {
       },
       "required": [
         "friendlyName",
-        "verbNames"
+        "verbs"
       ]
     }
   },

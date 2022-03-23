@@ -36,7 +36,7 @@ const defaultState: GameStoreState = {
   flags: [],
   config: {
     friendlyName: '',
-    verbNames: [],
+    verbs: [],
   },
   images: new Map(),
 };

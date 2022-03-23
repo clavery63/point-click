@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import verbNamesReducer from './verbNamesReducer';
+import verbsReducer from './verbsReducer';
 import friendlyNameReducer from './friendlyNameReducer';
 
 export default combineReducers({
-  verbNames: verbNamesReducer,
+  verbs: verbsReducer,
   friendlyName: friendlyNameReducer,
 });

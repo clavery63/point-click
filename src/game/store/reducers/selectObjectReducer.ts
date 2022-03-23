@@ -4,27 +4,27 @@ import openReducer from './verbReducers/openReducer';
 import takeReducer from './verbReducers/takeReducer';
 import _useReducer from './verbReducers/useReducer';
 import { keepState } from './utils';
-import { VerbIndex, VerbName } from '../types';
+import { VerbIndex, VerbConfig } from '../types';
 import genericVerbReducer from './verbReducers/genericVerbReducer';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getReducer = (verb: VerbIndex, verbNames: VerbName[]) => ([
+const getReducer = (verb: VerbIndex, verbs: VerbConfig[]) => ([
   moveReducer,
   genericVerbReducer(1, object => object.description),
   openReducer,
   _useReducer,
-  genericVerbReducer(4, () => verbNames[4].defaultText),
+  genericVerbReducer(4, () => verbs[4].defaultText),
   takeReducer,
-  genericVerbReducer(6, () => verbNames[6].defaultText),
-  genericVerbReducer(7, () => verbNames[7].defaultText),
-  genericVerbReducer(8, () => verbNames[8].defaultText),
+  genericVerbReducer(6, () => verbs[6].defaultText),
+  genericVerbReducer(7, () => verbs[7].defaultText),
+  genericVerbReducer(8, () => verbs[8].defaultText),
 ][verb]);
 
 type GenericReducer = (t: 'doors' | 'entities') => ParentReducer<number>;
 const selectObjectReducer: GenericReducer = entType => {
-  return (id, playerState, worldState, flags, verbNames) => {
+  return (id, playerState, worldState, flags, verbs) => {
     const object = worldState[entType][id];
-    const reducer = getReducer(playerState.verb, verbNames) || keepState;
+    const reducer = getReducer(playerState.verb, verbs) || keepState;
     return reducer(object, playerState, flags);
   };
 };
