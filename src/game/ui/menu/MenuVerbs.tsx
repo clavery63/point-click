@@ -1,7 +1,7 @@
 import { VerbIndex } from 'game/store/types';
 import React from 'react';
 import { useSelector } from 'shared/hooks/redux';
-import MenuOption from './MenuOption';
+import VerbOption from './VerbOption';
 
 type Props = {
   onClick: (verb: VerbIndex) => void;
@@ -12,7 +12,7 @@ const MenuCenter = ({ onClick }: Props) => {
   return (
     <>
       {verbPositions.map(({ left, top }, index) => (
-        <MenuOption
+        <VerbOption
           key={index}
           verbIndex={index as VerbIndex}
           left={left}

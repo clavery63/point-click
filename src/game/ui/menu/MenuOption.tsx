@@ -6,20 +6,18 @@ import { useSelector } from 'shared/hooks/redux';
 import Text from '../shared/Text';
 
 type Props = {
-  verbIndex: VerbIndex;
   top: number;
   left: number;
   onClick: (verb: VerbIndex) => void;
+  text: string;
+  isActive?: boolean;
 };
 
 const MenuOption = (props: Props) => {
   const {
-    verbIndex, top, left, onClick,
+    top, left, onClick, text, isActive,
   } = props;
   const images = useSelector(state => state.images);
-  const currentVerb = useSelector(state => state.playerState.verb);
-  const verbNames = useSelector(state => state.config.verbs);
-  const isActive = verbIndex === currentVerb;
 
   return (
     <Group x={left} y={top}>
@@ -32,11 +30,11 @@ const MenuOption = (props: Props) => {
       )}
       {!isActive && (
         <Image
-          onClick={() => onClick(verbIndex)}
+          onClick={onClick}
           image={images.get('menu-button')}
         />
       )}
-      <Text text={verbNames[verbIndex].name} left={9} top={1} />
+      <Text text={text} left={9} top={1} />
     </Group>
   );
 };

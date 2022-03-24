@@ -17,10 +17,11 @@ const revealedDoors = createSelector(
 );
 
 const menuSelector = (state: GameStoreState) => {
+  const menuImgName = state.config.img.menu || 'menu';
   return {
     hasText: hasText(state),
     doors: revealedDoors(state),
-    menuImg: state.images.get('menu'),
+    menuImg: state.images.get(menuImgName),
   };
 };
 

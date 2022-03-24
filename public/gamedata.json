@@ -1401,25 +1401,25 @@
   "config": {
     "friendlyName": "Test Game",
     "img": {
-      "cursor": "deja-vu-cursor"
+      "menu": "deja-vu-menu"
     },
     "positions" : {
       "verbs": [
-        { "left": 15, "top": 7 },
-        { "left": 68, "top": 15 },
-        { "left": 68, "top": 31 },
-        { "left": 68, "top": 47 },
-        { "left": 68, "top": 63 },
-        { "left": 118, "top": 15 },
-        { "left": 118, "top": 31 },
-        { "left": 118, "top": 47 },
-        { "left": 118, "top": 63 }
+        { "left": 119, "top": 15 },
+        { "left": 6, "top": 15 },
+        { "left": 6, "top": 31 },
+        { "left": 6, "top": 47 },
+        { "left": 6, "top": 63 },
+        { "left": 62, "top": 15 },
+        { "left": 62, "top": 31 },
+        { "left": 62, "top": 47 },
+        { "left": 62, "top": 63 }
       ],
       "pageDown": { "left": 175, "top": 15 },
-      "pageUp": { "left": 175, "top": 31 },
+      "pageUp": { "left": 207, "top": 15 },
       "self": { "left": 175, "top": 47 },
       "save": { "left": 175, "top": 63 },
-      "miniMap": { "left": 15, "top": 23 }
+      "miniMap": { "left": 119, "top": 31 }
     },
     "verbs": [
       {
