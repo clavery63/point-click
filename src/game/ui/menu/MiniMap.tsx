@@ -11,7 +11,7 @@ type Props = {
 const MiniMap = ({ onClick, doors }: Props) => {
   const images = useSelector(state => state.images);
   return (
-    <Group x={8} y={16}>
+    <Group x={15} y={23}>
       {doors.map(door => (
         <Image
           key={door.id}

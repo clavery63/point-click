@@ -2,22 +2,14 @@ import React from 'react';
 import { Image, Group } from 'react-konva';
 import { useDispatch, useSelector } from 'shared/hooks/redux';
 import { PageDir, VerbIndex } from 'game/store/types';
-import MenuLeft from './MenuLeft';
-import MenuCenter from './MenuCenter';
-import MenuRight from './MenuRight';
+import MenuVerbs from './MenuVerbs';
+import MenuButtons from './MenuButtons';
 import menuSelector from './menuSelector';
+import MiniMap from './MiniMap';
 
 const Menu = () => {
   const { hasText, menuImg, doors } = useSelector(menuSelector);
-
   const dispatch = useDispatch();
-  const dispatchVerb = (verb: VerbIndex) => dispatch({ type: 'SELECT_VERB', payload: verb });
-  const dispatchDoor = (id: number) => dispatch({
-    type: 'SELECT_DOOR',
-    payload: id,
-  });
-  const dispatchPage = (dir: PageDir) => dispatch({ type: 'CHANGE_PAGE', payload: dir });
-  const dispatchSave = () => dispatch({ type: 'SAVE_GAME' });
 
   if (hasText) {
     return null;
@@ -30,17 +22,25 @@ const Menu = () => {
         height={78}
         image={menuImg}
       />
-      <MenuLeft
+      <MiniMap
+        onClick={(id: number) => dispatch({
+          type: 'SELECT_DOOR',
+          payload: id,
+        })}
         doors={doors}
-        onMenuClick={dispatchVerb}
-        onDoorClick={dispatchDoor}
       />
-      <MenuCenter
-        onClick={dispatchVerb}
+      <MenuVerbs
+        onClick={(verb: VerbIndex) => dispatch({
+          type: 'SELECT_VERB',
+          payload: verb,
+        })}
       />
-      <MenuRight
-        onPageClick={dispatchPage}
-        onSaveClick={dispatchSave}
+      <MenuButtons
+        onPageClick={(dir: PageDir) => dispatch({
+          type: 'CHANGE_PAGE',
+          payload: dir,
+        })}
+        onSaveClick={() => dispatch({ type: 'SAVE_GAME' })}
       />
     </Group>
   );
