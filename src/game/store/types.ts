@@ -234,12 +234,32 @@ export type ImgConfig = {
   itemList?: string;
 };
 
+export type PositionsConfig = {
+  verbs?: [
+    Position,
+    Position,
+    Position,
+    Position,
+    Position,
+    Position,
+    Position,
+    Position,
+    Position,
+  ];
+  pageDown?: Position;
+  pageUp?: Position;
+  self?: Position;
+  save?: Position;
+  miniMap?: Position;
+};
+
 export interface GameState {
   worldState: WorldState;
   playerState: PlayerState;
   flags: Flags;
   config: {
     verbs: VerbConfig[];
+    positions: PositionsConfig;
     img: ImgConfig;
     friendlyName: string;
   };

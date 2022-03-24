@@ -34,6 +34,60 @@ const gameStateSchema = {
             ]
           }
         },
+        "positions": {
+          "type": "object",
+          "properties": {
+            "verbs": {
+              "type": "array",
+              "items": [
+                {
+                  "$ref": "#/definitions/Position"
+                },
+                {
+                  "$ref": "#/definitions/Position"
+                },
+                {
+                  "$ref": "#/definitions/Position"
+                },
+                {
+                  "$ref": "#/definitions/Position"
+                },
+                {
+                  "$ref": "#/definitions/Position"
+                },
+                {
+                  "$ref": "#/definitions/Position"
+                },
+                {
+                  "$ref": "#/definitions/Position"
+                },
+                {
+                  "$ref": "#/definitions/Position"
+                },
+                {
+                  "$ref": "#/definitions/Position"
+                }
+              ],
+              "minItems": 9,
+              "maxItems": 9
+            },
+            "pageDown": {
+              "$ref": "#/definitions/Position"
+            },
+            "pageUp": {
+              "$ref": "#/definitions/Position"
+            },
+            "self": {
+              "$ref": "#/definitions/Position"
+            },
+            "save": {
+              "$ref": "#/definitions/Position"
+            },
+            "miniMap": {
+              "$ref": "#/definitions/Position"
+            }
+          }
+        },
         "img": {
           "type": "object",
           "properties": {
@@ -55,6 +109,7 @@ const gameStateSchema = {
       "required": [
         "friendlyName",
         "img",
+        "positions",
         "verbs"
       ]
     }
