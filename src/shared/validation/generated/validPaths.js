@@ -82,5 +82,53 @@ export const numberPaths = [
   },
   {
     "value": "playerState.page"
+  },
+  {
+    "texts": [
+      "config.positions.verbs[",
+      "].left"
+    ],
+    "types": [
+      "number"
+    ]
+  },
+  {
+    "texts": [
+      "config.positions.verbs[",
+      "].top"
+    ],
+    "types": [
+      "number"
+    ]
+  },
+  {
+    "value": "config.positions.pageDown.left"
+  },
+  {
+    "value": "config.positions.pageDown.top"
+  },
+  {
+    "value": "config.positions.pageUp.left"
+  },
+  {
+    "value": "config.positions.pageUp.top"
+  },
+  {
+    "value": "config.positions.self.left"
+  },
+  {
+    "value": "config.positions.self.top"
+  },
+  {
+    "value": "config.positions.save.left"
+  },
+  {
+    "value": "config.positions.save.top"
+  },
+  {
+    "value": "config.positions.miniMap.left"
+  },
+  {
+    "value": "config.positions.miniMap.top"
   }
 ];

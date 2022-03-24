@@ -1,27 +1,17 @@
 import { VerbIndex } from 'game/store/types';
 import React from 'react';
+import { useSelector } from 'shared/hooks/redux';
 import MenuOption from './MenuOption';
-
-const menuOptions: { left: number; top: number}[] = [
-  { left: 15, top: 7 },
-  { left: 68, top: 15 },
-  { left: 68, top: 31 },
-  { left: 68, top: 47 },
-  { left: 68, top: 63 },
-  { left: 118, top: 15 },
-  { left: 118, top: 31 },
-  { left: 118, top: 47 },
-  { left: 118, top: 63 },
-];
 
 type Props = {
   onClick: (verb: VerbIndex) => void;
 };
 
 const MenuCenter = ({ onClick }: Props) => {
+  const verbPositions = useSelector(state => state.config.positions.verbs);
   return (
     <>
-      {menuOptions.map(({ left, top }, index) => (
+      {verbPositions.map(({ left, top }, index) => (
         <MenuOption
           key={index}
           verbIndex={index as VerbIndex}

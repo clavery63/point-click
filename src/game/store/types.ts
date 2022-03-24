@@ -235,7 +235,7 @@ export type ImgConfig = {
 };
 
 export type PositionsConfig = {
-  verbs?: [
+  verbs: [
     Position,
     Position,
     Position,
@@ -246,11 +246,11 @@ export type PositionsConfig = {
     Position,
     Position,
   ];
-  pageDown?: Position;
-  pageUp?: Position;
-  self?: Position;
-  save?: Position;
-  miniMap?: Position;
+  pageDown: Position;
+  pageUp: Position;
+  self: Position;
+  save: Position;
+  miniMap: Position;
 };
 
 export interface GameState {

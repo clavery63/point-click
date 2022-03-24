@@ -86,7 +86,15 @@ const gameStateSchema = {
             "miniMap": {
               "$ref": "#/definitions/Position"
             }
-          }
+          },
+          "required": [
+            "miniMap",
+            "pageDown",
+            "pageUp",
+            "save",
+            "self",
+            "verbs"
+          ]
         },
         "img": {
           "type": "object",
