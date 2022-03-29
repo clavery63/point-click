@@ -16,7 +16,7 @@ const shift = ' '.charCodeAt(0);
  *
  * We also probably want to store common assets like these in their own bucket.
  */
-const makeCanvasSet = (image: HTMLImageElement) => {
+export const makeCanvasSet = (image: HTMLImageElement) => {
   return range(sheetWidth).flatMap(y => range(sheetWidth).map(x => {
     const canvas = document.createElement('canvas');
     canvas.width = spriteWidth;
@@ -50,17 +50,15 @@ const selector = createSelector(
 );
 
 type Color = 'dark' | 'light';
-type Props = {
+type TextStatelessProps = {
   text: string;
   left: number;
   top: number;
-  color?: Color;
+  canvases?: HTMLCanvasElement[];
 };
-const Text = ({
-  text, left, top, color,
-}: Props) => {
-  const canvasSets = useSelector(selector);
-  const canvases = canvasSets[color || 'dark'];
+export const TextStateless = ({
+  text, left, top, canvases,
+}: TextStatelessProps) => {
   const upper = text.toUpperCase();
   const charCodes = upper.split('').map(char => char.charCodeAt(0) - shift);
 
@@ -78,6 +76,28 @@ const Text = ({
         />
       ))}
     </Group>
+  );
+};
+
+type Props = {
+  text: string;
+  left: number;
+  top: number;
+  color?: Color;
+};
+const Text = ({
+  text, left, top, color,
+}: Props) => {
+  const canvasSets = useSelector(selector);
+  const canvases = canvasSets[color || 'dark'];
+
+  return (
+    <TextStateless
+      top={top}
+      left={left}
+      text={text}
+      canvases={canvases}
+    />
   );
 };
 

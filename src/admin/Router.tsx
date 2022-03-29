@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import AdminContainer from './AdminContainer';
 import ConfigPage from './ui/config';
+import GameLayout from './ui/config/gameLayout';
 import Home from './ui/home/Home';
 import EditRoom from './ui/rooms/EditRoom';
 import ListRooms from './ui/rooms/ListRooms';
@@ -23,6 +24,9 @@ const Router = ({ gameName }: Props) => {
           </Route>
           <Route path={`${path}/rooms`}>
             <ListRooms />
+          </Route>
+          <Route path={`${path}/config/ui`}>
+            <GameLayout />
           </Route>
           <Route path={`${path}/config`}>
             <ConfigPage />

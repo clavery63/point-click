@@ -4,11 +4,16 @@ import Typography from '@mui/material/Typography';
 import { setVerb } from 'admin/store/reducers/gameStateReducer/configReducer/verbsReducer';
 import { Nullable } from 'game/store/types';
 import { setImageConfig } from 'admin/store/reducers/gameStateReducer/configReducer/imgReducer';
-import { useDispatch, useSelector } from '../hooks/redux';
-import LongTextField from '../shared/LongTextField';
-import ImgSelector from '../shared/assets/ImgSelector';
+import { Link, useParams } from 'react-router-dom';
+import { Button, Stack } from '@mui/material';
+import { ArrowBack } from '@mui/icons-material';
+import { useDispatch, useSelector } from '../../hooks/redux';
+import LongTextField from '../../shared/LongTextField';
+import ImgSelector from '../../shared/assets/ImgSelector';
+import GameLayoutWidget from './GameLayoutWidget';
 
-const Settings = () => {
+const GameLayout = () => {
+  const { gameName } = useParams<{ gameName: string }>();
   const dispatch = useDispatch();
   const {
     verbs: allVerbs,
@@ -55,11 +60,23 @@ const Settings = () => {
   };
 
   return (
-    <>
+    <Grid container>
       <Grid item xs={12}>
-        <Typography variant="h5">
-          Edit Settings:
+        <Link to={`/admin/${gameName}/config`}>
+          <Button
+            startIcon={<ArrowBack>back</ArrowBack>}
+          >
+            To Config Edit
+          </Button>
+        </Link>
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant="h4">
+          Edit Game UI:
         </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <GameLayoutWidget />
       </Grid>
       <Grid item xs={12}>
         <ImgSelector
@@ -72,8 +89,30 @@ const Settings = () => {
           tooltip="Custom image to use as the cursor (defaults to that skeleton hand)"
         />
       </Grid>
+      <Grid item xs={12}>
+        <ImgSelector
+          label="item list"
+          value={imgConfig.itemList}
+          onChange={imgName => dispatch(setImageConfig({
+            ...imgConfig,
+            itemList: imgName,
+          }))}
+          tooltip="Custom image to use as the item list (defaults to Shadowgate)"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <ImgSelector
+          label="menu"
+          value={imgConfig.menu}
+          onChange={imgName => dispatch(setImageConfig({
+            ...imgConfig,
+            menu: imgName,
+          }))}
+          tooltip="Custom image to use as the menu (defaults to Shadowgate)"
+        />
+      </Grid>
       {allVerbs.map((verb, index) => (
-        <Grid item xs={12} key={index}>
+        <Stack direction="row" spacing={2} key={index}>
           <LongTextField
             label={`verb ${index} name`}
             value={verb.name}
@@ -85,10 +124,10 @@ const Settings = () => {
             value={verb.defaultText}
             onChange={value => handleDefaultTextChange(value, index)}
           />
-        </Grid>
+        </Stack>
       ))}
-    </>
+    </Grid>
   );
 };
 
-export default Settings;
+export default GameLayout;

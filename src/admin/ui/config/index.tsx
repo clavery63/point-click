@@ -6,10 +6,10 @@ import Stack from '@mui/material/Stack';
 import { Link, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import ArrowBack from '@mui/icons-material/ArrowBack';
+import { ArrowForward } from '@mui/icons-material';
 import useStyles from '../shared/useStyles';
 import Player from './Player';
 import Flags from './Flags';
-import Settings from './Settings';
 import UploadButton from '../shared/UploadButton';
 import EntityDetails from '../rooms/EntityDetails';
 import GameName from './GameName';
@@ -31,6 +31,15 @@ const ConfigPage = () => {
             </Link>
           </Grid>
           <Grid item xs={12}>
+            <Link to={`/admin/${gameName}/config/ui`}>
+              <Button
+                startIcon={<ArrowForward>forward</ArrowForward>}
+              >
+                Edit Game UI
+              </Button>
+            </Link>
+          </Grid>
+          <Grid item xs={12}>
             <Typography variant="h4">
               Edit Game Config:
             </Typography>
@@ -38,7 +47,6 @@ const ConfigPage = () => {
           <GameName />
           <Player />
           <Flags />
-          <Settings />
         </Grid>
         <Stack direction="row" spacing={2}>
           <UploadButton />
