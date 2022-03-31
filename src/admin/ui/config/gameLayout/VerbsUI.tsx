@@ -1,3 +1,4 @@
+import { setSelected } from 'admin/store/reducers/editorStateReducer/selectedEntityReducer';
 import { setVerbPosition } from 'admin/store/reducers/gameStateReducer/configReducer/positionsReducer';
 import { useSelector, useDispatch } from 'admin/ui/hooks/redux';
 import useCachebuster from 'admin/ui/hooks/useCachebuster';
@@ -6,6 +7,7 @@ import { KonvaEventObject } from 'konva/types/Node';
 import React from 'react';
 import { Group, Image } from 'react-konva';
 import { createSelector } from 'reselect';
+import { setCursorStyle } from 'shared/components/PreciseImage';
 
 const canvasesSelector = createSelector(
   // TODO: fix the "any" type here
@@ -34,7 +36,10 @@ const Verb = (props: Props) => {
       x={left + cachebuster}
       y={top + cachebuster}
       draggable
-      onClick={() => console.log(verbs[index])}
+      onClick={() => dispatch(setSelected({
+        id: index,
+        type: 'verbs',
+      }))}
       onDragEnd={(e: KonvaEventObject<DragEvent>) => {
         dispatch(setVerbPosition({
           top: Math.round(e.target.y()),
@@ -42,6 +47,8 @@ const Verb = (props: Props) => {
           index,
         }));
       }}
+      onMouseEnter={setCursorStyle('pointer')}
+      onMouseLeave={setCursorStyle('default')}
     >
       <Image image={images['menu-button']} />
       <Text text={verbs[index].name} left={9} top={1} canvases={canvases} />
