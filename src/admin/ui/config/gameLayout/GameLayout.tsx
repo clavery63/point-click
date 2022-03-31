@@ -1,6 +1,7 @@
 import { useSelector } from 'admin/ui/hooks/redux';
 import React from 'react';
 import { Group, Image, Rect } from 'react-konva';
+import MenuButtonsUI from './MenuButtonsUI';
 import VerbsUI from './VerbsUI';
 
 const GameLayout = () => {
@@ -27,6 +28,7 @@ const GameLayout = () => {
       <Group x={17} y={152}>
         <Image image={images[menu || 'menu']} />
         <VerbsUI />
+        <MenuButtonsUI />
       </Group>
     </Group>
   );

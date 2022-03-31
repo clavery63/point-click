@@ -8,6 +8,12 @@ type VerbPayload = {
   left: number;
 };
 
+type ButtonPayload = {
+  name: string;
+  top: number;
+  left: number;
+};
+
 export const positionsSlice = createSlice({
   name: 'positions',
   initialState: {} as PositionsConfig,
@@ -17,12 +23,20 @@ export const positionsSlice = createSlice({
 
       state.verbs[index] = { top, left };
     },
+    setMenuButtonPosition: (state, action: PayloadAction<ButtonPayload>) => {
+      const { name, top, left } = action.payload;
+
+      return {
+        ...state,
+        [name]: { top, left },
+      };
+    },
   },
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.config.positions);
   },
 });
 
-export const { setVerbPosition } = positionsSlice.actions;
+export const { setVerbPosition, setMenuButtonPosition } = positionsSlice.actions;
 
 export default positionsSlice.reducer;
