@@ -1403,6 +1403,9 @@
     "img": {
       "menu": "deja-vu-menu"
     },
+    "colors": {
+      "background": "#ebe6af"
+    },
     "positions" : {
       "verbs": [
         { "left": 119, "top": 15 },

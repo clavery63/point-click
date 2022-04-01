@@ -26,7 +26,6 @@ const viewportSelector = (state: GameStoreState) => {
       .filter(door => !!(door.openImg || door.closedImg)),
     entities: entities
       .filter(entity => !entity.visibleFlag || flags.includes(entity.visibleFlag)),
-    borderImg: images.get('border'),
     roomImg: images.get(img || ''),
     video,
     gameName,

@@ -7,7 +7,6 @@ import Text from '../shared/Text';
 
 const TEXT_AREA_WIDTH = 224;
 const TEXT_AREA_HEIGHT = 96;
-const TEXT_AREA_COLOR = '#f6d7ae';
 
 type HrProps = {
   left: number;
@@ -40,15 +39,16 @@ const Rows = ({ hr }: RowsProps) => (
   </>
 );
 
-const selector = ({ text, images }: GameStoreState) => {
+const selector = ({ text, images, config }: GameStoreState) => {
   return {
     lines: text || null,
     hrImg: images.get('line'),
+    bgColor: config.colors.background,
   };
 };
 
 const TextOverlay = () => {
-  const { lines, hrImg } = useSelector(selector);
+  const { lines, hrImg, bgColor } = useSelector(selector);
 
   if (!lines) {
     return null;
@@ -57,7 +57,7 @@ const TextOverlay = () => {
   return (
     <Group>
       <Group x={16} y={160} width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT}>
-        <Rect width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT} fill={TEXT_AREA_COLOR} />
+        <Rect width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT} fill={bgColor} />
         <Rows hr={hrImg} />
         {lines.map((line, lineNumber) => (
           <Text

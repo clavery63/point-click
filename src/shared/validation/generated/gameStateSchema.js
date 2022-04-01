@@ -110,11 +110,23 @@ const gameStateSchema = {
             }
           }
         },
+        "colors": {
+          "type": "object",
+          "properties": {
+            "background": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "background"
+          ]
+        },
         "friendlyName": {
           "type": "string"
         }
       },
       "required": [
+        "colors",
         "friendlyName",
         "img",
         "positions",

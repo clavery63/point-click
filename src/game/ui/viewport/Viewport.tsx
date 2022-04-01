@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Group } from 'react-konva';
+import { Image, Group, Rect } from 'react-konva';
 import { useDispatch, useSelector } from 'shared/hooks/redux';
 import { Entity } from 'game/store/types';
 import { getVideoPath } from 'shared/util/getAssetsPath';
@@ -23,6 +23,17 @@ const Background = React.memo(({ image, video, gameName }: BGProps) => {
   return <Image width={112} height={112} image={image} />;
 });
 
+const Border = () => {
+  const images = useSelector(state => state.images);
+  const bgColor = useSelector(state => state.config.colors.background);
+  return (
+    <Group>
+      <Rect width={128} height={128} fill={bgColor} />
+      <Image width={128} height={128} image={images.get('border')} />
+    </Group>
+  );
+};
+
 type EntityProps = { entity: Entity; onClick: (id: number) => void };
 const EntityComponent = (props: EntityProps) => {
   const { entity, onClick } = props;
@@ -40,7 +51,6 @@ const EntityComponent = (props: EntityProps) => {
 const Viewport = () => {
   const dispatch = useDispatch();
   const {
-    borderImg,
     roomImg,
     doors,
     entities,
@@ -55,7 +65,7 @@ const Viewport = () => {
 
   return (
     <Group x={8} y={23}>
-      <Image width={128} height={128} image={borderImg} />
+      <Border />
       <Group x={8} y={8}>
         <Background image={roomImg} video={video} gameName={gameName} />
         <Group>

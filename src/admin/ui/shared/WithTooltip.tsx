@@ -19,17 +19,19 @@ const useStyles = makeStyles({
 type Props = {
   text?: string;
   children: React.ReactNode;
+  top?: string;
 };
-const WithTooltip = ({ text, children }: Props) => {
+const WithTooltip = ({ text, children, top }: Props) => {
   const tooltipsEnabled = useSelector(state => state.editorState.tooltips);
   const classes = useStyles();
+  const styleOverride = top ? { top } : {};
 
   return (
-    <Box style={{ position: 'relative' }}>
+    <Box style={{ position: 'relative', display: 'inline' }}>
       {children}
       {tooltipsEnabled && text && (
         <Tooltip title={text}>
-          <Box className={classes.tooltip}>
+          <Box className={classes.tooltip} style={styleOverride}>
             <Icon>
               <Help sx={{ fontSize: 16 }} />
             </Icon>

@@ -2,11 +2,13 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { setImageConfig } from 'admin/store/reducers/gameStateReducer/configReducer/imgReducer';
+import { setColors } from 'admin/store/reducers/gameStateReducer/configReducer/colorsReducer';
 import { Link, useParams } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
 import { ArrowBack } from '@mui/icons-material';
 import EntityDetails from 'admin/ui/rooms/EntityDetails';
 import { makeStyles } from '@mui/styles';
+import LongTextField from 'admin/ui/shared/LongTextField';
 import { useDispatch, useSelector } from '../../hooks/redux';
 import ImgSelector from '../../shared/assets/ImgSelector';
 import GameLayoutWidget from './GameLayoutWidget';
@@ -32,6 +34,7 @@ const GameLayout = () => {
   const styles = useStyles();
   const {
     img: imgConfig,
+    colors,
   } = useSelector(state => state.gameState.config);
 
   return (
@@ -86,6 +89,18 @@ const GameLayout = () => {
                 menu: imgName,
               }))}
               tooltip="Custom image to use as the menu (defaults to Shadowgate)"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <LongTextField
+              fullWidth={false}
+              label="background color"
+              value={colors.background}
+              onChange={color => dispatch(setColors({
+                ...colors,
+                background: color || '#ffffff',
+              }))}
+              tooltip="Affects the viewport background and text overlay"
             />
           </Grid>
         </Grid>

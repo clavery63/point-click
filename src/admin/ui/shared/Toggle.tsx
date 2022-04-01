@@ -13,7 +13,7 @@ const Toggle = ({
 }: Props) => {
   return (
     <Box style={{ float: 'left' }}>
-      <WithTooltip text={tooltip}>
+      <WithTooltip text={tooltip} top="-3px">
         <FormControlLabel
           style={{ paddingRight: '20px', marginTop: '-1px' }}
           control={(

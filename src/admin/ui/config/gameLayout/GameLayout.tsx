@@ -7,15 +7,17 @@ import VerbsUI from './VerbsUI';
 
 const GameLayout = () => {
   const images = useSelector(state => state.gameState.images);
-  const { cursor, menu, itemList } = useSelector(state => state.gameState.config.img);
+  const { img, colors } = useSelector(state => state.gameState.config);
+  const { cursor, menu, itemList } = img;
   return (
     <Group>
       <Rect width={256} height={240} fill="black" />
-      <Image
-        x={8}
-        y={23}
-        image={images.border}
-      />
+      <Group x={8} y={23}>
+        <Rect width={128} height={128} fill={colors.background} />
+        <Image
+          image={images.border}
+        />
+      </Group>
       <Image
         x={50}
         y={50}

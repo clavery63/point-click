@@ -38,6 +38,9 @@ const defaultState: GameStoreState = {
     friendlyName: '',
     verbs: [],
     img: {},
+    colors: {
+      background: '',
+    },
     positions: {
       verbs: [
         { left: 15, top: 7 },

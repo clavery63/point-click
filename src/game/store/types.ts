@@ -253,6 +253,10 @@ export type PositionsConfig = {
   miniMap: Position;
 };
 
+export type ColorsConfig = {
+  background: string;
+};
+
 export interface GameState {
   worldState: WorldState;
   playerState: PlayerState;
@@ -261,6 +265,7 @@ export interface GameState {
     verbs: VerbConfig[];
     positions: PositionsConfig;
     img: ImgConfig;
+    colors: ColorsConfig;
     friendlyName: string;
   };
 }
