@@ -1,6 +1,5 @@
 import { setMenuButtonPosition } from 'admin/store/reducers/gameStateReducer/configReducer/positionsReducer';
 import { useSelector, useDispatch } from 'admin/ui/hooks/redux';
-import useCachebuster from 'admin/ui/hooks/useCachebuster';
 import { KonvaEventObject } from 'konva/types/Node';
 import React from 'react';
 import { Group, Image } from 'react-konva';
@@ -16,12 +15,11 @@ type Props = { top: number; left: number};
 const MiniMapPositioned = ({ top, left }: Props) => {
   const dispatch = useDispatch();
   const images = useSelector(state => state.gameState.images);
-  const cachebuster = useCachebuster(1000 * top + left);
 
   return (
     <Group
-      x={left + cachebuster}
-      y={top + cachebuster}
+      x={left + Math.random() / 1000}
+      y={top + Math.random() / 1000}
       draggable
       onMouseEnter={setCursorStyle('pointer')}
       onMouseLeave={setCursorStyle('default')}

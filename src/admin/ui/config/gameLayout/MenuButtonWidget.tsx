@@ -1,5 +1,4 @@
 import { useSelector } from 'admin/ui/hooks/redux';
-import useCachebuster from 'admin/ui/hooks/useCachebuster';
 import { TextStateless as Text, makeCanvasSet } from 'game/ui/shared/Text';
 import { KonvaEventObject } from 'konva/types/Node';
 import React from 'react';
@@ -29,12 +28,13 @@ const MenuButtonWidget = (props: Props) => {
   } = props;
   const images = useSelector(state => state.gameState.images);
   const canvases = useSelector(canvasesSelector);
-  const cachebuster = useCachebuster(1000 * top + left);
 
   return (
     <Group
-      x={left + cachebuster}
-      y={top + cachebuster}
+      // TODO: useCachebuster doesn't really work as intended. Find a more
+      // foolproof way to handle this
+      x={left + Math.random() / 1000}
+      y={top + Math.random() / 1000}
       draggable
       onClick={onClick}
       onDragEnd={onDrag}
