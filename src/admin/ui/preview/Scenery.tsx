@@ -10,7 +10,7 @@ import { isUnselected } from '../utils/isSelected';
 import useReordering from '../hooks/useReordering';
 
 type Props = {
-  roomId: number;
+  roomId?: number;
   scenery: Scenery;
 };
 const SceneryComponent = ({ roomId, scenery }: Props) => {

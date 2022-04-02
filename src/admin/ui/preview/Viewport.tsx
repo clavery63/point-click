@@ -9,9 +9,9 @@ import Background from './Background';
 
 type EntityType = {
   id: number;
-  roomId: number;
+  roomId?: number;
 };
-const Entity = ({ id, roomId }: EntityType) => {
+export const Entity = ({ id, roomId }: EntityType) => {
   const entity = useSelector(state => {
     return state.gameState.worldState.entities[id];
   });
@@ -27,7 +27,11 @@ const Entity = ({ id, roomId }: EntityType) => {
   return null;
 };
 
-const DoorWrapper = ({ id, roomId }: EntityType) => {
+type DoorType = {
+  id: number;
+  roomId: number;
+};
+const DoorWrapper = ({ id, roomId }: DoorType) => {
   const door = useSelector(state => {
     return state.gameState.worldState.doors[id];
   });

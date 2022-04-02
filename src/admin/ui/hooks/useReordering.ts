@@ -4,13 +4,13 @@ import { useEffect } from 'react';
 import { isSelected } from '../utils/isSelected';
 import { useDispatch, useSelector } from './redux';
 
-const useReordering = (entity: Entity, roomId: number, type: ReorderType = 'entities') => {
+const useReordering = (entity: Entity, roomId?: number, type: ReorderType = 'entities') => {
   const dispatch = useDispatch();
   const selectedEnt = useSelector(state => state.editorState.selectedEntity);
 
   useEffect(() => {
     const keydown = (e: KeyboardEvent) => {
-      if (!isSelected(entity, selectedEnt)) {
+      if (!roomId || !isSelected(entity, selectedEnt)) {
         return;
       }
 

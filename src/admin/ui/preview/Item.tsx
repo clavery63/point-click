@@ -11,11 +11,12 @@ import useReordering from '../hooks/useReordering';
 
 type Props = {
   item: Item;
-  roomId: number;
+  roomId?: number;
 };
 const ItemComponent = ({ item, roomId }: Props) => {
   const dispatch = useDispatch();
-  const image = useSelector(state => state.gameState.images[item.img || '']);
+  const imgKey = item.imgSet?.img || item.img || '';
+  const image = useSelector(state => state.gameState.images[imgKey]);
   const selectedEnt = useSelector(state => state.editorState.selectedEntity);
   const cachebuster = useCachebuster(item.position);
   useReordering(item, roomId);
@@ -28,11 +29,15 @@ const ItemComponent = ({ item, roomId }: Props) => {
     <PreciseImage
       x={item.position.left + cachebuster}
       y={item.position.top + cachebuster}
-      width={image.width}
+      width={item.imgSet?.width || image.width}
       height={image.height}
       image={image}
       opacity={isUnselected(item, selectedEnt) ? 0.5 : 1}
       draggable
+      crop={item.imgSet !== undefined && {
+        width: item.imgSet?.width,
+        height: image.height,
+      }}
       onDragEnd={(e: KonvaEventObject<DragEvent>) => {
         dispatch(setEntityPosition({
           id: item.id,

@@ -3,6 +3,7 @@ import React from 'react';
 import { Group, Image, Rect } from 'react-konva';
 import MenuButtonsUI from './MenuButtonsUI';
 import MiniMapUI from './MiniMapUI';
+import StaticEntities from './StaticEntities';
 import VerbsUI from './VerbsUI';
 
 const GameLayout = () => {
@@ -34,6 +35,7 @@ const GameLayout = () => {
         <MenuButtonsUI />
         <MiniMapUI />
       </Group>
+      <StaticEntities />
     </Group>
   );
 };
