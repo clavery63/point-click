@@ -74,6 +74,10 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
       return from([
         addItemToPlayer({ id }),
         createEntity({ id, type: 'items' }),
+        setSelected({
+          id,
+          type: 'entity',
+        }),
       ]);
     }),
   );

@@ -13,7 +13,7 @@ const EntityDetails = () => {
     if (selectedEntity.type === 'doors') {
       return state.gameState.worldState.doors[selectedEntity.id];
     }
-    if (['items', 'scenery'].includes(selectedEntity.type)) {
+    if (selectedEntity.type === 'entity') {
       return state.gameState.worldState.entities[selectedEntity.id];
     }
     return null;
