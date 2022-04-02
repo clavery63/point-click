@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from '../../hooks/redux';
 import ImgSelector from '../../shared/assets/ImgSelector';
 import GameLayoutWidget from './GameLayoutWidget';
 import VerbDetails from './VerbDetails';
+import StaticEntityList from './StaticEntityList';
 
 const useStyles = makeStyles({
   leftColumn: {
@@ -57,6 +58,9 @@ const GameLayout = () => {
           </Grid>
           <Grid item xs={12}>
             <GameLayoutWidget />
+          </Grid>
+          <Grid item xs={12}>
+            <StaticEntityList />
           </Grid>
           <Grid item xs={12}>
             <ImgSelector

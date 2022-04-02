@@ -20,6 +20,7 @@ type EntityWithId = {
 type EntityTypeWithId = {
   type: 'items' | 'scenery';
   id: number;
+  isStatic: boolean;
 };
 
 type SizeWithId = {
@@ -45,7 +46,7 @@ const defaultSize = {
   height: 10,
 };
 
-const createItem = (state: Lookup<Item | Scenery>, id: number) => {
+const createItem = (state: Lookup<Item | Scenery>, id: number, isStatic: boolean) => {
   state[id] = {
     id,
     type: 'items',
@@ -57,6 +58,7 @@ const createItem = (state: Lookup<Item | Scenery>, id: number) => {
       left: 0,
       top: 0,
     },
+    isStatic,
   };
 };
 
@@ -141,10 +143,10 @@ export const entitiesSlice = createSlice({
       delete state[id];
     },
     createEntity: (state, action: PayloadAction<EntityTypeWithId>) => {
-      const { id, type } = action.payload;
+      const { id, type, isStatic } = action.payload;
 
       if (type === 'items') {
-        createItem(state, id);
+        createItem(state, id, isStatic);
       }
 
       if (type === 'scenery') {

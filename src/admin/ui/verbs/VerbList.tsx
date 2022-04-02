@@ -33,7 +33,7 @@ const VerbList = ({
   };
 
   return (
-    <Accordion>
+    <Accordion TransitionProps={{ unmountOnExit: true }}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
       >

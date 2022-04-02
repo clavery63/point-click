@@ -9,7 +9,7 @@ import { setSelected } from '../reducers/editorStateReducer/selectedEntityReduce
 import { createDoorWithId } from '../reducers/gameStateReducer/worldStateReducer/doorsReducer';
 import { addItemToPlayer } from '../reducers/gameStateReducer/playerStateReducer';
 
-export const createItem = createAction<number>('createItem');
+export const createItem = createAction<number | undefined>('createItem');
 export const createScenery = createAction<number>('createScenery');
 export const createDoor = createAction<number>('createDoor');
 export const createPlayerItem = createAction('createPlayerItem');
@@ -41,7 +41,7 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
       const id = generateKey(gameState);
       return from([
         addEntityToRoom({ entityId: id, roomId }),
-        createEntity({ id, type }),
+        createEntity({ id, type, isStatic: roomId === undefined }),
         setSelected({
           id,
           type: 'entity',
@@ -73,7 +73,7 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
       const id = generateKey(gameState);
       return from([
         addItemToPlayer({ id }),
-        createEntity({ id, type: 'items' }),
+        createEntity({ id, type: 'items', isStatic: false }),
         setSelected({
           id,
           type: 'entity',
@@ -89,7 +89,7 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
       const id = generateKey(gameState);
       return from([
         addItemToContainer({ id, containerId }),
-        createEntity({ id, type: 'items' }),
+        createEntity({ id, type: 'items', isStatic: false }),
         setSelected({
           id,
           type: 'entity',

@@ -10,7 +10,7 @@ type RoomWithId = {
 };
 
 type RoomWithEntity = {
-  roomId: number;
+  roomId?: number;
   entityId: number;
 };
 
@@ -79,7 +79,9 @@ export const roomsSlice = createSlice({
     addEntityToRoom: (state, action: PayloadAction<RoomWithEntity>) => {
       const { roomId, entityId } = action.payload;
 
-      state[roomId].entities.push(entityId);
+      if (roomId !== undefined) {
+        state[roomId].entities.push(entityId);
+      }
     },
     addDoorToRoom: (state, action: PayloadAction<RoomWithDoor>) => {
       const { roomId, doorId } = action.payload;
