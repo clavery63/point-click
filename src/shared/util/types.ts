@@ -64,10 +64,11 @@ type GetNullables<Base, Prefix extends string = '', AnyNumber = 0> = {
     : never
 }[keyof Base];
 
-type ValidPathsFor<Constraint> = Exclude<ConstrainedTypes<GameStoreState, Constraint>, undefined>;
+export type ValidPathsFor<Root, Constraint> =
+  Exclude<ConstrainedTypes<Root, Constraint>, undefined>;
 
-export type NumberArrayPath = ValidPathsFor<Nullable<number[]>>;
-export type NumberPath = ValidPathsFor<number>;
+export type NumberArrayPath = ValidPathsFor<GameStoreState, Nullable<number[]>>;
+export type NumberPath = ValidPathsFor<GameStoreState, number>;
 export type NullablePath = Exclude<GetNullables<GameStoreState>, undefined>;
 
 export type ValueUpdater<Override = string> = {
@@ -81,5 +82,5 @@ export type ValueUpdater<Override = string> = {
 // this directly from the NumberPath type.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface ValidationCreator {
-  numberPath: ValidPathsFor<Nullable<number>>;
+  numberPath: ValidPathsFor<GameStoreState, Nullable<number>>;
 }

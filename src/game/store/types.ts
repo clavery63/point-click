@@ -2,7 +2,7 @@ import { Store } from 'redux';
 // NOTE: made this a relative import for validation generation.
 // We can change this back if ts-json-schema-generator starts tolerating
 // template string literals.
-import { NumberPath } from '../../shared/util/types';
+import { NumberPath, ValidPathsFor } from '../../shared/util/types';
 
 export type MapCoord = 0 | 1 | 2 | 3 | 4;
 
@@ -97,12 +97,11 @@ export enum Operator {
   GT = 'GT'
 }
 
-export interface Condition {
-  // TODO: entity-level NumberPath?
-  field: string;
+export type Condition = {
+  field: ValidPathsFor<Item, Nullable<number>>;
   operator: Operator;
   value: number;
-}
+};
 
 export interface VerbLogic {
   text?: string;

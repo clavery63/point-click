@@ -475,28 +475,32 @@ const gameStateSchema = {
           }
         },
         "condition": {
-          "$ref": "#/definitions/Condition"
+          "type": "object",
+          "properties": {
+            "field": {
+              "$ref": "#/definitions/ValidPathsFor"
+            },
+            "operator": {
+              "$ref": "#/definitions/Operator"
+            },
+            "value": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "field",
+            "operator",
+            "value"
+          ]
         }
       }
     },
-    "Condition": {
-      "type": "object",
-      "properties": {
-        "field": {
-          "type": "string"
-        },
-        "operator": {
-          "$ref": "#/definitions/Operator"
-        },
-        "value": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "field",
-        "operator",
-        "value"
-      ]
+    "ValidPathsFor": {
+      "enum": [
+        "id",
+        "time"
+      ],
+      "type": "string"
     },
     "Operator": {
       "enum": [
@@ -661,7 +665,23 @@ const gameStateSchema = {
                 "type": "number"
               },
               "condition": {
-                "$ref": "#/definitions/Condition"
+                "type": "object",
+                "properties": {
+                  "field": {
+                    "$ref": "#/definitions/ValidPathsFor"
+                  },
+                  "operator": {
+                    "$ref": "#/definitions/Operator"
+                  },
+                  "value": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "field",
+                  "operator",
+                  "value"
+                ]
               }
             },
             "required": [

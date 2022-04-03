@@ -8,6 +8,7 @@ import LongTextField from '../shared/LongTextField';
 import Selector, { makeOptions } from '../shared/Selector';
 import { useSelector } from '../hooks/redux';
 import splitString from '../utils/splitString';
+import Condition from './Condition';
 
 const useStyles = makeStyles({
   verbCard: {
@@ -82,6 +83,7 @@ const Verb = ({
           options={makeOptions(allEntityIds)}
           style={{ width: '150px' }}
         />
+        <Condition />
         <Box>
           <Button onClick={() => handleDelete(index)} color="error">
             Delete
