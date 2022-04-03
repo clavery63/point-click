@@ -146,7 +146,9 @@ interface ImgSet {
  * custom code. It's not great, but it allows us to continue avoiding referencing
  * any specific entities in the engine itself.
  */
-type Capability = 'RAND_HORIZ';
+export enum Capability {
+  RAND_HORIZ = 'RAND_HORIZ',
+}
 
 export interface Item {
   type: 'items';

@@ -1,4 +1,4 @@
-import { Item } from 'game/store/types';
+import { Capability, Item } from 'game/store/types';
 import { useState, useEffect } from 'react';
 
 const MS_PER_FRAME = 40;
@@ -14,7 +14,7 @@ const useCapabilities = (item: Item, image?: HTMLImageElement) => {
 
   useEffect(() => {
     let interval: any;
-    if (item.capabilities?.includes('RAND_HORIZ')) {
+    if (item.capabilities?.includes(Capability.RAND_HORIZ)) {
       interval = setInterval(() => {
         setFlip(Math.floor(Math.random() * 2));
       }, MS_PER_FRAME);

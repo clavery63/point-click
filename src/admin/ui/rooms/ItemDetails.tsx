@@ -2,13 +2,15 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { setEntity } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
-import { Item } from 'game/store/types';
+import { Capability, Item } from 'game/store/types';
+import { first } from 'lodash';
 import { useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import ImgSelector from '../shared/assets/ImgSelector';
 import Verbs from '../verbs';
 import Toggle from '../shared/Toggle';
+import Selector, { makeOptions } from '../shared/Selector';
 
 type Props = {
   item: Item;
@@ -89,6 +91,15 @@ const ItemDetails = ({ item }: Props) => {
           onChange={handleChange('requiresPrecision')}
           label="require direct click?"
           tooltip="If true, only opaque parts of the image rectangle are clickable"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <Selector
+          label="capability"
+          value={first(item.capabilities)}
+          onChange={val => handleChange('capabilities')(val ? [val] : undefined)}
+          options={makeOptions(Object.keys(Capability))}
+          tooltip="Visual effects for this item. Usually very hard-coded and applicable only to specific use-cases"
         />
       </Grid>
       <Verbs entity={item} />
