@@ -37,7 +37,14 @@ const VerbList = ({
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
       >
-        <Typography>{verbName}</Typography>
+        <Box style={{ display: 'flex', alignItems: 'center' }}>
+          <Typography>{verbName}</Typography>
+          <IconButton
+            onClick={() => handleChange(verbIndex)}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Box>
       </AccordionSummary>
       <AccordionDetails>
         {verbLogics.map((verb, index) => (
@@ -53,11 +60,6 @@ const VerbList = ({
           <Button onClick={onCreate}>
             Add Logic
           </Button>
-          <IconButton
-            onClick={() => handleChange(verbIndex)}
-          >
-            <DeleteIcon />
-          </IconButton>
         </Box>
       </AccordionDetails>
     </Accordion>

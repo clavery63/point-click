@@ -1,7 +1,7 @@
 import React from 'react';
 import { DoorDir, VerbLogic } from 'game/store/types';
 import {
-  Box, Button, Card, CardContent,
+  Box, Button, Card, CardContent, Typography,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import LongTextField from '../shared/LongTextField';
@@ -44,6 +44,11 @@ const Verb = ({
   return (
     <Card className={styles.verbCard}>
       <CardContent>
+        <Typography variant="body1" display="block" margin="10px">
+          Case
+          {' '}
+          {index + 1}
+        </Typography>
         <LongTextField
           label="text"
           value={verb.text}
@@ -83,7 +88,10 @@ const Verb = ({
           options={makeOptions(allEntityIds)}
           style={{ width: '150px' }}
         />
-        <Condition />
+        <Condition
+          condition={verb.condition}
+          onChange={onChange('condition')}
+        />
         <Box>
           <Button onClick={() => handleDelete(index)} color="error">
             Delete
