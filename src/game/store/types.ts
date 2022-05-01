@@ -258,17 +258,19 @@ export type ColorsConfig = {
   background: string;
 };
 
+export type Config = {
+  verbs: VerbConfig[];
+  positions: PositionsConfig;
+  img: ImgConfig;
+  colors: ColorsConfig;
+  friendlyName: string;
+};
+
 export interface GameState {
   worldState: WorldState;
   playerState: PlayerState;
   flags: Flags;
-  config: {
-    verbs: VerbConfig[];
-    positions: PositionsConfig;
-    img: ImgConfig;
-    colors: ColorsConfig;
-    friendlyName: string;
-  };
+  config: Config;
 }
 
 export type Entity = Door | Item | Scenery;
