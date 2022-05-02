@@ -1,6 +1,6 @@
 import { startPreview } from 'admin/store/epics/preview';
 import React from 'react';
-import DispatchButton from './DispachButton';
+import DispatchButton from './DispatchButton';
 
 type Props = {
   roomId: number;

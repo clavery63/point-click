@@ -1,7 +1,7 @@
 import { uploadGame, UploadState } from 'admin/store/reducers/editorStateReducer/uploadStateReducer';
 import React from 'react';
 import { useSelector } from '../hooks/redux';
-import DispatchButton from './DispachButton';
+import DispatchButton from './DispatchButton';
 
 const getCallToAction = (uploadState: UploadState) => {
   switch (uploadState) {
