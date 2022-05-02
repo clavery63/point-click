@@ -10,7 +10,7 @@ import { ArrowForward } from '@mui/icons-material';
 import useStyles from '../shared/useStyles';
 import Player from './Player';
 import Flags from './Flags';
-import UploadButton from '../shared/UploadButton';
+import SaveButton from '../shared/SaveButton';
 import EntityDetails from '../rooms/EntityDetails';
 import GameName from './GameName';
 
@@ -49,7 +49,7 @@ const ConfigPage = () => {
           <Flags />
         </Grid>
         <Stack direction="row" spacing={2}>
-          <UploadButton />
+          <SaveButton />
         </Stack>
       </Box>
       <Box className={styles.rightColumn}>

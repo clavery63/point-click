@@ -16,7 +16,7 @@ const getCallToAction = (uploadState: UploadState) => {
   }
 };
 
-const UploadButton = () => {
+const SaveButton = () => {
   const uploadState = useSelector(state => state.editorState.uploadState);
   const callToAction = getCallToAction(uploadState);
 
@@ -30,4 +30,4 @@ const UploadButton = () => {
   );
 };
 
-export default UploadButton;
+export default SaveButton;
