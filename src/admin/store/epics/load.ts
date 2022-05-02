@@ -16,7 +16,7 @@ const initializeState: InitializeState = (bootInfo) => {
 };
 
 const load$ = (action$: Observable<Action>, state$: Observable<GameStoreState>) => {
-  return hydrateState$(state$, initializeState).pipe(
+  return hydrateState$(state$, initializeState, 'gamedata-draft.json').pipe(
     map(setGameState),
   );
 };

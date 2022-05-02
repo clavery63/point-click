@@ -9,15 +9,17 @@ import validateGameState from '../validation/validateGameState';
 
 const assetsBase = process.env.REACT_APP_ASSETS_BASE;
 const sharedAssetsBase = process.env.REACT_APP_SHARED_ASSETS_BASE;
+const defaultFileName = 'gamedata.json';
 
-type LoadState = (initialState: GameStoreState) => Observable<GameStoreState>;
-const loadPlayerAndGameState$: LoadState = initialState => {
+type LoadState = (fileName: string) =>
+  (initialState: GameStoreState) => Observable<GameStoreState>;
+const loadPlayerAndGameState$: LoadState = fileName => initialState => {
   const roomKeys = Object.keys(initialState.worldState?.rooms || {});
   if (roomKeys.length > 0) {
     return of(initialState);
   }
 
-  const dataSource = `${assetsBase}/${initialState.gameName}/gamedata.json`;
+  const dataSource = `${assetsBase}/${initialState.gameName}/${fileName}`;
   return fromFetch(dataSource).pipe(
     switchMap(resp => resp.json()),
     tap(validateGameState),
@@ -56,16 +58,17 @@ const setAudioSrc = () => {
 type HydrateState = {
   (
     $state: Observable<GameStoreState>,
-    initialize: (state: GameStoreState) => GameStoreState
+    initialize: (state: GameStoreState) => GameStoreState,
+    fileName?: string
   ): Observable<GameStoreState>;
 };
 
-const hydrateState$: HydrateState = (state$, initialize) => {
+const hydrateState$: HydrateState = (state$, initialize, fileName = defaultFileName) => {
   return state$.pipe(
     skipWhile(state => !state.gameName.length),
     take(1),
     map(initialize),
-    switchMap(loadPlayerAndGameState$),
+    switchMap(loadPlayerAndGameState$(fileName)),
     tap(setPageTitle),
     tap(setAudioSrc),
     switchMap(state => loadImages$(state.gameName).pipe(

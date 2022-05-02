@@ -12,16 +12,20 @@ import {
 
 const resetStates = [UploadState.ERROR, UploadState.COMPLETE];
 
-const handleUpload = async (state: RootState) => {
+type Props = {
+  fileName: string;
+  state: RootState;
+};
+const handleUpload = async ({ state, fileName }: Props) => {
   const s3 = new S3(state.gameName);
-  return s3.writeObject('gamedata.json', JSON.stringify(state.gameState));
+  return s3.writeObject(fileName, JSON.stringify(state.gameState));
 };
 
 const upload$ = (action$: Observable<Action>, state$: Observable<RootState>) => {
   const handleUpload$ = action$.pipe(
     filter(uploadGame.match),
-    withLatestFrom(state$, (_, state) => state),
-    tap(state => validateGameState(state.gameState)),
+    withLatestFrom(state$, ({ payload }, state) => ({ state, fileName: payload })),
+    tap(({ state }) => validateGameState(state.gameState)),
     switchMap(handleUpload),
     mapTo(uploadComplete()),
     catchError(() => of(uploadError())),

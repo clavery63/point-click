@@ -22,7 +22,7 @@ const UploadButton = () => {
 
   return (
     <DispatchButton
-      action={uploadGame()}
+      action={uploadGame('gamedata-draft.json')}
       callToAction={callToAction}
       color="primary"
       disabled={uploadState !== UploadState.NONE}
