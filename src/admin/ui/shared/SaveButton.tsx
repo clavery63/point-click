@@ -1,7 +1,6 @@
-import { uploadGame, UploadState } from 'admin/store/reducers/editorStateReducer/uploadStateReducer';
 import React from 'react';
-import { useSelector } from '../hooks/redux';
-import DispatchButton from './DispachButton';
+import Button from '@mui/material/Button';
+import useUpload, { UploadState } from '../hooks/useUpload';
 
 const getCallToAction = (uploadState: UploadState) => {
   switch (uploadState) {
@@ -17,16 +16,18 @@ const getCallToAction = (uploadState: UploadState) => {
 };
 
 const SaveButton = () => {
-  const uploadState = useSelector(state => state.editorState.uploadState);
+  const { upload, uploadState } = useUpload('gamedata-draft.json');
   const callToAction = getCallToAction(uploadState);
 
   return (
-    <DispatchButton
-      action={uploadGame('gamedata-draft.json')}
-      callToAction={callToAction}
+    <Button
+      variant="contained"
       color="primary"
       disabled={uploadState !== UploadState.NONE}
-    />
+      onClick={upload}
+    >
+      {callToAction}
+    </Button>
   );
 };
 
