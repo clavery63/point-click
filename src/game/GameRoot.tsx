@@ -9,7 +9,7 @@ import rootReducer from './store/reducers/rootReducer';
 import effectsMiddleware from './store/middleware/effectsMiddleware';
 import GameContainer from './GameContainer';
 import { GameState, GameStoreState } from './store/types';
-import defaultState from './store/defaultState';
+import defaultState from './store/defaults/defaultGameStoreState';
 import { AllActions } from './store/epics/types';
 
 const containerStyles = {

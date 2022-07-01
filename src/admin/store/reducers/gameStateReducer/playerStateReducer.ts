@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setGameState } from 'admin/store/sharedActions';
-import defaultState from 'game/store/defaultState';
+import defaultState from 'game/store/defaults/defaultGameStoreState';
 import { PlayerState } from 'game/store/types';
 import { deleteEntity } from './worldStateReducer/entitiesReducer';
 

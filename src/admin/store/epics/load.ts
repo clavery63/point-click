@@ -2,7 +2,7 @@ import { map } from 'rxjs/operators';
 import hydrateState$ from 'shared/observables/hydrateState';
 import { setGameState } from 'admin/store/sharedActions';
 import { GameStoreState } from 'game/store/types';
-import defaultState from 'game/store/defaultState';
+import defaultState from 'game/store/defaults/defaultGameStoreState';
 import { Observable } from 'rxjs';
 import { Action } from '@reduxjs/toolkit';
 

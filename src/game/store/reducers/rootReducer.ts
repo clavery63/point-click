@@ -11,7 +11,7 @@ import {
   Flags, GameStoreState, PlayerState, WorldState,
   Menu, VerbIndex, Nullable, PageDir, Music, Config,
 } from '../types';
-import defaultState from '../defaultState';
+import defaultState from '../defaults/defaultGameStoreState';
 import { AllActions } from '../epics/types';
 
 export type PositionType = {
