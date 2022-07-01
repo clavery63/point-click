@@ -1,0 +1,14 @@
+{
+  "name": "point-click-lambda-create",
+  "version": "1.0.0",
+  "description": "Lambda code for persisting a new point and click game in DynamoDB and on S3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Lavery",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1"
+  }
+}
