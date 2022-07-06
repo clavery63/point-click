@@ -4,15 +4,23 @@ import queryByName from './queryByName.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export async function handler(event) {
-  const { pw } = await queryByName(event.name) || {};
+  try {
+    const { name, pw: newPw } = JSON.parse(event.body);
+    const { pw: oldPw } = await queryByName(name) || {};
 
-  let result = true;
-  if (pw) {
-    result = await bcrypt.compare(event.pw, pw);
+    let result = true;
+    if (oldPw) {
+      result = await bcrypt.compare(newPw, oldPw);
+    }
+
+    return {
+      statusCode: 200,
+      body: result,
+    };
+  } catch (e) {
+    return {
+      statusCode: 500,
+      body: e.message,
+    };
   }
-
-  return {
-    statusCode: 200,
-    body: result,
-  };
 }
