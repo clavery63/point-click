@@ -9,6 +9,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useState } from 'react';
+import LinearProgress from '@mui/material/LinearProgress';
 import useAuth, { AuthState } from '../hooks/useAuth';
 
 type Props = {
@@ -28,6 +29,10 @@ const AuthGate = (props: Props) => {
     setPw(e.target.value);
     setAuthState(AuthState.UNKNOWN);
   };
+
+  if (authState === AuthState.LOADING) {
+    return <LinearProgress />;
+  }
 
   if (authState === AuthState.AUTHORIZED) {
     return children;
