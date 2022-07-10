@@ -7,14 +7,15 @@ const useAuth = (name: string) => {
 
   const authorize = useCallback(async (pw: string) => {
     const url = `${apiRoot}/verifyPw`;
-    const result = await fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({
         name,
         pw,
       }),
     });
-    console.log(result);
+    const result: boolean = await response.json();
+    setIsAuthorized(result);
   }, [name]);
 
   return { authorize, isAuthorized };

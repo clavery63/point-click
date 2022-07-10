@@ -19,7 +19,7 @@ const Router = ({ gameName }: Props) => {
   const { path } = useRouteMatch();
 
   if (!isAuthorized) {
-    return <AuthForm onSubmit={authorize} />;
+    return <AuthForm gameName={gameName} onSubmit={authorize} />;
   }
 
   return (
