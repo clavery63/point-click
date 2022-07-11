@@ -4,6 +4,7 @@ import styles from './Admin.module.css';
 import { clearSelected } from './store/reducers/editorStateReducer/selectedEntityReducer';
 import { useDispatch } from './ui/hooks/redux';
 import GamePreview from './ui/preview/GamePreview';
+import AdminHeader from './ui/shared/AdminHeader';
 
 type Props = {
   children: React.ReactNode;
@@ -23,6 +24,7 @@ const AdminContainer = ({ children }: Props) => {
   return (
     <div className={styles.adminContainer}>
       <GamePreview />
+      <AdminHeader />
       {children}
     </div>
   );
