@@ -13,6 +13,7 @@ import Flags from './Flags';
 import SaveButton from '../shared/SaveButton';
 import EntityDetails from '../rooms/EntityDetails';
 import GameName from './GameName';
+import Password from './Password';
 
 const ConfigPage = () => {
   const { gameName } = useParams<{ gameName: string }>();
@@ -45,6 +46,7 @@ const ConfigPage = () => {
             </Typography>
           </Grid>
           <GameName />
+          <Password gameName={gameName} />
           <Player />
           <Flags />
         </Grid>

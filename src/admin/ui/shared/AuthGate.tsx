@@ -62,6 +62,7 @@ const AuthGate = (props: Props) => {
           requires a password
         </Typography>
         <TextField
+          value={pw}
           margin="normal"
           fullWidth
           name="password"
