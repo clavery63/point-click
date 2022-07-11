@@ -2,10 +2,7 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { useParams, Link } from 'react-router-dom';
-import ArrowBack from '@mui/icons-material/ArrowBack';
 import { setRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
 import { Room } from 'game/store/types';
 import { useDispatch } from '../hooks/redux';
@@ -18,12 +15,10 @@ import ImgSelector from '../shared/assets/ImgSelector';
 import AudioSelector from '../shared/assets/AudioSelector';
 import VideoSelector from '../shared/assets/VideoSelector';
 import Toggle from '../shared/Toggle';
-import TooltipToggle from './TooltipToggle';
 import PublishButton from '../shared/PublishButton';
 
 type Props = { room: Room; roomId: number };
 const RoomDetails = ({ room, roomId }: Props) => {
-  const { gameName } = useParams<{ gameName: string }>();
   const dispatch = useDispatch();
   const styles = useStyles();
 
@@ -44,23 +39,6 @@ const RoomDetails = ({ room, roomId }: Props) => {
   return (
     <Box className={styles.leftColumn}>
       <Grid container>
-        <TooltipToggle />
-        <Grid item xs={12}>
-          <Link to={`/admin/${gameName}/rooms`}>
-            <Button
-              startIcon={<ArrowBack>back</ArrowBack>}
-            >
-              To Rooms List
-            </Button>
-          </Link>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h4">
-            Edit Room:
-            {' '}
-            {roomId}
-          </Typography>
-        </Grid>
         <Grid item xs={12}>
           <LongTextField
             label="initial description"

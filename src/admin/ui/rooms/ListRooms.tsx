@@ -6,8 +6,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Videocam from '@mui/icons-material/Videocam';
 import { Room } from 'game/store/types';
 import { createRoom, deleteRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
-import { Button, IconButton, Typography } from '@mui/material';
-import ArrowBack from '@mui/icons-material/ArrowBack';
+import { IconButton, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useSelector, useDispatch } from '../hooks/redux';
 import useStyles from '../shared/useStyles';
@@ -85,7 +84,6 @@ const RoomCard = ({ room, id }: RoomCardProps) => {
 };
 
 const ListRooms = () => {
-  const { gameName } = useParams<{ gameName: string }>();
   const classes = useStyles();
   const dispatch = useDispatch();
   const rooms = useSelector(state => state.gameState.worldState.rooms);
@@ -96,15 +94,6 @@ const ListRooms = () => {
 
   return (
     <Box className={classes.roomsPreview}>
-      <Box style={{ width: '100%' }}>
-        <Link to={`/admin/${gameName}`}>
-          <Button
-            startIcon={<ArrowBack>back</ArrowBack>}
-          >
-            To Home
-          </Button>
-        </Link>
-      </Box>
       {Object.entries(rooms).map(([id, room]) => (
         <RoomCard key={id} id={id} room={room} />
       ))}

@@ -1,14 +1,15 @@
 import {
-  AppBar, Button, IconButton, Toolbar, Typography,
+  AppBar, Button, Toolbar, Typography,
 } from '@mui/material';
 import React from 'react';
-import MenuIcon from '@mui/icons-material/Menu';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { ArrowBack } from '@mui/icons-material';
+import TooltipToggle from '../rooms/TooltipToggle';
 
 const getRoomHeading = (path: string) => {
   const pathParts = path.split('/');
   const roomNumber = pathParts[pathParts.length - 1];
-  return `Room ${roomNumber}`;
+  return `Edit Room ${roomNumber}`;
 };
 
 const hackilyGetPageHeaderInfo = (gameName: string, path: string) => {
@@ -18,6 +19,7 @@ const hackilyGetPageHeaderInfo = (gameName: string, path: string) => {
         heading: 'Home',
         backText: 'To Games List',
         backLink: '/admin',
+        useRealLink: true,
       };
     case 'rooms':
       return {
@@ -55,24 +57,41 @@ const usePageHeaderInfo = () => {
   return hackilyGetPageHeaderInfo(gameName, pathSuffix);
 };
 
+type Props = {
+  children: React.ReactNode;
+  backLink: string;
+  useRealLink: boolean;
+};
+const BackLink = (props: Props) => {
+  const { children, backLink, useRealLink } = props;
+
+  if (useRealLink) {
+    return (
+      <a href={backLink}>{children}</a>
+    );
+  }
+
+  return <Link to={backLink}>{children}</Link>;
+};
+
 const AdminHeader = () => {
-  const { heading, backText, backLink } = usePageHeaderInfo();
+  const {
+    heading, backText, backLink, useRealLink,
+  } = usePageHeaderInfo();
   return (
     <AppBar position="static" color="transparent">
       <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        >
-          <MenuIcon />
-        </IconButton>
+        <BackLink backLink={backLink} useRealLink={!!useRealLink}>
+          <Button
+            startIcon={<ArrowBack>back</ArrowBack>}
+          >
+            {backText}
+          </Button>
+        </BackLink>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           {heading}
         </Typography>
-        <Button color="inherit">Login</Button>
+        <TooltipToggle />
       </Toolbar>
     </AppBar>
   );

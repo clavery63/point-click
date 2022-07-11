@@ -1,11 +1,8 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import { setImageConfig } from 'admin/store/reducers/gameStateReducer/configReducer/imgReducer';
 import { setColors } from 'admin/store/reducers/gameStateReducer/configReducer/colorsReducer';
-import { Link, useParams } from 'react-router-dom';
-import { Box, Button } from '@mui/material';
-import { ArrowBack } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import EntityDetails from 'admin/ui/rooms/EntityDetails';
 import { makeStyles } from '@mui/styles';
 import LongTextField from 'admin/ui/shared/LongTextField';
@@ -30,7 +27,6 @@ const useStyles = makeStyles({
 });
 
 const GameLayout = () => {
-  const { gameName } = useParams<{ gameName: string }>();
   const dispatch = useDispatch();
   const styles = useStyles();
   const {
@@ -42,20 +38,6 @@ const GameLayout = () => {
     <>
       <Box className={styles.leftColumn}>
         <Grid container>
-          <Grid item xs={12}>
-            <Link to={`/admin/${gameName}/config`}>
-              <Button
-                startIcon={<ArrowBack>back</ArrowBack>}
-              >
-                To Config Edit
-              </Button>
-            </Link>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h4">
-              Edit Game UI:
-            </Typography>
-          </Grid>
           <Grid item xs={12}>
             <GameLayoutWidget />
           </Grid>
