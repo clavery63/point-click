@@ -5,13 +5,13 @@ import useUpload, { UploadState } from '../hooks/useUpload';
 const getCallToAction = (uploadState: UploadState) => {
   switch (uploadState) {
     case UploadState.IN_PROGRESS:
-      return 'Saving...';
+      return 'Saving Game...';
     case UploadState.COMPLETE:
-      return 'Saved!';
+      return 'Saved Game!';
     case UploadState.ERROR:
       return 'Something went wrong (check console)';
     default:
-      return 'Save';
+      return 'Save Game';
   }
 };
 
@@ -25,6 +25,7 @@ const SaveButton = () => {
       color="primary"
       disabled={uploadState !== UploadState.NONE}
       onClick={upload}
+      sx={{ ml: 1, mr: 1 }}
     >
       {callToAction}
     </Button>

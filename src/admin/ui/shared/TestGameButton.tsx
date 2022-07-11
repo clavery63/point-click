@@ -8,7 +8,7 @@ type Props = {
 const PreviewButton = ({ roomId }: Props) => (
   <DispatchButton
     action={startPreview(roomId)}
-    callToAction="Test Game"
+    callToAction="Test Play This Room"
   />
 );
 

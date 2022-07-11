@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 import useStyles from '../shared/useStyles';
 import Player from './Player';
 import Flags from './Flags';
-import SaveButton from '../shared/SaveButton';
 import EntityDetails from '../rooms/EntityDetails';
 import GameName from './GameName';
 import Password from './Password';
@@ -23,9 +22,6 @@ const ConfigPage = () => {
           <Player />
           <Flags />
         </Grid>
-        <Stack direction="row" spacing={2}>
-          <SaveButton />
-        </Stack>
       </Box>
       <Box className={styles.rightColumn}>
         <EntityDetails />

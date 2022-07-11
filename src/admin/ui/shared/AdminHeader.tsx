@@ -5,6 +5,8 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
 import TooltipToggle from '../rooms/TooltipToggle';
+import SaveButton from './SaveButton';
+import PublishButton from './PublishButton';
 
 const getRoomHeading = (path: string) => {
   const pathParts = path.split('/');
@@ -79,7 +81,7 @@ const AdminHeader = () => {
     heading, backText, backLink, useRealLink,
   } = usePageHeaderInfo();
   return (
-    <AppBar position="static" color="transparent">
+    <AppBar position="sticky" color="inherit">
       <Toolbar>
         <BackLink backLink={backLink} useRealLink={!!useRealLink}>
           <Button
@@ -88,9 +90,11 @@ const AdminHeader = () => {
             {backText}
           </Button>
         </BackLink>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} textAlign="center">
           {heading}
         </Typography>
+        <SaveButton />
+        <PublishButton />
         <TooltipToggle />
       </Toolbar>
     </AppBar>

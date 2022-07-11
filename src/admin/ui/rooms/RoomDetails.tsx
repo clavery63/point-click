@@ -9,13 +9,11 @@ import { useDispatch } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import TestGameButton from '../shared/TestGameButton';
-import SaveButton from '../shared/SaveButton';
 import PreviewWidget from '../preview/PreviewWidget';
 import ImgSelector from '../shared/assets/ImgSelector';
 import AudioSelector from '../shared/assets/AudioSelector';
 import VideoSelector from '../shared/assets/VideoSelector';
 import Toggle from '../shared/Toggle';
-import PublishButton from '../shared/PublishButton';
 
 type Props = { room: Room; roomId: number };
 const RoomDetails = ({ room, roomId }: Props) => {
@@ -98,8 +96,6 @@ const RoomDetails = ({ room, roomId }: Props) => {
         </Grid>
         <Stack direction="row" spacing={2}>
           <TestGameButton roomId={roomId} />
-          <SaveButton />
-          <PublishButton />
         </Stack>
       </Grid>
     </Box>

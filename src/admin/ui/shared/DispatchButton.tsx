@@ -21,6 +21,7 @@ const DispatchButton = (props: Props) => {
       color={color}
       disabled={disabled}
       onClick={onClick}
+      sx={{ mt: 1, mb: 1 }}
     >
       {callToAction}
     </Button>
