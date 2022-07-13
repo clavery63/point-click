@@ -15,7 +15,11 @@ const useDoorReducer: DoorReducer = (object, playerState) => {
     );
   }
 
-  return withText('Damn. Didn\'t work. The damned door is still locked.');
+  if (playerState.using) {
+    return withText('Damn. Didn\'t work. The damned door is still locked.');
+  }
+
+  return withText('What you expected hasn\'t happened, and that really sucks.');
 };
 
 const forfeitItemReducer: EntityReducer = (_o, playerState) => filterValues('playerState.items')(playerState.using);
