@@ -1,6 +1,6 @@
 import { compose } from 'redux';
 import { ItemReducer, ParentReducer } from 'shared/util/types';
-import { Item, VerbIndex } from '../types';
+import { Item, VerbConfig, VerbIndex } from '../types';
 import {
   setValue, updateValue, withText, keepState, filterValues,
 } from './utils';
@@ -24,32 +24,27 @@ export const useReducer: ItemReducer = ({ id }) => compose(
   setValue('playerState.using')(id),
 );
 
-const defaultReducer = () => withText('You seem to be wasting your time.');
 const lookReducer = (description: string) => () => withText(description);
 
-type GetReducer = (verb: VerbIndex, item: Item) => ItemReducer;
-const getReducer: GetReducer = (verb, item) => {
-  switch (verb) {
+type GetReducer = (verbIndex: VerbIndex, item: Item, verbs: VerbConfig[]) => ItemReducer;
+const getReducer: GetReducer = (verbIndex, item, verbs) => {
+  switch (verbIndex) {
     case 3:
       return useReducer;
     case 5:
       return takeReducer;
-    case 4:
-      return genericVerbReducer(4, () => 'Smoking that would be ill-advised!');
-    case 6:
-      return genericVerbReducer(6, () => 'test this eating thing');
     case 1:
       return lookReducer(item.description);
     default:
-      return defaultReducer;
+      return genericVerbReducer(verbIndex, () => verbs[verbIndex].defaultText);
   }
 };
 
-const selectItemReducer: ParentReducer<number> = (id, playerState, worldState, _flags) => {
+const selectItemReducer: ParentReducer<number> = (id, playerState, worldState, _flags, verbs) => {
   const entity = worldState.entities[id];
   // TODO: devise a better way to ensure the right type of entity gets here
   if (entity.type === 'items') {
-    const reducer = getReducer(playerState.verb, entity);
+    const reducer = getReducer(playerState.verb, entity, verbs);
     return reducer(entity, playerState, _flags);
   }
 
