@@ -36,7 +36,7 @@ const getReducer: GetReducer = (verbIndex, item, verbs) => {
     case 1:
       return lookReducer(item.description);
     default:
-      return genericVerbReducer(verbIndex, () => verbs[verbIndex].defaultText);
+      return genericVerbReducer(verbIndex, () => withText(verbs[verbIndex].defaultText));
   }
 };
 

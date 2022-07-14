@@ -4,7 +4,6 @@ import { DoorReducer, EntityReducer } from 'shared/util/types';
 import {
   withText, setValue, clearValue, filterValues, combineReducers,
 } from '../utils';
-import genericVerbReducer from './genericVerbReducer';
 import { useReducer as setUsingReducer } from '../selectItemReducer';
 
 const useDoorReducer: DoorReducer = (object, playerState) => {
@@ -16,13 +15,16 @@ const useDoorReducer: DoorReducer = (object, playerState) => {
   }
 
   if (playerState.using) {
-    return withText('Damn. Didn\'t work. The damned door is still locked.');
+    return withText('Damn. Didn\'t work. The damn door is still locked.');
   }
 
   return withText('What you expected hasn\'t happened, and that really sucks.');
 };
 
-const forfeitItemReducer: EntityReducer = (_o, playerState) => filterValues('playerState.items')(playerState.using);
+export const forfeitItemReducer: EntityReducer = combineReducers(
+  (_o, playerState) => filterValues('playerState.items')(playerState.using),
+  () => clearValue('playerState.using'),
+);
 
 const useReducerForType: EntityReducer = (object, playerState, flags) => {
   if (!playerState.using && object.type === 'items') {
@@ -33,7 +35,7 @@ const useReducerForType: EntityReducer = (object, playerState, flags) => {
     return useDoorReducer(object, playerState, flags);
   }
 
-  return genericVerbReducer(3, () => 'That ain\'t workin!\'!', forfeitItemReducer)(object, playerState, flags);
+  return withText('That ain\'t workin!\'!');
 };
 
 const useReducer: EntityReducer = combineReducers(

@@ -46,22 +46,22 @@ const getVerbLogic: GetVerbLogic = (object, verb, using, flags) => {
   return null;
 };
 
-type GetDefaultText = (object: Entity) => Nullable<string>;
 type GenericVerbReducer = (
   verb: VerbIndex,
-  getDefaultText: GetDefaultText,
-  extraReducer?: EntityReducer
+  failureReducer: EntityReducer,
+  successReducer?: EntityReducer
 ) => EntityReducer;
-const genericVerbReducer: GenericVerbReducer = (verb, getDefaultText, extraReducer = keepState) => {
+// eslint-disable-next-line max-len
+const genericVerbReducer: GenericVerbReducer = (verb, failureReducer, successReducer = keepState) => {
   return (object, playerState, flags) => {
     const logic = getVerbLogic(object, verb, playerState.using, flags);
 
     if (!logic) {
       if (object.type === 'scenery' && object.trigger === verb) {
-        // Don't display default text if this triggers an animation
+        // For now, ignore side effects if this triggers an animation
         return keepState();
       }
-      return withText(getDefaultText(object));
+      return failureReducer(object, playerState, flags);
     }
 
     if (logic.moveTo && logic.moveDir) {
@@ -76,7 +76,7 @@ const genericVerbReducer: GenericVerbReducer = (verb, getDefaultText, extraReduc
       when(!!logic.removeFlags)(removeFlags(logic.removeFlags || [])),
       withText(logic.text),
       effectsReducer(logic),
-      extraReducer(object, playerState, flags),
+      successReducer(object, playerState, flags),
     );
   };
 };

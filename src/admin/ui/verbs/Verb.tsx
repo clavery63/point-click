@@ -84,7 +84,7 @@ const Verb = ({
         <Selector
           label="prereq using"
           value={verb.prereqUsing}
-          onChange={onChange('prereqUsing')}
+          onChange={val => onChange('prereqUsing')(parseInt(val, 10))}
           options={makeOptions(allEntityIds)}
           style={{ width: '150px' }}
         />
