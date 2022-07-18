@@ -29,7 +29,7 @@ const Selector = ({
   return (
     <Box style={{ display: 'flex', flexDirection: 'row' }}>
       <WithTooltip text={tooltip}>
-        <FormControl variant="outlined" style={{ minWidth: 120 }} margin="normal">
+        <FormControl variant="outlined" style={{ minWidth: 140 }} margin="normal">
           <InputLabel>{label}</InputLabel>
           <Select
             value={isEmpty(value) ? '' : value}

@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'admin/ui/hooks/redux';
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import LongTextField from 'admin/ui/shared/LongTextField';
-import { Nullable } from 'game/store/types';
+import { Nullable, VerbBehavior, VerbConfig } from 'game/store/types';
 import { setVerb } from 'admin/store/reducers/gameStateReducer/configReducer/verbsReducer';
+import Selector, { makeOptions } from 'admin/ui/shared/Selector';
 
 const VerbDetails = () => {
   const dispatch = useDispatch();
@@ -22,57 +23,62 @@ const VerbDetails = () => {
     return null;
   }
 
-  const handleChange = (verbName: Nullable<string>, index: number) => {
-    if (!verbName) {
+  const handleChange = (key: keyof VerbConfig) => (value: Nullable<string | number>) => {
+    const newVerb = {
+      ...verb,
+      [key]: value,
+    };
+
+    if (!newVerb.name) {
       console.log('You gotta have a verbName');
       return;
     }
 
-    if (verbName.length < 1) {
+    if (newVerb.name.length < 1) {
       console.log('Each verbName must contain at least 1 character.');
       return;
     }
-    if (verbName.length > 5) {
+    if (newVerb.name.length > 5) {
       console.log('Each verbName must contain at most 5 characters.');
       return;
     }
 
-    dispatch(setVerb({
-      verb: {
-        name: verbName,
-        defaultText: verb.defaultText,
-      },
-      index,
-    }));
-  };
-
-  const handleDefaultTextChange = (defaultText: Nullable<string>, index: number) => {
-    if (!defaultText) {
-      console.log('You gotta have text');
+    if (!newVerb.defaultText && newVerb.defaultBehavior === VerbBehavior.NONE) {
+      console.log('OK, look. You gotta have either defaultText or defaultBehavior.');
       return;
     }
 
     dispatch(setVerb({
-      verb: {
-        name: verb.name,
-        defaultText,
-      },
-      index,
+      verb: newVerb,
+      index: newVerb.index,
     }));
   };
 
   return (
-    <Stack direction="row" spacing={2} key={verb.index}>
+    <Stack direction="column" key={verb.index}>
+      <Typography variant="h6">
+        Edit Verb
+        {' '}
+        {verb.index}
+      </Typography>
       <LongTextField
-        label={`verb ${verb.index} name`}
+        label="name"
         value={verb.name}
         fullWidth={false}
-        onChange={value => handleChange(value, verb.index)}
+        onChange={handleChange('name')}
       />
       <LongTextField
-        label={`verb ${verb.index} default text`}
+        label="default text"
         value={verb.defaultText}
-        onChange={value => handleDefaultTextChange(value, verb.index)}
+        onChange={handleChange('defaultText')}
+      />
+      <Selector
+        required
+        label="default behavior"
+        value={verb.defaultBehavior}
+        onChange={handleChange('defaultBehavior')}
+        options={makeOptions(Object.values(VerbBehavior))}
+        tooltip="This defines default behavior for when you don't supply any behavior for a particular object + verb."
       />
     </Stack>
   );

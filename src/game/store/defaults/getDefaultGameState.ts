@@ -1,4 +1,4 @@
-import { GameState, VerbIndex } from '../types';
+import { GameState } from '../types';
 import defaultVerbs from './defaultVerbs';
 
 type GetDefaultGameState = (friendlyName: string) => GameState;
@@ -9,7 +9,7 @@ const getDefaultGameState: GetDefaultGameState = friendlyName => ({
     rooms: {},
   },
   playerState: {
-    verb: 0 as VerbIndex,
+    verb: 0,
     room: 0,
     page: 0,
     examining: null,

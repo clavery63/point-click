@@ -26,10 +26,13 @@ const gameStateSchema = {
               },
               "defaultText": {
                 "type": "string"
+              },
+              "defaultBehavior": {
+                "$ref": "#/definitions/VerbBehavior"
               }
             },
             "required": [
-              "defaultText",
+              "defaultBehavior",
               "name"
             ]
           }
@@ -962,6 +965,17 @@ const gameStateSchema = {
         "room",
         "verb"
       ]
+    },
+    "VerbBehavior": {
+      "enum": [
+        "LOOK",
+        "MOVE",
+        "NONE",
+        "OPEN",
+        "TAKE",
+        "USE"
+      ],
+      "type": "string"
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#"

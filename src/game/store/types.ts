@@ -224,9 +224,19 @@ export interface PlayerState {
 
 export type Flags = string[];
 
+export enum VerbBehavior {
+  NONE = 'NONE',
+  MOVE = 'MOVE',
+  LOOK = 'LOOK',
+  OPEN = 'OPEN',
+  USE = 'USE',
+  TAKE = 'TAKE'
+}
+
 export type VerbConfig = {
   name: string;
-  defaultText: string;
+  defaultText?: string;
+  defaultBehavior: VerbBehavior;
 };
 
 export type ImgConfig = {
