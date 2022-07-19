@@ -22,8 +22,10 @@ const ObjectsSummary = ({ room }: Props) => {
 
   const doorInfos = useSelector(state => doors.map(id => {
     const ent = state.gameState.worldState.doors[id];
-    // TODO: let's force doors to have a name :)
-    return { id, name: ent.closedImg || ent.openImg || ent.id.toString() };
+    return {
+      id,
+      name: ent.name || ent.closedImg || ent.openImg || ent.id.toString(),
+    };
   }));
 
   return (

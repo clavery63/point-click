@@ -72,7 +72,7 @@ export const roomsSlice = createSlice({
       // TODO: What do we do about doors that point to this room?
       // - Probably don't want to delete the door. Might still want it.
       // - We probably do want to enforce that doors point somewhere (right?)
-      // - We probably don't wna tto choos a random room. Too annoying
+      // - We probably don't wnat to choose a random room. Too annoying
       // - So it sounds like we want a panel that displays all current errors
       // - Also, this is another case for introducing logic-level validation
     },
