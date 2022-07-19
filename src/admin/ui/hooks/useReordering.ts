@@ -10,7 +10,7 @@ const useReordering = (entity: Entity, roomId?: number, type: ReorderType = 'ent
 
   useEffect(() => {
     const keydown = (e: KeyboardEvent) => {
-      if (!roomId || !isSelected(entity, selectedEnt)) {
+      if (roomId == null || !isSelected(entity, selectedEnt)) {
         return;
       }
 
