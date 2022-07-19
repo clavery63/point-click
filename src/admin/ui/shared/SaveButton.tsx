@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import useUpload, { UploadState } from '../hooks/useUpload';
+import useCommand from '../hooks/useCommand';
 
 const getCallToAction = (uploadState: UploadState) => {
   switch (uploadState) {
@@ -17,6 +18,7 @@ const getCallToAction = (uploadState: UploadState) => {
 
 const SaveButton = () => {
   const { upload, uploadState } = useUpload('gamedata-draft.json');
+  useCommand('s', upload);
   const callToAction = getCallToAction(uploadState);
 
   return (
