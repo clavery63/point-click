@@ -200,6 +200,9 @@ const gameStateSchema = {
         "id": {
           "type": "number"
         },
+        "name": {
+          "type": "string"
+        },
         "closedImg": {
           "type": "string"
         },

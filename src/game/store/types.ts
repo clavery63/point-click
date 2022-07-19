@@ -57,6 +57,7 @@ export interface Music {
 export interface Door {
   type: 'doors';
   id: number;
+  name?: string;
   closedImg?: string;
   openImg?: string;
   position?: Position;

@@ -9,7 +9,7 @@ import {
 } from '../types';
 import genericVerbReducer from './verbReducers/genericVerbReducer';
 
-const failLookup: { [key: string]: EntityReducer } = {
+const fallbackLookup: { [key: string]: EntityReducer } = {
   MOVE: moveReducer,
   LOOK: (object: Entity) => withText(object.description),
   OPEN: openReducer,
@@ -23,8 +23,8 @@ const successLookup: { [key: string]: EntityReducer } = {
 
 const getReducer = (verb: VerbIndex, verbs: VerbConfig[]) => {
   const { defaultBehavior, defaultText } = verbs[verb];
-  const failBehavior = failLookup[defaultBehavior] || (() => withText(defaultText));
-  return genericVerbReducer(verb, failBehavior, successLookup[defaultBehavior]);
+  const fallbackBehavior = fallbackLookup[defaultBehavior] || (() => withText(defaultText));
+  return genericVerbReducer(verb, fallbackBehavior, successLookup[defaultBehavior]);
 };
 
 type GenericReducer = (t: 'doors' | 'entities') => ParentReducer<number>;

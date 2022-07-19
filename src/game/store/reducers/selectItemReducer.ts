@@ -1,12 +1,12 @@
 import { compose } from 'redux';
-import { ItemReducer, ParentReducer } from 'shared/util/types';
-import { Item, VerbConfig, VerbIndex } from '../types';
+import { EntityReducer, ParentReducer } from 'shared/util/types';
+import { Entity, VerbConfig, VerbIndex } from '../types';
 import {
   setValue, updateValue, withText, keepState, filterValues,
 } from './utils';
 import genericVerbReducer from './verbReducers/genericVerbReducer';
 
-const takeReducer: ItemReducer = (item, playerState) => {
+const takeReducer: EntityReducer = (item, playerState) => {
   if (!playerState.examining) return keepState();
   return compose(
     filterValues(`worldState.entities[${playerState.examining}].contains`)(item.id),
@@ -15,7 +15,7 @@ const takeReducer: ItemReducer = (item, playerState) => {
   );
 };
 
-export const useReducer: ItemReducer = ({ id }) => compose(
+export const useReducer: EntityReducer = ({ id }) => compose(
   // TODO NEXT: allow custom text here, for example with the bag:
   // "So you've decided to use your bag... What would you like to use it on?"
   // Also should be able to have custom default text:
@@ -24,31 +24,25 @@ export const useReducer: ItemReducer = ({ id }) => compose(
   setValue('playerState.using')(id),
 );
 
-const lookReducer = (description: string) => () => withText(description);
+const lookReducer = (object: Entity) => withText(object.description);
 
-type GetReducer = (verbIndex: VerbIndex, item: Item, verbs: VerbConfig[]) => ItemReducer;
+const fallbackLookup: { [key: string]: EntityReducer } = {
+  LOOK: lookReducer,
+  USE: useReducer,
+  TAKE: takeReducer,
+};
+
+type GetReducer = (verbIndex: VerbIndex, item: Entity, verbs: VerbConfig[]) => EntityReducer;
 const getReducer: GetReducer = (verbIndex, item, verbs) => {
-  switch (verbIndex) {
-    case 3:
-      return useReducer;
-    case 5:
-      return takeReducer;
-    case 1:
-      return lookReducer(item.description);
-    default:
-      return genericVerbReducer(verbIndex, () => withText(verbs[verbIndex].defaultText));
-  }
+  const { defaultBehavior, defaultText } = verbs[verbIndex];
+  const fallbackReducer = fallbackLookup[defaultBehavior] || (() => withText(defaultText));
+  return genericVerbReducer(verbIndex, fallbackReducer);
 };
 
 const selectItemReducer: ParentReducer<number> = (id, playerState, worldState, _flags, verbs) => {
   const entity = worldState.entities[id];
-  // TODO: devise a better way to ensure the right type of entity gets here
-  if (entity.type === 'items') {
-    const reducer = getReducer(playerState.verb, entity, verbs);
-    return reducer(entity, playerState, _flags);
-  }
-
-  return keepState();
+  const reducer = getReducer(playerState.verb, entity, verbs);
+  return reducer(entity, playerState, _flags);
 };
 
 export default selectItemReducer;
