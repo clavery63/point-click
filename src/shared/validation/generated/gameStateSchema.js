@@ -843,6 +843,9 @@ const gameStateSchema = {
         "movedText": {
           "type": "string"
         },
+        "takeableFlag": {
+          "type": "string"
+        },
         "visibleFlag": {
           "type": "string"
         },

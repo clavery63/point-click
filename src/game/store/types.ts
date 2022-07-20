@@ -23,6 +23,7 @@ export enum DoorDir {
 export type PageDir = 'UP' | 'DOWN';
 export type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
 export type EntityType = 'items' | 'scenery' | 'doors';
+export type Flag = string;
 
 export type Nullable<T> = T | null | undefined;
 
@@ -72,7 +73,7 @@ export interface Door {
   openText?: string;
   keyId?: number;
   hidden?: boolean;
-  openCondition?: string;
+  openCondition?: Flag;
   // TODO: Somehow make the shared fields between entities more explicit
   verbs?: VerbMappings;
 }
@@ -108,9 +109,9 @@ export interface VerbLogic {
   text?: string;
   moveTo?: number;
   moveDir?: DoorDir;
-  addFlags?: string[];
-  removeFlags?: string[];
-  prereqFlags?: string[];
+  addFlags?: Flag[];
+  removeFlags?: Flag[];
+  prereqFlags?: Flag[];
   prereqUsing?: number;
   effects?: Effect[];
   condition?: Condition;
@@ -160,8 +161,8 @@ export interface Item {
   imgSet?: ImgSet;
   // TODO: see if this can use genericVerbReducer
   onTake?: string;
-  takeableFlag?: string;
-  visibleFlag?: string;
+  takeableFlag?: Flag;
+  visibleFlag?: Flag;
   requiresPrecision?: boolean;
   verbs?: VerbMappings;
   contains: Nullable<number[]>;
@@ -191,7 +192,8 @@ export interface Scenery {
   contains: Nullable<number[]>;
   trigger?: VerbIndex;
   movedText?: string;
-  visibleFlag?: string;
+  takeableFlag?: Flag;
+  visibleFlag?: Flag;
   isStatic?: boolean;
   time?: number;
   timeEffect?: TimeEffect;
@@ -223,7 +225,7 @@ export interface PlayerState {
   page: number;
 }
 
-export type Flags = string[];
+export type Flags = Flag[];
 
 export enum VerbBehavior {
   NONE = 'NONE',
