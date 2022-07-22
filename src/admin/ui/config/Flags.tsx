@@ -2,9 +2,13 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { setFlags } from 'admin/store/reducers/gameStateReducer/flagsReducer';
-import { compact, uniq } from 'lodash';
-import { Autocomplete, TextField } from '@mui/material';
+import { compact, last, uniq } from 'lodash';
+import TextField from '@mui/material/TextField';
+import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+import { Flag } from 'game/store/types';
 import { RootState, useDispatch, useSelector } from '../hooks/redux';
+
+const filter = createFilterOptions<FlagOption>();
 
 const flagsSelector = (state: RootState) => {
   const { worldState, flags } = state.gameState;
@@ -27,10 +31,23 @@ const flagsSelector = (state: RootState) => {
   return uniq(allFlags).sort();
 };
 
+const toFlagOption = (flag: Flag) => ({
+  value: flag,
+  label: flag,
+});
+
+type FlagOption = {
+  value: Flag;
+  label: string;
+};
+
 const Flags = () => {
   const dispatch = useDispatch();
   const flags = useSelector(state => state.gameState.flags);
   const allFlags = useSelector(flagsSelector);
+
+  const seedOptions = allFlags.map(toFlagOption);
+  const seedValue = flags.map(toFlagOption);
 
   return (
     <>
@@ -44,10 +61,33 @@ const Flags = () => {
           multiple
           disableClearable
           id="tags-outlined"
-          options={allFlags}
+          options={seedOptions}
           filterSelectedOptions
-          value={flags}
-          onChange={(e, newFlags) => dispatch(setFlags(newFlags))}
+          value={seedValue}
+          onChange={(e, newFlags) => {
+            dispatch(setFlags(newFlags.map(({ value }) => value)));
+          }}
+          filterOptions={(options, params) => {
+            const filtered = filter(options, params);
+
+            const { inputValue } = params;
+            const isExisting = [...options, ...seedValue]
+              .map(({ value }) => value)
+              .includes(inputValue);
+
+            if (inputValue !== '' && !isExisting) {
+              // TODO: ensure the flag has no spaces here.
+              // Probably fine to just filter it
+              filtered.push({
+                value: inputValue,
+                label: `Add "${inputValue}"`,
+              });
+            }
+
+            return filtered;
+          }}
+          getOptionLabel={(option) => option.label}
+          isOptionEqualToValue={(a, b) => a.value === b.value}
           renderInput={(params) => (
             <TextField
               {...params}
