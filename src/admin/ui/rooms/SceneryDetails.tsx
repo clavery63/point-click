@@ -109,8 +109,7 @@ const SceneryDetails = ({ scenery }: Props) => {
           label="visible flags"
           value={scenery.visibleFlags}
           onChange={handleChange('visibleFlags')}
-          // eslint-disable-next-line max-len
-          // tooltip="When set, this flag must be on for this scenery to be visible (otherwise, the item is visible by default)"
+          tooltip="When set, all of these flags must be on for this scenery to be visible (otherwise, the item is visible by default)"
         />
       </Grid>
       <Contains container={scenery} />

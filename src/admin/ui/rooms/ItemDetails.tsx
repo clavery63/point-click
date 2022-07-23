@@ -75,8 +75,7 @@ const ItemDetails = ({ item }: Props) => {
           label="takeable flags"
           value={item.takeableFlags}
           onChange={handleChange('takeableFlags')}
-          // eslint-disable-next-line max-len
-          // tooltip="When set, this flag must be on for the player to collect this item (otherwise, the item is takeable by default)"
+          tooltip="When set, all of these flags must be on for the player to collect this item (otherwise, the item is takeable by default)"
         />
       </Grid>
       <Grid item xs={12}>
@@ -84,8 +83,7 @@ const ItemDetails = ({ item }: Props) => {
           label="visible flags"
           value={item.visibleFlags}
           onChange={handleChange('visibleFlags')}
-          // eslint-disable-next-line max-len
-          // tooltip="When set, this flag must be on for this item to be visible (otherwise, the item is visible by default)"
+          tooltip="When set, all of these flags must be on for this item to be visible (otherwise, the item is visible by default)"
         />
       </Grid>
       <Grid item xs={12}>

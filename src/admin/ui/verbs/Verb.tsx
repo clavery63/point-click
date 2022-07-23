@@ -1,7 +1,7 @@
 import React from 'react';
 import { DoorDir, VerbLogic } from 'game/store/types';
 import {
-  Box, Button, Card, CardContent, Typography,
+  Box, Button, Card, CardContent, Stack, Typography,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import LongTextField from '../shared/LongTextField';
@@ -49,49 +49,56 @@ const Verb = ({
           {' '}
           {index + 1}
         </Typography>
-        <LongTextField
-          label="text"
-          value={verb.text}
-          onChange={onChange('text')}
-        />
-        <Selector
-          label="move to"
-          value={verb.moveTo}
-          onChange={val => onChange('moveTo')(val ? parseInt(val, 10) : undefined)}
-          options={makeOptions(allRoomIds)}
-        />
-        <Selector
-          label="animation direction"
-          value={verb.moveDir}
-          onChange={onChange('moveDir')}
-          options={makeOptions(Object.keys(DoorDir))}
-        />
-        <FlagsInput
-          label="add flags"
-          value={verb.addFlags}
-          onChange={newFlags => onChange('addFlags')(newFlags)}
-        />
-        <FlagsInput
-          label="remove flags"
-          value={verb.removeFlags}
-          onChange={newFlags => onChange('removeFlags')(newFlags)}
-        />
-        <FlagsInput
-          label="prereq flags"
-          value={verb.prereqFlags}
-          onChange={newFlags => onChange('prereqFlags')(newFlags)}
-        />
-        <Selector
-          label="prereq using"
-          value={verb.prereqUsing}
-          onChange={val => onChange('prereqUsing')(parseInt(val, 10))}
-          options={makeOptions(allEntityIds)}
-          style={{ width: '150px' }}
-        />
-        <Condition
-          condition={verb.condition}
-          onChange={onChange('condition')}
-        />
+        <Stack direction="column">
+          <LongTextField
+            label="text"
+            value={verb.text}
+            onChange={onChange('text')}
+            tooltip="Text to display when this verb condition is met"
+          />
+          <Selector
+            label="move to"
+            value={verb.moveTo}
+            onChange={val => onChange('moveTo')(val ? parseInt(val, 10) : undefined)}
+            options={makeOptions(allRoomIds)}
+          />
+          <Selector
+            label="animation direction"
+            value={verb.moveDir}
+            onChange={onChange('moveDir')}
+            options={makeOptions(Object.keys(DoorDir))}
+          />
+          <FlagsInput
+            label="add flags"
+            value={verb.addFlags}
+            onChange={newFlags => onChange('addFlags')(newFlags)}
+            tooltip="Flags that get added when this verb is triggered"
+          />
+          <FlagsInput
+            label="remove flags"
+            value={verb.removeFlags}
+            onChange={newFlags => onChange('removeFlags')(newFlags)}
+            tooltip="Flags that get removed when this verb is triggered"
+          />
+          <FlagsInput
+            label="prereq flags"
+            value={verb.prereqFlags}
+            onChange={newFlags => onChange('prereqFlags')(newFlags)}
+            tooltip="Flags that must be set for this verb to be triggered"
+          />
+          <Selector
+            label="prereq using"
+            value={verb.prereqUsing}
+            onChange={val => onChange('prereqUsing')(parseInt(val, 10))}
+            options={makeOptions(allEntityIds)}
+            style={{ width: '150px' }}
+            tooltip="ID of the item the player must be USING to trigger this verb"
+          />
+          <Condition
+            condition={verb.condition}
+            onChange={onChange('condition')}
+          />
+        </Stack>
         <Box>
           <Button onClick={() => handleDelete(index)} color="error">
             Delete

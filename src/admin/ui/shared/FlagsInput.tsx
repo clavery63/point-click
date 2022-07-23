@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { Flag } from 'game/store/types';
 import { RootState, useSelector } from '../hooks/redux';
+import WithTooltip from './WithTooltip';
 
 const filter = createFilterOptions<FlagOption>();
 
@@ -42,53 +43,58 @@ type Props = {
   value?: Flag[];
   onChange: (f: Flag[]) => void;
   label: string;
+  tooltip?: string;
 };
 
 const FlagsInput = (props: Props) => {
-  const { value: propsValue = [], onChange, label } = props;
+  const {
+    value: propsValue = [], onChange, label, tooltip,
+  } = props;
   const allFlags = useSelector(flagsSelector);
   const seedOptions = allFlags.map(toFlagOption);
   const seedValue = propsValue.map(toFlagOption);
 
   return (
-    <Autocomplete
-      sx={{ mt: 2, mb: 2 }}
-      multiple
-      disableClearable
-      options={seedOptions}
-      filterSelectedOptions
-      value={seedValue}
-      onChange={(e, newFlags) => {
-        onChange(newFlags.map(({ value }) => value));
-      }}
-      filterOptions={(options, params) => {
-        const filtered = filter(options, params);
+    <WithTooltip text={tooltip}>
+      <Autocomplete
+        sx={{ mt: 2, mb: 2 }}
+        multiple
+        disableClearable
+        options={seedOptions}
+        filterSelectedOptions
+        value={seedValue}
+        onChange={(e, newFlags) => {
+          onChange(newFlags.map(({ value }) => value));
+        }}
+        filterOptions={(options, params) => {
+          const filtered = filter(options, params);
 
-        const { inputValue } = params;
-        const isExisting = [...options, ...seedValue]
-          .map(({ value }) => value)
-          .includes(inputValue);
+          const { inputValue } = params;
+          const isExisting = [...options, ...seedValue]
+            .map(({ value }) => value)
+            .includes(inputValue);
 
-        if (inputValue !== '' && !isExisting) {
-          const newFlag = inputValue.toUpperCase().replaceAll(/\s+/g, '_');
-          filtered.push({
-            value: newFlag,
-            label: `Add "${newFlag}"`,
-          });
-        }
+          if (inputValue !== '' && !isExisting) {
+            const newFlag = inputValue.toUpperCase().replaceAll(/\s+/g, '_');
+            filtered.push({
+              value: newFlag,
+              label: `Add "${newFlag}"`,
+            });
+          }
 
-        return filtered;
-      }}
-      getOptionLabel={(option) => option.label}
-      isOptionEqualToValue={(a, b) => a.value === b.value}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label={label}
-          placeholder="choose a flag"
-        />
-      )}
-    />
+          return filtered;
+        }}
+        getOptionLabel={(option) => option.label}
+        isOptionEqualToValue={(a, b) => a.value === b.value}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label={label}
+            placeholder="choose a flag"
+          />
+        )}
+      />
+    </WithTooltip>
   );
 };
 
