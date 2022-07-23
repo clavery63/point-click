@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { setFlags } from 'admin/store/reducers/gameStateReducer/flagsReducer';
-import { compact, last, uniq } from 'lodash';
+import { compact, uniq } from 'lodash';
 import TextField from '@mui/material/TextField';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { Flag } from 'game/store/types';
@@ -76,11 +76,10 @@ const Flags = () => {
               .includes(inputValue);
 
             if (inputValue !== '' && !isExisting) {
-              // TODO: ensure the flag has no spaces here.
-              // Probably fine to just filter it
+              const newFlag = inputValue.toUpperCase().replaceAll(/\s+/g, '_');
               filtered.push({
-                value: inputValue,
-                label: `Add "${inputValue}"`,
+                value: newFlag,
+                label: `Add "${newFlag}"`,
               });
             }
 
