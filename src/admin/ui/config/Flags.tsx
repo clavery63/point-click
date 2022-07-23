@@ -18,6 +18,7 @@ const Flags = () => {
       </Grid>
       <Grid item xs={12}>
         <FlagsInput
+          label="initial flags"
           value={flags}
           onChange={newFlags => dispatch(setFlags(newFlags))}
         />

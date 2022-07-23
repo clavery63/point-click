@@ -39,24 +39,27 @@ type FlagOption = {
 };
 
 type Props = {
-  value: Flag[];
+  value?: Flag[];
   onChange: (f: Flag[]) => void;
+  label: string;
 };
 
 const FlagsInput = (props: Props) => {
+  const { value: propsValue = [], onChange, label } = props;
   const allFlags = useSelector(flagsSelector);
   const seedOptions = allFlags.map(toFlagOption);
-  const seedValue = props.value.map(toFlagOption);
+  const seedValue = propsValue.map(toFlagOption);
 
   return (
     <Autocomplete
+      sx={{ mt: 2, mb: 2 }}
       multiple
       disableClearable
       options={seedOptions}
       filterSelectedOptions
       value={seedValue}
       onChange={(e, newFlags) => {
-        props.onChange(newFlags.map(({ value }) => value));
+        onChange(newFlags.map(({ value }) => value));
       }}
       filterOptions={(options, params) => {
         const filtered = filter(options, params);
@@ -81,7 +84,8 @@ const FlagsInput = (props: Props) => {
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="add a flag"
+          label={label}
+          placeholder="choose a flag"
         />
       )}
     />

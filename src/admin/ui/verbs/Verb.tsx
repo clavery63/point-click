@@ -9,6 +9,7 @@ import Selector, { makeOptions } from '../shared/Selector';
 import { useSelector } from '../hooks/redux';
 import splitString from '../utils/splitString';
 import Condition from './Condition';
+import FlagsInput from '../shared/FlagsInput';
 
 const useStyles = makeStyles({
   verbCard: {
@@ -66,20 +67,20 @@ const Verb = ({
           onChange={onChange('moveDir')}
           options={makeOptions(Object.keys(DoorDir))}
         />
-        <LongTextField
+        <FlagsInput
           label="add flags"
-          value={(verb.addFlags || []).join(',')}
-          onChange={str => onChange('addFlags')(splitString(str))}
+          value={verb.addFlags}
+          onChange={newFlags => onChange('addFlags')(newFlags)}
         />
-        <LongTextField
+        <FlagsInput
           label="remove flags"
-          value={(verb.removeFlags || []).join(',')}
-          onChange={str => onChange('removeFlags')(splitString(str))}
+          value={verb.removeFlags}
+          onChange={newFlags => onChange('removeFlags')(newFlags)}
         />
-        <LongTextField
+        <FlagsInput
           label="prereq flags"
-          value={(verb.prereqFlags || []).join(',')}
-          onChange={str => onChange('prereqFlags')(splitString(str))}
+          value={verb.prereqFlags}
+          onChange={newFlags => onChange('prereqFlags')(newFlags)}
         />
         <Selector
           label="prereq using"
