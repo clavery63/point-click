@@ -12,6 +12,7 @@ import Selector from '../shared/Selector';
 import Verbs from '../verbs';
 import Contains from './Contains';
 import Toggle from '../shared/Toggle';
+import FlagsInput from '../shared/FlagsInput';
 
 type Props = {
   scenery: Scenery;
@@ -23,7 +24,7 @@ const SceneryDetails = ({ scenery }: Props) => {
   const sceneriesEditing = useSelector(state => state.editorState.sceneryEditing);
   const positionEditing = sceneriesEditing[scenery.id] || 'startPosition';
 
-  const handleChange = (fieldName: keyof Scenery) => (value: Nullable<string>) => {
+  const handleChange = (fieldName: keyof Scenery) => (value: Nullable<string> | string[]) => {
     dispatch(setEntity({
       id: scenery.id,
       entity: {
@@ -104,11 +105,12 @@ const SceneryDetails = ({ scenery }: Props) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <LongTextField
-          label="visible flag"
-          value={scenery.visibleFlag}
-          onChange={handleChange('visibleFlag')}
-          tooltip="When set, this flag must be on for this scenery to be visible (otherwise, the item is visible by default)"
+        <FlagsInput
+          label="visible flags"
+          value={scenery.visibleFlags}
+          onChange={handleChange('visibleFlags')}
+          // eslint-disable-next-line max-len
+          // tooltip="When set, this flag must be on for this scenery to be visible (otherwise, the item is visible by default)"
         />
       </Grid>
       <Contains container={scenery} />

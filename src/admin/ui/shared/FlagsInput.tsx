@@ -12,10 +12,10 @@ const flagsSelector = (state: RootState) => {
   const { entities, doors } = worldState;
 
   const doorFlags = Object.values(doors)
-    .flatMap(({ openCondition }) => [openCondition]);
+    .flatMap(({ openCondition }) => openCondition);
 
   const entityFlags = Object.values(entities)
-    .flatMap(({ visibleFlag, takeableFlag }) => [visibleFlag, takeableFlag]);
+    .flatMap(({ visibleFlags = [], takeableFlags = [] }) => [...visibleFlags, ...takeableFlags]);
 
   const verbFlags = [...Object.values(entities), ...Object.values(doors)]
     .flatMap(({ verbs }) => Object.values(verbs || {}).flat())

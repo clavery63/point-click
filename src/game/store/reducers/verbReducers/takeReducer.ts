@@ -1,4 +1,5 @@
 import { compose } from 'redux';
+import includesAll from 'shared/util/includesAll';
 import { EntityReducer, ItemReducer } from 'shared/util/types';
 import { withText, updateValue, filterValues } from '../utils';
 
@@ -12,7 +13,7 @@ const itemReducer: ItemReducer = (item, playerState) => {
 
 const takeReducer: EntityReducer = (object, playerState, flags) => {
   if (object.type === 'items') {
-    if (object.takeableFlag && !flags.includes(object.takeableFlag)) {
+    if (object.takeableFlags?.length && !includesAll(flags, object.takeableFlags)) {
       return withText(`No good. Taking ${object.name} isn't working`);
     }
     return itemReducer(object, playerState, flags);

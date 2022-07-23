@@ -73,7 +73,7 @@ export interface Door {
   openText?: string;
   keyId?: number;
   hidden?: boolean;
-  openCondition?: Flag;
+  openCondition?: Flag[];
   // TODO: Somehow make the shared fields between entities more explicit
   verbs?: VerbMappings;
 }
@@ -161,8 +161,8 @@ export interface Item {
   imgSet?: ImgSet;
   // TODO: see if this can use genericVerbReducer
   onTake?: string;
-  takeableFlag?: Flag;
-  visibleFlag?: Flag;
+  takeableFlags?: Flag[];
+  visibleFlags?: Flag[];
   requiresPrecision?: boolean;
   verbs?: VerbMappings;
   contains: Nullable<number[]>;
@@ -192,8 +192,8 @@ export interface Scenery {
   contains: Nullable<number[]>;
   trigger?: VerbIndex;
   movedText?: string;
-  takeableFlag?: Flag;
-  visibleFlag?: Flag;
+  takeableFlags?: Flag[];
+  visibleFlags?: Flag[];
   isStatic?: boolean;
   time?: number;
   timeEffect?: TimeEffect;

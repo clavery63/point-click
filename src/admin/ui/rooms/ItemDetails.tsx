@@ -11,6 +11,7 @@ import ImgSelector from '../shared/assets/ImgSelector';
 import Verbs from '../verbs';
 import Toggle from '../shared/Toggle';
 import Selector, { makeOptions } from '../shared/Selector';
+import FlagsInput from '../shared/FlagsInput';
 
 type Props = {
   item: Item;
@@ -70,19 +71,21 @@ const ItemDetails = ({ item }: Props) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <LongTextField
-          label="takeable flag"
-          value={item.takeableFlag}
-          onChange={handleChange('takeableFlag')}
-          tooltip="When set, this flag must be on for the player to collect this item (otherwise, the item is takeable by default)"
+        <FlagsInput
+          label="takeable flags"
+          value={item.takeableFlags}
+          onChange={handleChange('takeableFlags')}
+          // eslint-disable-next-line max-len
+          // tooltip="When set, this flag must be on for the player to collect this item (otherwise, the item is takeable by default)"
         />
       </Grid>
       <Grid item xs={12}>
-        <LongTextField
-          label="visible flag"
-          value={item.visibleFlag}
-          onChange={handleChange('visibleFlag')}
-          tooltip="When set, this flag must be on for this item to be visible (otherwise, the item is visible by default)"
+        <FlagsInput
+          label="visible flags"
+          value={item.visibleFlags}
+          onChange={handleChange('visibleFlags')}
+          // eslint-disable-next-line max-len
+          // tooltip="When set, this flag must be on for this item to be visible (otherwise, the item is visible by default)"
         />
       </Grid>
       <Grid item xs={12}>

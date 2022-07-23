@@ -246,7 +246,10 @@ const gameStateSchema = {
           "type": "boolean"
         },
         "openCondition": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "verbs": {
           "type": "object",
@@ -546,11 +549,17 @@ const gameStateSchema = {
         "onTake": {
           "type": "string"
         },
-        "takeableFlag": {
-          "type": "string"
+        "takeableFlags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
-        "visibleFlag": {
-          "type": "string"
+        "visibleFlags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "requiresPrecision": {
           "type": "boolean"
@@ -843,11 +852,17 @@ const gameStateSchema = {
         "movedText": {
           "type": "string"
         },
-        "takeableFlag": {
-          "type": "string"
+        "takeableFlags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
-        "visibleFlag": {
-          "type": "string"
+        "visibleFlags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "isStatic": {
           "type": "boolean"

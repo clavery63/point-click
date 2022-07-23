@@ -10,6 +10,7 @@ import ImgSelector from '../shared/assets/ImgSelector';
 import Selector, { makeOptions } from '../shared/Selector';
 import MapPositioner from './MapPositioner';
 import Toggle from '../shared/Toggle';
+import FlagsInput from '../shared/FlagsInput';
 
 type Props = {
   door: Door;
@@ -139,11 +140,12 @@ const DoorDetails = ({ door }: Props) => {
         />
       </Grid>
       <Grid item xs={12}>
-        <LongTextField
+        <FlagsInput
           label="open condition"
           value={door.openCondition}
           onChange={handleChange('openCondition')}
-          tooltip="Custom flag to determine if player can open this door (even if the door is in an OPEN state)"
+          // eslint-disable-next-line max-len
+          // tooltip="Custom flag to determine if player can open this door (even if the door is in an OPEN state)"
         />
       </Grid>
       <Grid item xs={12}>
