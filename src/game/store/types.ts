@@ -225,8 +225,6 @@ export interface PlayerState {
   page: number;
 }
 
-export type Flags = Flag[];
-
 export enum VerbBehavior {
   NONE = 'NONE',
   MOVE = 'MOVE',
@@ -282,7 +280,7 @@ export type Config = {
 export interface GameState {
   worldState: WorldState;
   playerState: PlayerState;
-  flags: Flags;
+  flags: Flag[];
   config: Config;
 }
 

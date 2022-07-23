@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setGameState } from 'admin/store/sharedActions';
-import { Flags } from 'game/store/types';
+import { Flag } from 'game/store/types';
 
 export const flagsSlice = createSlice({
   name: 'flags',
-  initialState: [] as Flags,
+  initialState: [] as Flag[],
   reducers: {
-    setFlags: (state, action: PayloadAction<Flags>) => {
+    setFlags: (state, action: PayloadAction<Flag[]>) => {
       const flags = action.payload.filter(flag => flag !== '');
       return flags;
     },

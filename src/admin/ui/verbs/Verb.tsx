@@ -7,7 +7,6 @@ import { makeStyles } from '@mui/styles';
 import LongTextField from '../shared/LongTextField';
 import Selector, { makeOptions } from '../shared/Selector';
 import { useSelector } from '../hooks/redux';
-import splitString from '../utils/splitString';
 import Condition from './Condition';
 import FlagsInput from '../shared/FlagsInput';
 

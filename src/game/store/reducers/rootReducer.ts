@@ -8,7 +8,7 @@ import changePageReducer from './changePageReducer';
 import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
 import {
-  Flags, GameStoreState, PlayerState, WorldState,
+  Flag, GameStoreState, PlayerState, WorldState,
   Menu, VerbIndex, Nullable, PageDir, Music, Config,
 } from '../types';
 import defaultState from '../defaults/defaultGameStoreState';
@@ -24,7 +24,7 @@ type ActionTypes = {
   SET_STATE: GameStoreState;
   SET_WORLD_STATE: WorldState;
   SET_PLAYER_STATE: PlayerState;
-  SET_FLAGS: Flags;
+  SET_FLAGS: Flag[];
   SET_CONFIG: Config;
   SET_TEXT: Nullable<string[]>;
   SET_NEXT_MUSIC: Music;
@@ -69,7 +69,7 @@ const applyReducer = <
 const setState: ParentReducer<GameStoreState> = payload => () => payload;
 const setWorldState: ParentReducer<WorldState> = setValue('worldState');
 const setPlayerState: ParentReducer<PlayerState> = setValue('playerState');
-const setFlags: ParentReducer<Flags> = setValue('flags');
+const setFlags: ParentReducer<Flag[]> = setValue('flags');
 const setConfig: ParentReducer<Config> = setValue('config');
 const setText: ParentReducer<Nullable<string[]>> = setValue('text');
 const setRoom: ParentReducer<number> = roomReducer;

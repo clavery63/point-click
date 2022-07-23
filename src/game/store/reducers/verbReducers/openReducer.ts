@@ -1,11 +1,11 @@
 import { compose } from 'redux';
 import { EntityReducer } from 'shared/util/types';
 import {
-  Door, DoorState, Flags, Scenery,
+  Door, DoorState, Flag, Scenery,
 } from 'game/store/types';
 import { withText, setValue, keepState } from '../utils';
 
-const doorReducer = (door: Door, flags: Flags) => {
+const doorReducer = (door: Door, flags: Flag[]) => {
   switch (door.state) {
     case DoorState.CLOSED:
       if (!door.openCondition || flags.includes(door.openCondition)) {

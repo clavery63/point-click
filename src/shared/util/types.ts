@@ -1,7 +1,7 @@
 import {
   Door,
   Entity,
-  Flags,
+  Flag,
   GameStoreState,
   Item,
   Nullable,
@@ -20,7 +20,7 @@ export type Transformer<T> = (arg: T) => T;
 export type StateTransformer = Transformer<GameStoreState>;
 
 type ChildReducer<T> = {
-  (ent: T, playerState: PlayerState, flags: Flags): StateTransformer;
+  (ent: T, playerState: PlayerState, flags: Flag[]): StateTransformer;
 };
 
 export type EntityReducer = ChildReducer<Entity>;
@@ -31,7 +31,7 @@ export type DoorReducer = ChildReducer<Door>;
 export type ParentReducer<PayloadType> = {
   // TODO: group verb names and flags together
   // eslint-disable-next-line max-len
-  (p: PayloadType, ps: PlayerState, w: WorldState, f: Flags, verbNames: VerbConfig[]): StateTransformer;
+  (p: PayloadType, ps: PlayerState, w: WorldState, f: Flag[], verbNames: VerbConfig[]): StateTransformer;
 };
 
 export type EmptyReducer = () => StateTransformer;

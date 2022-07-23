@@ -1,6 +1,6 @@
 import { compose } from 'redux';
 import {
-  Entity, Flags, Nullable, VerbIndex, VerbLogic,
+  Entity, Flag, Nullable, VerbIndex, VerbLogic,
 } from 'game/store/types';
 import { EntityReducer } from 'shared/util/types';
 import get from 'shared/util/get';
@@ -10,7 +10,7 @@ import {
 } from '../utils';
 import effectsReducer from '../effectsReducer';
 
-const isValid = (verbLogic: VerbLogic, object: Entity, using: Nullable<number>, flags: Flags) => {
+const isValid = (verbLogic: VerbLogic, object: Entity, using: Nullable<number>, flags: Flag[]) => {
   const { prereqUsing, prereqFlags } = verbLogic;
   if (prereqUsing && prereqUsing !== using) {
     return false;
@@ -31,7 +31,7 @@ type GetVerbLogic = (
   object: Entity,
   verb: VerbIndex,
   using: Nullable<number>,
-  flags: Flags
+  flags: Flag[]
 ) => Nullable<VerbLogic>;
 const getVerbLogic: GetVerbLogic = (object, verb, using, flags) => {
   const options = get(object, `verbs.${verb}`);

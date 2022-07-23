@@ -1,7 +1,6 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import { useParams } from 'react-router-dom';
 import useStyles from '../shared/useStyles';
 import Player from './Player';
