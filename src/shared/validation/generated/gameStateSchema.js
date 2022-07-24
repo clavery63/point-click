@@ -624,17 +624,10 @@ const gameStateSchema = {
           }
         },
         "contains": {
-          "anyOf": [
-            {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            },
-            {
-              "type": "null"
-            }
-          ]
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
         },
         "isStatic": {
           "type": "boolean"

@@ -52,7 +52,6 @@ const createItem = (state: Lookup<Item | Scenery>, id: number, isStatic: boolean
     type: 'items',
     name: 'New Item',
     description: '',
-    contains: null,
     // TODO: don't set position for items that don't render in viewport
     position: {
       left: 0,

@@ -165,7 +165,7 @@ export interface Item {
   visibleFlags?: Flag[];
   requiresPrecision?: boolean;
   verbs?: VerbMappings;
-  contains: Nullable<number[]>;
+  contains?: number[];
   isStatic?: boolean;
   time?: number;
   timeEffect?: TimeEffect;

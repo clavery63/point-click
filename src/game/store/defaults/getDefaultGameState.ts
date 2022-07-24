@@ -5,7 +5,20 @@ type GetDefaultGameState = (friendlyName: string) => GameState;
 const getDefaultGameState: GetDefaultGameState = friendlyName => ({
   worldState: {
     doors: {},
-    entities: {},
+    entities: {
+      0: {
+        name: 'self',
+        isStatic: true,
+        position: { left: 191, top: 199 },
+        img: 'menu-button',
+        verbs: {
+          0: [{ text: 'Move yourself? Nope.' }],
+        },
+        description: 'You look great!',
+        id: 0,
+        type: 'items',
+      },
+    },
     rooms: {},
   },
   playerState: {
