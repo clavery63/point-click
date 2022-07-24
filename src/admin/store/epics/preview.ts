@@ -10,8 +10,9 @@ const preview$ = (action$: Observable<Action>, state$: Observable<RootState>) =>
   return action$.pipe(
     filter(startPreview.match),
     withLatestFrom(state$),
-    map(([{ payload }, { gameState }]) => setPreview({
-      ...gameState,
+    map(([{ payload }, { gameState, images }]) => setPreview({
+      ...gameState.present,
+      images,
       playerState: {
         ...gameState.present.playerState,
         // TODO: make this way more easily configurable
