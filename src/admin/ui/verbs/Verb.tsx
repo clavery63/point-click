@@ -29,8 +29,10 @@ const Verb = ({
   verb, index, handleChange, handleDelete,
 }: Props) => {
   const styles = useStyles();
-  const allRoomIds = useSelector(state => Object.keys(state.gameState.worldState.rooms));
-  const allEntityIds = useSelector(state => Object.keys(state.gameState.worldState.entities));
+  const allRoomIds = useSelector(state => Object.keys(state.gameState.present.worldState.rooms));
+  const allEntityIds = useSelector(state => {
+    return Object.keys(state.gameState.present.worldState.entities);
+  });
 
   const onChange = (fieldName: keyof VerbLogic) => (value: any) => {
     handleChange(index, {

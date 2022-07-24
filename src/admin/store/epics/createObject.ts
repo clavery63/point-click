@@ -38,7 +38,7 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     filter(match[type]),
     withLatestFrom(state$),
     switchMap(([{ payload: roomId }, { gameState }]) => {
-      const id = generateKey(gameState);
+      const id = generateKey(gameState.present);
       return from([
         addEntityToRoom({ entityId: id, roomId }),
         createEntity({ id, type, isStatic: roomId === undefined }),
@@ -54,7 +54,7 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     filter(createDoor.match),
     withLatestFrom(state$),
     switchMap(([{ payload: roomId }, { gameState }]) => {
-      const id = generateKey(gameState);
+      const id = generateKey(gameState.present);
       return from([
         addDoorToRoom({ doorId: id, roomId }),
         createDoorWithId({ id }),
@@ -70,7 +70,7 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     filter(createPlayerItem.match),
     withLatestFrom(state$),
     switchMap(([, { gameState }]) => {
-      const id = generateKey(gameState);
+      const id = generateKey(gameState.present);
       return from([
         addItemToPlayer({ id }),
         createEntity({ id, type: 'items', isStatic: false }),
@@ -86,7 +86,7 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     filter(createContainedItem.match),
     withLatestFrom(state$),
     switchMap(([{ payload: containerId }, { gameState }]) => {
-      const id = generateKey(gameState);
+      const id = generateKey(gameState.present);
       return from([
         addItemToContainer({ id, containerId }),
         createEntity({ id, type: 'items', isStatic: false }),

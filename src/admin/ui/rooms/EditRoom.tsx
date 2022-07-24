@@ -8,7 +8,7 @@ const EditRoom = () => {
   const { roomId: roomIdString } = useParams<{ roomId: string }>();
   const roomId = parseInt(roomIdString, 10);
   const room = useSelector(state => {
-    return state.gameState.worldState.rooms[roomId];
+    return state.gameState.present.worldState.rooms[roomId];
   });
 
   if (!room) {

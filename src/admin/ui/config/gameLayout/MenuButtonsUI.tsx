@@ -16,7 +16,7 @@ const texts = {
 
 const MenuButtonsUI = () => {
   const dispatch = useDispatch();
-  const positions = useSelector(state => state.gameState.config.positions);
+  const positions = useSelector(state => state.gameState.present.config.positions);
 
   if (!positions.save) {
     // Hasn't loaded yet

@@ -16,7 +16,7 @@ const ImgSelector = ({
   label, value, onChange, tooltip,
 }: Props) => {
   const dispatch = useDispatch();
-  const images = useSelector(state => state.gameState.images);
+  const images = useSelector(state => state.gameState.present.images);
   const options = Object.keys(images);
 
   const handleUploadSuccess = (file: File) => {

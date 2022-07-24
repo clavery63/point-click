@@ -32,7 +32,7 @@ const GameLayout = () => {
   const {
     img: imgConfig,
     colors,
-  } = useSelector(state => state.gameState.config);
+  } = useSelector(state => state.gameState.present.config);
 
   return (
     <>

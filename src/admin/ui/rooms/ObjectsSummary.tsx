@@ -16,12 +16,12 @@ const ObjectsSummary = ({ room }: Props) => {
   const { entities, doors } = room;
 
   const entityInfos = useSelector(state => entities.map(id => {
-    const ent = state.gameState.worldState.entities[id];
+    const ent = state.gameState.present.worldState.entities[id];
     return { id, type: ent.type, name: ent.name || ent.id.toString() };
   }));
 
   const doorInfos = useSelector(state => doors.map(id => {
-    const ent = state.gameState.worldState.doors[id];
+    const ent = state.gameState.present.worldState.doors[id];
     return {
       id,
       name: ent.name || ent.closedImg || ent.openImg || ent.id.toString(),

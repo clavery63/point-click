@@ -16,7 +16,7 @@ type Props = {
 const ItemComponent = ({ item, roomId }: Props) => {
   const dispatch = useDispatch();
   const imgKey = item.imgSet?.img || item.img || '';
-  const image = useSelector(state => state.gameState.images[imgKey]);
+  const image = useSelector(state => state.gameState.present.images[imgKey]);
   const selectedEnt = useSelector(state => state.editorState.selectedEntity);
   const cachebuster = useCachebuster(item.position);
   useReordering(item, roomId);

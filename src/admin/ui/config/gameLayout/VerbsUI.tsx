@@ -14,7 +14,7 @@ type Props = {
 const Verb = (props: Props) => {
   const { top, left, index } = props;
   const dispatch = useDispatch();
-  const verbs = useSelector(state => state.gameState.config.verbs);
+  const verbs = useSelector(state => state.gameState.present.config.verbs);
 
   return (
     <MenuButtonWidget
@@ -37,7 +37,7 @@ const Verb = (props: Props) => {
 };
 
 const VerbsUI = () => {
-  const { verbs = [] } = useSelector(state => state.gameState.config.positions);
+  const { verbs = [] } = useSelector(state => state.gameState.present.config.positions);
   return (
     <Group>
       {verbs.map(({ left, top }, index) => (

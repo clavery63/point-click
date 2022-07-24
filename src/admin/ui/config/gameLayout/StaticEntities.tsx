@@ -5,7 +5,7 @@ import { Group } from 'react-konva';
 
 const StaticEntities = () => {
   const ids = useSelector(state => {
-    const allEntities = Object.values(state.gameState.worldState.entities);
+    const allEntities = Object.values(state.gameState.present.worldState.entities);
     return allEntities
       .filter(ent => !!ent.isStatic)
       .map(ent => ent.id);

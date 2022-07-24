@@ -7,7 +7,7 @@ import FlagsInput from '../shared/FlagsInput';
 
 const Flags = () => {
   const dispatch = useDispatch();
-  const flags = useSelector(state => state.gameState.flags);
+  const flags = useSelector(state => state.gameState.present.flags);
 
   return (
     <>

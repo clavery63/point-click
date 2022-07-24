@@ -12,7 +12,7 @@ const VerbDetails = () => {
     const { selectedEntity } = state.editorState;
     if (selectedEntity?.type === 'verbs') {
       return {
-        ...state.gameState.config.verbs[selectedEntity.id],
+        ...state.gameState.present.config.verbs[selectedEntity.id],
         index: selectedEntity.id,
       };
     }

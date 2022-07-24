@@ -20,7 +20,7 @@ type Props = {
 const SceneryDetails = ({ scenery }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const verbs = useSelector(state => state.gameState.config.verbs);
+  const verbs = useSelector(state => state.gameState.present.config.verbs);
   const sceneriesEditing = useSelector(state => state.editorState.sceneryEditing);
   const positionEditing = sceneriesEditing[scenery.id] || 'startPosition';
 

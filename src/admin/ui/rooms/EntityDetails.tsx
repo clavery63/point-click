@@ -11,10 +11,10 @@ const EntityDetails = () => {
       return null;
     }
     if (selectedEntity.type === 'doors') {
-      return state.gameState.worldState.doors[selectedEntity.id];
+      return state.gameState.present.worldState.doors[selectedEntity.id];
     }
     if (selectedEntity.type === 'entity') {
-      return state.gameState.worldState.entities[selectedEntity.id];
+      return state.gameState.present.worldState.entities[selectedEntity.id];
     }
     return null;
   });

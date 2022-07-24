@@ -12,7 +12,7 @@ const Contains = ({ container }: Props) => {
   const contains = container.contains || [];
 
   const entityInfos = useSelector(state => contains.map(id => {
-    const ent = state.gameState.worldState.entities[id];
+    const ent = state.gameState.present.worldState.entities[id];
     return { id, type: ent.type, name: ent.name || ent.id.toString() };
   }));
 

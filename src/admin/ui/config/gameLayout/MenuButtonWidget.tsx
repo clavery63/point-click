@@ -8,7 +8,7 @@ import { setCursorStyle } from 'shared/components/PreciseImage';
 
 const canvasesSelector = createSelector(
   // TODO: fix the "any" type here
-  (state: any) => state.gameState.images,
+  (state: any) => state.gameState.present.images,
   (images) => {
     const charSet = images['alpha-dark'];
     return charSet ? makeCanvasSet(charSet) : undefined;
@@ -26,7 +26,7 @@ const MenuButtonWidget = (props: Props) => {
   const {
     top, left, text, onClick = () => {}, onDrag = () => {},
   } = props;
-  const images = useSelector(state => state.gameState.images);
+  const images = useSelector(state => state.gameState.present.images);
   const canvases = useSelector(canvasesSelector);
 
   return (

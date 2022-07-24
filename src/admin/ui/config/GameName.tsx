@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from '../hooks/redux';
 
 const GameName = () => {
   const dispatch = useDispatch();
-  const gameName = useSelector(state => state.gameState.config.friendlyName);
+  const gameName = useSelector(state => state.gameState.present.config.friendlyName);
 
   return (
     <>

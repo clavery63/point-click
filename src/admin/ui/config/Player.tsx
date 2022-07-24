@@ -12,13 +12,13 @@ import ObjectsList from '../rooms/ObjectsList';
 
 const Player = () => {
   const dispatch = useDispatch();
-  const player = useSelector(state => state.gameState.playerState);
-  const allRoomIds = useSelector(state => Object.keys(state.gameState.worldState.rooms));
+  const player = useSelector(state => state.gameState.present.playerState);
+  const allRoomIds = useSelector(state => Object.keys(state.gameState.present.worldState.rooms));
   const currentInventory = useSelector(state => player.items.map(id => {
-    const ent = state.gameState.worldState.entities[id];
+    const ent = state.gameState.present.worldState.entities[id];
     return { id, type: ent.type, name: ent.name || ent.id.toString() };
   }));
-  const verbs = useSelector(state => state.gameState.config.verbs);
+  const verbs = useSelector(state => state.gameState.present.config.verbs);
 
   const handleChange = (fieldName: keyof PlayerState) => (value: any) => {
     dispatch(setPlayer({

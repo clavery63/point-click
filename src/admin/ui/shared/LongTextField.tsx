@@ -23,11 +23,13 @@ const LongTextField = ({
         maxRows={6}
         value={value || ''}
         onChange={e => {
-          if (e.target.value === '') {
-            onChange(undefined);
-          } else {
-            onChange(e.target.value);
-          }
+          window.setTimeout(() => {
+            if (e.target.value === '') {
+              onChange(undefined);
+            } else {
+              onChange(e.target.value);
+            }
+          }, 1000);
         }}
         variant="outlined"
       />

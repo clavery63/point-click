@@ -13,7 +13,7 @@ type EntityType = {
 };
 export const Entity = ({ id, roomId }: EntityType) => {
   const entity = useSelector(state => {
-    return state.gameState.worldState.entities[id];
+    return state.gameState.present.worldState.entities[id];
   });
 
   if (entity?.type === 'items') {
@@ -33,7 +33,7 @@ type DoorType = {
 };
 const DoorWrapper = ({ id, roomId }: DoorType) => {
   const door = useSelector(state => {
-    return state.gameState.worldState.doors[id];
+    return state.gameState.present.worldState.doors[id];
   });
 
   if (!door) {

@@ -24,7 +24,7 @@ const useUpload = (filename: string) => {
     setUploadState(UploadState.IN_PROGRESS);
     try {
       const s3 = new S3(state.gameName);
-      validateGameState(state.gameState);
+      validateGameState(state.gameState.present);
       s3.writeObject(filename, JSON.stringify(state.gameState));
       setUploadState(UploadState.COMPLETE);
     } catch (e) {

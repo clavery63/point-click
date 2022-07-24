@@ -86,7 +86,7 @@ const RoomCard = ({ room, id }: RoomCardProps) => {
 const ListRooms = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const rooms = useSelector(state => state.gameState.worldState.rooms);
+  const rooms = useSelector(state => state.gameState.present.worldState.rooms);
 
   const onCreate = () => {
     dispatch(createRoom());

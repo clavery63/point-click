@@ -14,7 +14,7 @@ const dummyPositions = [
 type Props = { top: number; left: number};
 const MiniMapPositioned = ({ top, left }: Props) => {
   const dispatch = useDispatch();
-  const images = useSelector(state => state.gameState.images);
+  const images = useSelector(state => state.gameState.present.images);
 
   return (
     <Group
@@ -44,7 +44,7 @@ const MiniMapPositioned = ({ top, left }: Props) => {
 };
 
 const MiniMapUI = () => {
-  const { miniMap } = useSelector(state => state.gameState.config.positions);
+  const { miniMap } = useSelector(state => state.gameState.present.config.positions);
   if (!miniMap) {
     // Hasn't loaded yet
     return null;

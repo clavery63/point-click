@@ -13,7 +13,7 @@ const preview$ = (action$: Observable<Action>, state$: Observable<RootState>) =>
     map(([{ payload }, { gameState }]) => setPreview({
       ...gameState,
       playerState: {
-        ...gameState.playerState,
+        ...gameState.present.playerState,
         // TODO: make this way more easily configurable
         room: payload,
       },

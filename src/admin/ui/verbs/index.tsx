@@ -14,7 +14,7 @@ type Props = {
 };
 const Verbs = ({ entity }: Props) => {
   const dispatch = useDispatch();
-  const verbs = useSelector(state => state.gameState.config.verbs);
+  const verbs = useSelector(state => state.gameState.present.config.verbs);
 
   const handleChange = (verbIndex: VerbIndex, verbLogics?: VerbLogic[]) => {
     dispatch(setEntityVerb({

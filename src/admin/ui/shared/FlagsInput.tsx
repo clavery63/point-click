@@ -9,7 +9,7 @@ import WithTooltip from './WithTooltip';
 const filter = createFilterOptions<FlagOption>();
 
 const flagsSelector = (state: RootState) => {
-  const { worldState, flags } = state.gameState;
+  const { worldState, flags } = state.gameState.present;
   const { entities, doors } = worldState;
 
   const doorFlags = Object.values(doors)

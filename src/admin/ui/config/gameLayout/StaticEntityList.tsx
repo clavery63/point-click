@@ -8,7 +8,7 @@ import React from 'react';
 const StaticEntityList = () => {
   const dispatch = useDispatch();
   const entityInfos = useSelector(state => {
-    return Object.values(state.gameState.worldState.entities)
+    return Object.values(state.gameState.present.worldState.entities)
       .filter(ent => !!ent.isStatic)
       .map(ent => ({ id: ent.id, name: ent.name || ent.id.toString() }));
   });
