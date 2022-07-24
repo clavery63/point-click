@@ -14,8 +14,6 @@ export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: {
-      // TODO: I bet these images can be moved to a selector without too much
-      // trouble
       ignoredActionPaths: ['payload.images', 'payload.img'],
       ignoredPaths: ['images', 'previewState.images'],
     },
@@ -29,9 +27,8 @@ const AdminRoot = () => {
 
   useEffect(() => {
     document.title = 'Admin';
+    store.dispatch(setGameName(gameName));
   }, []);
-
-  store.dispatch(setGameName(gameName));
 
   return (
     <Provider store={store}>
