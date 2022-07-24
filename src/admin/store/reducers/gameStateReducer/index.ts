@@ -30,4 +30,8 @@ const groupBy = () => {
   return curGroup;
 };
 
-export default undoable(gameStateReducer, { groupBy, ignoreInitialState: true });
+export default undoable(gameStateReducer, {
+  groupBy,
+  ignoreInitialState: true,
+  limit: 50,
+});
