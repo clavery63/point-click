@@ -15,7 +15,7 @@ type Props = {
 const VisibleScenery = ({
   scenery, position, onDragEnd, onClick, opacity,
 }: Props) => {
-  const image = useSelector(state => state.gameState.present.images[scenery.img || '']);
+  const image = useSelector(state => state.images[scenery.img || '']);
   const cachebuster = useCachebuster(position);
 
   if (!position) {

@@ -7,7 +7,7 @@ import StaticEntities from './StaticEntities';
 import VerbsUI from './VerbsUI';
 
 const GameLayout = () => {
-  const images = useSelector(state => state.gameState.present.images);
+  const images = useSelector(state => state.images);
   const { img, colors } = useSelector(state => state.gameState.present.config);
   const { cursor, menu, itemList } = img;
   return (

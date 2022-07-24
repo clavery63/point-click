@@ -1,11 +1,12 @@
 import {
-  catchError, switchMapTo, switchMap,
+  catchError, switchMapTo, switchMap, map,
 } from 'rxjs/operators';
 import {
   of, merge, from, Observable, ObservableInput,
 } from 'rxjs';
 import { ofType } from 'redux-observable';
 import hydrateState$ from 'shared/observables/hydrateState';
+import loadImages$ from 'shared/observables/loadImages';
 import { AllActions, MyEpic } from './types';
 import { DoorDir, GameState, GameStoreState } from '../types';
 
@@ -57,6 +58,12 @@ const initializeGame: InitializeGame = bootInfo => ({
 
 const boot$: MyEpic = (action$, state$) => {
   return hydrateState$(state$, initializeGame).pipe(
+    switchMap(state => loadImages$(state.gameName).pipe(
+      map(images => ({
+        ...state,
+        images,
+      })),
+    )),
     switchMap(state => merge(
       of<AllActions>({ type: 'SET_STATE', payload: state }),
       restart$(action$, state),

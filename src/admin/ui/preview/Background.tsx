@@ -13,7 +13,7 @@ type BackgroundProps = {
 const Background = ({ room, selectedEntity }: BackgroundProps) => {
   const dispatch = useDispatch();
   const { img, video } = room;
-  const image = useSelector(state => state.gameState.present.images[img || '']);
+  const image = useSelector(state => state.images[img || '']);
   const gameName = useSelector(state => state.gameName);
   const opacity = selectedEntity ? 0.5 : 1;
 

@@ -17,7 +17,7 @@ export const store = configureStore({
       // TODO: I bet these images can be moved to a selector without too much
       // trouble
       ignoredActionPaths: ['payload.images', 'payload.img'],
-      ignoredPaths: ['gameState.images', 'previewState.images'],
+      ignoredPaths: ['images', 'previewState.images'],
     },
   }).concat(epicMiddleware),
   devTools: process.env.NODE_ENV !== 'production',

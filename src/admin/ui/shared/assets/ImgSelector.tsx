@@ -1,7 +1,7 @@
 import React from 'react';
 import { Nullable } from 'game/store/types';
 import { Stack } from '@mui/material';
-import { addImage } from 'admin/store/reducers/gameStateReducer/imagesReducer';
+import { addImage } from 'admin/store/reducers/imagesReducer';
 import { useDispatch, useSelector } from '../../hooks/redux';
 import ImageUploader from './ImageUploader';
 import Selector, { makeOptions } from '../Selector';
@@ -16,7 +16,7 @@ const ImgSelector = ({
   label, value, onChange, tooltip,
 }: Props) => {
   const dispatch = useDispatch();
-  const images = useSelector(state => state.gameState.present.images);
+  const images = useSelector(state => state.images);
   const options = Object.keys(images);
 
   const handleUploadSuccess = (file: File) => {

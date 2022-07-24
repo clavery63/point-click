@@ -40,8 +40,8 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     switchMap(([{ payload: roomId }, { gameState }]) => {
       const id = generateKey(gameState.present);
       return from([
-        addEntityToRoom({ entityId: id, roomId }),
         createEntity({ id, type, isStatic: roomId === undefined }),
+        addEntityToRoom({ entityId: id, roomId }),
         setSelected({
           id,
           type: 'entity',
@@ -56,8 +56,8 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     switchMap(([{ payload: roomId }, { gameState }]) => {
       const id = generateKey(gameState.present);
       return from([
-        addDoorToRoom({ doorId: id, roomId }),
         createDoorWithId({ id }),
+        addDoorToRoom({ doorId: id, roomId }),
         setSelected({
           id,
           type: 'doors',
@@ -72,8 +72,8 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     switchMap(([, { gameState }]) => {
       const id = generateKey(gameState.present);
       return from([
-        addItemToPlayer({ id }),
         createEntity({ id, type: 'items', isStatic: false }),
+        addItemToPlayer({ id }),
         setSelected({
           id,
           type: 'entity',
@@ -88,8 +88,8 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     switchMap(([{ payload: containerId }, { gameState }]) => {
       const id = generateKey(gameState.present);
       return from([
-        addItemToContainer({ id, containerId }),
         createEntity({ id, type: 'items', isStatic: false }),
+        addItemToContainer({ id, containerId }),
         setSelected({
           id,
           type: 'entity',

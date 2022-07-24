@@ -14,7 +14,7 @@ const dummyPositions = [
 type Props = { top: number; left: number};
 const MiniMapPositioned = ({ top, left }: Props) => {
   const dispatch = useDispatch();
-  const images = useSelector(state => state.gameState.present.images);
+  const images = useSelector(state => state.images);
 
   return (
     <Group

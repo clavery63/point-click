@@ -16,7 +16,7 @@ type Props = {
 const DoorComponent = ({ door, roomId }: Props) => {
   const dispatch = useDispatch();
   const imgName = door.openImg || door.closedImg || '';
-  const image = useSelector(state => state.gameState.present.images[imgName]);
+  const image = useSelector(state => state.images[imgName]);
   const selectedEnt = useSelector(state => state.editorState.selectedEntity);
   const cachebuster = useCachebuster(door.position);
   useReordering(door, roomId, 'doors');

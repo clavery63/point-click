@@ -71,12 +71,6 @@ const hydrateState$: HydrateState = (state$, initialize, fileName = defaultFileN
     switchMap(loadPlayerAndGameState$(fileName)),
     tap(setPageTitle),
     tap(setAudioSrc),
-    switchMap(state => loadImages$(state.gameName).pipe(
-      map(images => ({
-        ...state,
-        images,
-      })),
-    )),
   );
 };
 
