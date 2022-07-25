@@ -1,8 +1,8 @@
 import { useSelector } from 'admin/ui/hooks/redux';
 import { TextStateless as Text, makeCanvasSet } from 'game/ui/shared/Text';
 import { KonvaEventObject } from 'konva/types/Node';
-import React from 'react';
-import { Group, Image } from 'react-konva';
+import React, { useState } from 'react';
+import { Group, Image, Text as KonvaText } from 'react-konva';
 import { createSelector } from 'reselect';
 import { setCursorStyle } from 'shared/components/PreciseImage';
 
@@ -29,6 +29,7 @@ const MenuButtonWidget = (props: Props) => {
   } = props;
   const images = useSelector(state => state.images);
   const canvases = useSelector(canvasesSelector);
+  const [hovering, setHovering] = useState(false);
 
   const textLeft = hasButton ? 9 : 0;
   const textTop = hasButton ? 1 : 0;
@@ -42,11 +43,34 @@ const MenuButtonWidget = (props: Props) => {
       draggable
       onClick={onClick}
       onDragEnd={onDrag}
-      onMouseEnter={setCursorStyle('pointer')}
-      onMouseLeave={setCursorStyle('default')}
+      onMouseEnter={e => {
+        setHovering(true);
+        setCursorStyle('pointer')(e);
+      }}
+      onMouseLeave={e => {
+        setHovering(false);
+        setCursorStyle('default')(e);
+      }}
     >
       {hasButton && <Image image={images['menu-button']} />}
       {text && <Text text={text} left={textLeft} top={textTop} canvases={canvases} />}
+      {hovering && (
+        // https://konvajs.org/api/Konva.Text.html
+        // But maybe what we really want is helper text that shows up somewhere else on the screen
+        // Downside of that is we need to dispatch and keep it in the store
+        // But that's not that big of a deal
+        <KonvaText
+          text="hi"
+          fontSize={8}
+          x={3}
+          y={-4}
+          fill="white"
+          shadowColor="black"
+          shadowOffsetX={1}
+          shadowOffsetY={1}
+
+        />
+      )}
     </Group>
   );
 };
