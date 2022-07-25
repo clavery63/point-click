@@ -1,3 +1,4 @@
+import { setMiscInfo } from 'admin/store/reducers/editorStateReducer/miscInfoReducer';
 import { setMenuButtonPosition } from 'admin/store/reducers/gameStateReducer/configReducer/positionsReducer';
 import { useSelector, useDispatch } from 'admin/ui/hooks/redux';
 import { KonvaEventObject } from 'konva/types/Node';
@@ -30,6 +31,7 @@ const MiniMapPositioned = ({ top, left }: Props) => {
           name: 'miniMap',
         }));
       }}
+      onClick={() => dispatch(setMiscInfo('miniMap (drag to reposition)'))}
     >
       {dummyPositions.map(({ x, y }) => (
         <Image

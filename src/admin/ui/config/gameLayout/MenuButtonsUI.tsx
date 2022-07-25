@@ -1,3 +1,4 @@
+import { setMiscInfo } from 'admin/store/reducers/editorStateReducer/miscInfoReducer';
 import { setMenuButtonPosition } from 'admin/store/reducers/gameStateReducer/configReducer/positionsReducer';
 import { useSelector, useDispatch } from 'admin/ui/hooks/redux';
 import { KonvaEventObject } from 'konva/types/Node';
@@ -19,6 +20,13 @@ const hasButton = {
   pageDown: true,
   self: false,
   save: true,
+};
+
+const helperTexts = {
+  pageUp: 'pageUp button',
+  pageDown: 'pageDown button',
+  self: 'self, just the text',
+  save: 'save button and text',
 };
 
 const MenuButtonsUI = () => {
@@ -45,6 +53,9 @@ const MenuButtonsUI = () => {
               left: Math.round(e.target.x()),
               name,
             }));
+          }}
+          onClick={() => {
+            dispatch(setMiscInfo(`${helperTexts[name]} (drag to reposition)`));
           }}
         />
       ))}

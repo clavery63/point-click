@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Nullable } from 'game/store/types';
+import { setMiscInfo } from './miscInfoReducer';
 
 export type SelectedEntity = {
   id: number;
@@ -12,6 +13,9 @@ export const selectedEntitySlice = createSlice({
   reducers: {
     setSelected: (state, action: PayloadAction<SelectedEntity>) => action.payload,
     clearSelected: () => null,
+  },
+  extraReducers: builder => {
+    builder.addCase(setMiscInfo, () => null);
   },
 });
 

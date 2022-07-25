@@ -29,7 +29,6 @@ const MenuButtonWidget = (props: Props) => {
   } = props;
   const images = useSelector(state => state.images);
   const canvases = useSelector(canvasesSelector);
-  const [hovering, setHovering] = useState(false);
 
   const textLeft = hasButton ? 9 : 0;
   const textTop = hasButton ? 1 : 0;
@@ -43,34 +42,11 @@ const MenuButtonWidget = (props: Props) => {
       draggable
       onClick={onClick}
       onDragEnd={onDrag}
-      onMouseEnter={e => {
-        setHovering(true);
-        setCursorStyle('pointer')(e);
-      }}
-      onMouseLeave={e => {
-        setHovering(false);
-        setCursorStyle('default')(e);
-      }}
+      onMouseEnter={setCursorStyle('pointer')}
+      onMouseLeave={setCursorStyle('default')}
     >
       {hasButton && <Image image={images['menu-button']} />}
       {text && <Text text={text} left={textLeft} top={textTop} canvases={canvases} />}
-      {hovering && (
-        // https://konvajs.org/api/Konva.Text.html
-        // But maybe what we really want is helper text that shows up somewhere else on the screen
-        // Downside of that is we need to dispatch and keep it in the store
-        // But that's not that big of a deal
-        <KonvaText
-          text="hi"
-          fontSize={8}
-          x={3}
-          y={-4}
-          fill="white"
-          shadowColor="black"
-          shadowOffsetX={1}
-          shadowOffsetY={1}
-
-        />
-      )}
     </Group>
   );
 };

@@ -11,6 +11,7 @@ import ImgSelector from '../../shared/assets/ImgSelector';
 import GameLayoutWidget from './GameLayoutWidget';
 import VerbDetails from './VerbDetails';
 import StaticEntityList from './StaticEntityList';
+import MiscInfo from './MiscInfo';
 
 const useStyles = makeStyles({
   leftColumn: {
@@ -95,6 +96,7 @@ const GameLayout = () => {
       <Box className={styles.leftColumn}>
         <EntityDetails />
         <VerbDetails />
+        <MiscInfo />
       </Box>
     </>
   );
