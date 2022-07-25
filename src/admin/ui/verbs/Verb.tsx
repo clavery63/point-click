@@ -30,8 +30,8 @@ const Verb = ({
 }: Props) => {
   const styles = useStyles();
   const allRoomIds = useSelector(state => Object.keys(state.gameState.present.worldState.rooms));
-  const allEntityIds = useSelector(state => {
-    return Object.keys(state.gameState.present.worldState.entities);
+  const allEntities = useSelector(state => {
+    return Object.values(state.gameState.present.worldState.entities);
   });
 
   const onChange = (fieldName: keyof VerbLogic) => (value: any) => {
@@ -92,7 +92,10 @@ const Verb = ({
             label="prereq using"
             value={verb.prereqUsing}
             onChange={val => onChange('prereqUsing')(parseInt(val, 10))}
-            options={makeOptions(allEntityIds)}
+            options={allEntities.map(({ id, name }) => ({
+              value: id,
+              label: [id, name].filter(Boolean).join(': '),
+            }))}
             style={{ width: '150px' }}
             tooltip="ID of the item the player must be USING to trigger this verb"
           />
