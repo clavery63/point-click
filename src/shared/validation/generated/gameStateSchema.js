@@ -649,6 +649,7 @@ const gameStateSchema = {
         }
       },
       "required": [
+        "contains",
         "description",
         "id",
         "name",
@@ -816,17 +817,10 @@ const gameStateSchema = {
           }
         },
         "contains": {
-          "anyOf": [
-            {
-              "type": "array",
-              "items": {
-                "type": "number"
-              }
-            },
-            {
-              "type": "null"
-            }
-          ]
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
         },
         "trigger": {
           "enum": [
@@ -868,6 +862,7 @@ const gameStateSchema = {
         }
       },
       "required": [
+        "contains",
         "id",
         "startPosition",
         "type"

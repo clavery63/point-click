@@ -58,6 +58,7 @@ const createItem = (state: Lookup<Item | Scenery>, id: number, isStatic: boolean
       top: 0,
     },
     isStatic,
+    contains: [],
   };
 };
 
@@ -67,13 +68,13 @@ const createScenery = (state: Lookup<Item | Scenery>, id: number) => {
     type: 'scenery',
     name: 'New Scenery',
     description: '',
-    contains: null,
     // TODO: don't set position for items that don't render in viewport
     startPosition: {
       left: 0,
       top: 0,
     },
     size: defaultSize,
+    contains: [],
   };
 };
 

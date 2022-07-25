@@ -165,7 +165,7 @@ export interface Item {
   visibleFlags?: Flag[];
   requiresPrecision?: boolean;
   verbs?: VerbMappings;
-  contains?: number[];
+  contains: number[];
   isStatic?: boolean;
   time?: number;
   timeEffect?: TimeEffect;
@@ -189,7 +189,7 @@ export interface Scenery {
   img?: string;
   openText?: string;
   verbs?: VerbMappings;
-  contains: Nullable<number[]>;
+  contains: number[];
   trigger?: VerbIndex;
   movedText?: string;
   takeableFlags?: Flag[];

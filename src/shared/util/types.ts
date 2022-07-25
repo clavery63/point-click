@@ -67,7 +67,7 @@ type GetNullables<Base, Prefix extends string = '', AnyNumber = 0> = {
 export type ValidPathsFor<Root, Constraint> =
   Exclude<ConstrainedTypes<Root, Constraint>, undefined>;
 
-export type NumberArrayPath = ValidPathsFor<GameStoreState, Nullable<number[]>>;
+export type NumberArrayPath = ValidPathsFor<GameStoreState, number[]>;
 export type NumberPath = ValidPathsFor<GameStoreState, number>;
 export type NullablePath = Exclude<GetNullables<GameStoreState>, undefined>;
 

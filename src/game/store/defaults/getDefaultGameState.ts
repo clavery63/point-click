@@ -17,6 +17,7 @@ const getDefaultGameState: GetDefaultGameState = friendlyName => ({
         description: 'You look great!',
         id: 0,
         type: 'items',
+        contains: [],
       },
     },
     rooms: {},

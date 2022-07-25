@@ -57,6 +57,5 @@ export const when = (pred: boolean) => (transform: StateTransformer) => {
 export const filterValues = <
   PathType extends NumberArrayPath
 >(path: PathType) => (id: Nullable<number>) => updateValue<NumberArrayPath>(path)(objects => {
-  if (!objects) return null;
   return filter(objects, objectId => objectId !== id);
 });
