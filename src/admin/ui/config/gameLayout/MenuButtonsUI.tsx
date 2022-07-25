@@ -14,6 +14,13 @@ const texts = {
   save: 'save',
 };
 
+const hasButton = {
+  pageUp: true,
+  pageDown: true,
+  self: false,
+  save: true,
+};
+
 const MenuButtonsUI = () => {
   const dispatch = useDispatch();
   const positions = useSelector(state => state.gameState.present.config.positions);
@@ -31,6 +38,7 @@ const MenuButtonsUI = () => {
           top={positions[name].top}
           left={positions[name].left}
           text={texts[name]}
+          hasButton={hasButton[name]}
           onDrag={(e: KonvaEventObject<DragEvent>) => {
             dispatch(setMenuButtonPosition({
               top: Math.round(e.target.y()),

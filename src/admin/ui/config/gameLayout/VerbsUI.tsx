@@ -21,6 +21,7 @@ const Verb = (props: Props) => {
       left={left}
       top={top}
       text={verbs[index].name}
+      hasButton
       onClick={() => dispatch(setSelected({
         id: index,
         type: 'verbs',

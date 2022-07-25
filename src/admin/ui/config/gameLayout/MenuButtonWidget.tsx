@@ -19,15 +19,19 @@ type Props = {
   top: number;
   left: number;
   text?: string;
+  hasButton: boolean;
   onClick?: () => void;
   onDrag?: (e: KonvaEventObject<DragEvent>) => void;
 };
 const MenuButtonWidget = (props: Props) => {
   const {
-    top, left, text, onClick = () => {}, onDrag = () => {},
+    top, left, text, hasButton, onClick = () => {}, onDrag = () => {},
   } = props;
   const images = useSelector(state => state.images);
   const canvases = useSelector(canvasesSelector);
+
+  const textLeft = hasButton ? 9 : 0;
+  const textTop = hasButton ? 1 : 0;
 
   return (
     <Group
@@ -41,8 +45,8 @@ const MenuButtonWidget = (props: Props) => {
       onMouseEnter={setCursorStyle('pointer')}
       onMouseLeave={setCursorStyle('default')}
     >
-      <Image image={images['menu-button']} />
-      {text && <Text text={text} left={9} top={1} canvases={canvases} />}
+      {hasButton && <Image image={images['menu-button']} />}
+      {text && <Text text={text} left={textLeft} top={textTop} canvases={canvases} />}
     </Group>
   );
 };

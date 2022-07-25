@@ -2,6 +2,7 @@ import { PageDir } from 'game/store/types';
 import React from 'react';
 import { Image } from 'shared/components/tappables';
 import { useSelector } from 'shared/hooks/redux';
+import Text from '../shared/Text';
 import MenuOption from './MenuOption';
 
 type Props = {
@@ -28,10 +29,9 @@ const MenuRight = ({ onPageClick, onSaveClick }: Props) => {
         onClick={() => onPageClick('DOWN')}
         image={images.get('menu-button')}
       />
-      <MenuOption
+      <Text
         left={self.left}
         top={self.top}
-        onClick={() => {}}
         text="self"
       />
       <MenuOption
