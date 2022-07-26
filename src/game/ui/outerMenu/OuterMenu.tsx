@@ -34,10 +34,10 @@ const Load = ({ onClick }: Props) => (
 
 const OuterMenu = () => {
   const dispatch = useDispatch();
-  const menu = useSelector(state => state.menu);
+  const { current } = useSelector(state => state.menu);
   const gameName = useSelector(state => state.gameName);
 
-  if (menu === 'NONE') return null;
+  if (current === 'NONE') return null;
 
   const hack = (fn: () => void) => () => {
     // NOTE: This hack is here to establish play intent from the user. Otherwise
@@ -51,7 +51,7 @@ const OuterMenu = () => {
 
   return (
     <>
-      {menu === 'GAME_OVER' && <GameOver />}
+      {current === 'GAME_OVER' && <GameOver />}
       <Start onClick={hack(() => dispatch({ type: 'START_GAME' }))} />
       {hasLoadData && <Load onClick={hack(() => dispatch({ type: 'LOAD_GAME' }))} />}
     </>

@@ -298,7 +298,10 @@ export interface GameStoreState extends GameState {
   };
   text: Nullable<string[]>;
   loading: boolean;
-  menu: Menu;
+  menu: {
+    current: Menu;
+    next?: Menu;
+  };
   cursorEnabled: boolean;
   gameName: string;
   images: Map<string, HTMLImageElement>;

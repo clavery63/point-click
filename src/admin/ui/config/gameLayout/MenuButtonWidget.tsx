@@ -1,8 +1,8 @@
 import { useSelector } from 'admin/ui/hooks/redux';
 import { TextStateless as Text, makeCanvasSet } from 'game/ui/shared/Text';
 import { KonvaEventObject } from 'konva/types/Node';
-import React, { useState } from 'react';
-import { Group, Image, Text as KonvaText } from 'react-konva';
+import React from 'react';
+import { Group, Image } from 'react-konva';
 import { createSelector } from 'reselect';
 import { setCursorStyle } from 'shared/components/PreciseImage';
 

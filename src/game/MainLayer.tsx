@@ -9,6 +9,7 @@ import OuterMenu from './ui/outerMenu/OuterMenu';
 import ClickMask from './ui/clickMask/ClickMask';
 import { Menu } from './store/types';
 import StaticItems from './ui/staticItems/StaticItems';
+import Fade from './ui/transition/Fade';
 
 type GameContentProps = {
   menu: Menu;
@@ -29,7 +30,9 @@ const GameContent = ({ menu }: GameContentProps) => {
 
 type Props = {
   loading: boolean;
-  menu: Menu;
+  menu: {
+    current: Menu;
+  };
   stageData: StageData;
 };
 const MainLayer = ({ loading, menu, stageData }: Props) => {
@@ -45,8 +48,9 @@ const MainLayer = ({ loading, menu, stageData }: Props) => {
 
   return (
     <Layer ref={layerRef}>
-      <GameContent menu={menu} />
+      <GameContent menu={menu.current} />
       <OuterMenu />
+      <Fade />
       <Cursor stageData={stageData} />
     </Layer>
   );
