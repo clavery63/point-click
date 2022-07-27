@@ -8,7 +8,7 @@ type EpicActions =
   { type: 'LOAD_GAME' } |
   { type: 'PLAY_SFX' } |
   { type: 'PAGE_CLICK' } |
-  { type: 'START_GAME' } |
+  { type: 'START_GAME'; payload: boolean } |
   { type: 'RUN_TEXT'; payload: string } |
   {
     type: 'PLAY_MUSIC';

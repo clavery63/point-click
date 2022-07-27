@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'shared/hooks/redux';
 import { getSaveDataKey } from 'game/store/epics/save';
 import Text from '../shared/Text';
 
-type Props = {
+type StartProps = {
   onClick: () => void;
 };
 
-const Start = ({ onClick }: Props) => (
+const Start = ({ onClick }: StartProps) => (
   <>
     <Text left={88} top={100} color="light" text="start game" />
     <Rect
@@ -21,14 +21,17 @@ const Start = ({ onClick }: Props) => (
   </>
 );
 
-const Load = ({ onClick }: Props) => (
+const Load = ({ onClick }: StartProps) => (
   <>
     <Text left={92} top={120} color="light" text="load game" />
     <Rect x={92} y={120} height={8} width={72} onClick={onClick} />
   </>
 );
 
-const Title = () => {
+type Props = {
+  fadeOnStart?: boolean;
+};
+const Title = ({ fadeOnStart = true }: Props) => {
   const dispatch = useDispatch();
   const gameName = useSelector(state => state.gameName);
 
@@ -44,7 +47,7 @@ const Title = () => {
 
   return (
     <>
-      <Start onClick={hack(() => dispatch({ type: 'START_GAME' }))} />
+      <Start onClick={hack(() => dispatch({ type: 'START_GAME', payload: fadeOnStart }))} />
       {hasLoadData && <Load onClick={hack(() => dispatch({ type: 'LOAD_GAME' }))} />}
     </>
   );

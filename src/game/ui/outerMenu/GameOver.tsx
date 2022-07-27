@@ -6,7 +6,7 @@ const GameOver = () => {
   return (
     <>
       <Text left={92} top={60} color="light" text="game over" />
-      <Title />
+      <Title fadeOnStart={false} />
     </>
   );
 };

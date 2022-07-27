@@ -1,14 +1,21 @@
 import {
-  catchError, switchMapTo, switchMap, map,
+  catchError, switchMapTo, switchMap, map, filter,
 } from 'rxjs/operators';
 import {
   of, merge, from, Observable, concat, timer,
 } from 'rxjs';
-import { ofType } from 'redux-observable';
 import hydrateState$ from 'shared/observables/hydrateState';
 import loadImages$ from 'shared/observables/loadImages';
+import { isOfType } from 'typesafe-actions';
 import { AllActions, MyEpic } from './types';
 import { DoorDir, GameState, GameStoreState } from '../types';
+
+const getMenuAction = (shouldFade: boolean) => {
+  if (shouldFade) {
+    return { type: 'FADE_TO_MENU', payload: 'NONE' };
+  }
+  return { type: 'SET_MENU', payload: { current: 'NONE' } };
+};
 
 type Restart = (
   action$: Observable<AllActions>,
@@ -18,16 +25,16 @@ const restart$: Restart = (action$, { playerState, worldState }) => {
   const initialRoom = worldState.rooms[playerState.room];
   const { description, initialDescription } = initialRoom;
   return action$.pipe(
-    ofType('START_GAME'),
-    switchMapTo(concat<AllActions>(
+    filter(isOfType('START_GAME')),
+    switchMap(({ payload: shouldFade }) => concat<AllActions>(
       from([
-        { type: 'FADE_TO_MENU', payload: 'NONE' },
+        getMenuAction(shouldFade),
         { type: 'SET_WORLD_STATE', payload: worldState },
         { type: 'SET_PLAYER_STATE', payload: playerState },
 
       ]),
       // Wait for fade to complete for initial room
-      timer(1500).pipe(switchMapTo(from([
+      timer(shouldFade ? 1500 : 0).pipe(switchMapTo(from([
         { type: 'PLAY_MUSIC', payload: { fileName: initialRoom.music } },
         { type: 'RUN_TEXT', payload: initialDescription || description },
       ]))),
