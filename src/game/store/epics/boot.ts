@@ -2,7 +2,7 @@ import {
   catchError, switchMapTo, switchMap, map,
 } from 'rxjs/operators';
 import {
-  of, merge, from, Observable, ObservableInput,
+  of, merge, from, Observable, concat, timer,
 } from 'rxjs';
 import { ofType } from 'redux-observable';
 import hydrateState$ from 'shared/observables/hydrateState';
@@ -19,13 +19,19 @@ const restart$: Restart = (action$, { playerState, worldState }) => {
   const { description, initialDescription } = initialRoom;
   return action$.pipe(
     ofType('START_GAME'),
-    switchMapTo(from<ObservableInput<AllActions>>([
-      { type: 'RUN_TEXT', payload: initialDescription || description },
-      { type: 'FADE_TO_MENU', payload: 'NONE' },
-      { type: 'SET_WORLD_STATE', payload: worldState },
-      { type: 'SET_PLAYER_STATE', payload: playerState },
-      { type: 'PLAY_MUSIC', payload: { fileName: initialRoom.music } },
-    ])),
+    switchMapTo(concat<AllActions>(
+      from([
+        { type: 'FADE_TO_MENU', payload: 'NONE' },
+        { type: 'SET_WORLD_STATE', payload: worldState },
+        { type: 'SET_PLAYER_STATE', payload: playerState },
+
+      ]),
+      // Wait for fade to complete for initial room
+      timer(1500).pipe(switchMapTo(from([
+        { type: 'PLAY_MUSIC', payload: { fileName: initialRoom.music } },
+        { type: 'RUN_TEXT', payload: initialDescription || description },
+      ]))),
+    )),
   );
 };
 

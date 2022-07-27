@@ -4,6 +4,12 @@ import { Rect } from 'shared/components/tappables';
 import { interval } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
+const numFrames = 20; // First half fade out; second half fade in
+const clampBy = 5; // Hold on black for this many frames (for both fade in and fade out)
+
+const ceil = numFrames / 2;
+const clampedCeil = ceil - clampBy;
+
 const frame$ = () => interval(60).pipe(
   takeWhile((frame: number) => frame <= 20),
 );
@@ -34,7 +40,10 @@ const Fade = () => {
     return null;
   }
 
-  const opacity = (7 - Math.max(0, Math.abs(currentFrame - 10) - 3)) / 7;
+  const inverseRelativeOpacity = Math.max(0, Math.abs(currentFrame - ceil));
+  const clampedInverseRelativeOpacity = Math.max(0, inverseRelativeOpacity - clampBy);
+  const clampedRelativeOpacity = clampedCeil - clampedInverseRelativeOpacity;
+  const opacity = clampedRelativeOpacity / clampedCeil;
 
   if (opacity === 0) {
     return null;
