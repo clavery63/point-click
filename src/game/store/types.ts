@@ -21,7 +21,7 @@ export enum DoorDir {
 }
 
 export type PageDir = 'UP' | 'DOWN';
-export type Menu = 'NONE' | 'MAIN' | 'GAME_OVER';
+export type Menu = 'NONE' | 'TITLE' | 'GAME_OVER' | 'SAVE';
 export type EntityType = 'items' | 'scenery' | 'doors';
 export type Flag = string;
 
@@ -284,6 +284,11 @@ export interface GameState {
   config: Config;
 }
 
+export type MenuState = {
+  current: Menu;
+  next?: Menu;
+};
+
 export type Entity = Door | Item | Scenery;
 
 export interface GameStoreState extends GameState {
@@ -298,10 +303,7 @@ export interface GameStoreState extends GameState {
   };
   text: Nullable<string[]>;
   loading: boolean;
-  menu: {
-    current: Menu;
-    next?: Menu;
-  };
+  menu: MenuState;
   cursorEnabled: boolean;
   gameName: string;
   images: Map<string, HTMLImageElement>;

@@ -31,14 +31,14 @@ const Fade = () => {
   }, [next]);
 
   useEffect(() => {
-    if (currentFrame === 10 && next) {
-      dispatch({ type: 'SET_MENU', payload: next });
+    if (currentFrame === ceil && next) {
+      dispatch({ type: 'SET_MENU', payload: { current: next, next } });
+    }
+    if (currentFrame === numFrames && next) {
+      // We need to clear 'next' at the end of this
+      dispatch({ type: 'SET_MENU', payload: { current: next } });
     }
   }, [currentFrame]);
-
-  if (!next) {
-    return null;
-  }
 
   const inverseRelativeOpacity = Math.max(0, Math.abs(currentFrame - ceil));
   const clampedInverseRelativeOpacity = Math.max(0, inverseRelativeOpacity - clampBy);

@@ -46,7 +46,7 @@ const GameRoot = React.memo(({ gameName, state }: Props) => {
       store.dispatch({ type: 'SET_PLAYER_STATE', payload: state.playerState });
       store.dispatch({ type: 'SET_CONFIG', payload: state.config });
       store.dispatch({ type: 'SET_FLAGS', payload: state.flags });
-      store.dispatch({ type: 'SET_MENU', payload: 'NONE' });
+      store.dispatch({ type: 'SET_MENU', payload: { current: 'NONE' } });
       // TODO: Feels like playing the first room's music should be a little more automatic
       // Also, For some reason SET_GAME_NAME has to happen after SET_MENU...
       store.dispatch({ type: 'SET_GAME_NAME', payload: gameName });

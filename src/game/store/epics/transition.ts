@@ -71,7 +71,7 @@ const checkGameOver: CheckGameOver = (dest, state, pageClick$) => {
     switchMapTo(from([
       when(!!room.gameOver, {
         type: 'SET_MENU',
-        payload: 'GAME_OVER',
+        payload: { current: 'GAME_OVER' },
       }),
       when(!!room.gameOver, {
         type: 'PLAY_MUSIC',

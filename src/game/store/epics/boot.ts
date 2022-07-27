@@ -49,7 +49,7 @@ const initializeGame: InitializeGame = bootInfo => ({
     },
   },
   loading: false,
-  menu: bootInfo.menu || 'MAIN',
+  menu: bootInfo.menu || { current: 'TITLE' },
   cursorEnabled: true,
   gameName: bootInfo.gameName,
   playerState: bootInfo.playerState,

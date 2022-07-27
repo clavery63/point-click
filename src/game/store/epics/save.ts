@@ -34,7 +34,7 @@ const loadGame$: LoadGame = gameName => {
     { type: 'SET_WORLD_STATE', payload: worldState },
     { type: 'SET_PLAYER_STATE', payload: playerState },
     { type: 'SET_FLAGS', payload: flags },
-    { type: 'SET_MENU', payload: 'NONE' },
+    { type: 'SET_MENU', payload: { current: 'NONE' } },
     {
       type: 'PLAY_MUSIC',
       payload: {

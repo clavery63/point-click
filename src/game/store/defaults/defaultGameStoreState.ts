@@ -17,7 +17,7 @@ const defaultGameStoreState: GameStoreState = {
   cursorEnabled: false,
   gameName: '',
   menu: {
-    current: 'MAIN',
+    current: 'TITLE',
   },
   images: new Map(),
   ...getDefaultGameState(''),

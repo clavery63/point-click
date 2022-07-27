@@ -9,7 +9,7 @@ import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
 import {
   Flag, GameStoreState, PlayerState, WorldState,
-  Menu, VerbIndex, Nullable, PageDir, Music, Config,
+  Menu, VerbIndex, Nullable, PageDir, Music, Config, MenuState,
 } from '../types';
 import defaultState from '../defaults/defaultGameStoreState';
 import { AllActions } from '../epics/types';
@@ -40,7 +40,7 @@ type ActionTypes = {
   SELECT_DOOR: number;
   SELECT_ITEM: number;
   CHANGE_PAGE: PageDir;
-  SET_MENU: Menu;
+  SET_MENU: MenuState;
   FADE_TO_MENU: Menu;
   SET_GAME_NAME: string;
   ERROR: null;
@@ -86,7 +86,7 @@ const selectObject: ParentReducer<number> = selectEntityReducer;
 const selectDoor: ParentReducer<number> = selectDoorReducer;
 const selectItem: ParentReducer<number> = selectItemReducer;
 const changePage: ParentReducer<PageDir> = changePageReducer;
-const setMenu: ParentReducer<Menu> = setValue('menu.current');
+const setMenu: ParentReducer<MenuState> = setValue('menu');
 const fadeToMenu: ParentReducer<Menu> = setValue('menu.next');
 const setGameName: ParentReducer<string> = setValue('gameName');
 
