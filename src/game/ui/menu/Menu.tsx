@@ -40,7 +40,7 @@ const Menu = () => {
           type: 'CHANGE_PAGE',
           payload: dir,
         })}
-        onSaveClick={() => dispatch({ type: 'SAVE_GAME' })}
+        onSaveClick={() => dispatch({ type: 'FADE_TO_MENU', payload: 'SAVE' })}
       />
     </Group>
   );

@@ -11,13 +11,7 @@ type StartProps = {
 const Start = ({ onClick }: StartProps) => (
   <>
     <Text left={88} top={100} color="light" text="start game" />
-    <Rect
-      x={88}
-      y={100}
-      height={8}
-      width={80}
-      onClick={onClick}
-    />
+    <Rect x={88} y={100} height={8} width={80} onClick={onClick} />
   </>
 );
 
