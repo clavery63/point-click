@@ -12,7 +12,7 @@ const defaultGameStoreState: GameStoreState = {
       fileName: null,
     },
   },
-  text: null,
+  text: { lines: null, scroll: 0 },
   loading: true,
   cursorEnabled: false,
   gameName: '',

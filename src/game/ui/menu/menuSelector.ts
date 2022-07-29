@@ -5,7 +5,7 @@ const getText = (state: GameStoreState) => state.text;
 const getDoors = (state: GameStoreState) => state.worldState.doors;
 const getRooms = (state: GameStoreState) => state.worldState.rooms;
 const getPlayerRoom = (state: GameStoreState) => state.playerState.room;
-const hasText = createSelector([getText], text => text !== null);
+const hasText = createSelector([getText], text => text.lines !== null);
 const revealedDoors = createSelector(
   [getDoors, getRooms, getPlayerRoom],
   (doors, rooms, playerRoom) => {

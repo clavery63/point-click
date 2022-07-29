@@ -6,6 +6,9 @@ export const numberPaths = [
     "value": "transition.frame"
   },
   {
+    "value": "text.scroll"
+  },
+  {
     "texts": [
       "worldState.doors[",
       "].dest"

@@ -9,7 +9,7 @@ import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
 import {
   Flag, GameStoreState, PlayerState, WorldState,
-  Menu, VerbIndex, Nullable, PageDir, Music, Config, MenuState,
+  Menu, VerbIndex, Nullable, PageDir, Music, Config, MenuState, GameText,
 } from '../types';
 import defaultState from '../defaults/defaultGameStoreState';
 import { AllActions } from '../epics/types';
@@ -26,7 +26,7 @@ type ActionTypes = {
   SET_PLAYER_STATE: PlayerState;
   SET_FLAGS: Flag[];
   SET_CONFIG: Config;
-  SET_TEXT: Nullable<string[]>;
+  SET_TEXT: GameText;
   SET_NEXT_MUSIC: Music;
   SET_ROOM: number;
   SET_FRAME: number;
@@ -72,7 +72,7 @@ const setWorldState: ParentReducer<WorldState> = setValue('worldState');
 const setPlayerState: ParentReducer<PlayerState> = setValue('playerState');
 const setFlags: ParentReducer<Flag[]> = setValue('flags');
 const setConfig: ParentReducer<Config> = setValue('config');
-const setText: ParentReducer<Nullable<string[]>> = setValue('text');
+const setText: ParentReducer<GameText> = setValue('text');
 const setRoom: ParentReducer<number> = roomReducer;
 const setFrame: ParentReducer<number> = setValue('transition.frame');
 const setCursorEnabled: ParentReducer<boolean> = setValue('cursorEnabled');

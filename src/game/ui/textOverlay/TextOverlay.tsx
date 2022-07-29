@@ -41,7 +41,7 @@ const Rows = ({ hr }: RowsProps) => (
 
 const selector = ({ text, images, config }: GameStoreState) => {
   return {
-    lines: text || null,
+    lines: text.lines || null,
     hrImg: images.get('line'),
     bgColor: config.colors.background,
   };

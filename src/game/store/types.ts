@@ -290,6 +290,11 @@ export type MenuState = {
   next?: Menu;
 };
 
+export type GameText = {
+  lines: Nullable<string[]>;
+  scroll: number;
+};
+
 export type Entity = Door | Item | Scenery;
 
 export interface GameStoreState extends GameState {
@@ -302,7 +307,7 @@ export interface GameStoreState extends GameState {
     nextText: Nullable<string>;
     nextMusic: Music;
   };
-  text: Nullable<string[]>;
+  text: GameText;
   loading: boolean;
   menu: MenuState;
   cursorEnabled: boolean;
