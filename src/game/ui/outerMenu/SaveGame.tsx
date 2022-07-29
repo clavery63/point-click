@@ -8,9 +8,9 @@ const SaveGame = () => {
 
   return (
     <>
-      <Text left={92} top={80} color="light" text="save game?" />
+      <Text left="centered" top={80} color="light" text="save game?" />
       <ClickText
-        left={120}
+        left="centered"
         top={120}
         color="light"
         text="yes"
@@ -20,7 +20,7 @@ const SaveGame = () => {
         }}
       />
       <ClickText
-        left={124}
+        left="centered"
         top={100}
         color="light"
         text="no"

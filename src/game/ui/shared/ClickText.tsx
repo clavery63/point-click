@@ -1,11 +1,11 @@
 import React from 'react';
 import { Rect } from 'shared/components/tappables';
-import Text, { Color } from './Text';
+import Text, { Color, getTextLeft } from './Text';
 
 const charWidth = 8;
 
 type Props = {
-  left: number;
+  left: number | 'centered';
   top: number;
   color: Color;
   text: string;
@@ -13,9 +13,11 @@ type Props = {
 };
 const ClickText = (props: Props) => {
   const {
-    left, top, color, text, onClick,
+    left: leftProp, top, color, text, onClick,
   } = props;
   const width = text.length * charWidth;
+  const left = getTextLeft(leftProp, text.length);
+
   return (
     <>
       <Text left={left} top={top} color={color} text={text} />

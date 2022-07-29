@@ -23,7 +23,7 @@ const Title = ({ fadeOnStart = true }: Props) => {
   return (
     <>
       <ClickText
-        left={88}
+        left="centered"
         top={100}
         color="light"
         text="start game"
@@ -31,7 +31,7 @@ const Title = ({ fadeOnStart = true }: Props) => {
       />
       {hasLoadData && (
         <ClickText
-          left={92}
+          left="centered"
           top={120}
           color="light"
           text="load game"

@@ -49,18 +49,32 @@ const selector = createSelector(
   },
 );
 
+export const getTextLeft = (leftProp: number | 'centered', len: number) => {
+  if (leftProp !== 'centered') {
+    return leftProp;
+  }
+
+  const centerScreen = 256 / 2;
+  const charWidth = spriteWidth + 1;
+  const halfTextWidth = (len * charWidth) / 2;
+
+  return centerScreen - halfTextWidth;
+};
+
 export type Color = 'dark' | 'light';
 type TextStatelessProps = {
   text: string;
-  left: number;
+  left: number | 'centered';
   top: number;
   canvases?: HTMLCanvasElement[];
 };
 export const TextStateless = ({
-  text, left, top, canvases,
+  text, left: leftProp, top, canvases,
 }: TextStatelessProps) => {
   const upper = text.toUpperCase();
   const charCodes = upper.split('').map(char => char.charCodeAt(0) - shift);
+
+  const left = getTextLeft(leftProp, text.length);
 
   return (
     <Group>
@@ -81,7 +95,7 @@ export const TextStateless = ({
 
 type Props = {
   text: string;
-  left: number;
+  left: number | 'centered';
   top: number;
   color?: Color;
 };
