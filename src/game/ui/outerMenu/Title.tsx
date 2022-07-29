@@ -1,26 +1,7 @@
 import React from 'react';
-import { Rect } from 'shared/components/tappables';
 import { useDispatch, useSelector } from 'shared/hooks/redux';
 import { getSaveDataKey } from 'game/store/epics/save';
-import Text from '../shared/Text';
-
-type StartProps = {
-  onClick: () => void;
-};
-
-const Start = ({ onClick }: StartProps) => (
-  <>
-    <Text left={88} top={100} color="light" text="start game" />
-    <Rect x={88} y={100} height={8} width={80} onClick={onClick} />
-  </>
-);
-
-const Load = ({ onClick }: StartProps) => (
-  <>
-    <Text left={92} top={120} color="light" text="load game" />
-    <Rect x={92} y={120} height={8} width={72} onClick={onClick} />
-  </>
-);
+import ClickText from '../shared/ClickText';
 
 type Props = {
   fadeOnStart?: boolean;
@@ -41,8 +22,22 @@ const Title = ({ fadeOnStart = true }: Props) => {
 
   return (
     <>
-      <Start onClick={hack(() => dispatch({ type: 'START_GAME', payload: fadeOnStart }))} />
-      {hasLoadData && <Load onClick={hack(() => dispatch({ type: 'LOAD_GAME' }))} />}
+      <ClickText
+        left={88}
+        top={100}
+        color="light"
+        text="start game"
+        onClick={hack(() => dispatch({ type: 'START_GAME', payload: fadeOnStart }))}
+      />
+      {hasLoadData && (
+        <ClickText
+          left={92}
+          top={120}
+          color="light"
+          text="load game"
+          onClick={hack(() => dispatch({ type: 'LOAD_GAME' }))}
+        />
+      )}
     </>
   );
 };

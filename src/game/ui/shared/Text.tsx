@@ -49,7 +49,7 @@ const selector = createSelector(
   },
 );
 
-type Color = 'dark' | 'light';
+export type Color = 'dark' | 'light';
 type TextStatelessProps = {
   text: string;
   left: number;
