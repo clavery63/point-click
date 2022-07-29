@@ -17,6 +17,12 @@ const makeLines = textToLines(CHARS_PER_LINE);
 
 type Position = [number, number];
 
+type Page = {
+  existingLines?: string[];
+  lines: string[];
+  type: 'standard' | 'scroll';
+};
+
 type GetLines = (l: string[], p: Position) => string[];
 const getLines: GetLines = (lines, [row, col]) => {
   const fullLines = lines.slice(0, row);
@@ -30,16 +36,16 @@ const linesToPositions: LtoP = lines => lines.flatMap((line, row) => {
   return positions;
 });
 
-type RenderPage = (p: Observable<any>) => (l: string[]) => Observable<string[]>;
-const renderPage$: RenderPage = pageClick$ => lines => {
-  const allPositions = linesToPositions(lines);
+type RenderPage = (p: Observable<any>) => (l: Page) => Observable<string[]>;
+const renderPage$: RenderPage = pageClick$ => page => {
+  const allPositions = linesToPositions(page.lines);
   const lastPosition = allPositions[allPositions.length - 1];
   return concat(
     from(allPositions).pipe(
-      concatMap(position => timer(MS_PER_CHAR).pipe(mapTo(getLines(lines, position)))),
+      concatMap(position => timer(MS_PER_CHAR).pipe(mapTo(getLines(page.lines, position)))),
       takeUntil(pageClick$),
     ),
-    of(getLines(lines, lastPosition)),
+    of(getLines(page.lines, lastPosition)),
     pageClick$.pipe(mapTo([]), take(1)),
   );
 };
@@ -47,8 +53,15 @@ const renderPage$: RenderPage = pageClick$ => lines => {
 type RunText = (p: Observable<any>) => (t: string) => Observable<ActionsType['SET_TEXT']>;
 const runText$: RunText = pageClick$ => rawText => {
   const lines = makeLines(rawText);
+  const chunks = chunk(lines, LINES_PER_PAGE);
+  const pages: Page[] = chunks.map(pageLines => ({
+    type: 'standard',
+    lines: pageLines,
+  }));
+  pages[1].type = 'scroll';
+  pages[1].existingLines = pages[0].lines;
   return concat(
-    from(chunk(lines, LINES_PER_PAGE)).pipe(
+    from(pages).pipe(
       concatMap(renderPage$(pageClick$)),
     ),
     of(null),

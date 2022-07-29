@@ -1,5 +1,5 @@
 import {
-  tap, switchMap, switchMapTo, withLatestFrom,
+  tap, switchMap, withLatestFrom,
 } from 'rxjs/operators';
 import {
   from, of, merge, Observable, ObservableInput,
@@ -49,7 +49,7 @@ const save$: MyEpic = (action$, state$, { runText$ }) => {
     ofType('SAVE_GAME'),
     withLatestFrom(state$),
     tap(([, state]) => saveGame(state)),
-    switchMapTo(runText$('Game Saved Successfully!')),
+    switchMap(() => runText$('Game Saved Successfully?')),
   );
 
   const load$ = action$.pipe(
