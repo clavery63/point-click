@@ -65,7 +65,7 @@ const runText$: RunText = pageClick$ => rawText => {
       concatMap(renderPage$(pageClick$)),
     ),
     of(null),
-  ).pipe(map(text => ({ type: 'SET_TEXT', payload: { lines: text, scroll: 0 } })));
+  ).pipe(map(text => ({ type: 'SET_TEXT', payload: { lines: text, scroll: 10 } })));
 };
 
 export default runText$;

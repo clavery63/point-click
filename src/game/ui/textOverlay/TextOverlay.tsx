@@ -42,13 +42,16 @@ const Rows = ({ hr }: RowsProps) => (
 const selector = ({ text, images, config }: GameStoreState) => {
   return {
     lines: text.lines || null,
+    scroll: text.scroll,
     hrImg: images.get('line'),
     bgColor: config.colors.background,
   };
 };
 
 const TextOverlay = () => {
-  const { lines, hrImg, bgColor } = useSelector(selector);
+  const {
+    lines, scroll, hrImg, bgColor,
+  } = useSelector(selector);
 
   if (!lines) {
     return null;
@@ -56,17 +59,28 @@ const TextOverlay = () => {
 
   return (
     <Group>
-      <Group x={16} y={160} width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT}>
+      <Group
+        x={16}
+        y={160}
+        width={TEXT_AREA_WIDTH}
+        height={TEXT_AREA_HEIGHT}
+        clipX={0}
+        clipY={0}
+        clipWidth={TEXT_AREA_WIDTH}
+        clipHeight={TEXT_AREA_HEIGHT}
+      >
         <Rect width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT} fill={bgColor} />
-        <Rows hr={hrImg} />
-        {lines.map((line, lineNumber) => (
-          <Text
-            key={lineNumber}
-            left={9}
-            top={9 + lineNumber * 16}
-            text={line}
-          />
-        ))}
+        <Group y={-scroll}>
+          <Rows hr={hrImg} />
+          {lines.map((line, lineNumber) => (
+            <Text
+              key={lineNumber}
+              left={9}
+              top={9 + lineNumber * 16}
+              text={line}
+            />
+          ))}
+        </Group>
       </Group>
     </Group>
   );
