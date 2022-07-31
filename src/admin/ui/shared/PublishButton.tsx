@@ -5,13 +5,13 @@ import useUpload, { UploadState } from '../hooks/useUpload';
 const getCallToAction = (uploadState: UploadState) => {
   switch (uploadState) {
     case UploadState.IN_PROGRESS:
-      return 'Publishing Game...';
+      return 'Publishing...';
     case UploadState.COMPLETE:
-      return 'Published Game!';
+      return 'Published!';
     case UploadState.ERROR:
       return 'Something went wrong (check console)';
     default:
-      return 'Publish Game';
+      return 'Publish';
   }
 };
 

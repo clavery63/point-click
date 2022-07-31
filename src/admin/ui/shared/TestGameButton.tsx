@@ -3,13 +3,17 @@ import React from 'react';
 import DispatchButton from './DispatchButton';
 
 type Props = {
-  roomId: number;
+  roomId?: number;
 };
-const PreviewButton = ({ roomId }: Props) => (
-  <DispatchButton
-    action={startPreview(roomId)}
-    callToAction="Test Play This Room"
-  />
-);
-
-export default PreviewButton;
+const TestGameButton = ({ roomId }: Props) => {
+  if (roomId == null) {
+    return null;
+  }
+  return (
+    <DispatchButton
+      action={startPreview(roomId)}
+      callToAction="Preview This Room"
+    />
+  );
+};
+export default TestGameButton;

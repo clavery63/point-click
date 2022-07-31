@@ -7,11 +7,12 @@ import { ArrowBack } from '@mui/icons-material';
 import TooltipToggle from '../rooms/TooltipToggle';
 import SaveButton from './SaveButton';
 import PublishButton from './PublishButton';
+import TestGameButton from './TestGameButton';
 
-const getRoomHeading = (path: string) => {
+const getRoomId = (path: string) => {
   const pathParts = path.split('/');
-  const roomNumber = pathParts[pathParts.length - 1];
-  return `Edit Room ${roomNumber}`;
+  const roomId = pathParts[pathParts.length - 1];
+  return parseInt(roomId, 10);
 };
 
 const hackilyGetPageHeaderInfo = (gameName: string, path: string) => {
@@ -43,9 +44,10 @@ const hackilyGetPageHeaderInfo = (gameName: string, path: string) => {
       };
     default:
       return {
-        heading: getRoomHeading(path),
+        heading: `Edit Room ${getRoomId(path)}`,
         backText: 'To Rooms',
         backLink: `/admin/${gameName}/rooms`,
+        roomId: getRoomId(path),
       };
   }
 };
@@ -78,7 +80,7 @@ const BackLink = (props: Props) => {
 
 const AdminHeader = () => {
   const {
-    heading, backText, backLink, useRealLink,
+    heading, backText, backLink, useRealLink, roomId,
   } = usePageHeaderInfo();
   return (
     <AppBar position="sticky" color="inherit">
@@ -93,6 +95,7 @@ const AdminHeader = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} textAlign="center">
           {heading}
         </Typography>
+        <TestGameButton roomId={roomId} />
         <SaveButton />
         <PublishButton />
         <TooltipToggle />

@@ -901,6 +901,9 @@ const gameStateSchema = {
             "string"
           ]
         },
+        "name": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },

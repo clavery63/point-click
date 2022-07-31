@@ -6,13 +6,13 @@ import useCommand from '../hooks/useCommand';
 const getCallToAction = (uploadState: UploadState) => {
   switch (uploadState) {
     case UploadState.IN_PROGRESS:
-      return 'Saving Game...';
+      return 'Saving...';
     case UploadState.COMPLETE:
-      return 'Saved Game!';
+      return 'Saved!';
     case UploadState.ERROR:
       return 'Something went wrong (check console)';
     default:
-      return 'Save Game';
+      return 'Save';
   }
 };
 

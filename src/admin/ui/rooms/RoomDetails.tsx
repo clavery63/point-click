@@ -38,19 +38,36 @@ const RoomDetails = ({ room, roomId }: Props) => {
     <Box className={styles.leftColumn}>
       <Grid container>
         <Grid item xs={12}>
+          <PreviewWidget room={room} roomId={roomId} />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography>
+            Click an object to select and edit.
+            Press ↑ or ↓ to reorder selected object.
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <LongTextField
+            label="room name"
+            value={room.name}
+            onChange={handleChange('name')}
+            tooltip="Friendly name for this room. Does not serve any purpose in game."
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <LongTextField
+            label="room description"
+            value={room.description}
+            onChange={handleChange('description')}
+            tooltip="Default text that displays upon entering this room"
+          />
+        </Grid>
+        <Grid item xs={12}>
           <LongTextField
             label="initial description"
             value={room.initialDescription}
             onChange={handleChange('initialDescription')}
             tooltip="Text to display just the first time the player enters this room"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <LongTextField
-            label="description"
-            value={room.description}
-            onChange={handleChange('description')}
-            tooltip="Default text that displays upon entering this room"
           />
         </Grid>
         <Grid item xs={12}>
@@ -85,18 +102,6 @@ const RoomDetails = ({ room, roomId }: Props) => {
             tooltip="If true, this room triggers the game over menu"
           />
         </Grid>
-        <Grid item xs={12}>
-          <Typography>
-            Click an object to select and edit.
-            Press ↑ or ↓ to reorder selected object.
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <PreviewWidget room={room} roomId={roomId} />
-        </Grid>
-        <Stack direction="row" spacing={2}>
-          <TestGameButton roomId={roomId} />
-        </Stack>
       </Grid>
     </Box>
   );

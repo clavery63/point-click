@@ -204,6 +204,7 @@ export interface Room {
   music?: string;
   video?: string;
   initialDescription?: Nullable<string>;
+  name?: string;
   description: string;
   doors: number[];
   entities: number[];
