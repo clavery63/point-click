@@ -6,7 +6,7 @@ import { Rect } from 'shared/components/tappables';
 const selector = (state: GameStoreState) => {
   const { text, worldState, playerState } = state;
   const room = worldState.rooms[playerState.room];
-  const shouldShow = !!text || !!room.gameOver;
+  const shouldShow = !!text.lines || !!room.gameOver;
   return {
     shouldShow,
   };

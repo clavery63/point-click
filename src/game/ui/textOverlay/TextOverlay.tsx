@@ -30,10 +30,11 @@ const Hr = ({ left, top, hr }: HrProps) => (
 
 type RowsProps = {
   hr?: HTMLImageElement;
+  num: number;
 };
-const Rows = ({ hr }: RowsProps) => (
+const Rows = ({ hr, num }: RowsProps) => (
   <>
-    {range(5).map(i => (
+    {range(Math.max(5, num + 1)).map(i => (
       <Hr key={i} left={8} top={2 + i * 16} hr={hr} />
     ))}
   </>
@@ -58,29 +59,27 @@ const TextOverlay = () => {
   }
 
   return (
-    <Group>
-      <Group
-        x={16}
-        y={160}
-        width={TEXT_AREA_WIDTH}
-        height={TEXT_AREA_HEIGHT}
-        clipX={0}
-        clipY={0}
-        clipWidth={TEXT_AREA_WIDTH}
-        clipHeight={TEXT_AREA_HEIGHT}
-      >
-        <Rect width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT} fill={bgColor} />
-        <Group y={-scroll}>
-          <Rows hr={hrImg} />
-          {lines.map((line, lineNumber) => (
-            <Text
-              key={lineNumber}
-              left={9}
-              top={9 + lineNumber * 16}
-              text={line}
-            />
-          ))}
-        </Group>
+    <Group
+      x={16}
+      y={160}
+      width={TEXT_AREA_WIDTH}
+      height={TEXT_AREA_HEIGHT}
+      clipX={0}
+      clipY={0}
+      clipWidth={TEXT_AREA_WIDTH}
+      clipHeight={TEXT_AREA_HEIGHT - 10}
+    >
+      <Rect width={TEXT_AREA_WIDTH} height={TEXT_AREA_HEIGHT} fill={bgColor} />
+      <Group y={-scroll}>
+        <Rows hr={hrImg} num={lines.length} />
+        {lines.map((line, lineNumber) => (
+          <Text
+            key={lineNumber}
+            left={9}
+            top={9 + lineNumber * 16}
+            text={line}
+          />
+        ))}
       </Group>
     </Group>
   );
