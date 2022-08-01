@@ -15,38 +15,33 @@ const MS_PER_CHAR = 65;
 
 const makeLines = textToLines(CHARS_PER_LINE);
 
-type Position = [number, number];
-
 type Page = {
   existingLines?: string[];
   lines: string[];
   type: 'standard' | 'scroll';
 };
 
-type GetLines = (l: string[], p: Position) => string[];
-const getLines: GetLines = (lines, [row, col]) => {
-  const fullLines = lines.slice(0, row);
-  const lastLine = lines[row].slice(0, col + 1);
-  return [...fullLines, lastLine];
+const renderLine$ = (page: Page) => (lineIndex: number) => {
+  const { type, lines } = page;
+  const prevLines = lines.slice(0, lineIndex);
+  const curLine = lines[lineIndex];
+  const positions = range(curLine.length);
+  return from(positions).pipe(
+    concatMap(position => timer(MS_PER_CHAR).pipe(mapTo({
+      lines: [...prevLines, curLine.slice(0, position)],
+      scroll: 0,
+    }))),
+  );
 };
 
-type LtoP = (l: string[]) => Position[];
-const linesToPositions: LtoP = lines => lines.flatMap((line, row) => {
-  const positions: Position[] = range(line.length).map(col => [row, col]);
-  return positions;
-});
-
-type RenderPage = (p: Observable<any>) => (l: Page) => Observable<string[]>;
-const renderPage$: RenderPage = pageClick$ => page => {
-  const allPositions = linesToPositions(page.lines);
-  const lastPosition = allPositions[allPositions.length - 1];
+const renderPage$ = (pageClick$: Observable<any>) => (page: Page) => {
   return concat(
-    from(allPositions).pipe(
-      concatMap(position => timer(MS_PER_CHAR).pipe(mapTo(getLines(page.lines, position)))),
+    from(range(page.lines.length)).pipe(
+      concatMap(renderLine$(page)),
       takeUntil(pageClick$),
     ),
-    of(getLines(page.lines, lastPosition)),
-    pageClick$.pipe(mapTo([]), take(1)),
+    of({ lines: page.lines, scroll: 0 }),
+    pageClick$.pipe(mapTo({ lines: [], scroll: 0 }), take(1)),
   );
 };
 
@@ -61,11 +56,9 @@ const runText$: RunText = pageClick$ => rawText => {
   pages[1].type = 'scroll';
   pages[1].existingLines = pages[0].lines;
   return concat(
-    from(pages).pipe(
-      concatMap(renderPage$(pageClick$)),
-    ),
-    of(null),
-  ).pipe(map(text => ({ type: 'SET_TEXT', payload: { lines: text, scroll: 10 } })));
+    from(pages).pipe(concatMap(renderPage$(pageClick$))),
+    of({ lines: null, scroll: 0 }),
+  ).pipe(map(payload => ({ type: 'SET_TEXT', payload })));
 };
 
 export default runText$;
