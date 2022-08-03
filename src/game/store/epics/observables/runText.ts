@@ -4,25 +4,13 @@ import {
 import {
   from, timer, of, concat, Observable, EMPTY,
 } from 'rxjs';
-import chunk from 'lodash/chunk';
 import range from 'lodash/range';
 import { ActionsType } from 'game/store/reducers/rootReducer';
 import { ofType } from 'redux-observable';
-import { textToLines } from '../util';
+import { Page, PageType, textToPages } from '../util';
 
-const LINES_PER_PAGE = 4;
-const CHARS_PER_LINE = 24;
 const MS_PER_CHAR = 65;
 const LINE_HEIGHT = 16;
-
-const makeLines = textToLines(CHARS_PER_LINE);
-
-type PageType = 'standard' | 'scroll';
-type Page = {
-  previousPage?: string[];
-  lines: string[];
-  type: PageType;
-};
 
 const getInitScroll = (type: PageType, numLines: number) => {
   if (type === 'standard') {
@@ -106,19 +94,7 @@ type RunText = (p: Observable<any>) => (t: string) => Observable<ActionsType['SE
 const runText$: RunText = action$ => {
   const pageClick$ = action$.pipe(ofType('PAGE_CLICK'));
   return rawText => {
-    const lines = makeLines(rawText);
-    const chunks = chunk(lines, LINES_PER_PAGE);
-    const pages: Page[] = chunks.map(pageLines => ({
-      type: 'standard',
-      lines: pageLines,
-    }));
-    if (pages.length > 2) {
-      // Temporary as test until we have a way of setting this in admin
-      pages[1].type = 'scroll';
-      pages[1].previousPage = pages[0].lines;
-      pages[2].type = 'scroll';
-      pages[2].previousPage = pages[1].lines;
-    }
+    const pages = textToPages(rawText);
     return concat(
       from(pages).pipe(concatMap(renderPage$(pageClick$))),
       of({ lines: null, scroll: 0 }),
