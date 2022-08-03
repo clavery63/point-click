@@ -73,6 +73,7 @@ const renderLine$ = (page: Page, shouldAnimateText: boolean = true) => (lineInde
 const renderPage$ = (pageClick$: Observable<any>) => (page: Page) => {
   let lastLineRendered = 0;
   return concat(
+
     // Render the lines one at a time
     from(range(page.lines.length)).pipe(
       concatMap(renderLine$(page)),
@@ -81,6 +82,7 @@ const renderPage$ = (pageClick$: Observable<any>) => (page: Page) => {
         lastLineRendered = lines.length - (page.previousPage || []).length;
       }),
     ),
+
     // Finish rendering the page after click. This might involve scrolling through
     // the rest of the text.
     of({}).pipe(switchMap(() => {
@@ -91,6 +93,7 @@ const renderPage$ = (pageClick$: Observable<any>) => (page: Page) => {
         concatMap(renderLine$(page, false)),
       );
     })),
+
     // Click again to go to the next page (or close the dialog if this is the last page)
     pageClick$.pipe(
       mapTo({ lines: page.lines, scroll: 0 }),

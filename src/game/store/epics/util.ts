@@ -1,18 +1,30 @@
+import { last } from 'lodash';
 import identity from 'lodash/identity';
 import { AllActions } from './types';
 
 type TextToLines = (c: number) => (t: string) => string[];
 export const textToLines: TextToLines = charsPerLine => text => {
-  if (!text.length) return [];
-  const words = text.trim().split(' ');
-  return words.slice(1).reduce((lines, word) => {
-    const lastLine = lines[lines.length - 1];
-    if (lastLine.length + word.length + 1 > charsPerLine) {
-      return [...lines, word];
+  const lines: string[] = [];
+  let curWord = '';
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    if (char === ' ' || char === '\n') {
+      const lastLine = last(lines);
+      if (!lastLine || lastLine.length + curWord.length + 1 > charsPerLine) {
+        lines.push(curWord);
+      } else {
+        lines[lines.length - 1] = `${lines[lines.length - 1]} ${curWord}`;
+      }
+      curWord = '';
+      continue;
     }
-    const firstLines = lines.slice(0, lines.length - 1);
-    return [...firstLines, `${lastLine} ${word}`];
-  }, [words[0]]);
+    if (char === '\n') {
+      lines.push('');
+      continue;
+    }
+    curWord += char;
+  }
+  return lines;
 };
 
 type When = (p: boolean, a: AllActions) => AllActions;
