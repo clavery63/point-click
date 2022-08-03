@@ -1,4 +1,4 @@
-import { chunk, last } from 'lodash';
+import { chunk } from 'lodash';
 import identity from 'lodash/identity';
 import { AllActions } from './types';
 
@@ -14,32 +14,25 @@ export type Page = {
 
 type TextToLines = (t: string) => string[];
 const textToLines: TextToLines = text => {
-  const lines: string[] = [];
-  let curWord = '';
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i];
-    if (char === ' ' || char === '\n') {
-      const lastLine = last(lines);
-      if (!lastLine || lastLine.length + curWord.length + 1 > CHARS_PER_LINE) {
-        lines.push(curWord);
-      } else {
-        lines[lines.length - 1] = `${lines[lines.length - 1]} ${curWord}`;
-      }
-      curWord = '';
-      continue;
+  if (!text.length) return [''];
+  const words = text.trim().split(' ');
+  return words.slice(1).reduce((lines, word) => {
+    const lastLine = lines[lines.length - 1];
+    if (lastLine.length + word.length + 1 > CHARS_PER_LINE) {
+      return [...lines, word];
     }
-    if (char === '\n') {
-      lines.push('');
-      continue;
-    }
-    curWord += char;
-  }
-  return lines;
+    const firstLines = lines.slice(0, lines.length - 1);
+    return [...firstLines, `${lastLine} ${word}`];
+  }, [words[0]]);
+};
+
+const textToParagraphs: TextToLines = text => {
+  return text.split('\n').map(textToLines).flat();
 };
 
 type TextToPages = (t: string) => Page[];
 export const textToPages: TextToPages = text => {
-  const allLines = textToLines(text);
+  const allLines = textToParagraphs(text);
   const chunks = chunk(allLines, LINES_PER_PAGE);
   return chunks.map(lines => ({
     type: 'standard',
