@@ -7,7 +7,9 @@ import {
 import range from 'lodash/range';
 import { ActionsType } from 'game/store/reducers/rootReducer';
 import { ofType } from 'redux-observable';
-import { Page, PageType, textToPages } from '../util';
+import {
+  LINES_PER_PAGE, Page, PageType, textToPages,
+} from '../util';
 
 const MS_PER_CHAR = 65;
 const LINE_HEIGHT = 16;
@@ -63,21 +65,27 @@ const renderPage$ = (pageClick$: Observable<any>) => (page: Page) => {
   return concat(
 
     // Render the lines one at a time
-    from(range(page.lines.length)).pipe(
+    from(range(LINES_PER_PAGE)).pipe(
       concatMap(renderLine$(page)),
       takeUntil(pageClick$),
-      tap(({ lines }) => {
+      tap(({ lines, scroll }) => {
         lastLineRendered = lines.length - (page.previousPage || []).length;
+        if (scroll % LINE_HEIGHT !== 0) {
+          // Bit of a hack. If we're mid-scroll, we "round up" here
+          // Otherwise, if you click mid scroll, the text ticks back before
+          // Scrolling forward
+          lastLineRendered += 1;
+        }
       }),
     ),
 
     // Finish rendering the page after click. This might involve scrolling through
     // the rest of the text.
     of({}).pipe(switchMap(() => {
-      if (lastLineRendered === page.length) {
+      if (lastLineRendered >= LINES_PER_PAGE) {
         return of({ lines: page.lines, scroll: 0 });
       }
-      return from(range(lastLineRendered, page.lines.length)).pipe(
+      return from(range(lastLineRendered, LINES_PER_PAGE)).pipe(
         concatMap(renderLine$(page, false)),
       );
     })),
