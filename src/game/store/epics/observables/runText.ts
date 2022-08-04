@@ -74,7 +74,7 @@ const renderPage$ = (pageClick$: Observable<any>) => (page: Page) => {
     // Finish rendering the page after click. This might involve scrolling through
     // the rest of the text.
     of({}).pipe(switchMap(() => {
-      if (lastLineRendered === page.lines.length) {
+      if (lastLineRendered === page.length) {
         return of({ lines: page.lines, scroll: 0 });
       }
       return from(range(lastLineRendered, page.lines.length)).pipe(

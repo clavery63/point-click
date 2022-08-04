@@ -9,7 +9,7 @@ import roomReducer from './roomReducer';
 import { setValue, clearValue } from './utils';
 import {
   Flag, GameStoreState, PlayerState, WorldState,
-  Menu, VerbIndex, Nullable, PageDir, Music, Config, MenuState, GameText,
+  Menu, VerbIndex, PageDir, Music, Config, MenuState, GameText,
 } from '../types';
 import defaultState from '../defaults/defaultGameStoreState';
 import { AllActions } from '../epics/types';
