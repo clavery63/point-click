@@ -5,8 +5,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { LoadingButton } from '@mui/lab';
 import { TextField } from '@mui/material';
-
-const apiRoot = process.env.REACT_APP_API_BASE;
+import api from 'admin/api';
 
 enum Status {
   NONE,
@@ -21,20 +20,15 @@ const updatePw = async (
   setStatus: React.Dispatch<React.SetStateAction<Status>>,
 ) => {
   setStatus(Status.PENDING);
-  const url = `${apiRoot}/updateGame`;
-  try {
-    await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify({
-        name,
-        pw,
-      }),
-    });
-    setStatus(Status.SUCCESS);
-  } catch (e) {
-    console.log(e);
+  const { error } = await api('updateGame', name, pw);
+
+  if (error) {
+    console.log(`error updating pw: ${error}`);
     setStatus(Status.FAILURE);
+    return;
   }
+
+  setStatus(Status.SUCCESS);
 };
 
 type Props = {

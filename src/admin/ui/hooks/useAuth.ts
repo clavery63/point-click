@@ -1,6 +1,5 @@
+import api from 'admin/api';
 import { useCallback, useEffect, useState } from 'react';
-
-const apiRoot = process.env.REACT_APP_API_BASE;
 
 export enum AuthState {
   LOADING,
@@ -11,16 +10,11 @@ export enum AuthState {
 }
 
 const authorize = async (name: string, pw: string) => {
-  const url = `${apiRoot}/verifyPw`;
-  const response = await fetch(url, {
-    method: 'POST',
-    body: JSON.stringify({
-      name,
-      pw,
-    }),
-  });
-  const result: boolean = await response.json();
-  return result;
+  const { result, error } = await api('verifyPw', name, pw);
+  if (error || !result) {
+    return false;
+  }
+  return JSON.parse(result);
 };
 
 const useAuth = (name: string) => {
