@@ -1,7 +1,7 @@
 import React from 'react';
 import FileUploaderButton from './FileUploaderButton';
 
-const MAX_IMAGE_SIZE = 112;
+const MAX_IMAGE_SIZE = 256;
 
 type GetImageDimensions = (f: File) => Promise<{ width: number; height: number}>;
 const getImageDimensions: GetImageDimensions = file => new Promise((resolve, reject) => {
