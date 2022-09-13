@@ -3,13 +3,14 @@ import { Layer } from 'react-konva';
 import Viewport from './ui/viewport/Viewport';
 import Inventory from './ui/inventory/Inventory';
 import MenuComponent from './ui/menu/Menu';
-import TextOverlay from './ui/textOverlay/TextOverlay';
+import TextOverlay from './ui/overlay/TextOverlay';
 import Cursor, { StageData } from './ui/cursor/Cursor';
 import OuterMenu from './ui/outerMenu/OuterMenu';
 import ClickMask from './ui/clickMask/ClickMask';
 import { Menu } from './store/types';
 import StaticItems from './ui/staticItems/StaticItems';
 import Fade from './ui/transition/Fade';
+import DialogScreen from './ui/overlay/DialogScreen';
 
 type GameContentProps = {
   menu: Menu;
@@ -24,6 +25,7 @@ const GameContent = ({ menu }: GameContentProps) => {
       <StaticItems />
       <TextOverlay />
       <ClickMask />
+      <DialogScreen />
     </>
   );
 };
