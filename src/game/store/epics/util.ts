@@ -12,13 +12,13 @@ export type Page = {
   type: PageType;
 };
 
-type TextToLines = (t: string) => string[];
-const textToLines: TextToLines = text => {
+type TextToLines = (c: number) => (t: string) => string[];
+export const textToLines: TextToLines = charsPerLine => text => {
   if (!text.length) return [''];
   const words = text.trim().split(' ');
   return words.slice(1).reduce((lines, word) => {
     const lastLine = lines[lines.length - 1];
-    if (lastLine.length + word.length + 1 > CHARS_PER_LINE) {
+    if (lastLine.length + word.length + 1 > charsPerLine) {
       return [...lines, word];
     }
     const firstLines = lines.slice(0, lines.length - 1);
@@ -26,8 +26,9 @@ const textToLines: TextToLines = text => {
   }, [words[0]]);
 };
 
-const textToParagraphs: TextToLines = text => {
-  return text.split('\n').map(textToLines).flat();
+type TextToParagraphs = (t: string) => string[];
+const textToParagraphs: TextToParagraphs = text => {
+  return text.split('\n').map(textToLines(CHARS_PER_LINE)).flat();
 };
 
 type TextToPagesForType = (t: string, type: PageType) => Page[];
