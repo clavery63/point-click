@@ -1,5 +1,7 @@
 import { textToLines } from 'game/store/epics/util';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {
+  useCallback, useEffect, useState,
+} from 'react';
 import { Group, Rect } from 'react-konva';
 import { interval } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
@@ -53,18 +55,32 @@ const Answer = ({ answer, index }: AnswerProps) => {
   );
 };
 
+const defaultDialog = {
+  question: "well why don't we put a couple of lines of text here. OK, it seems like 4 lines is the max.",
+  answers: [
+    "I don't know. why don't you tell me?",
+    'I mean, as far as I can tell it looks fine',
+    'No clue.',
+    'Does the extra space here look awkward?',
+  ],
+};
+
 const DialogScreen = () => {
-  const inputDialog = useMemo(() => ({
-    question: "well why don't we put a couple of lines of text here. OK, it seems like 4 lines is the max.",
-    answers: [
-      "I don't know. why don't you tell me?",
-      'I mean, as far as I can tell it looks fine',
-      'No clue.',
-      'Does the extra space here look awkward?',
-    ],
-  }), []);
+  const [inputDialog, setInputDialog] = useState(defaultDialog);
+
+  const resetDialog = useCallback(() => {
+    // TODO: just for testing. remove once we read this from the store
+    setInputDialog({
+      question: defaultDialog.question,
+      answers: defaultDialog.answers,
+    });
+  }, []);
 
   const [currentFrame, setCurrentFrame] = useState(0);
+
+  useEffect(() => {
+
+  });
 
   useEffect(() => {
     const { question, answers } = inputDialog;
@@ -84,6 +100,7 @@ const DialogScreen = () => {
       y={0}
       width={256}
       height={240}
+      onClick={resetDialog}
     >
       <Rect width={256} height={240} fill="#bbbbbb" />
       <Avatar />
