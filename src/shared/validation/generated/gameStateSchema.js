@@ -984,6 +984,7 @@ const gameStateSchema = {
         "MOVE",
         "NONE",
         "OPEN",
+        "SPEAK",
         "TAKE",
         "USE"
       ],

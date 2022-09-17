@@ -2,6 +2,7 @@ import { EntityReducer, ParentReducer } from 'shared/util/types';
 import moveReducer from './verbReducers/moveReducer';
 import openReducer from './verbReducers/openReducer';
 import takeReducer from './verbReducers/takeReducer';
+import speakReducer from './verbReducers/speakReducer';
 import _useReducer, { forfeitItemReducer } from './verbReducers/useReducer';
 import { keepState, withText } from './utils';
 import {
@@ -15,6 +16,7 @@ const fallbackLookup: { [key: string]: EntityReducer } = {
   OPEN: openReducer,
   USE: _useReducer,
   TAKE: takeReducer,
+  SPEAK: speakReducer,
 };
 
 const successLookup: { [key: string]: EntityReducer } = {

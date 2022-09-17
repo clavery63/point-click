@@ -232,7 +232,8 @@ export enum VerbBehavior {
   LOOK = 'LOOK',
   OPEN = 'OPEN',
   USE = 'USE',
-  TAKE = 'TAKE'
+  TAKE = 'TAKE',
+  SPEAK = 'SPEAK'
 }
 
 export type VerbConfig = {
