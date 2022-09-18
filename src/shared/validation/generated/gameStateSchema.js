@@ -1106,10 +1106,7 @@ const gameStateSchema = {
           ]
         },
         "dialog": {
-          "type": [
-            "null",
-            "number"
-          ]
+          "type": "number"
         },
         "examining": {
           "type": [

@@ -1,7 +1,6 @@
 import { textToLines } from 'game/store/epics/util';
-import React, {
-  useCallback, useEffect, useState,
-} from 'react';
+import { DialogPage } from 'game/store/types';
+import React, { useEffect, useState } from 'react';
 import { Group, Rect } from 'react-konva';
 import { interval } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
@@ -13,18 +12,17 @@ const frame$ = (numFrames: number) => interval(16).pipe(
   takeWhile((frame: number) => frame <= numFrames),
 );
 
-type Dialog = { question: string; answers: string[] };
-const computeDialog = (input: Dialog, currentFrame: number) => {
-  const answersTruncated = input.answers.slice(0, input.answers.length - 1);
+const computeDialog = (page: DialogPage, currentFrame: number) => {
+  const answersTruncated = page.answers.slice(0, page.answers.length - 1);
   const startFrames = answersTruncated.reduce((acc, cur) => {
-    acc.push(acc[acc.length - 1] + cur.length);
+    acc.push(acc[acc.length - 1] + cur.text.length);
     return acc;
-  }, [input.question.length]);
+  }, [page.question.length]);
 
   return {
-    question: input.question.slice(0, currentFrame),
+    question: page.question.slice(0, currentFrame),
     answers: startFrames.map((startFrame, index) => {
-      return input.answers[index].slice(0, Math.max(currentFrame - startFrame, 0));
+      return page.answers[index].text.slice(0, Math.max(currentFrame - startFrame, 0));
     }),
   };
 };
@@ -66,31 +64,41 @@ const defaultDialog = {
 };
 
 const DialogScreen = () => {
-  const [inputDialog, setInputDialog] = useState(defaultDialog);
+  const dialogPage = useSelector(state => {
+    const { dialog: dialogId = -1 } = state.playerState;
+    const dialog = state.worldState.dialogs[dialogId];
+    if (dialog == null) {
+      return null;
+    }
 
-  const resetDialog = useCallback(() => {
-    // TODO: just for testing. remove once we read this from the store
-    setInputDialog({
-      question: defaultDialog.question,
-      answers: defaultDialog.answers,
-    });
-  }, []);
+    // eslint-disable-next-line no-restricted-syntax
+    for (const page of (dialog.pages || [])) {
+      if (!page.prereqFlags?.some(flag => !state.flags.includes(flag))) {
+        return page;
+      }
+    }
+
+    return null;
+  });
 
   const [currentFrame, setCurrentFrame] = useState(0);
 
   useEffect(() => {
-
-  });
-
-  useEffect(() => {
-    const { question, answers } = inputDialog;
+    if (dialogPage == null) {
+      return () => {};
+    }
+    const { question, answers } = dialogPage;
     const totalLength = question.length + answers.join('').length;
     const subscription = frame$(totalLength).subscribe(setCurrentFrame);
 
     return () => subscription.unsubscribe();
-  }, [inputDialog]);
+  }, [dialogPage]);
 
-  const { question, answers } = computeDialog(inputDialog, currentFrame);
+  if (dialogPage == null) {
+    return null;
+  }
+
+  const { question, answers } = computeDialog(dialogPage, currentFrame);
 
   const questionLines = textToLines(23)(question);
 
@@ -100,7 +108,6 @@ const DialogScreen = () => {
       y={0}
       width={256}
       height={240}
-      onClick={resetDialog}
     >
       <Rect width={256} height={240} fill="#bbbbbb" />
       <Avatar />

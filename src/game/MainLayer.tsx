@@ -25,7 +25,7 @@ const GameContent = ({ menu }: GameContentProps) => {
       <StaticItems />
       <TextOverlay />
       <ClickMask />
-      {/* <DialogScreen /> */}
+      <DialogScreen />
     </>
   );
 };
