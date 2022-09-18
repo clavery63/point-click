@@ -1297,7 +1297,8 @@
         "type": "items",
         "contains": []
       }
-    }
+    },
+    "dialogs": {}
   },
   "playerState": {
     "verb": 1,
