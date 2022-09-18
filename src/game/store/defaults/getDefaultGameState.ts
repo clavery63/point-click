@@ -21,6 +21,7 @@ const getDefaultGameState: GetDefaultGameState = friendlyName => ({
       },
     },
     rooms: {},
+    dialogs: {},
   },
   playerState: {
     verb: 0,
