@@ -229,14 +229,22 @@ export interface PlayerState {
   page: number;
 }
 
-export type DialogPage = {
-  question: string;
-  answerOne: string;
-  answerTwo: string;
-  answerThree: string;
-  answerFour: string;
+export type DialogAnswer = {
+  text: string;
   addFlags?: Flag[];
   removeFlags?: Flag[];
+};
+
+export type DialogAnswers = [
+  DialogAnswer,
+  DialogAnswer,
+  DialogAnswer,
+  DialogAnswer
+];
+
+export type DialogPage = {
+  question: string;
+  answers: DialogAnswers;
   prereqFlags?: Flag[];
   prereqUsing?: number;
 };

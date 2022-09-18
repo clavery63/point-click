@@ -202,29 +202,104 @@ const gameStateSchema = {
                       "question": {
                         "type": "string"
                       },
-                      "answerOne": {
-                        "type": "string"
-                      },
-                      "answerTwo": {
-                        "type": "string"
-                      },
-                      "answerThree": {
-                        "type": "string"
-                      },
-                      "answerFour": {
-                        "type": "string"
-                      },
-                      "addFlags": {
+                      "answers": {
                         "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      },
-                      "removeFlags": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
+                        "items": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "text": {
+                                "type": "string"
+                              },
+                              "addFlags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "removeFlags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "required": [
+                              "text"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "text": {
+                                "type": "string"
+                              },
+                              "addFlags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "removeFlags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "required": [
+                              "text"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "text": {
+                                "type": "string"
+                              },
+                              "addFlags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "removeFlags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "required": [
+                              "text"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "text": {
+                                "type": "string"
+                              },
+                              "addFlags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "removeFlags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "required": [
+                              "text"
+                            ]
+                          }
+                        ],
+                        "minItems": 4,
+                        "maxItems": 4
                       },
                       "prereqFlags": {
                         "type": "array",
@@ -237,10 +312,7 @@ const gameStateSchema = {
                       }
                     },
                     "required": [
-                      "answerFour",
-                      "answerOne",
-                      "answerThree",
-                      "answerTwo",
+                      "answers",
                       "question"
                     ]
                   }

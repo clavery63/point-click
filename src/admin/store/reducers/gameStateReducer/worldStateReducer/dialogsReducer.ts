@@ -20,10 +20,12 @@ export const dialogsSlice = createSlice({
 
       const newPage: DialogPage = {
         question: '',
-        answerOne: '',
-        answerTwo: '',
-        answerThree: '',
-        answerFour: '',
+        answers: [
+          { text: '' },
+          { text: '' },
+          { text: '' },
+          { text: '' },
+        ],
       };
 
       state[id]?.pages.push(newPage);

@@ -10,6 +10,7 @@ import React from 'react';
 import { useDispatch } from '../hooks/redux';
 import FlagsInput from '../shared/FlagsInput';
 import LongTextField from '../shared/LongTextField';
+import DialogAnswerEdit from './DialogAnswerEdit';
 
 const useStyles = makeStyles({
   dialogPageCard: {
@@ -40,6 +41,8 @@ const DialogPageEdit = ({ dialogId, index, dialogPage }: Props) => {
     }));
   };
 
+  console.log('dialogPage?', dialogPage);
+
   return (
     <Card className={styles.dialogPageCard}>
       <CardContent>
@@ -54,36 +57,14 @@ const DialogPageEdit = ({ dialogId, index, dialogPage }: Props) => {
             value={dialogPage.question}
             onChange={handleChange('question')}
           />
-          <LongTextField
-            label="first answer"
-            value={dialogPage.answerOne}
-            onChange={handleChange('answerOne')}
-          />
-          <LongTextField
-            label="second answer"
-            value={dialogPage.answerTwo}
-            onChange={handleChange('answerTwo')}
-          />
-          <LongTextField
-            label="third answer"
-            value={dialogPage.answerThree}
-            onChange={handleChange('answerThree')}
-          />
-          <LongTextField
-            label="fourth answer"
-            value={dialogPage.answerFour}
-            onChange={handleChange('answerFour')}
-          />
-          <FlagsInput
-            label="add flags"
-            value={dialogPage.addFlags}
-            onChange={newFlags => handleChange('addFlags')(newFlags)}
-          />
-          <FlagsInput
-            label="remove flags"
-            value={dialogPage.removeFlags}
-            onChange={newFlags => handleChange('removeFlags')(newFlags)}
-          />
+          {[0, 1, 2, 3].map((answerIndex) => (
+            <DialogAnswerEdit
+              key={answerIndex}
+              answers={dialogPage.answers}
+              onChange={handleChange('answers')}
+              index={answerIndex as 0 | 1 | 2 | 3}
+            />
+          ))}
           <FlagsInput
             label="prereq flags"
             value={dialogPage.prereqFlags}
