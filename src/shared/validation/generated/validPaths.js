@@ -73,6 +73,15 @@ export const numberPaths = [
   },
   {
     "texts": [
+      "worldState.entities[",
+      "].dialog"
+    ],
+    "types": [
+      "number"
+    ]
+  },
+  {
+    "texts": [
       "worldState.dialogs[",
       "].id"
     ],

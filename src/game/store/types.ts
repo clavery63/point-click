@@ -169,6 +169,7 @@ export interface Item {
   isStatic?: boolean;
   time?: number;
   timeEffect?: TimeEffect;
+  dialog?: number;
   capabilities?: Capability[];
 }
 

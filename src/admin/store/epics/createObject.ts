@@ -3,22 +3,36 @@ import { filter, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Action, createAction } from '@reduxjs/toolkit';
 import { RootState } from 'admin/ui/hooks/redux';
 import { GameState } from 'game/store/types';
-import { addItemToContainer, createEntity } from '../reducers/gameStateReducer/worldStateReducer/entitiesReducer';
+import { addDialogToEntity, addItemToContainer, createEntity } from '../reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { addDoorToRoom, addEntityToRoom } from '../reducers/gameStateReducer/worldStateReducer/roomsReducer';
 import { setSelected } from '../reducers/editorStateReducer/selectedEntityReducer';
 import { createDoorWithId } from '../reducers/gameStateReducer/worldStateReducer/doorsReducer';
 import { addItemToPlayer } from '../reducers/gameStateReducer/playerStateReducer';
+import { createDialogWithId } from '../reducers/gameStateReducer/worldStateReducer/dialogsReducer';
 
 export const createItem = createAction<number | undefined>('createItem');
 export const createScenery = createAction<number>('createScenery');
+export const createDialog = createAction<number>('createDialog');
 export const createDoor = createAction<number>('createDoor');
 export const createPlayerItem = createAction('createPlayerItem');
 export const createContainedItem = createAction<number>('createContainedItem');
 
-const generateKey = (gameState: GameState) => {
+const generateEntityKey = (gameState: GameState) => {
   const entityKeys = Object.keys(gameState.worldState.entities);
   const doorKeys = Object.keys(gameState.worldState.doors);
   const keys = [...entityKeys, ...doorKeys].map((key: string) => parseInt(key, 10));
+  keys.sort((a, b) => a - b);
+
+  if (!keys.length) {
+    return 0;
+  }
+
+  return keys[keys.length - 1] + 1;
+};
+
+const generateDialogKey = (gameState: GameState) => {
+  const dialogKeys = Object.keys(gameState.worldState.dialogs);
+  const keys = dialogKeys.map((key: string) => parseInt(key, 10));
   keys.sort((a, b) => a - b);
 
   if (!keys.length) {
@@ -38,7 +52,7 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     filter(match[type]),
     withLatestFrom(state$),
     switchMap(([{ payload: roomId }, { gameState }]) => {
-      const id = generateKey(gameState.present);
+      const id = generateEntityKey(gameState.present);
       return from([
         createEntity({ id, type, isStatic: roomId === undefined }),
         addEntityToRoom({ entityId: id, roomId }),
@@ -54,7 +68,7 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     filter(createDoor.match),
     withLatestFrom(state$),
     switchMap(([{ payload: roomId }, { gameState }]) => {
-      const id = generateKey(gameState.present);
+      const id = generateEntityKey(gameState.present);
       return from([
         createDoorWithId({ id }),
         addDoorToRoom({ doorId: id, roomId }),
@@ -70,7 +84,7 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     filter(createPlayerItem.match),
     withLatestFrom(state$),
     switchMap(([, { gameState }]) => {
-      const id = generateKey(gameState.present);
+      const id = generateEntityKey(gameState.present);
       return from([
         createEntity({ id, type: 'items', isStatic: false }),
         addItemToPlayer({ id }),
@@ -86,7 +100,7 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     filter(createContainedItem.match),
     withLatestFrom(state$),
     switchMap(([{ payload: containerId }, { gameState }]) => {
-      const id = generateKey(gameState.present);
+      const id = generateEntityKey(gameState.present);
       return from([
         createEntity({ id, type: 'items', isStatic: false }),
         addItemToContainer({ id, containerId }),
@@ -98,9 +112,22 @@ const createObject$ = (action$: Observable<Action>, state$: Observable<RootState
     }),
   );
 
+  const dialog$ = action$.pipe(
+    filter(createDialog.match),
+    withLatestFrom(state$),
+    switchMap(([{ payload: entityId }, { gameState }]) => {
+      const dialogId = generateDialogKey(gameState.present);
+      return from([
+        createDialogWithId({ id: dialogId }),
+        addDialogToEntity({ dialogId, entityId }),
+      ]);
+    }),
+  );
+
   return merge(
     entity$('items'),
     entity$('scenery'),
+    dialog$,
     door$,
     playerItem$,
     containedItem$,

@@ -159,6 +159,14 @@ export const entitiesSlice = createSlice({
 
       state[containerId].contains = [...contains, id];
     },
+    addDialogToEntity: (state, action: PayloadAction<{ dialogId: number; entityId: number }>) => {
+      const { dialogId, entityId } = action.payload;
+      const entity = state[entityId];
+
+      if (entity) {
+        state[entityId].dialog = dialogId;
+      }
+    },
   },
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.worldState.entities);
@@ -179,6 +187,7 @@ export const {
   deleteEntity,
   setEntityVerb,
   addItemToContainer,
+  addDialogToEntity,
 } = entitiesSlice.actions;
 
 export default entitiesSlice.reducer;

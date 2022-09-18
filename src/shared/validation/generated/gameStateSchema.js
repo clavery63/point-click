@@ -577,6 +577,7 @@ const gameStateSchema = {
     },
     "ValidPathsFor": {
       "enum": [
+        "dialog",
         "id",
         "time"
       ],
@@ -708,6 +709,9 @@ const gameStateSchema = {
         },
         "timeEffect": {
           "$ref": "#/definitions/TimeEffect"
+        },
+        "dialog": {
+          "type": "number"
         },
         "capabilities": {
           "type": "array",
