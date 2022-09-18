@@ -1,11 +1,11 @@
 import { textToLines } from 'game/store/epics/util';
-import { DialogPage } from 'game/store/types';
+import { DialogAnswer, DialogPage } from 'game/store/types';
 import React, { useEffect, useState } from 'react';
 import { Group, Rect } from 'react-konva';
 import { interval } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { Image } from 'shared/components/tappables';
-import { useSelector } from 'shared/hooks/redux';
+import { useDispatch, useSelector } from 'shared/hooks/redux';
 import Text from '../shared/Text';
 
 const frame$ = (numFrames: number) => interval(16).pipe(
@@ -21,9 +21,11 @@ const computeDialog = (page: DialogPage, currentFrame: number) => {
 
   return {
     question: page.question.slice(0, currentFrame),
-    answers: startFrames.map((startFrame, index) => {
-      return page.answers[index].text.slice(0, Math.max(currentFrame - startFrame, 0));
-    }),
+    answers: startFrames.map((startFrame, index) => ({
+      text: page.answers[index].text.slice(0, Math.max(currentFrame - startFrame, 0)),
+      addFlags: page.answers[index].addFlags,
+      removeFlags: page.answers[index].removeFlags,
+    })),
   };
 };
 
@@ -33,14 +35,28 @@ const Avatar = () => {
   );
 };
 
-type AnswerProps = { answer: string; index: number };
+type AnswerProps = { answer: DialogAnswer; index: number };
 const Answer = ({ answer, index }: AnswerProps) => {
+  const dispatch = useDispatch();
   const images = useSelector(state => state.images);
-  const lines = textToLines(28)(answer);
+  const lines = textToLines(28)(answer.text);
   const top = 100 + index * 34;
   return (
     <>
-      <Image image={images.get('menu-button')} x={10} y={top} />
+      <Image
+        image={images.get('menu-button')}
+        x={10}
+        y={top}
+        onClick={() => {
+          if (answer.addFlags != null) {
+            dispatch({ type: 'ADD_FLAGS', payload: answer.addFlags });
+          }
+
+          if (answer.removeFlags != null) {
+            dispatch({ type: 'REMOVE_FLAGS', payload: answer.removeFlags });
+          }
+        }}
+      />
       {lines.map((line, lineNumber) => (
         <Text
           key={lineNumber}
@@ -51,16 +67,6 @@ const Answer = ({ answer, index }: AnswerProps) => {
       ))}
     </>
   );
-};
-
-const defaultDialog = {
-  question: "well why don't we put a couple of lines of text here. OK, it seems like 4 lines is the max.",
-  answers: [
-    "I don't know. why don't you tell me?",
-    'I mean, as far as I can tell it looks fine',
-    'No clue.',
-    'Does the extra space here look awkward?',
-  ],
 };
 
 const DialogScreen = () => {

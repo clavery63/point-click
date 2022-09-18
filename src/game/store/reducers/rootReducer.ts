@@ -6,7 +6,9 @@ import selectItemReducer from './selectItemReducer';
 import setPositionReducer from './setPositionReducer';
 import changePageReducer from './changePageReducer';
 import roomReducer from './roomReducer';
-import { setValue, clearValue } from './utils';
+import {
+  setValue, clearValue, addFlags, removeFlags,
+} from './utils';
 import {
   Flag, GameStoreState, PlayerState, WorldState,
   Menu, VerbIndex, PageDir, Music, Config, MenuState, GameText,
@@ -25,6 +27,8 @@ type ActionTypes = {
   SET_WORLD_STATE: WorldState;
   SET_PLAYER_STATE: PlayerState;
   SET_FLAGS: Flag[];
+  ADD_FLAGS: Flag[];
+  REMOVE_FLAGS: Flag[];
   SET_CONFIG: Config;
   SET_TEXT: GameText;
   SET_NEXT_MUSIC: Music;
@@ -118,6 +122,10 @@ const rootReducer: ReduxReducer<
       return applyReducer(setPlayerState, state, action.payload);
     case 'SET_FLAGS':
       return applyReducer(setFlags, state, action.payload);
+    case 'ADD_FLAGS':
+      return applyReducer(addFlags, state, action.payload);
+    case 'REMOVE_FLAGS':
+      return applyReducer(removeFlags, state, action.payload);
     case 'SET_CONFIG':
       return applyReducer(setConfig, state, action.payload);
     case 'SET_TEXT':
