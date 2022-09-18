@@ -197,6 +197,7 @@ export interface Scenery {
   isStatic?: boolean;
   time?: number;
   timeEffect?: TimeEffect;
+  dialog?: number;
 }
 
 export interface Room {
@@ -225,6 +226,24 @@ export interface PlayerState {
   items: number[];
   page: number;
 }
+
+export type DialogPage = {
+  question: string;
+  answerOne: string;
+  answerTwo?: string;
+  answerThree?: string;
+  answerFour?: string;
+  addFlags?: Flag[];
+  removeFlags?: Flag[];
+  prereqFlags?: Flag[];
+  prereqUsing?: number;
+};
+
+export type Dialog = {
+  id: number;
+  avatar: string;
+  pages: DialogPage[];
+};
 
 export enum VerbBehavior {
   NONE = 'NONE',

@@ -859,6 +859,9 @@ const gameStateSchema = {
         },
         "timeEffect": {
           "$ref": "#/definitions/TimeEffect"
+        },
+        "dialog": {
+          "type": "number"
         }
       },
       "required": [
