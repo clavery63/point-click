@@ -28,6 +28,17 @@ export const dialogsSlice = createSlice({
 
       state[id]?.pages.push(newPage);
     },
+    editDialogPage: (
+      state,
+      action: PayloadAction<{ id: number; pageIndex: number; page: DialogPage }>,
+    ) => {
+      const { id, pageIndex, page } = action.payload;
+      const dialog = state[id];
+
+      if (dialog) {
+        dialog.pages[pageIndex] = page;
+      }
+    },
   },
   extraReducers: builder => {
     builder.addCase(setGameState, (state, action) => action.payload.worldState.dialogs);
@@ -37,6 +48,7 @@ export const dialogsSlice = createSlice({
 export const {
   createDialogWithId,
   addPageToDialog,
+  editDialogPage,
 } = dialogsSlice.actions;
 
 export default dialogsSlice.reducer;
