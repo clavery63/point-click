@@ -72,6 +72,26 @@ export const numberPaths = [
     ]
   },
   {
+    "texts": [
+      "worldState.dialogs[",
+      "].id"
+    ],
+    "types": [
+      "number"
+    ]
+  },
+  {
+    "texts": [
+      "worldState.dialogs[",
+      "].pages[",
+      "].prereqUsing"
+    ],
+    "types": [
+      "number",
+      "number"
+    ]
+  },
+  {
     "value": "playerState.verb"
   },
   {

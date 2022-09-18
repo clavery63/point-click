@@ -216,6 +216,7 @@ export interface WorldState {
   doors: Lookup<Door>;
   entities: Lookup<Item | Scenery>;
   rooms: Lookup<Room>;
+  dialogs: Lookup<Dialog>;
 }
 
 export interface PlayerState {

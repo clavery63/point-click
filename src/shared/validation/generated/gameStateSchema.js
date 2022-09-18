@@ -180,9 +180,80 @@ const gameStateSchema = {
               "$ref": "#/definitions/Room"
             }
           }
+        },
+        "dialogs": {
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[0-9]+$": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "avatar": {
+                  "type": "string"
+                },
+                "pages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "question": {
+                        "type": "string"
+                      },
+                      "answerOne": {
+                        "type": "string"
+                      },
+                      "answerTwo": {
+                        "type": "string"
+                      },
+                      "answerThree": {
+                        "type": "string"
+                      },
+                      "answerFour": {
+                        "type": "string"
+                      },
+                      "addFlags": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "removeFlags": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "prereqFlags": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "prereqUsing": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "answerOne",
+                      "question"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "avatar",
+                "id",
+                "pages"
+              ]
+            }
+          }
         }
       },
       "required": [
+        "dialogs",
         "doors",
         "entities",
         "rooms"
