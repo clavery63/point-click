@@ -237,7 +237,10 @@ const gameStateSchema = {
                       }
                     },
                     "required": [
+                      "answerFour",
                       "answerOne",
+                      "answerThree",
+                      "answerTwo",
                       "question"
                     ]
                   }

@@ -13,6 +13,7 @@ import Verbs from '../verbs';
 import Contains from './Contains';
 import Toggle from '../shared/Toggle';
 import FlagsInput from '../shared/FlagsInput';
+import DialogEdit from '../dialog';
 
 type Props = {
   scenery: Scenery;
@@ -114,6 +115,9 @@ const SceneryDetails = ({ scenery }: Props) => {
       </Grid>
       <Contains container={scenery} />
       <Verbs entity={scenery} />
+      <Grid item xs={12}>
+        <DialogEdit scenery={scenery} />
+      </Grid>
     </Grid>
   );
 };

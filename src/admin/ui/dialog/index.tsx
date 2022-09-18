@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { Dialog, Scenery } from 'game/store/types';
 import { createDialog } from 'admin/store/epics/createObject';
+import { addPageToDialog } from 'admin/store/reducers/gameStateReducer/worldStateReducer/dialogsReducer';
 import { useDispatch, useSelector } from '../hooks/redux';
 import DispatchButton from '../shared/DispatchButton';
 import DialogPageEdit from './DialogPageEdit';
@@ -13,7 +14,7 @@ type Props = {
 const DialogEdit = ({ scenery }: Props) => {
   const dispatch = useDispatch();
   const existingDialog = useSelector(state => {
-    const dialogId = scenery.dialog || -1;
+    const dialogId = scenery.dialog == null ? -1 : scenery.dialog;
     return state.gameState.present.worldState.dialogs[dialogId];
   });
 
@@ -24,7 +25,7 @@ const DialogEdit = ({ scenery }: Props) => {
     });
   };
 
-  const handleCreate = () => {
+  const handleAddPage = () => {
     console.log('creating it:', scenery.id);
   };
 
@@ -53,11 +54,10 @@ const DialogEdit = ({ scenery }: Props) => {
           />
         ))}
       </Grid>
-      {/* <AddVerb
-        indexes={verbIndexPairings.map(([index]) => parseInt(index, 10))}
-        names={verbs.map(verb => verb.name)}
-        entityId={entity.id}
-      /> */}
+      <DispatchButton
+        action={addPageToDialog({ id: existingDialog.id })}
+        callToAction="Add Dialog Page"
+      />
     </>
   );
 };
