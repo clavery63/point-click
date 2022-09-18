@@ -101,6 +101,9 @@ export const numberPaths = [
     ]
   },
   {
+    "value": "playerState.dialog"
+  },
+  {
     "value": "playerState.verb"
   },
   {

@@ -223,6 +223,7 @@ export interface WorldState {
 export interface PlayerState {
   verb: VerbIndex;
   using?: Nullable<number>;
+  dialog?: Nullable<number>;
   examining: Nullable<number>;
   room: number;
   items: number[];

@@ -41,8 +41,6 @@ const DialogPageEdit = ({ dialogId, index, dialogPage }: Props) => {
     }));
   };
 
-  console.log('dialogPage?', dialogPage);
-
   return (
     <Card className={styles.dialogPageCard}>
       <CardContent>
