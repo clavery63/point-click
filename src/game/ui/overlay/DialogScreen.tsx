@@ -1,5 +1,4 @@
 import { textToLines } from 'game/store/epics/util';
-import { DialogAnswer, DialogPage } from 'game/store/types';
 import React, { useEffect, useState } from 'react';
 import { Group, Rect } from 'react-konva';
 import { interval } from 'rxjs';
@@ -8,23 +7,50 @@ import { Image } from 'shared/components/tappables';
 import { useDispatch, useSelector } from 'shared/hooks/redux';
 import Text from '../shared/Text';
 
-const frame$ = (numFrames: number) => interval(16).pipe(
+type DialogAnswerWithLines = {
+  text: string[];
+  addFlags?: string[] | undefined;
+  removeFlags?: string[] | undefined;
+};
+
+const frame$ = (numFrames: number) => interval(100).pipe(
   takeWhile((frame: number) => frame <= numFrames),
 );
 
-const computeDialog = (page: DialogPage, currentFrame: number) => {
-  const answersTruncated = page.answers.slice(0, page.answers.length - 1);
+const truncateLines = (inputLines: string[], frame: number) => {
+  const result = inputLines.reduce((acc, cur) => {
+    if (acc.remaining <= 0) {
+      return acc;
+    }
+    return {
+      lines: [
+        ...acc.lines,
+        cur.slice(0, acc.remaining),
+      ],
+      remaining: acc.remaining - cur.length,
+    };
+  }, { lines: [] as string[], remaining: frame });
+
+  return result.lines;
+};
+
+const computeDialog = (
+  question: string[],
+  answers: DialogAnswerWithLines[],
+  currentFrame: number,
+) => {
+  const answersTruncated = answers.slice(0, answers.length - 1);
   const startFrames = answersTruncated.reduce((acc, cur) => {
-    acc.push(acc[acc.length - 1] + cur.text.length);
+    acc.push(acc[acc.length - 1] + cur.text.join().length);
     return acc;
-  }, [page.question.length]);
+  }, [question.join().length]);
 
   return {
-    question: page.question.slice(0, currentFrame),
+    question: truncateLines(question, currentFrame),
     answers: startFrames.map((startFrame, index) => ({
-      text: page.answers[index].text.slice(0, Math.max(currentFrame - startFrame, 0)),
-      addFlags: page.answers[index].addFlags,
-      removeFlags: page.answers[index].removeFlags,
+      text: truncateLines(answers[index].text, Math.max(currentFrame - startFrame, 0)),
+      addFlags: answers[index].addFlags,
+      removeFlags: answers[index].removeFlags,
     })),
   };
 };
@@ -35,11 +61,10 @@ const Avatar = () => {
   );
 };
 
-type AnswerProps = { answer: DialogAnswer; index: number };
+type AnswerProps = { answer: DialogAnswerWithLines; index: number };
 const Answer = ({ answer, index }: AnswerProps) => {
   const dispatch = useDispatch();
   const images = useSelector(state => state.images);
-  const lines = textToLines(28)(answer.text);
   const top = 100 + index * 34;
   return (
     <>
@@ -57,7 +82,7 @@ const Answer = ({ answer, index }: AnswerProps) => {
           }
         }}
       />
-      {lines.map((line, lineNumber) => (
+      {answer.text.map((line, lineNumber) => (
         <Text
           key={lineNumber}
           left={20}
@@ -107,9 +132,13 @@ const DialogScreen = () => {
     return null;
   }
 
-  const { question, answers } = computeDialog(dialogPage, currentFrame);
+  const inputQuestion = textToLines(23)(dialogPage.question);
+  const inputAnswers = dialogPage.answers.map(answer => ({
+    ...answer,
+    text: textToLines(28)(answer.text),
+  }));
 
-  const questionLines = textToLines(23)(question);
+  const { question, answers } = computeDialog(inputQuestion, inputAnswers, currentFrame);
 
   return (
     <Group
@@ -120,7 +149,7 @@ const DialogScreen = () => {
     >
       <Rect width={256} height={240} fill="#bbbbbb" />
       <Avatar />
-      {questionLines.map((line, lineNumber) => (
+      {question.map((line, lineNumber) => (
         <Text
           key={lineNumber}
           left={10}
