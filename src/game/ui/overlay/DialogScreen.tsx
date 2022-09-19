@@ -97,7 +97,10 @@ const DialogScreen = () => {
     const totalLength = question.length + answers.join('').length;
     const subscription = frame$(totalLength).subscribe(setCurrentFrame);
 
-    return () => subscription.unsubscribe();
+    return () => {
+      setCurrentFrame(0);
+      subscription.unsubscribe();
+    };
   }, [dialogPage]);
 
   if (dialogPage == null) {
