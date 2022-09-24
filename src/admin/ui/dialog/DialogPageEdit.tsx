@@ -1,11 +1,11 @@
 import {
   Box,
-  Button,
-  Card, CardContent, Stack, Typography,
+  Card, CardContent, IconButton, Stack, Typography,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { editDialogPage } from 'admin/store/reducers/gameStateReducer/worldStateReducer/dialogsReducer';
+import { deleteDialogPage, editDialogPage } from 'admin/store/reducers/gameStateReducer/worldStateReducer/dialogsReducer';
 import { DialogPage } from 'game/store/types';
+import DeleteIcon from '@mui/icons-material/Delete';
 import React from 'react';
 import { useDispatch } from '../hooks/redux';
 import FlagsInput from '../shared/FlagsInput';
@@ -41,14 +41,29 @@ const DialogPageEdit = ({ dialogId, index, dialogPage }: Props) => {
     }));
   };
 
+  const handleDelete = (id: number, pageIndex: number) => {
+    dispatch(deleteDialogPage({ id, pageIndex }));
+  };
+
+  if (!dialogPage) {
+    return null;
+  }
+
   return (
     <Card className={styles.dialogPageCard}>
       <CardContent>
-        <Typography variant="body1" display="block" margin="10px">
-          Page
-          {' '}
-          {index + 1}
-        </Typography>
+        <Stack direction="row">
+          <Typography variant="body1" display="block" margin="10px">
+            Page
+            {' '}
+            {index + 1}
+          </Typography>
+          <IconButton
+            onClick={() => handleDelete(dialogId, index)}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Stack>
         <Stack direction="column">
           <FlagsInput
             label="prereq flags"
@@ -69,11 +84,6 @@ const DialogPageEdit = ({ dialogId, index, dialogPage }: Props) => {
             />
           ))}
         </Stack>
-        <Box>
-          <Button onClick={() => console.log('deleting dialog page:', index)} color="error">
-            Delete
-          </Button>
-        </Box>
       </CardContent>
     </Card>
   );

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { Scenery } from 'game/store/types';
@@ -19,6 +19,12 @@ const DialogEdit = ({ scenery }: Props) => {
     const dialogId = scenery.dialog == null ? -1 : scenery.dialog;
     return state.gameState.present.worldState.dialogs[dialogId];
   });
+
+  useEffect(() => {
+    if (existingDialog && currentPageIndex >= existingDialog.pages.length) {
+      setCurrentPageIndex(existingDialog.pages.length - 1);
+    }
+  }, [existingDialog.pages, currentPageIndex]);
 
   const currentPage = useMemo(() => {
     return existingDialog?.pages[currentPageIndex];
