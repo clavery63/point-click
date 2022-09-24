@@ -3,14 +3,17 @@ import { compact, uniq } from 'lodash';
 import TextField from '@mui/material/TextField';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { Flag } from 'game/store/types';
+import { createSelector } from 'reselect';
 import { RootState, useSelector } from '../hooks/redux';
 import WithTooltip from './WithTooltip';
 
 const filter = createFilterOptions<FlagOption>();
 
-const flagsSelector = (state: RootState) => {
-  const { worldState, flags } = state.gameState.present;
-  const { entities, doors } = worldState;
+const selectWorldState = (state: RootState) => state.gameState.present.worldState;
+const selectFlags = (state: RootState) => state.gameState.present.flags;
+
+const flagsSelector = createSelector(selectWorldState, selectFlags, (worldState, flags) => {
+  const { entities, doors, dialogs } = worldState;
 
   const doorFlags = Object.values(doors)
     .flatMap(({ openCondition }) => openCondition);
@@ -18,16 +21,23 @@ const flagsSelector = (state: RootState) => {
   const entityFlags = Object.values(entities)
     .flatMap(({ visibleFlags = [], takeableFlags = [] }) => [...visibleFlags, ...takeableFlags]);
 
+  const dialogFlags = Object.values(dialogs)
+    .flatMap(({ pages }) => pages.flatMap(({ prereqFlags = [], answers }) => [
+      ...prereqFlags, ...answers.flatMap(({ addFlags = [], removeFlags = [] }) => [
+        ...addFlags, ...removeFlags,
+      ]),
+    ]));
+
   const verbFlags = [...Object.values(entities), ...Object.values(doors)]
     .flatMap(({ verbs }) => Object.values(verbs || {}).flat())
     .flatMap(({ addFlags = [], removeFlags = [], prereqFlags = [] }) => [
       ...addFlags, ...removeFlags, ...prereqFlags,
     ]);
 
-  const allFlags = compact([...flags, ...doorFlags, ...entityFlags, ...verbFlags]);
+  const allFlags = compact([...flags, ...doorFlags, ...entityFlags, ...verbFlags, ...dialogFlags]);
 
   return uniq(allFlags).sort();
-};
+});
 
 const toFlagOption = (flag: Flag) => ({
   value: flag,

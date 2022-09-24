@@ -42,12 +42,12 @@ const DialogAnswerEdit = ({ onChange, answers, index }: Props) => {
           <FlagsInput
             label="add flags"
             value={answer.addFlags}
-            onChange={newFlags => handleChange('addFlags')(newFlags)}
+            onChange={handleChange('addFlags')}
           />
           <FlagsInput
             label="remove flags"
             value={answer.removeFlags}
-            onChange={newFlags => handleChange('removeFlags')(newFlags)}
+            onChange={handleChange('removeFlags')}
           />
         </Stack>
       </CardContent>
