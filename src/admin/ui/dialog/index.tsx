@@ -7,6 +7,7 @@ import { addPageToDialog } from 'admin/store/reducers/gameStateReducer/worldStat
 import { useSelector } from '../hooks/redux';
 import DispatchButton from '../shared/DispatchButton';
 import DialogPageEdit from './DialogPageEdit';
+import DialogAvatarEdit from './DialogAvatarEdit';
 
 type Props = {
   scenery: Scenery;
@@ -32,6 +33,9 @@ const DialogEdit = ({ scenery }: Props) => {
         <Typography variant="h6">
           Edit Dialog:
         </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <DialogAvatarEdit dialogId={existingDialog.id} />
       </Grid>
       <Grid item xs={12}>
         {existingDialog.pages.map((dialogPage, index) => (

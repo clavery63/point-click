@@ -1,6 +1,8 @@
 import { textToLines } from 'game/store/epics/util';
+import { GameStoreState } from 'game/store/types';
 import React, { useEffect, useState } from 'react';
 import { Group, Rect } from 'react-konva';
+import { createSelector } from 'reselect';
 import { interval } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { Image } from 'shared/components/tappables';
@@ -13,7 +15,7 @@ type DialogAnswerWithLines = {
   removeFlags?: string[] | undefined;
 };
 
-const frame$ = (numFrames: number) => interval(100).pipe(
+const frame$ = (numFrames: number) => interval(16).pipe(
   takeWhile((frame: number) => frame <= numFrames),
 );
 
@@ -55,9 +57,14 @@ const computeDialog = (
   };
 };
 
-const Avatar = () => {
+type AvatarProps = { avatar: string};
+const Avatar = (props: AvatarProps) => {
+  const img = useSelector(state => state.images.get(props.avatar));
   return (
-    <Rect x={201} y={10} width={45} height={60} fill="black" />
+    <>
+      <Rect x={200} y={9} width={47} height={62} fill="black" />
+      <Image x={201} y={10} width={45} height={60} image={img} fill="white" />
+    </>
   );
 };
 
@@ -94,24 +101,32 @@ const Answer = ({ answer, index }: AnswerProps) => {
   );
 };
 
-const DialogScreen = () => {
-  const dialogPage = useSelector(state => {
-    const { dialog: dialogId = -1 } = state.playerState;
-    const dialog = state.worldState.dialogs[dialogId];
-    if (dialog == null) {
-      return null;
-    }
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const page of (dialog.pages || [])) {
-      if (!page.prereqFlags?.some(flag => !state.flags.includes(flag))) {
-        return page;
-      }
-    }
-
+const selectDialogId = (state: GameStoreState) => state.playerState.dialog;
+const selectFlags = (state: GameStoreState) => state.flags;
+const selectDialogs = (state: GameStoreState) => state.worldState.dialogs;
+const dialogSelector = createSelector(
+  selectDialogs,
+  selectDialogId,
+  (dialogs, dialogId = -1) => dialogs[dialogId],
+);
+const dialogPageSelector = createSelector(dialogSelector, selectFlags, (dialog, flags) => {
+  if (dialog == null) {
     return null;
-  });
+  }
+  // eslint-disable-next-line no-restricted-syntax
+  for (const page of (dialog.pages || [])) {
+    if (!page.prereqFlags?.some(flag => !flags.includes(flag))) {
+      return page;
+    }
+  }
 
+  return null;
+});
+const avatarSelector = createSelector(dialogSelector, dialog => dialog?.avatar);
+
+const DialogScreen = () => {
+  const dialogPage = useSelector(dialogPageSelector);
+  const avatar = useSelector(avatarSelector);
   const [currentFrame, setCurrentFrame] = useState(0);
 
   useEffect(() => {
@@ -148,7 +163,7 @@ const DialogScreen = () => {
       height={240}
     >
       <Rect width={256} height={240} fill="#bbbbbb" />
-      <Avatar />
+      <Avatar avatar={avatar} />
       {question.map((line, lineNumber) => (
         <Text
           key={lineNumber}

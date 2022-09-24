@@ -30,6 +30,13 @@ export const dialogsSlice = createSlice({
 
       state[id]?.pages.push(newPage);
     },
+    editDialogAvatar: (state, action: PayloadAction<{ dialogId: number; avatar: string}>) => {
+      const { dialogId, avatar } = action.payload;
+
+      if (state[dialogId] != null) {
+        state[dialogId].avatar = avatar;
+      }
+    },
     editDialogPage: (
       state,
       action: PayloadAction<{ id: number; pageIndex: number; page: DialogPage }>,
@@ -50,6 +57,7 @@ export const dialogsSlice = createSlice({
 export const {
   createDialogWithId,
   addPageToDialog,
+  editDialogAvatar,
   editDialogPage,
 } = dialogsSlice.actions;
 
