@@ -50,6 +50,11 @@ const DialogPageEdit = ({ dialogId, index, dialogPage }: Props) => {
           {index + 1}
         </Typography>
         <Stack direction="column">
+          <FlagsInput
+            label="prereq flags"
+            value={dialogPage.prereqFlags}
+            onChange={newFlags => handleChange('prereqFlags')(newFlags)}
+          />
           <LongTextField
             label="question"
             value={dialogPage.question}
@@ -63,11 +68,6 @@ const DialogPageEdit = ({ dialogId, index, dialogPage }: Props) => {
               index={answerIndex as 0 | 1 | 2 | 3}
             />
           ))}
-          <FlagsInput
-            label="prereq flags"
-            value={dialogPage.prereqFlags}
-            onChange={newFlags => handleChange('prereqFlags')(newFlags)}
-          />
         </Stack>
         <Box>
           <Button onClick={() => console.log('deleting dialog page:', index)} color="error">

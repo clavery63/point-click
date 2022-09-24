@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { Scenery } from 'game/store/types';
 import { createDialog } from 'admin/store/epics/createObject';
 import { addPageToDialog } from 'admin/store/reducers/gameStateReducer/worldStateReducer/dialogsReducer';
+import { Button } from '@mui/material';
 import { useSelector } from '../hooks/redux';
 import DispatchButton from '../shared/DispatchButton';
 import DialogPageEdit from './DialogPageEdit';
@@ -13,10 +14,15 @@ type Props = {
   scenery: Scenery;
 };
 const DialogEdit = ({ scenery }: Props) => {
+  const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const existingDialog = useSelector(state => {
     const dialogId = scenery.dialog == null ? -1 : scenery.dialog;
     return state.gameState.present.worldState.dialogs[dialogId];
   });
+
+  const currentPage = useMemo(() => {
+    return existingDialog?.pages[currentPageIndex];
+  }, [existingDialog, currentPageIndex]);
 
   if (!existingDialog) {
     return (
@@ -33,24 +39,36 @@ const DialogEdit = ({ scenery }: Props) => {
         <Typography variant="h6">
           Edit Dialog:
         </Typography>
+        <Typography variant="body1">
+          Use this to trigger a dialog screen when using the SPEAK verb behavior
+        </Typography>
       </Grid>
       <Grid item xs={12}>
         <DialogAvatarEdit dialogId={existingDialog.id} />
       </Grid>
       <Grid item xs={12}>
-        {existingDialog.pages.map((dialogPage, index) => (
-          <DialogPageEdit
-            key={index}
-            index={index}
-            dialogId={existingDialog.id}
-            dialogPage={dialogPage}
-          />
+        Pages:
+        {' '}
+        {existingDialog.pages.map((_, index) => (
+          <Button
+            onClick={() => setCurrentPageIndex(index)}
+            disabled={index === currentPageIndex}
+          >
+            {index + 1}
+          </Button>
         ))}
+        <DispatchButton
+          action={addPageToDialog({ id: existingDialog.id })}
+          callToAction="Add Page"
+        />
       </Grid>
-      <DispatchButton
-        action={addPageToDialog({ id: existingDialog.id })}
-        callToAction="Add Dialog Page"
-      />
+      <Grid item xs={12}>
+        <DialogPageEdit
+          index={currentPageIndex}
+          dialogId={existingDialog.id}
+          dialogPage={currentPage}
+        />
+      </Grid>
     </>
   );
 };

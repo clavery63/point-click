@@ -63,7 +63,7 @@ const Avatar = (props: AvatarProps) => {
   return (
     <>
       <Rect x={200} y={9} width={47} height={62} fill="black" />
-      <Image x={201} y={10} width={45} height={60} image={img} fill="white" />
+      <Image x={201} y={10} width={45} height={60} image={img} />
     </>
   );
 };
