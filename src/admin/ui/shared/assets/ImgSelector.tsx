@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Nullable } from 'game/store/types';
-import { Stack } from '@mui/material';
+import { FormHelperText, Stack } from '@mui/material';
 import { addImage } from 'admin/store/reducers/imagesReducer';
 import { useDispatch, useSelector } from '../../hooks/redux';
 import ImageUploader from './ImageUploader';
@@ -21,9 +21,11 @@ const ImgSelector = ({
 }: Props) => {
   const dispatch = useDispatch();
   const images = useSelector(state => state.images);
+  const [error, setError] = useState<Nullable<string>>(null);
   const options = Object.keys(images);
 
   const onSelect = async (fileName: string) => {
+    setError(null);
     const image = images[fileName];
     if (!image) {
       return;
@@ -38,8 +40,7 @@ const ImgSelector = ({
     );
 
     if (validationError) {
-      // TODO(now): display this error
-      console.log('error:', validationError);
+      setError(validationError);
       return;
     }
 
@@ -47,6 +48,7 @@ const ImgSelector = ({
   };
 
   const handleUploadSuccess = (file: File) => {
+    setError(null);
     const name = file.name.split('.')[0];
     const dataUrl = window.URL.createObjectURL(file);
     const img = new Image();
@@ -56,26 +58,29 @@ const ImgSelector = ({
       onChange(name);
     };
     img.onerror = () => {
-      console.log('Dag nabbit! uploaded an image but something went wrong after that');
+      setError('Dag nabbit! uploaded an image but something went wrong after that');
     };
   };
 
   return (
-    <Stack direction="row" spacing={2}>
-      <Selector
-        label={label}
-        value={value}
-        onChange={onSelect}
-        options={makeOptions(options)}
-        tooltip={tooltip}
-      />
-      <ImageUploader
-        onSuccess={handleUploadSuccess}
-        width={width}
-        height={height}
-        exactSize={exactSize}
-      />
-    </Stack>
+    <>
+      <Stack direction="row" spacing={2}>
+        <Selector
+          label={label}
+          value={value}
+          onChange={onSelect}
+          options={makeOptions(options)}
+          tooltip={tooltip}
+        />
+        <ImageUploader
+          onSuccess={handleUploadSuccess}
+          width={width}
+          height={height}
+          exactSize={exactSize}
+        />
+      </Stack>
+      {error && <FormHelperText error>{error}</FormHelperText>}
+    </>
   );
 };
 
