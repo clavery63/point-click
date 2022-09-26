@@ -22,12 +22,14 @@ const validate = async (file: File) => {
   const { duration } = await getAudioDuration(file);
 
   if (file.size > MAX_SIZE) {
-    throw new Error(`Whoa hold up. Your file is ${file.size}, which is bigger than the max of ${MAX_SIZE}`);
+    return `Whoa hold up. Your file is ${file.size}, which is bigger than the max of ${MAX_SIZE}`;
   }
 
   if (duration === 0) {
-    throw new Error('Looks like your audio has no duration. That\'s messed up, so I\'m gonna bail');
+    return 'Looks like your audio has no duration. That\'s messed up, so I\'m gonna bail';
   }
+
+  return null;
 };
 
 type Props = {

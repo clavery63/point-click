@@ -17,6 +17,9 @@ const DialogAvatarEdit = ({ dialogId }: Props) => {
         avatar,
       }))}
       tooltip="Avatar to display during this dialog"
+      width={45}
+      height={60}
+      exactSize
     />
   );
 };

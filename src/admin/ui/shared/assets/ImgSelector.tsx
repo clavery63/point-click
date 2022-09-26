@@ -5,19 +5,46 @@ import { addImage } from 'admin/store/reducers/imagesReducer';
 import { useDispatch, useSelector } from '../../hooks/redux';
 import ImageUploader from './ImageUploader';
 import Selector, { makeOptions } from '../Selector';
+import { validateImage } from './imageUtils';
 
 type Props = {
   label: string;
   value: Nullable<string>;
   onChange: (value: string) => void;
   tooltip?: string;
+  width?: number;
+  height?: number;
+  exactSize?: boolean;
 };
 const ImgSelector = ({
-  label, value, onChange, tooltip,
+  label, value, onChange, tooltip, width, height, exactSize,
 }: Props) => {
   const dispatch = useDispatch();
   const images = useSelector(state => state.images);
   const options = Object.keys(images);
+
+  const onSelect = async (fileName: string) => {
+    const image = images[fileName];
+    if (!image) {
+      return;
+    }
+
+    const validationError = await validateImage(
+      image.width,
+      image.height,
+      width,
+      height,
+      exactSize,
+    );
+
+    if (validationError) {
+      // TODO(now): display this error
+      console.log('error:', validationError);
+      return;
+    }
+
+    onChange(fileName);
+  };
 
   const handleUploadSuccess = (file: File) => {
     const name = file.name.split('.')[0];
@@ -38,12 +65,15 @@ const ImgSelector = ({
       <Selector
         label={label}
         value={value}
-        onChange={onChange}
+        onChange={onSelect}
         options={makeOptions(options)}
         tooltip={tooltip}
       />
       <ImageUploader
         onSuccess={handleUploadSuccess}
+        width={width}
+        height={height}
+        exactSize={exactSize}
       />
     </Stack>
   );

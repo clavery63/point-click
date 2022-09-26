@@ -5,6 +5,7 @@ import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useParams } from 'react-router-dom';
 import S3 from 'shared/util/S3';
+import { Nullable } from 'game/store/types';
 
 const useStyles = makeStyles({
   uploader: {
@@ -67,7 +68,7 @@ const MessageBox = ({ text }: MessageBoxProps) => {
 };
 
 type Props = {
-  validate: (f: File) => Promise<void>;
+  validate: (f: File) => Promise<Nullable<string>>;
   onSuccess: (f: File) => void;
   setWaiting: (b: boolean) => void;
   filePath: string;
@@ -75,24 +76,32 @@ type Props = {
 const FileUploader = ({
   validate, onSuccess, filePath, setWaiting,
 }: Props) => {
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Nullable<string>>(null);
   const [status, setStatus] = useState<UploadStatus>(UploadStatus.NONE);
   const { gameName } = useParams<{ gameName: string}>();
+
+  const handleError = (message: string) => {
+    setStatus(UploadStatus.ERROR);
+    setError(message);
+  };
 
   const onDrop = useCallback(async acceptedFiles => {
     try {
       setWaiting(true);
       setStatus(UploadStatus.IN_PROGRESS);
       const file = acceptedFiles[0];
-      await validate(file);
+      const validationError = await validate(file);
+      if (validationError) {
+        handleError(validationError);
+        return;
+      }
       const s3 = new S3(gameName);
       const path = `${filePath}/${file.name}`;
       await s3.writeObject(path, file);
       onSuccess(file);
       setStatus(UploadStatus.SUCCESS);
     } catch (e: any) {
-      setStatus(UploadStatus.ERROR);
-      setError(e.message);
+      handleError(e.message);
     } finally {
       setWaiting(false);
     }

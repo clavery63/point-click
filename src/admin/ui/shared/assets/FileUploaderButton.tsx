@@ -3,10 +3,11 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Button from '@mui/material/Button';
 import { Box } from '@mui/material';
+import { Nullable } from 'game/store/types';
 import FileUploader from './FileUploader';
 
 type Props = {
-  validate: (f: File) => Promise<void>;
+  validate: (f: File) => Promise<Nullable<string>>;
   onSuccess: (f: File) => void;
   filePath: string;
 };

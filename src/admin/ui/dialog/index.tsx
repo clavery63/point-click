@@ -57,6 +57,7 @@ const DialogEdit = ({ scenery }: Props) => {
         {' '}
         {existingDialog.pages.map((_, index) => (
           <Button
+            key={index}
             onClick={() => setCurrentPageIndex(index)}
             disabled={index === currentPageIndex}
           >
