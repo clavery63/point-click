@@ -24,7 +24,7 @@ const DialogEdit = ({ scenery }: Props) => {
     if (existingDialog && currentPageIndex >= existingDialog.pages.length) {
       setCurrentPageIndex(existingDialog.pages.length - 1);
     }
-  }, [existingDialog.pages, currentPageIndex]);
+  }, [existingDialog?.pages, currentPageIndex]);
 
   const currentPage = useMemo(() => {
     return existingDialog?.pages[currentPageIndex];
