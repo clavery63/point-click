@@ -16,7 +16,7 @@ type Props = {
   height?: number;
   exactSize?: boolean;
 };
-const ImgSelector = ({
+const ImgSelector = React.memo(({
   label, value, onChange, tooltip, width, height, exactSize,
 }: Props) => {
   const dispatch = useDispatch();
@@ -82,6 +82,6 @@ const ImgSelector = ({
       {error && <FormHelperText error>{error}</FormHelperText>}
     </>
   );
-};
+});
 
 export default ImgSelector;
