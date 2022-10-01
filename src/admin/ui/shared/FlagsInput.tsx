@@ -13,26 +13,28 @@ const selectEntities = (state: RootState) => state.gameState.present.worldState.
 const selectDoors = (state: RootState) => state.gameState.present.worldState.doors;
 const selectDialogs = (state: RootState) => state.gameState.present.worldState.dialogs;
 const selectFlags = (state: RootState) => state.gameState.present.flags;
+const dialogPagesSelector = createSelector(selectDialogs, dialogs => {
+  return Object.values(dialogs).flatMap(({ pages }) => pages);
+});
 
 const flagsSelector = createSelector(
   selectEntities,
   selectDoors,
-  selectDialogs,
+  dialogPagesSelector,
   selectFlags,
 
-  (entities, doors, dialogs, flags) => {
+  (entities, doors, dialogPages, flags) => {
     const doorFlags = Object.values(doors)
       .flatMap(({ openCondition }) => openCondition);
 
     const entityFlags = Object.values(entities)
       .flatMap(({ visibleFlags = [], takeableFlags = [] }) => [...visibleFlags, ...takeableFlags]);
 
-    const dialogFlags = Object.values(dialogs)
-      .flatMap(({ pages }) => pages.flatMap(({ prereqFlags = [], answers }) => [
-        ...prereqFlags, ...answers.flatMap(({ addFlags = [], removeFlags = [] }) => [
-          ...addFlags, ...removeFlags,
-        ]),
-      ]));
+    const dialogFlags = dialogPages.flatMap(({ prereqFlags = [], answers }) => [
+      ...prereqFlags, ...answers.flatMap(({ addFlags = [], removeFlags = [] }) => [
+        ...addFlags, ...removeFlags,
+      ]),
+    ]);
 
     const verbFlags = [...Object.values(entities), ...Object.values(doors)]
       .flatMap(({ verbs }) => Object.values(verbs || {}).flat())
@@ -69,7 +71,7 @@ type Props = {
   tooltip?: string;
 };
 
-const FlagsInput = (props: Props) => {
+const FlagsInput = React.memo((props: Props) => {
   const {
     value: propsValue = [], onChange, label, tooltip,
   } = props;
@@ -119,6 +121,6 @@ const FlagsInput = (props: Props) => {
       />
     </WithTooltip>
   );
-};
+});
 
 export default FlagsInput;

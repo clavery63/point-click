@@ -22,7 +22,7 @@ const RoomDetails = ({ roomId }: Props) => {
     return state.gameState.present.worldState.rooms[roomId];
   });
 
-  const handleChange = useCallback((fieldName: keyof Room) => (value: any) => {
+  const handleChange = useCallback((fieldName: keyof Room) => useCallback((value: any) => {
     dispatch(setRoom({
       id: roomId,
       room: {
@@ -30,7 +30,7 @@ const RoomDetails = ({ roomId }: Props) => {
         [fieldName]: value,
       },
     }));
-  }, [room, roomId]);
+  }, [fieldName]), [room, roomId]);
 
   if (!room) {
     return null;

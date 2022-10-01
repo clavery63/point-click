@@ -20,7 +20,7 @@ type Props = {
   onChange: (value: string) => void;
   tooltip?: string;
 };
-const AudioSelector = ({
+const AudioSelector = React.memo(({
   label, value, onChange, tooltip,
 }: Props) => {
   const { gameName } = useParams<{ gameName: string }>();
@@ -53,6 +53,6 @@ const AudioSelector = ({
       />
     </Stack>
   );
-};
+});
 
 export default AudioSelector;

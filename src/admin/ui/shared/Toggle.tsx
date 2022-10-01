@@ -8,7 +8,7 @@ type Props = {
   onChange: (value: boolean) => void;
   tooltip?: string;
 };
-const Toggle = ({
+const Toggle = React.memo(({
   label, value, onChange, tooltip,
 }: Props) => {
   return (
@@ -27,6 +27,6 @@ const Toggle = ({
       </WithTooltip>
     </Box>
   );
-};
+});
 
 export default Toggle;

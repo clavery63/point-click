@@ -21,7 +21,7 @@ type Props = {
   onChange: (value: string) => void;
   tooltip?: string;
 };
-const VideoSelector = ({
+const VideoSelector = React.memo(({
   label, value, onChange, tooltip,
 }: Props) => {
   const { gameName } = useParams<{ gameName: string }>();
@@ -54,6 +54,6 @@ const VideoSelector = ({
       />
     </Stack>
   );
-};
+});
 
 export default VideoSelector;

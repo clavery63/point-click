@@ -2,7 +2,7 @@ import {
   Card, CardContent, Stack, Typography,
 } from '@mui/material';
 import { DialogAnswer, DialogAnswers } from 'game/store/types';
-import React from 'react';
+import React, { useCallback } from 'react';
 import FlagsInput from '../shared/FlagsInput';
 import LongTextField from '../shared/LongTextField';
 
@@ -14,7 +14,7 @@ type Props = {
 const DialogAnswerEdit = ({ onChange, answers, index }: Props) => {
   const answer = answers[index];
 
-  const handleChange = (fieldName: keyof DialogAnswer) => (value: any) => {
+  const handleChange = useCallback((fieldName: keyof DialogAnswer) => useCallback((value: any) => {
     const newAnswers: DialogAnswers = [...answers];
     const newAnswer = {
       ...answers[index],
@@ -23,7 +23,7 @@ const DialogAnswerEdit = ({ onChange, answers, index }: Props) => {
 
     newAnswers[index] = newAnswer;
     onChange(newAnswers);
-  };
+  }, [fieldName]), [answers, index]);
 
   return (
     <Card>
