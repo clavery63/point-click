@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { setRoom } from 'admin/store/reducers/gameStateReducer/worldStateReducer/roomsReducer';
 import { Room } from 'game/store/types';
-import { useDispatch } from '../hooks/redux';
+import { useDispatch, useSelector } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import PreviewWidget from '../preview/PreviewWidget';
@@ -13,12 +13,16 @@ import AudioSelector from '../shared/assets/AudioSelector';
 import VideoSelector from '../shared/assets/VideoSelector';
 import Toggle from '../shared/Toggle';
 
-type Props = { room: Room; roomId: number };
-const RoomDetails = ({ room, roomId }: Props) => {
+type Props = { roomId: number };
+const RoomDetails = ({ roomId }: Props) => {
   const dispatch = useDispatch();
   const styles = useStyles();
 
-  const handleChange = (fieldName: keyof Room) => (value: any) => {
+  const room = useSelector(state => {
+    return state.gameState.present.worldState.rooms[roomId];
+  });
+
+  const handleChange = useCallback((fieldName: keyof Room) => (value: any) => {
     dispatch(setRoom({
       id: roomId,
       room: {
@@ -26,7 +30,7 @@ const RoomDetails = ({ room, roomId }: Props) => {
         [fieldName]: value,
       },
     }));
-  };
+  }, [room, roomId]);
 
   if (!room) {
     return null;

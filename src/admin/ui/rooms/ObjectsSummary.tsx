@@ -4,15 +4,14 @@ import { createDoor, createItem, createScenery } from 'admin/store/epics/createO
 import { useParams } from 'react-router-dom';
 import { deleteEntity } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
 import { deleteDoor } from 'admin/store/reducers/gameStateReducer/worldStateReducer/doorsReducer';
-import { Room } from 'game/store/types';
 import { useDispatch, useSelector } from '../hooks/redux';
 import ObjectsList from './ObjectsList';
 
-type Props = { room: Room };
-const ObjectsSummary = ({ room }: Props) => {
+const ObjectsSummary = () => {
   const dispatch = useDispatch();
   const { roomId: roomIdString } = useParams<{ roomId: string }>();
   const roomId = parseInt(roomIdString, 10);
+  const room = useSelector(state => state.gameState.present.worldState.rooms[roomId]);
   const { entities, doors } = room;
 
   const entityInfos = useSelector(state => entities.map(id => {

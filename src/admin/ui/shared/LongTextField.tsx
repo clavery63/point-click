@@ -10,7 +10,7 @@ type Props = {
   fullWidth?: boolean;
   tooltip?: string;
 };
-const LongTextField = ({
+const LongTextField = React.memo(({
   label, value, onChange, fullWidth = true, tooltip,
 }: Props) => {
   return (
@@ -33,6 +33,6 @@ const LongTextField = ({
       />
     </WithTooltip>
   );
-};
+});
 
 export default LongTextField;

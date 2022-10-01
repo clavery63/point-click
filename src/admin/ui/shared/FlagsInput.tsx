@@ -9,35 +9,48 @@ import WithTooltip from './WithTooltip';
 
 const filter = createFilterOptions<FlagOption>();
 
-const selectWorldState = (state: RootState) => state.gameState.present.worldState;
+const selectEntities = (state: RootState) => state.gameState.present.worldState.entities;
+const selectDoors = (state: RootState) => state.gameState.present.worldState.doors;
+const selectDialogs = (state: RootState) => state.gameState.present.worldState.dialogs;
 const selectFlags = (state: RootState) => state.gameState.present.flags;
 
-const flagsSelector = createSelector(selectWorldState, selectFlags, (worldState, flags) => {
-  const { entities, doors, dialogs } = worldState;
+const flagsSelector = createSelector(
+  selectEntities,
+  selectDoors,
+  selectDialogs,
+  selectFlags,
 
-  const doorFlags = Object.values(doors)
-    .flatMap(({ openCondition }) => openCondition);
+  (entities, doors, dialogs, flags) => {
+    const doorFlags = Object.values(doors)
+      .flatMap(({ openCondition }) => openCondition);
 
-  const entityFlags = Object.values(entities)
-    .flatMap(({ visibleFlags = [], takeableFlags = [] }) => [...visibleFlags, ...takeableFlags]);
+    const entityFlags = Object.values(entities)
+      .flatMap(({ visibleFlags = [], takeableFlags = [] }) => [...visibleFlags, ...takeableFlags]);
 
-  const dialogFlags = Object.values(dialogs)
-    .flatMap(({ pages }) => pages.flatMap(({ prereqFlags = [], answers }) => [
-      ...prereqFlags, ...answers.flatMap(({ addFlags = [], removeFlags = [] }) => [
-        ...addFlags, ...removeFlags,
-      ]),
-    ]));
+    const dialogFlags = Object.values(dialogs)
+      .flatMap(({ pages }) => pages.flatMap(({ prereqFlags = [], answers }) => [
+        ...prereqFlags, ...answers.flatMap(({ addFlags = [], removeFlags = [] }) => [
+          ...addFlags, ...removeFlags,
+        ]),
+      ]));
 
-  const verbFlags = [...Object.values(entities), ...Object.values(doors)]
-    .flatMap(({ verbs }) => Object.values(verbs || {}).flat())
-    .flatMap(({ addFlags = [], removeFlags = [], prereqFlags = [] }) => [
-      ...addFlags, ...removeFlags, ...prereqFlags,
+    const verbFlags = [...Object.values(entities), ...Object.values(doors)]
+      .flatMap(({ verbs }) => Object.values(verbs || {}).flat())
+      .flatMap(({ addFlags = [], removeFlags = [], prereqFlags = [] }) => [
+        ...addFlags, ...removeFlags, ...prereqFlags,
+      ]);
+
+    const allFlags = compact([
+      ...flags,
+      ...doorFlags,
+      ...entityFlags,
+      ...verbFlags,
+      ...dialogFlags,
     ]);
 
-  const allFlags = compact([...flags, ...doorFlags, ...entityFlags, ...verbFlags, ...dialogFlags]);
-
-  return uniq(allFlags).sort();
-});
+    return uniq(allFlags).sort();
+  },
+);
 
 const toFlagOption = (flag: Flag) => ({
   value: flag,
