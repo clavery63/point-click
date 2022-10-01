@@ -1,28 +1,30 @@
-import { useCallback, useEffect, useState } from 'react';
+import {
+  useCallback, useEffect, useRef,
+} from 'react';
 
 const useCommand = (char: string, callback: () => void) => {
-  const [cmdPressed, setCmdPressed] = useState(false);
+  const cmdPressed = useRef(false);
 
   const keydown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Meta') {
       e.preventDefault();
-      setCmdPressed(true);
+      cmdPressed.current = true;
     }
 
     if (e.key === char) {
-      if (cmdPressed) {
+      if (cmdPressed.current) {
         e.preventDefault();
         callback();
       }
     }
-  }, [cmdPressed]);
+  }, []);
 
   const keyup = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Meta') {
       e.preventDefault();
-      setCmdPressed(false);
+      cmdPressed.current = false;
     }
-  }, [cmdPressed]);
+  }, []);
 
   useEffect(() => {
     window.addEventListener('keydown', keydown);
