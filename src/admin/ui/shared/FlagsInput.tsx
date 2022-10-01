@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { Flag } from 'game/store/types';
 import { createSelector } from 'reselect';
+import memoize from 'proxy-memoize';
 import { RootState, useSelector } from '../hooks/redux';
 import WithTooltip from './WithTooltip';
 
@@ -11,30 +12,30 @@ const filter = createFilterOptions<FlagOption>();
 
 const selectEntities = (state: RootState) => state.gameState.present.worldState.entities;
 const selectDoors = (state: RootState) => state.gameState.present.worldState.doors;
-const selectDialogs = (state: RootState) => state.gameState.present.worldState.dialogs;
 const selectFlags = (state: RootState) => state.gameState.present.flags;
-const dialogPagesSelector = createSelector(selectDialogs, dialogs => {
-  return Object.values(dialogs).flatMap(({ pages }) => pages);
+const dialogFlagsSelector = memoize((state: RootState) => {
+  const { dialogs } = state.gameState.present.worldState;
+  const dialogPages = Object.values(dialogs).flatMap(({ pages }) => pages);
+
+  return dialogPages.flatMap(({ prereqFlags = [], answers }) => [
+    ...prereqFlags, ...answers.flatMap(({ addFlags = [], removeFlags = [] }) => [
+      ...addFlags, ...removeFlags,
+    ]),
+  ]);
 });
 
 const flagsSelector = createSelector(
   selectEntities,
   selectDoors,
-  dialogPagesSelector,
+  dialogFlagsSelector,
   selectFlags,
 
-  (entities, doors, dialogPages, flags) => {
+  (entities, doors, dialogFlags, flags) => {
     const doorFlags = Object.values(doors)
       .flatMap(({ openCondition }) => openCondition);
 
     const entityFlags = Object.values(entities)
       .flatMap(({ visibleFlags = [], takeableFlags = [] }) => [...visibleFlags, ...takeableFlags]);
-
-    const dialogFlags = dialogPages.flatMap(({ prereqFlags = [], answers }) => [
-      ...prereqFlags, ...answers.flatMap(({ addFlags = [], removeFlags = [] }) => [
-        ...addFlags, ...removeFlags,
-      ]),
-    ]);
 
     const verbFlags = [...Object.values(entities), ...Object.values(doors)]
       .flatMap(({ verbs }) => Object.values(verbs || {}).flat())
