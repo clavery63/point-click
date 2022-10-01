@@ -35,4 +35,6 @@ const LongTextField = React.memo(({
   );
 });
 
+LongTextField.displayName = 'LongTextField';
+
 export default LongTextField;

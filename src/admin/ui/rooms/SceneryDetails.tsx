@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { setEntity } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
@@ -25,7 +25,15 @@ const SceneryDetails = ({ scenery }: Props) => {
   const sceneriesEditing = useSelector(state => state.editorState.sceneryEditing);
   const positionEditing = sceneriesEditing[scenery.id] || 'startPosition';
 
-  const handleChange = (fieldName: keyof Scenery) => (value: Nullable<string> | string[]) => {
+  const verbNames = useMemo(
+    () => {
+      return verbs.map((verb, index) => ({ value: index, label: verb.name }));
+    },
+    [verbs],
+  );
+
+  // eslint-disable-next-line max-len
+  const handleChange = useCallback((fieldName: keyof Scenery) => useCallback((value: Nullable<string> | string[]) => {
     dispatch(setEntity({
       id: scenery.id,
       entity: {
@@ -33,7 +41,14 @@ const SceneryDetails = ({ scenery }: Props) => {
         [fieldName]: value,
       },
     }));
-  };
+  }, [fieldName]), [scenery]);
+
+  const changeSceneryEdition = useCallback((checked: boolean) => {
+    dispatch(setSceneryEditing({
+      position: checked ? 'endPosition' : 'startPosition',
+      id: scenery.id,
+    }));
+  }, [scenery.id]);
 
   return (
     <Grid container className={styles.rightColumn}>
@@ -79,12 +94,7 @@ const SceneryDetails = ({ scenery }: Props) => {
       <Grid item xs={12}>
         <Toggle
           value={positionEditing === 'endPosition'}
-          onChange={checked => {
-            dispatch(setSceneryEditing({
-              position: checked ? 'endPosition' : 'startPosition',
-              id: scenery.id,
-            }));
-          }}
+          onChange={changeSceneryEdition}
           label={`Editing: ${positionEditing}`}
           tooltip="For animated scenery, determines which part (start or end) of the animation position is currently being edited"
         />
@@ -94,7 +104,7 @@ const SceneryDetails = ({ scenery }: Props) => {
           label="trigger"
           value={scenery.trigger}
           onChange={handleChange('trigger')}
-          options={verbs.map((verb, index) => ({ value: index, label: verb.name }))}
+          options={verbNames}
           tooltip="Which verb causes this scenery to animate"
         />
       </Grid>

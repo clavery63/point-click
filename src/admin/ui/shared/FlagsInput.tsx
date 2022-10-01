@@ -23,25 +23,33 @@ const dialogFlagsSelector = memoize((state: RootState) => {
     ]),
   ]);
 });
+const entityFlagsSelector = memoize((state: RootState) => {
+  const entities = selectEntities(state);
+  return Object.values(entities).flatMap(({ visibleFlags = [], takeableFlags = [] }) => [
+    ...visibleFlags,
+    ...takeableFlags,
+  ]);
+});
+const verbFlagsSelector = memoize((state: RootState) => {
+  const entities = selectEntities(state);
+  const doors = selectDoors(state);
+  return [...Object.values(entities), ...Object.values(doors)]
+    .flatMap(({ verbs }) => Object.values(verbs || {}).flat())
+    .flatMap(({ addFlags = [], removeFlags = [], prereqFlags = [] }) => [
+      ...addFlags, ...removeFlags, ...prereqFlags,
+    ]);
+});
 
 const flagsSelector = createSelector(
-  selectEntities,
-  selectDoors,
+  entityFlagsSelector,
   dialogFlagsSelector,
+  verbFlagsSelector,
+  selectDoors,
   selectFlags,
 
-  (entities, doors, dialogFlags, flags) => {
+  (entityFlags, dialogFlags, verbFlags, doors, flags) => {
     const doorFlags = Object.values(doors)
       .flatMap(({ openCondition }) => openCondition);
-
-    const entityFlags = Object.values(entities)
-      .flatMap(({ visibleFlags = [], takeableFlags = [] }) => [...visibleFlags, ...takeableFlags]);
-
-    const verbFlags = [...Object.values(entities), ...Object.values(doors)]
-      .flatMap(({ verbs }) => Object.values(verbs || {}).flat())
-      .flatMap(({ addFlags = [], removeFlags = [], prereqFlags = [] }) => [
-        ...addFlags, ...removeFlags, ...prereqFlags,
-      ]);
 
     const allFlags = compact([
       ...flags,
@@ -123,5 +131,7 @@ const FlagsInput = React.memo((props: Props) => {
     </WithTooltip>
   );
 });
+
+FlagsInput.displayName = 'FlagsInput';
 
 export default FlagsInput;

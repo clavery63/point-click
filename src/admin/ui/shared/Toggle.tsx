@@ -29,4 +29,6 @@ const Toggle = React.memo(({
   );
 });
 
+Toggle.displayName = 'Toggle';
+
 export default Toggle;

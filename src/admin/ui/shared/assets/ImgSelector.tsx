@@ -84,4 +84,6 @@ const ImgSelector = React.memo(({
   );
 });
 
+ImgSelector.displayName = 'ImgSelector';
+
 export default ImgSelector;

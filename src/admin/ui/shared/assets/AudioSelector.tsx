@@ -55,4 +55,6 @@ const AudioSelector = React.memo(({
   );
 });
 
+AudioSelector.displayName = 'AudioSelector';
+
 export default AudioSelector;

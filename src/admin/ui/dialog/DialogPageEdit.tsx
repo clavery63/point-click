@@ -1,12 +1,11 @@
 import {
-  Box,
   Card, CardContent, IconButton, Stack, Typography,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { deleteDialogPage, editDialogPage } from 'admin/store/reducers/gameStateReducer/worldStateReducer/dialogsReducer';
 import { DialogPage } from 'game/store/types';
 import DeleteIcon from '@mui/icons-material/Delete';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from '../hooks/redux';
 import FlagsInput from '../shared/FlagsInput';
 import LongTextField from '../shared/LongTextField';
@@ -30,7 +29,7 @@ const DialogPageEdit = ({ dialogId, index, dialogPage }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const handleChange = (fieldName: keyof DialogPage) => (value: any) => {
+  const handleChange = useCallback((fieldName: keyof DialogPage) => useCallback((value: any) => {
     dispatch(editDialogPage({
       id: dialogId,
       pageIndex: index,
@@ -39,7 +38,7 @@ const DialogPageEdit = ({ dialogId, index, dialogPage }: Props) => {
         [fieldName]: value,
       },
     }));
-  };
+  }, [fieldName]), [dialogId, index, dialogPage]);
 
   const handleDelete = (id: number, pageIndex: number) => {
     dispatch(deleteDialogPage({ id, pageIndex }));
@@ -68,7 +67,7 @@ const DialogPageEdit = ({ dialogId, index, dialogPage }: Props) => {
           <FlagsInput
             label="prereq flags"
             value={dialogPage.prereqFlags}
-            onChange={newFlags => handleChange('prereqFlags')(newFlags)}
+            onChange={handleChange('prereqFlags')}
           />
           <LongTextField
             label="question"

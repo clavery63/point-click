@@ -56,4 +56,6 @@ const VideoSelector = React.memo(({
   );
 });
 
+VideoSelector.displayName = 'VideoSelector';
+
 export default VideoSelector;

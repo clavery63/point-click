@@ -23,7 +23,7 @@ type Props = {
   style?: React.CSSProperties;
   tooltip?: string;
 };
-const Selector = ({
+const Selector = React.memo(({
   label, value, onChange, options, required = false, style, tooltip,
 }: Props) => {
   return (
@@ -52,6 +52,8 @@ const Selector = ({
       </WithTooltip>
     </Box>
   );
-};
+});
+
+Selector.displayName = 'Selector';
 
 export default Selector;
