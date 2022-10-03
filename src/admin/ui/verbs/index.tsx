@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { setEntityVerb } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
@@ -16,15 +16,21 @@ const Verbs = ({ entity }: Props) => {
   const dispatch = useDispatch();
   const verbs = useSelector(state => state.gameState.present.config.verbs);
 
-  const handleChange = (verbIndex: VerbIndex, verbLogics?: VerbLogic[]) => {
+  const handleChange = useCallback((verbIndex: VerbIndex, verbLogics?: VerbLogic[]) => {
     dispatch(setEntityVerb({
       id: entity.id,
       verbIndex,
       verbLogics,
     }));
-  };
+  }, [entity.id]);
 
-  const verbIndexPairings = Object.entries(entity.verbs || {} as VerbMappings);
+  const verbIndexPairings = useMemo(() => {
+    return Object.entries(entity.verbs || {} as VerbMappings);
+  }, [entity.verbs]);
+  const verbIndexes = useMemo(() => {
+    return verbIndexPairings.map(([index]) => parseInt(index, 10));
+  }, [verbIndexPairings]);
+  const verbNames = useMemo(() => verbs.map(verb => verb.name), [verbs]);
 
   return (
     <>
@@ -45,8 +51,8 @@ const Verbs = ({ entity }: Props) => {
         ))}
       </Grid>
       <AddVerb
-        indexes={verbIndexPairings.map(([index]) => parseInt(index, 10))}
-        names={verbs.map(verb => verb.name)}
+        indexes={verbIndexes}
+        names={verbNames}
         entityId={entity.id}
       />
     </>

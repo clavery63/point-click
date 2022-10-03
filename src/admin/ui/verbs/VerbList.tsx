@@ -13,7 +13,7 @@ type Props = {
   verbName: string;
   handleChange: (verbIndex: VerbIndex, verbLogics?: VerbLogic[]) => void;
 };
-const VerbList = ({
+const VerbList = React.memo(({
   verbIndex, verbLogics, handleChange, verbName,
 }: Props) => {
   const onChange = (index: number, verb: VerbLogic) => {
@@ -64,6 +64,8 @@ const VerbList = ({
       </AccordionDetails>
     </Accordion>
   );
-};
+});
+
+VerbList.displayName = 'VerbList';
 
 export default VerbList;

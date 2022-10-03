@@ -19,7 +19,7 @@ type Props = {
   names: string[];
   entityId: number;
 };
-const AddVerb = ({ indexes, names, entityId }: Props) => {
+const AddVerb = React.memo(({ indexes, names, entityId }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const remainingIndexes = range(9).filter(i => !indexes.includes(i));
@@ -59,6 +59,8 @@ const AddVerb = ({ indexes, names, entityId }: Props) => {
       />
     </Stack>
   );
-};
+});
+
+AddVerb.displayName = 'AddVerb';
 
 export default AddVerb;
