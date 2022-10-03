@@ -6,13 +6,13 @@ import {
 } from '@mui/material';
 import WithTooltip from './WithTooltip';
 
-export const makeOptions = (options: string[]) => {
+export const makeOptions = (options: (string | number)[]) => {
   return options.map(option => ({ value: option, label: option }));
 };
 
 const isEmpty = (value: any) => value === undefined || value === null;
 
-type Option = { value: string | number; label: string };
+type Option = { value: string | number; label: string | number };
 
 type Props = {
   label: string;

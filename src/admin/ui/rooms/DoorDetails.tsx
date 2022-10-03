@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { Door, DoorDir, DoorState } from 'game/store/types';
 import { setDoor } from 'admin/store/reducers/gameStateReducer/worldStateReducer/doorsReducer';
-import { useDispatch, useSelector } from '../hooks/redux';
+import { createSelector } from 'reselect';
+import { RootState, useDispatch, useSelector } from '../hooks/redux';
 import LongTextField from '../shared/LongTextField';
 import useStyles from '../shared/useStyles';
 import ImgSelector from '../shared/assets/ImgSelector';
@@ -12,16 +13,25 @@ import MapPositioner from './MapPositioner';
 import Toggle from '../shared/Toggle';
 import FlagsInput from '../shared/FlagsInput';
 
+const selectRooms = (state: RootState) => state.gameState.present.worldState.rooms;
+const selectEntities = (state: RootState) => state.gameState.present.worldState.entities;
+const roomIdsSelector = createSelector(selectRooms, rooms => {
+  return Object.keys(rooms).map(id => parseInt(id, 10));
+});
+const keyIdsSelector = createSelector(selectEntities, ents => {
+  return Object.keys(ents).map(id => parseInt(id, 10));
+});
+
 type Props = {
   door: Door;
 };
 const DoorDetails = ({ door }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
-  const allRoomIds = useSelector(state => Object.keys(state.gameState.present.worldState.rooms));
-  const allKeyIds = useSelector(state => Object.keys(state.gameState.present.worldState.entities));
+  const allRoomIds = useSelector(roomIdsSelector);
+  const allKeyIds = useSelector(keyIdsSelector);
 
-  const handleChange = (fieldName: keyof Door) => (value: any) => {
+  const handleChange = useCallback((fieldName: keyof Door) => useCallback((value: any) => {
     dispatch(setDoor({
       id: door.id,
       door: {
@@ -29,7 +39,12 @@ const DoorDetails = ({ door }: Props) => {
         [fieldName]: value,
       },
     }));
-  };
+  }, [fieldName]), [door]);
+
+  const destOptions = useMemo(() => makeOptions(allRoomIds), [allRoomIds]);
+  const keyIdOptions = useMemo(() => makeOptions(allKeyIds), [allKeyIds]);
+  const stateOptions = useMemo(() => makeOptions(Object.keys(DoorState)), []);
+  const dirOptions = useMemo(() => makeOptions(Object.keys(DoorDir)), []);
 
   return (
     <Grid container className={styles.rightColumn}>
@@ -92,8 +107,8 @@ const DoorDetails = ({ door }: Props) => {
         <Selector
           label="destination"
           value={door.dest}
-          onChange={val => handleChange('dest')(parseInt(val, 10))}
-          options={makeOptions(allRoomIds)}
+          onChange={handleChange('dest')}
+          options={destOptions}
           tooltip="The ID of the room this door leads to"
         />
       </Grid>
@@ -101,8 +116,8 @@ const DoorDetails = ({ door }: Props) => {
         <Selector
           label="key id"
           value={door.keyId}
-          onChange={id => handleChange('keyId')(parseInt(id, 10))}
-          options={makeOptions(allKeyIds)}
+          onChange={handleChange('keyId')}
+          options={keyIdOptions}
           tooltip="The ID of the item the player must be USING to unlock the door"
         />
       </Grid>
@@ -111,7 +126,7 @@ const DoorDetails = ({ door }: Props) => {
           label="state"
           value={door.state}
           onChange={handleChange('state')}
-          options={makeOptions(Object.keys(DoorState))}
+          options={stateOptions}
         />
       </Grid>
       <Grid item xs={12}>
@@ -119,7 +134,7 @@ const DoorDetails = ({ door }: Props) => {
           label="transition"
           value={door.dir}
           onChange={handleChange('dir')}
-          options={makeOptions(Object.keys(DoorDir))}
+          options={dirOptions}
           tooltip="The predefined animation that runs when transition to the next room through this door"
         />
       </Grid>
