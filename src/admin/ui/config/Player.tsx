@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { PlayerState } from 'game/store/types';
@@ -20,14 +20,14 @@ const Player = () => {
   }));
   const verbs = useSelector(state => state.gameState.present.config.verbs);
 
-  const handleChange = (fieldName: keyof PlayerState) => (value: any) => {
+  const handleChange = useCallback((fieldName: keyof PlayerState) => useCallback((value: any) => {
     dispatch(setPlayer({
       player: {
         ...player,
         [fieldName]: value,
       },
     }));
-  };
+  }, [fieldName, player]), [player]);
 
   return (
     <>

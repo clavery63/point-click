@@ -30,7 +30,7 @@ const RoomDetails = ({ roomId }: Props) => {
         [fieldName]: value,
       },
     }));
-  }, [fieldName]), [room, roomId]);
+  }, [fieldName, room, roomId]), [room, roomId]);
 
   if (!room) {
     return null;

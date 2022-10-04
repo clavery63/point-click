@@ -38,7 +38,7 @@ const DialogPageEdit = ({ dialogId, index, dialogPage }: Props) => {
         [fieldName]: value,
       },
     }));
-  }, [fieldName]), [dialogId, index, dialogPage]);
+  }, [fieldName, dialogId, index, dialogPage]), [dialogId, index, dialogPage]);
 
   const handleDelete = (id: number, pageIndex: number) => {
     dispatch(deleteDialogPage({ id, pageIndex }));

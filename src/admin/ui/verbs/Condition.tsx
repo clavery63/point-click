@@ -3,7 +3,7 @@ import {
   Condition, Item, Nullable, Operator,
 } from 'game/store/types';
 import { isEqual } from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ValidPathsFor } from 'shared/util/types';
 import LongTextField from '../shared/LongTextField';
 import Selector, { makeOptions } from '../shared/Selector';
@@ -38,12 +38,12 @@ const ConditionEdit = (props: Props) => {
   const { condition, onChange } = props;
   const [localCondition, setLocalCondition] = useState<Nullable<LocalCondition>>(condition);
 
-  const handleChange = (fieldName: keyof Condition) => (value: any) => {
+  const handleChange = useCallback((fieldName: keyof Condition) => useCallback((value: any) => {
     setLocalCondition({
       ...localCondition,
       [fieldName]: value,
     });
-  };
+  }, []), []);
 
   useEffect(() => {
     if (localCondition && !isEqual(localCondition, condition)) {

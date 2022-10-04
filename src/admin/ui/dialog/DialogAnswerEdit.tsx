@@ -23,7 +23,7 @@ const DialogAnswerEdit = ({ onChange, answers, index }: Props) => {
 
     newAnswers[index] = newAnswer;
     onChange(newAnswers);
-  }, [fieldName]), [answers, index]);
+  }, [fieldName, answers, index]), [answers, index]);
 
   return (
     <Card>

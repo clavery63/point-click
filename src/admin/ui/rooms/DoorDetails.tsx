@@ -39,7 +39,7 @@ const DoorDetails = ({ door }: Props) => {
         [fieldName]: value,
       },
     }));
-  }, [fieldName]), [door]);
+  }, [fieldName, door]), [door]);
 
   const destOptions = useMemo(() => makeOptions(allRoomIds), [allRoomIds]);
   const keyIdOptions = useMemo(() => makeOptions(allKeyIds), [allKeyIds]);

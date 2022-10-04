@@ -41,7 +41,7 @@ const SceneryDetails = ({ scenery }: Props) => {
         [fieldName]: value,
       },
     }));
-  }, [fieldName]), [scenery]);
+  }, [fieldName, scenery]), [scenery]);
 
   const changeSceneryEdition = useCallback((checked: boolean) => {
     dispatch(setSceneryEditing({

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'admin/ui/hooks/redux';
 import { Stack, Typography } from '@mui/material';
 import LongTextField from 'admin/ui/shared/LongTextField';
@@ -23,7 +23,8 @@ const VerbDetails = () => {
     return null;
   }
 
-  const handleChange = (key: keyof VerbConfig) => (value: Nullable<string | number>) => {
+  // eslint-disable-next-line max-len
+  const handleChange = useCallback((key: keyof VerbConfig) => useCallback((value: Nullable<string | number>) => {
     const newVerb = {
       ...verb,
       [key]: value,
@@ -52,7 +53,7 @@ const VerbDetails = () => {
       verb: newVerb,
       index: newVerb.index,
     }));
-  };
+  }, [key, verb]), [verb]);
 
   return (
     <Stack direction="column" key={verb.index}>

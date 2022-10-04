@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { setEntity } from 'admin/store/reducers/gameStateReducer/worldStateReducer/entitiesReducer';
@@ -20,7 +20,7 @@ const ItemDetails = ({ item }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
 
-  const handleChange = (fieldName: keyof Item) => (value: any) => {
+  const handleChange = useCallback((fieldName: keyof Item) => useCallback((value: any) => {
     dispatch(setEntity({
       id: item.id,
       entity: {
@@ -28,7 +28,7 @@ const ItemDetails = ({ item }: Props) => {
         [fieldName]: value,
       },
     }));
-  };
+  }, [fieldName, item]), [item]);
 
   return (
     <Grid container className={styles.rightColumn}>
