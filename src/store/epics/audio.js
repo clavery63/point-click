@@ -11,7 +11,7 @@ const audio$ = action$ => {
       of({}).pipe(
         tap(() => {
           const player = document.querySelector('.music-player');
-          player.src = `https://doublehamburger.com/${payload.fileName}`;
+          player.src = `http://localhost:3000/${payload.fileName}`;
           player.play();
         }),
         mapTo({ type: null })

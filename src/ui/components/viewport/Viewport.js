@@ -20,7 +20,7 @@ const ObjectGroup = ({ Component, objects, onClick }) => (
 
 const Background = ({ image, video }) => {
   if (video) {
-    return <Video src={`https://doublehamburger.com/${video}`} />
+    return <Video src={`http://localhost:3000/${video}`} />
   }
 
   return <Image width={112} height={112} image={image} />
