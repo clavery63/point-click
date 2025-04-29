@@ -4,12 +4,15 @@ import { ofType } from 'redux-observable';
 import runText$ from './observables/runText';
 
 const KEY = 'doublehamburger-save-data';
+const revertFlags = data => { data.flags = data.flags.length ? new Set(data.flags) : new Set() };
 
 const saveGame = ({ gameState, playerState }) => {
+  gameState.flags = Array.from(gameState.flags)
   localStorage.setItem(KEY, JSON.stringify({
     gameState,
     playerState
   }));
+  revertFlags(gameState);
 };
 
 const loadGame = oldState => {
@@ -17,8 +20,8 @@ const loadGame = oldState => {
   if (!newState) {
     return { type: null }
   }
-
   const { gameState, playerState } = JSON.parse(newState);
+  revertFlags(gameState);
 
   const payload = {
     ...oldState,
