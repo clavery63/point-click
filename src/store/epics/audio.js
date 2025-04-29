@@ -11,7 +11,7 @@ const audio$ = action$ => {
       of({}).pipe(
         tap(() => {
           const player = document.querySelector('.music-player');
-          player.src = `http://localhost:3000/${payload.fileName}`;
+          player.src = `${process.env.PUBLIC_URL}/${payload.fileName}`;
           player.play();
         }),
         mapTo({ type: null })

@@ -29,7 +29,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <audio className='music-player' loop />
-      <audio className='sfx-player' src='http://localhost:3000/transition.mp3' />
+      <audio className='sfx-player' src={process.env.PUBLIC_URL + '/transition.mp3'} />
       <App />
     </Provider>
   </React.StrictMode>,
